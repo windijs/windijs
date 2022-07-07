@@ -1,3 +1,4 @@
+import { CSSAngle, CSSAttributeType, CSSFillRule, CSSFlex, CSSLength, CSSPercentage } from "../types";
 import { camelToDash, parenWrap } from "../utils";
 
 export function sub (left: string | number, right: string | number) {
@@ -25,18 +26,11 @@ export function str (str: string) {
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Functions
-
-type CSSLength = number | string;
-type CSSAngle = number | string;
-type CSSPercentage = number | string;
-type CSSFlex = "1fr"; // number + fr
-type CSSFillRule = "nonzero" | "evenodd";
-
-type AttributeType = "string" | "color" | "url" | "integer" | "number" | "length" | "em" | "ex" | "px" | "rem" | "vw" | "vh" | "vmin" | "vmax" | "mm" | "cm" | "in" | "pt" | "pc" | "angle" | "deg" | "grad" | "rad" | "time" | "s" | "ms" | "frequency" | "Hz" | "kHz";
+// todo: more detailed help documentation for css functions
 
 // reference functionns
 
-export function attr (name: string, type?: AttributeType, fallback?: string | number): string {
+export function attr (name: string, type?: CSSAttributeType, fallback?: string | number): string {
   if (!type) return parenWrap("attr", name);
   return parenWrap("attr", name + " " + type + fallback ? (", " + fallback) : "");
 }
@@ -281,6 +275,9 @@ export const {
   repeat,
 } = new Proxy({}, {
   get (target, prop: string, receiver) {
-    return (...args: any[]) => (["conicGradient", "cubicBezier", "linearGradient", "radialGradient", "repeatingConicGradient", "repeatingLinearGradient", "repeatingRadialGradient", "fitContent", "dropShadow", "hueRotate"].includes(prop) ? camelToDash(prop) : prop) + "(" + args.filter(i => i).join(", ") + ")";
+    return (...args: any[]) => (["conicGradient", "cubicBezier", "linearGradient", "radialGradient", "repeatingConicGradient", "repeatingLinearGradient", "repeatingRadialGradient", "fitContent", "dropShadow", "hueRotate"]
+      .includes(prop)
+      ? camelToDash(prop)
+      : prop) + "(" + args.filter(i => i).join(", ") + ")";
   },
 }) as CSSFunctions;
