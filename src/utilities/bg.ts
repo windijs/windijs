@@ -93,7 +93,7 @@ export function backgroundClip<T extends object> (clips: T, key = "clip") {
       }
     };
 
-    return handler as unknown as ProxyType;
+    return handler as ProxyType;
 }
 
 function handleSingleColor (value: string): BgColorStyle {

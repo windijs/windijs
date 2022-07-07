@@ -1,7 +1,9 @@
+export type StyleProperties = keyof Omit<CSSStyleDeclaration, "getPropertyPriority" | "getPropertyValue" | "item" | "removeProperty" | "setProperty">;
+
 export interface StyleObject {
     /** @internal */
     css: {
-        [key: string]: string;
+        [key in StyleProperties]?: string;
     }
 }
 
