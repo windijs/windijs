@@ -42,4 +42,5 @@ export const dpi = useProxy<object, string>(v => v + "dpi") as NumberDict;
 export const percent = useProxy<object, string>(v => v + "%") as NumberDict;
 
 // Color
+// eslint-disable-next-line no-unused-vars
 export const color = useProxy<object, string>(v => v) as {[key in CSSColors]: string};
