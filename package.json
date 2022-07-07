@@ -4,8 +4,10 @@
   "description": "utility-first css-in-js framework",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext .ts .",
-    "lint:fix": "eslint --ext .ts . --fix",
+    "tsd": "tsc -p ./src --emitDeclarationOnly",
+    "typecheck": "tsc -p ./src --noEmit",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Raven Satir",
