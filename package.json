@@ -1,0 +1,14 @@
+{
+  "name": "windijs",
+  "version": "0.0.1",
+  "description": "utility-first css-in-js framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raven Satir",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
