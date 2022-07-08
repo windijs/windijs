@@ -1,4 +1,4 @@
-import { StyleObject } from "./types";
+import { CSSObject, StyleObject } from "./types";
 
 /**
  * Check if value is a number
@@ -32,4 +32,16 @@ export function parenWrap (key: string, value: string) {
 
 export function camelToDash (str: string) {
   return str.replace(/([A-Z])/g, val => `-${val.toLowerCase()}`);
+}
+
+export function bundleStyle (utilities: StyleObject[]): CSSObject {
+  const css: CSSObject = {};
+  for (const utility of utilities) {
+    for (const [k, v] of Object.entries(utility.css)) {
+      if (v != null) {
+        css[k] = v;
+      }
+    }
+  }
+  return css;
 }
