@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`after 1`] = `
+Object {
+  "css": Object {
+    "&::after": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`before 1`] = `
+Object {
+  "css": Object {
+    "&::before": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`fileSelectorButton 1`] = `
+Object {
+  "css": Object {
+    "&::file-selector-button": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`firstLetter 1`] = `
+Object {
+  "css": Object {
+    "&::first-letter": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`firstLine 1`] = `
+Object {
+  "css": Object {
+    "&::first-line": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`marker 1`] = `
+Object {
+  "css": Object {
+    "& *::marker, &::marker": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`selection 1`] = `
+Object {
+  "css": Object {
+    "& *::selection, &::selection": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
