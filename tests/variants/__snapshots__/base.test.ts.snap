@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useMedia 1`] = `
+Object {
+  "css": Object {
+    "@media print": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`useMedia 2`] = `
+Object {
+  "css": Object {
+    "@media (min-width: 1000px) and (max-width: 2000px)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`useVariant 1`] = `
+Object {
+  "css": Object {
+    "span": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`useVariant 2`] = `
+Object {
+  "css": Object {
+    "&:hover": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
