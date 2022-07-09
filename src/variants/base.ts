@@ -1,10 +1,18 @@
 import { CSSObject, StyleObject } from "../types";
 import { bundleStyle } from "../utils";
 
-export function useVariant (key: string, utilities: StyleObject[]): StyleObject {
+export function useVariant (rule: string, utilities: StyleObject[]): StyleObject {
   const css: CSSObject = {};
-  css[key] = bundleStyle(utilities);
+  css[rule] = bundleStyle(utilities);
   return { css };
 }
 
-export const useMedia = (media: string, utilities: StyleObject[]) => useVariant("@media " + media, utilities);
+export const useMedia = (rule: string, utilities: StyleObject[]) => useVariant("@media " + rule, utilities);
+
+export function variant (rule: string, ...utilities: StyleObject[]): StyleObject {
+  return useVariant(rule, utilities);
+}
+
+export function media (rule: string, ...utilities: StyleObject[]): StyleObject {
+  return useMedia(rule, utilities);
+}
