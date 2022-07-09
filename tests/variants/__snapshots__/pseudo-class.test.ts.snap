@@ -1,17 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Hover 1`] = `
-Object {
-  "css": Object {
-    "&:hover": Object {
-      "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
-      "webkitBackgroundClip": "content-box",
-    },
-  },
-}
-`;
-
 exports[`active 1`] = `
 Object {
   "css": Object {
