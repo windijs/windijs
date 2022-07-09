@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`media 1`] = `
+Object {
+  "css": Object {
+    "@media print": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#22c55e",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`media 2`] = `
+Object {
+  "css": Object {
+    "@media (min-width: 1000px) and (max-width: 2000px)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#22c55e",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
 exports[`useMedia 1`] = `
 Object {
   "css": Object {
@@ -42,6 +66,54 @@ Object {
     "&:hover": Object {
       "backgroundClip": "content-box",
       "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`variant 1`] = `
+Object {
+  "css": Object {
+    "span": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#22c55e",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`variant 2`] = `
+Object {
+  "css": Object {
+    "&:hover": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#22c55e",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`variantt 1`] = `
+Object {
+  "css": Object {
+    "span": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#22c55e",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`variantt 2`] = `
+Object {
+  "css": Object {
+    "&:hover": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#22c55e",
       "webkitBackgroundClip": "content-box",
     },
   },
