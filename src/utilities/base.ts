@@ -24,3 +24,7 @@ export class Utility<T = {}> {
     return new Proxy({}, handler) as unknown as T;
   }
 }
+
+export function createUtility () {
+  return new Utility();
+}
