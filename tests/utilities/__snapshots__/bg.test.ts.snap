@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Background Attachment 1`] = `
+Object {
+  "backgroundAttachment": "fixed",
+}
+`;
+
+exports[`Background Attachment 2`] = `
+Object {
+  "backgroundAttachment": "local",
+}
+`;
+
+exports[`Background Attachment 3`] = `
+Object {
+  "backgroundAttachment": "scroll",
+}
+`;
+
+exports[`Background Clip 1`] = `
+Object {
+  "backgroundClip": "border-box",
+  "webkitBackgroundClip": "border-box",
+}
+`;
+
+exports[`Background Clip 2`] = `
+Object {
+  "backgroundClip": "padding-box",
+  "webkitBackgroundClip": "padding-box",
+}
+`;
+
+exports[`Background Clip 3`] = `
+Object {
+  "backgroundClip": "content-box",
+  "webkitBackgroundClip": "content-box",
+}
+`;
+
+exports[`Background Clip 4`] = `
+Object {
+  "backgroundClip": "text",
+  "webkitBackgroundClip": "text",
+}
+`;
+
+exports[`Background Color 1`] = `
+Object {
+  "backgroundColor": "currentColor",
+}
+`;
+
+exports[`Background Color 2`] = `
+Object {
+  "backgroundColor": "#fff",
+}
+`;
+
+exports[`Background Color 3`] = `
+Object {
+  "backgroundColor": "#1d4ed8",
+}
+`;
+
+exports[`Background Color 4`] = `
+Object {
+  "backgroundColor": "#ef4444",
+}
+`;
+
+exports[`Background Generic 1`] = `
+Object {
+  "backgroundColor": "rgb(22, 22, 22)",
+}
+`;
+
+exports[`Background Generic 2`] = `
+Object {
+  "backgroundColor": "red",
+}
+`;
+
+exports[`Background Generic 3`] = `
+Object {
+  "backgroundColor": "aliceBlue",
+}
+`;
+
+exports[`Background Generic 4`] = `
+Object {
+  "backgroundColor": "#ffffff",
+}
+`;
