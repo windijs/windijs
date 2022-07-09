@@ -5,158 +5,160 @@ const bg = createUtility()
   .use(backgroundClip(backgroundClipConfig))
   .init();
 
+const utilities = [bg.blue[500], bg.clip.content];
+
 test("first", () => {
-  expect(first(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(first(...utilities)).toMatchSnapshot();
 });
 
 test("last", () => {
-  expect(last(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(last(...utilities)).toMatchSnapshot();
 });
 
 test("odd", () => {
-  expect(odd(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(odd(...utilities)).toMatchSnapshot();
 });
 
 test("even", () => {
-  expect(even(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(even(...utilities)).toMatchSnapshot();
 });
 
 test("visited", () => {
-  expect(visited(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(visited(...utilities)).toMatchSnapshot();
 });
 
 test("checked", () => {
-  expect(checked(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(checked(...utilities)).toMatchSnapshot();
 });
 
 test("focusWithin", () => {
-  expect(focusWithin(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(focusWithin(...utilities)).toMatchSnapshot();
 });
 
 test("hover", () => {
-  expect(hover(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(hover(...utilities)).toMatchSnapshot();
 });
 
 test("focus", () => {
-  expect(focus(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(focus(...utilities)).toMatchSnapshot();
 });
 
 test("focusVisible", () => {
-  expect(focusVisible(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(focusVisible(...utilities)).toMatchSnapshot();
 });
 
 test("active", () => {
-  expect(active(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(active(...utilities)).toMatchSnapshot();
 });
 
 test("link", () => {
-  expect(link(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(link(...utilities)).toMatchSnapshot();
 });
 
 test("target", () => {
-  expect(target(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(target(...utilities)).toMatchSnapshot();
 });
 
 test("notChecked", () => {
-  expect(notChecked(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(notChecked(...utilities)).toMatchSnapshot();
 });
 
 test("enabled", () => {
-  expect(enabled(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(enabled(...utilities)).toMatchSnapshot();
 });
 
 test("indeterminate", () => {
-  expect(indeterminate(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(indeterminate(...utilities)).toMatchSnapshot();
 });
 
 test("invalid", () => {
-  expect(invalid(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(invalid(...utilities)).toMatchSnapshot();
 });
 
 test("valid", () => {
-  expect(valid(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(valid(...utilities)).toMatchSnapshot();
 });
 
 test("optional", () => {
-  expect(optional(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(optional(...utilities)).toMatchSnapshot();
 });
 
 test("required", () => {
-  expect(required(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(required(...utilities)).toMatchSnapshot();
 });
 
 test("placeholderShown", () => {
-  expect(placeholderShown(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(placeholderShown(...utilities)).toMatchSnapshot();
 });
 
 test("readOnly", () => {
-  expect(readOnly(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(readOnly(...utilities)).toMatchSnapshot();
 });
 
 test("readWrite", () => {
-  expect(readWrite(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(readWrite(...utilities)).toMatchSnapshot();
 });
 
 test("notDisabled", () => {
-  expect(notDisabled(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(notDisabled(...utilities)).toMatchSnapshot();
 });
 
 test("firstOfType", () => {
-  expect(firstOfType(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(firstOfType(...utilities)).toMatchSnapshot();
 });
 
 test("notFirstOfType", () => {
-  expect(notFirstOfType(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(notFirstOfType(...utilities)).toMatchSnapshot();
 });
 
 test("lastOfType", () => {
-  expect(lastOfType(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(lastOfType(...utilities)).toMatchSnapshot();
 });
 
 test("notLastOfType", () => {
-  expect(notLastOfType(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(notLastOfType(...utilities)).toMatchSnapshot();
 });
 
 test("notFirst", () => {
-  expect(notFirst(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(notFirst(...utilities)).toMatchSnapshot();
 });
 
 test("notLast", () => {
-  expect(notLast(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(notLast(...utilities)).toMatchSnapshot();
 });
 
 test("onlyChild", () => {
-  expect(onlyChild(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(onlyChild(...utilities)).toMatchSnapshot();
 });
 
 test("notOnlyChild", () => {
-  expect(notOnlyChild(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(notOnlyChild(...utilities)).toMatchSnapshot();
 });
 
 test("onlyOfType", () => {
-  expect(onlyOfType(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(onlyOfType(...utilities)).toMatchSnapshot();
 });
 
 test("notOnlyOfType", () => {
-  expect(notOnlyOfType(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(notOnlyOfType(...utilities)).toMatchSnapshot();
 });
 
 test("root", () => {
-  expect(root(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(root(...utilities)).toMatchSnapshot();
 });
 
 test("empty", () => {
-  expect(empty(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(empty(...utilities)).toMatchSnapshot();
 });
 
 test("evenOfType", () => {
-  expect(evenOfType(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(evenOfType(...utilities)).toMatchSnapshot();
 });
 
 test("oddOfType", () => {
-  expect(oddOfType(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect(oddOfType(...utilities)).toMatchSnapshot();
 });
 
 test("default", () => {
-  expect($default(bg.blue[500], bg.clip.content)).toMatchSnapshot();
+  expect($default(...utilities)).toMatchSnapshot();
 });
