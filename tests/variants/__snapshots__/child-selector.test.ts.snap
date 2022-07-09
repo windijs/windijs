@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`all 1`] = `
+Object {
+  "css": Object {
+    "& *": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`children 1`] = `
+Object {
+  "css": Object {
+    "& > *": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`sibling 1`] = `
+Object {
+  "css": Object {
+    "& + *": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`siblings 1`] = `
+Object {
+  "css": Object {
+    "& ~ *": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`svg 1`] = `
+Object {
+  "css": Object {
+    "& svg": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
