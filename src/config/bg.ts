@@ -5,6 +5,7 @@ export const backgroundAttachmentConfig = {
 };
 
 export const backgroundClipConfig = {
+  text: "text",
   border: "border-box",
   padding: "padding-box",
   content: "content-box",
