@@ -1,0 +1,481 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hover 1`] = `
+Object {
+  "css": Object {
+    "&:hover": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`active 1`] = `
+Object {
+  "css": Object {
+    "&:active": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`checked 1`] = `
+Object {
+  "css": Object {
+    "&:checked": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`default 1`] = `
+Object {
+  "css": Object {
+    "&:default": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`empty 1`] = `
+Object {
+  "css": Object {
+    "&:empty": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`enabled 1`] = `
+Object {
+  "css": Object {
+    "&:enabled": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`even 1`] = `
+Object {
+  "css": Object {
+    "&:even": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`evenOfType 1`] = `
+Object {
+  "css": Object {
+    "&:nth-of-type(even)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`first 1`] = `
+Object {
+  "css": Object {
+    "&:first": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`firstOfType 1`] = `
+Object {
+  "css": Object {
+    "&:first-of-type": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`focus 1`] = `
+Object {
+  "css": Object {
+    "&:focus": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`focusVisible 1`] = `
+Object {
+  "css": Object {
+    "&:focus-visible": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`focusWithin 1`] = `
+Object {
+  "css": Object {
+    "&:focus-within": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`hover 1`] = `
+Object {
+  "css": Object {
+    "&:hover": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`indeterminate 1`] = `
+Object {
+  "css": Object {
+    "&:indeterminate": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`invalid 1`] = `
+Object {
+  "css": Object {
+    "&:invalid": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`last 1`] = `
+Object {
+  "css": Object {
+    "&:last": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`lastOfType 1`] = `
+Object {
+  "css": Object {
+    "&:last-of-type": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`link 1`] = `
+Object {
+  "css": Object {
+    "&:link": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`notChecked 1`] = `
+Object {
+  "css": Object {
+    "&:not(:checked)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`notDisabled 1`] = `
+Object {
+  "css": Object {
+    "&:not(:disabled)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`notFirst 1`] = `
+Object {
+  "css": Object {
+    "&:not(:first)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`notFirstOfType 1`] = `
+Object {
+  "css": Object {
+    "&:not(:first-of-type)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`notLast 1`] = `
+Object {
+  "css": Object {
+    "&:not(:last)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`notLastOfType 1`] = `
+Object {
+  "css": Object {
+    "&:not(:last-of-type)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`notOnlyChild 1`] = `
+Object {
+  "css": Object {
+    "&:not(:only-child)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`notOnlyOfType 1`] = `
+Object {
+  "css": Object {
+    "&:not(:only-of-type)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`odd 1`] = `
+Object {
+  "css": Object {
+    "&:odd": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`oddOfType 1`] = `
+Object {
+  "css": Object {
+    "&:nth-of-type(odd)": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`onlyChild 1`] = `
+Object {
+  "css": Object {
+    "&:only-child": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`onlyOfType 1`] = `
+Object {
+  "css": Object {
+    "&:only-of-type": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`optional 1`] = `
+Object {
+  "css": Object {
+    "&:optional": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`placeholderShown 1`] = `
+Object {
+  "css": Object {
+    "&:placeholder-shown": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`readOnly 1`] = `
+Object {
+  "css": Object {
+    "&:read-only": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`readWrite 1`] = `
+Object {
+  "css": Object {
+    "&:read-write": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`required 1`] = `
+Object {
+  "css": Object {
+    "&:required": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`root 1`] = `
+Object {
+  "css": Object {
+    "&:root": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`target 1`] = `
+Object {
+  "css": Object {
+    "&:target": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`valid 1`] = `
+Object {
+  "css": Object {
+    "&:valid": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
+
+exports[`visited 1`] = `
+Object {
+  "css": Object {
+    "&:visited": Object {
+      "backgroundClip": "content-box",
+      "backgroundColor": "#3b82f6",
+      "webkitBackgroundClip": "content-box",
+    },
+  },
+}
+`;
