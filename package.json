@@ -8,11 +8,15 @@
     "typecheck": "tsc -p ./src --noEmit",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest",
+    "test:watch": "npx jest --watch",
+    "test:update": "npx jest --updateSnapshot",
+    "coverage": "npx jest --coverage --collectCoverageFrom='./src/**'"
   },
   "author": "Raven Satir",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^28.1.4",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "eslint": "^8.0.1",
@@ -20,6 +24,7 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
+    "jest": "^28.1.2",
     "typescript": "^4.7.4"
   }
 }
