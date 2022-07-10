@@ -26,7 +26,7 @@ export function str (str: string) {
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Functions
-// todo: more detailed help documentation for css functions
+// TODO: more detailed help documentation for css functions
 
 // reference functionns
 
@@ -47,6 +47,12 @@ export function $var (name: string, defaultValue?: string): string {
 
 export function path (path: string, fillRule?: CSSFillRule): string {
   return parenWrap("path", fillRule ? (fillRule + ", " + JSON.stringify(path)) : JSON.stringify(path));
+}
+
+// color functions
+
+export function hwb (hue: CSSAngle | number, whiteness: CSSPercentage, blackness: CSSPercentage, alpha?: number | CSSPercentage): string {
+  return parenWrap("hwb", [hue, whiteness, blackness].join(" ") + (alpha ? (" / " + alpha) : ""));
 }
 
 type EnvInsetValue = "safe-area-inset-top" | "safe-area-inset-right" | "safe-area-inset-bottom" | "safe-area-inset-left titlebar-area-x" | "titlebar-area-y" | "titlebar-area-width" | "titlebar-area-height";
