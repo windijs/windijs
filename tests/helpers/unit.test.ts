@@ -1,82 +1,82 @@
 import { em, rem, vh, vw, cm, mm, pt, px, deg, s, ms, dpi, percent, color } from "../../src";
 
 test("em", () => {
-  expect(em[3]).toEqual("3em");
-  expect(em[1.25]).toEqual("1.25em");
-  expect(em[3.5]).toEqual("3.5em");
+  expect(em[3].toString()).toEqual("3em");
+  expect(em[1.25].toString()).toEqual("1.25em");
+  expect(em[3.5].toString()).toEqual("3.5em");
 });
 
 test("rem", () => {
-  expect(rem[3]).toEqual("3rem");
-  expect(rem[1.25]).toEqual("1.25rem");
-  expect(rem[3.5]).toEqual("3.5rem");
+  expect(rem[3].toString()).toEqual("3rem");
+  expect(rem[1.25].toString()).toEqual("1.25rem");
+  expect(rem[3.5].toString()).toEqual("3.5rem");
 });
 
 test("vh", () => {
-  expect(vh[50]).toEqual("50vh");
-  expect(vh[100]).toEqual("100vh");
-  expect(vh[35]).toEqual("35vh");
+  expect(vh[50].toString()).toEqual("50vh");
+  expect(vh[100].toString()).toEqual("100vh");
+  expect(vh[35].toString()).toEqual("35vh");
 });
 
 test("vw", () => {
-  expect(vw[50]).toEqual("50vw");
-  expect(vw[100]).toEqual("100vw");
-  expect(vw[35]).toEqual("35vw");
+  expect(vw[50].toString()).toEqual("50vw");
+  expect(vw[100].toString()).toEqual("100vw");
+  expect(vw[35].toString()).toEqual("35vw");
 });
 
 test("cm", () => {
-  expect(cm[50]).toEqual("50cm");
-  expect(cm[100]).toEqual("100cm");
-  expect(cm[35]).toEqual("35cm");
+  expect(cm[50].toString()).toEqual("50cm");
+  expect(cm[100].toString()).toEqual("100cm");
+  expect(cm[35].toString()).toEqual("35cm");
 });
 
 test("mm", () => {
-  expect(mm[50]).toEqual("50mm");
-  expect(mm[100]).toEqual("100mm");
-  expect(mm[35]).toEqual("35mm");
+  expect(mm[50].toString()).toEqual("50mm");
+  expect(mm[100].toString()).toEqual("100mm");
+  expect(mm[35].toString()).toEqual("35mm");
 });
 
 test("pt", () => {
-  expect(pt[3]).toEqual("3pt");
-  expect(pt[3.25]).toEqual("3.25pt");
-  expect(pt[1]).toEqual("1pt");
+  expect(pt[3].toString()).toEqual("3pt");
+  expect(pt[3.25].toString()).toEqual("3.25pt");
+  expect(pt[1].toString()).toEqual("1pt");
 });
 
 test("px", () => {
-  expect(px[3]).toEqual("3px");
-  expect(px[3.25]).toEqual("3.25px");
-  expect(px[1]).toEqual("1px");
-  expect(px[-3]).toEqual("-3px");
+  expect(px[3].toString().toString()).toEqual("3px");
+  expect(px[3.25].toString()).toEqual("3.25px");
+  expect(px[1].toString()).toEqual("1px");
+  expect(px[-3].toString()).toEqual("-3px");
 });
 
 test("deg", () => {
-  expect(deg[60]).toEqual("60deg");
-  expect(deg[360]).toEqual("360deg");
-  expect(deg[-90]).toEqual("-90deg");
+  expect(deg[60].toString()).toEqual("60deg");
+  expect(deg[360].toString()).toEqual("360deg");
+  expect(deg[-90].toString()).toEqual("-90deg");
 });
 
 test("s", () => {
-  expect(s[60]).toEqual("60s");
-  expect(s[360]).toEqual("360s");
-  expect(s[3600]).toEqual("3600s");
+  expect(s[60].toString()).toEqual("60s");
+  expect(s[360].toString()).toEqual("360s");
+  expect(s[3600].toString()).toEqual("3600s");
 });
 
 test("ms", () => {
-  expect(ms[60]).toEqual("60ms");
-  expect(ms[360]).toEqual("360ms");
-  expect(ms[3600]).toEqual("3600ms");
+  expect(ms[60].toString()).toEqual("60ms");
+  expect(ms[360].toString()).toEqual("360ms");
+  expect(ms[3600].toString()).toEqual("3600ms");
 });
 
 test("dpi", () => {
-  expect(dpi[60]).toEqual("60dpi");
-  expect(dpi[360]).toEqual("360dpi");
-  expect(dpi[120]).toEqual("120dpi");
+  expect(dpi[60].toString()).toEqual("60dpi");
+  expect(dpi[360].toString()).toEqual("360dpi");
+  expect(dpi[120].toString()).toEqual("120dpi");
 });
 
 test("percent", () => {
-  expect(percent[60]).toEqual("60%");
-  expect(percent[12.5]).toEqual("12.5%");
-  expect(percent[90]).toEqual("90%");
+  expect(percent[60].toString()).toEqual("60%");
+  expect(percent[12.5].toString()).toEqual("12.5%");
+  expect(percent[90].toString()).toEqual("90%");
 });
 
 test("color", () => {
