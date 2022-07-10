@@ -1,4 +1,4 @@
-import { CSSAngle, CSSAngleType, CSSColors, CSSFlex, CSSLength, CSSLengthType, CSSPercentage, CSSResolution, CSSResolutionType, CSSTime, CSSTimeType } from "../types";
+import { CSSAlphaValue, CSSAngle, CSSAngleType, CSSColors, CSSFlex, CSSLength, CSSLengthType, CSSPercentage, CSSResolution, CSSResolutionType, CSSTime, CSSTimeType } from "../types";
 import { useProxy } from "../utils";
 import { $var, calc, rgb, rgba, hsl, hsla, hwb } from "./funcs";
 
@@ -12,10 +12,10 @@ type ColorFunc = {
   var(name: string, defaultValue?: string): string;
   calc(expr: string): string;
   rgb(red: number, green: number, blue: number): string;
-  rgba(red: number, green: number, blue: number, alpha: number): string;
+  rgba(red: number, green: number, blue: number, alpha: CSSAlphaValue): string;
   hsl(hue: number, saturation: CSSPercentage, lightness: CSSPercentage): string;
-  hsla(hue: number, saturation: CSSPercentage, lightness: CSSPercentage, alpha: number): string;
-  hwb(hue: CSSAngle | number, whiteness: CSSPercentage, blackness: CSSPercentage, alpha?: number | CSSPercentage): string;
+  hsla(hue: number, saturation: CSSPercentage, lightness: CSSPercentage, alpha: CSSAlphaValue): string;
+  hwb(hue: CSSAngle | number, whiteness: CSSPercentage, blackness: CSSPercentage, alpha?: CSSAlphaValue): string;
 };
 
 type ColorValue = {[key in CSSColors]: string} & {[key in "transparent" | "currentColor" | "inherit" | "initial" | "unset"]: string} & ColorFunc;
