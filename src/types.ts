@@ -14,7 +14,6 @@ export type CSSAttributeType = "string" | "color" | "url" | "integer" | "number"
 export type NumberDict = { [key: number]: string };
 
 export type CSSDict = {
-  // eslint-disable-next-line no-unused-vars
   [key in StyleProperties]?: string;
 }
 
@@ -27,7 +26,6 @@ export interface StyleObject {
 
 export type StyleBuilder = (key: string) => StyleObject;
 
-// eslint-disable-next-line no-unused-vars
 export type ObjectEntry<T> = { [key in keyof T]: StyleObject }
 
 export interface BgColorStyle extends StyleObject {

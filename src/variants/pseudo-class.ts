@@ -16,5 +16,4 @@ export const { first, last, odd, even, visited, checked, focusWithin, hover, foc
       return useVariant("&:" + prop, args);
     };
   },
-// eslint-disable-next-line no-unused-vars
 }) as { [key in PseudoClassVariantKeys]: VariantBuilder };
