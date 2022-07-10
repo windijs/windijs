@@ -1,5 +1,6 @@
-import { CSSColors, NumberDict } from "../types";
+import { CSSAngle, CSSColors, CSSPercentage, NumberDict } from "../types";
 import { useProxy } from "../utils";
+import { $var, calc, rgb, rgba, hsl, hsla, hwb } from "./funcs";
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Values_and_Units
 
@@ -41,6 +42,21 @@ export const dpi = useProxy<object, string>(v => v + "dpi") as NumberDict;
 
 export const percent = useProxy<object, string>(v => v + "%") as NumberDict;
 
-// Color
+type ColorFunc = {
+  var(name: string, defaultValue?: string): string;
+  calc(expr: string): string;
+  rgb(red: number, green: number, blue: number): string;
+  rgba(red: number, green: number, blue: number, alpha: number): string;
+  hsl(hue: number, saturation: CSSPercentage, lightness: CSSPercentage): string;
+  hsla(hue: number, saturation: CSSPercentage, lightness: CSSPercentage, alpha: number): string;
+  hwb(hue: CSSAngle | number, whiteness: CSSPercentage, blackness: CSSPercentage, alpha?: number | CSSPercentage): string;
+};
+
 // eslint-disable-next-line no-unused-vars
-export const color = useProxy<object, string>(v => v) as {[key in CSSColors]: string};
+type ColorValue = {[key in CSSColors]: string} & {[key in "transparent" | "currentColor" | "inherit" | "initial" | "unset"]: string} & ColorFunc;
+
+// Color
+export const color = useProxy<object, string | Function>(v => {
+  const map: ColorFunc = { var: $var, calc, rgb, rgba, hsl, hsla, hwb };
+  return v in map ? map[v as keyof ColorFunc] : v;
+}) as ColorValue;
