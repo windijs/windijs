@@ -1,6 +1,9 @@
 import { BgColorStyle, ObjectEntry, StyleBuilder, StyleObject } from "../types";
 import { hasKey, isNumber, useProxy } from "../utils";
 
+// TODO: support call bg as a function via apply proxy
+// TODO: maybe support delete api, like delete bg.red[500]??
+
 export function backgroundGeneric () {
     type RealType = (key: string) => StyleObject;
     type ProxyType = (key: string) => {
@@ -53,7 +56,7 @@ export function backgroundAttachment<T extends object> (attachments: T) {
     const build: StyleBuilder = (value) => {
       return {
         css: {
-          "background-attachment": value,
+          backgroundAttachment: value,
         },
       };
     };
@@ -76,8 +79,8 @@ export function backgroundClip<T extends object> (clips: T, key = "clip") {
     const build: StyleBuilder = (value) => {
       return {
         css: {
-          "-webkit-background-clip": value,
-          "background-clip": value,
+          webkitBackgroundClip: value,
+          backgroundClip: value,
         },
       };
     };
@@ -99,12 +102,12 @@ export function backgroundClip<T extends object> (clips: T, key = "clip") {
 function handleSingleColor (value: string): BgColorStyle {
   return {
     css: {
-      background: value,
+      backgroundColor: value,
     },
     opacity: (op) => {
       return {
         css: {
-          background: value,
+          backgroundColor: value,
         },
       };
     },
