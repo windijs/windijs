@@ -1,19 +1,32 @@
-import { CSSAngle, CSSAttributeType, CSSFillRule, CSSFlex, CSSLength, CSSPercentage } from "../types";
+import { CSSAngle, CSSAttributeType, CSSDimension, CSSFillRule, CSSFlex, CSSLength, CSSPercentage } from "../types";
 import { camelToDash, parenWrap } from "../utils";
 
-export function sub (left: string | number, right: string | number) {
+// TODO: should return object, like CSSPercentage/CSSDimension...
+
+export function sub (left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage) {
+  if (typeof left === "object" && typeof right === "object") {
+    if (left.type === right.type) return (left.value - right.value) + (left.type === "percent" ? "%" : left.type);
+  }
   return left + " - " + right;
 }
 
-export function add (left: string | number, right: string | number) {
+export function add (left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage) {
+  if (typeof left === "object" && typeof right === "object") {
+    if (left.type === right.type) return (left.value + right.value) + (left.type === "percent" ? "%" : left.type);
+  }
   return left + " + " + right;
 }
 
-export function mul (left: string | number, right: string | number) {
+export function mul (left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage) {
+  if (typeof left === "number" && typeof right === "object") return (left * right.value) + (right.type === "percent" ? "%" : right.type);
+  if (typeof left === "object" && typeof right === "number") return (left.value * right) + (left.type === "percent" ? "%" : left.type);
+  if (typeof left === "number" && typeof right === "number") return (left * right) + "";
   return left + " * " + right;
 }
 
-export function div (left: string | number, right: string | number) {
+export function div (left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage) {
+  if (typeof left === "object" && typeof right === "number") return (left.value / right) + (left.type === "percent" ? "%" : left.type);
+  if (typeof left === "number" && typeof right === "number") return (left / right) + "";
   return left + " / " + right;
 }
 
@@ -115,8 +128,8 @@ export interface CSSFunctions {
 
   rgb(red: number, green: number, blue: number): string;
   rgba(red: number, green: number, blue: number, alpha: number): string;
-  hsl(hue: number, saturation: string, lightness: string): string;
-  hsla(hue: number, saturation: string, lightness: string, alpha: number): string;
+  hsl(hue: number, saturation: CSSPercentage, lightness: CSSPercentage): string;
+  hsla(hue: number, saturation: CSSPercentage, lightness: CSSPercentage, alpha: number): string;
 
   // image functions
 
