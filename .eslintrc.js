@@ -29,6 +29,8 @@ module.exports = {
     "no-trailing-spaces": 2,
     "no-unused-vars": 0,
     "@typescript-eslint/no-unused-vars": 1,
+    "no-redeclare": 0,
+    "@typescript-eslint/no-redeclare": 1,
     "object-curly-spacing": [2, "always"],
     quotes: [2, "double"],
     semi: [2, "always"],
