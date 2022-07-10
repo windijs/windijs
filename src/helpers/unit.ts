@@ -1,46 +1,12 @@
-import { CSSAngle, CSSColors, CSSPercentage, NumberDict } from "../types";
+import { CSSAngle, CSSAngleType, CSSColors, CSSFlex, CSSLength, CSSLengthType, CSSPercentage, CSSResolution, CSSResolutionType, CSSTime, CSSTimeType } from "../types";
 import { useProxy } from "../utils";
 import { $var, calc, rgb, rgba, hsl, hsla, hwb } from "./funcs";
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Values_and_Units
-
-// Relative Distance
-
-export const em = useProxy<object, string>(v => v + "em") as NumberDict;
-
-export const rem = useProxy<object, string>(v => v + "rem") as NumberDict;
-
-export const vh = useProxy<object, string>(v => v + "vh") as NumberDict;
-
-export const vw = useProxy<object, string>(v => v + "vw") as NumberDict;
-
-// Absolute Distance
-
-export const cm = useProxy<object, string>(v => v + "cm") as NumberDict;
-
-export const mm = useProxy<object, string>(v => v + "mm") as NumberDict;
-
-export const pt = useProxy<object, string>(v => v + "pt") as NumberDict;
-
-export const px = useProxy<object, string>(v => v + "px") as NumberDict;
-
-// Angle
-
-export const deg = useProxy<object, string>(v => v + "deg") as NumberDict;
-
-// Time
-
-export const s = useProxy<object, string>(v => v + "s") as NumberDict;
-
-export const ms = useProxy<object, string>(v => v + "ms") as NumberDict;
-
-// Resolution
-
-export const dpi = useProxy<object, string>(v => v + "dpi") as NumberDict;
-
-// Percentage
-
-export const percent = useProxy<object, string>(v => v + "%") as NumberDict;
+// TODO: maybe support math like add/sub for rem, px...
+// however, javascript doesn't support operator overloading,
+// maybe https://github.com/codalien/operator-overloading-js works?
+// see https://github.com/microsoft/TypeScript/issues/5407
 
 type ColorFunc = {
   var(name: string, defaultValue?: string): string;
@@ -52,11 +18,37 @@ type ColorFunc = {
   hwb(hue: CSSAngle | number, whiteness: CSSPercentage, blackness: CSSPercentage, alpha?: number | CSSPercentage): string;
 };
 
-// eslint-disable-next-line no-unused-vars
 type ColorValue = {[key in CSSColors]: string} & {[key in "transparent" | "currentColor" | "inherit" | "initial" | "unset"]: string} & ColorFunc;
+type CSSLengthProxy = {[k in CSSLengthType]: {[value: number]: CSSLength;}}
+type CSSAngleProxy = {[k in CSSAngleType]: {[value: number]: CSSAngle;}}
+type CSSTimeProxy = {[k in CSSTimeType]: {[value: number]: CSSTime;}}
+type CSSResolutionProxy = {[k in CSSResolutionType]: {[value: number]: CSSResolution;}}
 
 // Color
 export const color = useProxy<object, string | Function>(v => {
   const map: ColorFunc = { var: $var, calc, rgb, rgba, hsl, hsla, hwb };
   return v in map ? map[v as keyof ColorFunc] : v;
 }) as ColorValue;
+
+function dimension<T> (type: string, suffix = type) {
+  return useProxy<object, T>(value => Object.create({
+    value: +value,
+    type,
+    valueOf: () => value + suffix,
+    toString: () => value + suffix,
+  })) as {[value: number]: T };
+}
+
+export const percent = dimension<CSSPercentage>("percent", "%");
+
+export const { deg, grad, rad, turn } = useProxy<object, Object>(k => dimension<CSSAngle>(k)) as CSSAngleProxy;
+
+export const { s, ms } = useProxy<object, Object>(k => dimension<CSSTime>(k)) as CSSTimeProxy;
+
+export const fr = dimension<CSSFlex>("fr");
+
+export const $in = dimension<CSSLength>("in");
+
+export const { dpi, dpcm, dppx, x } = useProxy<object, Object>(k => dimension<CSSResolution>(k)) as CSSResolutionProxy;
+
+export const { px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = useProxy<object, Object>(k => dimension<CSSLength>(k)) as CSSLengthProxy;
