@@ -11,7 +11,7 @@
     "test": "npx jest",
     "test:watch": "npx jest --watch",
     "test:update": "npx jest --updateSnapshot",
-    "coverage": "npx jest --coverage --collectCoverageFrom='./src/**'"
+    "coverage": "npx jest --coverage"
   },
   "author": "Raven Satir",
   "license": "MIT",
