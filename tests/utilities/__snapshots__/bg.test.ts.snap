@@ -46,27 +46,111 @@ Object {
 }
 `;
 
+exports[`Background Clip With Different Key 1`] = `
+Object {
+  "backgroundClip": "border-box",
+  "webkitBackgroundClip": "border-box",
+}
+`;
+
+exports[`Background Clip With Different Key 2`] = `
+Object {
+  "backgroundClip": "padding-box",
+  "webkitBackgroundClip": "padding-box",
+}
+`;
+
+exports[`Background Clip With Different Key 3`] = `
+Object {
+  "backgroundClip": "content-box",
+  "webkitBackgroundClip": "content-box",
+}
+`;
+
+exports[`Background Clip With Different Key 4`] = `
+Object {
+  "backgroundClip": "text",
+  "webkitBackgroundClip": "text",
+}
+`;
+
 exports[`Background Color 1`] = `
 Object {
+  "--w-bg-opacity": "1",
   "backgroundColor": "currentColor",
 }
 `;
 
 exports[`Background Color 2`] = `
 Object {
+  "--w-bg-opacity": "1",
   "backgroundColor": "#fff",
 }
 `;
 
 exports[`Background Color 3`] = `
 Object {
+  "--w-bg-opacity": "1",
   "backgroundColor": "#1d4ed8",
 }
 `;
 
 exports[`Background Color 4`] = `
 Object {
+  "--w-bg-opacity": "1",
   "backgroundColor": "#ef4444",
+}
+`;
+
+exports[`Background Color With Different Opacity Name 1`] = `
+Object {
+  "css": Object {
+    "--my-opacity": "0.5",
+    "backgroundColor": "#000",
+  },
+}
+`;
+
+exports[`Background Color With Different Opacity Name 2`] = `
+Object {
+  "css": Object {
+    "--my-opacity": "0.5",
+    "backgroundColor": "#fef3c7",
+  },
+}
+`;
+
+exports[`Background Color With Opacity 1`] = `
+Object {
+  "css": Object {
+    "--w-bg-opacity": "0.5",
+    "backgroundColor": "#000",
+  },
+}
+`;
+
+exports[`Background Color With Opacity 2`] = `
+Object {
+  "css": Object {
+    "--w-bg-opacity": "0.5",
+    "backgroundColor": "#fef3c7",
+  },
+}
+`;
+
+exports[`Background Color Without Opacity 1`] = `
+Object {
+  "css": Object {
+    "backgroundColor": "#000",
+  },
+}
+`;
+
+exports[`Background Color Without Opacity 2`] = `
+Object {
+  "css": Object {
+    "backgroundColor": "#fef3c7",
+  },
 }
 `;
 
