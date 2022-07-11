@@ -11,6 +11,30 @@ test("Background Color", () => {
   expect(bg.red[500].css).toMatchSnapshot();
 });
 
+test("Background Color With Opacity", () => {
+  const bg = createUtility()
+    .use(backgroundColor(colors))
+    .init();
+  expect(bg.black.opacity(50)).toMatchSnapshot();
+  expect(bg.amber[100].opacity(50)).toMatchSnapshot();
+});
+
+test("Background Color With Different Opacity Name", () => {
+  const bg = createUtility()
+    .use(backgroundColor(colors, true, "--my-opacity"))
+    .init();
+  expect(bg.black.opacity(50)).toMatchSnapshot();
+  expect(bg.amber[100].opacity(50)).toMatchSnapshot();
+});
+
+test("Background Color Without Opacity", () => {
+  const bg = createUtility()
+    .use(backgroundColor(colors, false))
+    .init();
+  expect(bg.black).toMatchSnapshot();
+  expect(bg.amber[100]).toMatchSnapshot();
+});
+
 test("Background Attachment", () => {
   const bg = createUtility()
     .use(backgroundAttachment(backgroundAttachmentConfig))
@@ -29,6 +53,16 @@ test("Background Clip", () => {
   expect(bg.clip.padding.css).toMatchSnapshot();
   expect(bg.clip.content.css).toMatchSnapshot();
   expect(bg.clip.text.css).toMatchSnapshot();
+});
+
+test("Background Clip With Different Key", () => {
+  const bg = createUtility()
+    .use(backgroundClip(backgroundClipConfig, "clipped"))
+    .init();
+  expect(bg.clipped.border.css).toMatchSnapshot();
+  expect(bg.clipped.padding.css).toMatchSnapshot();
+  expect(bg.clipped.content.css).toMatchSnapshot();
+  expect(bg.clipped.text.css).toMatchSnapshot();
 });
 
 test("Background Generic", () => {
