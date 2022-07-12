@@ -101,6 +101,149 @@ Object {
 }
 `;
 
+exports[`Background Color With Different Color Value Type 1`] = `
+Object {
+  "backgroundColor": "currentColor",
+}
+`;
+
+exports[`Background Color With Different Color Value Type 2`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(255, 255, 255, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: black 1`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(0, 0, 0, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: black-opacity 1`] = `
+Object {
+  "--w-bg-opacity": "0.5",
+  "backgroundColor": "rgba(0, 0, 0, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: current 1`] = `
+Object {
+  "backgroundColor": "currentColor",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: dark 1`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(28, 28, 30, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: dark-opacity 1`] = `
+Object {
+  "--w-bg-opacity": "0.5",
+  "backgroundColor": "rgba(28, 28, 30, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: hsl 1`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "hsla(360, 100%, 50%, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: hsl-opacity 1`] = `
+Object {
+  "--w-bg-opacity": "0.5",
+  "backgroundColor": "hsla(360, 100%, 50%, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: hsla 1`] = `
+Object {
+  "--w-bg-opacity": "0.3",
+  "backgroundColor": "hsla(360, 100%, 50%, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: hsla-opacity 1`] = `
+Object {
+  "--w-bg-opacity": "0.5",
+  "backgroundColor": "hsla(360, 100%, 50%, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: hwb 1`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "hwb(194 0% 0% / var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: hwb-opacity 1`] = `
+Object {
+  "--w-bg-opacity": "0.5",
+  "backgroundColor": "hwb(194 0% 0% / var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: hwba 1`] = `
+Object {
+  "--w-bg-opacity": ".5",
+  "backgroundColor": "hwb(194 0% 0% / var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: hwba-opacity 1`] = `
+Object {
+  "--w-bg-opacity": "0.5",
+  "backgroundColor": "hwb(194 0% 0% / var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: inherit 1`] = `
+Object {
+  "backgroundColor": "inherit",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: rgb 1`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(22, 13, 14, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: rgb-opacity 1`] = `
+Object {
+  "--w-bg-opacity": "0.5",
+  "backgroundColor": "rgba(22, 13, 14, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: rgba 1`] = `
+Object {
+  "--w-bg-opacity": "0.5",
+  "backgroundColor": "rgba(22, 13, 14, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: rgba-opacity 1`] = `
+Object {
+  "--w-bg-opacity": "0.5",
+  "backgroundColor": "rgba(22, 13, 14, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Color With Different Color Value Type: transparent 1`] = `
+Object {
+  "backgroundColor": "transparent",
+}
+`;
+
 exports[`Background Color With Different Opacity Name 1`] = `
 Object {
   "css": Object {
@@ -150,6 +293,72 @@ Object {
   "css": Object {
     "backgroundColor": "#fef3c7",
   },
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: black 1`] = `
+Object {
+  "backgroundColor": "#000",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: current 1`] = `
+Object {
+  "backgroundColor": "currentColor",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: dark 1`] = `
+Object {
+  "backgroundColor": "#1c1c1e",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: hsl 1`] = `
+Object {
+  "backgroundColor": "hsl(360, 100%, 50%)",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: hsla 1`] = `
+Object {
+  "backgroundColor": "hsla(360, 100%, 50%, 0.3)",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: hwb 1`] = `
+Object {
+  "backgroundColor": "hwb(194 0% 0%)",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: hwba 1`] = `
+Object {
+  "backgroundColor": "hwb(194 0% 0% / .5)",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: inherit 1`] = `
+Object {
+  "backgroundColor": "inherit",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: rgb 1`] = `
+Object {
+  "backgroundColor": "rgb(22, 13, 14)",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: rgba 1`] = `
+Object {
+  "backgroundColor": "rgba(22, 13, 14, 0.5)",
+}
+`;
+
+exports[`Background Color Without Opacity With Different Color Value Type: transparent 1`] = `
+Object {
+  "backgroundColor": "transparent",
 }
 `;
 
