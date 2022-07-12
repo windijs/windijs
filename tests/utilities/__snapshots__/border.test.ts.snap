@@ -2,7 +2,6 @@
 
 exports[`Border Color 1`] = `
 Object {
-  "--w-border-opacity": "1",
   "borderColor": "currentColor",
 }
 `;
@@ -10,21 +9,21 @@ Object {
 exports[`Border Color 2`] = `
 Object {
   "--w-border-opacity": "1",
-  "borderColor": "#fff",
+  "borderColor": "rgba(255, 255, 255, var(--w-border-opacity))",
 }
 `;
 
 exports[`Border Color 3`] = `
 Object {
   "--w-border-opacity": "1",
-  "borderColor": "#1d4ed8",
+  "borderColor": "rgba(29, 78, 216, var(--w-border-opacity))",
 }
 `;
 
 exports[`Border Color 4`] = `
 Object {
   "--w-border-opacity": "1",
-  "borderColor": "#ef4444",
+  "borderColor": "rgba(239, 68, 68, var(--w-border-opacity))",
 }
 `;
 

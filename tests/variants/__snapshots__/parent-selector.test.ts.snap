@@ -4,8 +4,9 @@ exports[`groupActive 1`] = `
 Object {
   "css": Object {
     ".group:active &": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -16,8 +17,9 @@ exports[`groupFocus 1`] = `
 Object {
   "css": Object {
     ".group:focus &": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -28,8 +30,9 @@ exports[`groupHover 1`] = `
 Object {
   "css": Object {
     ".group:hover &": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -40,8 +43,9 @@ exports[`groupVisited 1`] = `
 Object {
   "css": Object {
     ".group:visited &": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },

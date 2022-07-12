@@ -76,7 +76,6 @@ Object {
 
 exports[`Background Color 1`] = `
 Object {
-  "--w-bg-opacity": "1",
   "backgroundColor": "currentColor",
 }
 `;
@@ -84,21 +83,21 @@ Object {
 exports[`Background Color 2`] = `
 Object {
   "--w-bg-opacity": "1",
-  "backgroundColor": "#fff",
+  "backgroundColor": "rgba(255, 255, 255, var(--w-bg-opacity))",
 }
 `;
 
 exports[`Background Color 3`] = `
 Object {
   "--w-bg-opacity": "1",
-  "backgroundColor": "#1d4ed8",
+  "backgroundColor": "rgba(29, 78, 216, var(--w-bg-opacity))",
 }
 `;
 
 exports[`Background Color 4`] = `
 Object {
   "--w-bg-opacity": "1",
-  "backgroundColor": "#ef4444",
+  "backgroundColor": "rgba(239, 68, 68, var(--w-bg-opacity))",
 }
 `;
 
@@ -106,7 +105,7 @@ exports[`Background Color With Different Opacity Name 1`] = `
 Object {
   "css": Object {
     "--my-opacity": "0.5",
-    "backgroundColor": "#000",
+    "backgroundColor": "rgba(0, 0, 0, var(--my-opacity))",
   },
 }
 `;
@@ -115,7 +114,7 @@ exports[`Background Color With Different Opacity Name 2`] = `
 Object {
   "css": Object {
     "--my-opacity": "0.5",
-    "backgroundColor": "#fef3c7",
+    "backgroundColor": "rgba(254, 243, 199, var(--my-opacity))",
   },
 }
 `;
@@ -124,7 +123,7 @@ exports[`Background Color With Opacity 1`] = `
 Object {
   "css": Object {
     "--w-bg-opacity": "0.5",
-    "backgroundColor": "#000",
+    "backgroundColor": "rgba(0, 0, 0, var(--w-bg-opacity))",
   },
 }
 `;
@@ -133,7 +132,7 @@ exports[`Background Color With Opacity 2`] = `
 Object {
   "css": Object {
     "--w-bg-opacity": "0.5",
-    "backgroundColor": "#fef3c7",
+    "backgroundColor": "rgba(254, 243, 199, var(--w-bg-opacity))",
   },
 }
 `;

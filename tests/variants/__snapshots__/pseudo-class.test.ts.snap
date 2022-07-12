@@ -4,8 +4,9 @@ exports[`active 1`] = `
 Object {
   "css": Object {
     "&:active": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -16,8 +17,9 @@ exports[`checked 1`] = `
 Object {
   "css": Object {
     "&:checked": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -28,8 +30,9 @@ exports[`default 1`] = `
 Object {
   "css": Object {
     "&:default": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -40,8 +43,9 @@ exports[`empty 1`] = `
 Object {
   "css": Object {
     "&:empty": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -52,8 +56,9 @@ exports[`enabled 1`] = `
 Object {
   "css": Object {
     "&:enabled": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -64,8 +69,9 @@ exports[`even 1`] = `
 Object {
   "css": Object {
     "&:even": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -76,8 +82,9 @@ exports[`evenOfType 1`] = `
 Object {
   "css": Object {
     "&:nth-of-type(even)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -88,8 +95,9 @@ exports[`first 1`] = `
 Object {
   "css": Object {
     "&:first": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -100,8 +108,9 @@ exports[`firstOfType 1`] = `
 Object {
   "css": Object {
     "&:first-of-type": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -112,8 +121,9 @@ exports[`focus 1`] = `
 Object {
   "css": Object {
     "&:focus": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -124,8 +134,9 @@ exports[`focusVisible 1`] = `
 Object {
   "css": Object {
     "&:focus-visible": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -136,8 +147,9 @@ exports[`focusWithin 1`] = `
 Object {
   "css": Object {
     "&:focus-within": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -148,8 +160,9 @@ exports[`hover 1`] = `
 Object {
   "css": Object {
     "&:hover": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -160,8 +173,9 @@ exports[`indeterminate 1`] = `
 Object {
   "css": Object {
     "&:indeterminate": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -172,8 +186,9 @@ exports[`invalid 1`] = `
 Object {
   "css": Object {
     "&:invalid": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -184,8 +199,9 @@ exports[`last 1`] = `
 Object {
   "css": Object {
     "&:last": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -196,8 +212,9 @@ exports[`lastOfType 1`] = `
 Object {
   "css": Object {
     "&:last-of-type": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -208,8 +225,9 @@ exports[`link 1`] = `
 Object {
   "css": Object {
     "&:link": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -220,8 +238,9 @@ exports[`notChecked 1`] = `
 Object {
   "css": Object {
     "&:not(:checked)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -232,8 +251,9 @@ exports[`notDisabled 1`] = `
 Object {
   "css": Object {
     "&:not(:disabled)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -244,8 +264,9 @@ exports[`notFirst 1`] = `
 Object {
   "css": Object {
     "&:not(:first)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -256,8 +277,9 @@ exports[`notFirstOfType 1`] = `
 Object {
   "css": Object {
     "&:not(:first-of-type)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -268,8 +290,9 @@ exports[`notLast 1`] = `
 Object {
   "css": Object {
     "&:not(:last)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -280,8 +303,9 @@ exports[`notLastOfType 1`] = `
 Object {
   "css": Object {
     "&:not(:last-of-type)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -292,8 +316,9 @@ exports[`notOnlyChild 1`] = `
 Object {
   "css": Object {
     "&:not(:only-child)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -304,8 +329,9 @@ exports[`notOnlyOfType 1`] = `
 Object {
   "css": Object {
     "&:not(:only-of-type)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -316,8 +342,9 @@ exports[`odd 1`] = `
 Object {
   "css": Object {
     "&:odd": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -328,8 +355,9 @@ exports[`oddOfType 1`] = `
 Object {
   "css": Object {
     "&:nth-of-type(odd)": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -340,8 +368,9 @@ exports[`onlyChild 1`] = `
 Object {
   "css": Object {
     "&:only-child": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -352,8 +381,9 @@ exports[`onlyOfType 1`] = `
 Object {
   "css": Object {
     "&:only-of-type": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -364,8 +394,9 @@ exports[`optional 1`] = `
 Object {
   "css": Object {
     "&:optional": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -376,8 +407,9 @@ exports[`placeholderShown 1`] = `
 Object {
   "css": Object {
     "&:placeholder-shown": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -388,8 +420,9 @@ exports[`readOnly 1`] = `
 Object {
   "css": Object {
     "&:read-only": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -400,8 +433,9 @@ exports[`readWrite 1`] = `
 Object {
   "css": Object {
     "&:read-write": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -412,8 +446,9 @@ exports[`required 1`] = `
 Object {
   "css": Object {
     "&:required": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -424,8 +459,9 @@ exports[`root 1`] = `
 Object {
   "css": Object {
     "&:root": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -436,8 +472,9 @@ exports[`target 1`] = `
 Object {
   "css": Object {
     "&:target": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -448,8 +485,9 @@ exports[`valid 1`] = `
 Object {
   "css": Object {
     "&:valid": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
@@ -460,8 +498,9 @@ exports[`visited 1`] = `
 Object {
   "css": Object {
     "&:visited": Object {
+      "--w-bg-opacity": "1",
       "backgroundClip": "content-box",
-      "backgroundColor": "#3b82f6",
+      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
       "webkitBackgroundClip": "content-box",
     },
   },
