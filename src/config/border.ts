@@ -1,5 +1,5 @@
 export const borderRadiusConfig = {
-  default: "0.25rem",
+  DEFAULT: "0.25rem",
   none: "0px",
   sm: "0.125rem",
   md: "0.375rem",
@@ -20,7 +20,7 @@ export const borderStyleConfig = {
 };
 
 export const borderWidthConfig = {
-  default: "1px",
+  DEFAULT: "1px",
   0: "0px",
   2: "2px",
   4: "4px",
