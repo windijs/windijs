@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Font Family 1`] = `
+Object {
+  "fontFamily": "ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,\\"Liberation Mono\\",\\"Courier New\\",monospace",
+}
+`;
+
+exports[`Font Family 2`] = `
+Object {
+  "fontFamily": "ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\\"Segoe UI\\",Roboto,\\"Helvetica Neue\\",Arial,\\"Noto Sans\\",sans-serif,\\"Apple Color Emoji\\",\\"Segoe UI Emoji\\",\\"Segoe UI Symbol\\",\\"Noto Color Emoji\\"",
+}
+`;
+
+exports[`Font Family 3`] = `
+Object {
+  "fontFamily": "ui-serif,Georgia,Cambria,\\"Times New Roman\\",Times,serif",
+}
+`;
+
+exports[`Font Size 1`] = `
+Object {
+  "fontSize": "0.75rem",
+  "lineHeight": "1rem",
+}
+`;
+
+exports[`Font Size 2`] = `
+Object {
+  "fontSize": "1.5rem",
+  "lineHeight": "2rem",
+}
+`;
+
+exports[`Font Size 3`] = `
+Object {
+  "fontSize": "1rem",
+  "lineHeight": "1.5rem",
+}
+`;
+
+exports[`Font Size 4`] = `
+Object {
+  "fontSize": "1.125rem",
+  "lineHeight": "1.75rem",
+}
+`;
+
+exports[`Font Size With Different Config 1`] = `
+Object {
+  "fontSize": "0.75rem",
+  "lineHeight": "1rem",
+}
+`;
+
+exports[`Font Size With Different Config 2`] = `
+Object {
+  "fontSize": "0.875rem",
+}
+`;
+
+exports[`Font Size With Different Config 3`] = `
+Object {
+  "fontSize": "1rem",
+  "letterSpacing": "1px",
+  "lineHeight": "1.25rem",
+}
+`;
+
+exports[`Font Smoothing 1`] = `
+Object {
+  "-moz-osx-font-smoothing": "grayscale",
+  "-webkit-font-smoothing": "antialiased",
+}
+`;
+
+exports[`Font Smoothing 2`] = `
+Object {
+  "-moz-osx-font-smoothing": "auto",
+  "-webkit-font-smoothing": "auto",
+}
+`;
+
+exports[`Font Style 1`] = `
+Object {
+  "fontStyle": "italic",
+}
+`;
+
+exports[`Font Style 2`] = `
+Object {
+  "fontStyle": "normal",
+}
+`;

@@ -29,208 +29,156 @@ Object {
 
 exports[`Border Opacity 1`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "0",
-  },
+  "--w-border-opacity": "0",
 }
 `;
 
 exports[`Border Opacity 2`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "0.5",
-  },
+  "--w-border-opacity": "0.5",
 }
 `;
 
 exports[`Border Opacity 3`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "0.3",
-  },
+  "--w-border-opacity": "0.3",
 }
 `;
 
 exports[`Border Opacity 4`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "1",
-  },
+  "--w-border-opacity": "1",
 }
 `;
 
 exports[`Border Opacity With Different Trigger 1`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "0",
-  },
+  "--w-border-opacity": "0",
 }
 `;
 
 exports[`Border Opacity With Different Trigger 2`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "0.5",
-  },
+  "--w-border-opacity": "0.5",
 }
 `;
 
 exports[`Border Opacity With Different Trigger 3`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "0.3",
-  },
+  "--w-border-opacity": "0.3",
 }
 `;
 
 exports[`Border Opacity With Different Trigger 4`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "1",
-  },
+  "--w-border-opacity": "1",
 }
 `;
 
 exports[`Border Radius: 1 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "100%",
-  },
+  "borderRadius": "100%",
 }
 `;
 
 exports[`Border Radius: default 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "0.25rem",
-  },
+  "borderRadius": "0.25rem",
 }
 `;
 
 exports[`Border Radius: full 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "9999px",
-  },
+  "borderRadius": "9999px",
 }
 `;
 
 exports[`Border Radius: lg 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "0.5rem",
-  },
+  "borderRadius": "0.5rem",
 }
 `;
 
 exports[`Border Radius: md 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "0.375rem",
-  },
+  "borderRadius": "0.375rem",
 }
 `;
 
 exports[`Border Radius: none 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "0px",
-  },
+  "borderRadius": "0px",
 }
 `;
 
 exports[`Border Radius: sm 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "0.125rem",
-  },
+  "borderRadius": "0.125rem",
 }
 `;
 
 exports[`Border Radius: xl 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "0.75rem",
-  },
+  "borderRadius": "0.75rem",
 }
 `;
 
 exports[`Border Radius: xxl 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "1rem",
-  },
+  "borderRadius": "1rem",
 }
 `;
 
 exports[`Border Radius: xxxl 1`] = `
 Object {
-  "css": Object {
-    "borderRadius": "1.5rem",
-  },
+  "borderRadius": "1.5rem",
 }
 `;
 
 exports[`Border Style: dashed 1`] = `
 Object {
-  "css": Object {
-    "borderStyle": "dashed",
-  },
+  "borderStyle": "dashed",
 }
 `;
 
 exports[`Border Style: dotted 1`] = `
 Object {
-  "css": Object {
-    "borderStyle": "dotted",
-  },
+  "borderStyle": "dotted",
 }
 `;
 
 exports[`Border Style: double 1`] = `
 Object {
-  "css": Object {
-    "borderStyle": "double",
-  },
+  "borderStyle": "double",
 }
 `;
 
 exports[`Border Style: none 1`] = `
 Object {
-  "css": Object {
-    "borderStyle": "none",
-  },
+  "borderStyle": "none",
 }
 `;
 
 exports[`Border Style: solid 1`] = `
 Object {
-  "css": Object {
-    "borderStyle": "solid",
-  },
+  "borderStyle": "solid",
 }
 `;
 
 exports[`Border Width 1`] = `
 Object {
-  "css": Object {
-    "borderWidth": "0px",
-  },
+  "borderWidth": "0px",
 }
 `;
 
 exports[`Border Width 2`] = `
 Object {
-  "css": Object {
-    "borderWidth": "4px",
-  },
+  "borderWidth": "4px",
 }
 `;
 
 exports[`Border Width 3`] = `
 Object {
-  "css": Object {
-    "borderWidth": "1px",
-  },
+  "borderWidth": "1px",
 }
 `;
