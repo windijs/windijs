@@ -11,9 +11,6 @@ export function createStaticHandler<T extends object, K extends string> (statics
   type ProxyType = (uid: string, prop: string) => ObjectEntry<T> | undefined;
   type KeyProxyType = (uid: string, prop: string) => Record<K, ObjectEntry<T>>;
 
-  // @ts-ignore, generate default css
-  if (handleDefault && "DEFAULT" in statics) statics.css = statics.DEFAULT;
-
   const build = (uid: string, prop: string, value: string) => {
     const css: CSSObject = {};
     if (Array.isArray(property)) {
@@ -21,12 +18,15 @@ export function createStaticHandler<T extends object, K extends string> (statics
     } else {
       css[property] = value;
     }
-    if (prop === "css") return css;
-    if (prop === "meta") return { uid, type: "static" };
     return { css, meta: { uid, type: "static", props: [key, prop].filter(p => p != null) } } as StyleObject;
   };
 
   const handler = (uid: string, prop: string) => {
+    if (handleDefault) {
+      if (prop === "meta") return { uid, type: "static" };
+      // @ts-ignore, generate default css
+      if (prop === "css" && "DEFAULT" in statics) return build(uid, prop, statics.DEFAULT).css;
+    }
     if (hasKey(statics, prop)) {
       const value = statics[prop];
       if (typeof value === "string") return build(uid, prop, value);
