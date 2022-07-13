@@ -4,65 +4,67 @@ import { opacityConfig } from "../../src/config/opacity";
 import { borderColor, borderOpacity, borderRadius, borderStyle, borderWidth } from "../../src/utilities/border";
 
 test("Border Radius", () => {
-  const rounded = createUtility()
+  const rounded = createUtility("rounded")
     .use(borderRadius(borderRadiusConfig))
     .init();
 
-  expect(rounded.default).toMatchSnapshot("default");
-  expect(rounded.full).toMatchSnapshot("full");
-  expect(rounded[1]).toMatchSnapshot("1");
-  expect(rounded.none).toMatchSnapshot("none");
-  expect(rounded.sm).toMatchSnapshot("sm");
-  expect(rounded.md).toMatchSnapshot("md");
-  expect(rounded.lg).toMatchSnapshot("lg");
-  expect(rounded.xl).toMatchSnapshot("xl");
-  expect(rounded.xxl).toMatchSnapshot("xxl");
-  expect(rounded.xxxl).toMatchSnapshot("xxxl");
+  // @ts-ignore, hidden property
+  expect(rounded.css).toMatchSnapshot("default");
+  expect(rounded.full.css).toMatchSnapshot("full");
+  expect(rounded[1].css).toMatchSnapshot("1");
+  expect(rounded.none.css).toMatchSnapshot("none");
+  expect(rounded.sm.css).toMatchSnapshot("sm");
+  expect(rounded.md.css).toMatchSnapshot("md");
+  expect(rounded.lg.css).toMatchSnapshot("lg");
+  expect(rounded.xl.css).toMatchSnapshot("xl");
+  expect(rounded.xxl.css).toMatchSnapshot("xxl");
+  expect(rounded.xxxl.css).toMatchSnapshot("xxxl");
 });
 
 test("Border Style", () => {
-  const border = createUtility()
+  const border = createUtility("border")
     .use(borderStyle(borderStyleConfig))
     .init();
-  expect(border.solid).toMatchSnapshot("solid");
-  expect(border.dashed).toMatchSnapshot("dashed");
-  expect(border.dotted).toMatchSnapshot("dotted");
-  expect(border.double).toMatchSnapshot("double");
-  expect(border.none).toMatchSnapshot("none");
+  expect(border.solid.css).toMatchSnapshot("solid");
+  expect(border.dashed.css).toMatchSnapshot("dashed");
+  expect(border.dotted.css).toMatchSnapshot("dotted");
+  expect(border.double.css).toMatchSnapshot("double");
+  expect(border.none.css).toMatchSnapshot("none");
 });
 
 test("Border Opacity", () => {
-  const border = createUtility()
+  const border = createUtility("border")
     .use(borderOpacity(opacityConfig))
     .init();
-  expect(border.opacity[0]).toMatchSnapshot();
-  expect(border.opacity[50]).toMatchSnapshot();
-  expect(border.opacity[30]).toMatchSnapshot();
-  expect(border.opacity[100]).toMatchSnapshot();
+  expect(border.opacity[0].css).toMatchSnapshot();
+  expect(border.opacity[50].css).toMatchSnapshot();
+  expect(border.opacity[30].css).toMatchSnapshot();
+  expect(border.opacity[100].css).toMatchSnapshot();
 });
 
 test("Border Opacity With Different Trigger", () => {
-  const border = createUtility()
+  const border = createUtility("border")
     .use(borderOpacity(opacityConfig, "op"))
     .init();
 
-  expect(border.op[0]).toMatchSnapshot();
-  expect(border.op[50]).toMatchSnapshot();
-  expect(border.op[30]).toMatchSnapshot();
-  expect(border.op[100]).toMatchSnapshot();
+  expect(border.op[0].css).toMatchSnapshot();
+  expect(border.op[50].css).toMatchSnapshot();
+  expect(border.op[30].css).toMatchSnapshot();
+  expect(border.op[100].css).toMatchSnapshot();
 });
 
 test("Border Width", () => {
-  const border = createUtility()
+  const border = createUtility("border")
     .use(borderWidth(borderWidthConfig))
     .init();
-  expect(border[0]).toMatchSnapshot();
-  expect(border[4]).toMatchSnapshot();
-  expect(border.default).toMatchSnapshot();
+  expect(border[0].css).toMatchSnapshot();
+  expect(border[4].css).toMatchSnapshot();
+  // @ts-ignore
+  expect(border.css).toMatchSnapshot();
 });
 
 test("Border Color", () => {
-  const border = createUtility()
+  const border = createUtility("border")
     .use(borderColor(colors))
     .init();
 
