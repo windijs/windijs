@@ -38,9 +38,7 @@ export function bundleStyle (utilities: StyleObject[]): CSSObject {
   const css: CSSObject = {};
   for (const utility of utilities) {
     for (const [k, v] of Object.entries(utility.css)) {
-      if (v != null) {
-        css[k] = v;
-      }
+      if (v != null) css[k] = v;
     }
   }
   return css;
@@ -65,4 +63,13 @@ export function hexToRgb (hex: string): string {
 
 export function hexToRgba (hex: string) {
   return parenWrap("rgba", calcRgba(hex).join(", "));
+}
+
+export function hash (str: string): string {
+  str = str.replace(/\r/g, "");
+  let hash = 5381;
+  let i = str.length;
+
+  while (i--) hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+  return (hash >>> 0).toString(36);
 }
