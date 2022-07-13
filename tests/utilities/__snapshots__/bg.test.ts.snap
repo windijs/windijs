@@ -360,3 +360,65 @@ Object {
   "backgroundColor": "#ffffff",
 }
 `;
+
+exports[`Background Meta 1`] = `
+Object {
+  "props": Array [
+    "current",
+  ],
+  "type": "color",
+  "uid": "bg",
+}
+`;
+
+exports[`Background Meta 2`] = `
+Object {
+  "props": Array [
+    "blue",
+    "700",
+  ],
+  "type": "color",
+  "uid": "bg",
+}
+`;
+
+exports[`Background Meta 3`] = `
+Object {
+  "props": Array [
+    "clipped",
+    "border",
+  ],
+  "type": "static",
+  "uid": "bg",
+}
+`;
+
+exports[`Background Meta 4`] = `
+Object {
+  "props": Array [
+    "fixed",
+  ],
+  "type": "static",
+  "uid": "bg",
+}
+`;
+
+exports[`Background Meta 5`] = `
+Object {
+  "props": Array [
+    "aliceblue",
+  ],
+  "type": "generic",
+  "uid": "bg",
+}
+`;
+
+exports[`Background Meta 6`] = `
+Object {
+  "props": Array [
+    "rgb(22, 22, 22)",
+  ],
+  "type": "generic",
+  "uid": "bg",
+}
+`;

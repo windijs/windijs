@@ -144,3 +144,18 @@ test("Background Generic", () => {
   expect(bg.aliceBlue.css).toMatchSnapshot();
   expect(bg[0xffffff].css).toMatchSnapshot();
 });
+
+test("Background Meta", () => {
+  const bg = createUtility("bg")
+    .use(backgroundColor(colors))
+    .use(backgroundAttachment(backgroundAttachmentConfig))
+    .use(backgroundClip(backgroundClipConfig, "clipped"))
+    .use(backgroundGeneric())
+    .init();
+  expect(bg.current.meta).toMatchSnapshot();
+  expect(bg.blue[700].meta).toMatchSnapshot();
+  expect(bg.clipped.border.meta).toMatchSnapshot();
+  expect(bg.fixed.meta).toMatchSnapshot();
+  expect(bg.aliceblue.meta).toMatchSnapshot();
+  expect(bg["rgb(22, 22, 22)"].meta).toMatchSnapshot();
+});
