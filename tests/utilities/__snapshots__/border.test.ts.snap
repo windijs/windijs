@@ -27,6 +27,82 @@ Object {
 }
 `;
 
+exports[`Border Meta 1`] = `
+Object {
+  "type": "static",
+  "uid": "rounded",
+}
+`;
+
+exports[`Border Meta 2`] = `
+Object {
+  "props": Array [
+    "sm",
+  ],
+  "type": "static",
+  "uid": "rounded",
+}
+`;
+
+exports[`Border Meta 3`] = `
+Object {
+  "type": "static",
+  "uid": "border",
+}
+`;
+
+exports[`Border Meta 4`] = `
+Object {
+  "props": Array [
+    "2",
+  ],
+  "type": "static",
+  "uid": "border",
+}
+`;
+
+exports[`Border Meta 5`] = `
+Object {
+  "props": Array [
+    "black",
+  ],
+  "type": "color",
+  "uid": "border",
+}
+`;
+
+exports[`Border Meta 6`] = `
+Object {
+  "props": Array [
+    "blue",
+    "400",
+  ],
+  "type": "color",
+  "uid": "border",
+}
+`;
+
+exports[`Border Meta 7`] = `
+Object {
+  "props": Array [
+    "dashed",
+  ],
+  "type": "static",
+  "uid": "border",
+}
+`;
+
+exports[`Border Meta 8`] = `
+Object {
+  "props": Array [
+    "op",
+    "50",
+  ],
+  "type": "static",
+  "uid": "border",
+}
+`;
+
 exports[`Border Opacity 1`] = `
 Object {
   "--w-border-opacity": "0",
