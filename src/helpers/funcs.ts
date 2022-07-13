@@ -1,4 +1,4 @@
-import { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSLinearColorStopOrHint, CSSDimension, CSSFillRule, CSSFlex, CSSLength, CSSLengthPercentage, CSSPercentage, CSSSideOrCorner, CSSAngularColorStopOrHint, CSSPosition, CSSBorderRadius, CSSBorderRadiusItem } from "../types";
+import { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSLinearColorStopOrHint, CSSDimension, CSSFillRule, CSSFlex, CSSLength, CSSLengthPercentage, CSSPercentage, CSSSideOrCorner, CSSAngularColorStopOrHint, CSSPosition, CSSBorderRadiusItem } from "../types";
 import { camelToDash, parenWrap } from "../utils";
 
 // TODO: should return object, like CSSPercentage/CSSDimension...
