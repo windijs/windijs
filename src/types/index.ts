@@ -10,13 +10,22 @@ export type CSSObject = CSSDict & {[key: string]: CSSObject | string}
 
 export type NumberDict = { [key: number]: string };
 
+export type UtilityMeta = {
+  uid: string;
+  type: "static" | "color" | "generic";
+  props?: string[];
+  variants?: string[];
+};
+
 export interface StyleObject {
     /** @internal */
-    css: CSSObject
+    css: CSSObject;
+    /** @internal */
+    meta?: UtilityMeta;
 }
 
-export type StyleBuilder = (key: string) => StyleObject;
+export type ObjectEntry<T> = Omit<{ [key in keyof T]: StyleObject }, "css" | "meta" | "DEFAULT">
 
-export type ObjectEntry<T> = { [key in keyof T]: StyleObject }
+export type ProxyEntry<T> = (uid: string, prop: string) => ObjectEntry<T> | undefined;
 
 export type VariantBuilder = (...utilities: StyleObject[]) => StyleObject;
