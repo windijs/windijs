@@ -1,36 +1,43 @@
-import { CSSObject, ObjectEntry, StyleBuilder, StyleObject, StyleProperties } from "../types";
+import { CSSObject, ObjectEntry, StyleObject, StyleProperties, UtilityMeta } from "../types";
 import { calcRgba, hasKey, parenWrap, sliceColor, useProxy } from "../utils";
 
 /* Static Handler */
 
-export function createStaticHandler<T extends object>(statics: T, property: StyleProperties | StyleProperties[]): ((key: string) => ObjectEntry<T> | undefined);
-export function createStaticHandler<T extends object, K extends string>(statics: T, property: StyleProperties | StyleProperties[], key: K): (key: string) => Record<K, ObjectEntry<T>>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], key: K | undefined = undefined) {
-  // @ts-ignore, generate default css
-  if ("DEFAULT" in statics) statics.css = statics.DEFAULT;
+export function createStaticHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[]): ((uid: string, prop: string) => ObjectEntry<T> | undefined);
+export function createStaticHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[], key: undefined, handleDefault: true): ((uid: string, prop: string) => ObjectEntry<T> & { css: CSSObject } | undefined);
+export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], key: K, handleDefault: true): (uid: string, prop: string) => Record<K, ObjectEntry<T> & { css: CSSObject }>;
+export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], key: K): (uid: string, prop: string) => Record<K, ObjectEntry<T>>;
+export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], key: K | undefined = undefined, handleDefault = false) {
+  type ProxyType = (uid: string, prop: string) => ObjectEntry<T> | undefined;
+  type KeyProxyType = (uid: string, prop: string) => Record<K, ObjectEntry<T>>;
 
-  const build: StyleBuilder = (value) => {
+  // @ts-ignore, generate default css
+  if (handleDefault && "DEFAULT" in statics) statics.css = statics.DEFAULT;
+
+  const build = (uid: string, prop: string, value: string) => {
     const css: CSSObject = {};
     if (Array.isArray(property)) {
       property.forEach(p => (css[p] = value));
     } else {
       css[property] = value;
     }
-    return { css };
+    if (prop === "css") return css;
+    if (prop === "meta") return { uid, type: "static" };
+    return { css, meta: { uid, type: "static", props: [key, prop].filter(p => p != null) } } as StyleObject;
   };
 
-  const handler = (key: string) => {
-    if (hasKey(statics, key)) {
-      const value = statics[key];
-      if (typeof value === "string") return build(value);
+  const handler = (uid: string, prop: string) => {
+    if (hasKey(statics, prop)) {
+      const value = statics[prop];
+      if (typeof value === "string") return build(uid, prop, value);
     }
   };
 
-  if (key == null) return handler as (key: string) => ObjectEntry<T> | undefined;
+  if (key == null) return handler as ProxyType;
 
-  return ((prop) => {
-    if (prop === key) return useProxy(handler);
-  }) as (key: string) => Record<K, ObjectEntry<T>>;
+  return ((uid, prop) => {
+    if (prop === key) return useProxy(p => handler(uid, p));
+  }) as KeyProxyType;
 };
 
 // /* CSS Handler */
@@ -56,11 +63,13 @@ export type ColorProxy<T> = {
   }
 }
 
-export function createColorHandler<T extends object>(colors: T, colorProperty: StyleProperties): (key: string) => ColorProxy<T> | undefined;
-export function createColorHandler<T extends object>(colors: T, colorProperty: StyleProperties, colorOpacityProperty: string): (key: string) => ColorOpacityProxy<T> | undefined;
+export function createColorHandler<T extends object> (colors: T, colorProperty: StyleProperties): (uid: string, prop: string) => ColorProxy<T> | undefined;
+export function createColorHandler<T extends object> (colors: T, colorProperty: StyleProperties, colorOpacityProperty: string): (uid: string, prop: string) => ColorOpacityProxy<T> | undefined;
 export function createColorHandler<T extends object> (colors: T, colorProperty: StyleProperties, colorOpacityProperty?: string) {
-  function build (value: string): ColorOpacityObject | StyleObject {
+  function build (uid: string, p1: string, p2: string | undefined, value: string): ColorOpacityObject | StyleObject {
     let css: CSSObject = { [colorProperty]: value };
+    const meta: UtilityMeta = { type: "color", uid, props: [p1, p2].filter(i => i != null) as string[] };
+
     if (colorOpacityProperty != null) {
       if (value.startsWith("#")) {
         const [r, g, b, a] = calcRgba(value);
@@ -78,27 +87,29 @@ export function createColorHandler<T extends object> (colors: T, colorProperty: 
       }
       return {
         css,
+        meta,
         opacity (op) {
           const css: CSSObject = { ...this.css };
           css[colorOpacityProperty] = (op / 100).toString();
-          return { css };
+          meta.props!.push(parenWrap("opacity", op.toString()));
+          return { css, meta };
         },
       };
     }
-    return { css };
+    return { css, meta };
   }
 
-  return (key: string) => {
-    if (hasKey(colors, key)) {
-      const value = colors[key];
+  return (uid: string, p1: string) => {
+    if (hasKey(colors, p1)) {
+      const value = colors[p1];
       if (typeof value === "string") {
-        const singleColor = build(value);
-        if (singleColor) return singleColor;
+        const color = build(uid, p1, undefined, value);
+        if (color) return color;
       }
       if (typeof value === "object") {
-        const child = value as unknown as { [key: string]: string };
-        return useProxy(prop => {
-          if (hasKey(child, prop)) return build(child[prop]);
+        const children = value as unknown as { [key: string]: string };
+        return useProxy(p2 => {
+          if (hasKey(children, p2)) return build(uid, p1, p2, children[p2]);
         });
       }
     }
