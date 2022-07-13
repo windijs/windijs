@@ -1,7 +1,7 @@
 import { createUtility, backgroundAttachment, backgroundAttachmentConfig, backgroundColor, backgroundGeneric, backgroundClip, backgroundClipConfig, colors, styleProperty, px, rem, calc, hover, focus, notChecked, evenOfType, dark, sm, internalGet, rgb } from "../../src";
 
 test("Background Color", () => {
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundColor(colors))
     .init();
 
@@ -12,27 +12,27 @@ test("Background Color", () => {
 });
 
 test("Background Color With Opacity", () => {
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundColor(colors))
     .init();
-  expect(bg.black.opacity(50)).toMatchSnapshot();
-  expect(bg.amber[100].opacity(50)).toMatchSnapshot();
+  expect(bg.black.opacity(50).css).toMatchSnapshot();
+  expect(bg.amber[100].opacity(50).css).toMatchSnapshot();
 });
 
 test("Background Color With Different Opacity Name", () => {
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundColor(colors, true, "--my-opacity"))
     .init();
-  expect(bg.black.opacity(50)).toMatchSnapshot();
-  expect(bg.amber[100].opacity(50)).toMatchSnapshot();
+  expect(bg.black.opacity(50).css).toMatchSnapshot();
+  expect(bg.amber[100].opacity(50).css).toMatchSnapshot();
 });
 
 test("Background Color Without Opacity", () => {
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundColor(colors, false))
     .init();
-  expect(bg.black).toMatchSnapshot();
-  expect(bg.amber[100]).toMatchSnapshot();
+  expect(bg.black.css).toMatchSnapshot();
+  expect(bg.amber[100].css).toMatchSnapshot();
 });
 
 test("Background Color With Different Color Value Type", () => {
@@ -49,7 +49,7 @@ test("Background Color With Different Color Value Type", () => {
     hwb: "hwb(194 0% 0%)",
     hwba: "hwb(194 0% 0% / .5)",
   };
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundColor(customColors))
     .init();
 
@@ -88,7 +88,7 @@ test("Background Color Without Opacity With Different Color Value Type", () => {
     hwb: "hwb(194 0% 0%)",
     hwba: "hwb(194 0% 0% / .5)",
   };
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundColor(customColors, false))
     .init();
 
@@ -106,7 +106,7 @@ test("Background Color Without Opacity With Different Color Value Type", () => {
 });
 
 test("Background Attachment", () => {
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundAttachment(backgroundAttachmentConfig))
     .init();
 
@@ -116,7 +116,7 @@ test("Background Attachment", () => {
 });
 
 test("Background Clip", () => {
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundClip(backgroundClipConfig))
     .init();
   expect(bg.clip.border.css).toMatchSnapshot();
@@ -126,7 +126,7 @@ test("Background Clip", () => {
 });
 
 test("Background Clip With Different Key", () => {
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundClip(backgroundClipConfig, "clipped"))
     .init();
   expect(bg.clipped.border.css).toMatchSnapshot();
@@ -136,7 +136,7 @@ test("Background Clip With Different Key", () => {
 });
 
 test("Background Generic", () => {
-  const bg = createUtility()
+  const bg = createUtility("bg")
     .use(backgroundGeneric())
     .init();
   expect(bg["rgb(22, 22, 22)"].css).toMatchSnapshot();
