@@ -2,18 +2,16 @@ import { StyleObject, StyleProperties } from "../types";
 import { useProxy } from "../utils";
 
 export function styleProperty () {
-    type RealType = (key: string) => object | undefined;
-    type ProxyType = (key: string) => {[key in StyleProperties]: {[k: string]: StyleObject}} & {[key: string]: {[key: string]: StyleObject}};
+    type ProxyType = (uid: string, prop: string) => {[key in StyleProperties]: {[k: string]: StyleObject}} & {[key: string]: {[key: string]: StyleObject}};
 
-    const build = (key: string, value: string) => {
-      return {
-        css: {
-          [key]: value,
-        },
-      };
-    };
-
-    const handler: RealType = (prop) => useProxy(value => build(prop, value));
-
-    return handler as ProxyType;
+    return (uid: string, prop: string) => useProxy(value => ({
+      css: {
+        [prop]: value,
+      },
+      meta: {
+        type: "generic",
+        uid,
+        props: [prop, value],
+      },
+    } as StyleObject)) as ProxyType;
 }
