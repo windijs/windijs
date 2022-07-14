@@ -1,4 +1,4 @@
-import { CSSObject, StyleObject } from "./types";
+import { CSSObject, StyleObject, StyleProperties, UtilityMeta } from "./types";
 
 /**
  * Check if value is a number
@@ -72,4 +72,45 @@ export function hash (str: string): string {
 
   while (i--) hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
   return (hash >>> 0).toString(36);
+}
+
+export function buildStatic (property: StyleProperties | StyleProperties[], value: string, meta: UtilityMeta): StyleObject {
+  const css: CSSObject = {};
+  if (Array.isArray(property)) {
+    property.forEach(p => (css[p] = value));
+  } else {
+    css[property] = value;
+  }
+  return { css, meta };
+}
+
+export function buildColor (colorProperty: StyleProperties, colorOpacityProperty: string | undefined, value: string, meta: UtilityMeta) {
+  let css: CSSObject = { [colorProperty]: value };
+
+  if (colorOpacityProperty != null) {
+    if (value.startsWith("#")) {
+      const [r, g, b, a] = calcRgba(value);
+      css = {
+        [colorProperty]: parenWrap("rgba", [r, g, b, parenWrap("var", colorOpacityProperty)].join(", ")),
+        [colorOpacityProperty]: a.toString(),
+      };
+    } else if (/^(rgb|hwb|hsl)/.test(value)) {
+      const values = sliceColor(value);
+      css = {
+        [colorProperty]: value.startsWith("hwb") ? parenWrap("hwb", values.slice(0, 3).join(" ") + " / " + parenWrap("var", colorOpacityProperty)) : parenWrap(value.startsWith("hsl") ? "hsla" : "rgba", [...values.slice(0, 3), parenWrap("var", colorOpacityProperty)].join(", ")),
+        [colorOpacityProperty]: values[3] ?? "1",
+      };
+    }
+    return {
+      css,
+      meta,
+      opacity (op: number) {
+        const css: CSSObject = { ...this.css };
+        css[colorOpacityProperty] = (op / 100).toString();
+        meta.props!.push(parenWrap("opacity", op.toString()));
+        return { css, meta };
+      },
+    };
+  }
+  return { css, meta };
 }
