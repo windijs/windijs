@@ -24,9 +24,11 @@ export interface StyleObject {
     meta?: UtilityMeta;
 }
 
-export type ObjectEntry<T> = Omit<{ [key in keyof T]: StyleObject }, "css" | "meta" | "DEFAULT">
+export type StyleEntry<T> = Omit<{ [key in keyof T]: StyleObject }, "meta" | "DEFAULT">
 
-export type ProxyEntry<T> = (uid: string, prop: string) => ObjectEntry<T> | undefined;
+export type Handler<R> = (uid: string, prop: string) => R;
+
+export type StyleHandler<T> = Handler<StyleEntry<T> | undefined>;
 
 export type VariantBuilder = (...utilities: StyleObject[]) => StyleObject;
 
@@ -37,3 +39,5 @@ export type NestedProxy<T, O> = {
 }
 
 export type StyleProxy<T> = NestedProxy<T, StyleObject>;
+
+export type StyleProxyHandler<T> = Handler<StyleProxy<T> | undefined>

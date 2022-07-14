@@ -1,4 +1,4 @@
-import { CSSObject, ProxyEntry, StyleObject, StyleProperties } from "../types";
+import { CSSObject, StyleHandler, StyleObject, StyleProperties } from "../types";
 import { hasKey } from "../utils";
 import { useStaticHandler, useColorHandler } from "./handler";
 
@@ -28,7 +28,7 @@ export function fontSize<T extends object> (sizes: T) {
         if (typeof value[1] === "object" && value[1] != null) return build(uid, prop, value[0], undefined, value[1]);
       }
     }
-  }) as ProxyEntry<T>;
+  }) as StyleHandler<T>;
 }
 
 /* Font Smoothing */
