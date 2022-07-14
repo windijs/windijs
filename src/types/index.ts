@@ -29,3 +29,11 @@ export type ObjectEntry<T> = Omit<{ [key in keyof T]: StyleObject }, "css" | "me
 export type ProxyEntry<T> = (uid: string, prop: string) => ObjectEntry<T> | undefined;
 
 export type VariantBuilder = (...utilities: StyleObject[]) => StyleObject;
+
+export type NestedProxy<T, O> = {
+  [key in keyof T]: (T[key] extends object ? {
+    [k in keyof T[key]]: (T[key][k] extends object ? NestedProxy<T[key][k], O> : O)
+  } : O);
+}
+
+export type StyleProxy<T> = NestedProxy<T, StyleObject>;
