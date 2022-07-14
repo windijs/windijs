@@ -1,14 +1,14 @@
 import { CSSObject, ProxyEntry, StyleObject, StyleProperties } from "../types";
 import { hasKey } from "../utils";
-import { ColorOpacityProxy, ColorProxy, createColorHandler, createStaticHandler } from "./handler";
+import { useStaticHandler, useColorHandler } from "./handler";
 
-export function fontFamily<T extends object> (fonts: T) {
-  const cssFonts = {} as {[key in keyof T]: string};
+export const fontFamily = useStaticHandler((handle, fonts) => {
+  const cssFonts = {} as {[key in keyof typeof fonts]: string};
   for (const [key, value] of Object.entries(fonts)) {
-    cssFonts[key as keyof T] = Array.isArray(value) ? value.join(",") : value as string;
+    cssFonts[key as keyof typeof fonts] = Array.isArray(value) ? value.join(",") : value as string;
   }
-  return createStaticHandler(cssFonts, "fontFamily");
-}
+  return handle(cssFonts, "fontFamily");
+});
 
 export function fontSize<T extends object> (sizes: T) {
   const build = (uid: string, prop: string, fontSize: string, lineHeight?: string, others?: { [key in StyleProperties]: string }) => {
@@ -77,38 +77,33 @@ export const italic: StyleObject & { not: StyleObject } = {
   },
 };
 
-export function fontWeight<T extends object> (weights: T) {
-  return createStaticHandler(weights, "fontWeight");
-}
+export const fontWeight = useStaticHandler((handle, weights) =>
+  handle(weights, "fontWeight"),
+);
 
 /* Font Variant Numeric */
 // TODO: I don't like the font variant utilities, maybe implemented later...
 
-export function hyphens<T extends object> (hyphens: T) {
-  return createStaticHandler(hyphens, ["-webkit-hyphens" as StyleProperties, "-ms-hyphens" as StyleProperties, "hyphens"]);
-}
+export const hyphens = useStaticHandler((handle, hyphens) =>
+  handle(hyphens, ["-webkit-hyphens" as StyleProperties, "-ms-hyphens" as StyleProperties, "hyphens"]),
+);
 
-export function tracking<T extends object> (letterSpacings: T) {
-  return createStaticHandler(letterSpacings, "letterSpacing");
-}
+export const tracking = useStaticHandler((handle, letterSpacings) =>
+  handle(letterSpacings, "letterSpacing"),
+);
 
-export function leading<T extends object> (lineHeights: T) {
-  return createStaticHandler(lineHeights, "lineHeight");
-}
+export const leading = useStaticHandler((handle, lineHeights) =>
+  handle(lineHeights, "lineHeight"),
+);
 
-export function tabSize<T extends object> (tabs: T) {
-  return createStaticHandler(tabs, ["-moz-tab-size" as StyleProperties, "-o-tab-size" as StyleProperties, "tabSize"]);
-}
+export const tabSize = useStaticHandler((handle, tabs) =>
+  handle(tabs, ["-moz-tab-size" as StyleProperties, "-o-tab-size" as StyleProperties, "tabSize"]),
+);
 
-export function textAlignment<T extends object> (aligns: T) {
-  return createStaticHandler(aligns, "textAlign");
-}
+export const textAlignment = useStaticHandler((handle, aligns) =>
+  handle(aligns, "textAlign"),
+);
 
-export function textColor<T extends object> (colors: T): (key: string) => ColorOpacityProxy<T> | undefined;
-export function textColor<T extends object> (colors: T, withOpacity: true | undefined): (key: string) => ColorOpacityProxy<T> | undefined;
-export function textColor<T extends object> (colors: T, withOpacity: true | undefined, opacityName: string): (key: string) => ColorOpacityProxy<T> | undefined;
-export function textColor<T extends object> (colors: T, withOpacity: false): (key: string) => ColorProxy<T> | undefined;
-export function textColor<T extends object> (colors: T, withOpacity = true, opacityName = "--w-text-opacity") {
-  if (!withOpacity) return createColorHandler(colors, "color");
-  return createColorHandler(colors, "color", opacityName);
-}
+export const fillColor = useColorHandler((handle, colors, withOpacity = true, opacityName = "--w-textt-opacity") =>
+  handle(colors, "color", withOpacity ? opacityName : undefined),
+);
