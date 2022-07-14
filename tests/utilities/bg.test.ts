@@ -1,4 +1,4 @@
-import { createUtility, backgroundAttachment, backgroundAttachmentConfig, backgroundColor, backgroundGeneric, backgroundClip, backgroundClipConfig, colors, styleProperty, px, rem, calc, hover, focus, notChecked, evenOfType, dark, sm, internalGet, rgb } from "../../src";
+import { createUtility, backgroundAttachment, backgroundAttachmentConfig, backgroundColor, backgroundGeneric, backgroundClip, backgroundClipConfig, colors } from "../../src";
 
 test("Background Color", () => {
   const bg = createUtility("bg")
@@ -158,4 +158,38 @@ test("Background Meta", () => {
   expect(bg.fixed.meta).toMatchSnapshot();
   expect(bg.aliceblue.meta).toMatchSnapshot();
   expect(bg["rgb(22, 22, 22)"].meta).toMatchSnapshot();
+});
+
+test("Background With Deep Nested Color", () => {
+  const nestedColors = {
+    white: "#fff",
+    rose: {
+      50: "#fff1f2",
+      dark: {
+        100: "#fff",
+        night: {
+          300: "#1c1c1e",
+          blue: {
+            600: "#222222",
+          },
+        },
+      },
+    },
+  };
+
+  const bg = createUtility("bg")
+    .use(backgroundColor(nestedColors))
+    .init();
+
+  expect(bg.white.css).toMatchSnapshot();
+  expect(bg.rose[50].css).toMatchSnapshot();
+  expect(bg.rose.dark[100].css).toMatchSnapshot();
+  expect(bg.rose.dark.night[300].css).toMatchSnapshot();
+  expect(bg.rose.dark.night.blue[600].css).toMatchSnapshot();
+
+  expect(bg.white.meta?.props).toMatchSnapshot();
+  expect(bg.rose[50].meta?.props).toMatchSnapshot();
+  expect(bg.rose.dark[100].meta?.props).toMatchSnapshot();
+  expect(bg.rose.dark.night[300].meta?.props).toMatchSnapshot();
+  expect(bg.rose.dark.night.blue[600].meta?.props).toMatchSnapshot();
 });

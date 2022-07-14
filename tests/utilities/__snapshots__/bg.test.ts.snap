@@ -422,3 +422,78 @@ Object {
   "uid": "bg",
 }
 `;
+
+exports[`Background With Deep Nested Color 1`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(255, 255, 255, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background With Deep Nested Color 2`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(255, 241, 242, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background With Deep Nested Color 3`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(255, 255, 255, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background With Deep Nested Color 4`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(28, 28, 30, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background With Deep Nested Color 5`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(34, 34, 34, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background With Deep Nested Color 6`] = `
+Array [
+  "white",
+]
+`;
+
+exports[`Background With Deep Nested Color 7`] = `
+Array [
+  "rose",
+  "50",
+]
+`;
+
+exports[`Background With Deep Nested Color 8`] = `
+Array [
+  "rose",
+  "dark",
+  "100",
+]
+`;
+
+exports[`Background With Deep Nested Color 9`] = `
+Array [
+  "rose",
+  "dark",
+  "night",
+  "300",
+]
+`;
+
+exports[`Background With Deep Nested Color 10`] = `
+Array [
+  "rose",
+  "dark",
+  "night",
+  "blue",
+  "600",
+]
+`;
