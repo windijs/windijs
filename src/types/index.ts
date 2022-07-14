@@ -30,6 +30,12 @@ export type Handler<R> = (uid: string, prop: string) => R;
 
 export type StyleHandler<T> = Handler<StyleEntry<T> | undefined>;
 
+export type DefaultedStyleHandler<T> = Handler<StyleEntry<T> & { css: CSSObject } | undefined>;
+
+export type KeyedStyleHandler<T, K extends string> = Handler<Record<K, StyleEntry<T>>>;
+
+export type KeyedDefaultedStyleHandler<T, K extends string> = Handler<Record<K, StyleEntry<T> & { css: CSSObject }>>;
+
 export type VariantBuilder = (...utilities: StyleObject[]) => StyleObject;
 
 export type NestedProxy<T, O> = {

@@ -1,20 +1,12 @@
-import { CSSObject, NestedProxy, StyleEntry, StyleObject, StyleProperties, StyleProxy, UtilityMeta, Handler, StyleHandler, StyleProxyHandler } from "../types";
+import { NestedProxy, StyleObject, StyleProperties, StyleProxy, UtilityMeta, Handler, StyleHandler, StyleProxyHandler, KeyedStyleHandler, DefaultedStyleHandler, KeyedDefaultedStyleHandler } from "../types";
 import { buildStatic, buildColor, hasKey, useProxy } from "../utils";
 
 /* Static Handler */
-
-type DefaultEntryHandler<T> = Handler<StyleEntry<T> & { css: CSSObject } | undefined>;
-type KeyedEntryHandler<T, K extends string> = Handler<Record<K, StyleEntry<T>>>;
-type KeyedDefaultEntryHandler<T, K extends string> = Handler<Record<K, StyleEntry<T> & { css: CSSObject }>>;
-
 export function createStaticHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[]): StyleHandler<T>;
-export function createStaticHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[], key: undefined, handleDefault: true): DefaultEntryHandler<T>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], key: K, handleDefault: true): KeyedDefaultEntryHandler<T, K>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], key: K): KeyedEntryHandler<T, K>;
+export function createStaticHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[], key: undefined, handleDefault: true): DefaultedStyleHandler<T>;
+export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], key: K, handleDefault: true): KeyedDefaultedStyleHandler<T, K>;
+export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], key: K): KeyedStyleHandler<T, K>;
 export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], key: K | undefined = undefined, handleDefault = false) {
-  type ProxyType = (uid: string, prop: string) => StyleEntry<T> | undefined;
-  type KeyProxyType = (uid: string, prop: string) => Record<K, StyleEntry<T>>;
-
   const handler = (uid: string, prop: string) => {
     const meta: UtilityMeta = { uid, type: "static", props: key ? [key, prop] : [prop] };
     if (handleDefault) {
@@ -28,11 +20,11 @@ export function createStaticHandler<T extends object, K extends string> (statics
     }
   };
 
-  if (key == null) return handler as ProxyType;
+  if (key == null) return handler as StyleHandler<T>;
 
   return ((uid, prop) => {
     if (prop === key) return useProxy(p => handler(uid, p));
-  }) as KeyProxyType;
+  }) as KeyedStyleHandler<T, K>;
 };
 
 // /* CSS Handler */
@@ -73,13 +65,13 @@ export function useColorHandler (f: handleColor) {
   return ((colors, withOpacity, opacityName) => f(createColorHandler, colors, withOpacity, opacityName)) as ColorHandler;
 }
 
-type StaticHandler = <T extends object> (statics: T, k?: undefined) => DefaultEntryHandler<T>;
-type StaticHandlerWithKey<DEFAULT_KEY extends string> = <T extends object, K extends string = DEFAULT_KEY>(statics: T, key?: K) => KeyedDefaultEntryHandler<T, K>;
+type StaticHandler = <T extends object> (statics: T, k?: undefined) => DefaultedStyleHandler<T>;
+type StaticHandlerWithKey<DEFAULT_KEY extends string> = <T extends object, K extends string = DEFAULT_KEY>(statics: T, key?: K) => KeyedDefaultedStyleHandler<T, K>;
 
 type handleStatic = <T extends object> (handle: typeof createStaticHandler, statics: T) => StyleHandler<T>;
-type handleStaticWithDefault = <T extends object> (handle: typeof createStaticHandler, statics: T) => DefaultEntryHandler<T>;
-type handleStaticWithKey = <T extends object, K extends string> (handle: typeof createStaticHandler, statics: T, key: K) => KeyedEntryHandler<T, K>;
-type handleStaticWithKeyDefault = <T extends object, K extends string> (handle: typeof createStaticHandler, statics: T, key: K) => KeyedDefaultEntryHandler<T, K>;
+type handleStaticWithDefault = <T extends object> (handle: typeof createStaticHandler, statics: T) => DefaultedStyleHandler<T>;
+type handleStaticWithKey = <T extends object, K extends string> (handle: typeof createStaticHandler, statics: T, key: K) => KeyedStyleHandler<T, K>;
+type handleStaticWithKeyDefault = <T extends object, K extends string> (handle: typeof createStaticHandler, statics: T, key: K) => KeyedDefaultedStyleHandler<T, K>;
 
 export function useStaticHandler <K extends string> (k: K, f: handleStaticWithKeyDefault): StaticHandlerWithKey<K>;
 export function useStaticHandler <K extends string> (k: K, f: handleStaticWithKey): StaticHandlerWithKey<K>;
