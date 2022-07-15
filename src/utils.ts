@@ -74,7 +74,9 @@ export function hash (str: string): string {
   return (hash >>> 0).toString(36);
 }
 
-export function buildStatic (property: StyleProperties | StyleProperties[], value: string, meta: UtilityMeta): StyleObject {
+export function buildStatic (property: StyleProperties | StyleProperties[], value: unknown, meta: UtilityMeta): StyleObject | undefined {
+  if (typeof value !== "string") return undefined;
+
   const css: CSSObject = {};
   if (Array.isArray(property)) {
     property.forEach(p => (css[p] = value));
@@ -84,7 +86,9 @@ export function buildStatic (property: StyleProperties | StyleProperties[], valu
   return { css, meta };
 }
 
-export function buildColor (colorProperty: StyleProperties, colorOpacityProperty: string | undefined, value: string, meta: UtilityMeta) {
+export function buildColor (colorProperty: StyleProperties, colorOpacityProperty: string | undefined, value: unknown, meta: UtilityMeta) {
+  if (typeof value !== "string") return undefined;
+
   let css: CSSObject = { [colorProperty]: value };
 
   if (colorOpacityProperty != null) {
@@ -112,5 +116,13 @@ export function buildColor (colorProperty: StyleProperties, colorOpacityProperty
       },
     };
   }
+  return { css, meta };
+}
+
+export function buildFontSize (fontSize: string, meta: UtilityMeta, lineHeight?: string, others?: { [key in StyleProperties]: string }): StyleObject {
+  let css: CSSObject = { fontSize };
+  if (lineHeight != null) css.lineHeight = lineHeight;
+  if (others != null) css = { ...css, ...others } as CSSObject;
+
   return { css, meta };
 }
