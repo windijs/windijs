@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`guard with meld 1`] = `
+Object {
+  "css": Object {
+    "--w-border-opacity": "1",
+    "borderColor": "rgba(254, 243, 199, var(--w-border-opacity))",
+  },
+  "meta": Object {
+    "props": Array [
+      "amber",
+      "100",
+    ],
+    "type": "color",
+    "uid": "border",
+  },
+  "opacity": [Function],
+}
+`;
+
+exports[`guard with meld 2`] = `
+Object {
+  "css": Object {
+    "borderWidth": "2px",
+  },
+  "meta": Object {
+    "props": Array [
+      "2",
+    ],
+    "type": "static",
+    "uid": "border",
+  },
+}
+`;
+
+exports[`guard with meld 3`] = `
+Object {
+  "css": Object {
+    "--w-border-opacity": "1",
+    "borderColor": "rgba(96, 165, 250, var(--w-border-opacity))",
+  },
+  "meta": Object {
+    "props": Array [
+      "blue",
+      "400",
+    ],
+    "type": "color",
+    "uid": "border",
+  },
+  "opacity": [Function],
+}
+`;
+
+exports[`use multi plugin with meld and use 1`] = `
+Object {
+  "borderWidth": "0px",
+}
+`;
+
+exports[`use multi plugin with meld and use 2`] = `
+Object {
+  "--w-border-opacity": "1",
+  "borderColor": "rgba(16, 185, 129, var(--w-border-opacity))",
+}
+`;
+
+exports[`use multi plugin with meld and use 3`] = `
+Object {
+  "borderStyle": "dashed",
+}
+`;
+
+exports[`use single plugin 1`] = `
+Object {
+  "backgroundColor": "rgb(22, 22, 22)",
+}
+`;
+
+exports[`use single plugin 2`] = `
+Object {
+  "backgroundColor": "red",
+}
+`;
+
+exports[`use single plugin 3`] = `
+Object {
+  "backgroundColor": "aliceBlue",
+}
+`;
+
+exports[`use single plugin 4`] = `
+Object {
+  "backgroundColor": "#ffffff",
+}
+`;
+
+exports[`useGeneric With Trigger 1`] = `
+Object {
+  "backgroundColor": "rgb(22, 22, 22)",
+}
+`;
+
+exports[`useGeneric With Trigger2 1`] = `
+Object {
+  "backgroundColor": "rgb(22, 22, 22)",
+}
+`;
