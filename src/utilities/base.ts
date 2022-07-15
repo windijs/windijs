@@ -33,22 +33,19 @@ export class Utility<T = {}> {
     setPrototypeOf?: ((v: object | null) => boolean)[];
   };
 
-  private root: Object;
   readonly uid: string;
 
   constructor (uid: string) {
     this.uid = uid;
-    this.root = {};
     this.plugins = {
       get: [],
     };
   }
 
-  public use<U> (plugin: ((uid: string, prop: string) => U) | { get: (uid: string, prop: string) => U; default?: Object }): Utility<T & U> {
+  public use<U> (plugin: ((uid: string, prop: string) => U) | { get: (uid: string, prop: string) => U }): Utility<T & U> {
     if (typeof plugin === "function") {
       this.plugins.get.push(plugin);
     } else {
-      if (plugin.default) this.root = plugin.default;
       this.plugins.get.push(plugin.get);
     }
     return this as unknown as Utility<T & U>;
@@ -66,7 +63,7 @@ export class Utility<T = {}> {
         }
       },
     };
-    return new Proxy(this.root, handler) as unknown as T;
+    return new Proxy({}, handler) as unknown as T;
   }
 }
 
@@ -77,4 +74,19 @@ export class Utility<T = {}> {
  */
 export function createUtility (uid: string) {
   return new Utility(uid);
+}
+
+/**
+ * Use single plugin.
+ * @param uid
+ * @param plugin
+ * @returns
+ */
+export function use<U> (uid: string, plugin: (uid: string, prop: string) => U): U {
+  return new Proxy({}, {
+    get (target, prop: string) {
+      const res = plugin(uid, prop);
+      if (res) return res;
+    },
+  }) as unknown as U;
 }
