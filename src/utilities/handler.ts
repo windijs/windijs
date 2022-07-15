@@ -144,24 +144,25 @@ export function useCSSHandler<T extends object> (f: (css: CSSEntry) => T) {
   return () => createCSSHandler(f(css => ({ css, meta: { type: "css", uid: "css" } })));
 }
 
-type handleDynamic = (prop: string) => CSSObject;
+type ProxyType = (f: (prop: string) => CSSObject | undefined) => CSSObject;
+type handleDynamic = ((prop: string, proxy: ProxyType) => CSSObject | undefined);
 type DynamicHandler<R> = () => Handler<R>;
 
 export function useGenericHandler <K extends string, R> (k: K, f: handleDynamic): DynamicHandler<Record<K, R>>;
 export function useGenericHandler <R> (f: handleDynamic): DynamicHandler<R>;
 export function useGenericHandler <K extends string, R> (tOrF: K | handleDynamic, f2?: handleDynamic): DynamicHandler<R> | DynamicHandler<Record<K, R>> {
-  const build = (f: handleDynamic, uid: string, prop: string) => ({
-    css: f(prop),
-    meta: { uid, type: "generic", props: [prop] },
-  });
+  const meta = (uid: string, props: string[]) => ({ uid, type: "generic", props } as UtilityMeta);
 
   if (typeof tOrF === "string") {
-    return () => ((uid: string, prop: string) => {
-      if (prop === tOrF) return useProxy(p => build(f2!, uid, p)) as StyleObject;
+    return () => ((uid: string, p1: string) => {
+      if (p1 === tOrF) return useProxy(p2 => ({ css: f2!(p2, () => ({})), meta: meta(uid, [p1, p2]) })) as StyleObject;
     }) as unknown as Handler<Record<K, R>>;
   }
 
-  return () => (uid: string, prop: string) => build(tOrF, uid, prop) as unknown as R;
+  return () => (uid: string, p1: string) => {
+    const css = tOrF(p1, f => useProxy(p2 => ({ css: f(p2), meta: meta(uid, [p1, p2]) })));
+    return (css?.$$proxy ? css : { css, meta: meta(uid, [p1]) }) as unknown as R;
+  };
 }
 
 export function guard <K extends string, R> (key: K, handler: Handler<R>): Handler<Record<K, R>> {
