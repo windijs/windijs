@@ -9,8 +9,8 @@ export const borderWidth = useStaticHandler((handle, width) =>
   handle(width, "borderWidth", undefined, true),
 );
 
-export const borderOpacity = useStaticHandler("opacity", (handle, opacity, key) =>
-  handle(opacity, "--w-border-opacity" as StyleProperties, key),
+export const borderOpacity = useStaticHandler("opacity", (handle, opacity, trigger) =>
+  handle(opacity, "--w-border-opacity" as StyleProperties, trigger),
 );
 
 export const borderStyle = useStaticHandler((handle, styles) =>
