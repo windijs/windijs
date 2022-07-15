@@ -19,7 +19,7 @@ export function useProxy<T extends object, S = StyleObject> (f: (prop: string) =
     },
   };
 
-  return new Proxy({}, handler);
+  return new Proxy({ $$proxy: true } as T, handler);
 }
 
 export function commaJoin (...items: (string|number|undefined)[]) {

@@ -2,6 +2,8 @@ import { StyleProperties } from "./css";
 
 export * from "./css";
 
+export { CSSStyleData } from "./style";
+
 export type CSSDict = {
   [key in StyleProperties]?: string;
 }
