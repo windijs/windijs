@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "test": "npx jest",
+    "gen:style": "sucrase-node ./scripts/genStyleTypes.ts",
     "test:watch": "npx jest --watch",
     "test:update": "npx jest --updateSnapshot",
     "coverage": "npx jest --coverage"
