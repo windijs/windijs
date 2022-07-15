@@ -67,28 +67,70 @@ Object {
 }
 `;
 
-exports[`Font Smoothing 1`] = `
+exports[`Font Style and Font Smoothing 1`] = `
 Object {
-  "-moz-osx-font-smoothing": "grayscale",
-  "-webkit-font-smoothing": "antialiased",
+  "fontStyle": "normal",
 }
 `;
 
-exports[`Font Smoothing 2`] = `
+exports[`Font Style and Font Smoothing 2`] = `
+Object {
+  "fontStyle": "italic",
+}
+`;
+
+exports[`Font Style and Font Smoothing 3`] = `
 Object {
   "-moz-osx-font-smoothing": "auto",
   "-webkit-font-smoothing": "auto",
 }
 `;
 
-exports[`Font Style 1`] = `
+exports[`Font Style and Font Smoothing 4`] = `
 Object {
-  "fontStyle": "italic",
+  "-moz-osx-font-smoothing": "grayscale",
+  "-webkit-font-smoothing": "antialiased",
 }
 `;
 
-exports[`Font Style 2`] = `
+exports[`Font Style and Font Smoothing 5`] = `
 Object {
-  "fontStyle": "normal",
+  "props": Array [
+    "italic",
+  ],
+  "type": "css",
+  "uid": "font",
+}
+`;
+
+exports[`Font Style and Font Smoothing 6`] = `
+Object {
+  "props": Array [
+    "italic",
+    "not",
+  ],
+  "type": "css",
+  "uid": "font",
+}
+`;
+
+exports[`Font Style and Font Smoothing 7`] = `
+Object {
+  "props": Array [
+    "antialiased",
+  ],
+  "type": "css",
+  "uid": "font",
+}
+`;
+
+exports[`Font Style and Font Smoothing 8`] = `
+Object {
+  "props": Array [
+    "antialiased",
+    "auto",
+  ],
+  "type": "css",
+  "uid": "font",
 }
 `;

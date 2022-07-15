@@ -1,6 +1,6 @@
 import { createUtility } from "../../src";
 import { fontFamilyConfig, fontSizeConfig } from "../../src/config/typography";
-import { fontFamily, fontSize, italic, antialiased } from "../../src/utilities/typography";
+import { fontFamily, fontSize, fontStyle } from "../../src/utilities/typography";
 
 test("Font Family", () => {
   const font = createUtility("font")
@@ -34,12 +34,23 @@ test("Font Size With Different Config", () => {
   expect(text.md.css).toMatchSnapshot();
 });
 
-test("Font Smoothing", () => {
-  expect(antialiased.css).toMatchSnapshot();
-  expect(antialiased.auto.css).toMatchSnapshot();
-});
-
-test("Font Style", () => {
-  expect(italic.css).toMatchSnapshot();
+test("Font Style and Font Smoothing", () => {
+  const { italic, antialiased } = createUtility("font").use(fontStyle()).init();
+  // @ts-ignore safe entry ignored
   expect(italic.not.css).toMatchSnapshot();
+  // @ts-ignore safe entry ignored
+  expect(italic.css).toMatchSnapshot();
+  // @ts-ignore safe entry ignored
+  expect(antialiased.auto.css).toMatchSnapshot();
+  // @ts-ignore safe entry ignored
+  expect(antialiased.css).toMatchSnapshot();
+
+  // @ts-ignore safe entry ignored
+  expect(italic.meta).toMatchSnapshot();
+  // @ts-ignore safe entry ignored
+  expect(italic.not.meta).toMatchSnapshot();
+  // @ts-ignore safe entry ignored
+  expect(antialiased.meta).toMatchSnapshot();
+  // @ts-ignore safe entry ignored
+  expect(antialiased.auto.meta).toMatchSnapshot();
 });
