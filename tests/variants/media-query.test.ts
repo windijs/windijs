@@ -1,6 +1,6 @@
 import { createUtility, backgroundColor, colors, backgroundClip, backgroundClipConfig, sm, md, lg, xl, xxl, _sm, _md, _lg, _xl, _xxl, $sm, $md, $lg, $xl, $xxl, motionSafe, motionReduce, dark, light, $dark, $light, portrait, landscape, ltr, rtl } from "../../src";
 
-const bg = createUtility()
+const bg = createUtility("bg")
   .use(backgroundColor(colors))
   .use(backgroundClip(backgroundClipConfig))
   .init();

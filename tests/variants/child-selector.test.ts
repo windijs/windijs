@@ -1,6 +1,6 @@
 import { createUtility, backgroundColor, colors, backgroundClip, backgroundClipConfig, svg, all, children, siblings, sibling } from "../../src";
 
-const bg = createUtility()
+const bg = createUtility("bg")
   .use(backgroundColor(colors))
   .use(backgroundClip(backgroundClipConfig))
   .init();

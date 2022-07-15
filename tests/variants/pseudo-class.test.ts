@@ -1,6 +1,6 @@
 import { createUtility, backgroundColor, colors, backgroundClip, backgroundClipConfig, first, last, odd, even, visited, checked, focusWithin, hover, focus, focusVisible, active, link, target, notChecked, enabled, indeterminate, invalid, valid, optional, required, placeholderShown, readOnly, readWrite, notDisabled, firstOfType, notFirstOfType, lastOfType, notLastOfType, notFirst, notLast, onlyChild, notOnlyChild, onlyOfType, notOnlyOfType, root, empty, evenOfType, oddOfType, $default } from "../../src";
 
-const bg = createUtility()
+const bg = createUtility("bg")
   .use(backgroundColor(colors))
   .use(backgroundClip(backgroundClipConfig))
   .init();

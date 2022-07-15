@@ -1,6 +1,6 @@
 import { createUtility, backgroundColor, colors, backgroundClip, backgroundClipConfig, before, after, fileSelectorButton, firstLetter, firstLine, marker, selection } from "../../src";
 
-const bg = createUtility()
+const bg = createUtility("bg")
   .use(backgroundColor(colors))
   .use(backgroundClip(backgroundClipConfig))
   .init();
