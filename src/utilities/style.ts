@@ -1,17 +1,6 @@
-import { StyleObject, StyleProperties } from "../types";
-import { useProxy } from "../utils";
+import { CSSStyleData } from "../types";
+import { useGenericHandler } from "./handler";
 
-export function styleProperty () {
-    type ProxyType = (uid: string, prop: string) => {[key in StyleProperties]: {[k: string]: StyleObject}} & {[key: string]: {[key: string]: StyleObject}};
+// TODO, more types for other css properties, like transform, suggest opacity...
 
-    return (uid: string, prop: string) => useProxy(value => ({
-      css: {
-        [prop]: value,
-      },
-      meta: {
-        type: "generic",
-        uid,
-        props: [prop, value],
-      },
-    } as StyleObject)) as ProxyType;
-}
+export const styleProperty = useGenericHandler<CSSStyleData>((prop, proxy) => proxy(value => ({ [prop]: value })));
