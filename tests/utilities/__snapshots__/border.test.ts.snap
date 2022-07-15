@@ -29,6 +29,7 @@ Object {
 
 exports[`Border Meta 1`] = `
 Object {
+  "props": Array [],
   "type": "static",
   "uid": "rounded",
 }
@@ -46,6 +47,7 @@ Object {
 
 exports[`Border Meta 3`] = `
 Object {
+  "props": Array [],
   "type": "static",
   "uid": "border",
 }
@@ -256,5 +258,29 @@ Object {
 exports[`Border Width 3`] = `
 Object {
   "borderWidth": "1px",
+}
+`;
+
+exports[`Border With Nested Config 1`] = `
+Object {
+  "borderStyle": "nested",
+}
+`;
+
+exports[`Border With Nested Config 2`] = `
+Object {
+  "borderStyle": "solid",
+}
+`;
+
+exports[`Border With Nested Config 3`] = `
+Object {
+  "borderStyle": "dashed",
+}
+`;
+
+exports[`Border With Nested Config 4`] = `
+Object {
+  "borderStyle": "double",
 }
 `;

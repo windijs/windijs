@@ -2,6 +2,7 @@ import { colors, createUtility } from "../../src";
 import { borderRadiusConfig, borderStyleConfig, borderWidthConfig } from "../../src/config/border";
 import { opacityConfig } from "../../src/config/opacity";
 import { borderColor, borderOpacity, borderRadius, borderStyle, borderWidth } from "../../src/utilities/border";
+import { useStaticHandler } from "../../src/utilities/handler";
 
 test("Border Radius", () => {
   const rounded = createUtility("rounded")
@@ -30,6 +31,27 @@ test("Border Style", () => {
   expect(border.dotted.css).toMatchSnapshot("dotted");
   expect(border.double.css).toMatchSnapshot("double");
   expect(border.none.css).toMatchSnapshot("none");
+});
+
+test("Border With Nested Config", () => {
+  const borderStyle = useStaticHandler((handle, styles) => handle(styles, "borderStyle", undefined, true));
+  const border = createUtility("border")
+    .use(borderStyle({
+      solid: "solid",
+      nested: {
+        DEFAULT: "nested",
+        dashed: "dashed",
+        nested: {
+          double: "double",
+        },
+      },
+    }))
+    .init();
+  // @ts-ignore
+  expect(border.nested.css).toMatchSnapshot();
+  expect(border.solid.css).toMatchSnapshot();
+  expect(border.nested.dashed.css).toMatchSnapshot();
+  expect(border.nested.nested.double.css).toMatchSnapshot();
 });
 
 test("Border Opacity", () => {
