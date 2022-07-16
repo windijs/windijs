@@ -3,8 +3,6 @@ import * as units from "../helpers/unit";
 import * as funcs from "../helpers/funcs";
 import { useProxy } from "../utils";
 
-// TODO, more types for other css properties, like transform, suggest opacity...
-
 export function styleProperty () {
   const build = (uid: string, prop: string, value: string) => ({
     css: {
