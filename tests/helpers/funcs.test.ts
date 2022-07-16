@@ -1,4 +1,4 @@
-import { px, sub, rem, add, mul, div, percent, join, em, str, attr, inherit, url, $var, path, hwb, matrix, matrix3d, perspective, none, rotate, deg, turn, rad, rotate3d, rotateX, rotateY, rotateZ, scale, scale3d, scaleX, scaleY, scaleZ, skew, skewX, skewY, translate, ex, ch, mm, translate3d, $in, translateX, translateY, translateZ, calc, vw, clamp, max, min, abs, sign, blur, brightness, contrast, dropShadow, color, grayscale, hueRotate, invert, opacity, saturate, sepia, hsl, hsla, rgb, rgba, linearGradient, radialGradient, repeat, minmax, fr, fitContent, cubicBezier, conicGradient, repeatingLinearGradient, repeatingRadialGradient, repeatingConicGradient, steps, counter, counters, env, circle, ellipse, inset, polygon } from "../../src";
+import { px, sub, rem, add, mul, div, percent, join, em, attr, inherit, url, $var, path, hwb, matrix, matrix3d, perspective, none, rotate, deg, turn, rad, rotate3d, rotateX, rotateY, rotateZ, scale, scale3d, scaleX, scaleY, scaleZ, skew, skewX, skewY, translate, ex, ch, mm, translate3d, $in, translateX, translateY, translateZ, calc, vw, clamp, max, min, abs, sign, blur, brightness, contrast, dropShadow, color, grayscale, hueRotate, invert, opacity, saturate, sepia, hsl, hsla, rgb, rgba, linearGradient, radialGradient, repeat, minmax, fr, fitContent, cubicBezier, conicGradient, repeatingLinearGradient, repeatingRadialGradient, repeatingConicGradient, steps, counter, counters, env, circle, ellipse, inset, polygon, quote } from "../../src";
 
 test("sub", () => {
   expect(sub(rem[3], rem[1])).toEqual("2rem");
@@ -34,8 +34,8 @@ test("join", () => {
   expect(join(rem[2], px[4], em[3])).toEqual("2rem 4px 3em");
 });
 
-test("str", () => {
-  expect(str("Hello World")).toEqual("\"Hello World\"");
+test("quote", () => {
+  expect(quote("Hello World")).toEqual("\"Hello World\"");
 });
 
 test("attr", () => {
@@ -50,14 +50,14 @@ test("attr", () => {
 
   /* With fallback */
   expect(attr("data-count", "number", 0)).toEqual("attr(data-count number, 0)");
-  expect(attr("src", "url", str(""))).toEqual("attr(src url, \"\")");
+  expect(attr("src", "url", quote(""))).toEqual("attr(src url, \"\")");
   expect(attr("data-width", "px", inherit)).toEqual("attr(data-width px, inherit)");
-  expect(attr("data-something", undefined, str("default"))).toEqual("attr(data-something, \"default\")");
+  expect(attr("data-something", undefined, quote("default"))).toEqual("attr(data-something, \"default\")");
 });
 
 test("url", () => {
   expect(url("fantasticfont.woff")).toEqual("url(fantasticfont.woff)");
-  expect(url(str("fantasticfont.woff"))).toEqual("url(\"fantasticfont.woff\")");
+  expect(url(quote("fantasticfont.woff"))).toEqual("url(\"fantasticfont.woff\")");
   expect(url("../images/bullet.jpg")).toEqual("url(../images/bullet.jpg)");
 
   /* Base 64 */

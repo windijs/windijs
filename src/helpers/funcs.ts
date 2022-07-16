@@ -35,7 +35,7 @@ export function join (...args: (string | number | CSSDimension | CSSFlex | CSSPe
   return args.join(" ");
 }
 
-export function str (str: string) {
+export function quote (str: string) {
   return `${JSON.stringify(str)}`;
 }
 
@@ -68,6 +68,7 @@ export function path (path: string, fillRule?: CSSFillRule): string {
 
 // color functions
 
+/** Creates a Color from hue, white and black. */
 export function hwb (hue: CSSAngle | number, whiteness: CSSPercentage, blackness: CSSPercentage, alpha?: CSSAlphaValue): string {
   return parenWrap("hwb", [hue, whiteness, blackness].join(" ") + (alpha ? (" / " + alpha) : ""));
 }
@@ -180,9 +181,13 @@ export interface CSSFunctions {
 
   // color functions
 
+  /** Creates a Color from red, green, and blue values. */
   rgb(red: number, green: number, blue: number): string;
+  /** Creates a Color from red, green, blue, and alpha values. */
   rgba(red: number, green: number, blue: number, alpha: CSSAlphaValue): string;
+  /** Creates a Color from hue, saturation, and lightness values. */
   hsl(hue: number, saturation: CSSPercentage, lightness: CSSPercentage): string;
+  /** Creates a Color from hue, saturation, lightness, and alpha values. */
   hsla(hue: number, saturation: CSSPercentage, lightness: CSSPercentage, alpha: CSSAlphaValue): string;
 
   // others
