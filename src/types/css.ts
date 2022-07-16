@@ -1,7 +1,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Types
 
 import { StyleObject } from ".";
-import { $var, calc, circle, ellipse, hsl, hsla, hwb, inset, linearGradient, polygon, radialGradient, repeatingLinearGradient, repeatingRadialGradient, rgb, rgba, url } from "../helpers";
+import { $var, calc, circle, ellipse, hsl, hsla, hwb, inset, linearGradient, polygon, quote, radialGradient, repeatingLinearGradient, repeatingRadialGradient, rgb, rgba, url } from "../helpers";
 
 // pre-defined keywords
 
@@ -596,6 +596,17 @@ export interface LineStyleEntry {
 };
 
 export type LineWidthEntry = { [key in "medium" | "thick" | "thin"]: StyleObject };
+export type AlphaEntry = { [key in Exclude<CSSAlphaValue, CSSPercentage>]: StyleObject };
+export type IntegerEntry = { [ key in CSSInteger]: StyleObject };
+export interface URLEntry {
+  /** Reference a file by URL */
+  url: (...params: Parameters<typeof url>) => StyleObject
+}
+
+export interface StringEntry {
+  /** Generate quoted String */
+  quote: (...params: Parameters<typeof quote>) => StyleObject
+}
 
 export interface BoxEntry {
   /** The background is painted within (clipped to) the border box. */
