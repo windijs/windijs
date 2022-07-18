@@ -1,14 +1,25 @@
-import { StyleProperties } from "./css";
+import { CSSAngleType, CSSFrequencyType, CSSLengthType, CSSResolutionType, CSSTimeType } from "./css";
+import { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs } from "./data";
 
 export * from "./css";
+export { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs };
 
-export { CSSStyleData } from "./style";
+export type GeneralCSSData = CSSDecls & { [key in keyof CSSDecls]: { [key: string]: StyleObject } } & { [key: string]: { [key: string]: StyleObject } }
 
 export type CSSDict = {
-  [key in StyleProperties]?: string;
+  [prop in keyof CSSDecls]?: {
+    [value in keyof CSSDecls[prop]]?:
+      CSSDecls[prop][value] extends Function ?
+        value extends string ? `${value}()` : value
+      : value extends CSSLengthType | CSSAngleType | CSSTimeType | CSSResolutionType | CSSFrequencyType ? `0${value}`
+      : value extends "percent" ? "0%"
+      : value extends "fr" ? "0fr"
+      : value
+  }[keyof CSSDecls[prop]]
+  | String; // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
 }
 
-export type CSSObject = CSSDict & {[key: string]: CSSObject | string}
+export type CSSObject = CSSDict & Partial<CSSAtRules<CSSObject>> & Partial<CSSClasses<CSSObject>> & Partial<CSSElements<CSSObject>> & Partial<HTMLTags<CSSObject>> & Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | String }
 
 export type NumberDict = { [key: number]: string };
 

@@ -497,6 +497,7 @@ export interface WideEntry {
   calc: (...params: Parameters<typeof calc>) => StyleObject
 }
 
+// TODO: turn other string func into real functions
 export interface ImageFunctions {
   /** Reference an image file by URL */
   url: (...params: Parameters<typeof url>) => StyleObject
