@@ -1,3 +1,4 @@
 dist/
 node_modules/
-webCustomData.ts
+data/
+data.d.ts
