@@ -8,17 +8,17 @@ const bg = createUtility("bg")
 const utilities = [bg.blue[500], bg.clip.content];
 
 test("groupHover", () => {
-  expect(groupHover(...utilities)).toMatchSnapshot();
+  expect(groupHover(...utilities).css).toMatchSnapshot();
 });
 
 test("groupFocus", () => {
-  expect(groupFocus(...utilities)).toMatchSnapshot();
+  expect(groupFocus(...utilities).css).toMatchSnapshot();
 });
 
 test("groupActive", () => {
-  expect(groupActive(...utilities)).toMatchSnapshot();
+  expect(groupActive(...utilities).css).toMatchSnapshot();
 });
 
 test("groupVisited", () => {
-  expect(groupVisited(...utilities)).toMatchSnapshot();
+  expect(groupVisited(...utilities).css).toMatchSnapshot();
 });

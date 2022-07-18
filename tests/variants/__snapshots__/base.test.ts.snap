@@ -2,104 +2,88 @@
 
 exports[`media 1`] = `
 Object {
-  "css": Object {
-    "@media print": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "@media print": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`media 2`] = `
 Object {
-  "css": Object {
-    "@media (min-width: 1000px) and (max-width: 2000px)": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "@media (min-width: 1000px) and (max-width: 2000px)": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`useMedia 1`] = `
 Object {
-  "css": Object {
-    "@media print": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "@media print": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`useMedia 2`] = `
 Object {
-  "css": Object {
-    "@media (min-width: 1000px) and (max-width: 2000px)": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "@media (min-width: 1000px) and (max-width: 2000px)": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`useVariant 1`] = `
 Object {
-  "css": Object {
-    "span": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "span": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`useVariant 2`] = `
 Object {
-  "css": Object {
-    "&:hover": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "&:hover": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`variant 1`] = `
 Object {
-  "css": Object {
-    "span": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "span": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`variant 2`] = `
 Object {
-  "css": Object {
-    "&:hover": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "&:hover": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;

@@ -2,26 +2,33 @@
 
 exports[`after 1`] = `
 Object {
-  "css": Object {
-    "&::after": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "&::after": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
+  },
+}
+`;
+
+exports[`backdrop 1`] = `
+Object {
+  "&::backdrop": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`before 1`] = `
 Object {
-  "css": Object {
-    "&::before": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "&::before": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -41,52 +48,44 @@ Object {
 
 exports[`firstLetter 1`] = `
 Object {
-  "css": Object {
-    "&::first-letter": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "&::first-letter": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`firstLine 1`] = `
 Object {
-  "css": Object {
-    "&::first-line": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "&::first-line": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`marker 1`] = `
 Object {
-  "css": Object {
-    "& *::marker, &::marker": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "& *::marker, &::marker": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;
 
 exports[`selection 1`] = `
 Object {
-  "css": Object {
-    "& *::selection, &::selection": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
+  "& *::selection, &::selection": Object {
+    "--w-bg-opacity": "1",
+    "backgroundClip": "content-box",
+    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
+    "webkitBackgroundClip": "content-box",
   },
 }
 `;

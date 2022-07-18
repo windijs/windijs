@@ -1,4 +1,4 @@
-import { createUtility, backgroundColor, colors, backgroundClip, backgroundClipConfig, before, after, fileSelectorButton, firstLetter, firstLine, marker, selection } from "../../src";
+import { createUtility, backgroundColor, colors, backgroundClip, backgroundClipConfig, before, after, firstLetter, firstLine, marker, selection, backdrop } from "../../src";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))
@@ -7,30 +7,30 @@ const bg = createUtility("bg")
 
 const utilities = [bg.blue[500], bg.clip.content];
 
-test("before", () => {
-  expect(before(...utilities)).toMatchSnapshot();
-});
-
 test("after", () => {
-  expect(after(...utilities)).toMatchSnapshot();
+  expect(after(...utilities).css).toMatchSnapshot();
 });
 
-test("fileSelectorButton", () => {
-  expect(fileSelectorButton(...utilities)).toMatchSnapshot();
+test("backdrop", () => {
+  expect(backdrop(...utilities).css).toMatchSnapshot();
+});
+
+test("before", () => {
+  expect(before(...utilities).css).toMatchSnapshot();
 });
 
 test("firstLetter", () => {
-  expect(firstLetter(...utilities)).toMatchSnapshot();
+  expect(firstLetter(...utilities).css).toMatchSnapshot();
 });
 
 test("firstLine", () => {
-  expect(firstLine(...utilities)).toMatchSnapshot();
+  expect(firstLine(...utilities).css).toMatchSnapshot();
 });
 
 test("marker", () => {
-  expect(marker(...utilities)).toMatchSnapshot();
+  expect(marker(...utilities).css).toMatchSnapshot();
 });
 
 test("selection", () => {
-  expect(selection(...utilities)).toMatchSnapshot();
+  expect(selection(...utilities).css).toMatchSnapshot();
 });

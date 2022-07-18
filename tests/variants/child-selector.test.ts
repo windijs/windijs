@@ -8,21 +8,21 @@ const bg = createUtility("bg")
 const utilities = [bg.blue[500], bg.clip.content];
 
 test("svg", () => {
-  expect(svg(...utilities)).toMatchSnapshot();
+  expect(svg(...utilities).css).toMatchSnapshot();
 });
 
 test("all", () => {
-  expect(all(...utilities)).toMatchSnapshot();
+  expect(all(...utilities).css).toMatchSnapshot();
 });
 
 test("children", () => {
-  expect(children(...utilities)).toMatchSnapshot();
+  expect(children(...utilities).css).toMatchSnapshot();
 });
 
 test("siblings", () => {
-  expect(siblings(...utilities)).toMatchSnapshot();
+  expect(siblings(...utilities).css).toMatchSnapshot();
 });
 
 test("sibling", () => {
-  expect(sibling(...utilities)).toMatchSnapshot();
+  expect(sibling(...utilities).css).toMatchSnapshot();
 });
