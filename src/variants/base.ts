@@ -5,7 +5,7 @@ import { bundleStyle } from "../utils";
 export function useVariant (rule: string, utilities: StyleObject[]): StyleObject {
   const decl: CSSObject = {};
   decl[rule] = bundleStyle(utilities);
-  return css(decl, { type: "variant", uid: rule, children: utilities });
+  return css(decl, undefined, { type: "variant", uid: rule, props: [], children: utilities });
 }
 
 export const useMedia = (rule: string, utilities: StyleObject[]) => useVariant("@media " + rule, utilities);

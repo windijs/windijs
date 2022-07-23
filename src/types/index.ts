@@ -31,8 +31,7 @@ export type MetaType = "css" | "static" | "color" | "generic" | "variant";
 export type UtilityMeta = {
   uid: string;
   type: MetaType;
-  props?: string[];
-  variants?: string[];
+  props: string[];
   children?: StyleObject[];
 } & {
   [key: string]: any;
@@ -53,7 +52,7 @@ export type SafeEntry<T> = Omit<T, "meta" | "DEFAULT" | "css">;
 
 export type StyleEntry<T> = SafeEntry<{ [key in keyof T]: StyleObject }>
 
-export type Handler<R> = (uid: string, prop: string) => R;
+export type Handler<R> = (prop: string) => R;
 
 export type StyleHandler<T> = Handler<StyleEntry<T> | undefined>;
 

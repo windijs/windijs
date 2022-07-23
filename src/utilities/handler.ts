@@ -1,23 +1,22 @@
 import { NestedProxy, StyleObject, StyleProperties, StyleProxy, UtilityMeta, Handler, StyleProxyHandler, KeyedStyleProxyHandler, KeyedDefaultedStyleProxyHandler, DefaultedStyleProxyHandler, MetaType, CSSObject, CSSEntry } from "../types";
-import { buildStatic, buildColor, hasKey, useProxy } from "../utils";
-import { css, SymbolCSS, SymbolMeta } from "./base";
+import { buildStatic, buildColor, hasKey, useProxy, isProxy } from "../utils";
+import { css, pushMetaProp, SymbolCSS, SymbolMeta, getMeta, updateMetaType } from "./base";
 
-type BuildFunc = (value: unknown, meta: UtilityMeta) => StyleObject | undefined;
+type BuildFunc = (value: unknown) => StyleObject | undefined;
 
-function process<T extends object> (build: BuildFunc, statics: T, type: MetaType, uid: string, p: string, ps: string[] = [], handleDefault = false): StyleObject | UtilityMeta | undefined {
-  const meta: UtilityMeta = { uid, type, props: ps };
+function process<T extends object> (build: BuildFunc, statics: T, type: MetaType, p: string, handleDefault = false): StyleObject | UtilityMeta | undefined {
+  updateMetaType(type);
 
   if (handleDefault) {
-    if (p === "meta") return meta;
+    if (p === "meta") return getMeta();
     // @ts-ignore, generate default css
-    if (p === "css" && "DEFAULT" in statics) return build(statics.DEFAULT, meta).css;
+    if (p === "css" && "DEFAULT" in statics) return build(statics.DEFAULT).css;
   }
   if (hasKey(statics, p)) {
-    meta.props!.push(p);
-    const value = statics[p];
+    const value = pushMetaProp(p) && statics[p];
     return (typeof value === "object" && !Array.isArray(value))
-      ? useProxy(p2 => process(build, value as any, type, uid, p2, ps, handleDefault)) as StyleObject
-      : build(value, meta);
+      ? useProxy(p2 => process(build, value as any, type, p2, handleDefault)) as StyleObject
+      : build(value);
   }
 };
 
@@ -38,11 +37,14 @@ export function createStaticHandler<T extends object, K extends string> (statics
 export function createStaticHandler<T extends object, K extends string> (statics: T, build: BuildFunc, trigger: K, handleDefault: false): KeyedStyleProxyHandler<T, K>;
 export function createStaticHandler<T extends object, K extends string> (statics: T, build: BuildFunc, trigger: K, handleDefault: true): KeyedDefaultedStyleProxyHandler<T, K>;
 export function createStaticHandler<T extends object, K extends string> (statics: T, propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc, trigger: K | undefined = undefined, handleDefault = false) {
-  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : (value, meta) => buildStatic(propertyOrBuildFunc, value, meta);
-  if (trigger == null) return ((uid, p) => process(build, statics, "static", uid, p, [], handleDefault)) as StyleProxyHandler<T>;
+  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
+  if (trigger == null) return (p => process(build, statics, "static", p, handleDefault)) as StyleProxyHandler<T>;
 
-  return ((uid, p1) => {
-    if (p1 === trigger) return useProxy(p2 => process(build, statics, "static", uid, p2, [p1], handleDefault));
+  return (p1 => {
+    if (p1 === trigger) {
+      pushMetaProp(p1);
+      return useProxy(p2 => process(build, statics, "static", p2, handleDefault));
+    };
   }) as KeyedStyleProxyHandler<T, K>;
 };
 
@@ -69,8 +71,8 @@ export type ColorHandler =
 export function createColorHandler<T extends object> (colors: T, colorProperty: StyleProperties, colorOpacityProperty?: string): StyleProxyHandler<T>;
 export function createColorHandler<T extends object> (colors: T, colorProperty: StyleProperties, colorOpacityProperty: string): ColorOpacityProxyHandler<T>;
 export function createColorHandler<T extends object> (colors: T, colorPropertyOrBuildFunc: StyleProperties | BuildFunc, colorOpacityProperty?: string) {
-  const build: BuildFunc = typeof colorPropertyOrBuildFunc === "function" ? colorPropertyOrBuildFunc : (value, meta) => buildColor(colorPropertyOrBuildFunc, colorOpacityProperty, value, meta);
-  return (uid: string, p: string) => process(build, colors, "color", uid, p, [], false) as StyleProxy<T> | ColorOpacityProxy<T> | undefined;
+  const build: BuildFunc = typeof colorPropertyOrBuildFunc === "function" ? colorPropertyOrBuildFunc : value => buildColor(colorPropertyOrBuildFunc, colorOpacityProperty, value);
+  return (p: string) => process(build, colors, "color", p, false) as StyleProxy<T> | ColorOpacityProxy<T> | undefined;
 }
 
 type handleColor = <T extends object>(handle: typeof createColorHandler, colors: T, withOpacity?: boolean, opacityName?: string) => StyleProxyHandler<T>;
@@ -122,27 +124,28 @@ export function fixMeta<T extends object> (t: T, props: string[] = []): true {
   return true;
 }
 
-export function fixUid<T extends object> (t: T, uid: string): T {
-  if (SymbolMeta in t) (t as StyleObject)[SymbolMeta].uid = uid;
-  for (const v of Object.values(t)) {
-    if (v == null || Array.isArray(v) || typeof v !== "object") continue;
-    if (SymbolCSS in v) (v as StyleObject)[SymbolMeta].uid = uid;
-    fixUid(v, uid);
-  }
-  return t;
-}
+// export function fixUid<T extends object> (t: T, uid: string): T {
+//   if (SymbolMeta in t) (t as StyleObject)[SymbolMeta].uid = uid;
+//   for (const v of Object.values(t)) {
+//     if (v == null || Array.isArray(v) || typeof v !== "object") continue;
+//     if (SymbolCSS in v) (v as StyleObject)[SymbolMeta].uid = uid;
+//     fixUid(v, uid);
+//   }
+//   return t;
+// }
 
 export function createCSSHandler <T extends object> (t: T): StyleProxyHandler<T> {
-  return fixMeta(t) && ((uid, prop) => {
+  return fixMeta(t) && (prop => {
     if (hasKey(t, prop)) {
-      const v = t[prop];
-      if (typeof v === "object") return fixUid(v as unknown as object, uid);
+      pushMetaProp(prop);
+      return t[prop];
+      // if (typeof v === "object") return fixUid(v as unknown as object);
     }
   }) as StyleProxyHandler<T>;
 }
 
 export function useCSSHandler<T extends object> (f: (css: CSSEntry) => T) {
-  return () => createCSSHandler(f(decl => css(decl, { type: "css", uid: "css" })));
+  return () => createCSSHandler(f(decl => css(decl)));
 }
 
 type ProxyType = (f: (prop: string) => CSSObject | undefined) => CSSObject;
@@ -152,23 +155,28 @@ type DynamicHandler<R> = () => Handler<R>;
 export function useGenericHandler <K extends string, R> (k: K, f: handleDynamic): DynamicHandler<Record<K, R>>;
 export function useGenericHandler <R> (f: handleDynamic): DynamicHandler<R>;
 export function useGenericHandler <K extends string, R> (tOrF: K | handleDynamic, f2?: handleDynamic): DynamicHandler<R> | DynamicHandler<Record<K, R>> {
-  const meta = (uid: string, props: string[]) => ({ uid, type: "generic", props } as UtilityMeta);
-
   if (typeof tOrF === "string") {
-    return () => ((uid: string, p1: string) => {
-      if (p1 === tOrF) return useProxy(p2 => css(f2!(p2, () => ({}))!, meta(uid, [p1, p2]))) as StyleObject;
+    return () => ((p1: string) => {
+      if (p1 === tOrF) {
+        pushMetaProp(p1) && updateMetaType("generic");
+        return useProxy(p2 => css(f2!(p2, () => ({}))!)) as StyleObject;
+      }
     }) as unknown as Handler<Record<K, R>>;
   }
 
-  return () => (uid: string, p1: string) => {
-    const r = tOrF(p1, f => useProxy(p2 => css(f(p2)!, meta(uid, [p1, p2]))));
-    return (r?.$$proxy ? r : css(r!, meta(uid, [p1]))) as unknown as R;
+  return () => (p1: string) => {
+    pushMetaProp(p1) && updateMetaType("generic");
+    const r = tOrF(p1, f => useProxy(p2 => css(f(p2)!)));
+    return (isProxy(r) ? r : css(r!)) as unknown as R;
   };
 }
 
 export function guard <K extends string, R> (key: K, handler: Handler<R>): Handler<Record<K, R>> {
-  return ((uid: string, prop: string) => {
-    if (prop === key) return useProxy(p => handler(uid, p));
+  return ((prop: string) => {
+    if (prop === key) {
+      pushMetaProp(prop);
+      return useProxy(p => handler(p));
+    }
   }) as Handler<Record<K, R>>;
 }
 
@@ -203,10 +211,10 @@ export function meld <A, B> (a: Handler<A>, b: Handler<B>): Handler<A & B>;
 export function meld <A> (a: Handler<A>): Handler<A>;
 export function meld (...handlers: Handler<unknown>[]): Handler<unknown>;
 export function meld (...handlers: Handler<unknown>[]) {
-  return ((uid: string, prop: string) => {
+  return ((prop: string) => {
     let result;
     for (const handler of handlers) {
-      result = handler(uid, prop);
+      result = handler(prop);
       if (result) return result;
     }
   }) as any;

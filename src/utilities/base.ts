@@ -1,7 +1,7 @@
 // TODO: support more complex plugin api, like allow both get and set
 
-import { CSSObject, StyleObject, UtilityMeta } from "../types";
-import { firstRet } from "../utils";
+import { CSSObject, MetaType, StyleObject, UtilityMeta } from "../types";
+import { firstRet, parenWrap } from "../utils";
 
 interface UtilityPlugin {
   get: (p: string) => any;
@@ -19,14 +19,49 @@ interface UtilityPlugin {
   setPrototypeOf?: (v: object | null) => boolean;
 }
 
+let CurrentMeta: UtilityMeta;
+
 export const SymbolCSS = Symbol.for("css");
 export const SymbolMeta = Symbol.for("meta");
 export const SymbolData = Symbol.for("data");
 
-export function css<T extends object> (css: CSSObject, meta: UtilityMeta, data?: T) {
+export function resetMeta (uid = "css", type: MetaType = "css") {
+  CurrentMeta = { uid, type, props: [] };
+}
+
+resetMeta();
+
+export function getMeta () {
+  return CurrentMeta;
+}
+
+export function pushMetaProp (prop: string) {
+  return CurrentMeta.props.push(prop);
+}
+
+export function updateMetaType (type: MetaType) {
+  CurrentMeta.type = type;
+}
+
+export function isStyleObject (i: unknown) {
+  return i != null && typeof i === "object" && SymbolCSS in i;
+}
+
+export function css (css: CSSObject, data?: { [key: string]: unknown }, meta?: UtilityMeta) {
+  if (data != null) {
+    for (const [k, v] of Object.entries(data)) {
+      if (typeof v === "function") {
+        data[k] = (...args: unknown[]) => {
+          pushMetaProp(parenWrap(k, args.toString())); // push func prop, for example bg.red.opacity(50) -> [..., opacity(50)]
+          return v(...args);
+        };
+      }
+    }
+  }
+
   return new Proxy({
     [SymbolCSS]: css,
-    [SymbolMeta]: meta,
+    [SymbolMeta]: meta ?? CurrentMeta,
     [SymbolData]: data,
   }, {
     get (target, prop, receiver) {
@@ -42,7 +77,7 @@ export function css<T extends object> (css: CSSObject, meta: UtilityMeta, data?:
 
 export class Utility<T = {}> implements Required<ProxyHandler<Function>> {
   private plugins: {
-    get: ((uid: string, p: string) => any)[];
+    get: ((p: string) => any)[];
     apply: ((thisArg: any, argArray: any[]) => any)[];
     construct: ((argArray: any[], newTarget: Function) => object)[];
     defineProperty: ((p: string, attributes: PropertyDescriptor) => boolean)[];
@@ -130,7 +165,7 @@ export class Utility<T = {}> implements Required<ProxyHandler<Function>> {
     return firstRet(this.plugins.setPrototypeOf, [v]);
   }
 
-  public use<U> (plugin: ((uid: string, prop: string) => U) | { get: (prop: string) => U }): Utility<T & U> {
+  public use<U> (plugin: ((prop: string) => U) | { get: (prop: string) => U }): Utility<T & U> {
     if (typeof plugin === "function") {
       this.plugins.get.push(plugin);
     } else {
@@ -145,8 +180,9 @@ export class Utility<T = {}> implements Required<ProxyHandler<Function>> {
     const handler: ProxyHandler<{}> = {
       get (target, prop: string) {
         let result;
+        resetMeta(uid);
         for (const plugin of plugins) {
-          result = plugin(uid, prop);
+          result = plugin(prop);
           if (result) return result;
         }
       },
@@ -170,10 +206,11 @@ export function createUtility (uid: string) {
  * @param plugin
  * @returns
  */
-export function use<U> (uid: string, plugin: (uid: string, prop: string) => U): U {
+export function use<U> (uid: string, plugin: (prop: string) => U): U {
   return new Proxy({}, {
     get (target, prop: string) {
-      const res = plugin(uid, prop);
+      resetMeta(uid);
+      const res = plugin(prop);
       if (res) return res;
     },
   }) as unknown as U;

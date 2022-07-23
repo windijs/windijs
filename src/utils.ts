@@ -1,4 +1,4 @@
-import { CSSObject, StyleObject, StyleProperties, UtilityMeta } from "./types";
+import { CSSObject, StyleObject, StyleProperties } from "./types";
 import { css } from "./utilities";
 
 /**
@@ -13,14 +13,20 @@ export function isNumber (value: string) {
 
 export const hasKey = <T extends object>(obj: T, k: keyof any): k is keyof T => k in obj;
 
+export const SymbolProxy = Symbol.for("proxy");
+
+export function isProxy (i: unknown) {
+  return i != null && typeof i === "object" && SymbolProxy in i;
+}
+
 export function useProxy<T extends object, S = StyleObject> (f: (prop: string) => S | undefined) {
   const handler: ProxyHandler<T> = {
-    get (target, prop) {
-      return f(prop as string);
+    get (target, prop: string) {
+      return f(prop);
     },
   };
 
-  return new Proxy({ $$proxy: true } as T, handler);
+  return new Proxy({ [SymbolProxy]: true } as T, handler);
 }
 
 export function commaJoin (...items: (string|number|undefined)[]) {
@@ -75,7 +81,15 @@ export function hash (str: string): string {
   return (hash >>> 0).toString(36);
 }
 
-export function buildStatic (property: StyleProperties | StyleProperties[], value: unknown, meta: UtilityMeta): StyleObject | undefined {
+export function firstRet (fns: Function[], args: any[] = []) {
+  let result;
+  for (const fn of fns) {
+    result = fn.apply(undefined, args);
+    if (result) return result;
+  }
+}
+
+export function buildStatic (property: StyleProperties | StyleProperties[], value: unknown): StyleObject | undefined {
   if (typeof value !== "string") return undefined;
 
   const decl: CSSObject = {};
@@ -84,10 +98,10 @@ export function buildStatic (property: StyleProperties | StyleProperties[], valu
   } else {
     decl[property as string] = value;
   }
-  return css(decl, meta);
+  return css(decl);
 }
 
-export function buildColor (colorProperty: StyleProperties, colorOpacityProperty: string | undefined, value: unknown, meta: UtilityMeta): StyleObject | undefined {
+export function buildColor (colorProperty: StyleProperties, colorOpacityProperty: string | undefined, value: unknown): StyleObject | undefined {
   if (typeof value !== "string") return undefined;
 
   let decl: CSSObject = { [colorProperty]: value };
@@ -106,22 +120,21 @@ export function buildColor (colorProperty: StyleProperties, colorOpacityProperty
         [colorOpacityProperty]: values[3] ?? "1",
       };
     }
-    return css(decl, meta, {
+    return css(decl, {
       opacity (op: number) {
         const obj: CSSObject = { ...decl };
         obj[colorOpacityProperty] = (op / 100).toString();
-        meta.props!.push(parenWrap("opacity", op.toString()));
-        return css(obj, meta);
+        return css(obj);
       },
     }) as StyleObject & { opacity(op: number): StyleObject };
   }
-  return css(decl, meta);
+  return css(decl);
 }
 
-export function buildFontSize (fontSize: string, meta: UtilityMeta, lineHeight?: string, others?: { [key in StyleProperties]: string }): StyleObject {
+export function buildFontSize (fontSize: string, lineHeight?: string, others?: { [key in StyleProperties]: string }): StyleObject {
   let decl: CSSObject = { fontSize };
   if (lineHeight != null) decl.lineHeight = lineHeight;
   if (others != null) decl = { ...decl, ...others } as CSSObject;
 
-  return css(decl, meta);
+  return css(decl);
 }
