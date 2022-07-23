@@ -187,9 +187,9 @@ test("Background With Deep Nested Color", () => {
   expect(bg.rose.dark.night[300].css).toMatchSnapshot();
   expect(bg.rose.dark.night.blue[600].css).toMatchSnapshot();
 
-  expect(bg.white.meta?.props).toMatchSnapshot();
-  expect(bg.rose[50].meta?.props).toMatchSnapshot();
-  expect(bg.rose.dark[100].meta?.props).toMatchSnapshot();
-  expect(bg.rose.dark.night[300].meta?.props).toMatchSnapshot();
-  expect(bg.rose.dark.night.blue[600].meta?.props).toMatchSnapshot();
+  expect(bg.white.meta.props).toMatchSnapshot();
+  expect(bg.rose[50].meta.props).toMatchSnapshot();
+  expect(bg.rose.dark[100].meta.props).toMatchSnapshot();
+  expect(bg.rose.dark.night[300].meta.props).toMatchSnapshot();
+  expect(bg.rose.dark.night.blue[600].meta.props).toMatchSnapshot();
 });

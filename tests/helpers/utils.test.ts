@@ -1,4 +1,4 @@
-import { calcRgba, hexToRgb, hexToRgba, sliceColor } from "../../src/utils";
+import { calcRgba, hexToRgb, hexToRgba, sliceColor } from "../../src";
 
 test("calcRgba", () => {
   expect(calcRgba("#1CF")).toEqual([17, 204, 255, 1]);

@@ -2,52 +2,21 @@
 
 exports[`guard with meld 1`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "1",
-    "borderColor": "rgba(254, 243, 199, var(--w-border-opacity))",
-  },
-  "meta": Object {
-    "props": Array [
-      "amber",
-      "100",
-    ],
-    "type": "color",
-    "uid": "border",
-  },
-  "opacity": [Function],
+  "--w-border-opacity": "1",
+  "borderColor": "rgba(254, 243, 199, var(--w-border-opacity))",
 }
 `;
 
 exports[`guard with meld 2`] = `
 Object {
-  "css": Object {
-    "borderWidth": "2px",
-  },
-  "meta": Object {
-    "props": Array [
-      "2",
-    ],
-    "type": "static",
-    "uid": "border",
-  },
+  "borderWidth": "2px",
 }
 `;
 
 exports[`guard with meld 3`] = `
 Object {
-  "css": Object {
-    "--w-border-opacity": "1",
-    "borderColor": "rgba(96, 165, 250, var(--w-border-opacity))",
-  },
-  "meta": Object {
-    "props": Array [
-      "blue",
-      "400",
-    ],
-    "type": "color",
-    "uid": "border",
-  },
-  "opacity": [Function],
+  "--w-border-opacity": "1",
+  "borderColor": "rgba(96, 165, 250, var(--w-border-opacity))",
 }
 `;
 

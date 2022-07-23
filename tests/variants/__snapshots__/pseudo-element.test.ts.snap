@@ -33,19 +33,6 @@ Object {
 }
 `;
 
-exports[`fileSelectorButton 1`] = `
-Object {
-  "css": Object {
-    "&::file-selector-button": Object {
-      "--w-bg-opacity": "1",
-      "backgroundClip": "content-box",
-      "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-      "webkitBackgroundClip": "content-box",
-    },
-  },
-}
-`;
-
 exports[`firstLetter 1`] = `
 Object {
   "&::first-letter": Object {
