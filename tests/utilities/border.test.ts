@@ -95,27 +95,3 @@ test("Border Color", () => {
   expect(border.blue[700].css).toMatchSnapshot();
   expect(border.red[500].css).toMatchSnapshot();
 });
-
-test("Border Meta", () => {
-  const rounded = createUtility("rounded")
-    .use(borderRadius(borderRadiusConfig))
-    .init();
-
-  const border = createUtility("border")
-    .use(borderColor(colors))
-    .use(borderWidth(borderWidthConfig))
-    .use(borderOpacity(opacityConfig, "op"))
-    .use(borderStyle(borderStyleConfig))
-    .init();
-
-  // @ts-ignore, hidden property
-  expect(rounded.meta).toMatchSnapshot();
-  expect(rounded.sm.meta).toMatchSnapshot();
-  // @ts-ignore, hidden property
-  expect(border.meta).toMatchSnapshot();
-  expect(border[2].meta).toMatchSnapshot();
-  expect(border.black.meta).toMatchSnapshot();
-  expect(border.blue[400].meta).toMatchSnapshot();
-  expect(border.dashed.meta).toMatchSnapshot();
-  expect(border.op[50].meta).toMatchSnapshot();
-});
