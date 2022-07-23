@@ -116,7 +116,7 @@ export function useStaticHandler (tOrF: string | Function, f2?: Function) {
 export function fixMeta<T extends object> (t: T, props: string[] = []): true {
   for (const [k, v] of Object.entries(t)) {
     if (v == null || Array.isArray(v) || typeof v !== "object") continue;
-    if (SymbolCSS in v) (v as StyleObject).meta!.props = [...props, k];
+    if (SymbolCSS in v) (v as StyleObject)[SymbolMeta].props = [...props, k];
     fixMeta(v, [...props, k]);
   }
   return true;
@@ -126,7 +126,7 @@ export function fixUid<T extends object> (t: T, uid: string): T {
   if (SymbolMeta in t) (t as StyleObject)[SymbolMeta].uid = uid;
   for (const v of Object.values(t)) {
     if (v == null || Array.isArray(v) || typeof v !== "object") continue;
-    if (SymbolCSS in v) (v as StyleObject).meta!.uid = uid;
+    if (SymbolCSS in v) (v as StyleObject)[SymbolMeta].uid = uid;
     fixUid(v, uid);
   }
   return t;

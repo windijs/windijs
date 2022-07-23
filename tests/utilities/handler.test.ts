@@ -44,10 +44,10 @@ test("guard with meld", () => {
     .use(guard("width", meld(borderWidth(borderWidthConfig), borderColor(colors))))
     .init();
 
-  expect(border.colors.dark.amber[100]).toMatchSnapshot();
-  expect(border.width[2]).toMatchSnapshot();
+  expect(border.colors.dark.amber[100].css).toMatchSnapshot();
+  expect(border.width[2].css).toMatchSnapshot();
   expect(border.width.blue).toBeDefined();
-  expect(border.width.blue[400]).toMatchSnapshot();
+  expect(border.width.blue[400].css).toMatchSnapshot();
 });
 
 test("two guard with same name should not work", () => {
