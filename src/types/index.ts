@@ -1,3 +1,4 @@
+import { SymbolCSS, SymbolData, SymbolMeta } from "../utilities/base";
 import { CSSAngleType, CSSFrequencyType, CSSLengthType, CSSResolutionType, CSSTimeType } from "./css";
 import { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs } from "./data";
 
@@ -6,7 +7,7 @@ export { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs };
 
 export type GeneralCSSData = CSSDecls & { [key in keyof CSSDecls]: { [key: string]: StyleObject } } & { [key: string]: { [key: string]: StyleObject } }
 
-export type CSSDict = {
+export type CSSProps = {
   [prop in keyof CSSDecls]?: {
     [value in keyof CSSDecls[prop]]?:
       CSSDecls[prop][value] extends Function ?
@@ -19,24 +20,31 @@ export type CSSDict = {
   | String; // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
 }
 
-export type CSSObject = CSSDict & Partial<CSSAtRules<CSSObject>> & Partial<CSSClasses<CSSObject>> & Partial<CSSElements<CSSObject>> & Partial<HTMLTags<CSSObject>> & Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | String }
+export type CSSSelector = String | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
+
+export type CSSObject = CSSProps & Partial<CSSAtRules<CSSObject>> & Partial<CSSClasses<CSSObject>> & Partial<CSSElements<CSSObject>> & Partial<HTMLTags<CSSObject>> & Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | String | number }
 
 export type NumberDict = { [key: number]: string };
 
-export type MetaType = "css" | "static" | "color" | "generic";
+export type MetaType = "css" | "static" | "color" | "generic" | "variant";
 
 export type UtilityMeta = {
   uid: string;
   type: MetaType;
   props?: string[];
   variants?: string[];
+  children?: StyleObject[];
+} & {
+  [key: string]: any;
 };
 
 export interface StyleObject {
-  /** @internal */
-  css: CSSObject;
-  /** @internal */
-  meta?: UtilityMeta;
+  readonly css: CSSObject;
+  readonly meta: UtilityMeta;
+  readonly toString: () => string;
+  [SymbolCSS]: CSSObject;
+  [SymbolMeta]: UtilityMeta;
+  [SymbolData]: object | undefined,
 }
 
 export type CSSEntry = (css: CSSObject) => StyleObject;

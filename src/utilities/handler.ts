@@ -1,5 +1,6 @@
 import { NestedProxy, StyleObject, StyleProperties, StyleProxy, UtilityMeta, Handler, StyleProxyHandler, KeyedStyleProxyHandler, KeyedDefaultedStyleProxyHandler, DefaultedStyleProxyHandler, MetaType, CSSObject, CSSEntry } from "../types";
 import { buildStatic, buildColor, hasKey, useProxy } from "../utils";
+import { css, SymbolCSS, SymbolMeta } from "./base";
 
 type BuildFunc = (value: unknown, meta: UtilityMeta) => StyleObject | undefined;
 
@@ -115,17 +116,17 @@ export function useStaticHandler (tOrF: string | Function, f2?: Function) {
 export function fixMeta<T extends object> (t: T, props: string[] = []): true {
   for (const [k, v] of Object.entries(t)) {
     if (v == null || Array.isArray(v) || typeof v !== "object") continue;
-    if ("css" in v) (v as StyleObject).meta!.props = [...props, k];
+    if (SymbolCSS in v) (v as StyleObject).meta!.props = [...props, k];
     fixMeta(v, [...props, k]);
   }
   return true;
 }
 
 export function fixUid<T extends object> (t: T, uid: string): T {
-  for (const [k, v] of Object.entries(t)) {
-    if (k === "meta") v.uid = uid;
+  if (SymbolMeta in t) (t as StyleObject)[SymbolMeta].uid = uid;
+  for (const v of Object.values(t)) {
     if (v == null || Array.isArray(v) || typeof v !== "object") continue;
-    if ("css" in v) (v as StyleObject).meta!.uid = uid;
+    if (SymbolCSS in v) (v as StyleObject).meta!.uid = uid;
     fixUid(v, uid);
   }
   return t;
@@ -141,7 +142,7 @@ export function createCSSHandler <T extends object> (t: T): StyleProxyHandler<T>
 }
 
 export function useCSSHandler<T extends object> (f: (css: CSSEntry) => T) {
-  return () => createCSSHandler(f(css => ({ css, meta: { type: "css", uid: "css" } })));
+  return () => createCSSHandler(f(decl => css(decl, { type: "css", uid: "css" })));
 }
 
 type ProxyType = (f: (prop: string) => CSSObject | undefined) => CSSObject;
@@ -155,13 +156,13 @@ export function useGenericHandler <K extends string, R> (tOrF: K | handleDynamic
 
   if (typeof tOrF === "string") {
     return () => ((uid: string, p1: string) => {
-      if (p1 === tOrF) return useProxy(p2 => ({ css: f2!(p2, () => ({})), meta: meta(uid, [p1, p2]) })) as StyleObject;
+      if (p1 === tOrF) return useProxy(p2 => css(f2!(p2, () => ({}))!, meta(uid, [p1, p2]))) as StyleObject;
     }) as unknown as Handler<Record<K, R>>;
   }
 
   return () => (uid: string, p1: string) => {
-    const css = tOrF(p1, f => useProxy(p2 => ({ css: f(p2), meta: meta(uid, [p1, p2]) })));
-    return (css?.$$proxy ? css : { css, meta: meta(uid, [p1]) }) as unknown as R;
+    const r = tOrF(p1, f => useProxy(p2 => css(f(p2)!, meta(uid, [p1, p2]))));
+    return (r?.$$proxy ? r : css(r!, meta(uid, [p1]))) as unknown as R;
   };
 }
 
