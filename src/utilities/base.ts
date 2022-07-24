@@ -1,8 +1,9 @@
 // TODO: support more complex plugin api, like allow both get and set
 
-import { CSSObject, MetaType, StyleObject, UtilityMeta } from "../types";
-import { SymbolProxy } from "../helpers/proxy";
+import { CSSObject, StyleObject, UtilityMeta } from "../types";
+import { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "../helpers/symbol";
 import { firstRet, parenWrap } from "../utils";
+import { getMeta, pushMetaProp, resetMeta } from "../helpers/meta";
 
 interface UtilityPlugin {
   get: (p: string) => any;
@@ -18,30 +19,6 @@ interface UtilityPlugin {
   preventExtensions?: () => boolean;
   set?: (p: string, value: any) => boolean;
   setPrototypeOf?: (v: object | null) => boolean;
-}
-
-let CurrentMeta: UtilityMeta;
-
-export const SymbolCSS = Symbol.for("css");
-export const SymbolMeta = Symbol.for("meta");
-export const SymbolData = Symbol.for("data");
-
-export function resetMeta (uid = "css", type: MetaType = "css") {
-  CurrentMeta = { uid, type, props: [] };
-}
-
-resetMeta();
-
-export function getMeta () {
-  return CurrentMeta;
-}
-
-export function pushMetaProp (prop: string) {
-  return CurrentMeta.props.push(prop);
-}
-
-export function updateMetaType (type: MetaType) {
-  CurrentMeta.type = type;
 }
 
 export function isStyleObject (i: unknown) {
@@ -63,7 +40,7 @@ export function css (css: CSSObject, data?: { [key: string]: unknown }, meta?: U
   return new Proxy({
     [SymbolProxy]: true,
     [SymbolCSS]: css,
-    [SymbolMeta]: meta ?? CurrentMeta,
+    [SymbolMeta]: meta ?? getMeta(),
     [SymbolData]: data,
   }, {
     get (target, prop, receiver) {

@@ -1,6 +1,5 @@
 import { StyleObject } from "../types";
-
-export const SymbolProxy = Symbol.for("proxy");
+import { SymbolProxy } from "./symbol";
 
 export function useProxy<T extends object, S = StyleObject> (f: (prop: string) => S | undefined) {
   const handler: ProxyHandler<T> = {
