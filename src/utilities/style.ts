@@ -1,7 +1,7 @@
 import { GeneralCSSData, Handler } from "../types";
 import * as units from "../helpers/unit";
 import * as funcs from "../helpers/funcs";
-import { useProxy } from "../utils";
+import { useProxy } from "../helpers/proxy";
 import { css } from "./base";
 
 export function styleProperty () {

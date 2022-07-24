@@ -1,6 +1,7 @@
 // TODO: support more complex plugin api, like allow both get and set
 
 import { CSSObject, MetaType, StyleObject, UtilityMeta } from "../types";
+import { SymbolProxy } from "../helpers/proxy";
 import { firstRet, parenWrap } from "../utils";
 
 interface UtilityPlugin {
@@ -60,6 +61,7 @@ export function css (css: CSSObject, data?: { [key: string]: unknown }, meta?: U
   }
 
   return new Proxy({
+    [SymbolProxy]: true,
     [SymbolCSS]: css,
     [SymbolMeta]: meta ?? CurrentMeta,
     [SymbolData]: data,

@@ -1,5 +1,6 @@
-import { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSLinearColorStopOrHint, CSSDimension, CSSFillRule, CSSFlex, CSSLength, CSSLengthPercentage, CSSPercentage, CSSSideOrCorner, CSSAngularColorStopOrHint, CSSPosition, CSSBorderRadiusItem } from "../types";
+import { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSDimension, CSSFillRule, CSSFlex, CSSLength, CSSLengthPercentage, CSSPercentage, CSSFunctions, CSSPosition, CSSBorderRadiusItem } from "../types";
 import { camelToDash, parenWrap } from "../utils";
+import { useProxy } from "./proxy";
 
 // TODO: should return object, like CSSPercentage/CSSDimension...
 // TODO: support multiple add/sub/mul/div
@@ -133,140 +134,8 @@ export function polygon (fillRule?: "nonzero" | "evenodd" | [CSSLengthPercentage
   return parenWrap("polygon", [fillRule, ...lengthOrPercent].filter(i => i != null).map(i => Array.isArray(i) ? i.join(" ") : i).join(", "));
 }
 
-type EnvInsetValue = "safe-area-inset-top" | "safe-area-inset-right" | "safe-area-inset-bottom" | "safe-area-inset-left titlebar-area-x" | "titlebar-area-y" | "titlebar-area-width" | "titlebar-area-height";
+export const { matrix, matrix3d, perspective, rotate, rotate3d, rotateX, rotateY, rotateZ, scale, scale3d, scaleX, scaleY, scaleZ, skew, skewX, skewY, translate, translate3d, translateX, translateY, translateZ, steps, calc, clamp, max, min, abs, sign, blur, brightness, contrast, grayscale, invert, opacity, saturate, sepia, rgb, rgba, hsl, hsla, counter, env, minmax, repeat } =
+  useProxy<CSSFunctions, Function>(prop => (...args: any[]) => prop + "(" + args.filter(i => i != null).join(", ") + ")");
 
-export interface CSSFunctions {
-  // transform functions
-  matrix(a: number, b: number, c: number, d: number, tx: number, ty: number): string;
-  matrix3d(a1: number, b1: number, c1: number, d1: number, a2: number, b2: number, c2: number, d2: number, a3: number, b3: number, c3: number, d3: number, a4: number, b4: number, c4: number, d4: number): string;
-  perspective(d: CSSLength | number | string): string;
-  rotate(a: CSSAngle | number): string;
-  rotate3d(a: CSSAngle | number): string;
-  rotate3d(x: number, y: number, z: number, a: CSSAngle): string;
-  rotateX(a: CSSAngle): string;
-  rotateY(a: CSSAngle): string;
-  rotateZ(a: CSSAngle): string;
-  scale(sx: number | CSSPercentage, sy?: number | CSSPercentage): string;
-  scale3d(sx: number, sy: number, sz: number): string;
-  scaleX(s: number): string;
-  scaleY(s: number): string;
-  scaleZ(s: number): string;
-  skew(ax: CSSAngle, ay?: CSSAngle): string;
-  skewX(a: CSSAngle): string;
-  skewY(a: CSSAngle): string;
-  translate(tx: CSSLengthPercentage, ty?: CSSLengthPercentage): string;
-  translate3d(tx: CSSLengthPercentage, ty?: CSSLengthPercentage, tz?: CSSLength): string;
-  translateX(tx: CSSLengthPercentage): string;
-  translateY(ty: CSSLengthPercentage): string;
-  translateZ(tz: CSSLength): string;
-  steps(count: number): string;
-
-  // math functions
-  calc(expr: string | CSSDimension | CSSPercentage | number): string;
-  clamp(min: CSSLength, val: CSSLength, max: CSSLength): string;
-  max(...exprs: (string | CSSDimension | CSSPercentage | number)[]): string;
-  min(...exprs: (string | CSSDimension | CSSPercentage | number)[]): string;
-  abs(expr: string | CSSDimension | CSSPercentage | number): string;
-  sign(expr: string | CSSDimension | CSSPercentage | number): string;
-
-  // filter functions
-  blur(radius: CSSLength): string;
-  brightness(amount: number | CSSPercentage): string;
-  contrast(amount: number | CSSPercentage): string;
-  grayscale(amount: number | CSSPercentage): string;
-  invert(amount: number | CSSPercentage): string;
-  opacity(amount: number | CSSPercentage): string;
-  saturate(amount: number | CSSPercentage): string;
-  sepia(amount: number | CSSPercentage): string;
-
-  // color functions
-
-  /** Creates a Color from red, green, and blue values. */
-  rgb(red: number, green: number, blue: number): string;
-  /** Creates a Color from red, green, blue, and alpha values. */
-  rgba(red: number, green: number, blue: number, alpha: CSSAlphaValue): string;
-  /** Creates a Color from hue, saturation, and lightness values. */
-  hsl(hue: number, saturation: CSSPercentage, lightness: CSSPercentage): string;
-  /** Creates a Color from hue, saturation, lightness, and alpha values. */
-  hsla(hue: number, saturation: CSSPercentage, lightness: CSSPercentage, alpha: CSSAlphaValue): string;
-
-  // others
-
-  counter(name: string, style?: string): string;
-  env(inset: EnvInsetValue | string, fallback?: CSSLength): string
-  minmax(min: CSSLengthPercentage | CSSFlex | "max-content" | "min-content" | "auto", max: CSSLengthPercentage | CSSFlex | "max-content" | "min-content" | "auto"): string;
-  repeat(repeatCount: "auto-fill" | "auto-fit" | number, tracks: string | CSSDimension | CSSPercentage | CSSFlex | number): string;
-}
-
-export const {
-  matrix,
-  matrix3d,
-  perspective,
-  rotate,
-  rotate3d,
-  rotateX,
-  rotateY,
-  rotateZ,
-  scale,
-  scale3d,
-  scaleX,
-  scaleY,
-  scaleZ,
-  skew,
-  skewX,
-  skewY,
-  translate,
-  translate3d,
-  translateX,
-  translateY,
-  translateZ,
-  steps,
-  calc,
-  clamp,
-  max,
-  min,
-  abs,
-  sign,
-  blur,
-  brightness,
-  contrast,
-  grayscale,
-  invert,
-  opacity,
-  saturate,
-  sepia,
-  rgb,
-  rgba,
-  hsl,
-  hsla,
-  counter,
-  env,
-  minmax,
-  repeat,
-} = new Proxy({}, {
-  get (target, prop: string) {
-    return (...args: any[]) => prop + "(" + args.filter(i => i != null).join(", ") + ")";
-  },
-}) as CSSFunctions;
-
-// camel cased functions
-
-export const { hueRotate, fitContent, cubicBezier, linearGradient, radialGradient, conicGradient, repeatingConicGradient, repeatingLinearGradient, repeatingRadialGradient } = new Proxy({}, {
-  get (target, prop: string) {
-    return (...args: any[]) => camelToDash(prop) + "(" + args.map(i => Array.isArray(i) ? i.join(" ") : i).filter(i => i != null).join(", ") + ")";
-  },
-}) as {
-  hueRotate(angle: CSSAngle): string;
-  fitContent(lengthOrPercent: CSSLengthPercentage): string;
-  cubicBezier(x1: number, y1: number, x2: number, y2: number): string;
-  linearGradient (direction: CSSSideOrCorner | CSSAngle, ...colorStops: CSSLinearColorStopOrHint[]): string;
-  radialGradient (...colors: CSSLinearColorStopOrHint[]): string;
-  radialGradient (shapeSizeAtPosition: string | undefined, ...colors: CSSLinearColorStopOrHint[]): string;
-  conicGradient(...colorDegrees: CSSAngularColorStopOrHint[]): string;
-  conicGradient(fromAngleAtPosition: string | undefined, ...colorDegrees: CSSAngularColorStopOrHint[]): string;
-  repeatingLinearGradient(direction: CSSSideOrCorner | CSSAngle, ...colorStops: CSSLinearColorStopOrHint[]): string;
-  repeatingRadialGradient(...colors: CSSLinearColorStopOrHint[]): string;
-  repeatingRadialGradient(shapeSizeAtPosition: string | undefined, ...colors: CSSLinearColorStopOrHint[]): string;
-  repeatingConicGradient(...colorDegrees: CSSAngularColorStopOrHint[]): string;
-  repeatingConicGradient(fromAngleAtPosition: string | undefined, ...colorDegrees: CSSAngularColorStopOrHint[]): string;
-};
+export const { hueRotate, fitContent, cubicBezier, linearGradient, radialGradient, conicGradient, repeatingConicGradient, repeatingLinearGradient, repeatingRadialGradient } =
+  useProxy<CSSFunctions, Function>(prop => (...args: any[]) => camelToDash(prop) + "(" + args.map(i => Array.isArray(i) ? i.join(" ") : i).filter(i => i != null).join(", ") + ")");

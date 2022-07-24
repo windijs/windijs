@@ -1,4 +1,5 @@
 import { SymbolCSS, SymbolData, SymbolMeta } from "../utilities/base";
+import { SymbolProxy } from "../helpers/proxy";
 import { CSSAngleType, CSSFrequencyType, CSSLengthType, CSSResolutionType, CSSTimeType } from "./css";
 import { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs } from "./data";
 
@@ -44,6 +45,7 @@ export interface StyleObject {
   [SymbolCSS]: CSSObject;
   [SymbolMeta]: UtilityMeta;
   [SymbolData]: object | undefined,
+  [SymbolProxy]: true;
 }
 
 export type CSSEntry = (css: CSSObject) => StyleObject;
@@ -74,8 +76,8 @@ export type StyleProxy<T> = NestedProxy<T, StyleObject>;
 
 export type StyleProxyHandler<T> = Handler<StyleProxy<T> | undefined>
 
-export type DefaultedStyleProxyHandler<T> = Handler<StyleProxy<T> & { css: CSSObject }>;
+export type DefaultedStyleProxyHandler<T> = Handler<StyleProxy<T> & StyleObject>;
 
 export type KeyedStyleProxyHandler<T, K extends string> = Handler<Record<K, StyleProxy<T>>>;
 
-export type KeyedDefaultedStyleProxyHandler<T, K extends string> = Handler<Record<K, StyleProxy<T> & { css: CSSObject }>>;
+export type KeyedDefaultedStyleProxyHandler<T, K extends string> = Handler<Record<K, StyleProxy<T> & StyleObject>>;

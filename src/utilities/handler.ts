@@ -1,5 +1,7 @@
 import { NestedProxy, StyleObject, StyleProperties, StyleProxy, UtilityMeta, Handler, StyleProxyHandler, KeyedStyleProxyHandler, KeyedDefaultedStyleProxyHandler, DefaultedStyleProxyHandler, MetaType, CSSObject, CSSEntry } from "../types";
-import { buildStatic, buildColor, hasKey, useProxy, isProxy } from "../utils";
+import { hasKey } from "../utils";
+import { useProxy, isProxy } from "../helpers/proxy";
+import { buildStatic, buildColor } from "./builder";
 import { css, pushMetaProp, SymbolCSS, SymbolMeta, getMeta, updateMetaType } from "./base";
 
 type BuildFunc = (value: unknown) => StyleObject | undefined;
@@ -8,9 +10,11 @@ function process<T extends object> (build: BuildFunc, statics: T, type: MetaType
   updateMetaType(type);
 
   if (handleDefault) {
-    if (p === "meta") return getMeta();
+    if (p === "meta" || p as unknown as Symbol === SymbolMeta) return getMeta();
     // @ts-ignore, generate default css
-    if (p === "css" && "DEFAULT" in statics) return build(statics.DEFAULT).css;
+    if ((p === "css" || p === SymbolCSS) && "DEFAULT" in statics) return build(statics.DEFAULT).css;
+    // if (p === "toString") return
+    // TODO: fix toString
   }
   if (hasKey(statics, p)) {
     const value = pushMetaProp(p) && statics[p];
