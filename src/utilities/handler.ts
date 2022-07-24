@@ -76,9 +76,9 @@ export function createStaticHandler<T extends object, K extends string> (statics
 
 /* Color Handler  */
 
-type ColorOpacityProxy<T> = NestedProxy<T, StyleObject & {
+type ColorOpacityProxy<T> = NestedProxy<T, StyleObject<{
   opacity: (op: number) => StyleObject
-}>;
+}>>;
 
 type ColorOpacityProxyHandler<T> = Handler<ColorOpacityProxy<T>>;
 

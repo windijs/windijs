@@ -40,7 +40,7 @@ export function buildColor (colorProperty: StyleProperties, colorOpacityProperty
         obj[colorOpacityProperty] = (op / 100).toString();
         return css(obj);
       },
-    }) as StyleObject & { opacity(op: number): StyleObject };
+    }) as StyleObject<{ opacity(op: number): StyleObject }>;
   }
   return css(decl);
 }

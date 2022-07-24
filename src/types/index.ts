@@ -37,15 +37,18 @@ export type UtilityMeta = {
   [key: string]: any;
 };
 
-export interface StyleObject {
-  readonly css: CSSObject;
-  readonly meta: UtilityMeta;
-  readonly toString: () => string;
+interface StyleObjectBase {
   [SymbolCSS]: CSSObject;
   [SymbolMeta]: UtilityMeta;
   [SymbolData]: object | undefined,
   [SymbolProxy]: true;
 }
+
+export type StyleObject<T = {}> = StyleObjectBase & {
+  readonly css: CSSObject;
+  readonly meta: UtilityMeta;
+  readonly toString: () => string;
+} & T;
 
 export type CSSEntry = (css: CSSObject) => StyleObject;
 
@@ -56,6 +59,12 @@ export type StyleEntry<T> = SafeEntry<{ [key in keyof T]: StyleObject }>
 export type Handler<R> = (prop: string) => R;
 
 export type StyleHandler<T> = Handler<StyleEntry<T> | undefined>;
+
+export type UnknownDict = { [key: string]: unknown };
+
+export type StyleBaseLoader = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict, props?: UnknownDict) => StyleObjectBase;
+
+export type StyleLoader = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict, props?: UnknownDict) => { css: CSSObject, meta: UtilityMeta, data?: UnknownDict, props?: UnknownDict };
 
 // export type DefaultedStyleHandler<T> = Handler<StyleEntry<T> & { css: CSSObject } | undefined>;
 
