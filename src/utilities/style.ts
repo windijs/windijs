@@ -3,7 +3,7 @@ import * as units from "../helpers/unit";
 
 import { GeneralCSSData, Handler } from "../types";
 
-import { css } from "./base";
+import { css } from "../helpers/css";
 import { useProxy } from "../helpers/proxy";
 
 export function styleProperty () {

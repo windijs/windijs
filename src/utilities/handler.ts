@@ -18,7 +18,7 @@ import { buildColor, buildStatic } from "./builder";
 import { getMeta, pushMetaProp, updateMetaType } from "../helpers/meta";
 import { isProxy, useProxy } from "../helpers/proxy";
 
-import { css } from "./base";
+import { css } from "../helpers/css";
 import { hasKey } from "../utils";
 
 type BuildFunc = (value: unknown) => StyleObject | undefined;
