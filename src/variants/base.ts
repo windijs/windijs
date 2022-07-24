@@ -1,7 +1,5 @@
 import { CSSObject, StyleObject } from "../types";
-
-import { bundleStyle } from "../helpers/build";
-import { css } from "../helpers/css";
+import { bundleStyle, css } from "../helpers/css";
 
 export function useVariant (rule: string, utilities: StyleObject[]): StyleObject {
   const decl: CSSObject = {};

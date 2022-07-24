@@ -20,6 +20,14 @@ export type CSSProps = {
   | String; // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
 }
 
+// used when build css
+export type CSSBlockBody = (string | { selector: string, body: CSSBlockBody })[]
+export type CSSDecl = { property: string, value: string | string[] };
+export type CSSRule = { selector: string, children: CSSDecl[] };
+export type CSSAtRule = { rule: string, children: CSSRules };
+export type CSSRules = (CSSRule | CSSAtRule)[];
+export type CSSStyleSheet = { rules: CSSRules };
+
 export type CSSSelector = String | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
 
 export type CSSObject = CSSProps & Partial<CSSAtRules<CSSObject>> & Partial<CSSClasses<CSSObject>> & Partial<CSSElements<CSSObject>> & Partial<HTMLTags<CSSObject>> & Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | String | number }
@@ -65,6 +73,8 @@ export type UnknownDict = { [key: string]: unknown };
 export type StyleBaseLoader = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict, props?: UnknownDict) => StyleObjectBase;
 
 export type StyleLoader = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict, props?: UnknownDict) => { css: CSSObject, meta: UtilityMeta, data?: UnknownDict, props?: UnknownDict };
+
+export type StyleNamer = (style: StyleObject) => string;
 
 // export type DefaultedStyleHandler<T> = Handler<StyleEntry<T> & { css: CSSObject } | undefined>;
 
