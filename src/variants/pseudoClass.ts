@@ -1,5 +1,6 @@
 import { VariantBuilder } from "../types";
 import { camelToDash } from "../utils";
+import { useProxy } from "../helpers/proxy";
 import { useVariant } from "./base";
 
 // TODO: the document of variants need to be improved.
@@ -268,12 +269,10 @@ export const odd: VariantBuilder = (...utilities) => useVariant("&:nth-child(odd
  */
 export const even: VariantBuilder = (...utilities) => useVariant("&:nth-child(even)", utilities);
 
-export const { visited, checked, disabled, focusWithin, hover, focus, focusVisible, active, link, target, notChecked, enabled, indeterminate, invalid, valid, optional, required, placeholderShown, readOnly, readWrite, notDisabled, firstOfType, notFirstOfType, lastOfType, notLastOfType, onlyChild, notOnlyChild, onlyOfType, notOnlyOfType, root, empty } = new Proxy({}, {
-  get (target, prop: string) {
-    return (...args: any[]) => {
-      prop = camelToDash(prop);
-      if (prop.startsWith("not-")) prop = `not(:${prop.slice(4)})`;
-      return useVariant("&:" + prop, args);
-    };
-  },
-}) as PseudoClassVariants;
+export const { visited, checked, disabled, focusWithin, hover, focus, focusVisible, active, link, target, notChecked, enabled, indeterminate, invalid, valid, optional, required, placeholderShown, readOnly, readWrite, notDisabled, firstOfType, notFirstOfType, lastOfType, notLastOfType, onlyChild, notOnlyChild, onlyOfType, notOnlyOfType, root, empty } = useProxy<PseudoClassVariants, Function>((prop) => {
+  return (...args: any[]) => {
+    prop = camelToDash(prop);
+    if (prop.startsWith("not-")) prop = `not(:${prop.slice(4)})`;
+    return useVariant("&:" + prop, args);
+  };
+});

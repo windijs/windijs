@@ -1,5 +1,6 @@
-import { VariantBuilder } from "../types";
 import { useMedia, useVariant } from "./base";
+
+import { VariantBuilder } from "../types";
 
 // screens
 

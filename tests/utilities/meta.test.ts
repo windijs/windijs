@@ -1,4 +1,4 @@
-import { backgroundColor, borderOpacity, borderWidth, colors, createUtility, borderWidthConfig, opacityConfig, backgroundGeneric, borderColor } from "../../src";
+import { backgroundColor, backgroundGeneric, borderColor, borderOpacity, borderWidth, borderWidthConfig, colors, createUtility, opacityConfig } from "../../src";
 import { guard, meld } from "../../src/utilities/handler";
 
 test("Color Meta", () => {

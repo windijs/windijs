@@ -1,5 +1,6 @@
-import { borderColor, borderWidth, colors, createUtility, CSSObject, StyleObject, borderWidthConfig, use, backgroundGeneric, borderStyle, borderStyleConfig, Handler } from "../../src";
+import { CSSObject, StyleObject, backgroundGeneric, borderColor, borderStyle, borderStyleConfig, borderWidth, borderWidthConfig, colors, createUtility, use } from "../../src";
 import { guard, meld, useGenericHandler } from "../../src/utilities/handler";
+
 import { isNumber } from "../../src/utils";
 
 test("useGeneric With Trigger", () => {

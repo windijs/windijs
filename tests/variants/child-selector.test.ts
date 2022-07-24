@@ -1,4 +1,4 @@
-import { createUtility, backgroundColor, colors, backgroundClip, backgroundClipConfig, svg, all, children, siblings, sibling } from "../../src";
+import { all, backgroundClip, backgroundClipConfig, backgroundColor, children, colors, createUtility, sibling, siblings, svg } from "../../src";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))

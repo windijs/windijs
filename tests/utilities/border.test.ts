@@ -1,7 +1,8 @@
-import { colors, createUtility } from "../../src";
-import { borderRadiusConfig, borderStyleConfig, borderWidthConfig } from "../../src/config/border";
-import { opacityConfig } from "../../src/config/opacity";
 import { borderColor, borderOpacity, borderRadius, borderStyle, borderWidth } from "../../src/utilities/border";
+import { borderRadiusConfig, borderStyleConfig, borderWidthConfig } from "../../src/config/border";
+import { colors, createUtility } from "../../src";
+
+import { opacityConfig } from "../../src/config/opacity";
 import { useStaticHandler } from "../../src/utilities/handler";
 
 test("Border Radius", () => {

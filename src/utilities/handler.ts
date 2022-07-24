@@ -1,8 +1,25 @@
-import { NestedProxy, StyleObject, StyleProperties, StyleProxy, UtilityMeta, Handler, StyleProxyHandler, KeyedStyleProxyHandler, KeyedDefaultedStyleProxyHandler, DefaultedStyleProxyHandler, MetaType, CSSObject, CSSEntry } from "../types";
+import {
+  CSSEntry,
+  CSSObject,
+  DefaultedStyleProxyHandler,
+  Handler,
+  KeyedDefaultedStyleProxyHandler,
+  KeyedStyleProxyHandler,
+  MetaType,
+  NestedProxy,
+  StyleObject,
+  StyleProperties,
+  StyleProxy,
+  StyleProxyHandler,
+  UtilityMeta,
+} from "../types";
+import { SymbolCSS, SymbolMeta } from "../helpers/symbol";
+import { buildColor, buildStatic } from "./builder";
+import { getMeta, pushMetaProp, updateMetaType } from "../helpers/meta";
+import { isProxy, useProxy } from "../helpers/proxy";
+
+import { css } from "./base";
 import { hasKey } from "../utils";
-import { useProxy, isProxy } from "../helpers/proxy";
-import { buildStatic, buildColor } from "./builder";
-import { css, pushMetaProp, SymbolCSS, SymbolMeta, getMeta, updateMetaType } from "./base";
 
 type BuildFunc = (value: unknown) => StyleObject | undefined;
 

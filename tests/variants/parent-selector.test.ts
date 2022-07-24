@@ -1,4 +1,4 @@
-import { createUtility, backgroundColor, colors, backgroundClip, backgroundClipConfig, groupHover, groupFocus, groupActive, groupVisited } from "../../src";
+import { backgroundClip, backgroundClipConfig, backgroundColor, colors, createUtility, groupActive, groupFocus, groupHover, groupVisited } from "../../src";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))

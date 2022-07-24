@@ -1,4 +1,4 @@
-import { em, rem, vh, vw, cm, mm, pt, px, deg, s, ms, dpi, percent, color } from "../../src";
+import { cm, color, deg, dpi, em, mm, ms, percent, pt, px, rem, s, vh, vw } from "../../src";
 
 test("em", () => {
   expect(em[3].toString()).toEqual("3em");

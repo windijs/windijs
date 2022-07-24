@@ -1,5 +1,6 @@
-import { StyleProperties } from "../types";
 import { useColorHandler, useStaticHandler } from "./handler";
+
+import { StyleProperties } from "../types";
 
 export const borderRadius = useStaticHandler((handle, radius) =>
   handle(radius, "borderRadius", undefined, true),

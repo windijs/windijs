@@ -1,6 +1,7 @@
+import { $var, calc, hsl, hsla, hwb, rgb, rgba } from "./funcs";
 import { CSSAlphaValue, CSSAngle, CSSAngleType, CSSColors, CSSFlex, CSSLength, CSSLengthType, CSSPercentage, CSSResolution, CSSResolutionType, CSSTime, CSSTimeType } from "../types";
+
 import { useProxy } from "../helpers/proxy";
-import { $var, calc, rgb, rgba, hsl, hsla, hwb } from "./funcs";
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Values_and_Units
 // TODO: maybe support math like add/sub for rem, px...

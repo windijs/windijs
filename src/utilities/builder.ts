@@ -1,5 +1,6 @@
 import { CSSObject, StyleObject, StyleProperties } from "../types";
 import { calcRgba, parenWrap, sliceColor } from "../utils";
+
 import { css } from "./base";
 
 export function buildStatic (property: StyleProperties | StyleProperties[], value: unknown): StyleObject | undefined {

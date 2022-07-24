@@ -1,8 +1,10 @@
-import { GeneralCSSData, Handler } from "../types";
-import * as units from "../helpers/unit";
 import * as funcs from "../helpers/funcs";
-import { useProxy } from "../helpers/proxy";
+import * as units from "../helpers/unit";
+
+import { GeneralCSSData, Handler } from "../types";
+
 import { css } from "./base";
+import { useProxy } from "../helpers/proxy";
 
 export function styleProperty () {
   const build = (prop: string, value: string) => css({ [prop]: value });

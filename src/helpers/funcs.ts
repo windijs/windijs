@@ -1,5 +1,6 @@
-import { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSDimension, CSSFillRule, CSSFlex, CSSLength, CSSLengthPercentage, CSSPercentage, CSSFunctions, CSSPosition, CSSBorderRadiusItem } from "../types";
+import { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSBorderRadiusItem, CSSDimension, CSSFillRule, CSSFlex, CSSFunctions, CSSLength, CSSLengthPercentage, CSSPercentage, CSSPosition } from "../types";
 import { camelToDash, parenWrap } from "../utils";
+
 import { useProxy } from "./proxy";
 
 // TODO: should return object, like CSSPercentage/CSSDimension...

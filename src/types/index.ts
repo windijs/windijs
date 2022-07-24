@@ -1,7 +1,6 @@
-import { SymbolCSS, SymbolData, SymbolMeta } from "../utilities/base";
-import { SymbolProxy } from "../helpers/proxy";
 import { CSSAngleType, CSSFrequencyType, CSSLengthType, CSSResolutionType, CSSTimeType } from "./css";
-import { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs } from "./data";
+import { CSSAtRules, CSSClasses, CSSDecls, CSSElements, HTMLAttrs, HTMLTags } from "./data";
+import { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "../helpers/symbol";
 
 export * from "./css";
 export { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs };
