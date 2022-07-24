@@ -59,3 +59,7 @@ export function firstRet (fns: Function[], args: any[] = []) {
     if (result) return result;
   }
 }
+
+export function indent (value: string, count: number = 2) {
+  return " ".repeat(count) + value;
+}

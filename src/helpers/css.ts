@@ -28,11 +28,7 @@ const baseLoader: StyleBaseLoader = (css, meta, data, props = {}) => {
 
 let CurrentLoader: StyleBaseLoader = baseLoader;
 
-export function getStyleLoader () {
-  return CurrentLoader;
-}
-
-export function setStyleLoader (loader: StyleLoader) {
+export function useStyleLoader (loader: StyleLoader) {
   CurrentLoader = (c, m, d, p) => {
     const { css, meta, data, props } = loader(c, m, d, p);
     return baseLoader(css, meta, data, props);
@@ -54,4 +50,32 @@ export function css (css: CSSObject, data?: { [key: string]: unknown }, meta?: U
 
 export function isStyleObject (i: unknown) {
   return i != null && typeof i === "object" && SymbolCSS in i;
+}
+
+export function injectCSS (css: string) {
+  const el = document.createElement("style");
+  el.setAttribute("type", "text/css");
+  el.textContent = css;
+  document.head.appendChild(el);
+}
+
+/**
+ * Bundle all utilities to a single css object.
+ * @param utilities Utilities and Variants
+ * @returns CSSObject
+ */
+export function bundleStyle (utilities: StyleObject[]): CSSObject {
+  const css: CSSObject = {};
+  for (const utility of utilities) {
+    for (const [k, v] of Object.entries(utility.css)) {
+      if (v != null) css[k] = v;
+    }
+  }
+  return css;
+}
+
+export function getStyleProps (style: StyleObject): string[] {
+  const { uid, children, props } = style[SymbolMeta];
+  if (Array.isArray(children)) style = children[0]!;
+  return [uid, ...props ?? []].filter(i => i != null) as string[];
 }
