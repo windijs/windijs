@@ -1,3 +1,4 @@
+/** @type { import("eslint-config-standard") } */
 module.exports = {
   env: {
     browser: true,
