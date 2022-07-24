@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`atomic 1`] = `
+".a {
+  background-color: #3b82f6;
+}
+
+.b {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .c {
+    border-width: 1px;
+  }
+  .d {
+    border-radius: 0.25rem;
+  }
+  .e {
+    background-color: #93c5fd;
+  }
+}"
+`;
+
+exports[`atomic with atomicNamer 1`] = `
+".bg\\\\.blue\\\\.500 {
+  background-color: #3b82f6;
+}
+
+.text\\\\.lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .border {
+    border-width: 1px;
+  }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .bg\\\\.blue\\\\.300 {
+    background-color: #93c5fd;
+  }
+}"
+`;
+
+exports[`atomic with hashNamer 1`] = `
+".windi-ixsi2d {
+  background-color: #3b82f6;
+}
+
+.windi-fhiqyx {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .windi-vkeghb {
+    border-width: 1px;
+  }
+  .windi-112vb5c {
+    border-radius: 0.25rem;
+  }
+  .windi-y1td23 {
+    background-color: #93c5fd;
+  }
+}"
+`;
+
+exports[`unify with utilities 1`] = `
+".test {
+  background-color: #3b82f6;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .test {
+    border-width: 1px;
+    border-radius: 0.25rem;
+    background-color: #60a5fa;
+  }
+}"
+`;
+
+exports[`unify with utilities 2`] = `
+".test2 {
+  background-color: #3b82f6;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  border-radius: 0.375rem;
+  border-width: 2px;
+}
+
+@media (min-width: 640px) {
+  .test2 {
+    border-width: 1px;
+    border-radius: 0.25rem;
+    background-color: #60a5fa;
+  }
+}"
+`;
+
+exports[`unify with utility object 1`] = `
+".test {
+  background-color: #3b82f6;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.button {
+  background-color: #f43f5e;
+  border-radius: 0.25rem;
+  border-width: 1px;
+}"
+`;
+
+exports[`unify with utility object: a 1`] = `
+".test {
+  background-color: #3b82f6;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.button {
+  background-color: #f43f5e;
+  border-radius: 0.25rem;
+  border-width: 1px;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}"
+`;
+
+exports[`unify with utility object: a 2`] = `
+".test {
+  background-color: #3b82f6;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.button {
+  background-color: #f43f5e;
+  border-radius: 0.25rem;
+  border-width: 1px;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}"
+`;

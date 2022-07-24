@@ -1,5 +1,5 @@
 import { StyleObject, UtilityMeta } from "../../src/types";
-import { css, setStyleLoader } from "../../src/helpers/css";
+import { css, useStyleLoader } from "../../src/helpers/css";
 
 test("css", () => {
   const props = {
@@ -40,7 +40,7 @@ test("css with meta", () => {
 });
 
 test("style loader", () => {
-  setStyleLoader((css, meta, data, props) => {
+  useStyleLoader((css, meta, data, props) => {
     props = { "bg.red.500": true, "text.lg": true };
 
     return { css, meta, data, props };
