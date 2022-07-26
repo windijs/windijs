@@ -36,6 +36,5 @@ export function useNamer (f: StyleNamer) {
 }
 
 export function nameStyle (style: StyleObject) {
-  if (style.meta.type === "variant") style = style.meta.children![0];
   return CURRENT_NAMER(style);
 }

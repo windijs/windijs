@@ -59,6 +59,17 @@ export function injectCSS (css: string) {
   document.head.appendChild(el);
 }
 
+export function applyVariant (utility: StyleObject) {
+  let css = utility[SymbolCSS];
+  for (const variant of utility[SymbolMeta].variants) {
+    css = {
+      [variant]: css,
+    };
+  }
+
+  return css;
+}
+
 /**
  * Bundle all utilities to a single css object.
  * @param utilities Utilities and Variants
@@ -67,8 +78,8 @@ export function injectCSS (css: string) {
 export function bundleStyle (utilities: StyleObject[]): CSSObject {
   const css: CSSObject = {};
   for (const utility of utilities) {
-    for (const [k, v] of Object.entries(utility.css)) {
-      if (v != null) css[k] = v;
+    for (const [k, v] of Object.entries(applyVariant(utility))) {
+      if (v != null) css[k] = k in css ? Object.assign(css[k], v) : v;
     }
   }
   return css;

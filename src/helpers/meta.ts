@@ -3,7 +3,7 @@ import { MetaType, UtilityMeta } from "../types";
 let CurrentMeta: UtilityMeta;
 
 export function resetMeta (uid = "css", type: MetaType = "css") {
-  CurrentMeta = { uid, type, props: [] };
+  CurrentMeta = { uid, type, props: [], variants: [] };
 }
 
 resetMeta();

@@ -1,8 +1,7 @@
 import { CSSAtRule, CSSBlockBody, CSSDecl, CSSObject, CSSRule, CSSRules, StyleObject } from "../types";
-import { bundleStyle, css, isStyleObject } from "./css";
+import { applyVariant, bundleStyle, isStyleObject } from "./css";
 import { camelToDash, indent } from "../utils";
 
-import { SymbolMeta } from "./symbol";
 import { nameStyle } from "./namer";
 
 /**
@@ -22,9 +21,7 @@ export function inline (x: HTMLElement | StyleObject, ...utilities: StyleObject[
   const isGet = isStyleObject(x);
   const styles = [];
   for (const [key, value] of Object.entries(bundleStyle(utilities))) {
-    if (typeof value === "string") {
-      isGet ? styles.push(key + ":" + value) : (x as HTMLElement).style.setProperty(key, value);
-    }
+    if (typeof value === "string") isGet ? styles.push(key + ":" + value) : (x as HTMLElement).style.setProperty(key, value);
   }
   if (isGet) return styles.join(";");
 }
@@ -73,18 +70,18 @@ function createRules (css: CSSObject, selector: string) {
   return rules;
 }
 
-function buildDecl (decl: CSSDecl): string | string[] {
-  if (Array.isArray(decl.value)) return decl.value.map(i => decl.property + ": " + i + ";");
-  return decl.property.startsWith("webkit") ? "-" : "" + camelToDash(decl.property) + ": " + decl.value + ";";
+export function buildDecl ({ value, property }: CSSDecl): string | string[] {
+  if (Array.isArray(value)) return value.map(i => property + ": " + i + ";");
+  return property.startsWith("webkit") ? "-" : "" + camelToDash(property) + ": " + value + ";";
 }
 
-function buildRule (rule: CSSRule, indent = 0) {
-  return cssBlock(rule.selector, rule.children.map(i => buildDecl(i)).flat(), indent);
+export function buildRule ({ selector, children }: CSSRule, indent = 0) {
+  return cssBlock(selector, children.map(i => buildDecl(i)).flat(), indent);
 }
 
-function buildAtRule (rule: CSSAtRule, indent = 0) {
+export function buildAtRule ({ rule, children }: CSSAtRule, indent = 0) {
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  return cssBlock(rule.rule, createBlockBody(rule.children, indent + 2), indent, indent);
+  return cssBlock(rule, createBlockBody(children, indent + 2), indent, 0);
 }
 
 function createBlockBody (rules: CSSRules, indent = 0) {
@@ -101,26 +98,11 @@ function createBlockBody (rules: CSSRules, indent = 0) {
   return blocks;
 }
 
-function buildRules (rules: CSSRules) {
+export function buildRules (rules: CSSRules) {
   return createBlockBody(rules).join("\n\n");
 }
 
-function extractChildren (style: StyleObject): StyleObject[] {
-  const { uid, children } = style[SymbolMeta];
-  if (Array.isArray(children)) {
-    return children.map(child => css({
-      [uid]: child.css,
-    }, undefined, {
-      type: "variant",
-      uid,
-      props: [],
-      children: [child],
-    }));
-  }
-  return [style];
-}
-
-function dedupRules (rules: CSSRules): CSSRules {
+export function dedupRules (rules: CSSRules): CSSRules {
   const styles: CSSRules = [];
   const atRules: {[key: string]: CSSAtRule} = {};
 
@@ -140,19 +122,10 @@ function dedupRules (rules: CSSRules): CSSRules {
 }
 
 export function atomic (...utilities: (StyleObject | StyleObject[])[]): string {
-  const flats: StyleObject[] = [];
   const rules: CSSRules = [];
 
-  for (const utility of utilities) {
-    if (Array.isArray(utility)) {
-      utility.forEach(u => flats.push(...extractChildren(u)));
-    } else {
-      flats.push(...extractChildren(utility));
-    }
-  }
-
-  for (const utility of flats) {
-    rules.push(...createRules(utility.css, "." + nameStyle(utility)));
+  for (const utility of utilities.flat()) {
+    rules.push(...createRules(applyVariant(utility), "." + nameStyle(utility)));
   }
 
   return buildRules(dedupRules(rules));
