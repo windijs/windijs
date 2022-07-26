@@ -1,4 +1,4 @@
-import { backgroundClip, backgroundClipConfig, backgroundColor, colors, createUtility, groupActive, groupFocus, groupHover, groupVisited } from "../../src";
+import { backgroundClip, backgroundClipConfig, backgroundColor, bundle, colors, createUtility, groupActive, groupFocus, groupHover, groupVisited } from "../../src";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))
@@ -8,17 +8,17 @@ const bg = createUtility("bg")
 const utilities = [bg.blue[500], bg.clip.content];
 
 test("groupHover", () => {
-  expect(groupHover(...utilities).css).toMatchSnapshot();
+  expect(bundle(groupHover(...utilities))).toMatchSnapshot();
 });
 
 test("groupFocus", () => {
-  expect(groupFocus(...utilities).css).toMatchSnapshot();
+  expect(bundle(groupFocus(...utilities))).toMatchSnapshot();
 });
 
 test("groupActive", () => {
-  expect(groupActive(...utilities).css).toMatchSnapshot();
+  expect(bundle(groupActive(...utilities))).toMatchSnapshot();
 });
 
 test("groupVisited", () => {
-  expect(groupVisited(...utilities).css).toMatchSnapshot();
+  expect(bundle(groupVisited(...utilities))).toMatchSnapshot();
 });

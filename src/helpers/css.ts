@@ -75,7 +75,7 @@ export function applyVariant (utility: StyleObject) {
  * @param utilities Utilities and Variants
  * @returns CSSObject
  */
-export function bundleStyle (utilities: StyleObject[]): CSSObject {
+export function bundle (utilities: StyleObject[]): CSSObject {
   const css: CSSObject = {};
   for (const utility of utilities) {
     for (const [k, v] of Object.entries(applyVariant(utility))) {

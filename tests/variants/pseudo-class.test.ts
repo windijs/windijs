@@ -1,4 +1,4 @@
-import { $default, active, backgroundClip, backgroundClipConfig, backgroundColor, checked, colors, createUtility, empty, enabled, even, evenOfType, first, firstOfType, focus, focusVisible, focusWithin, hover, indeterminate, invalid, last, lastOfType, link, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, readOnly, readWrite, required, root, target, valid, visited } from "../../src";
+import { $default, active, backgroundClip, backgroundClipConfig, backgroundColor, bundle, checked, colors, createUtility, empty, enabled, even, evenOfType, first, firstOfType, focus, focusVisible, focusWithin, hover, indeterminate, invalid, last, lastOfType, link, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, readOnly, readWrite, required, root, target, valid, visited } from "../../src";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))
@@ -8,157 +8,157 @@ const bg = createUtility("bg")
 const utilities = [bg.blue[500], bg.clip.content];
 
 test("first", () => {
-  expect(first(...utilities).css).toMatchSnapshot();
+  expect(bundle(first(...utilities))).toMatchSnapshot();
 });
 
 test("last", () => {
-  expect(last(...utilities).css).toMatchSnapshot();
+  expect(bundle(last(...utilities))).toMatchSnapshot();
 });
 
 test("odd", () => {
-  expect(odd(...utilities).css).toMatchSnapshot();
+  expect(bundle(odd(...utilities))).toMatchSnapshot();
 });
 
 test("even", () => {
-  expect(even(...utilities).css).toMatchSnapshot();
+  expect(bundle(even(...utilities))).toMatchSnapshot();
 });
 
 test("visited", () => {
-  expect(visited(...utilities).css).toMatchSnapshot();
+  expect(bundle(visited(...utilities))).toMatchSnapshot();
 });
 
 test("checked", () => {
-  expect(checked(...utilities).css).toMatchSnapshot();
+  expect(bundle(checked(...utilities))).toMatchSnapshot();
 });
 
 test("focusWithin", () => {
-  expect(focusWithin(...utilities).css).toMatchSnapshot();
+  expect(bundle(focusWithin(...utilities))).toMatchSnapshot();
 });
 
 test("hover", () => {
-  expect(hover(...utilities).css).toMatchSnapshot();
+  expect(bundle(hover(...utilities))).toMatchSnapshot();
 });
 
 test("focus", () => {
-  expect(focus(...utilities).css).toMatchSnapshot();
+  expect(bundle(focus(...utilities))).toMatchSnapshot();
 });
 
 test("focusVisible", () => {
-  expect(focusVisible(...utilities).css).toMatchSnapshot();
+  expect(bundle(focusVisible(...utilities))).toMatchSnapshot();
 });
 
 test("active", () => {
-  expect(active(...utilities).css).toMatchSnapshot();
+  expect(bundle(active(...utilities))).toMatchSnapshot();
 });
 
 test("link", () => {
-  expect(link(...utilities).css).toMatchSnapshot();
+  expect(bundle(link(...utilities))).toMatchSnapshot();
 });
 
 test("target", () => {
-  expect(target(...utilities).css).toMatchSnapshot();
+  expect(bundle(target(...utilities))).toMatchSnapshot();
 });
 
 test("notChecked", () => {
-  expect(notChecked(...utilities).css).toMatchSnapshot();
+  expect(bundle(notChecked(...utilities))).toMatchSnapshot();
 });
 
 test("enabled", () => {
-  expect(enabled(...utilities).css).toMatchSnapshot();
+  expect(bundle(enabled(...utilities))).toMatchSnapshot();
 });
 
 test("indeterminate", () => {
-  expect(indeterminate(...utilities).css).toMatchSnapshot();
+  expect(bundle(indeterminate(...utilities))).toMatchSnapshot();
 });
 
 test("invalid", () => {
-  expect(invalid(...utilities).css).toMatchSnapshot();
+  expect(bundle(invalid(...utilities))).toMatchSnapshot();
 });
 
 test("valid", () => {
-  expect(valid(...utilities).css).toMatchSnapshot();
+  expect(bundle(valid(...utilities))).toMatchSnapshot();
 });
 
 test("optional", () => {
-  expect(optional(...utilities).css).toMatchSnapshot();
+  expect(bundle(optional(...utilities))).toMatchSnapshot();
 });
 
 test("required", () => {
-  expect(required(...utilities).css).toMatchSnapshot();
+  expect(bundle(required(...utilities))).toMatchSnapshot();
 });
 
 test("placeholderShown", () => {
-  expect(placeholderShown(...utilities).css).toMatchSnapshot();
+  expect(bundle(placeholderShown(...utilities))).toMatchSnapshot();
 });
 
 test("readOnly", () => {
-  expect(readOnly(...utilities).css).toMatchSnapshot();
+  expect(bundle(readOnly(...utilities))).toMatchSnapshot();
 });
 
 test("readWrite", () => {
-  expect(readWrite(...utilities).css).toMatchSnapshot();
+  expect(bundle(readWrite(...utilities))).toMatchSnapshot();
 });
 
 test("notDisabled", () => {
-  expect(notDisabled(...utilities).css).toMatchSnapshot();
+  expect(bundle(notDisabled(...utilities))).toMatchSnapshot();
 });
 
 test("firstOfType", () => {
-  expect(firstOfType(...utilities).css).toMatchSnapshot();
+  expect(bundle(firstOfType(...utilities))).toMatchSnapshot();
 });
 
 test("notFirstOfType", () => {
-  expect(notFirstOfType(...utilities).css).toMatchSnapshot();
+  expect(bundle(notFirstOfType(...utilities))).toMatchSnapshot();
 });
 
 test("lastOfType", () => {
-  expect(lastOfType(...utilities).css).toMatchSnapshot();
+  expect(bundle(lastOfType(...utilities))).toMatchSnapshot();
 });
 
 test("notLastOfType", () => {
-  expect(notLastOfType(...utilities).css).toMatchSnapshot();
+  expect(bundle(notLastOfType(...utilities))).toMatchSnapshot();
 });
 
 test("notFirst", () => {
-  expect(notFirst(...utilities).css).toMatchSnapshot();
+  expect(bundle(notFirst(...utilities))).toMatchSnapshot();
 });
 
 test("notLast", () => {
-  expect(notLast(...utilities).css).toMatchSnapshot();
+  expect(bundle(notLast(...utilities))).toMatchSnapshot();
 });
 
 test("onlyChild", () => {
-  expect(onlyChild(...utilities).css).toMatchSnapshot();
+  expect(bundle(onlyChild(...utilities))).toMatchSnapshot();
 });
 
 test("notOnlyChild", () => {
-  expect(notOnlyChild(...utilities).css).toMatchSnapshot();
+  expect(bundle(notOnlyChild(...utilities))).toMatchSnapshot();
 });
 
 test("onlyOfType", () => {
-  expect(onlyOfType(...utilities).css).toMatchSnapshot();
+  expect(bundle(onlyOfType(...utilities))).toMatchSnapshot();
 });
 
 test("notOnlyOfType", () => {
-  expect(notOnlyOfType(...utilities).css).toMatchSnapshot();
+  expect(bundle(notOnlyOfType(...utilities))).toMatchSnapshot();
 });
 
 test("root", () => {
-  expect(root(...utilities).css).toMatchSnapshot();
+  expect(bundle(root(...utilities))).toMatchSnapshot();
 });
 
 test("empty", () => {
-  expect(empty(...utilities).css).toMatchSnapshot();
+  expect(bundle(empty(...utilities))).toMatchSnapshot();
 });
 
 test("evenOfType", () => {
-  expect(evenOfType(...utilities).css).toMatchSnapshot();
+  expect(bundle(evenOfType(...utilities))).toMatchSnapshot();
 });
 
 test("oddOfType", () => {
-  expect(oddOfType(...utilities).css).toMatchSnapshot();
+  expect(bundle(oddOfType(...utilities))).toMatchSnapshot();
 });
 
 test("default", () => {
-  expect($default(...utilities).css).toMatchSnapshot();
+  expect(bundle($default(...utilities))).toMatchSnapshot();
 });

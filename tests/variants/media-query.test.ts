@@ -1,4 +1,4 @@
-import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, backgroundClip, backgroundClipConfig, backgroundColor, colors, createUtility, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, rtl, sm, xl, xxl } from "../../src";
+import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, backgroundClip, backgroundClipConfig, backgroundColor, bundle, colors, createUtility, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, rtl, sm, xl, xxl } from "../../src";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))
@@ -8,47 +8,47 @@ const bg = createUtility("bg")
 const utilities = [bg.blue[500], bg.clip.content];
 
 test("mobile first screens", () => {
-  expect(sm(...utilities).css).toMatchSnapshot("sm");
-  expect(md(...utilities).css).toMatchSnapshot("md");
-  expect(lg(...utilities).css).toMatchSnapshot("lg");
-  expect(xl(...utilities).css).toMatchSnapshot("xl");
-  expect(xxl(...utilities).css).toMatchSnapshot("xxl");
+  expect(bundle(sm(...utilities))).toMatchSnapshot("sm");
+  expect(bundle(md(...utilities))).toMatchSnapshot("md");
+  expect(bundle(lg(...utilities))).toMatchSnapshot("lg");
+  expect(bundle(xl(...utilities))).toMatchSnapshot("xl");
+  expect(bundle(xxl(...utilities))).toMatchSnapshot("xxl");
 });
 
 test("desktop first screens", () => {
-  expect(_sm(...utilities).css).toMatchSnapshot("_sm");
-  expect(_md(...utilities).css).toMatchSnapshot("_md");
-  expect(_lg(...utilities).css).toMatchSnapshot("_lg");
-  expect(_xl(...utilities).css).toMatchSnapshot("_xl");
-  expect(_xxl(...utilities).css).toMatchSnapshot("_xxl");
+  expect(bundle(_sm(...utilities))).toMatchSnapshot("_sm");
+  expect(bundle(_md(...utilities))).toMatchSnapshot("_md");
+  expect(bundle(_lg(...utilities))).toMatchSnapshot("_lg");
+  expect(bundle(_xl(...utilities))).toMatchSnapshot("_xl");
+  expect(bundle(_xxl(...utilities))).toMatchSnapshot("_xxl");
 });
 
 test("only screens", () => {
-  expect($sm(...utilities).css).toMatchSnapshot("$sm");
-  expect($md(...utilities).css).toMatchSnapshot("$md");
-  expect($lg(...utilities).css).toMatchSnapshot("$lg");
-  expect($xl(...utilities).css).toMatchSnapshot("$xl");
-  expect($xxl(...utilities).css).toMatchSnapshot("$xxl");
+  expect(bundle($sm(...utilities))).toMatchSnapshot("$sm");
+  expect(bundle($md(...utilities))).toMatchSnapshot("$md");
+  expect(bundle($lg(...utilities))).toMatchSnapshot("$lg");
+  expect(bundle($xl(...utilities))).toMatchSnapshot("$xl");
+  expect(bundle($xxl(...utilities))).toMatchSnapshot("$xxl");
 });
 
 test("motions", () => {
-  expect(motionSafe(...utilities).css).toMatchSnapshot("motionSafe");
-  expect(motionReduce(...utilities).css).toMatchSnapshot("motionReduce");
+  expect(bundle(motionSafe(...utilities))).toMatchSnapshot("motionSafe");
+  expect(bundle(motionReduce(...utilities))).toMatchSnapshot("motionReduce");
 });
 
 test("themes", () => {
-  expect(dark(...utilities).css).toMatchSnapshot("dark");
-  expect(light(...utilities).css).toMatchSnapshot("light");
-  expect($dark(...utilities).css).toMatchSnapshot("$dark");
-  expect($light(...utilities).css).toMatchSnapshot("$light");
+  expect(bundle(dark(...utilities))).toMatchSnapshot("dark");
+  expect(bundle(light(...utilities))).toMatchSnapshot("light");
+  expect(bundle($dark(...utilities))).toMatchSnapshot("$dark");
+  expect(bundle($light(...utilities))).toMatchSnapshot("$light");
 });
 
 test("orientations", () => {
-  expect(portrait(...utilities).css).toMatchSnapshot("portrait");
-  expect(landscape(...utilities).css).toMatchSnapshot("landscape");
+  expect(bundle(portrait(...utilities))).toMatchSnapshot("portrait");
+  expect(bundle(landscape(...utilities))).toMatchSnapshot("landscape");
 });
 
 test("directions", () => {
-  expect(ltr(...utilities).css).toMatchSnapshot("ltr");
-  expect(rtl(...utilities).css).toMatchSnapshot("rtl");
+  expect(bundle(ltr(...utilities))).toMatchSnapshot("ltr");
+  expect(bundle(rtl(...utilities))).toMatchSnapshot("rtl");
 });

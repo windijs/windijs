@@ -1,4 +1,4 @@
-import { atomic, atomicNamer, backgroundColor, borderRadius, borderRadiusConfig, borderWidth, borderWidthConfig, colors, createUtility, fontSize, fontSizeConfig, hashNamer, sm, unify, useNamer } from "../../src";
+import { atomic, atomicNamer, backgroundColor, borderRadius, borderRadiusConfig, borderWidth, borderWidthConfig, colors, createUtility, dark, fontSize, fontSizeConfig, hashNamer, hover, sm, unify, useNamer } from "../../src";
 
 const text = createUtility("text")
   .use(fontSize(fontSizeConfig))
@@ -47,10 +47,20 @@ test("atomic", () => {
   expect(atomic(bg.blue[500], text.lg, sm(border, rounded, bg.blue[300]))).toMatchSnapshot();
 });
 
+test("atomic with nested variant", () => {
+  expect(atomic(bg.blue[500], text.lg, hover(bg.yellow[300]), sm(border, rounded, bg.blue[300], hover(bg.blue[600]), dark(hover(bg.blue[800]))))).toMatchSnapshot();
+});
+
 test("atomic with atomicNamer", () => {
   useNamer(atomicNamer);
 
   expect(atomic(bg.blue[500], text.lg, sm(border, rounded, bg.blue[300]))).toMatchSnapshot();
+});
+
+test("atomic with nested variant and atomicNamer", () => {
+  useNamer(atomicNamer);
+
+  expect(atomic(bg.blue[500], text.lg, hover(bg.yellow[300]), sm(border, rounded, bg.blue[300], hover(bg.blue[600]), dark(hover(bg.blue[800]))))).toMatchSnapshot();
 });
 
 test("atomic with hashNamer", () => {

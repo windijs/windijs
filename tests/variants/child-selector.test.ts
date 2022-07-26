@@ -1,4 +1,4 @@
-import { all, backgroundClip, backgroundClipConfig, backgroundColor, children, colors, createUtility, sibling, siblings, svg } from "../../src";
+import { all, backgroundClip, backgroundClipConfig, backgroundColor, bundle, children, colors, createUtility, sibling, siblings, svg } from "../../src";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))
@@ -8,21 +8,21 @@ const bg = createUtility("bg")
 const utilities = [bg.blue[500], bg.clip.content];
 
 test("svg", () => {
-  expect(svg(...utilities).css).toMatchSnapshot();
+  expect(bundle(svg(...utilities))).toMatchSnapshot();
 });
 
 test("all", () => {
-  expect(all(...utilities).css).toMatchSnapshot();
+  expect(bundle(all(...utilities))).toMatchSnapshot();
 });
 
 test("children", () => {
-  expect(children(...utilities).css).toMatchSnapshot();
+  expect(bundle(children(...utilities))).toMatchSnapshot();
 });
 
 test("siblings", () => {
-  expect(siblings(...utilities).css).toMatchSnapshot();
+  expect(bundle(siblings(...utilities))).toMatchSnapshot();
 });
 
 test("sibling", () => {
-  expect(sibling(...utilities).css).toMatchSnapshot();
+  expect(bundle(sibling(...utilities))).toMatchSnapshot();
 });

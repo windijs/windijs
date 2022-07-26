@@ -69,6 +69,76 @@ exports[`atomic with hashNamer 1`] = `
 }"
 `;
 
+exports[`atomic with nested variant 1`] = `
+".a {
+  background-color: #3b82f6;
+}
+
+.b {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.f:hover {
+  background-color: #fde047;
+}
+
+@media (min-width: 640px) {
+  .c {
+    border-width: 1px;
+  }
+  .d {
+    border-radius: 0.25rem;
+  }
+  .e {
+    background-color: #93c5fd;
+  }
+  .g:hover {
+    background-color: #2563eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    .h:hover {
+      background-color: #1e40af;
+    }
+  }
+}"
+`;
+
+exports[`atomic with nested variant and atomicNamer 1`] = `
+".bg\\\\.blue\\\\.500 {
+  background-color: #3b82f6;
+}
+
+.text\\\\.lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.bg\\\\.yellow\\\\.300:hover {
+  background-color: #fde047;
+}
+
+@media (min-width: 640px) {
+  .border {
+    border-width: 1px;
+  }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .bg\\\\.blue\\\\.300 {
+    background-color: #93c5fd;
+  }
+  .bg\\\\.blue\\\\.600:hover {
+    background-color: #2563eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    .bg\\\\.blue\\\\.800:hover {
+      background-color: #1e40af;
+    }
+  }
+}"
+`;
+
 exports[`unify with utilities 1`] = `
 ".test {
   background-color: #3b82f6;

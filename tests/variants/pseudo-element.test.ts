@@ -1,4 +1,4 @@
-import { after, backdrop, backgroundClip, backgroundClipConfig, backgroundColor, before, colors, createUtility, firstLetter, firstLine, marker, selection } from "../../src";
+import { after, backdrop, backgroundClip, backgroundClipConfig, backgroundColor, before, bundle, colors, createUtility, firstLetter, firstLine, marker, selection } from "../../src";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))
@@ -8,29 +8,29 @@ const bg = createUtility("bg")
 const utilities = [bg.blue[500], bg.clip.content];
 
 test("after", () => {
-  expect(after(...utilities).css).toMatchSnapshot();
+  expect(bundle(after(...utilities))).toMatchSnapshot();
 });
 
 test("backdrop", () => {
-  expect(backdrop(...utilities).css).toMatchSnapshot();
+  expect(bundle(backdrop(...utilities))).toMatchSnapshot();
 });
 
 test("before", () => {
-  expect(before(...utilities).css).toMatchSnapshot();
+  expect(bundle(before(...utilities))).toMatchSnapshot();
 });
 
 test("firstLetter", () => {
-  expect(firstLetter(...utilities).css).toMatchSnapshot();
+  expect(bundle(firstLetter(...utilities))).toMatchSnapshot();
 });
 
 test("firstLine", () => {
-  expect(firstLine(...utilities).css).toMatchSnapshot();
+  expect(bundle(firstLine(...utilities))).toMatchSnapshot();
 });
 
 test("marker", () => {
-  expect(marker(...utilities).css).toMatchSnapshot();
+  expect(bundle(marker(...utilities))).toMatchSnapshot();
 });
 
 test("selection", () => {
-  expect(selection(...utilities).css).toMatchSnapshot();
+  expect(bundle(selection(...utilities))).toMatchSnapshot();
 });

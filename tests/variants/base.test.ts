@@ -1,4 +1,4 @@
-import { backgroundClip, backgroundClipConfig, backgroundColor, colors, createUtility, media, useMedia, useVariant, variant } from "../../src";
+import { backgroundClip, backgroundClipConfig, backgroundColor, bundle, colors, createUtility, media, useMedia, useVariant, variant } from "../../src";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))
@@ -8,21 +8,21 @@ const bg = createUtility("bg")
 const utilities = [bg.blue[500], bg.clip.content];
 
 test("useVariant", () => {
-  expect(useVariant("span", utilities).css).toMatchSnapshot();
-  expect(useVariant("&:hover", utilities).css).toMatchSnapshot();
+  expect(bundle(useVariant("span", utilities))).toMatchSnapshot();
+  expect(bundle(useVariant("&:hover", utilities))).toMatchSnapshot();
 });
 
 test("useMedia", () => {
-  expect(useMedia("print", utilities).css).toMatchSnapshot();
-  expect(useMedia("(min-width: 1000px) and (max-width: 2000px)", utilities).css).toMatchSnapshot();
+  expect(bundle(useMedia("print", utilities))).toMatchSnapshot();
+  expect(bundle(useMedia("(min-width: 1000px) and (max-width: 2000px)", utilities))).toMatchSnapshot();
 });
 
 test("variant", () => {
-  expect(variant("span", bg.green[500], bg.clip.content).css).toMatchSnapshot();
-  expect(variant("&:hover", bg.green[500], bg.clip.content).css).toMatchSnapshot();
+  expect(bundle(variant("span", bg.green[500], bg.clip.content))).toMatchSnapshot();
+  expect(bundle(variant("&:hover", bg.green[500], bg.clip.content))).toMatchSnapshot();
 });
 
 test("media", () => {
-  expect(media("print", bg.green[500], bg.clip.content).css).toMatchSnapshot();
-  expect(media("(min-width: 1000px) and (max-width: 2000px)", bg.green[500], bg.clip.content).css).toMatchSnapshot();
+  expect(bundle(media("print", bg.green[500], bg.clip.content))).toMatchSnapshot();
+  expect(bundle(media("(min-width: 1000px) and (max-width: 2000px)", bg.green[500], bg.clip.content))).toMatchSnapshot();
 });

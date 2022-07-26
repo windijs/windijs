@@ -1,5 +1,5 @@
 import { CSSAtRule, CSSBlockBody, CSSDecl, CSSObject, CSSRule, CSSRules, StyleObject } from "../types";
-import { applyVariant, bundleStyle, isStyleObject } from "./css";
+import { applyVariant, bundle, isStyleObject } from "./css";
 import { camelToDash, indent } from "../utils";
 
 import { nameStyle } from "./namer";
@@ -20,7 +20,7 @@ export function inline (el: HTMLElement, ...utilities: StyleObject[]): void;
 export function inline (x: HTMLElement | StyleObject, ...utilities: StyleObject[]): string | void {
   const isGet = isStyleObject(x);
   const styles = [];
-  for (const [key, value] of Object.entries(bundleStyle(utilities))) {
+  for (const [key, value] of Object.entries(bundle(utilities))) {
     if (typeof value === "string") isGet ? styles.push(key + ":" + value) : (x as HTMLElement).style.setProperty(key, value);
   }
   if (isGet) return styles.join(";");
@@ -131,7 +131,7 @@ export function atomic (...utilities: (StyleObject | StyleObject[])[]): string {
   return buildRules(dedupRules(rules));
 }
 
-const _unify = (selector: string, utilities: StyleObject[]) => buildRules(createRules(bundleStyle(utilities), selector));
+const _unify = (selector: string, utilities: StyleObject[]) => buildRules(createRules(bundle(utilities), selector));
 
 export function unify (...utilities: {[key: string]: StyleObject | StyleObject[]}[]): string;
 export function unify (selector: string, ...utilities: (StyleObject | StyleObject[])[]): string;

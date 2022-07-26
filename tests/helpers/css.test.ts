@@ -13,6 +13,7 @@ test("css", () => {
     uid: "css",
     type: "css",
     props: [],
+    variants: [],
   });
 });
 
@@ -31,6 +32,7 @@ test("css with meta", () => {
     uid: "test",
     props: [],
     type: "static",
+    variants: [],
   };
 
   expect(css({

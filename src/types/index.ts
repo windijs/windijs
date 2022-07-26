@@ -40,7 +40,7 @@ export type UtilityMeta = {
   uid: string;
   type: MetaType;
   props: string[];
-  children?: StyleObject[];
+  variants: string[];
 } & {
   [key: string]: any;
 };
@@ -82,7 +82,7 @@ export type StyleNamer = (style: StyleObject) => string;
 
 // export type KeyedDefaultedStyleHandler<T, K extends string> = Handler<Record<K, StyleEntry<T> & { css: CSSObject }>>;
 
-export type VariantBuilder = (...utilities: StyleObject[]) => StyleObject;
+export type VariantBuilder = (...utilities: (StyleObject | StyleObject[])[]) => StyleObject[];
 
 export type NestedProxy<T, O> = SafeEntry<{
   [key in keyof T]: (T[key] extends object ? T[key] extends Array<unknown> ? O : SafeEntry<{
