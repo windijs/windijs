@@ -1,5 +1,5 @@
 import { StyleObject, UtilityMeta } from "../../src/types";
-import { css, useStyleLoader } from "../../src/helpers/css";
+import { baseStyleHandler, baseStyleTarget, css, useStyleLoader } from "../../src/helpers/css";
 
 test("css", () => {
   const props = {
@@ -42,11 +42,16 @@ test("css with meta", () => {
 });
 
 test("style loader", () => {
-  useStyleLoader((css, meta, data, props) => {
-    props = { "bg.red.500": true, "text.lg": true };
-
-    return { css, meta, data, props };
-  });
+  useStyleLoader((css, meta, data) => new Proxy({
+    "bg.red.500": true,
+    "text.lg": true,
+    ...baseStyleTarget(css, meta, data),
+  } as unknown as StyleObject, {
+    get (target, prop, receiver) {
+      if (prop === "toString") return () => Object.keys(target).join(" ");
+      return baseStyleHandler(target, prop, receiver);
+    },
+  }));
 
   expect(css({}).toString()).toEqual("bg.red.500 text.lg");
 });

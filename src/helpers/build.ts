@@ -44,7 +44,7 @@ function cssBlock (selector: string, body: CSSBlockBody = [], rootIndent = 0, ch
   ].join("\n");
 }
 
-function createRules (css: CSSObject, selector: string) {
+export function createRules (css: CSSObject, selector: string) {
   const rules: CSSRules = [];
 
   let atRule: CSSAtRule | undefined;

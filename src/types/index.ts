@@ -45,7 +45,7 @@ export type UtilityMeta = {
   [key: string]: any;
 };
 
-interface StyleObjectBase {
+export interface StyleObjectBase {
   [SymbolCSS]: CSSObject;
   [SymbolMeta]: UtilityMeta;
   [SymbolData]: object | undefined,
@@ -55,7 +55,6 @@ interface StyleObjectBase {
 export type StyleObject<T = {}> = StyleObjectBase & {
   readonly css: CSSObject;
   readonly meta: UtilityMeta;
-  readonly toString: () => string;
 } & T;
 
 export type CSSEntry = (css: CSSObject) => StyleObject;
@@ -70,9 +69,9 @@ export type StyleHandler<T> = Handler<StyleEntry<T> | undefined>;
 
 export type UnknownDict = { [key: string]: unknown };
 
-export type StyleBaseLoader = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict, props?: UnknownDict) => StyleObjectBase;
+export type TargetCreator = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict) => StyleObjectBase;
 
-export type StyleLoader = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict, props?: UnknownDict) => { css: CSSObject, meta: UtilityMeta, data?: UnknownDict, props?: UnknownDict };
+export type StyleLoader = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict) => StyleObject;
 
 export type StyleNamer = (style: StyleObject) => string;
 
