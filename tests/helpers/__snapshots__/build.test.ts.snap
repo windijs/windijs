@@ -47,23 +47,23 @@ exports[`atomic with atomicNamer 1`] = `
 `;
 
 exports[`atomic with hashNamer 1`] = `
-".windi-ixsi2d {
+".w-ixsi2d {
   background-color: #3b82f6;
 }
 
-.windi-fhiqyx {
+.w-fhiqyx {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
 @media (min-width: 640px) {
-  .windi-vkeghb {
+  .w-4mwz7n {
     border-width: 1px;
   }
-  .windi-112vb5c {
+  .w-3cecw {
     border-radius: 0.25rem;
   }
-  .windi-y1td23 {
+  .w-1ho46uf {
     background-color: #93c5fd;
   }
 }"
