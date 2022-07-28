@@ -12,6 +12,10 @@ export function getMeta () {
   return CurrentMeta;
 }
 
+export function getUid () {
+  return CurrentMeta.uid;
+}
+
 export function pushMetaProp (prop: string) {
   return CurrentMeta.props.push(prop);
 }

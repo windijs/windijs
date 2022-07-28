@@ -131,7 +131,7 @@ export function atomic (...utilities: (StyleObject | StyleObject[])[]): string {
   return buildRules(dedupRules(rules));
 }
 
-const _unify = (selector: string, utilities: StyleObject[]) => buildRules(createRules(bundle(utilities), selector));
+const _unify = (selector: string, utilities: (StyleObject | StyleObject[])[]) => buildRules(createRules(bundle(utilities), selector));
 
 export function unify (...utilities: {[key: string]: StyleObject | StyleObject[]}[]): string;
 export function unify (selector: string, ...utilities: (StyleObject | StyleObject[])[]): string;
