@@ -1,7 +1,7 @@
 import { StyleNamer, StyleObject } from "../types";
+import { getStyleIdent, getStyleProps } from "./css";
 
 import { escapeCSS } from "./escape";
-import { getStyleProps } from "./css";
 import { hash } from "../utils";
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -18,17 +18,18 @@ export function alphaCount (n: number): string {
 }
 
 export function alphaNamer (style: StyleObject): string {
-  const key = getStyleProps(style).join(".");
+  const key = getStyleIdent(style);
   if (key in MINI_MAP) return MINI_MAP[key];
   return (MINI_MAP[key] = alphaCount(MINI_COUNT++));
 }
 
 export function atomicNamer (style: StyleObject): string {
+  // TODO: apply varaint for this
   return escapeCSS(getStyleProps(style).join("."));
 }
 
 export function hashNamer (style: StyleObject): string {
-  return "windi-" + hash(getStyleProps(style).join("."));
+  return "w-" + hash(getStyleIdent(style));
 }
 
 export function useNamer (f: StyleNamer) {

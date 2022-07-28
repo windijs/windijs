@@ -49,11 +49,19 @@ export function isStyleObject (i: unknown) {
   return i != null && typeof i === "object" && SymbolCSS in i;
 }
 
+export function useArrayHelper () {
+  // eslint-disable-next-line no-extend-native
+  Array.prototype.toString = function () {
+    if (this.find(isStyleObject)) return this.join(" ");
+    return this.join(",");
+  };
+}
+
 const BUILDED_CLASSES: string[] = [];
 let CSSINJS_LOADED = false;
 
 export function injectCSS (css: string) {
-  if (CSSINJS_LOADED) document.getElementById("windijs")!.textContent += css;
+  if (CSSINJS_LOADED) document.getElementById("windijs")!.textContent += ("\n" + css);
   else {
     const el = document.createElement("style");
     el.id = "windijs";
@@ -90,10 +98,18 @@ export function bundle (utilities: StyleObject[]): CSSObject {
   return css;
 }
 
+export function getStyleVariants (style: StyleObject): string[] {
+  return style[SymbolMeta].variants;
+}
+
 export function getStyleProps (style: StyleObject): string[] {
   const { uid, children, props } = style[SymbolMeta];
   if (Array.isArray(children)) style = children[0]!;
   return [uid, ...props ?? []].filter(i => i != null) as string[];
+}
+
+export function getStyleIdent (style: StyleObject): string {
+  return getStyleVariants(style).map(i => i + ":").join("") + getStyleProps(style).join(".");
 }
 
 export const cssInJsLoader: StyleLoader = (css, meta, data) => {
