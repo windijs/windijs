@@ -4,10 +4,11 @@ import * as units from "../helpers/unit";
 import { GeneralCSSData, Handler } from "../types";
 
 import { css } from "../helpers/css";
+import { getUid } from "../helpers/meta";
 import { useProxy } from "../helpers/proxy";
 
 export function styleProperty () {
-  const build = (prop: string, value: string) => css({ [prop]: value });
+  const build = (prop: string, value: string) => css({ [prop]: value }, undefined, { uid: getUid(), type: "css", props: [prop, value], variants: [] });
 
   return (prop => useProxy(value => {
     if (value === "var") return (name: string, defaultValue?: string | undefined) => build(prop, funcs.$var(name, defaultValue));
