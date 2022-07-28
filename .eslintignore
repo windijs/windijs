@@ -2,4 +2,4 @@ dist/
 node_modules/
 data/
 examples/
-data.d.ts
+src/types/data.ts

@@ -1,7 +1,9 @@
-/* eslint-disable no-console */
-import { cssData, EntryStatus, IAtDirectiveData, IPropertyData, IPseudoClassData, IPseudoElementData, IReference, IValueData } from "../data/cssData";
-import { htmlData, IAttributeData, ITagData } from "../data/htmlData";
 import * as funcs from "../src/helpers/funcs";
+
+/* eslint-disable no-console */
+import { EntryStatus, IAtDirectiveData, IPropertyData, IPseudoClassData, IPseudoElementData, IReference, IValueData, cssData } from "../data/cssData";
+import { IAttributeData, ITagData, htmlData } from "../data/htmlData";
+
 import { writeFileSync } from "fs";
 
 const codes: string[] = [];
@@ -292,8 +294,8 @@ console.log("Generating HTML Attributes..\n");
 
 genHTMLAttrs();
 
-console.log("Write to ./src/types/data.d.ts\n");
+console.log("Write to ./src/types/data.ts\n");
 
-writeFileSync("./src/types/data.d.ts", codes.join("\n"));
+writeFileSync("./src/types/data.ts", codes.join("\n"));
 
 console.log("Done.\n");

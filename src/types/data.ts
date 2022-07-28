@@ -12145,16 +12145,6 @@ export interface HTMLAttrs<T> {
   "link[as]": T
   /** Indicates the relative importance of the resource. Priority hints are delegated using the values: */
   "link[importance]": T
-  /**
-   * **`auto`**: Indicates **no preference**. The browser may use its own heuristics to decide the priority of the resource.
-   *
-   * **`high`**: Indicates to the browser that the resource is of **high** priority.
-   *
-   * **`low`**: Indicates to the browser that the resource is of **low** priority.
-   *
-   * **Note:** The `importance` attribute may only be used for the `\<link>` element if `rel="preload"` or `rel="prefetch"` is present.
-   */
-  "link[importance]": T
   /** Contains inline metadata — a base64-encoded cryptographic hash of the resource (file) you’re telling the browser to fetch. The browser can use this to verify that the fetched resource has been delivered free of unexpected manipulation. See [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity). */
   "link[integrity]": T
   /**
@@ -12175,58 +12165,58 @@ export interface HTMLAttrs<T> {
    * This metadata name is associated with the value contained by the [`content`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-content) attribute. The possible values for the name attribute are:
    *
    * *   `application-name` which defines the name of the application running in the web page.
-   *
+   * 
    * **Note:**
-   *
+   * 
    * *   Browsers may use this to identify the application. It is different from the [`\<title>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title "The HTML Title element (\<title>) defines the document's title that is shown in a browser's title bar or a page's tab.") element, which usually contain the application name, but may also contain information like the document name or a status.
    * *   Simple web pages shouldn't define an application-name.
-   *
+   * 
    * *   `author` which defines the name of the document's author.
    * *   `description` which contains a short and accurate summary of the content of the page. Several browsers, like Firefox and Opera, use this as the default description of bookmarked pages.
    * *   `generator` which contains the identifier of the software that generated the page.
    * *   `keywords` which contains words relevant to the page's content separated by commas.
    * *   `referrer` which controls the [`Referer` HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) attached to requests sent from the document:
-   *
+   * 
    * Values for the `content` attribute of `\<meta name="referrer">`
-   *
+   * 
    * `no-referrer`
-   *
+   * 
    * Do not send a HTTP `Referrer` header.
-   *
+   * 
    * `origin`
-   *
+   * 
    * Send the [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin) of the document.
-   *
+   * 
    * `no-referrer-when-downgrade`
-   *
+   * 
    * Send the [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin) as a referrer to URLs as secure as the current page, (https→https), but does not send a referrer to less secure URLs (https→http). This is the default behaviour.
-   *
+   * 
    * `origin-when-cross-origin`
-   *
+   * 
    * Send the full URL (stripped of parameters) for same-origin requests, but only send the [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin) for other cases.
-   *
+   * 
    * `same-origin`
-   *
+   * 
    * A referrer will be sent for [same-site origins](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy), but cross-origin requests will contain no referrer information.
-   *
+   * 
    * `strict-origin`
-   *
+   * 
    * Only send the origin of the document as the referrer to a-priori as-much-secure destination (HTTPS->HTTPS), but don't send it to a less secure destination (HTTPS->HTTP).
-   *
+   * 
    * `strict-origin-when-cross-origin`
-   *
+   * 
    * Send a full URL when performing a same-origin request, only send the origin of the document to a-priori as-much-secure destination (HTTPS->HTTPS), and send no header to a less secure destination (HTTPS->HTTP).
-   *
+   * 
    * `unsafe-URL`
-   *
+   * 
    * Send the full URL (stripped of parameters) for same-origin or cross-origin requests.
-   *
+   * 
    * **Notes:**
-   *
+   * 
    * *   Some browsers support the deprecated values of `always`, `default`, and `never` for referrer.
    * *   Dynamically inserting `\<meta name="referrer">` (with [`document.write`](https://developer.mozilla.org/en-US/docs/Web/API/Document/write) or [`appendChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)) makes the referrer behaviour unpredictable.
    * *   When several conflicting policies are defined, the no-referrer policy is applied.
-   *
+   * 
    *
    * This attribute may also have a value taken from the extended list defined on [WHATWG Wiki MetaExtensions page](https://wiki.whatwg.org/wiki/MetaExtensions). Although none have been formally accepted yet, a few commonly used names are:
    *
@@ -12234,147 +12224,147 @@ export interface HTMLAttrs<T> {
    * *   `googlebot`, a synonym of `robots`, is only followed by Googlebot (the indexing crawler for Google).
    * *   `publisher` which defines the name of the document's publisher.
    * *   `robots` which defines the behaviour that cooperative crawlers, or "robots", should use with the page. It is a comma-separated list of the values below:
-   *
+   * 
    * Values for the content of `\<meta name="robots">`
-   *
+   * 
    * Value
-   *
+   * 
    * Description
-   *
+   * 
    * Used by
-   *
+   * 
    * `index`
-   *
+   * 
    * Allows the robot to index the page (default).
-   *
+   * 
    * All
-   *
+   * 
    * `noindex`
-   *
+   * 
    * Requests the robot to not index the page.
-   *
+   * 
    * All
-   *
+   * 
    * `follow`
-   *
+   * 
    * Allows the robot to follow the links on the page (default).
-   *
+   * 
    * All
-   *
+   * 
    * `nofollow`
-   *
+   * 
    * Requests the robot to not follow the links on the page.
-   *
+   * 
    * All
-   *
+   * 
    * `none`
-   *
+   * 
    * Equivalent to `noindex, nofollow`
-   *
+   * 
    * [Google](https://support.google.com/webmasters/answer/79812)
-   *
+   * 
    * `noodp`
-   *
+   * 
    * Prevents using the [Open Directory Project](https://www.dmoz.org/) description, if any, as the page description in search engine results.
-   *
+   * 
    * [Google](https://support.google.com/webmasters/answer/35624#nodmoz), [Yahoo](https://help.yahoo.com/kb/search-for-desktop/meta-tags-robotstxt-yahoo-search-sln2213.html#cont5), [Bing](https://www.bing.com/webmaster/help/which-robots-metatags-does-bing-support-5198d240)
-   *
+   * 
    * `noarchive`
-   *
+   * 
    * Requests the search engine not to cache the page content.
-   *
+   * 
    * [Google](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag#valid-indexing--serving-directives), [Yahoo](https://help.yahoo.com/kb/search-for-desktop/SLN2213.html), [Bing](https://www.bing.com/webmaster/help/which-robots-metatags-does-bing-support-5198d240)
-   *
+   * 
    * `nosnippet`
-   *
+   * 
    * Prevents displaying any description of the page in search engine results.
-   *
+   * 
    * [Google](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag#valid-indexing--serving-directives), [Bing](https://www.bing.com/webmaster/help/which-robots-metatags-does-bing-support-5198d240)
-   *
+   * 
    * `noimageindex`
-   *
+   * 
    * Requests this page not to appear as the referring page of an indexed image.
-   *
+   * 
    * [Google](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag#valid-indexing--serving-directives)
-   *
+   * 
    * `nocache`
-   *
+   * 
    * Synonym of `noarchive`.
-   *
+   * 
    * [Bing](https://www.bing.com/webmaster/help/which-robots-metatags-does-bing-support-5198d240)
-   *
+   * 
    * **Notes:**
-   *
+   * 
    * *   Only cooperative robots follow these rules. Do not expect to prevent e-mail harvesters with them.
    * *   The robot still needs to access the page in order to read these rules. To prevent bandwidth consumption, use a _[robots.txt](https://developer.mozilla.org/en-US/docs/Glossary/robots.txt "robots.txt: Robots.txt is a file which is usually placed in the root of any website. It decides whether crawlers are permitted or forbidden access to the web site.")_ file.
    * *   If you want to remove a page, `noindex` will work, but only after the robot visits the page again. Ensure that the `robots.txt` file is not preventing revisits.
    * *   Some values are mutually exclusive, like `index` and `noindex`, or `follow` and `nofollow`. In these cases the robot's behaviour is undefined and may vary between them.
    * *   Some crawler robots, like Google, Yahoo and Bing, support the same values for the HTTP header `X-Robots-Tag`; this allows non-HTML documents like images to use these rules.
-   *
+   * 
    * *   `slurp`, is a synonym of `robots`, but only for Slurp - the crawler for Yahoo Search.
    * *   `viewport`, which gives hints about the size of the initial size of the [viewport](https://developer.mozilla.org/en-US/docs/Glossary/viewport "viewport: A viewport represents a polygonal (normally rectangular) area in computer graphics that is currently being viewed. In web browser terms, it refers to the part of the document you're viewing which is currently visible in its window (or the screen, if the document is being viewed in full screen mode). Content outside the viewport is not visible onscreen until scrolled into view."). Used by mobile devices only.
-   *
+   * 
    * Values for the content of `\<meta name="viewport">`
-   *
+   * 
    * Value
-   *
+   * 
    * Possible subvalues
-   *
+   * 
    * Description
-   *
+   * 
    * `width`
-   *
+   * 
    * A positive integer number, or the text `device-width`
-   *
+   * 
    * Defines the pixel width of the viewport that you want the web site to be rendered at.
-   *
+   * 
    * `height`
-   *
+   * 
    * A positive integer, or the text `device-height`
-   *
+   * 
    * Defines the height of the viewport. Not used by any browser.
-   *
+   * 
    * `initial-scale`
-   *
+   * 
    * A positive number between `0.0` and `10.0`
-   *
+   * 
    * Defines the ratio between the device width (`device-width` in portrait mode or `device-height` in landscape mode) and the viewport size.
-   *
+   * 
    * `maximum-scale`
-   *
+   * 
    * A positive number between `0.0` and `10.0`
-   *
+   * 
    * Defines the maximum amount to zoom in. It must be greater or equal to the `minimum-scale` or the behaviour is undefined. Browser settings can ignore this rule and iOS10+ ignores it by default.
-   *
+   * 
    * `minimum-scale`
-   *
+   * 
    * A positive number between `0.0` and `10.0`
-   *
+   * 
    * Defines the minimum zoom level. It must be smaller or equal to the `maximum-scale` or the behaviour is undefined. Browser settings can ignore this rule and iOS10+ ignores it by default.
-   *
+   * 
    * `user-scalable`
-   *
+   * 
    * `yes` or `no`
-   *
+   * 
    * If set to `no`, the user is not able to zoom in the webpage. The default is `yes`. Browser settings can ignore this rule, and iOS10+ ignores it by default.
-   *
+   * 
    * Specification
-   *
+   * 
    * Status
-   *
+   * 
    * Comment
-   *
+   * 
    * [CSS Device Adaptation
    * The definition of '\<meta name="viewport">' in that specification.](https://drafts.csswg.org/css-device-adapt/#viewport-meta)
-   *
+   * 
    * Working Draft
-   *
+   * 
    * Non-normatively describes the Viewport META element
-   *
+   * 
    * See also: [`@viewport`](https://developer.mozilla.org/en-US/docs/Web/CSS/@viewport "The @viewport CSS at-rule lets you configure the viewport through which the document is viewed. It's primarily used for mobile devices, but is also used by desktop browsers that support features like "snap to edge" (such as Microsoft Edge).")
-   *
+   * 
    * **Notes:**
-   *
+   * 
    * *   Though unstandardized, this declaration is respected by most mobile browsers due to de-facto dominance.
    * *   The default values may vary between devices and browsers.
    * *   To learn about this declaration in Firefox for Mobile, see [this article](https://developer.mozilla.org/en-US/docs/Mobile/Viewport_meta_tag "Mobile/Viewport meta tag").
@@ -12385,25 +12375,25 @@ export interface HTMLAttrs<T> {
    *
    * *   `"content-language"`
    * Defines the default language of the page. It can be overridden by the [lang](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) attribute on any element.
-   *
+   * 
    * **Warning:** Do not use this value, as it is obsolete. Prefer the `lang` attribute on the [`\<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html "The HTML \<html> element represents the root (top-level element) of an HTML document, so it is also referred to as the root element. All other elements must be descendants of this element.") element.
-   *
+   * 
    * *   `"content-security-policy"`
    * Allows page authors to define a [content policy](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives) for the current page. Content policies mostly specify allowed server origins and script endpoints which help guard against cross-site scripting attacks.
    * *   `"content-type"`
    * Defines the [MIME type](https://developer.mozilla.org/en-US/docs/Glossary/MIME_type) of the document, followed by its character encoding. It follows the same syntax as the HTTP `content-type` entity-header field, but as it is inside a HTML page, most values other than `text/html` are impossible. Therefore the valid syntax for its `content` is the string '`text/html`' followed by a character set with the following syntax: '`; charset=_IANAcharset_`', where `IANAcharset` is the _preferred MIME name_ for a character set as [defined by the IANA.](https://www.iana.org/assignments/character-sets)
-   *
+   * 
    * **Warning:** Do not use this value, as it is obsolete. Use the [`charset`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-charset) attribute on the [`\<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta "The HTML \<meta> element represents metadata that cannot be represented by other HTML meta-related elements, like \<base>, \<link>, \<script>, \<style> or \<title>.") element.
-   *
+   * 
    * **Note:** As [`\<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta "The HTML \<meta> element represents metadata that cannot be represented by other HTML meta-related elements, like \<base>, \<link>, \<script>, \<style> or \<title>.") can't change documents' types in XHTML or HTML5's XHTML serialization, never set the MIME type to an XHTML MIME type with `\<meta>`.
-   *
+   * 
    * *   `"refresh"`
    * This instruction specifies:
    * *   The number of seconds until the page should be reloaded - only if the [`content`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-content) attribute contains a positive integer.
    * *   The number of seconds until the page should redirect to another - only if the [`content`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-content) attribute contains a positive integer followed by the string '`;url=`', and a valid URL.
    * *   `"set-cookie"`
    * Defines a [cookie](https://developer.mozilla.org/en-US/docs/cookie) for the page. Its content must follow the syntax defined in the [IETF HTTP Cookie Specification](https://tools.ietf.org/html/draft-ietf-httpstate-cookie-14).
-   *
+   * 
    * **Warning:** Do not use this instruction, as it is obsolete. Use the HTTP header [`Set-Cookie`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie) instead.
    */
   "meta[http-equiv]": T
@@ -12691,29 +12681,7 @@ export interface HTMLAttrs<T> {
   "img[height]": T
   /** Provides an image decoding hint to the browser. The allowed values are: */
   "img[decoding]": T
-  /**
-   * `sync`
-   *
-   * Decode the image synchronously for atomic presentation with other content.
-   *
-   * `async`
-   *
-   * Decode the image asynchronously to reduce delay in presenting other content.
-   *
-   * `auto`
-   *
-   * Default mode, which indicates no preference for the decoding mode. The browser decides what is best for the user.
-   */
-  "img[decoding]": T
   /** Indicates the relative importance of the resource. Priority hints are delegated using the values: */
-  "img[importance]": T
-  /**
-   * `auto`: Indicates **no preference**. The browser may use its own heuristics to decide the priority of the image.
-   *
-   * `high`: Indicates to the browser that the image is of **high** priority.
-   *
-   * `low`: Indicates to the browser that the image is of **low** priority.
-   */
   "img[importance]": T
   /** This attribute tells the browser to ignore the actual intrinsic size of the image and pretend it’s the size specified in the attribute. Specifically, the image would raster at these dimensions and `naturalWidth`/`naturalHeight` on images would return the values specified in this attribute. [Explainer](https://github.com/ojanvafai/intrinsicsize-attribute), [examples](https://googlechrome.github.io/samples/intrinsic-size/index.html) */
   "img[intrinsicsize]": T
@@ -12775,8 +12743,6 @@ export interface HTMLAttrs<T> {
   /** Specifies a [feature policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Feature_Policy) for the `\<iframe>`. */
   "iframe[allow]": T
   /** Set to `true` if a cross-origin `\<iframe>` should be allowed to invoke the [Payment Request API](https://developer.mozilla.org/en-US/docs/Web/API/Payment_Request_API). */
-  "iframe[allowpaymentrequest]": T
-  /** This attribute is considered a legacy attribute and redefined as `allow="payment"`. */
   "iframe[allowpaymentrequest]": T
   /** A [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) enforced for the embedded resource. See [`HTMLIFrameElement.csp`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/csp "The csp property of the HTMLIFrameElement interface specifies the Content Security Policy that an embedded document must agree to enforce upon itself.") for details. */
   "iframe[csp]": T
@@ -13176,67 +13142,67 @@ export interface HTMLAttrs<T> {
   /**
    * This attribute defines the background color of each cell in a column. It consists of a 6-digit hexadecimal code as defined in [sRGB](https://www.w3.org/Graphics/Color/sRGB) and is prefixed by '#'. This attribute may be used with one of sixteen predefined color strings:
    *
-   *
+   * 
    *
    * `black` = "#000000"
    *
-   *
+   * 
    *
    * `green` = "#008000"
    *
-   *
+   * 
    *
    * `silver` = "#C0C0C0"
    *
-   *
+   * 
    *
    * `lime` = "#00FF00"
    *
-   *
+   * 
    *
    * `gray` = "#808080"
    *
-   *
+   * 
    *
    * `olive` = "#808000"
    *
-   *
+   * 
    *
    * `white` = "#FFFFFF"
    *
-   *
+   * 
    *
    * `yellow` = "#FFFF00"
    *
-   *
+   * 
    *
    * `maroon` = "#800000"
    *
-   *
+   * 
    *
    * `navy` = "#000080"
    *
-   *
+   * 
    *
    * `red` = "#FF0000"
    *
-   *
+   * 
    *
    * `blue` = "#0000FF"
    *
-   *
+   * 
    *
    * `purple` = "#800080"
    *
-   *
+   * 
    *
    * `teal` = "#008080"
    *
-   *
+   * 
    *
    * `fuchsia` = "#FF00FF"
    *
-   *
+   * 
    *
    * `aqua` = "#00FFFF"
    *
@@ -13276,67 +13242,67 @@ export interface HTMLAttrs<T> {
   /**
    * This attribute defines the background color of each cell in a column. It consists of a 6-digit hexadecimal code as defined in [sRGB](https://www.w3.org/Graphics/Color/sRGB) and is prefixed by '#'. This attribute may be used with one of sixteen predefined color strings:
    *
-   *
+   * 
    *
    * `black` = "#000000"
    *
-   *
+   * 
    *
    * `green` = "#008000"
    *
-   *
+   * 
    *
    * `silver` = "#C0C0C0"
    *
-   *
+   * 
    *
    * `lime` = "#00FF00"
    *
-   *
+   * 
    *
    * `gray` = "#808080"
    *
-   *
+   * 
    *
    * `olive` = "#808000"
    *
-   *
+   * 
    *
    * `white` = "#FFFFFF"
    *
-   *
+   * 
    *
    * `yellow` = "#FFFF00"
    *
-   *
+   * 
    *
    * `maroon` = "#800000"
    *
-   *
+   * 
    *
    * `navy` = "#000080"
    *
-   *
+   * 
    *
    * `red` = "#FF0000"
    *
-   *
+   * 
    *
    * `blue` = "#0000FF"
    *
-   *
+   * 
    *
    * `purple` = "#800080"
    *
-   *
+   * 
    *
    * `teal` = "#008080"
    *
-   *
+   * 
    *
    * `fuchsia` = "#FF00FF"
    *
-   *
+   * 
    *
    * `aqua` = "#00FFFF"
    *
