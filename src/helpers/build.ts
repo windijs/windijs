@@ -133,10 +133,10 @@ export function atomic (...utilities: (StyleObject | StyleObject[])[]): string {
 
 const _unify = (selector: string, utilities: (StyleObject | StyleObject[])[]) => buildRules(createRules(bundle(utilities), selector));
 
-export function unify (...utilities: {[key: string]: StyleObject | StyleObject[]}[]): string;
 export function unify (selector: string, ...utilities: (StyleObject | StyleObject[])[]): string;
+export function unify (...utilities: {[key: string]: StyleObject | StyleObject[]}[]): string;
 export function unify (...params: unknown[]): string {
-  if (typeof params[0] === "string") return _unify(params[0], params.slice(1).flat() as StyleObject[]);
+  if (typeof params[0] === "string") return _unify(params[0], params.slice(1) as (StyleObject | StyleObject[])[]);
   const map = Object.assign({}, ...params) as { [key: string]: StyleObject | StyleObject[] };
   return Object.entries(map).map(([k, v]) => Array.isArray(v) ? _unify(k, v) : _unify(k, [v])).join("\n\n");
 }

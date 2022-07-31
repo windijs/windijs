@@ -3,6 +3,7 @@ import { CSSAtRules, CSSClasses, CSSDecls, CSSElements, HTMLAttrs, HTMLTags } fr
 import { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "../helpers/symbol";
 
 export * from "./css";
+export * from "./data";
 export { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs };
 
 export type GeneralCSSData = CSSDecls & { [key in keyof CSSDecls]: { [key: string]: StyleObject } } & { [key: string]: { [key: string]: StyleObject } }
@@ -18,6 +19,14 @@ export type CSSProps = {
       : value
   }[keyof CSSDecls[prop]]
   | String; // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
+}
+
+type ExtractAttrName<S extends string> = S extends `${string}[${infer A}]` ? A : S;
+
+export type GeneralHTMLAttrs<T> = {
+  [key in ExtractAttrName<keyof HTMLAttrs<unknown>>]: T
+} & {
+  [key: string]: T
 }
 
 // used when build css

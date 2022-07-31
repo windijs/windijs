@@ -721,3 +721,243 @@ export interface BasicShapeFunctions {
   /** Defines a polygon. */
   polygon: (...params: Parameters<typeof polygon>) => StyleObject
 };
+
+export type Html5Tags = "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | "b" | "base" | "bdi" | "bdo" | "blockquote" | "body" | "br" | "button" | "canvas" | "caption" |
+"cite" | "code" | "col" | "colgroup" | "data" | "datalist" | "dd" | "del" | "details" | "dfn" | "dialog" | "div" | "dl" | "dt" | "em" | "embed" | "fieldset" | "figcaption" | "figure" | "footer" |
+"form" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "head" | "header" | "hgroup" | "hr" | "html" | "i" | "iframe" | "img" | "input" | "ins" | "kbd" | "keygen" | "label" | "legend" | "li" | "link" |
+"main" | "map" | "mark" | "menu" | "menuitem" | "meta" | "meter" | "nav" | "noscript" | "object" | "ol" | "optgroup" | "option" | "output" | "p" | "param" | "picture" | "pre" | "progress" | "q" |
+"rb" | "rp" | "rt" | "rtc" | "ruby" | "s" | "samp" | "script" | "section" | "select" | "small" | "source" | "span" | "strong" | "style" | "sub" | "summary" | "sup" | "table" | "tbody" | "td" |
+"template" | "textarea" | "tfoot" | "th" | "thead" | "time" | "title" | "tr" | "track" | "u" | "ul" | "const" | "video" | "wbr";
+
+export type ElementSelectors<T> = {
+  /** CSS element selector, select all `<a>` elements. */
+  A: T,
+  /** CSS element selector, select all `<abbr>` elements. */
+  Abbr: T,
+  /** CSS element selector, select all `<address>` elements. */
+  Address: T,
+  /** CSS element selector, select all `<area>` elements. */
+  Area: T,
+  /** CSS element selector, select all `<article>` elements. */
+  Article: T,
+  /** CSS element selector, select all `<aside>` elements. */
+  Aside: T,
+  /** CSS element selector, select all `<audio>` elements. */
+  Audio: T,
+  /** CSS element selector, select all `<b>` elements. */
+  B: T,
+  /** CSS element selector, select all `<base>` elements. */
+  Base: T,
+  /** CSS element selector, select all `<bdi>` elements. */
+  Bdi: T,
+  /** CSS element selector, select all `<bdo>` elements. */
+  Bdo: T,
+  /** CSS element selector, select all `<blockquote>` elements. */
+  Blockquote: T,
+  /** CSS element selector, select all `<body>` elements. */
+  Body: T,
+  /** CSS element selector, select all `<br>` elements. */
+  Br: T,
+  /** CSS element selector, select all `<button>` elements. */
+  Button: T,
+  /** CSS element selector, select all `<canvas>` elements. */
+  Canvas: T,
+  /** CSS element selector, select all `<caption>` elements. */
+  Caption: T,
+  /** CSS element selector, select all `<cite>` elements. */
+  Cite: T,
+  /** CSS element selector, select all `<code>` elements. */
+  Code: T,
+  /** CSS element selector, select all `<col>` elements. */
+  Col: T,
+  /** CSS element selector, select all `<colgroup>` elements. */
+  Colgroup: T,
+  /** CSS element selector, select all `<data>` elements. */
+  Data: T,
+  /** CSS element selector, select all `<datalist>` elements. */
+  Datalist: T,
+  /** CSS element selector, select all `<dd>` elements. */
+  Dd: T,
+  /** CSS element selector, select all `<del>` elements. */
+  Del: T,
+  /** CSS element selector, select all `<details>` elements. */
+  Details: T,
+  /** CSS element selector, select all `<dfn>` elements. */
+  Dfn: T,
+  /** CSS element selector, select all `<dialog>` elements. */
+  Dialog: T,
+  /** CSS element selector, select all `<div>` elements. */
+  Div: T,
+  /** CSS element selector, select all `<dl>` elements. */
+  Dl: T,
+  /** CSS element selector, select all `<dt>` elements. */
+  Dt: T,
+  /** CSS element selector, select all `<em>` elements. */
+  Em: T,
+  /** CSS element selector, select all `<embed>` elements. */
+  Embed: T,
+  /** CSS element selector, select all `<fieldset>` elements. */
+  Fieldset: T,
+  /** CSS element selector, select all `<figcaption>` elements. */
+  Figcaption: T,
+  /** CSS element selector, select all `<figure>` elements. */
+  Figure: T,
+  /** CSS element selector, select all `<footer>` elements. */
+  Footer: T,
+  /** CSS element selector, select all `<form>` elements. */
+  Form: T,
+  /** CSS element selector, select all `<h1>` elements. */
+  H1: T,
+  /** CSS element selector, select all `<h2>` elements. */
+  H2: T,
+  /** CSS element selector, select all `<h3>` elements. */
+  H3: T,
+  /** CSS element selector, select all `<h4>` elements. */
+  H4: T,
+  /** CSS element selector, select all `<h5>` elements. */
+  H5: T,
+  /** CSS element selector, select all `<h6>` elements. */
+  H6: T,
+  /** CSS element selector, select all `<head>` elements. */
+  Head: T,
+  /** CSS element selector, select all `<header>` elements. */
+  Header: T,
+  /** CSS element selector, select all `<hgroup>` elements. */
+  Hgroup: T,
+  /** CSS element selector, select all `<hr>` elements. */
+  Hr: T,
+  /** CSS element selector, select all `<html>` elements. */
+  Html: T,
+  /** CSS element selector, select all `<i>` elements. */
+  I: T,
+  /** CSS element selector, select all `<iframe>` elements. */
+  Iframe: T,
+  /** CSS element selector, select all `<img>` elements. */
+  Img: T,
+  /** CSS element selector, select all `<input>` elements. */
+  Input: T,
+  /** CSS element selector, select all `<ins>` elements. */
+  Ins: T,
+  /** CSS element selector, select all `<kbd>` elements. */
+  Kbd: T,
+  /** CSS element selector, select all `<keygen>` elements. */
+  Keygen: T,
+  /** CSS element selector, select all `<label>` elements. */
+  Label: T,
+  /** CSS element selector, select all `<legend>` elements. */
+  Legend: T,
+  /** CSS element selector, select all `<li>` elements. */
+  Li: T,
+  /** CSS element selector, select all `<link>` elements. */
+  Link: T,
+  /** CSS element selector, select all `<main>` elements. */
+  Main: T,
+  /** CSS element selector, select all `<map>` elements. */
+  Map: T,
+  /** CSS element selector, select all `<mark>` elements. */
+  Mark: T,
+  /** CSS element selector, select all `<menu>` elements. */
+  Menu: T,
+  /** CSS element selector, select all `<menuitem>` elements. */
+  Menuitem: T,
+  /** CSS element selector, select all `<meta>` elements. */
+  Meta: T,
+  /** CSS element selector, select all `<meter>` elements. */
+  Meter: T,
+  /** CSS element selector, select all `<nav>` elements. */
+  Nav: T,
+  /** CSS element selector, select all `<noscript>` elements. */
+  Noscript: T,
+  /** CSS element selector, select all `<object>` elements. */
+  Object: T,
+  /** CSS element selector, select all `<ol>` elements. */
+  Ol: T,
+  /** CSS element selector, select all `<optgroup>` elements. */
+  Optgroup: T,
+  /** CSS element selector, select all `<option>` elements. */
+  Option: T,
+  /** CSS element selector, select all `<output>` elements. */
+  Output: T,
+  /** CSS element selector, select all `<p>` elements. */
+  P: T,
+  /** CSS element selector, select all `<param>` elements. */
+  Param: T,
+  /** CSS element selector, select all `<picture>` elements. */
+  Picture: T,
+  /** CSS element selector, select all `<pre>` elements. */
+  Pre: T,
+  /** CSS element selector, select all `<progress>` elements. */
+  Progress: T,
+  /** CSS element selector, select all `<q>` elements. */
+  Q: T,
+  /** CSS element selector, select all `<rb>` elements. */
+  Rb: T,
+  /** CSS element selector, select all `<rp>` elements. */
+  Rp: T,
+  /** CSS element selector, select all `<rt>` elements. */
+  Rt: T,
+  /** CSS element selector, select all `<rtc>` elements. */
+  Rtc: T,
+  /** CSS element selector, select all `<ruby>` elements. */
+  Ruby: T,
+  /** CSS element selector, select all `<s>` elements. */
+  S: T,
+  /** CSS element selector, select all `<samp>` elements. */
+  Samp: T,
+  /** CSS element selector, select all `<script>` elements. */
+  Script: T,
+  /** CSS element selector, select all `<section>` elements. */
+  Section: T,
+  /** CSS element selector, select all `<select>` elements. */
+  Select: T,
+  /** CSS element selector, select all `<small>` elements. */
+  Small: T,
+  /** CSS element selector, select all `<source>` elements. */
+  Source: T,
+  /** CSS element selector, select all `<span>` elements. */
+  Span: T,
+  /** CSS element selector, select all `<strong>` elements. */
+  Strong: T,
+  /** CSS element selector, select all `<style>` elements. */
+  Style: T,
+  /** CSS element selector, select all `<sub>` elements. */
+  Sub: T,
+  /** CSS element selector, select all `<summary>` elements. */
+  Summary: T,
+  /** CSS element selector, select all `<sup>` elements. */
+  Sup: T,
+  /** CSS element selector, select all `<table>` elements. */
+  Table: T,
+  /** CSS element selector, select all `<tbody>` elements. */
+  Tbody: T,
+  /** CSS element selector, select all `<td>` elements. */
+  Td: T,
+  /** CSS element selector, select all `<template>` elements. */
+  Template: T,
+  /** CSS element selector, select all `<textarea>` elements. */
+  Textarea: T,
+  /** CSS element selector, select all `<tfoot>` elements. */
+  Tfoot: T,
+  /** CSS element selector, select all `<th>` elements. */
+  Th: T,
+  /** CSS element selector, select all `<thead>` elements. */
+  Thead: T,
+  /** CSS element selector, select all `<time>` elements. */
+  Time: T,
+  /** CSS element selector, select all `<title>` elements. */
+  Title: T,
+  /** CSS element selector, select all `<tr>` elements. */
+  Tr: T,
+  /** CSS element selector, select all `<track>` elements. */
+  Track: T,
+  /** CSS element selector, select all `<u>` elements. */
+  U: T,
+  /** CSS element selector, select all `<ul>` elements. */
+  Ul: T,
+  /** CSS element selector, select all `<const>` elements. */
+  Const: T,
+  /** CSS element selector, select all `<video>` elements. */
+  Video: T,
+  /** CSS element selector, select all `<wbr>` elements. */
+  Wbr: T,
+}
