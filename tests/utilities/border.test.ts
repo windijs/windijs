@@ -1,9 +1,9 @@
-import { borderColor, borderOpacity, borderRadius, borderStyle, borderWidth } from "../../src/utilities/border";
-import { borderRadiusConfig, borderStyleConfig, borderWidthConfig } from "../../src/config/border";
-import { colors, createUtility } from "../../src";
+import { borderColor, borderOpacity, borderRadius, borderStyle, borderWidth } from "utilities/border";
+import { borderRadiusConfig, borderStyleConfig, borderWidthConfig } from "config/border";
+import { colors, createUtility } from "index";
+import { opacityConfig, opacityConfigProxy } from "config/opacity";
 
-import { opacityConfig } from "../../src/config/opacity";
-import { useStaticHandler } from "../../src/utilities/handler";
+import { useStaticHandler } from "utilities/handler";
 
 test("Border Radius", () => {
   const rounded = createUtility("rounded")
@@ -63,6 +63,19 @@ test("Border Opacity", () => {
   expect(border.opacity[50].css).toMatchSnapshot();
   expect(border.opacity[30].css).toMatchSnapshot();
   expect(border.opacity[100].css).toMatchSnapshot();
+});
+
+test("Border Opacity With Proxy Config", () => {
+  const border = createUtility("border")
+    .use(borderOpacity(opacityConfigProxy<{12: string, 70: null}>()))
+    .init();
+  expect(border.opacity[0].css).toMatchSnapshot();
+  expect(border.opacity[50].css).toMatchSnapshot();
+  expect(border.opacity[30].css).toMatchSnapshot();
+  expect(border.opacity[100].css).toMatchSnapshot();
+  expect(border.opacity[12].css).toMatchSnapshot();
+  // @ts-expect-error should trigger ts-error when set key to null | undefined.
+  expect(border.opacity[70].css).toMatchSnapshot();
 });
 
 test("Border Opacity With Different Trigger", () => {

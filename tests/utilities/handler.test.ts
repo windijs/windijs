@@ -1,7 +1,7 @@
-import { CSSObject, StyleObject, backgroundGeneric, borderColor, borderStyle, borderStyleConfig, borderWidth, borderWidthConfig, colors, createUtility, use } from "../../src";
-import { guard, meld, useGenericHandler } from "../../src/utilities/handler";
+import { CSSObject, StyleObject, backgroundGeneric, borderColor, borderStyle, borderStyleConfig, borderWidth, borderWidthConfig, colors, createUtility, use } from "index";
+import { guard, meld, useGenericHandler } from "utilities/handler";
 
-import { isNumber } from "../../src/utils";
+import { isNumber } from "utils";
 
 test("useGeneric With Trigger", () => {
   const backgroundGeneric = useGenericHandler<"trigger", { [key: string]: StyleObject }>("trigger", prop => {

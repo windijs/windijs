@@ -1,4 +1,4 @@
-import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, backgroundClip, backgroundClipConfig, backgroundColor, bundle, colors, createUtility, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, rtl, sm, xl, xxl } from "../../src";
+import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, backgroundClip, backgroundClipConfig, backgroundColor, bundle, colors, createUtility, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, rtl, sm, xl, xxl } from "index";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))

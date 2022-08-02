@@ -1,4 +1,4 @@
-import { after, backdrop, backgroundClip, backgroundClipConfig, backgroundColor, before, bundle, colors, createUtility, firstLetter, firstLine, marker, selection } from "../../src";
+import { after, backdrop, backgroundClip, backgroundClipConfig, backgroundColor, before, bundle, colors, createUtility, firstLetter, firstLine, marker, selection } from "index";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))

@@ -1,5 +1,5 @@
-import { backgroundColor, backgroundGeneric, borderColor, borderOpacity, borderWidth, borderWidthConfig, colors, createUtility, opacityConfig } from "../../src";
-import { guard, meld } from "../../src/utilities/handler";
+import { backgroundColor, backgroundGeneric, borderColor, borderOpacity, borderWidth, borderWidthConfig, colors, createUtility, opacityConfig } from "index";
+import { guard, meld } from "utilities/handler";
 
 test("Color Meta", () => {
   const bg = createUtility("bg")

@@ -1,4 +1,4 @@
-import { backgroundAttachment, backgroundAttachmentConfig, backgroundClip, backgroundClipConfig, backgroundColor, backgroundGeneric, colors, createUtility } from "../../src";
+import { backgroundAttachment, backgroundAttachmentConfig, backgroundClip, backgroundClipConfig, backgroundColor, backgroundGeneric, colors, createUtility } from "index";
 
 test("Background Color", () => {
   const bg = createUtility("bg")

@@ -1,4 +1,4 @@
-import { atomic, atomicNamer, backgroundColor, borderRadius, borderRadiusConfig, borderWidth, borderWidthConfig, colors, createUtility, dark, fontSize, fontSizeConfig, hashNamer, hover, sm, unify, useNamer } from "../../src";
+import { atomic, atomicNamer, backgroundColor, borderRadius, borderRadiusConfig, borderWidth, borderWidthConfig, colors, createUtility, dark, fontSize, fontSizeConfig, hashNamer, hover, sm, unify, useNamer } from "index";
 
 const text = createUtility("text")
   .use(fontSize(fontSizeConfig))

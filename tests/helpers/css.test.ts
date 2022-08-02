@@ -1,5 +1,5 @@
-import { StyleObject, UtilityMeta } from "../../src/types";
-import { baseStyleHandler, baseStyleTarget, css, useStyleLoader } from "../../src/helpers/css";
+import type { StyleObject, UtilityMeta } from "types";
+import { baseStyleHandler, baseStyleTarget, css, useStyleLoader } from "helpers/css";
 
 test("css", () => {
   const props = {
