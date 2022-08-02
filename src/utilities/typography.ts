@@ -1,6 +1,7 @@
-import { StyleProperties } from "../types";
-import { buildFontSize } from "../utils";
-import { useStaticHandler, useColorHandler, useCSSHandler } from "./handler";
+import { useCSSHandler, useColorHandler, useStaticHandler } from "./handler";
+
+import type { StyleProperties } from "types";
+import { buildFontSize } from "./builder";
 
 export const fontFamily = useStaticHandler((handle, fonts) => {
   const cssFonts = {} as {[key in keyof typeof fonts]: string};
@@ -11,11 +12,11 @@ export const fontFamily = useStaticHandler((handle, fonts) => {
 });
 
 export const fontSize = useStaticHandler((handle, sizes) =>
-  handle(sizes, (value, meta) => {
-    if (typeof value === "string") return buildFontSize(value, meta);
+  handle(sizes, value => {
+    if (typeof value === "string") return buildFontSize(value);
     if (Array.isArray(value) && value[0]) {
-      if (value[1] == null || typeof value[1] === "string") return buildFontSize(value[0], meta, value[1]);
-      if (typeof value[1] === "object" && value[1] != null) return buildFontSize(value[0], meta, undefined, value[1]);
+      if (value[1] == null || typeof value[1] === "string") return buildFontSize(value[0], value[1]);
+      if (typeof value[1] === "object" && value[1] != null) return buildFontSize(value[0], undefined, value[1]);
     }
   }),
 );

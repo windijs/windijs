@@ -1,4 +1,4 @@
-import { $default, active, backgroundClip, backgroundClipConfig, backgroundColor, bundle, checked, colors, createUtility, empty, enabled, even, evenOfType, first, firstOfType, focus, focusVisible, focusWithin, hover, indeterminate, invalid, last, lastOfType, link, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, readOnly, readWrite, required, root, target, valid, visited } from "../../src";
+import { $default, active, backgroundClip, backgroundClipConfig, backgroundColor, bundle, checked, colors, createUtility, empty, enabled, even, evenOfType, first, firstOfType, focus, focusVisible, focusWithin, hover, indeterminate, invalid, last, lastOfType, link, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, readOnly, readWrite, required, root, target, valid, visited } from "index";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))

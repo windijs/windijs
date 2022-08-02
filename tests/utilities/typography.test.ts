@@ -1,6 +1,7 @@
-import { createUtility } from "../../src";
-import { fontFamilyConfig, fontSizeConfig } from "../../src/config/typography";
-import { fontFamily, fontSize, fontStyle } from "../../src/utilities/typography";
+import { fontFamily, fontSize, fontStyle } from "utilities/typography";
+import { fontFamilyConfig, fontSizeConfig } from "config/typography";
+
+import { createUtility } from "index";
 
 test("Font Family", () => {
   const font = createUtility("font")
@@ -36,21 +37,13 @@ test("Font Size With Different Config", () => {
 
 test("Font Style and Font Smoothing", () => {
   const { italic, antialiased } = createUtility("font").use(fontStyle()).init();
-  // @ts-ignore safe entry ignored
   expect(italic.not.css).toMatchSnapshot();
-  // @ts-ignore safe entry ignored
   expect(italic.css).toMatchSnapshot();
-  // @ts-ignore safe entry ignored
   expect(antialiased.auto.css).toMatchSnapshot();
-  // @ts-ignore safe entry ignored
   expect(antialiased.css).toMatchSnapshot();
 
-  // @ts-ignore safe entry ignored
   expect(italic.meta).toMatchSnapshot();
-  // @ts-ignore safe entry ignored
   expect(italic.not.meta).toMatchSnapshot();
-  // @ts-ignore safe entry ignored
   expect(antialiased.meta).toMatchSnapshot();
-  // @ts-ignore safe entry ignored
   expect(antialiased.auto.meta).toMatchSnapshot();
 });
