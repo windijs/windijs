@@ -1,10 +1,10 @@
-import { CSSObject, StyleLoader, StyleObject, TargetCreator, UtilityMeta } from "../types";
+import type { CSSObject, StyleLoader, StyleObject, TargetCreator, UtilityMeta } from "types";
 import { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "./symbol";
 import { buildRules, createRules } from "./build";
 import { getMeta, pushMetaProp } from "./meta";
 
 import { nameStyle } from "./namer";
-import { parenWrap } from "../utils";
+import { parenWrap } from "utils";
 
 export const baseStyleTarget: TargetCreator = (css, meta, data) => {
   if (data != null) {

@@ -1,7 +1,7 @@
-import { CSSObject, StyleObject, StyleProperties } from "../types";
-import { calcRgba, parenWrap, sliceColor } from "../utils";
+import type { CSSObject, StyleObject, StyleProperties } from "types";
+import { calcRgba, parenWrap, sliceColor } from "utils";
 
-import { css } from "../helpers/css";
+import { css } from "helpers/css";
 
 export function buildStatic (property: StyleProperties | StyleProperties[], value: unknown): StyleObject | undefined {
   if (typeof value !== "string") return undefined;

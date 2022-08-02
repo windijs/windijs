@@ -1,6 +1,6 @@
 import { CSSAngleType, CSSFrequencyType, CSSLengthType, CSSResolutionType, CSSTimeType } from "./css";
 import { CSSAtRules, CSSClasses, CSSDecls, CSSElements, HTMLAttrs, HTMLTags } from "./data";
-import { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "../helpers/symbol";
+import type { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "helpers/symbol";
 
 export * from "./css";
 export * from "./data";
@@ -66,9 +66,12 @@ export type StyleObject<T = {}> = StyleObjectBase & {
   readonly meta: UtilityMeta;
 } & T;
 
-export type CSSEntry = (css: CSSObject) => StyleObject;
+export type CSSEntry = (css: CSSObject) => {
+  readonly css: CSSObject;
+  readonly meta: UtilityMeta;
+};
 
-export type SafeEntry<T> = Omit<T, "meta" | "DEFAULT" | "css">;
+export type SafeEntry<T> = Omit<T, "DEFAULT">; // "meta" | "DEFAULT" | "css">;
 
 export type StyleEntry<T> = SafeEntry<{ [key in keyof T]: StyleObject }>
 
@@ -98,7 +101,7 @@ export type NestedProxy<T, O> = SafeEntry<{
   }> : O);
 }>;
 
-export type StyleProxy<T> = NestedProxy<T, StyleObject>;
+export type StyleProxy<T, O={}> = NestedProxy<T, StyleObject<O>>;
 
 export type StyleProxyHandler<T> = Handler<StyleProxy<T> | undefined>
 
@@ -107,3 +110,5 @@ export type DefaultedStyleProxyHandler<T> = Handler<StyleProxy<T> & StyleObject>
 export type KeyedStyleProxyHandler<T, K extends string> = Handler<Record<K, StyleProxy<T>>>;
 
 export type KeyedDefaultedStyleProxyHandler<T, K extends string> = Handler<Record<K, StyleProxy<T> & StyleObject>>;
+
+export type PickValue<T, ValueType> = Pick<T, {[key in keyof T]-?: T[key] extends ValueType? key : never} [keyof T]>

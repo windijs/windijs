@@ -1,6 +1,6 @@
-import { CSSAtRule, CSSBlockBody, CSSDecl, CSSObject, CSSRule, CSSRules, StyleObject } from "../types";
+import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSObject, CSSRule, CSSRules, StyleObject } from "types";
 import { applyVariant, bundle, isStyleObject } from "./css";
-import { camelToDash, indent } from "../utils";
+import { camelToDash, indent } from "utils";
 
 import { nameStyle } from "./namer";
 
@@ -134,7 +134,7 @@ export function atomic (...utilities: (StyleObject | StyleObject[])[]): string {
 const _unify = (selector: string, utilities: (StyleObject | StyleObject[])[]) => buildRules(createRules(bundle(utilities), selector));
 
 export function unify (selector: string, ...utilities: (StyleObject | StyleObject[])[]): string;
-export function unify (...utilities: {[key: string]: StyleObject | StyleObject[]}[]): string;
+export function unify (...utilities: {[key: string]: StyleObject | (StyleObject | StyleObject[])[]}[]): string;
 export function unify (...params: unknown[]): string {
   if (typeof params[0] === "string") return _unify(params[0], params.slice(1) as (StyleObject | StyleObject[])[]);
   const map = Object.assign({}, ...params) as { [key: string]: StyleObject | StyleObject[] };

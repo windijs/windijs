@@ -1,4 +1,4 @@
-import { VariantBuilder } from "../types";
+import type { VariantBuilder } from "types";
 import { useVariant } from "./base";
 
 /**

@@ -1,6 +1,6 @@
-import { ElementSelectors, GeneralHTMLAttrs, StyleObject } from "../types";
+import type { ElementSelectors, GeneralHTMLAttrs, StyleObject } from "types";
 
-import { hasKey } from "../utils";
+import { hasKey } from "utils";
 import { unify } from "./build";
 
 // TODO: support variant group

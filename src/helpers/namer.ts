@@ -1,8 +1,8 @@
-import { StyleNamer, StyleObject } from "../types";
+import type { StyleNamer, StyleObject } from "types";
 import { getStyleIdent, getStyleProps } from "./css";
 
 import { escapeCSS } from "./escape";
-import { hash } from "../utils";
+import { hash } from "utils";
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 let CURRENT_NAMER = alphaNamer;

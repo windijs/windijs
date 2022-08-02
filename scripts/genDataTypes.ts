@@ -177,7 +177,7 @@ function genCSSDecls () {
 
   console.log("Collect function depends...\n");
 
-  codes.splice(2, 0, `import { ${funcDepends.join(", ")} } from "../helpers/funcs";`);
+  codes.splice(2, 0, `import { ${funcDepends.join(", ")} } from "helpers/funcs";`);
 
   codes.push("}");
   codes.push("");

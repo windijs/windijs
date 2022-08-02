@@ -1,5 +1,5 @@
-import { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSBorderRadiusItem, CSSDimension, CSSFillRule, CSSFlex, CSSFunctions, CSSLength, CSSLengthPercentage, CSSPercentage, CSSPosition } from "../types";
-import { camelToDash, parenWrap } from "../utils";
+import type { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSBorderRadiusItem, CSSDimension, CSSFillRule, CSSFlex, CSSFunctions, CSSLength, CSSLengthPercentage, CSSPercentage, CSSPosition } from "types";
+import { camelToDash, parenWrap } from "utils";
 
 import { useProxy } from "./proxy";
 

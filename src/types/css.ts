@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Types
 
-import { $var, calc, circle, ellipse, hsl, hsla, hwb, inset, linearGradient, polygon, quote, radialGradient, repeatingLinearGradient, repeatingRadialGradient, rgb, rgba, url } from "../helpers";
+import { $var, calc, circle, ellipse, hsl, hsla, hwb, inset, linearGradient, polygon, quote, radialGradient, repeatingLinearGradient, repeatingRadialGradient, rgb, rgba, url } from "helpers";
 
 import { StyleObject } from ".";
 

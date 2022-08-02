@@ -1,4 +1,4 @@
-import { StyleObject } from "../types";
+import type { StyleObject } from "types";
 import { SymbolProxy } from "./symbol";
 
 export function useProxy<T extends object, S = StyleObject> (f: (prop: string) => S | undefined) {

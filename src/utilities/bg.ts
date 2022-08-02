@@ -1,7 +1,7 @@
-import { CSSObject, StyleObject } from "../types";
+import type { CSSObject, StyleObject } from "types";
 import { useColorHandler, useGenericHandler, useStaticHandler } from "./handler";
 
-import { isNumber } from "../utils";
+import { isNumber } from "utils";
 
 // TODO: support call bg as a function via apply proxy
 // TODO: maybe support delete api, like delete bg.red[500]??
