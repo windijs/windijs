@@ -1,5 +1,5 @@
 import type { CSSObject, StyleLoader, StyleObject, TargetCreator, UtilityMeta } from "types";
-import { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "./symbol";
+import { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy, applyVariant } from "./common";
 import { buildRules, createRules } from "./build";
 import { getMeta, pushMetaProp } from "./meta";
 
@@ -45,18 +45,6 @@ export function css (css: CSSObject, data?: { [key: string]: unknown }, meta?: U
   return CurrentLoader(css, meta ?? getMeta(), data);
 }
 
-export function isStyleObject (i: unknown) {
-  return i != null && typeof i === "object" && SymbolCSS in i;
-}
-
-export function useArrayHelper () {
-  // eslint-disable-next-line no-extend-native
-  Array.prototype.toString = function () {
-    if (this.find(isStyleObject)) return this.join(" ");
-    return this.join(",");
-  };
-}
-
 const BUILDED_CLASSES: string[] = [];
 let CSSINJS_LOADED = false;
 
@@ -70,46 +58,6 @@ export function injectCSS (css: string) {
     document.head.appendChild(el);
     CSSINJS_LOADED = true;
   }
-}
-
-export function applyVariant (utility: StyleObject) {
-  let css = utility[SymbolCSS];
-  for (const variant of utility[SymbolMeta].variants) {
-    css = {
-      [variant]: css,
-    };
-  }
-
-  return css;
-}
-
-/**
- * Bundle all utilities to a single css object.
- * @param utilities Utilities and Variants
- * @returns CSSObject
- */
-export function bundle (utilities: (StyleObject | StyleObject[])[]): CSSObject {
-  const css: CSSObject = {};
-  for (const utility of utilities.flat()) {
-    for (const [k, v] of Object.entries(applyVariant(utility))) {
-      if (v != null) css[k] = k in css ? Object.assign(css[k], v) : v;
-    }
-  }
-  return css;
-}
-
-export function getStyleVariants (style: StyleObject): string[] {
-  return style[SymbolMeta].variants;
-}
-
-export function getStyleProps (style: StyleObject): string[] {
-  const { uid, children, props } = style[SymbolMeta];
-  if (Array.isArray(children)) style = children[0]!;
-  return [uid, ...props ?? []].filter(i => i != null) as string[];
-}
-
-export function getStyleIdent (style: StyleObject): string {
-  return getStyleVariants(style).map(i => i + ":").join("") + getStyleProps(style).join(".");
 }
 
 export const cssInJsLoader: StyleLoader = (css, meta, data) => {

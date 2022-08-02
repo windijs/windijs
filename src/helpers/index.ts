@@ -5,3 +5,4 @@ export * from "./namer";
 export * from "./build";
 export * from "./proxy";
 export * from "./dollar";
+export * from "./common";

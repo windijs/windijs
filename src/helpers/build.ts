@@ -1,5 +1,5 @@
 import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSObject, CSSRule, CSSRules, StyleObject } from "types";
-import { applyVariant, bundle, isStyleObject } from "./css";
+import { applyVariant, bundle, isStyleObject } from "./common";
 import { camelToDash, indent } from "utils";
 
 import { nameStyle } from "./namer";

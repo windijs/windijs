@@ -1,5 +1,5 @@
 import type { StyleNamer, StyleObject } from "types";
-import { getStyleIdent, getStyleProps } from "./css";
+import { getStyleIdent, getStyleProps } from "./common";
 
 import { escapeCSS } from "./escape";
 import { hash } from "utils";

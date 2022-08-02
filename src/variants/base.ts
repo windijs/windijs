@@ -1,4 +1,4 @@
-import { SymbolMeta, SymbolProxy } from "helpers/symbol";
+import { SymbolMeta, SymbolProxy } from "helpers/common";
 
 import type { StyleObject } from "types";
 import { css } from "helpers/css";
