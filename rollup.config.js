@@ -16,14 +16,16 @@ const dump = (file) => path.join(outDir, file);
 
 const copy = (files) => files.forEach((file) => fs.copyFileSync(file, dump(file)));
 
-const rmdir = (dir) => fs.existsSync(dir) && fs.statSync(dir).isDirectory() && fs.rmdirSync(dir, { recursive: true });
+const rmdir = (dir) => fs.existsSync(dir) && fs.statSync(dir).isDirectory() && fs.rmSync(dir, { recursive: true });
 
 const mkdir = (dir) => !(fs.existsSync(dir) && fs.statSync(dir).isDirectory()) && fs.mkdirSync(dir);
 
-const types = (dest = "index.d.ts") => {
+const types = (dest = "index", subdir = "") => {
+  if (dest !== "index" && subdir === "") subdir = "/" + dest;
+
   return {
     writeBundle () {
-      fs.writeFileSync(dump(dest), "export * from \"./types\";");
+      fs.writeFileSync(dump(dest + ".d.ts"), `export * from "${"./types" + subdir}";`);
     },
   };
 };
@@ -47,6 +49,25 @@ export default defineConfig([{
     rmdir(outDir),
     mkdir(outDir),
     copy(["package.json"]), //, "README.md", "LICENSE"]),
-    types("index.d.ts", "./types/lib", "{ Processor as default }"),
+    types(),
+  ],
+}, {
+  input: "src/plugins/index.ts",
+  output: [
+    {
+      file: dump("plugins.js"),
+      format: "cjs",
+      paths: (id) => `./${path.relative("./src", id)}/index.js`,
+    },
+    {
+      file: dump("plugins.mjs"),
+      format: "esm",
+      paths: (id) => `./${path.relative("./src", id)}/index.mjs`,
+    },
+  ],
+  plugins: [
+    tsPlugin,
+    types("plugins"),
+    types("global", "/types/global"),
   ],
 }]);

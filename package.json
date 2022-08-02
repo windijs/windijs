@@ -5,8 +5,14 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "exports": {
+    "./plugins": {
+      "import": "./plugins.mjs",
+      "require": "./plugins.js"
+    }
+  },
   "scripts": {
-    "tsd": "tsc -p ./src --emitDeclarationOnly",
+    "tsd": "tsc -p ./src --emitDeclarationOnly && tsc-alias -p tsconfig.json",
     "typecheck": "tsc -p ./src --noEmit",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
@@ -32,6 +38,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "jest": "^28.1.2",
     "rollup": "^2.77.1",
+    "tsc-alias": "^1.7.0",
     "typescript": "^4.7.4"
   }
 }
