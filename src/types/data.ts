@@ -1126,7 +1126,7 @@ export interface CSSDecls {
     "auto": StyleObject,
     /** Specifies offsets from the edges of the border box. */
     "rect()": StyleObject,
-  } & WideEntry
+  } & BasicShapeFunctions & WideEntry
   /**
    * Specifies a clipping path where everything inside the path is visible and everything outside is clipped out.
    *
@@ -2181,7 +2181,7 @@ export interface CSSDecls {
     "normal": StyleObject,
     /** Selects a font that is labeled as an 'oblique' face, or an 'italic' face if one is not. */
     "oblique": StyleObject,
-  } & WideEntry
+  } & AngleEntry & WideEntry
   /**
    * Controls whether user agents are allowed to synthesize bold or oblique font faces when a font family lacks bold or italic faces.
    *
@@ -4253,7 +4253,7 @@ export interface CSSDecls {
     "snapInterval(100%, 100%)": StyleObject,
     /** Specifies the position of individual snap-points as a comma-separated list of zoom factors. */
     "snapList()": StyleObject,
-  } & WideEntry
+  } & PercentEntry & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -6454,7 +6454,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold)
    */
-  shapeImageThreshold: { [value: number]: StyleObject } & WideEntry
+  shapeImageThreshold: { [value: number]: StyleObject } & AlphaEntry & WideEntry
   /**
    * Adds a margin to a 'shape-outside'. This defines a new shape that is the smallest contour that includes all the points that are the 'shape-margin' distance outward in the perpendicular direction from a point on the underlying shape.
    *
@@ -6511,7 +6511,7 @@ export interface CSSDecls {
     "format()": StyleObject,
     /** Format-specific string that identifies a locally available copy of a given font. */
     "local()": StyleObject,
-  } & URLEntry & WideEntry
+  } & StringEntry & URLEntry & WideEntry
   /** Indicates what color to use at that gradient stop. */
   stopColor: ColorEntry & ColorFunctions & WideEntry
   /** Defines the opacity of a given gradient stop. */
@@ -7614,7 +7614,7 @@ export interface CSSDecls {
     "left": StyleObject,
     /** The reflection appears to the right of the border box. */
     "right": StyleObject,
-  } & WideEntry
+  } & LengthEntry & ImageFunctions & WideEntry
   /**
    * Box Model addition in CSS3.
    *
@@ -8432,7 +8432,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-moz-binding)
    */
-  "-moz-binding": WideEntry
+  "-moz-binding": URLEntry & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -8478,7 +8478,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-moz-image-region)
    */
-  "-moz-image-region": WideEntry
+  "-moz-image-region": BasicShapeFunctions & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -8614,7 +8614,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-webkit-border-before)
    */
-  "-webkit-border-before": WideEntry
+  "-webkit-border-before": ColorEntry & ColorFunctions & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -8622,7 +8622,7 @@ export interface CSSDecls {
    *
    * Syntax: \<color>
    */
-  "-webkit-border-before-color": WideEntry
+  "-webkit-border-before-color": ColorEntry & ColorFunctions & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -8648,7 +8648,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-webkit-line-clamp)
    */
-  "-webkit-line-clamp": WideEntry
+  "-webkit-line-clamp": IntegerEntry & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -8656,7 +8656,7 @@ export interface CSSDecls {
    *
    * Syntax: [ \<mask-reference> || \<position> [ / \<bg-size> ]? || \<repeat-style> || [ \<box> | border | padding | content | text ] || [ \<box> | border | padding | content ] ]#
    */
-  "-webkit-mask": WideEntry
+  "-webkit-mask": PositionEntry & BoxEntry & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -8688,7 +8688,7 @@ export interface CSSDecls {
    *
    * Syntax: \<position>#
    */
-  "-webkit-mask-position": WideEntry
+  "-webkit-mask-position": PositionEntry & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -8746,7 +8746,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/accent-color)
    */
-  accentColor: WideEntry
+  accentColor: ColorEntry & ColorFunctions & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -8800,7 +8800,7 @@ export interface CSSDecls {
    *
    * Syntax: \<angle> | [ [ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards
    */
-  azimuth: WideEntry
+  azimuth: AngleEntry & WideEntry
   /**
    * The backdrop-filter CSS property lets you apply graphical effects such as blurring or color shifting to the area behind an element. Because it applies to everything behind the element, to see the effect you must make the element or its background at least partially transparent.
    *
@@ -8820,7 +8820,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block)
    */
-  borderBlock: WideEntry
+  borderBlock: ColorEntry & ColorFunctions & WideEntry
   /**
    * The border-block-color CSS property defines the color of the logical block borders of an element, which maps to a physical border color depending on the element's writing mode, directionality, and text orientation. It corresponds to the border-top-color and border-bottom-color, or border-right-color and border-left-color property depending on the values defined for writing-mode, direction, and text-orientation.
    *
@@ -8880,7 +8880,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline)
    */
-  borderInline: WideEntry
+  borderInline: ColorEntry & ColorFunctions & WideEntry
   /**
    * The border-inline-color CSS property defines the color of the logical inline borders of an element, which maps to a physical border color depending on the element's writing mode, directionality, and text orientation. It corresponds to the border-top-color and border-bottom-color, or border-right-color and border-left-color property depending on the values defined for writing-mode, direction, and text-orientation.
    *
@@ -8966,7 +8966,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-flex)
    */
-  boxFlex: WideEntry
+  boxFlex: { [value: number]: StyleObject } & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -8978,7 +8978,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-flex-group)
    */
-  boxFlexGroup: WideEntry
+  boxFlexGroup: IntegerEntry & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -9002,7 +9002,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-ordinal-group)
    */
-  boxOrdinalGroup: WideEntry
+  boxOrdinalGroup: IntegerEntry & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -9066,7 +9066,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/counter-set)
    */
-  counterSet: WideEntry
+  counterSet: IntegerEntry & WideEntry
   /**
    * The font-optical-sizing CSS property allows developers to control whether browsers render text with slightly differing visual representations to optimize viewing at different sizes, or not. This only works for fonts that have an optical size variation axis.
    *
@@ -9086,7 +9086,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variation-settings)
    */
-  fontVariationSettings: WideEntry
+  fontVariationSettings: StringEntry & { [value: number]: StyleObject } & WideEntry
   /**
    * 🚨️ Property is nonstandard. Avoid using it.
    *
@@ -9098,7 +9098,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-smooth)
    */
-  fontSmooth: WideEntry
+  fontSmooth: LengthEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -9138,7 +9138,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/hyphenate-character)
    */
-  hyphenateCharacter: WideEntry
+  hyphenateCharacter: StringEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -9158,7 +9158,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/initial-letter)
    */
-  initialLetter: WideEntry
+  initialLetter: { [value: number]: StyleObject } & IntegerEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -9264,7 +9264,7 @@ export interface CSSDecls {
    *
    * Syntax: none | \<integer>
    */
-  lineClamp: WideEntry
+  lineClamp: IntegerEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -9276,7 +9276,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/line-height-step)
    */
-  lineHeightStep: WideEntry
+  lineHeightStep: LengthEntry & WideEntry
   /**
    * The margin-block CSS property defines the logical block start and end margins of an element, which maps to physical margins depending on the element's writing mode, directionality, and text orientation.
    *
@@ -9344,7 +9344,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-outset)
    */
-  maskBorderOutset: WideEntry
+  maskBorderOutset: LengthEntry & { [value: number]: StyleObject } & WideEntry
   /**
    * The mask-border-repeat CSS property defines how the edge regions of a source image are adjusted to fit the dimensions of an element's mask border.
    *
@@ -9376,7 +9376,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-source)
    */
-  maskBorderSource: WideEntry
+  maskBorderSource: ImageFunctions & WideEntry
   /**
    * The mask-border-width CSS property specifies the width of an element's mask border.
    *
@@ -9386,7 +9386,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-width)
    */
-  maskBorderWidth: WideEntry
+  maskBorderWidth: { [value: number]: StyleObject } & WideEntry
   /**
    * The mask-clip CSS property determines the area, which is affected by a mask. The painted content of an element must be restricted to this area.
    *
@@ -9396,7 +9396,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-clip)
    */
-  maskClip: WideEntry
+  maskClip: GeometryBoxEntry & WideEntry
   /**
    * The mask-composite CSS property represents a compositing operation used on the current mask layer with the mask layers below it.
    *
@@ -9434,7 +9434,7 @@ export interface CSSDecls {
    *
    * Syntax: none | \<integer>
    */
-  maxLines: WideEntry
+  maxLines: IntegerEntry & WideEntry
   /**
    * The offset CSS property is a shorthand property for animating an element along a defined path.
    *
@@ -9454,7 +9454,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-anchor)
    */
-  offsetAnchor: WideEntry
+  offsetAnchor: PositionEntry & WideEntry
   /**
    * The offset-distance CSS property specifies a position along an offset-path.
    *
@@ -9476,7 +9476,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-path)
    */
-  offsetPath: WideEntry
+  offsetPath: URLEntry & AngleEntry & GeometryBoxEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -9486,7 +9486,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-position)
    */
-  offsetPosition: WideEntry
+  offsetPosition: PositionEntry & WideEntry
   /**
    * The offset-rotate CSS property defines the direction of the element while positioning along the offset path.
    *
@@ -9496,7 +9496,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-rotate)
    */
-  offsetRotate: WideEntry
+  offsetRotate: AngleEntry & WideEntry
   /**
    * The overflow-anchor CSS property provides a way to opt out browser scroll anchoring behavior which adjusts scroll position to minimize content shifts.
    *
@@ -9658,7 +9658,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/rotate)
    */
-  rotate: WideEntry
+  rotate: AngleEntry & { [value: number]: StyleObject } & WideEntry
   /**
    * The row-gap CSS property specifies the gutter between grid rows.
    *
@@ -9684,7 +9684,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scale)
    */
-  scale: WideEntry
+  scale: { [value: number]: StyleObject } & WideEntry
   /**
    * The scrollbar-color CSS property sets the color of the scrollbar track and thumb.
    *
@@ -9694,7 +9694,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scrollbar-color)
    */
-  scrollbarColor: WideEntry
+  scrollbarColor: ColorEntry & ColorFunctions & WideEntry
   /**
    * The scrollbar-gutter CSS property allows authors to reserve space for the scrollbar, preventing unwanted layout changes as the content grows while also avoiding unnecessary visuals when scrolling isn't needed.
    *
@@ -9724,7 +9724,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin)
    */
-  scrollMargin: WideEntry
+  scrollMargin: LengthEntry & WideEntry
   /**
    * The scroll-margin-block property is a shorthand property which sets the scroll-margin longhands in the block dimension.
    *
@@ -9734,7 +9734,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block)
    */
-  scrollMarginBlock: WideEntry
+  scrollMarginBlock: LengthEntry & WideEntry
   /**
    * The scroll-margin-block-start property defines the margin of the scroll snap area at the start of the block dimension that is used for snapping this box to the snapport. The scroll snap area is determined by taking the transformed border box, finding its rectangular bounding box (axis-aligned in the scroll container’s coordinate space), then adding the specified outsets.
    *
@@ -9744,7 +9744,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-start)
    */
-  scrollMarginBlockStart: WideEntry
+  scrollMarginBlockStart: LengthEntry & WideEntry
   /**
    * The scroll-margin-block-end property defines the margin of the scroll snap area at the end of the block dimension that is used for snapping this box to the snapport. The scroll snap area is determined by taking the transformed border box, finding its rectangular bounding box (axis-aligned in the scroll container’s coordinate space), then adding the specified outsets.
    *
@@ -9754,7 +9754,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-end)
    */
-  scrollMarginBlockEnd: WideEntry
+  scrollMarginBlockEnd: LengthEntry & WideEntry
   /**
    * The scroll-margin-bottom property defines the bottom margin of the scroll snap area that is used for snapping this box to the snapport. The scroll snap area is determined by taking the transformed border box, finding its rectangular bounding box (axis-aligned in the scroll container’s coordinate space), then adding the specified outsets.
    *
@@ -9764,7 +9764,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom)
    */
-  scrollMarginBottom: WideEntry
+  scrollMarginBottom: LengthEntry & WideEntry
   /**
    * The scroll-margin-inline property is a shorthand property which sets the scroll-margin longhands in the inline dimension.
    *
@@ -9774,7 +9774,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline)
    */
-  scrollMarginInline: WideEntry
+  scrollMarginInline: LengthEntry & WideEntry
   /**
    * The scroll-margin-inline-start property defines the margin of the scroll snap area at the start of the inline dimension that is used for snapping this box to the snapport. The scroll snap area is determined by taking the transformed border box, finding its rectangular bounding box (axis-aligned in the scroll container’s coordinate space), then adding the specified outsets.
    *
@@ -9784,7 +9784,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-start)
    */
-  scrollMarginInlineStart: WideEntry
+  scrollMarginInlineStart: LengthEntry & WideEntry
   /**
    * The scroll-margin-inline-end property defines the margin of the scroll snap area at the end of the inline dimension that is used for snapping this box to the snapport. The scroll snap area is determined by taking the transformed border box, finding its rectangular bounding box (axis-aligned in the scroll container’s coordinate space), then adding the specified outsets.
    *
@@ -9794,7 +9794,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-end)
    */
-  scrollMarginInlineEnd: WideEntry
+  scrollMarginInlineEnd: LengthEntry & WideEntry
   /**
    * The scroll-margin-left property defines the left margin of the scroll snap area that is used for snapping this box to the snapport. The scroll snap area is determined by taking the transformed border box, finding its rectangular bounding box (axis-aligned in the scroll container’s coordinate space), then adding the specified outsets.
    *
@@ -9804,7 +9804,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left)
    */
-  scrollMarginLeft: WideEntry
+  scrollMarginLeft: LengthEntry & WideEntry
   /**
    * The scroll-margin-right property defines the right margin of the scroll snap area that is used for snapping this box to the snapport. The scroll snap area is determined by taking the transformed border box, finding its rectangular bounding box (axis-aligned in the scroll container’s coordinate space), then adding the specified outsets.
    *
@@ -9814,7 +9814,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right)
    */
-  scrollMarginRight: WideEntry
+  scrollMarginRight: LengthEntry & WideEntry
   /**
    * The scroll-margin-top property defines the top margin of the scroll snap area that is used for snapping this box to the snapport. The scroll snap area is determined by taking the transformed border box, finding its rectangular bounding box (axis-aligned in the scroll container’s coordinate space), then adding the specified outsets.
    *
@@ -9824,7 +9824,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top)
    */
-  scrollMarginTop: WideEntry
+  scrollMarginTop: LengthEntry & WideEntry
   /**
    * The scroll-padding property is a shorthand property which sets all of the scroll-padding longhands, assigning values much like the padding property does for the padding-* longhands.
    *
@@ -9992,7 +9992,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-combine-upright)
    */
-  textCombineUpright: WideEntry
+  textCombineUpright: IntegerEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -10024,7 +10024,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-thickness)
    */
-  textDecorationThickness: WideEntry
+  textDecorationThickness: LengthEntry & PercentEntry & WideEntry
   /**
    * The text-emphasis CSS property is a shorthand property for setting text-emphasis-style and text-emphasis-color in one declaration. This property will apply the specified emphasis mark to each character of the element's text, except separator characters, like spaces,  and control characters.
    *
@@ -10044,7 +10044,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color)
    */
-  textEmphasisColor: WideEntry
+  textEmphasisColor: ColorEntry & ColorFunctions & WideEntry
   /**
    * The text-emphasis-position CSS property describes where emphasis marks are drawn at. The effect of emphasis marks on the line height is the same as for ruby text: if there isn't enough place, the line height is increased.
    *
@@ -10064,7 +10064,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style)
    */
-  textEmphasisStyle: WideEntry
+  textEmphasisStyle: StringEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -10076,7 +10076,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-size-adjust)
    */
-  textSizeAdjust: WideEntry
+  textSizeAdjust: PercentEntry & WideEntry
   /**
    * The text-underline-offset CSS property sets the offset distance of an underline text decoration line (applied using text-decoration) from its original position.
    *
@@ -10086,7 +10086,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-underline-offset)
    */
-  textUnderlineOffset: WideEntry
+  textUnderlineOffset: LengthEntry & PercentEntry & WideEntry
   /**
    * The transform-box CSS property defines the layout box to which the transform and transform-origin properties relate.
    *
@@ -10106,7 +10106,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/translate)
    */
-  translate: WideEntry
+  translate: LengthEntry & WideEntry
   /**
    * Specifies how whitespace is handled in an element.
    *
@@ -10128,7 +10128,7 @@ export interface CSSDecls {
    *
    * Syntax: normal | \<percentage>
    */
-  ascentOverride: WideEntry
+  ascentOverride: PercentEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -10136,7 +10136,7 @@ export interface CSSDecls {
    *
    * Syntax: normal | \<percentage>
    */
-  descentOverride: WideEntry
+  descentOverride: PercentEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -10152,7 +10152,7 @@ export interface CSSDecls {
    *
    * Syntax: normal | \<percentage>
    */
-  lineGapOverride: WideEntry
+  lineGapOverride: PercentEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -10160,13 +10160,13 @@ export interface CSSDecls {
    *
    * Syntax: \<percentage>
    */
-  sizeAdjust: WideEntry
+  sizeAdjust: PercentEntry & WideEntry
   /**
    * The bleed CSS at-rule descriptor, used with the @page at-rule, specifies the extent of the page bleed area outside the page box. This property only has effect if crop marks are enabled using the marks property.
    *
    * Syntax: auto | \<length>
    */
-  bleed: WideEntry
+  bleed: LengthEntry & WideEntry
   /**
    * The marks CSS at-rule descriptor, used with the @page at-rule, adds crop and/or cross marks to the presentation of the document. Crop marks indicate where the page should be cut. Cross marks are used to align sheets.
    *
@@ -10180,7 +10180,7 @@ export interface CSSDecls {
    *
    * Syntax: \<string>
    */
-  syntax: WideEntry
+  syntax: StringEntry & WideEntry
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
@@ -10196,7 +10196,7 @@ export interface CSSDecls {
    *
    * Syntax: \<string>
    */
-  initialValue: WideEntry
+  initialValue: StringEntry & WideEntry
   /**
    * The max-zoom CSS descriptor sets the maximum zoom factor of a document defined by the @viewport at-rule. The browser will not zoom in any further than this, whether automatically or at the user's request.
    *
@@ -10204,7 +10204,7 @@ export interface CSSDecls {
    *
    * Syntax: auto | \<number> | \<percentage>
    */
-  maxZoom: WideEntry
+  maxZoom: PercentEntry & { [value: number]: StyleObject } & WideEntry
   /**
    * The min-zoom CSS descriptor sets the minimum zoom factor of a document defined by the @viewport at-rule. The browser will not zoom out any further than this, whether automatically or at the user's request.
    *
@@ -10212,7 +10212,7 @@ export interface CSSDecls {
    *
    * Syntax: auto | \<number> | \<percentage>
    */
-  minZoom: WideEntry
+  minZoom: PercentEntry & { [value: number]: StyleObject } & WideEntry
   /**
    * The orientation CSS @media media feature can be used to apply styles based on the orientation of the viewport (or the page box, for paged media).
    *

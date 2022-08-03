@@ -102,31 +102,35 @@ function genHTMLDoc (value: ITagData | IAttributeData, indent = 0): string | und
 function genEndTypes (prop: IPropertyData, header?: string): string {
   const ends = header ? [] : ["}"];
 
+  const testRestrict = (name: string, syntax = "<" + name + ">") => {
+    return prop.restrictions?.includes(name) || prop.syntax?.includes(syntax);
+  };
+
   // 'integer', 'string', 'image', 'identifier', 'enum', 'time', 'timing-function', 'number', 'color', 'position', 'length', 'repeat', 'percentage', 'box', 'url', 'line-width', 'line-style', 'shape', 'geometry-box', 'number(0-1)', 'font', 'angle', 'property', 'positon', 'unicode-range'
 
-  if (prop.restrictions?.includes("color")) {
+  if (testRestrict("color")) {
     ends.push("ColorEntry");
     ends.push("ColorFunctions");
   }
 
-  prop.restrictions?.includes("string") && ends.push("StringEntry");
-  prop.restrictions?.includes("url") && ends.push("URLEntry");
-  prop.restrictions?.includes("length") && ends.push("LengthEntry");
-  prop.restrictions?.includes("percentage") && ends.push("PercentEntry");
-  prop.restrictions?.includes("angle") && ends.push("AngleEntry");
-  prop.restrictions?.includes("number") && ends.push("{ [value: number]: StyleObject }");
-  prop.restrictions?.includes("integer") && ends.push("IntegerEntry");
-  prop.restrictions?.includes("number(0-1)") && ends.push("AlphaEntry");
-  prop.restrictions?.includes("time") && ends.push("TimeEntry");
-  prop.restrictions?.includes("image") && ends.push("ImageFunctions");
-  prop.restrictions?.includes("position") && ends.push("PositionEntry");
-  prop.restrictions?.includes("repeat") && ends.push("RepeatStyleEntry");
-  prop.restrictions?.includes("line-width") && ends.push("LineWidthEntry");
-  prop.restrictions?.includes("line-style") && ends.push("LineStyleEntry");
-  prop.restrictions?.includes("shape") && ends.push("BasicShapeFunctions");
-  prop.restrictions?.includes("box") && ends.push("BoxEntry");
-  prop.restrictions?.includes("geometry-box") && ends.push("GeometryBoxEntry");
-  prop.restrictions?.includes("timing-function") && ends.push("TransitionTimingFunctions");
+  testRestrict("string") && ends.push("StringEntry");
+  testRestrict("url") && ends.push("URLEntry");
+  testRestrict("length") && ends.push("LengthEntry");
+  testRestrict("percentage") && ends.push("PercentEntry");
+  testRestrict("angle") && ends.push("AngleEntry");
+  testRestrict("number") && ends.push("{ [value: number]: StyleObject }");
+  testRestrict("integer") && ends.push("IntegerEntry");
+  testRestrict("number(0-1)", "<alpha-value>") && ends.push("AlphaEntry");
+  testRestrict("time") && ends.push("TimeEntry");
+  testRestrict("image") && ends.push("ImageFunctions");
+  testRestrict("position") && ends.push("PositionEntry");
+  testRestrict("repeat") && ends.push("RepeatStyleEntry");
+  testRestrict("line-width") && ends.push("LineWidthEntry");
+  testRestrict("line-style") && ends.push("LineStyleEntry");
+  testRestrict("shape") && ends.push("BasicShapeFunctions");
+  testRestrict("box") && ends.push("BoxEntry");
+  testRestrict("geometry-box") && ends.push("GeometryBoxEntry");
+  testRestrict("timing-function") && ends.push("TransitionTimingFunctions");
   ends.push("WideEntry");
 
   if (header) ends[0] = header + ends[0];
@@ -135,7 +139,8 @@ function genEndTypes (prop: IPropertyData, header?: string): string {
 }
 
 function genCSSDecls () {
-  codes.push("import { StyleObject, ColorEntry, LengthEntry, PercentEntry, AlphaEntry, IntegerEntry, URLEntry, StringEntry, AngleEntry, TimeEntry, WideEntry, PositionEntry, RepeatStyleEntry, LineStyleEntry, LineWidthEntry, BoxEntry, GeometryBoxEntry, ColorFunctions, ImageFunctions, BasicShapeFunctions, TransitionTimingFunctions } from \"./index\";");
+  const depends = ["StyleObject", "ColorEntry", "LengthEntry", "PercentEntry", "AlphaEntry", "IntegerEntry", "URLEntry", "StringEntry", "AngleEntry", "TimeEntry", "WideEntry", "PositionEntry", "RepeatStyleEntry", "LineStyleEntry", "LineWidthEntry", "BoxEntry", "GeometryBoxEntry", "ColorFunctions", "ImageFunctions", "BasicShapeFunctions", "TransitionTimingFunctions"];
+  codes.push(`import { ${depends.sort().join(", ")} } from "./index";`);
   codes.push("");
   codes.push("export interface CSSDecls {");
 
@@ -177,7 +182,7 @@ function genCSSDecls () {
 
   console.log("Collect function depends...\n");
 
-  codes.splice(2, 0, `import { ${funcDepends.join(", ")} } from "helpers/funcs";`);
+  codes.splice(2, 0, `import { ${funcDepends.sort().join(", ")} } from "helpers/funcs";`);
 
   codes.push("}");
   codes.push("");
