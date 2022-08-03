@@ -13,7 +13,9 @@ specifiers:
   eslint-plugin-promise: ^6.0.0
   jest: ^28.1.2
   rollup: ^2.77.1
+  sucrase: ^3.25.0
   tsc-alias: ^1.7.0
+  tsconfig-paths: ^4.0.0
   typescript: ^4.7.4
 
 devDependencies:
@@ -29,7 +31,9 @@ devDependencies:
   eslint-plugin-promise: 6.0.0_eslint@8.19.0
   jest: 28.1.2
   rollup: 2.77.1
+  sucrase: 3.25.0
   tsc-alias: 1.7.0
+  tsconfig-paths: 4.0.0
   typescript: 4.7.4
 
 packages:
@@ -724,7 +728,7 @@ packages:
   /@sucrase/jest-plugin/2.2.1:
     resolution: {integrity: sha512-5fG+kHOlfwPNi82MCvTFQdAg50YQymGbdwH9nzTA9D9FhJVHynTjadXi58gb/Ae17RMvinY0+Fglx33MB056Rg==}
     dependencies:
-      sucrase: 3.24.0
+      sucrase: 3.25.0
     dev: true
 
   /@types/babel__core/7.1.19:
@@ -3258,8 +3262,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /sucrase/3.24.0:
-    resolution: {integrity: sha512-SevqflhW356TKEyWjFHg2e5f3eH+5rzmsMJxrVMDvZIEHh/goYrpzDGA6APEj4ME9MdGm8oNgIzi1eF3c3dDQA==}
+  /sucrase/3.25.0:
+    resolution: {integrity: sha512-WxTtwEYXSmZArPGStGBicyRsg5TBEFhT5b7N+tF+zauImP0Acy+CoUK0/byJ8JNPK/5lbpWIVuFagI4+0l85QQ==}
     engines: {node: '>=8'}
     hasBin: true
     dependencies:
@@ -3380,6 +3384,14 @@ packages:
     dependencies:
       '@types/json5': 0.0.29
       json5: 1.0.1
+      minimist: 1.2.6
+      strip-bom: 3.0.0
+    dev: true
+
+  /tsconfig-paths/4.0.0:
+    resolution: {integrity: sha512-SLBg2GBKlR6bVtMgJJlud/o3waplKtL7skmLkExomIiaAtLGtVsoXIqP3SYdjbcH9lq/KVv7pMZeCBpLYOit6Q==}
+    dependencies:
+      json5: 2.2.1
       minimist: 1.2.6
       strip-bom: 3.0.0
     dev: true
