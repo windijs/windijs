@@ -17,7 +17,7 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "test": "npx jest",
-    "build": "rollup -c && pnpm tsd",
+    "build": "npx rollup -c && pnpm tsd",
     "gen:style": "node -r sucrase/register -r tsconfig-paths/register ./scripts/genDataTypes.ts",
     "test:watch": "npx jest --watch",
     "test:update": "npx jest --updateSnapshot",
@@ -41,6 +41,6 @@
     "sucrase": "^3.25.0",
     "tsc-alias": "^1.7.0",
     "tsconfig-paths": "^4.0.0",
-    "typescript": "^4.8.0-dev.20220803"
+    "typescript": "^4.8.0-dev.20220806"
   }
 }

@@ -1,15 +1,16 @@
 import { defineConfig } from "rollup";
 import fs from "fs";
 import path from "path";
-import typescript from "@rollup/plugin-typescript";
+import pluginTS from "@rollup/plugin-typescript";
+import typescript from "typescript";
 
 const outDir = "./dist";
 
-const tsPlugin = typescript({
+const tsPlugin = pluginTS({
   target: "es6",
   include: "src/**",
   outDir,
-  typescript: require("typescript"),
+  typescript,
 });
 
 const dump = (file) => path.join(outDir, file);
