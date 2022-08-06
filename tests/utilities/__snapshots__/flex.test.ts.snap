@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`All Flex Utilities 1`] = `
+Object {
+  "display": Array [
+    "-webkit-box",
+    "-ms-flexbox",
+    "-webkit-flex",
+    "flex",
+  ],
+}
+`;
+
+exports[`All Flex Utilities 2`] = `
+Object {
+  "props": Array [],
+  "type": "css",
+  "uid": "flex",
+  "variants": Array [],
+}
+`;
+
+exports[`All Flex Utilities 3`] = `
+Object {
+  "-ms-flex-direction": "row",
+  "-webkit-box-direction": "normal",
+  "-webkit-box-orient": "horizontal",
+  "-webkit-flex-direction": "row",
+  "flexDirection": "row",
+}
+`;
+
+exports[`All Flex Utilities 4`] = `
+Object {
+  "-ms-flex-direction": "column-reverse",
+  "-webkit-box-direction": "reverse",
+  "-webkit-box-orient": "vertical",
+  "-webkit-flex-direction": "column-reverse",
+  "flexDirection": "column-reverse",
+}
+`;
+
+exports[`All Flex Utilities 5`] = `
+Object {
+  "-ms-flex-wrap": "wrap-reverse",
+  "-webkit-flex-wrap": "wrap-reverse",
+  "flexWrap": "wrap-reverse",
+}
+`;
+
+exports[`All Flex Utilities 6`] = `
+Object {
+  "-ms-flex": "0 1 auto",
+  "-webkit-box-flex": "0",
+  "-webkit-flex": "0 1 auto",
+  "flex": "0 1 auto",
+}
+`;
+
+exports[`All Flex Utilities 7`] = `
+Object {
+  "-ms-flex-positive": "0",
+  "-webkit-box-flex": "0",
+  "-webkit-flex-grow": "0",
+  "flexGrow": "0",
+}
+`;
+
+exports[`All Flex Utilities 8`] = `
+Object {
+  "-ms-flex-negative": "1",
+  "-webkit-flex-shrink": "1",
+  "flexShrink": "1",
+}
+`;
+
+exports[`Flex 1`] = `
+Object {
+  "display": Array [
+    "-webkit-box",
+    "-ms-flexbox",
+    "-webkit-flex",
+    "flex",
+  ],
+}
+`;
+
+exports[`Flex 2`] = `
+Object {
+  "props": Array [],
+  "type": "css",
+  "uid": "flex",
+  "variants": Array [],
+}
+`;
+
+exports[`Flex Direction 1`] = `
+Object {
+  "-ms-flex-direction": "row",
+  "-webkit-box-direction": "normal",
+  "-webkit-box-orient": "horizontal",
+  "-webkit-flex-direction": "row",
+  "flexDirection": "row",
+}
+`;
+
+exports[`Flex Direction 2`] = `
+Object {
+  "-ms-flex-direction": "row-reverse",
+  "-webkit-box-direction": "reverse",
+  "-webkit-box-orient": "horizontal",
+  "-webkit-flex-direction": "row-reverse",
+  "flexDirection": "row-reverse",
+}
+`;
+
+exports[`Flex Direction 3`] = `
+Object {
+  "-ms-flex-direction": "column",
+  "-webkit-box-direction": "normal",
+  "-webkit-box-orient": "vertical",
+  "-webkit-flex-direction": "column",
+  "flexDirection": "column",
+}
+`;
+
+exports[`Flex Direction 4`] = `
+Object {
+  "-ms-flex-direction": "column-reverse",
+  "-webkit-box-direction": "reverse",
+  "-webkit-box-orient": "vertical",
+  "-webkit-flex-direction": "column-reverse",
+  "flexDirection": "column-reverse",
+}
+`;
+
+exports[`Flex Grow 1`] = `
+Object {
+  "-ms-flex-positive": "1",
+  "-webkit-box-flex": "1",
+  "-webkit-flex-grow": "1",
+  "flexGrow": "1",
+}
+`;
+
+exports[`Flex Grow 2`] = `
+Object {
+  "-ms-flex-positive": "0",
+  "-webkit-box-flex": "0",
+  "-webkit-flex-grow": "0",
+  "flexGrow": "0",
+}
+`;
+
+exports[`Flex Shrink 1`] = `
+Object {
+  "-ms-flex-negative": "1",
+  "-webkit-flex-shrink": "1",
+  "flexShrink": "1",
+}
+`;
+
+exports[`Flex Shrink 2`] = `
+Object {
+  "-ms-flex-negative": "0",
+  "-webkit-flex-shrink": "0",
+  "flexShrink": "0",
+}
+`;
+
+exports[`Flex Stretch 1`] = `
+Object {
+  "-ms-flex": "1 1 0%",
+  "-webkit-box-flex": "1",
+  "-webkit-flex": "1 1 0%",
+  "flex": "1 1 0%",
+}
+`;
+
+exports[`Flex Stretch 2`] = `
+Object {
+  "-ms-flex": "1 1 auto",
+  "-webkit-box-flex": "1",
+  "-webkit-flex": "1 1 auto",
+  "flex": "1 1 auto",
+}
+`;
+
+exports[`Flex Stretch 3`] = `
+Object {
+  "-ms-flex": "0 1 auto",
+  "-webkit-box-flex": "0",
+  "-webkit-flex": "0 1 auto",
+  "flex": "0 1 auto",
+}
+`;
+
+exports[`Flex Stretch 4`] = `
+Object {
+  "-ms-flex": "none",
+  "-webkit-box-flex": "0",
+  "-webkit-flex": "none",
+  "flex": "none",
+}
+`;
+
+exports[`Flex Wrap 1`] = `
+Object {
+  "-ms-flex-wrap": "wrap",
+  "-webkit-flex-wrap": "wrap",
+  "flexWrap": "wrap",
+}
+`;
+
+exports[`Flex Wrap 2`] = `
+Object {
+  "-ms-flex-wrap": "wrap-reverse",
+  "-webkit-flex-wrap": "wrap-reverse",
+  "flexWrap": "wrap-reverse",
+}
+`;
+
+exports[`Flex Wrap 3`] = `
+Object {
+  "-ms-flex-wrap": "nowrap",
+  "-webkit-flex-wrap": "nowrap",
+  "flexWrap": "nowrap",
+}
+`;
+
+exports[`Inline Flex 1`] = `
+Object {
+  "display": Array [
+    "-webkit-inline-box",
+    "-ms-inline-flexbox",
+    "-webkit-inline-flex",
+    "inline-flex",
+  ],
+}
+`;
+
+exports[`Inline Flex 2`] = `
+Object {
+  "props": Array [],
+  "type": "css",
+  "uid": "inlineFlex",
+  "variants": Array [],
+}
+`;
+
+exports[`Inline Flex 3`] = `
+Object {
+  "display": Array [
+    "-webkit-inline-box",
+    "-ms-inline-flexbox",
+    "-webkit-inline-flex",
+    "inline-flex",
+  ],
+}
+`;
+
+exports[`Inline Flex 4`] = `
+Object {
+  "display": Array [
+    "-webkit-inline-box",
+    "-ms-inline-flexbox",
+    "-webkit-inline-flex",
+    "inline-flex",
+  ],
+}
+`;
