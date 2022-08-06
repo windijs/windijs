@@ -10,6 +10,7 @@
     "declarationDir": "./dist/types",
     "stripInternal": true,
     "esModuleInterop": true,
+    "noEmitOnError": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true

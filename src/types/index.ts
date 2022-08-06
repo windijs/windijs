@@ -5,7 +5,6 @@ import type { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "helpers/com
 export * from "./css";
 export * from "./data";
 export * from "./calc";
-export { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs };
 
 export type GeneralCSSData = CSSDecls & { [key in keyof CSSDecls]: { [key: string]: StyleObject } } & { [key: string]: { [key: string]: StyleObject } }
 
@@ -86,9 +85,7 @@ export type StyleNamer = (style: StyleObject) => string;
 export type VariantBuilder = (...utilities: (StyleObject | StyleObject[])[]) => StyleObject[];
 
 export type NestedProxy<T, O> = SafeEntry<{
-  [key in keyof T]: (T[key] extends object ? T[key] extends Array<unknown> ? O : SafeEntry<{
-    [k in keyof T[key]]: (T[key][k] extends object ? T[key][k] extends Array<unknown> ? O : NestedProxy<T[key][k], O> : O)
-  }> : O);
+  [key in keyof T]: (T[key] extends object ? T[key] extends Array<unknown> ? O : NestedProxy<T[key], O> : O);
 }>;
 
 export type StyleProxy<T, O = {}> = NestedProxy<T, StyleObject<O>>;

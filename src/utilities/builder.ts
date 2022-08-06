@@ -46,7 +46,7 @@ export function buildColor (colorProperty: StyleProperties, colorOpacityProperty
 }
 
 export function buildContainer<T extends Record<string, string | [string, CSSObject]>> (screens: T, center = false) {
-  const m: CSSMap = new Map();
+  const m = new Map() as CSSMap;
   m.set("width", "100%");
   if (center) m.set("marginLeft", "auto") && m.set("marginRight", "auto");
 
