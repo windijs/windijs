@@ -1,0 +1,339 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Height 1`] = `
+Object {
+  "height": "20%",
+}
+`;
+
+exports[`Height 2`] = `
+Object {
+  "height": "25%",
+}
+`;
+
+exports[`Height 3`] = `
+Object {
+  "height": "2.5rem",
+}
+`;
+
+exports[`Height 4`] = `
+Object {
+  "height": "28rem",
+}
+`;
+
+exports[`Height 5`] = `
+Object {
+  "height": "100vh",
+}
+`;
+
+exports[`Height 6`] = `
+Object {
+  "height": "1024px",
+}
+`;
+
+exports[`Height 7`] = `
+Object {
+  "height": "min-content",
+}
+`;
+
+exports[`Height 8`] = `
+Object {
+  "height": "0.875rem",
+}
+`;
+
+exports[`Height 9`] = `
+Object {
+  "height": "100%",
+}
+`;
+
+exports[`Max Height 1`] = `
+Object {
+  "maxHeight": "none",
+}
+`;
+
+exports[`Max Height 2`] = `
+Object {
+  "maxHeight": "20%",
+}
+`;
+
+exports[`Max Height 3`] = `
+Object {
+  "maxHeight": "25%",
+}
+`;
+
+exports[`Max Height 4`] = `
+Object {
+  "maxHeight": "2.5rem",
+}
+`;
+
+exports[`Max Height 5`] = `
+Object {
+  "maxHeight": "28rem",
+}
+`;
+
+exports[`Max Height 6`] = `
+Object {
+  "maxHeight": "100vh",
+}
+`;
+
+exports[`Max Height 7`] = `
+Object {
+  "maxHeight": "1024px",
+}
+`;
+
+exports[`Max Height 8`] = `
+Object {
+  "maxHeight": "min-content",
+}
+`;
+
+exports[`Max Height 9`] = `
+Object {
+  "maxHeight": "0.875rem",
+}
+`;
+
+exports[`Max Height 10`] = `
+Object {
+  "maxHeight": "100%",
+}
+`;
+
+exports[`Max Width 1`] = `
+Object {
+  "maxWidth": "20%",
+}
+`;
+
+exports[`Max Width 2`] = `
+Object {
+  "maxWidth": "25%",
+}
+`;
+
+exports[`Max Width 3`] = `
+Object {
+  "maxWidth": "2.5rem",
+}
+`;
+
+exports[`Max Width 4`] = `
+Object {
+  "maxWidth": "28rem",
+}
+`;
+
+exports[`Max Width 5`] = `
+Object {
+  "maxWidth": "100vw",
+}
+`;
+
+exports[`Max Width 6`] = `
+Object {
+  "maxWidth": "1024px",
+}
+`;
+
+exports[`Max Width 7`] = `
+Object {
+  "maxWidth": "min-content",
+}
+`;
+
+exports[`Max Width 8`] = `
+Object {
+  "maxWidth": "0.875rem",
+}
+`;
+
+exports[`Max Width 9`] = `
+Object {
+  "maxWidth": "100%",
+}
+`;
+
+exports[`Min Height 1`] = `
+Object {
+  "minHeight": "none",
+}
+`;
+
+exports[`Min Height 2`] = `
+Object {
+  "minHeight": "20%",
+}
+`;
+
+exports[`Min Height 3`] = `
+Object {
+  "minHeight": "25%",
+}
+`;
+
+exports[`Min Height 4`] = `
+Object {
+  "minHeight": "2.5rem",
+}
+`;
+
+exports[`Min Height 5`] = `
+Object {
+  "minHeight": "28rem",
+}
+`;
+
+exports[`Min Height 6`] = `
+Object {
+  "minHeight": "100vh",
+}
+`;
+
+exports[`Min Height 7`] = `
+Object {
+  "minHeight": "1024px",
+}
+`;
+
+exports[`Min Height 8`] = `
+Object {
+  "minHeight": "min-content",
+}
+`;
+
+exports[`Min Height 9`] = `
+Object {
+  "minHeight": "0.875rem",
+}
+`;
+
+exports[`Min Height 10`] = `
+Object {
+  "minHeight": "100%",
+}
+`;
+
+exports[`Min Width 1`] = `undefined`;
+
+exports[`Min Width 2`] = `
+Object {
+  "minWidth": "20%",
+}
+`;
+
+exports[`Min Width 3`] = `
+Object {
+  "minWidth": "25%",
+}
+`;
+
+exports[`Min Width 4`] = `
+Object {
+  "minWidth": "2.5rem",
+}
+`;
+
+exports[`Min Width 5`] = `
+Object {
+  "minWidth": "28rem",
+}
+`;
+
+exports[`Min Width 6`] = `
+Object {
+  "minWidth": "100vw",
+}
+`;
+
+exports[`Min Width 7`] = `
+Object {
+  "minWidth": "1024px",
+}
+`;
+
+exports[`Min Width 8`] = `
+Object {
+  "minWidth": "min-content",
+}
+`;
+
+exports[`Min Width 9`] = `
+Object {
+  "minWidth": "0.875rem",
+}
+`;
+
+exports[`Min Width 10`] = `
+Object {
+  "minWidth": "100%",
+}
+`;
+
+exports[`Width 1`] = `
+Object {
+  "width": "20%",
+}
+`;
+
+exports[`Width 2`] = `
+Object {
+  "width": "25%",
+}
+`;
+
+exports[`Width 3`] = `
+Object {
+  "width": "2.5rem",
+}
+`;
+
+exports[`Width 4`] = `
+Object {
+  "width": "28rem",
+}
+`;
+
+exports[`Width 5`] = `
+Object {
+  "width": "100vw",
+}
+`;
+
+exports[`Width 6`] = `
+Object {
+  "width": "1024px",
+}
+`;
+
+exports[`Width 7`] = `
+Object {
+  "width": "min-content",
+}
+`;
+
+exports[`Width 8`] = `
+Object {
+  "width": "0.875rem",
+}
+`;
+
+exports[`Width 9`] = `
+Object {
+  "width": "100%",
+}
+`;

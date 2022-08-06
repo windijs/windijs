@@ -78,6 +78,85 @@ Object {
 }
 `;
 
+exports[`style with config 1`] = `
+Object {
+  "willChange": "scroll-position",
+}
+`;
+
+exports[`style with config 2`] = `
+Object {
+  "willChange": "transform",
+}
+`;
+
+exports[`style with config 3`] = `
+Object {
+  "backgroundColor": "#ef4444",
+}
+`;
+
+exports[`style with config 4`] = `
+Object {
+  "props": Array [
+    "backgroundColor",
+    "blue",
+    "300",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
+exports[`style with config 5`] = `
+Object {
+  "props": Array [
+    "fontSize",
+    "1rem",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
+exports[`style with config 6`] = `
+Object {
+  "props": Array [
+    "width",
+    "calc(100% - 1rem)",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
+exports[`style with config 7`] = `
+Object {
+  "props": Array [
+    "clipPath",
+    "ellipse(closest-side closest-side at 10%)",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
+exports[`style with config 8`] = `
+Object {
+  "props": Array [
+    "fontSize",
+    "2em",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
 exports[`style with geometry-box entry 1`] = `
 Object {
   "clipPath": "margin-box",
