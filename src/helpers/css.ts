@@ -1,4 +1,4 @@
-import type { CSSObject, StyleLoader, StyleObject, TargetCreator, UtilityMeta } from "types";
+import type { CSSMap, CSSObject, StyleLoader, StyleObject, TargetCreator, UtilityMeta } from "types";
 import { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy, applyVariant } from "./common";
 import { buildRules, createRules } from "./build";
 import { getMeta, pushMetaProp } from "./meta";
@@ -41,7 +41,7 @@ export function useStyleLoader (loader: StyleLoader) {
   CurrentLoader = loader;
 }
 
-export function css (css: CSSObject, data?: { [key: string]: unknown }, meta?: UtilityMeta): StyleObject {
+export function css (css: CSSObject | CSSMap, data?: { [key: string]: unknown }, meta?: UtilityMeta): StyleObject {
   return CurrentLoader(css, meta ?? getMeta(), data);
 }
 

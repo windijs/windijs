@@ -4,6 +4,7 @@ import type { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "helpers/com
 
 export * from "./css";
 export * from "./data";
+export * from "./calc";
 export { CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs };
 
 export type GeneralCSSData = CSSDecls & { [key in keyof CSSDecls]: { [key: string]: StyleObject } } & { [key: string]: { [key: string]: StyleObject } }
@@ -11,14 +12,14 @@ export type GeneralCSSData = CSSDecls & { [key in keyof CSSDecls]: { [key: strin
 export type CSSProps = {
   [prop in keyof CSSDecls]?: {
     [value in keyof CSSDecls[prop]]?:
-      CSSDecls[prop][value] extends Function ?
-        value extends string ? `${value}()` : value
-      : value extends CSSLengthType | CSSAngleType | CSSTimeType | CSSResolutionType | CSSFrequencyType ? `0${value}`
-      : value extends "percent" ? "0%"
-      : value extends "fr" ? "0fr"
-      : value
+    CSSDecls[prop][value] extends Function ?
+    value extends string ? `${value}()` : value
+    : value extends CSSLengthType | CSSAngleType | CSSTimeType | CSSResolutionType | CSSFrequencyType ? `0${value}`
+    : value extends "percent" ? "0%"
+    : value extends "fr" ? "0fr"
+    : value
   }[keyof CSSDecls[prop]]
-  | String; // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
+  | String | string[]; // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
 }
 
 type ExtractAttrName<S extends string> = S extends `${string}[${infer A}]` ? A : S;
@@ -39,7 +40,9 @@ export type CSSStyleSheet = { rules: CSSRules };
 
 export type CSSSelector = String | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
 
-export type CSSObject = CSSProps & Partial<CSSAtRules<CSSObject>> & Partial<CSSClasses<CSSObject>> & Partial<CSSElements<CSSObject>> & Partial<HTMLTags<CSSObject>> & Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | String | number }
+export type CSSObject = CSSProps & Partial<CSSAtRules<CSSObject>> & Partial<CSSClasses<CSSObject>> & Partial<CSSElements<CSSObject>> & Partial<HTMLTags<CSSObject>> & Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | String | string[] | number }
+
+export type CSSMap = Map<keyof CSSProps, string> & Map<keyof CSSAtRules<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSClasses<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSElements<CSSObject>, CSSObject | CSSMap> & Map<keyof HTMLTags<CSSObject>, CSSObject | CSSMap> & Map<string, CSSObject | CSSMap | String | string[] | number>
 
 export type NumberDict = { [key: number]: string };
 
@@ -55,23 +58,23 @@ export type UtilityMeta = {
 };
 
 export interface StyleObjectBase {
-  [SymbolCSS]: CSSObject;
+  [SymbolCSS]: CSSObject | CSSMap;
   [SymbolMeta]: UtilityMeta;
   [SymbolData]: object | undefined,
   [SymbolProxy]: true;
 }
 
 export type StyleObject<T = {}> = StyleObjectBase & {
-  readonly css: CSSObject;
+  readonly css: CSSObject | CSSMap;
   readonly meta: UtilityMeta;
 } & T;
 
-export type CSSEntry = (css: CSSObject) => {
-  readonly css: CSSObject;
+export type CSSEntry = (css: CSSObject | CSSMap) => {
+  readonly css: CSSObject | CSSMap;
   readonly meta: UtilityMeta;
 };
 
-export type SafeEntry<T> = Omit<T, "DEFAULT">; // "meta" | "DEFAULT" | "css">;
+export type SafeEntry<T extends {DEFAULT?: unknown}> = T["DEFAULT"] extends undefined | null | never ? Omit<T, "DEFAULT"> : Omit<T, "DEFAULT"> & T["DEFAULT"];
 
 export type StyleEntry<T> = SafeEntry<{ [key in keyof T]: StyleObject }>
 
@@ -81,9 +84,9 @@ export type StyleHandler<T> = Handler<StyleEntry<T> | undefined>;
 
 export type UnknownDict = { [key: string]: unknown };
 
-export type TargetCreator = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict) => StyleObjectBase;
+export type TargetCreator = (css: CSSObject | CSSMap, meta: UtilityMeta, data?: UnknownDict) => StyleObjectBase;
 
-export type StyleLoader = (css: CSSObject, meta: UtilityMeta, data?: UnknownDict) => StyleObject;
+export type StyleLoader = (css: CSSObject | CSSMap, meta: UtilityMeta, data?: UnknownDict) => StyleObject;
 
 export type StyleNamer = (style: StyleObject) => string;
 
@@ -101,7 +104,7 @@ export type NestedProxy<T, O> = SafeEntry<{
   }> : O);
 }>;
 
-export type StyleProxy<T, O={}> = NestedProxy<T, StyleObject<O>>;
+export type StyleProxy<T, O = {}> = NestedProxy<T, StyleObject<O>>;
 
 export type StyleProxyHandler<T> = Handler<StyleProxy<T> | undefined>
 
@@ -111,4 +114,4 @@ export type KeyedStyleProxyHandler<T, K extends string> = Handler<Record<K, Styl
 
 export type KeyedDefaultedStyleProxyHandler<T, K extends string> = Handler<Record<K, StyleProxy<T> & StyleObject>>;
 
-export type PickValue<T, ValueType> = Pick<T, {[key in keyof T]-?: T[key] extends ValueType? key : never} [keyof T]>
+export type PickValue<T, ValueType> = Pick<T, { [key in keyof T]-?: T[key] extends ValueType ? key : never }[keyof T]>;

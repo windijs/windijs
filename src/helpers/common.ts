@@ -1,11 +1,11 @@
-import type { CSSObject, StyleObject } from "types";
+import type { CSSMap, CSSObject, StyleObject } from "types";
 
 export const SymbolCSS = Symbol.for("css");
 export const SymbolMeta = Symbol.for("meta");
 export const SymbolData = Symbol.for("data");
 export const SymbolProxy = Symbol.for("proxy");
 
-export function isStyleObject (i: unknown) {
+export function isStyleObject (i: unknown): i is StyleObject {
   return i != null && typeof i === "object" && SymbolCSS in i;
 }
 
@@ -23,12 +23,12 @@ export function getStyleIdent (style: StyleObject): string {
   return getStyleVariants(style).map(i => i + ":").join("") + getStyleProps(style).join(".");
 }
 
-export function applyVariant (utility: StyleObject) {
+export function applyVariant (utility: StyleObject): CSSObject | CSSMap {
   let css = utility[SymbolCSS];
   for (const variant of utility[SymbolMeta].variants) {
     css = {
       [variant]: css,
-    };
+    } as CSSObject;
   }
 
   return css;
@@ -48,9 +48,11 @@ export function useArrayHelper () {
  * @returns CSSObject
  */
 export function bundle (utilities: (StyleObject | StyleObject[])[]): CSSObject {
+  let vcss: CSSMap | CSSObject;
   const css: CSSObject = {};
   for (const utility of utilities.flat()) {
-    for (const [k, v] of Object.entries(applyVariant(utility))) {
+    vcss = applyVariant(utility);
+    for (const [k, v] of vcss instanceof Map ? vcss.entries() : Object.entries(vcss)) {
       if (v != null) css[k] = k in css ? Object.assign(css[k], v) : v;
     }
   }
