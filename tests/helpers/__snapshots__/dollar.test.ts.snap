@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dollar call 1`] = `
+".test > a {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar call 2`] = `
+".test > a {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar multi selectors 1`] = `
+".button, a, button {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar nested selectors 1`] = `
+".button.clicked {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar nested selectors 2`] = `
+"#red-btn.clicked {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar nested selectors 3`] = `
+".button.clicked > a {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar nested selectors 4`] = `
+".button.clicked .button.hovered {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar nested selectors 5`] = `
+".button.clicked + a {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar nested selectors 6`] = `
+".button.clicked ~ a {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar nested selectors 7`] = `
+"a[href$=\\".org\\"] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar select HTML elements 1`] = `
+"a {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar select HTML elements 2`] = `
+"buttton {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar select HTML elements 3`] = `
+"textarea {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar wiith all/root/host 1`] = `
+"* {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar wiith all/root/host 2`] = `
+":root {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar wiith all/root/host 3`] = `
+":host {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with attribute 1`] = `
+"[title] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with attribute 2`] = `
+"[title] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with attribute 3`] = `
+"[some-attr] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with attribute 4`] = `
+"[href=\\"https://example.org\\"] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with attribute 5`] = `
+"[href*=\\"example\\"] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with attribute 6`] = `
+"[href^=\\"https\\"] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with attribute 7`] = `
+"[href$=\\".org\\"] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with attribute 8`] = `
+"[class~=\\"logo\\"] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with attribute 9`] = `
+"[lang|=\\"zh\\"] {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with classes 1`] = `
+".button {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with classes 2`] = `
+".bg-red-500 {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with id 1`] = `
+"#btn {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with id 2`] = `
+"#btn {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with id 3`] = `
+"#red-button {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
