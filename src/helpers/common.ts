@@ -1,4 +1,4 @@
-import type { CSSMap, CSSObject, StyleObject } from "types";
+import type { CSSMap, CSSObject, StyleObject, StyleProperties } from "types";
 
 export const SymbolCSS = Symbol.for("css");
 export const SymbolMeta = Symbol.for("meta");
@@ -58,3 +58,5 @@ export function bundle (utilities: (StyleObject | StyleObject[])[]): CSSObject {
   }
   return css;
 }
+
+export const prop = (strings: TemplateStringsArray, ...expr: string[]) => strings.map((string, i) => string + (expr[i] || "")).join("") as StyleProperties;
