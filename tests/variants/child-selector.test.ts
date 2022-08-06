@@ -1,8 +1,8 @@
-import { all, backgroundClip, backgroundClipConfig, backgroundColor, bundle, children, colors, createUtility, sibling, siblings, svg } from "index";
+import { all, backgroundClipConfig, backgroundColor, bundle, children, colors, configHandler, createUtility, prop, sibling, siblings, svg } from "index";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))
-  .use(backgroundClip(backgroundClipConfig))
+  .case("clip", configHandler(backgroundClipConfig, ["backgroundClip", prop`-webkit-background-clip`]))
   .init();
 
 const utilities = [bg.blue[500], bg.clip.content];

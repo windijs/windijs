@@ -4,9 +4,9 @@ exports[`desktop first screens: _lg 1`] = `
 Object {
   "@media (max-width: 1024px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -15,9 +15,9 @@ exports[`desktop first screens: _md 1`] = `
 Object {
   "@media (max-width: 768px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -26,9 +26,9 @@ exports[`desktop first screens: _sm 1`] = `
 Object {
   "@media (max-width: 640px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -37,9 +37,9 @@ exports[`desktop first screens: _xl 1`] = `
 Object {
   "@media (max-width: 1280x)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -48,9 +48,9 @@ exports[`desktop first screens: _xxl 1`] = `
 Object {
   "@media (max-width: 1536px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -59,9 +59,9 @@ exports[`directions: ltr 1`] = `
 Object {
   "[dir='ltr'] &, [dir='ltr']&": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -70,9 +70,9 @@ exports[`directions: rtl 1`] = `
 Object {
   "[dir='rtl'] &, [dir='rtl']&": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -81,9 +81,9 @@ exports[`mobile first screens: lg 1`] = `
 Object {
   "@media (min-width: 1024px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -92,9 +92,9 @@ exports[`mobile first screens: md 1`] = `
 Object {
   "@media (min-width: 768px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -103,9 +103,9 @@ exports[`mobile first screens: sm 1`] = `
 Object {
   "@media (min-width: 640px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -114,9 +114,9 @@ exports[`mobile first screens: xl 1`] = `
 Object {
   "@media (min-width: 1280x)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -125,9 +125,9 @@ exports[`mobile first screens: xxl 1`] = `
 Object {
   "@media (min-width: 1536px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -136,9 +136,9 @@ exports[`motions: motionReduce 1`] = `
 Object {
   "@media (prefers-reduced-motion: reduce)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -147,9 +147,9 @@ exports[`motions: motionSafe 1`] = `
 Object {
   "@media (prefers-reduced-motion: no-preference)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -158,9 +158,9 @@ exports[`only screens: $lg 1`] = `
 Object {
   "@media (min-width: 1024px) and (max-width: 1280px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -169,9 +169,9 @@ exports[`only screens: $md 1`] = `
 Object {
   "@media (min-width: 768px) and (max-width: 1024px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -180,9 +180,9 @@ exports[`only screens: $sm 1`] = `
 Object {
   "@media (min-width: 640px) and (max-width: 768px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -191,9 +191,9 @@ exports[`only screens: $xl 1`] = `
 Object {
   "@media (min-width: 1280px) and (max-width: 1536px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -202,9 +202,9 @@ exports[`only screens: $xxl 1`] = `
 Object {
   "@media (min-width: 1536px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -213,9 +213,9 @@ exports[`orientations: landscape 1`] = `
 Object {
   "@media (orientation: landscape)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -224,9 +224,9 @@ exports[`orientations: portrait 1`] = `
 Object {
   "@media (orientation: portrait)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -235,9 +235,9 @@ exports[`themes: $dark 1`] = `
 Object {
   ".dark &": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -246,9 +246,9 @@ exports[`themes: $light 1`] = `
 Object {
   ".light &": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -257,9 +257,9 @@ exports[`themes: dark 1`] = `
 Object {
   "@media (prefers-color-scheme: dark)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -268,9 +268,9 @@ exports[`themes: light 1`] = `
 Object {
   "@media (prefers-color-scheme: light)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;

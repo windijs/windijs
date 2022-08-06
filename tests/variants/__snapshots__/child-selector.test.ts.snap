@@ -4,9 +4,9 @@ exports[`all 1`] = `
 Object {
   "& *": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -15,9 +15,9 @@ exports[`children 1`] = `
 Object {
   "& > *": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -26,9 +26,9 @@ exports[`sibling 1`] = `
 Object {
   "& + *": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -37,9 +37,9 @@ exports[`siblings 1`] = `
 Object {
   "& ~ *": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -48,9 +48,9 @@ exports[`svg 1`] = `
 Object {
   "& svg": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;

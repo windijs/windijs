@@ -1,8 +1,8 @@
-import { after, backdrop, backgroundClip, backgroundClipConfig, backgroundColor, before, bundle, colors, createUtility, firstLetter, firstLine, marker, selection } from "index";
+import { after, backdrop, backgroundClipConfig, backgroundColor, before, bundle, colors, configHandler, createUtility, firstLetter, firstLine, marker, prop, selection } from "index";
 
 const bg = createUtility("bg")
   .use(backgroundColor(colors))
-  .use(backgroundClip(backgroundClipConfig))
+  .case("clip", configHandler(backgroundClipConfig, ["backgroundClip", prop`-webkit-background-clip`]))
   .init();
 
 const utilities = [bg.blue[500], bg.clip.content];

@@ -4,9 +4,9 @@ exports[`media 1`] = `
 Object {
   "@media print": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -15,9 +15,9 @@ exports[`media 2`] = `
 Object {
   "@media (min-width: 1000px) and (max-width: 2000px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -26,9 +26,9 @@ exports[`useMedia 1`] = `
 Object {
   "@media print": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -37,9 +37,9 @@ exports[`useMedia 2`] = `
 Object {
   "@media (min-width: 1000px) and (max-width: 2000px)": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -48,9 +48,9 @@ exports[`useVariant 1`] = `
 Object {
   "span": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -59,9 +59,9 @@ exports[`useVariant 2`] = `
 Object {
   "&:hover": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -70,9 +70,9 @@ exports[`variant 1`] = `
 Object {
   "span": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -81,9 +81,9 @@ exports[`variant 2`] = `
 Object {
   "&:hover": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(34, 197, 94, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;

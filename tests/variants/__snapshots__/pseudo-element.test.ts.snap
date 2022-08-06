@@ -4,9 +4,9 @@ exports[`after 1`] = `
 Object {
   "&::after": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -15,9 +15,9 @@ exports[`backdrop 1`] = `
 Object {
   "&::backdrop": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -26,9 +26,9 @@ exports[`before 1`] = `
 Object {
   "&::before": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -37,9 +37,9 @@ exports[`firstLetter 1`] = `
 Object {
   "&::first-letter": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -48,9 +48,9 @@ exports[`firstLine 1`] = `
 Object {
   "&::first-line": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -59,9 +59,9 @@ exports[`marker 1`] = `
 Object {
   "& *::marker, &::marker": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
@@ -70,9 +70,9 @@ exports[`selection 1`] = `
 Object {
   "& *::selection, &::selection": Object {
     "--w-bg-opacity": "1",
+    "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
     "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-    "webkitBackgroundClip": "content-box",
   },
 }
 `;
