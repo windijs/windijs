@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container 1`] = `
+Map {
+  "width" => "100%",
+  "@media (min-width: 640px)" => Object {
+    "maxWidth": "640px",
+  },
+  "@media (min-width: 768px)" => Object {
+    "maxWidth": "768px",
+  },
+  "@media (min-width: 1024px)" => Object {
+    "maxWidth": "1024px",
+  },
+  "@media (min-width: 1280px)" => Object {
+    "maxWidth": "1280px",
+  },
+  "@media (min-width: 1536px)" => Object {
+    "maxWidth": "1536px",
+  },
+}
+`;
+
+exports[`Container center 1`] = `
+Map {
+  "width" => "100%",
+  "marginLeft" => "auto",
+  "marginRight" => "auto",
+  "@media (min-width: 640px)" => Object {
+    "maxWidth": "640px",
+  },
+  "@media (min-width: 768px)" => Object {
+    "maxWidth": "768px",
+  },
+  "@media (min-width: 1024px)" => Object {
+    "maxWidth": "1024px",
+  },
+  "@media (min-width: 1280px)" => Object {
+    "maxWidth": "1280px",
+  },
+  "@media (min-width: 1536px)" => Object {
+    "maxWidth": "1536px",
+  },
+}
+`;
+
+exports[`Container compile 1`] = `
+".container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}"
+`;
+
+exports[`Container padding 1`] = `
+Map {
+  "width" => "100%",
+  "padding" => "1rem",
+  "@media (min-width: 640px)" => Object {
+    "maxWidth": "640px",
+    "padding": "2rem",
+  },
+  "@media (min-width: 768px)" => Object {
+    "maxWidth": "768px",
+  },
+  "@media (min-width: 1024px)" => Object {
+    "margin": "2rem",
+    "maxWidth": "1024px",
+    "padding": "4rem",
+  },
+  "@media (min-width: 1280px)" => Object {
+    "maxWidth": "1280px",
+  },
+  "@media (min-width: 1536px)" => Object {
+    "maxWidth": "1536px",
+  },
+}
+`;
