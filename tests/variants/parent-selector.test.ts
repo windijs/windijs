@@ -1,7 +1,7 @@
-import { backgroundClipConfig, backgroundColor, bundle, colors, configHandler, createUtility, groupActive, groupFocus, groupHover, groupVisited, prop } from "index";
+import { backgroundClipConfig, bundle, colorHandler, colors, configHandler, createUtility, groupActive, groupFocus, groupHover, groupVisited, prop } from "index";
 
 const bg = createUtility("bg")
-  .use(backgroundColor(colors))
+  .use(colorHandler(colors, "backgroundColor", "--w-bg-opacity"))
   .case("clip", configHandler(backgroundClipConfig, ["backgroundClip", prop`-webkit-background-clip`]))
   .init();
 

@@ -1,4 +1,4 @@
-import { createContainer } from "utilities/container";
+import { buildContainer } from "utilities";
 import { unify } from "helpers";
 
 const screens = {
@@ -10,17 +10,17 @@ const screens = {
 };
 
 test("Container", () => {
-  const container = createContainer(screens);
+  const container = buildContainer(screens);
   expect(container.css).toMatchSnapshot();
 });
 
 test("Container center", () => {
-  const container = createContainer(screens, true);
+  const container = buildContainer(screens, true);
   expect(container.css).toMatchSnapshot();
 });
 
 test("Container padding", () => {
-  const container = createContainer({
+  const container = buildContainer({
     DEFAULT: ["", { padding: "1rem" }],
     sm: ["640px", { padding: "2rem" }],
     md: "768px",
@@ -32,6 +32,6 @@ test("Container padding", () => {
 });
 
 test("Container compile", () => {
-  const container = createContainer(screens);
+  const container = buildContainer(screens);
   expect(unify(".container", container)).toMatchSnapshot();
 });

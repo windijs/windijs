@@ -1,42 +1,21 @@
-import { CSSObject, StyleObject, backgroundGeneric, borderStyleConfig, borderWidthConfig, colors, createUtility, use } from "index";
-import { colorHandler, configHandler, guard, meld, useGenericHandler } from "utilities/handler";
+import { backgroundGenericHandler, borderStyleConfig, borderWidthConfig, colors, createUtility, use } from "index";
+import { colorHandler, configHandler, genericHandler, guard, meld } from "utilities";
 
 import { isNumber } from "utils";
 
 test("useGeneric With Trigger", () => {
-  const backgroundGeneric = useGenericHandler<"trigger", { [key: string]: StyleObject }>("trigger", prop => {
-    const build = (value: string) => ({
-      backgroundColor: value,
-    } as CSSObject);
+  const backgroundGeneric = genericHandler("backgroundColor", prop => {
     if (isNumber(prop)) {
-      return build("#" + (+prop).toString(16));
+      return "#" + (+prop).toString(16);
     }
-    return build(prop);
+    return prop;
   });
 
   const bg = createUtility("bg")
-    .use(backgroundGeneric())
+    .case("trigger", backgroundGeneric)
     .init();
 
   expect(bg.trigger["rgb(22, 22, 22)"].css).toMatchSnapshot();
-});
-
-test("useGeneric With Trigger2", () => {
-  const backgroundGeneric = useGenericHandler<{ [key: string]: StyleObject }>(prop => {
-    const build = (value: string) => ({
-      backgroundColor: value,
-    } as CSSObject);
-    if (isNumber(prop)) {
-      return build("#" + (+prop).toString(16));
-    }
-    return build(prop);
-  });
-
-  const bg = createUtility("bg")
-    .use(guard("test", guard("trigger", backgroundGeneric())))
-    .init();
-
-  expect(bg.test.trigger["rgb(22, 22, 22)"].css).toMatchSnapshot();
 });
 
 test("guard with meld", () => {
@@ -62,7 +41,7 @@ test("two guard with same name should not work", () => {
 });
 
 test("use single plugin", () => {
-  const bg = use("bg", backgroundGeneric());
+  const bg = use("bg", backgroundGenericHandler());
 
   expect(bg["rgb(22, 22, 22)"].css).toMatchSnapshot();
   expect(bg.red.css).toMatchSnapshot();

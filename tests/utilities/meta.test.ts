@@ -1,9 +1,9 @@
-import { backgroundColor, backgroundGeneric, borderWidthConfig, colors, createUtility, opacityConfig, prop } from "index";
-import { colorHandler, configHandler, guard, meld } from "utilities/handler";
+import { backgroundGenericHandler, borderWidthConfig, colors, createUtility, opacityConfig, prop } from "index";
+import { colorHandler, configHandler, guard, meld } from "utilities";
 
 test("Color Meta", () => {
   const bg = createUtility("bg")
-    .use(backgroundColor(colors))
+    .use(colorHandler(colors, "backgroundColor", "-w-bg-opacity"))
     .init();
   expect(bg.current.meta.uid).toEqual("bg");
   expect(bg.blue[700].meta.uid).toEqual("bg");
@@ -31,7 +31,7 @@ test("Static Meta", () => {
 
 test("Generic Meta", () => {
   const bg = createUtility("bg")
-    .use(backgroundGeneric())
+    .use(backgroundGenericHandler())
     .init();
 
   expect(bg[0x1c1c1e].meta.props).toEqual([0x1c1c1e.toString()]);
