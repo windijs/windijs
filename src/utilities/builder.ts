@@ -73,3 +73,23 @@ export function buildFlexStretch (v: unknown) {
     flex: v,
   });
 }
+
+export function buildSpaceBetweenY (v: unknown) {
+  return css({
+    "& > :not([hidden]) ~ :not([hidden])": {
+      "--w-space-y-reverse": "0",
+      marginBottom: `calc(${v} * var(--w-space-y-reverse))`,
+      marginTop: `calc(${v} * calc(1 - var(--w-space-y-reverse)))`,
+    },
+  });
+}
+
+export function buildSpaceBetweenX (v: unknown) {
+  return css({
+    "& > :not([hidden]) ~ :not([hidden])": {
+      "--w-space-x-reverse": "0",
+      marginRight: `calc(${v} * var(--w-space-x-reverse))`,
+      marginLeft: `calc(${v} * calc(1 - var(--w-space-x-reverse)))`,
+    },
+  });
+}
