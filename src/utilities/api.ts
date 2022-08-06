@@ -1,194 +1,89 @@
-import {
-  CSSEntry,
+import type {
   CSSObject,
-  DefaultedStyleProxyHandler,
+  ColorOpacityProxy,
   Handler,
-  KeyedDefaultedStyleProxyHandler,
-  KeyedStyleProxyHandler,
   MetaType,
-  NestedProxy,
   StyleObject,
   StyleProperties,
   StyleProxy,
   StyleProxyHandler,
   UtilityMeta,
-} from "../types";
-import { SymbolCSS, SymbolMeta } from "../helpers/symbol";
+} from "types";
+import { SymbolCSS, SymbolMeta, isStyleObject } from "helpers/common";
 import { buildColor, buildStatic } from "./builder";
-import { getMeta, pushMetaProp, updateMetaType } from "../helpers/meta";
-import { isProxy, useProxy } from "../helpers/proxy";
+import { getMeta, pushMetaProp, updateMetaType } from "helpers/meta";
 
-import { css } from "../helpers/css";
-import { hasKey } from "../utils";
+import { css } from "helpers/css";
+import { useProxy } from "helpers/proxy";
 
 type BuildFunc = (value: unknown) => StyleObject | undefined;
 
-function process<T extends object> (build: BuildFunc, statics: T, type: MetaType, p: string, handleDefault = false): StyleObject | UtilityMeta | undefined {
+export function handleConfig<T extends object> (build: BuildFunc, statics: T, type: MetaType, p: string): StyleObject | UtilityMeta | undefined {
   updateMetaType(type);
 
-  if (handleDefault) {
-    if (p === "meta" || p as unknown as Symbol === SymbolMeta) return getMeta();
-    // @ts-ignore, generate default css
-    if ((p === "css" || p === SymbolCSS) && "DEFAULT" in statics) return build(statics.DEFAULT).css;
-    // if (p === "toString") return
-    // TODO: fix toString
-  }
-  if (hasKey(statics, p)) {
-    const value = pushMetaProp(p) && statics[p];
-    return (typeof value === "object" && !Array.isArray(value))
-      ? useProxy(p2 => process(build, value as any, type, p2, handleDefault)) as StyleObject
-      : build(value);
-  }
-};
-
-/* Static Handler */
-
-export function createStaticHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[]): StyleProxyHandler<T>;
-export function createStaticHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[], trigger: undefined): StyleProxyHandler<T>;
-export function createStaticHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[], trigger: undefined, handleDefault: false): StyleProxyHandler<T>;
-export function createStaticHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[], trigger: undefined, handleDefault: true): DefaultedStyleProxyHandler<T>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], trigger: K): KeyedStyleProxyHandler<T, K>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], trigger: K, handleDefault: false): KeyedStyleProxyHandler<T, K>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, property: StyleProperties | StyleProperties[], trigger: K, handleDefault: true): KeyedDefaultedStyleProxyHandler<T, K>;
-export function createStaticHandler<T extends object> (statics: T, build: BuildFunc): StyleProxyHandler<T>;
-export function createStaticHandler<T extends object> (statics: T, build: BuildFunc, trigger: undefined): StyleProxyHandler<T>;
-export function createStaticHandler<T extends object> (statics: T, build: BuildFunc, trigger: undefined, handleDefault: false): StyleProxyHandler<T>;
-export function createStaticHandler<T extends object> (statics: T, build: BuildFunc, trigger: undefined, handleDefault: true): DefaultedStyleProxyHandler<T>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, build: BuildFunc, trigger: K): KeyedStyleProxyHandler<T, K>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, build: BuildFunc, trigger: K, handleDefault: false): KeyedStyleProxyHandler<T, K>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, build: BuildFunc, trigger: K, handleDefault: true): KeyedDefaultedStyleProxyHandler<T, K>;
-export function createStaticHandler<T extends object, K extends string> (statics: T, propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc, trigger: K | undefined = undefined, handleDefault = false) {
-  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
-  if (trigger == null) return (p => process(build, statics, "static", p, handleDefault)) as StyleProxyHandler<T>;
-
-  return (p1 => {
-    if (p1 === trigger) {
-      pushMetaProp(p1);
-      return useProxy(p2 => process(build, statics, "static", p2, handleDefault));
-    };
-  }) as KeyedStyleProxyHandler<T, K>;
-};
-
-// /* CSS Handler */
-// export function createCSSHandler (key: string, css: CSSObject) {
-
-// }
-
-/* Color Handler  */
-
-type ColorOpacityProxy<T> = NestedProxy<T, StyleObject<{
-  opacity: (op: number) => StyleObject
-}>>;
-
-type ColorOpacityProxyHandler<T> = Handler<ColorOpacityProxy<T>>;
-
-export type ColorHandler =
-  (<T extends object> (colors: T, withOpacity?: boolean, opacityName?: string) => ColorOpacityProxyHandler<T>) &
-  (<T extends object> (colors: T, withOpacity: true | undefined, opacityName?: string) => ColorOpacityProxyHandler<T>) &
-  (<T extends object> (colors: T, withOpacity: false, opacityName?: string) => StyleProxyHandler<T>);
-
-// TODO: support handle Color with DEFAULT and key
-
-export function createColorHandler<T extends object> (colors: T, colorProperty: StyleProperties, colorOpacityProperty?: string): StyleProxyHandler<T>;
-export function createColorHandler<T extends object> (colors: T, colorProperty: StyleProperties, colorOpacityProperty: string): ColorOpacityProxyHandler<T>;
-export function createColorHandler<T extends object> (colors: T, colorPropertyOrBuildFunc: StyleProperties | BuildFunc, colorOpacityProperty?: string) {
-  const build: BuildFunc = typeof colorPropertyOrBuildFunc === "function" ? colorPropertyOrBuildFunc : value => buildColor(colorPropertyOrBuildFunc, colorOpacityProperty, value);
-  return (p: string) => process(build, colors, "color", p, false) as StyleProxy<T> | ColorOpacityProxy<T> | undefined;
-}
-
-type handleColor = <T extends object>(handle: typeof createColorHandler, colors: T, withOpacity?: boolean, opacityName?: string) => StyleProxyHandler<T>;
-
-export function useColorHandler (f: handleColor) {
-  return ((colors, withOpacity, opacityName) => f(createColorHandler, colors, withOpacity, opacityName)) as ColorHandler;
-}
-
-type StaticHandler = <T extends object> (statics: T, k?: undefined) => DefaultedStyleProxyHandler<T>;
-type StaticHandlerWithKey<DEFAULT_KEY extends string> = <T extends object, K extends string = DEFAULT_KEY>(statics: T, key?: K) => KeyedDefaultedStyleProxyHandler<T, K>;
-
-type handleStatic = <T extends object> (handle: typeof createStaticHandler, statics: T) => StyleProxyHandler<T>;
-type handleStaticWithDefault = <T extends object> (handle: typeof createStaticHandler, statics: T) => DefaultedStyleProxyHandler<T>;
-type handleStaticWithKey = <T extends object, K extends string> (handle: typeof createStaticHandler, statics: T, key: K) => KeyedStyleProxyHandler<T, K>;
-type handleStaticWithKeyDefault = <T extends object, K extends string> (handle: typeof createStaticHandler, statics: T, key: K) => KeyedDefaultedStyleProxyHandler<T, K>;
-
-/**
- * Shortcut for using createStaticHandler, for example
- * ```ts
- * export const backgroundAttachment = useStaticHandler((handle, attachments) =>
- *   handle(attachments, "backgroundAttachment"),
- * );
- * ```
- * Equal to
- * ```ts
- * export function backgroundAttachment<T extends object> (attachments: T) {
- *   return createStaticHandler(attachments, "backgroundAttachment");
- * }
- * ```
- *
- * @param k
- * @param f
- */
-export function useStaticHandler <K extends string> (k: K, f: handleStaticWithKeyDefault): StaticHandlerWithKey<K>;
-export function useStaticHandler <K extends string> (k: K, f: handleStaticWithKey): StaticHandlerWithKey<K>;
-export function useStaticHandler (f: handleStaticWithDefault): StaticHandler;
-export function useStaticHandler (f: handleStatic): StaticHandler;
-export function useStaticHandler (tOrF: string | Function, f2?: Function) {
-  if (typeof tOrF === "string") return <T> (statics: T, trigger?: string) => f2!(createStaticHandler, statics, trigger ?? tOrF);
-  return <T> (statics: T) => tOrF(createStaticHandler, statics);
-}
-
-export function fixMeta<T extends object> (t: T, props: string[] = []): true {
-  for (const [k, v] of Object.entries(t)) {
-    if (v == null || Array.isArray(v) || typeof v !== "object") continue;
-    if (SymbolCSS in v) (v as StyleObject)[SymbolMeta].props = [...props, k];
-    fixMeta(v, [...props, k]);
-  }
-  return true;
-}
-
-// export function fixUid<T extends object> (t: T, uid: string): T {
-//   if (SymbolMeta in t) (t as StyleObject)[SymbolMeta].uid = uid;
-//   for (const v of Object.values(t)) {
-//     if (v == null || Array.isArray(v) || typeof v !== "object") continue;
-//     if (SymbolCSS in v) (v as StyleObject)[SymbolMeta].uid = uid;
-//     fixUid(v, uid);
-//   }
-//   return t;
-// }
-
-export function createCSSHandler <T extends object> (t: T): StyleProxyHandler<T> {
-  return fixMeta(t) && (prop => {
-    if (hasKey(t, prop)) {
-      pushMetaProp(prop);
-      return t[prop];
-      // if (typeof v === "object") return fixUid(v as unknown as object);
-    }
-  }) as StyleProxyHandler<T>;
-}
-
-export function useCSSHandler<T extends object> (f: (css: CSSEntry) => T) {
-  return () => createCSSHandler(f(decl => css(decl)));
-}
-
-type ProxyType = (f: (prop: string) => CSSObject | undefined) => CSSObject;
-type handleDynamic = ((prop: string, proxy: ProxyType) => CSSObject | undefined);
-type DynamicHandler<R> = () => Handler<R>;
-
-export function useGenericHandler <K extends string, R> (k: K, f: handleDynamic): DynamicHandler<Record<K, R>>;
-export function useGenericHandler <R> (f: handleDynamic): DynamicHandler<R>;
-export function useGenericHandler <K extends string, R> (tOrF: K | handleDynamic, f2?: handleDynamic): DynamicHandler<R> | DynamicHandler<Record<K, R>> {
-  if (typeof tOrF === "string") {
-    return () => ((p1: string) => {
-      if (p1 === tOrF) {
-        pushMetaProp(p1) && updateMetaType("generic");
-        return useProxy(p2 => css(f2!(p2, () => ({}))!)) as StyleObject;
+  // handle DEFAULT
+  if (p === "meta" || p as unknown as Symbol === SymbolMeta) return getMeta();
+  // @ts-ignore, generate default css
+  if ((p === "css" || p === SymbolCSS) && "DEFAULT" in statics) return build(statics.DEFAULT).css;
+  // if (p === "toString") return
+  // TODO: fix toString
+  const value = (statics as Record<string, unknown>)[p];
+  if (value != null) {
+    pushMetaProp(p);
+    // const value = pushMetaProp(p) && statics[p];
+    if (typeof value === "object" && !Array.isArray(value)) {
+      if (SymbolCSS in value) {
+        (value as StyleObject)[SymbolMeta] = getMeta();
+        return value as StyleObject;
       }
-    }) as unknown as Handler<Record<K, R>>;
+      return useProxy(p2 => handleConfig(build, value as any, type, p2)) as StyleObject;
+    }
+    return build(value);
   }
+};
 
-  return () => (p1: string) => {
-    pushMetaProp(p1) && updateMetaType("generic");
-    const r = tOrF(p1, f => useProxy(p2 => css(f(p2)!)));
-    return (isProxy(r) ? r : css(r!)) as unknown as R;
+export function configHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[]): StyleProxyHandler<T>;
+export function configHandler<T extends object> (statics: T, build: BuildFunc): StyleProxyHandler<T>;
+export function configHandler<T extends object> (statics: T, propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) {
+  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
+  return (p => handleConfig(build, statics, "static", p)) as StyleProxyHandler<T>;
+};
+
+export function colorHandler<T extends object> (colors: T, colorProperty: StyleProperties): StyleProxyHandler<T>;
+export function colorHandler<T extends object> (colors: T, colorProperty: StyleProperties, colorOpacityProperty: string): Handler<ColorOpacityProxy<T>>;
+export function colorHandler<T extends object> (colors: T, colorPropertyOrBuildFunc: StyleProperties | BuildFunc, colorOpacityProperty?: string) {
+  const build: BuildFunc = typeof colorPropertyOrBuildFunc === "function" ? colorPropertyOrBuildFunc : value => buildColor(colorPropertyOrBuildFunc, colorOpacityProperty, value);
+  return (p: string) => handleConfig(build, colors, "color", p) as StyleProxy<T> | ColorOpacityProxy<T> | undefined;
+}
+
+export function cssHandler (cssOrStyle: StyleObject | CSSObject) {
+  return (p => {
+    cssOrStyle = isStyleObject(cssOrStyle) ? cssOrStyle : css(cssOrStyle);
+    cssOrStyle[SymbolMeta].props = []; // remove meta prop
+    return Reflect.get(cssOrStyle, p);
+  }) as Handler<StyleObject>;
+}
+
+type handleDynamic = ((prop: string) => CSSObject | StyleObject | undefined);
+type handleDynamicWithValue = ((prop: string) => string | undefined);
+
+export function genericHandler <R = { [key: string]: StyleObject }> (property: StyleProperties | StyleProperties[], handler: handleDynamicWithValue): Handler<R>
+export function genericHandler <R = { [key: string]: StyleObject }> (builder: BuildFunc, handler: handleDynamicWithValue): Handler<R>
+export function genericHandler <R = { [key: string]: StyleObject }> (handler: handleDynamic): Handler<R>
+export function genericHandler <R = { [key: string]: StyleObject }> (a: StyleProperties | StyleProperties[] | Function, b?: handleDynamicWithValue): Handler<R> {
+  return (p: string) => {
+    pushMetaProp(p) && updateMetaType("generic");
+    if (typeof b === "function") {
+      const v = b(p);
+      if (v == null) return;
+      if (typeof a === "function") return a(v);
+      if (Array.isArray(a)) return css(Object.fromEntries(a.map(i => [i, v as string])));
+      return css({ [a]: v });
+    }
+    if (typeof a === "function") {
+      const r = a(p);
+      return (isStyleObject(r) ? r : css(r)) as unknown as R;
+    }
   };
 }
 

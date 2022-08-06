@@ -69,18 +69,11 @@ export type StyleObject<T = {}> = StyleObjectBase & {
   readonly meta: UtilityMeta;
 } & T;
 
-export type CSSEntry = (css: CSSObject | CSSMap) => {
-  readonly css: CSSObject | CSSMap;
-  readonly meta: UtilityMeta;
-};
-
-export type SafeEntry<T extends {DEFAULT?: unknown}> = T["DEFAULT"] extends undefined | null | never ? Omit<T, "DEFAULT"> : Omit<T, "DEFAULT"> & T["DEFAULT"];
+export type SafeEntry<T extends {DEFAULT?: unknown}> = T["DEFAULT"] extends undefined | null | never ? Omit<T, "DEFAULT"> : (Omit<T, "DEFAULT"> & T["DEFAULT"]);
 
 export type StyleEntry<T> = SafeEntry<{ [key in keyof T]: StyleObject }>
 
 export type Handler<R> = (prop: string) => R;
-
-export type StyleHandler<T> = Handler<StyleEntry<T> | undefined>;
 
 export type UnknownDict = { [key: string]: unknown };
 
@@ -89,12 +82,6 @@ export type TargetCreator = (css: CSSObject | CSSMap, meta: UtilityMeta, data?: 
 export type StyleLoader = (css: CSSObject | CSSMap, meta: UtilityMeta, data?: UnknownDict) => StyleObject;
 
 export type StyleNamer = (style: StyleObject) => string;
-
-// export type DefaultedStyleHandler<T> = Handler<StyleEntry<T> & { css: CSSObject } | undefined>;
-
-// export type KeyedStyleHandler<T, K extends string> = Handler<Record<K, StyleEntry<T>>>;
-
-// export type KeyedDefaultedStyleHandler<T, K extends string> = Handler<Record<K, StyleEntry<T> & { css: CSSObject }>>;
 
 export type VariantBuilder = (...utilities: (StyleObject | StyleObject[])[]) => StyleObject[];
 
@@ -106,12 +93,10 @@ export type NestedProxy<T, O> = SafeEntry<{
 
 export type StyleProxy<T, O = {}> = NestedProxy<T, StyleObject<O>>;
 
-export type StyleProxyHandler<T> = Handler<StyleProxy<T> | undefined>
+export type StyleProxyHandler<T> = Handler<StyleProxy<T>>
 
-export type DefaultedStyleProxyHandler<T> = Handler<StyleProxy<T> & StyleObject>;
-
-export type KeyedStyleProxyHandler<T, K extends string> = Handler<Record<K, StyleProxy<T>>>;
-
-export type KeyedDefaultedStyleProxyHandler<T, K extends string> = Handler<Record<K, StyleProxy<T> & StyleObject>>;
+export type ColorOpacityProxy<T> = NestedProxy<T, StyleObject<{
+  opacity: (op: number) => StyleObject
+}>>;
 
 export type PickValue<T, ValueType> = Pick<T, { [key in keyof T]-?: T[key] extends ValueType ? key : never }[keyof T]>;

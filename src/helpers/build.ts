@@ -1,4 +1,4 @@
-import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSObject, CSSRule, CSSRules, StyleObject } from "types";
+import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSMap, CSSObject, CSSRule, CSSRules, StyleObject } from "types";
 import { applyVariant, bundle, isStyleObject } from "./common";
 import { camelToDash, indent } from "utils";
 
@@ -44,7 +44,7 @@ function cssBlock (selector: string, body: CSSBlockBody = [], rootIndent = 0, ch
   ].join("\n");
 }
 
-export function createRules (css: CSSObject, selector: string) {
+export function createRules (css: CSSObject | CSSMap, selector: string) {
   const rules: CSSRules = [];
 
   let atRule: CSSAtRule | undefined;

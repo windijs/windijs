@@ -1,4 +1,4 @@
-import type { CSSObject, StyleObject, StyleProperties } from "types";
+import type { CSSMap, CSSObject, StyleObject, StyleProperties } from "types";
 import { calcRgba, parenWrap, sliceColor } from "utils";
 
 import { css } from "helpers/css";
@@ -43,6 +43,24 @@ export function buildColor (colorProperty: StyleProperties, colorOpacityProperty
     }) as StyleObject<{ opacity(op: number): StyleObject }>;
   }
   return css(decl);
+}
+
+export function buildContainer<T extends Record<string, string | [string, CSSObject]>> (screens: T, center = false) {
+  const m: CSSMap = new Map();
+  m.set("width", "100%");
+  if (center) m.set("marginLeft", "auto") && m.set("marginRight", "auto");
+
+  for (const [k, v] of Object.entries(screens)) {
+    if (k === "DEFAULT") {
+      if (Array.isArray(v)) Object.entries(v[1]).forEach(([k, v]) => m.set(k, v));
+    } else if (typeof v === "string") {
+      m.set(`@media (min-width: ${v})`, { maxWidth: v });
+    } else {
+      m.set(`@media (min-width: ${v[0]})`, { maxWidth: v[0], ...v[1] });
+    }
+  }
+
+  return css(m);
 }
 
 export function buildFontSize (fontSize: string, lineHeight?: string, others?: { [key in StyleProperties]: string }): StyleObject {

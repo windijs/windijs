@@ -1,137 +1,53 @@
-// TODO: support more complex plugin api, like allow both get and set
+import { SymbolProxy } from "helpers/common";
+import { firstRet } from "utils";
+import { guard } from "./api";
+import { resetMeta } from "helpers/meta";
 
-import { firstRet } from "../utils";
-import { resetMeta } from "../helpers/meta";
-
-interface UtilityPlugin {
-  get: (p: string) => any;
-  apply?: (thisArg: any, argArray: any[]) => any;
-  construct?: (argArray: any[], newTarget: Function) => object;
-  defineProperty?: (p: string, attributes: PropertyDescriptor) => boolean;
-  deleteProperty?: (p: string) => boolean;
-  getOwnPropertyDescriptor?: (p: string) => PropertyDescriptor | undefined;
-  getPrototypeOf?: () => object | null;
-  has?: (p: string) => boolean;
-  isExtensible?: () => boolean;
-  ownKeys?: () => ArrayLike<string>;
-  preventExtensions?: () => boolean;
-  set?: (p: string, value: any) => boolean;
-  setPrototypeOf?: (v: object | null) => boolean;
-}
-
-export class Utility<T = {}> implements Required<ProxyHandler<Function>> {
-  private plugins: {
-    get: ((p: string) => any)[];
-    apply: ((thisArg: any, argArray: any[]) => any)[];
-    construct: ((argArray: any[], newTarget: Function) => object)[];
-    defineProperty: ((p: string, attributes: PropertyDescriptor) => boolean)[];
-    deleteProperty: ((p: string) => boolean)[];
-    getOwnPropertyDescriptor: ((p: string) => PropertyDescriptor | undefined)[];
-    getPrototypeOf: (() => object | null)[];
-    has: ((p: string) => boolean)[];
-    isExtensible: (() => boolean)[];
-    ownKeys: (() => ArrayLike<string>)[];
-    preventExtensions: (() => boolean)[];
-    set: ((p: string, value: any) => boolean)[];
-    setPrototypeOf: ((v: object | null) => boolean)[];
-  };
+export class Utility<T = {}> implements ProxyHandler<Function> {
+  private plugins: ((p: string) => any)[];
 
   readonly uid: string;
 
   constructor (uid: string) {
     this.uid = uid;
-    this.plugins = {
-      get: [],
-      apply: [],
-      construct: [],
-      defineProperty: [],
-      deleteProperty: [],
-      getOwnPropertyDescriptor: [],
-      getPrototypeOf: [],
-      has: [],
-      isExtensible: [],
-      ownKeys: [],
-      preventExtensions: [],
-      set: [],
-      setPrototypeOf: [],
-    };
+    this.plugins = [];
   }
 
   get (target: Function, p: string): any {
-    return firstRet(this.plugins.get, [p]);
+    return firstRet(this.plugins, [p]);
   }
 
-  apply (target: Function, thisArg: any, argArray: any[]) {
-    return firstRet(this.plugins.apply, argArray);
+  public case<K extends string, U> (trigger: K, plugin: (prop: string) => U): Utility<T & Record<K, U>> {
+    this.plugins.push(guard(trigger, plugin));
+    return this as unknown as Utility<T & Record<K, U>>;
   }
 
-  construct (target: Function, argArray: any[], newTarget: Function): object {
-    return firstRet(this.plugins.construct, argArray);
-  }
-
-  defineProperty (target: Function, p: string, attributes: PropertyDescriptor): boolean {
-    return firstRet(this.plugins.defineProperty, [p, attributes]);
-  }
-
-  deleteProperty (target: Function, p: string): boolean {
-    return firstRet(this.plugins.deleteProperty, [p]);
-  }
-
-  getOwnPropertyDescriptor (target: Function, p: string): PropertyDescriptor | undefined {
-    return firstRet(this.plugins.getOwnPropertyDescriptor, [p]);
-  }
-
-  getPrototypeOf (): object | null {
-    return firstRet(this.plugins.getPrototypeOf);
-  }
-
-  has (target: Function, p: string): boolean {
-    return firstRet(this.plugins.has, [p]);
-  }
-
-  isExtensible (): boolean {
-    return firstRet(this.plugins.isExtensible);
-  }
-
-  ownKeys (): Array<string> {
-    return [];
-  }
-
-  preventExtensions (): boolean {
-    return firstRet(this.plugins.preventExtensions);
-  }
-
-  set (target: Function, p: string, value: any, receiver: any): boolean {
-    return firstRet(this.plugins.set, [p, value]);
-  }
-
-  setPrototypeOf (target: Function, v: object | null): boolean {
-    return firstRet(this.plugins.setPrototypeOf, [v]);
-  }
-
-  public use<U> (plugin: ((prop: string) => U) | { get: (prop: string) => U }): Utility<T & U> {
-    if (typeof plugin === "function") {
-      this.plugins.get.push(plugin);
-    } else {
-      this.plugins.get.push(plugin.get);
-    }
+  public use<U> (plugin: (prop: string) => U): Utility<T & U> {
+    this.plugins.push(plugin);
     return this as unknown as Utility<T & U>;
   }
 
   public init (): T {
     const uid = this.uid;
-    const plugins = this.plugins.get;
-    const handler: ProxyHandler<{}> = {
-      get (target, prop: string) {
-        let result;
+    const plugins = this.plugins;
+    const target = function () {};
+    Reflect.defineProperty(target, SymbolProxy, { value: true });
+
+    const handler: ProxyHandler<Function> = {
+      get (target, prop) {
+        if (Reflect.has(target, prop)) return Reflect.get(target, prop);
         resetMeta(uid);
+        let result;
         for (const plugin of plugins) {
-          result = plugin(prop);
+          result = plugin(prop as string);
           if (result) return result;
         }
       },
+      set (target, p, value) {
+        return Reflect.defineProperty(target, p, { value, writable: true });
+      },
     };
-    return new Proxy(function () {}, handler) as unknown as T;
+    return new Proxy(target, handler) as unknown as T;
   }
 }
 
