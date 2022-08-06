@@ -69,72 +69,112 @@ Object {
 
 exports[`Font Style and Font Smoothing 1`] = `
 Object {
-  "fontStyle": "normal",
+  "fontStyle": "italic",
 }
 `;
 
 exports[`Font Style and Font Smoothing 2`] = `
 Object {
-  "fontStyle": "italic",
+  "fontStyle": "normal",
 }
 `;
 
 exports[`Font Style and Font Smoothing 3`] = `
-Object {
-  "-moz-osx-font-smoothing": "auto",
-  "-webkit-font-smoothing": "auto",
-}
-`;
-
-exports[`Font Style and Font Smoothing 4`] = `
 Object {
   "-moz-osx-font-smoothing": "grayscale",
   "-webkit-font-smoothing": "antialiased",
 }
 `;
 
-exports[`Font Style and Font Smoothing 5`] = `
+exports[`Font Style and Font Smoothing 4`] = `
 Object {
-  "props": Array [
-    "italic",
-  ],
-  "type": "css",
-  "uid": "font",
-  "variants": Array [],
+  "-moz-osx-font-smoothing": "auto",
+  "-webkit-font-smoothing": "auto",
 }
 `;
 
-exports[`Font Style and Font Smoothing 6`] = `
+exports[`Font Weight 1`] = `
 Object {
-  "props": Array [
-    "italic",
-    "not",
-  ],
-  "type": "css",
-  "uid": "font",
-  "variants": Array [],
+  "fontWeight": "700",
 }
 `;
 
-exports[`Font Style and Font Smoothing 7`] = `
+exports[`Font Weight 2`] = `
 Object {
-  "props": Array [
-    "antialiased",
-  ],
-  "type": "css",
-  "uid": "font",
-  "variants": Array [],
+  "fontWeight": "500",
 }
 `;
 
-exports[`Font Style and Font Smoothing 8`] = `
+exports[`Hyphens 1`] = `
 Object {
-  "props": Array [
-    "antialiased",
-    "auto",
-  ],
-  "type": "css",
-  "uid": "font",
-  "variants": Array [],
+  "-ms-hyphens": "manual",
+  "-webkit-hyphens": "manual",
+  "hyphens": "manual",
+}
+`;
+
+exports[`Hyphens 2`] = `
+Object {
+  "-ms-hyphens": "auto",
+  "-webkit-hyphens": "auto",
+  "hyphens": "auto",
+}
+`;
+
+exports[`Letter Spacing 1`] = `
+Object {
+  "letterSpacing": "-0.025em",
+}
+`;
+
+exports[`Letter Spacing 2`] = `
+Object {
+  "letterSpacing": "0.05em",
+}
+`;
+
+exports[`Line Height 1`] = `
+Object {
+  "lineHeight": "1rem",
+}
+`;
+
+exports[`Line Height 2`] = `
+Object {
+  "lineHeight": "1.5",
+}
+`;
+
+exports[`Line Height 3`] = `
+Object {
+  "lineHeight": "1.625",
+}
+`;
+
+exports[`Tab Size 1`] = `
+Object {
+  "-moz-tab-size": "4",
+  "-o-tab-size": "4",
+  "tabSize": "4",
+}
+`;
+
+exports[`Tab Size 2`] = `
+Object {
+  "-moz-tab-size": "2",
+  "-o-tab-size": "2",
+  "tabSize": "2",
+}
+`;
+
+exports[`Text Alignment 1`] = `
+Object {
+  "textAlign": "left",
+}
+`;
+
+exports[`Text Alignment 2`] = `
+Object {
+  "textAlign": "justify",
 }
 `;
