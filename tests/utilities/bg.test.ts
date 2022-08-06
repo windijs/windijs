@@ -1,4 +1,6 @@
-import { backgroundAttachment, backgroundAttachmentConfig, backgroundClip, backgroundClipConfig, backgroundColor, backgroundGeneric, colors, createUtility } from "index";
+import { backgroundAttachment, backgroundAttachmentConfig, backgroundClip, backgroundClipConfig, backgroundColor, backgroundGeneric, colors, configHandler, createUtility } from "index";
+
+import { prop } from "helpers";
 
 test("Background Color", () => {
   const bg = createUtility("bg")
@@ -117,7 +119,7 @@ test("Background Attachment", () => {
 
 test("Background Clip", () => {
   const bg = createUtility("bg")
-    .use(backgroundClip(backgroundClipConfig))
+    .case("clip", configHandler(backgroundClipConfig, ["backgroundClip", prop`-webkit-background-clip`]))
     .init();
   expect(bg.clip.border.css).toMatchSnapshot();
   expect(bg.clip.padding.css).toMatchSnapshot();
@@ -127,7 +129,7 @@ test("Background Clip", () => {
 
 test("Background Clip With Different Key", () => {
   const bg = createUtility("bg")
-    .use(backgroundClip(backgroundClipConfig, "clipped"))
+    .case("clipped", configHandler(backgroundClipConfig, ["backgroundClip", prop`-webkit-background-clip`]))
     .init();
   expect(bg.clipped.border.css).toMatchSnapshot();
   expect(bg.clipped.padding.css).toMatchSnapshot();

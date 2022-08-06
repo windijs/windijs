@@ -20,57 +20,57 @@ Object {
 
 exports[`Background Clip 1`] = `
 Object {
+  "-webkit-background-clip": "border-box",
   "backgroundClip": "border-box",
-  "webkitBackgroundClip": "border-box",
 }
 `;
 
 exports[`Background Clip 2`] = `
 Object {
+  "-webkit-background-clip": "padding-box",
   "backgroundClip": "padding-box",
-  "webkitBackgroundClip": "padding-box",
 }
 `;
 
 exports[`Background Clip 3`] = `
 Object {
+  "-webkit-background-clip": "content-box",
   "backgroundClip": "content-box",
-  "webkitBackgroundClip": "content-box",
 }
 `;
 
 exports[`Background Clip 4`] = `
 Object {
+  "-webkit-background-clip": "text",
   "backgroundClip": "text",
-  "webkitBackgroundClip": "text",
 }
 `;
 
 exports[`Background Clip With Different Key 1`] = `
 Object {
+  "-webkit-background-clip": "border-box",
   "backgroundClip": "border-box",
-  "webkitBackgroundClip": "border-box",
 }
 `;
 
 exports[`Background Clip With Different Key 2`] = `
 Object {
+  "-webkit-background-clip": "padding-box",
   "backgroundClip": "padding-box",
-  "webkitBackgroundClip": "padding-box",
 }
 `;
 
 exports[`Background Clip With Different Key 3`] = `
 Object {
+  "-webkit-background-clip": "content-box",
   "backgroundClip": "content-box",
-  "webkitBackgroundClip": "content-box",
 }
 `;
 
 exports[`Background Clip With Different Key 4`] = `
 Object {
+  "-webkit-background-clip": "text",
   "backgroundClip": "text",
-  "webkitBackgroundClip": "text",
 }
 `;
 
