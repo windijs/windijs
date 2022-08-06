@@ -52,3 +52,24 @@ export function buildFontSize (fontSize: string, lineHeight?: string, others?: {
 
   return css(decl);
 }
+
+export function buildFlexDirection (v: unknown) {
+  if (typeof v !== "string") return undefined;
+  return css({
+    "-webkit-box-orient": v.startsWith("row") ? "horizontal" : "vertical",
+    "-webkit-box-direction": v.includes("reverse") ? "reverse" : "normal",
+    "-ms-flex-direction": v,
+    "-webkit-flex-direction": v,
+    flexDirection: v,
+  });
+}
+
+export function buildFlexStretch (v: unknown) {
+  if (typeof v !== "string") return undefined;
+  return css({
+    "-webkit-box-flex": v === "none" || v.startsWith("0") ? "0" : "1",
+    "-ms-flex": v,
+    "-webkit-flex": v,
+    flex: v,
+  });
+}
