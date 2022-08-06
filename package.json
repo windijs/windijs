@@ -16,12 +16,12 @@
     "typecheck": "tsc -p ./src --noEmit",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "test": "npx jest",
-    "build": "npx rollup -c && pnpm tsd",
+    "test": "jest",
+    "build": "rollup -c && pnpm tsd",
     "gen:style": "node -r sucrase/register -r tsconfig-paths/register ./scripts/genDataTypes.ts",
-    "test:watch": "npx jest --watch",
-    "test:update": "npx jest --updateSnapshot",
-    "coverage": "npx jest --coverage"
+    "test:watch": "jest --watch",
+    "test:update": "jest --updateSnapshot",
+    "coverage": "jest --coverage"
   },
   "author": "Raven Satir",
   "license": "MIT",
