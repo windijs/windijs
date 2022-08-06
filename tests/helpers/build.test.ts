@@ -1,7 +1,7 @@
-import { atomic, atomicNamer, backgroundColor, borderRadius, borderRadiusConfig, borderWidth, borderWidthConfig, colors, createUtility, dark, fontSize, fontSizeConfig, hashNamer, hover, sm, unify, useNamer } from "index";
+import { atomic, atomicNamer, backgroundColor, borderRadiusConfig, borderWidthConfig, colors, configHandler, createUtility, dark, fontSizeConfig, fontSizeHandler, hashNamer, hover, sm, unify, useNamer } from "index";
 
 const text = createUtility("text")
-  .use(fontSize(fontSizeConfig))
+  .use(fontSizeHandler(fontSizeConfig))
   .init();
 
 const bg = createUtility("bg")
@@ -9,11 +9,11 @@ const bg = createUtility("bg")
   .init();
 
 const rounded = createUtility("rounded")
-  .use(borderRadius(borderRadiusConfig))
+  .use(configHandler(borderRadiusConfig, "borderRadius"))
   .init();
 
 const border = createUtility("border")
-  .use(borderWidth(borderWidthConfig))
+  .use(configHandler(borderWidthConfig, "borderWidth"))
   .init();
 
 test("unify with utilities", () => {

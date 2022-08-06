@@ -1,5 +1,5 @@
-import { CSSObject, StyleObject, backgroundGeneric, borderColor, borderStyle, borderStyleConfig, borderWidth, borderWidthConfig, colors, createUtility, use } from "index";
-import { guard, meld, useGenericHandler } from "utilities/handler";
+import { CSSObject, StyleObject, backgroundGeneric, borderStyleConfig, borderWidthConfig, colors, createUtility, use } from "index";
+import { colorHandler, configHandler, guard, meld, useGenericHandler } from "utilities/handler";
 
 import { isNumber } from "utils";
 
@@ -41,8 +41,8 @@ test("useGeneric With Trigger2", () => {
 
 test("guard with meld", () => {
   const border = createUtility("border")
-    .use(guard("colors", guard("dark", borderColor(colors))))
-    .use(guard("width", meld(borderWidth(borderWidthConfig), borderColor(colors))))
+    .use(guard("colors", guard("dark", colorHandler(colors, "borderColor", "--w-border-opacity"))))
+    .use(guard("width", meld(configHandler(borderWidthConfig, "borderWidth"), colorHandler(colors, "borderColor", "--w-border-opacity"))))
     .init();
 
   expect(border.colors.dark.amber[100].css).toMatchSnapshot();
@@ -53,8 +53,8 @@ test("guard with meld", () => {
 
 test("two guard with same name should not work", () => {
   const border = createUtility("border")
-    .use(guard("width", borderWidth(borderWidthConfig)))
-    .use(guard("width", borderColor(colors)))
+    .use(guard("width", configHandler(borderWidthConfig, "borderWidth")))
+    .use(guard("width", colorHandler(colors, "borderColor", "--w-border-opacity")))
     .init();
 
   expect(border.width[2]).toBeDefined();
@@ -71,8 +71,8 @@ test("use single plugin", () => {
 });
 
 test("use multi plugin with meld and use", () => {
-  const border = use("border", meld(borderWidth(borderWidthConfig), borderColor(colors)));
-  const border2 = use("border", meld(borderWidth(borderWidthConfig), borderColor(colors), borderStyle(borderStyleConfig)));
+  const border = use("border", meld(configHandler(borderWidthConfig, "borderWidth"), colorHandler(colors, "borderColor", "--w-border-opacity")));
+  const border2 = use("border", meld(configHandler(borderWidthConfig, "borderWidth"), colorHandler(colors, "borderColor", "--w-border-opacity"), configHandler(borderStyleConfig, "borderStyle")));
 
   expect(border[0].css).toMatchSnapshot();
   expect(border.emerald[500].css).toMatchSnapshot();

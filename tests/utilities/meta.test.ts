@@ -1,5 +1,5 @@
-import { backgroundColor, backgroundGeneric, borderColor, borderOpacity, borderWidth, borderWidthConfig, colors, createUtility, opacityConfig } from "index";
-import { guard, meld } from "utilities/handler";
+import { backgroundColor, backgroundGeneric, borderWidthConfig, colors, createUtility, opacityConfig, prop } from "index";
+import { colorHandler, configHandler, guard, meld } from "utilities/handler";
 
 test("Color Meta", () => {
   const bg = createUtility("bg")
@@ -16,8 +16,8 @@ test("Color Meta", () => {
 
 test("Static Meta", () => {
   const border = createUtility("border")
-    .use(borderWidth(borderWidthConfig))
-    .use(borderOpacity(opacityConfig, "op"))
+    .use(configHandler(borderWidthConfig, "borderWidth"))
+    .case("op", configHandler(opacityConfig, prop`--w-border-opacity`))
     .init();
 
   expect(border.meta.uid).toEqual("border");
@@ -41,8 +41,8 @@ test("Generic Meta", () => {
 
 test("Guard Meta", () => {
   const border = createUtility("border")
-    .use(guard("colors", guard("dark", borderColor(colors))))
-    .use(guard("width", meld(borderWidth(borderWidthConfig), borderColor(colors))))
+    .use(guard("colors", guard("dark", colorHandler(colors, "borderColor", "--w-border-opacity"))))
+    .use(guard("width", meld(configHandler(borderWidthConfig, "borderWidth"), colorHandler(colors, "borderColor", "--w-border-opacity"))))
     .init();
 
   expect(border.colors.dark.amber[100].meta.props).toEqual(["colors", "dark", "amber", "100"]);

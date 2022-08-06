@@ -1,14 +1,13 @@
-import { borderColor, borderOpacity, borderRadius, borderStyle, borderWidth } from "utilities/border";
 import { borderRadiusConfig, borderStyleConfig, borderWidthConfig } from "config/border";
-import { colors, createUtility } from "index";
+import { colorHandler, configHandler } from "utilities";
+import { colors, createUtility, prop } from "index";
 
 import type { PickValue } from "types";
-import { opacityConfig } from "config/opacity";
-import { useStaticHandler } from "utilities/handler";
+import { opacityConfig } from "config";
 
 test("Border Radius", () => {
   const rounded = createUtility("rounded")
-    .use(borderRadius(borderRadiusConfig))
+    .use(configHandler(borderRadiusConfig, "borderRadius"))
     .init();
 
   // @ts-ignore, hidden property
@@ -26,7 +25,7 @@ test("Border Radius", () => {
 
 test("Border Style", () => {
   const border = createUtility("border")
-    .use(borderStyle(borderStyleConfig))
+    .use(configHandler(borderStyleConfig, "borderStyle"))
     .init();
   expect(border.solid.css).toMatchSnapshot("solid");
   expect(border.dashed.css).toMatchSnapshot("dashed");
@@ -36,18 +35,19 @@ test("Border Style", () => {
 });
 
 test("Border With Nested Config", () => {
-  const borderStyle = useStaticHandler((handle, styles) => handle(styles, "borderStyle", undefined, true));
-  const border = createUtility("border")
-    .use(borderStyle({
-      solid: "solid",
+  const borderStyleHandler = configHandler({
+    solid: "solid",
+    nested: {
+      DEFAULT: "nested",
+      dashed: "dashed",
       nested: {
-        DEFAULT: "nested",
-        dashed: "dashed",
-        nested: {
-          double: "double",
-        },
+        double: "double",
       },
-    }))
+    },
+  }, "borderStyle");
+
+  const border = createUtility("border")
+    .use(borderStyleHandler)
     .init();
   // @ts-ignore
   expect(border.nested.css).toMatchSnapshot();
@@ -58,7 +58,7 @@ test("Border With Nested Config", () => {
 
 test("Border Opacity", () => {
   const border = createUtility("border")
-    .use(borderOpacity(opacityConfig))
+    .case("opacity", configHandler(opacityConfig, prop`--w-border-opacity`))
     .init();
   expect(border.opacity[0].css).toMatchSnapshot();
   expect(border.opacity[50].css).toMatchSnapshot();
@@ -74,7 +74,7 @@ test("Border Opacity With Proxy Config", () => {
   }) as PickValue<T & Omit<Record<0 | 5 | 10 | 20 | 25 | 30 | 40 | 50 | 60 | 70 | 75 | 80 | 90 | 95 | 100, string>, keyof T>, string | number>;
 
   const border = createUtility("border")
-    .use(borderOpacity(opacityConfigProxy<{12: string, 70: null}>()))
+    .case("opacity", configHandler(opacityConfigProxy<{12: string, 70: null}>(), prop`--w-border-opacity`))
     .init();
   expect(border.opacity[0].css).toMatchSnapshot();
   expect(border.opacity[50].css).toMatchSnapshot();
@@ -87,7 +87,7 @@ test("Border Opacity With Proxy Config", () => {
 
 test("Border Opacity With Different Trigger", () => {
   const border = createUtility("border")
-    .use(borderOpacity(opacityConfig, "op"))
+    .case("op", configHandler(opacityConfig, prop`--w-border-opacity`))
     .init();
 
   expect(border.op[0].css).toMatchSnapshot();
@@ -98,7 +98,7 @@ test("Border Opacity With Different Trigger", () => {
 
 test("Border Width", () => {
   const border = createUtility("border")
-    .use(borderWidth(borderWidthConfig))
+    .use(configHandler(borderWidthConfig, "borderWidth"))
     .init();
   expect(border[0].css).toMatchSnapshot();
   expect(border[4].css).toMatchSnapshot();
@@ -108,7 +108,7 @@ test("Border Width", () => {
 
 test("Border Color", () => {
   const border = createUtility("border")
-    .use(borderColor(colors))
+    .use(colorHandler(colors, "borderColor", "--w-border-opacity"))
     .init();
 
   expect(border.current.css).toMatchSnapshot();

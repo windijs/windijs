@@ -1,4 +1,4 @@
-import { buildSpaceBetweenX, buildSpaceBetweenY, configHandler, createUtility, cssHandler, guard, meld } from "utilities";
+import { buildSpaceBetweenX, buildSpaceBetweenY, configHandler, createUtility, guard, meld, spaceBetweenXReverseHandler, spaceBetweenYReverseHandler } from "index";
 import { marginConfig, paddingConfig, spaceBetweenConfig } from "config";
 
 import { unify } from "helpers";
@@ -85,26 +85,14 @@ test("Margin Separated", () => {
   expect(mr[2].css).toMatchSnapshot();
 });
 
-const handleSpaceBetweenXReverse = cssHandler({
-  "& > :not([hidden]) ~ :not([hidden])": {
-    "--w-space-x-reverse": "1",
-  },
-});
-
-const handleSpaceBetweenYReverse = cssHandler({
-  "& > :not([hidden]) ~ :not([hidden])": {
-    "--w-space-y-reverse": "1",
-  },
-});
-
 test("Space Between", () => {
   const space = createUtility("space")
     .case("x", meld(
-      guard("reverse", handleSpaceBetweenXReverse),
+      guard("reverse", spaceBetweenXReverseHandler()),
       configHandler(spaceBetweenConfig, buildSpaceBetweenX),
     ))
     .case("y", meld(
-      guard("reverse", handleSpaceBetweenYReverse),
+      guard("reverse", spaceBetweenYReverseHandler()),
       configHandler(spaceBetweenConfig, buildSpaceBetweenY),
     ))
     .init();
@@ -120,11 +108,11 @@ test("Space Between", () => {
 test("Build Space Between", () => {
   const space = createUtility("space")
     .case("x", meld(
-      guard("reverse", handleSpaceBetweenXReverse),
+      guard("reverse", spaceBetweenXReverseHandler()),
       configHandler(spaceBetweenConfig, buildSpaceBetweenX),
     ))
     .case("y", meld(
-      guard("reverse", handleSpaceBetweenYReverse),
+      guard("reverse", spaceBetweenYReverseHandler()),
       configHandler(spaceBetweenConfig, buildSpaceBetweenY),
     ))
     .init();
