@@ -1,4 +1,5 @@
-import { buildFontSize, configHandler } from "utilities";
+import { buildFontSize } from "./builder";
+import { configHandler } from "./api";
 
 export function fontFamilyHandler<T extends object> (fonts: T) {
   const cssFonts = {} as {[key in keyof typeof fonts]: string};

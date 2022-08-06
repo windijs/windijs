@@ -1,4 +1,4 @@
-import { cssHandler } from "utilities";
+import { cssHandler } from "./api";
 
 export function spaceBetweenXReverseHandler () {
   return cssHandler({
