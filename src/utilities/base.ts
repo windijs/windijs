@@ -50,28 +50,3 @@ export class Utility<T = {}> implements ProxyHandler<Function> {
     return new Proxy(target, handler) as unknown as T;
   }
 }
-
-/**
- * Create a new utility.
- * @param uid Utility ID, usually it should be consistent with the variiable name you declared. Such as, `const bg = createUtility("bg")`
- * @returns {Utility} Utility
- */
-export function createUtility (uid: string) {
-  return new Utility(uid);
-}
-
-/**
- * Use single plugin.
- * @param uid
- * @param plugin
- * @returns
- */
-export function use<U> (uid: string, plugin: (prop: string) => U): U {
-  return new Proxy({}, {
-    get (target, prop: string) {
-      resetMeta(uid);
-      const res = plugin(prop);
-      if (res) return res;
-    },
-  }) as unknown as U;
-}
