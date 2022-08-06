@@ -12297,6 +12297,10 @@ export const cssData : CSSDataV1 = {
       "name": "pointer-events",
       "values": [
         {
+          "name": "auto",
+          "description": "The given element behaves as it would if the pointer-events property were not specified. In SVG content, this value and the value visiblePainted have the same effect."
+        },
+        {
           "name": "all",
           "description": "The given element can be the target element for pointer events whenever the pointer is over either the interior or the perimeter of the element."
         },
@@ -18295,6 +18299,10 @@ export const cssData : CSSDataV1 = {
         "S14.1",
         "C87",
         "O73"
+      ],
+      "restrictions": [
+        "length",
+        "percentage"
       ],
       "references": [
         {

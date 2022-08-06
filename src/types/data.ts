@@ -6077,6 +6077,8 @@ export interface CSSDecls {
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/pointer-events)
    */
   pointerEvents: {
+    /** The given element behaves as it would if the pointer-events property were not specified. In SVG content, this value and the value visiblePainted have the same effect. */
+    "auto": StyleObject,
     /** The given element can be the target element for pointer events whenever the pointer is over either the interior or the perimeter of the element. */
     "all": StyleObject,
     /** The given element can be the target element for pointer events whenever the pointer is over the interior of the element. */
@@ -9184,7 +9186,7 @@ export interface CSSDecls {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset)
    */
-  inset: WideEntry
+  inset: LengthEntry & PercentEntry & WideEntry
   /**
    * The inset-block CSS property defines the logical block start and end offsets of an element, which maps to physical offsets depending on the element's writing mode, directionality, and text orientation. It corresponds to the top and bottom, or right and left properties depending on the values defined for writing-mode, direction, and text-orientation.
    *

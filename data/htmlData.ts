@@ -212,10 +212,10 @@ export const htmlData : HTMLDataV1 = {
           "name": "importance",
           "description": "Indicates the relative importance of the resource. Priority hints are delegated using the values:"
         },
-        {
-          "name": "importance",
-          "description": "**`auto`**: Indicates **no preference**. The browser may use its own heuristics to decide the priority of the resource.\n\n**`high`**: Indicates to the browser that the resource is of **high** priority.\n\n**`low`**: Indicates to the browser that the resource is of **low** priority.\n\n**Note:** The `importance` attribute may only be used for the `<link>` element if `rel=\"preload\"` or `rel=\"prefetch\"` is present."
-        },
+        // {
+        //   "name": "importance",
+        //   "description": "**`auto`**: Indicates **no preference**. The browser may use its own heuristics to decide the priority of the resource.\n\n**`high`**: Indicates to the browser that the resource is of **high** priority.\n\n**`low`**: Indicates to the browser that the resource is of **low** priority.\n\n**Note:** The `importance` attribute may only be used for the `<link>` element if `rel=\"preload\"` or `rel=\"prefetch\"` is present."
+        // },
         {
           "name": "integrity",
           "description": "Contains inline metadata — a base64-encoded cryptographic hash of the resource (file) you’re telling the browser to fetch. The browser can use this to verify that the fetched resource has been delivered free of unexpected manipulation. See [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity)."
@@ -1590,18 +1590,18 @@ export const htmlData : HTMLDataV1 = {
           "name": "decoding",
           "description": "Provides an image decoding hint to the browser. The allowed values are:"
         },
-        {
-          "name": "decoding",
-          "description": "`sync`\n\nDecode the image synchronously for atomic presentation with other content.\n\n`async`\n\nDecode the image asynchronously to reduce delay in presenting other content.\n\n`auto`\n\nDefault mode, which indicates no preference for the decoding mode. The browser decides what is best for the user."
-        },
+        // {
+        //   "name": "decoding",
+        //   "description": "`sync`\n\nDecode the image synchronously for atomic presentation with other content.\n\n`async`\n\nDecode the image asynchronously to reduce delay in presenting other content.\n\n`auto`\n\nDefault mode, which indicates no preference for the decoding mode. The browser decides what is best for the user."
+        // },
         {
           "name": "importance",
           "description": "Indicates the relative importance of the resource. Priority hints are delegated using the values:"
         },
-        {
-          "name": "importance",
-          "description": "`auto`: Indicates **no preference**. The browser may use its own heuristics to decide the priority of the image.\n\n`high`: Indicates to the browser that the image is of **high** priority.\n\n`low`: Indicates to the browser that the image is of **low** priority."
-        },
+        // {
+        //   "name": "importance",
+        //   "description": "`auto`: Indicates **no preference**. The browser may use its own heuristics to decide the priority of the image.\n\n`high`: Indicates to the browser that the image is of **high** priority.\n\n`low`: Indicates to the browser that the image is of **low** priority."
+        // },
         {
           "name": "intrinsicsize",
           "description": "This attribute tells the browser to ignore the actual intrinsic size of the image and pretend it’s the size specified in the attribute. Specifically, the image would raster at these dimensions and `naturalWidth`/`naturalHeight` on images would return the values specified in this attribute. [Explainer](https://github.com/ojanvafai/intrinsicsize-attribute), [examples](https://googlechrome.github.io/samples/intrinsic-size/index.html)"
@@ -1692,10 +1692,10 @@ export const htmlData : HTMLDataV1 = {
           "name": "allowpaymentrequest",
           "description": "Set to `true` if a cross-origin `<iframe>` should be allowed to invoke the [Payment Request API](https://developer.mozilla.org/en-US/docs/Web/API/Payment_Request_API)."
         },
-        {
-          "name": "allowpaymentrequest",
-          "description": "This attribute is considered a legacy attribute and redefined as `allow=\"payment\"`."
-        },
+        // {
+        //   "name": "allowpaymentrequest",
+        //   "description": "This attribute is considered a legacy attribute and redefined as `allow=\"payment\"`."
+        // },
         {
           "name": "csp",
           "description": "A [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) enforced for the embedded resource. See [`HTMLIFrameElement.csp`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/csp \"The csp property of the HTMLIFrameElement interface specifies the Content Security Policy that an embedded document must agree to enforce upon itself.\") for details."
