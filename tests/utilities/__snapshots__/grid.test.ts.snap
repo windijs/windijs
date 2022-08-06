@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gap 1`] = `
+Object {
+  "gap": "0.5rem",
+  "gridGap": "0.5rem",
+}
+`;
+
+exports[`Gap 2`] = `
+Object {
+  "gap": "0.375rem",
+  "gridGap": "0.375rem",
+}
+`;
+
+exports[`Gap 3`] = `
+Object {
+  "gap": "12rem",
+  "gridGap": "12rem",
+}
+`;
+
+exports[`Gap 4`] = `
+Object {
+  "-moz-column-gap": "3rem",
+  "-webkit-column-gap": "3rem",
+  "columnGap": "3rem",
+  "gridColumnGap": "3rem",
+}
+`;
+
+exports[`Gap 5`] = `
+Object {
+  "-moz-row-gap": "0.625rem",
+  "-webkit-row-gap": "0.625rem",
+  "gridRowGap": "0.625rem",
+  "rowGap": "0.625rem",
+}
+`;
+
+exports[`Grid 1`] = `
+Object {
+  "display": Array [
+    "-ms-grid",
+    "grid",
+  ],
+}
+`;
+
+exports[`Grid 2`] = `
+Object {
+  "display": Array [
+    "-ms-inline-grid",
+    "inline-grid",
+  ],
+}
+`;
+
+exports[`Grid Auto Flow 1`] = `
+Object {
+  "gridAutoFlow": "row",
+}
+`;
+
+exports[`Grid Auto Flow 2`] = `
+Object {
+  "gridAutoFlow": "column dense",
+}
+`;
+
+exports[`Grid Auto Rows/Columns 1`] = `
+Object {
+  "gridAutoRows": "auto",
+}
+`;
+
+exports[`Grid Auto Rows/Columns 2`] = `
+Object {
+  "gridAutoColumns": "max-content",
+}
+`;
+
+exports[`Grid Column End 1`] = `
+Object {
+  "gridColumnEnd": "auto",
+}
+`;
+
+exports[`Grid Column End 2`] = `
+Object {
+  "gridColumnEnd": "4",
+}
+`;
+
+exports[`Grid Column Span 1`] = `
+Object {
+  "gridColumn": "auto",
+}
+`;
+
+exports[`Grid Column Span 2`] = `
+Object {
+  "gridColumn": "span 4 / span 4",
+}
+`;
+
+exports[`Grid Column Start 1`] = `
+Object {
+  "gridColumnStart": "auto",
+}
+`;
+
+exports[`Grid Column Start 2`] = `
+Object {
+  "gridColumnStart": "4",
+}
+`;
+
+exports[`Grid Row End 1`] = `
+Object {
+  "gridRowEnd": "auto",
+}
+`;
+
+exports[`Grid Row End 2`] = `
+Object {
+  "gridRowEnd": "4",
+}
+`;
+
+exports[`Grid Row Span 1`] = `
+Object {
+  "gridRow": "auto",
+}
+`;
+
+exports[`Grid Row Span 2`] = `
+Object {
+  "gridRow": "span 12 / span 12",
+}
+`;
+
+exports[`Grid Row Start 1`] = `
+Object {
+  "gridRowStart": "auto",
+}
+`;
+
+exports[`Grid Row Start 2`] = `
+Object {
+  "gridRowStart": "4",
+}
+`;
+
+exports[`Grid Template Columns 1`] = `
+Object {
+  "gridTemplateColumns": "repeat(4, minmax(0, 1fr))",
+}
+`;
+
+exports[`Grid Template Columns 2`] = `
+Object {
+  "gridTemplateColumns": "none",
+}
+`;
+
+exports[`Grid Template Rows 1`] = `
+Object {
+  "gridTemplateRows": "repeat(4, minmax(0, 1fr))",
+}
+`;
+
+exports[`Grid Template Rows 2`] = `
+Object {
+  "gridTemplateRows": "none",
+}
+`;
