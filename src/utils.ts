@@ -1,3 +1,5 @@
+import type { FractionObject, Negative, RangeTuple } from "types";
+
 /**
  * Check if value is a number
  * @param value {string}
@@ -62,4 +64,20 @@ export function firstRet (fns: Function[], args: any[] = []) {
 
 export function indent (value: string, count: number = 2) {
   return " ".repeat(count) + value;
+}
+
+export function negative <T extends Record<string | number, string>> (t: T): Negative<T> {
+  return Object.fromEntries(Object.entries(t).filter(([, v]) => !/^0(px|rem|em)?$/.test(v)).map(([k, v]) => ["-" + k, "-" + v])) as Negative<T>;
+}
+
+export function range<S extends number, E extends number> (start: S, end: E): RangeTuple<S, E> {
+  return new Array(end - start).fill(0).map((_, i) => i + start) as RangeTuple<S, E>;
+}
+
+export function fractions<S extends number, E extends number> (start: S, end: E) {
+  return Object.fromEntries((range(start, end) as number[]).map(i => range(1, i as 0).map(v => [v + "/" + i, v / i * 100] as [string, number]).map(([k, v]) => [k, v % 1 === 0 ? v + "%" : v.toFixed(6) + "%"])).flat()) as FractionObject<S, E>;
+}
+
+export function spacings<T extends Array<any>> (numbers: T) {
+  return Object.fromEntries(numbers.map(i => [i, i / 4 + (i === 0 ? "px" : "rem")])) as Record<T[number], string>;
 }
