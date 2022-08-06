@@ -1,8 +1,9 @@
 import { borderColor, borderOpacity, borderRadius, borderStyle, borderWidth } from "utilities/border";
 import { borderRadiusConfig, borderStyleConfig, borderWidthConfig } from "config/border";
 import { colors, createUtility } from "index";
-import { opacityConfig, opacityConfigProxy } from "config/opacity";
 
+import type { PickValue } from "types";
+import { opacityConfig } from "config/opacity";
 import { useStaticHandler } from "utilities/handler";
 
 test("Border Radius", () => {
@@ -66,6 +67,12 @@ test("Border Opacity", () => {
 });
 
 test("Border Opacity With Proxy Config", () => {
+  const opacityConfigProxy = <T extends object> (cfg: T = {} as T) => new Proxy(cfg, {
+    get (target, p: string) {
+      return p in target ? Reflect.get(target, p) : (+p / 100).toString();
+    },
+  }) as PickValue<T & Omit<Record<0 | 5 | 10 | 20 | 25 | 30 | 40 | 50 | 60 | 70 | 75 | 80 | 90 | 95 | 100, string>, keyof T>, string | number>;
+
   const border = createUtility("border")
     .use(borderOpacity(opacityConfigProxy<{12: string, 70: null}>()))
     .init();

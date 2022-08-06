@@ -75,6 +75,42 @@ Object {
 }
 `;
 
+exports[`Border Opacity With Proxy Config 1`] = `
+Object {
+  "--w-border-opacity": "0",
+}
+`;
+
+exports[`Border Opacity With Proxy Config 2`] = `
+Object {
+  "--w-border-opacity": "0.5",
+}
+`;
+
+exports[`Border Opacity With Proxy Config 3`] = `
+Object {
+  "--w-border-opacity": "0.3",
+}
+`;
+
+exports[`Border Opacity With Proxy Config 4`] = `
+Object {
+  "--w-border-opacity": "1",
+}
+`;
+
+exports[`Border Opacity With Proxy Config 5`] = `
+Object {
+  "--w-border-opacity": "0.12",
+}
+`;
+
+exports[`Border Opacity With Proxy Config 6`] = `
+Object {
+  "--w-border-opacity": "0.7",
+}
+`;
+
 exports[`Border Radius: 1 1`] = `
 Object {
   "borderRadius": "100%",
