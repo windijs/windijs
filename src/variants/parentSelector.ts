@@ -1,22 +1,21 @@
-import type { VariantBuilder } from "types";
-import { useVariant } from "./base";
+import { createVariant } from "./base";
 
 /**
  * Targets an element when a marked parent matches the hover pseudo-class.
  */
-export const groupHover: VariantBuilder = (...utilities) => useVariant(".group:hover &", utilities);
+export const groupHover = createVariant(".group:hover &");
 
 /**
  * Targets an element when a marked parent matches the focus pseudo-class.
  */
-export const groupFocus: VariantBuilder = (...utilities) => useVariant(".group:focus &", utilities);
+export const groupFocus = createVariant(".group:focus &");
 
 /**
  * Targets an element when a marked parent matches the active pseudo-class.
  */
-export const groupActive: VariantBuilder = (...utilities) => useVariant(".group:active &", utilities);
+export const groupActive = createVariant(".group:active &");
 
 /**
  * Targets an element when a marked parent matches the visited pseudo-class.
  */
-export const groupVisited: VariantBuilder = (...utilities) => useVariant(".group:visited &", utilities);
+export const groupVisited = createVariant(".group:visited &");

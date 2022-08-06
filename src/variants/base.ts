@@ -1,6 +1,6 @@
 import { SymbolMeta, SymbolProxy } from "helpers/common";
 
-import type { StyleObject } from "types";
+import type { StyleObject, VariantBuilder } from "types";
 import { css } from "helpers/css";
 
 export function useVariant (rule: string, utilities: (StyleObject | StyleObject[])[]): StyleObject[] {
@@ -9,10 +9,10 @@ export function useVariant (rule: string, utilities: (StyleObject | StyleObject[
 
 export const useMedia = (rule: string, utilities: (StyleObject | StyleObject[])[]) => useVariant("@media " + rule, utilities);
 
-export function variant (rule: string, ...utilities: (StyleObject | StyleObject[])[]): StyleObject[] {
-  return useVariant(rule, utilities);
-}
+export const createVariant = (rule: string): VariantBuilder => (...utilities) => useVariant(rule, utilities);
 
-export function media (rule: string, ...utilities: (StyleObject | StyleObject[])[]): StyleObject[] {
-  return useMedia(rule, utilities);
-}
+export const createMedia = (rule: string): VariantBuilder => (...utilities) => useMedia(rule, utilities);
+
+export const variant = (rule: string, ...utilities: (StyleObject | StyleObject[])[]) => useVariant(rule, utilities);
+
+export const media = (rule: string, ...utilities: (StyleObject | StyleObject[])[]) => useMedia(rule, utilities);

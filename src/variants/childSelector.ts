@@ -1,27 +1,26 @@
-import type { VariantBuilder } from "types";
-import { useVariant } from "./base";
+import { createVariant } from "./base";
 
 /**
  * Targets svg nodes.
  */
-export const svg: VariantBuilder = (...utilities) => useVariant("& svg", utilities);
+export const svg = createVariant("& svg");
 
 /**
  * Target all nodes.
  */
-export const all: VariantBuilder = (...utilities) => useVariant("& *", utilities);
+export const all = createVariant("& *");
 
 /**
  * Targets children nodes.
  */
-export const children: VariantBuilder = (...utilities) => useVariant("& > *", utilities);
+export const children = createVariant("& > *");
 
 /**
  * Targets siblings nodes.
  */
-export const siblings: VariantBuilder = (...utilities) => useVariant("& ~ *", utilities);
+export const siblings = createVariant("& ~ *");
 
 /**
  * Targets first sibling node.
  */
-export const sibling: VariantBuilder = (...utilities) => useVariant("& + *", utilities);
+export const sibling = createVariant("& + *");

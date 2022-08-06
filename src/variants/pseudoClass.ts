@@ -1,7 +1,7 @@
 import type { VariantBuilder } from "types";
 import { camelToDash } from "utils";
 import { useProxy } from "helpers/proxy";
-import { useVariant } from "./base";
+import { createVariant } from "./base";
 
 // TODO: the document of variants need to be improved.
 
@@ -209,28 +209,28 @@ interface PseudoClassVariants {
  *
  * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/:first-child)
  */
-export const first: VariantBuilder = (...utilities) => useVariant("&:first-child", utilities);
+export const first = createVariant("&:first-child");
 
 /**
  * Same as :nth-last-child(1). Represents an element that is the last child of some other element.
  *
  * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/:last-child)
  */
-export const last: VariantBuilder = (...utilities) => useVariant("&:last-child", utilities);
+export const last = createVariant("&:last-child");
 
 /**
  * Same as :nth-of-type(even)
  *
  * [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-of-type)
  */
-export const evenOfType: VariantBuilder = (...utilities) => useVariant("&:nth-of-type(even)", utilities);
+export const evenOfType = createVariant("&:nth-of-type(even)");
 
 /**
  * Same as :nth-of-type(odd)
  *
  * [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-of-type)
  */
-export const oddOfType: VariantBuilder = (...utilities) => useVariant("&:nth-of-type(odd)", utilities);
+export const oddOfType = createVariant("&:nth-of-type(odd)");
 
 /**
  * Applies to the one or more UI elements that are the default among a set of similar elements. Typically applies to context menu items, buttons, and select lists/menus.
@@ -239,40 +239,38 @@ export const oddOfType: VariantBuilder = (...utilities) => useVariant("&:nth-of-
  *
  * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/:default)
  */
-export const $default: VariantBuilder = (...utilities) => useVariant("&:default", utilities);
+export const $default = createVariant("&:default");
 
 /**
  * Same as :not(:first-child).
  *
  * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/:first-child)
  */
-export const notFirst: VariantBuilder = (...utilities) => useVariant("&:not(:first-child)", utilities);
+export const notFirst = createVariant("&:not(:first-child)");
 
 /**
  * Same as :not(:last-child).
  *
  * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/:last-child)
  */
-export const notLast: VariantBuilder = (...utilities) => useVariant("&:not(:last-child)", utilities);
+export const notLast = createVariant("&:not(:last-child)");
 
 /**
  * Same as :nth-child(odd), Represents the odd elements of its parent.
  *
  * [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child)
  */
-export const odd: VariantBuilder = (...utilities) => useVariant("&:nth-child(odd)", utilities);
+export const odd = createVariant("&:nth-child(odd)");
 
 /**
  * Same as :nth-child(even), Represents the even elements of its parent.
  *
  * [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child)
  */
-export const even: VariantBuilder = (...utilities) => useVariant("&:nth-child(even)", utilities);
+export const even = createVariant("&:nth-child(even)");
 
 export const { visited, checked, disabled, focusWithin, hover, focus, focusVisible, active, link, target, notChecked, enabled, indeterminate, invalid, valid, optional, required, placeholderShown, readOnly, readWrite, notDisabled, firstOfType, notFirstOfType, lastOfType, notLastOfType, onlyChild, notOnlyChild, onlyOfType, notOnlyOfType, root, empty } = useProxy<PseudoClassVariants, Function>((prop) => {
-  return (...args: any[]) => {
-    prop = camelToDash(prop);
-    if (prop.startsWith("not-")) prop = `not(:${prop.slice(4)})`;
-    return useVariant("&:" + prop, args);
-  };
+  prop = camelToDash(prop);
+  if (prop.startsWith("not-")) prop = `not(:${prop.slice(4)})`;
+  return createVariant("&:" + prop);
 });
