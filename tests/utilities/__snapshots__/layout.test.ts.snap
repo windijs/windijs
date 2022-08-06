@@ -1,0 +1,750 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Align 1`] = `
+Object {
+  "-webkit-align-content": "space-evenly",
+  "alignContent": "space-evenly",
+}
+`;
+
+exports[`Align 2`] = `
+Object {
+  "-webkit-align-content": "flex-start",
+  "alignContent": "flex-start",
+}
+`;
+
+exports[`Align 3`] = `
+Object {
+  "-ms-flex-align": "center",
+  "-webkit-align-items": "center",
+  "-webkit-box-align": "center",
+  "alignItems": "center",
+}
+`;
+
+exports[`Align 4`] = `
+Object {
+  "-webkit-align-self": "stretch",
+  "alignSelf": "stretch",
+}
+`;
+
+exports[`Backface Visibility 1`] = `
+Object {
+  "-webkit-backface-visibility": "visible",
+  "backfaceVisibility": "visible",
+}
+`;
+
+exports[`Backface Visibility 2`] = `
+Object {
+  "-webkit-backface-visibility": "hidden",
+  "backfaceVisibility": "hidden",
+}
+`;
+
+exports[`Box Sizing 1`] = `
+Object {
+  "boxSizing": "border-box",
+}
+`;
+
+exports[`Box Sizing 2`] = `
+Object {
+  "boxSizing": "content-box",
+}
+`;
+
+exports[`Break 1`] = `
+Object {
+  "breakAfter": "auto",
+}
+`;
+
+exports[`Break 2`] = `
+Object {
+  "breakAfter": "avoid-page",
+}
+`;
+
+exports[`Break 3`] = `
+Object {
+  "breakBefore": "avoid-column",
+}
+`;
+
+exports[`Break 4`] = `
+Object {
+  "breakInside": "avoid",
+}
+`;
+
+exports[`Break Ater 1`] = `
+Object {
+  "breakAfter": "auto",
+}
+`;
+
+exports[`Break Ater 2`] = `
+Object {
+  "breakAfter": "avoid",
+}
+`;
+
+exports[`Break Ater 3`] = `
+Object {
+  "breakAfter": "all",
+}
+`;
+
+exports[`Break Ater 4`] = `
+Object {
+  "breakAfter": "avoid-page",
+}
+`;
+
+exports[`Break Ater 5`] = `
+Object {
+  "breakAfter": "page",
+}
+`;
+
+exports[`Break Ater 6`] = `
+Object {
+  "breakAfter": "left",
+}
+`;
+
+exports[`Break Ater 7`] = `
+Object {
+  "breakAfter": "right",
+}
+`;
+
+exports[`Break Ater 8`] = `
+Object {
+  "breakAfter": "column",
+}
+`;
+
+exports[`Break Before 1`] = `
+Object {
+  "breakBefore": "auto",
+}
+`;
+
+exports[`Break Before 2`] = `
+Object {
+  "breakBefore": "avoid",
+}
+`;
+
+exports[`Break Before 3`] = `
+Object {
+  "breakBefore": "all",
+}
+`;
+
+exports[`Break Before 4`] = `
+Object {
+  "breakBefore": "avoid-page",
+}
+`;
+
+exports[`Break Before 5`] = `
+Object {
+  "breakBefore": "page",
+}
+`;
+
+exports[`Break Before 6`] = `
+Object {
+  "breakBefore": "left",
+}
+`;
+
+exports[`Break Before 7`] = `
+Object {
+  "breakBefore": "right",
+}
+`;
+
+exports[`Break Before 8`] = `
+Object {
+  "breakBefore": "column",
+}
+`;
+
+exports[`Break Inside 1`] = `
+Object {
+  "breakInside": "auto",
+}
+`;
+
+exports[`Break Inside 2`] = `
+Object {
+  "breakInside": "avoid",
+}
+`;
+
+exports[`Break Inside 3`] = `
+Object {
+  "breakInside": "avoid-page",
+}
+`;
+
+exports[`Break Inside 4`] = `
+Object {
+  "breakInside": "avoid-column",
+}
+`;
+
+exports[`Clear 1`] = `
+Object {
+  "clear": "left",
+}
+`;
+
+exports[`Clear 2`] = `
+Object {
+  "clear": "right",
+}
+`;
+
+exports[`Clear 3`] = `
+Object {
+  "clear": "both",
+}
+`;
+
+exports[`Clear 4`] = `
+Object {
+  "clear": "none",
+}
+`;
+
+exports[`Columns 1`] = `
+Object {
+  "columns": "0",
+}
+`;
+
+exports[`Columns 2`] = `
+Object {
+  "columns": "1",
+}
+`;
+
+exports[`Columns 3`] = `
+Object {
+  "columns": "3",
+}
+`;
+
+exports[`Columns 4`] = `
+Object {
+  "columns": "9",
+}
+`;
+
+exports[`Display 1`] = `
+Object {
+  "display": "block",
+}
+`;
+
+exports[`Display 2`] = `
+Object {
+  "display": "inline",
+}
+`;
+
+exports[`Display 3`] = `
+Object {
+  "display": "contents",
+}
+`;
+
+exports[`Display 4`] = `
+Object {
+  "display": "inline-block",
+}
+`;
+
+exports[`Display 5`] = `
+Object {
+  "display": "list-item",
+}
+`;
+
+exports[`Display 6`] = `
+Object {
+  "display": "flow-root",
+}
+`;
+
+exports[`Display 7`] = `
+Object {
+  "display": "none",
+}
+`;
+
+exports[`Float 1`] = `
+Object {
+  "float": "left",
+}
+`;
+
+exports[`Float 2`] = `
+Object {
+  "float": "right",
+}
+`;
+
+exports[`Float 3`] = `
+Object {
+  "float": "none",
+}
+`;
+
+exports[`Inset 1`] = `
+Object {
+  "inset": "0px",
+}
+`;
+
+exports[`Inset 2`] = `
+Object {
+  "inset": "0.75rem",
+}
+`;
+
+exports[`Inset 3`] = `
+Object {
+  "inset": "-1.25rem",
+}
+`;
+
+exports[`Inset 4`] = `
+Object {
+  "inset": "1px",
+}
+`;
+
+exports[`Inset 5`] = `
+Object {
+  "inset": "-33.333333%",
+}
+`;
+
+exports[`Inset 6`] = `
+Object {
+  "inset": "-100%",
+}
+`;
+
+exports[`Inset 7`] = `
+Object {
+  "inset": "3rem",
+}
+`;
+
+exports[`Inset 8`] = `
+Object {
+  "inset": "auto",
+}
+`;
+
+exports[`Inset 9`] = `
+Object {
+  "inset": "100%",
+}
+`;
+
+exports[`Isolation 1`] = `
+Object {
+  "isolation": "isolate",
+}
+`;
+
+exports[`Isolation 2`] = `
+Object {
+  "isolation": "auto",
+}
+`;
+
+exports[`Justify 1`] = `
+Object {
+  "-webkit-justify-content": "space-evenly",
+  "justifyContent": "space-evenly",
+}
+`;
+
+exports[`Justify 2`] = `
+Object {
+  "-webkit-justify-content": "flex-start",
+  "justifyContent": "flex-start",
+}
+`;
+
+exports[`Justify 3`] = `
+Object {
+  "justifyItems": "center",
+}
+`;
+
+exports[`Justify 4`] = `
+Object {
+  "-ms-grid-column-align": "stretch",
+  "justifySelf": "stretch",
+}
+`;
+
+exports[`Object 1`] = `
+Object {
+  "-o-object-fit": "contain",
+  "objectFit": "contain",
+}
+`;
+
+exports[`Object 2`] = `
+Object {
+  "-o-object-fit": "cover",
+  "objectFit": "cover",
+}
+`;
+
+exports[`Object 3`] = `
+Object {
+  "-o-object-fit": "fill",
+  "objectFit": "fill",
+}
+`;
+
+exports[`Object 4`] = `
+Object {
+  "-o-object-fit": "none",
+  "objectFit": "none",
+}
+`;
+
+exports[`Object 5`] = `
+Object {
+  "-o-object-fit": "scale-down",
+  "objectFit": "scale-down",
+}
+`;
+
+exports[`Object 6`] = `
+Object {
+  "-o-object-position": "bottom",
+  "objectPosition": "bottom",
+}
+`;
+
+exports[`Object 7`] = `
+Object {
+  "-o-object-position": "center",
+  "objectPosition": "center",
+}
+`;
+
+exports[`Object 8`] = `
+Object {
+  "-o-object-position": "left",
+  "objectPosition": "left",
+}
+`;
+
+exports[`Object 9`] = `
+Object {
+  "-o-object-position": "left bottom",
+  "objectPosition": "left bottom",
+}
+`;
+
+exports[`Object 10`] = `
+Object {
+  "-o-object-position": "right top",
+  "objectPosition": "right top",
+}
+`;
+
+exports[`Order 1`] = `
+Object {
+  "-ms-flex-order": "0",
+  "-webkit-box-ordinal-group": "1",
+  "-webkit-order": "0",
+  "order": "0",
+}
+`;
+
+exports[`Order 2`] = `
+Object {
+  "-ms-flex-order": "5",
+  "-webkit-box-ordinal-group": "6",
+  "-webkit-order": "5",
+  "order": "5",
+}
+`;
+
+exports[`Order 3`] = `
+Object {
+  "-ms-flex-order": "-7",
+  "-webkit-box-ordinal-group": "-6",
+  "-webkit-order": "-7",
+  "order": "-7",
+}
+`;
+
+exports[`Order 4`] = `
+Object {
+  "-ms-flex-order": "-9999",
+  "-webkit-box-ordinal-group": "-9998",
+  "-webkit-order": "-9999",
+  "order": "-9999",
+}
+`;
+
+exports[`Order 5`] = `
+Object {
+  "-ms-flex-order": "9999",
+  "-webkit-box-ordinal-group": "10000",
+  "-webkit-order": "9999",
+  "order": "9999",
+}
+`;
+
+exports[`Order 6`] = `
+Object {
+  "-ms-flex-order": "0",
+  "-webkit-box-ordinal-group": "1",
+  "-webkit-order": "0",
+  "order": "0",
+}
+`;
+
+exports[`Place 1`] = `
+Object {
+  "placeContent": "space-evenly",
+}
+`;
+
+exports[`Place 2`] = `
+Object {
+  "placeContent": "start",
+}
+`;
+
+exports[`Place 3`] = `
+Object {
+  "placeItems": "center",
+}
+`;
+
+exports[`Place 4`] = `
+Object {
+  "-ms-grid-column-align": "stretch",
+  "-ms-grid-row-align": "stretch",
+  "placeSelf": "stretch",
+}
+`;
+
+exports[`Position 1`] = `
+Object {
+  "position": "static",
+}
+`;
+
+exports[`Position 2`] = `
+Object {
+  "position": "fixed",
+}
+`;
+
+exports[`Position 3`] = `
+Object {
+  "position": "absolute",
+}
+`;
+
+exports[`Position 4`] = `
+Object {
+  "position": "relative",
+}
+`;
+
+exports[`Position 5`] = `
+Object {
+  "position": "sticky",
+}
+`;
+
+exports[`Table 1`] = `
+Object {
+  "display": "table",
+}
+`;
+
+exports[`Table 2`] = `
+Object {
+  "display": "inline-table",
+}
+`;
+
+exports[`Table 3`] = `
+Object {
+  "display": "table-caption",
+}
+`;
+
+exports[`Table 4`] = `
+Object {
+  "display": "table-cell",
+}
+`;
+
+exports[`Table 5`] = `
+Object {
+  "display": "table-row",
+}
+`;
+
+exports[`Table 6`] = `
+Object {
+  "display": "table-column",
+}
+`;
+
+exports[`Table 7`] = `
+Object {
+  "display": "table-column-group",
+}
+`;
+
+exports[`Table 8`] = `
+Object {
+  "display": "table-row-group",
+}
+`;
+
+exports[`Table 9`] = `
+Object {
+  "display": "table-header-group",
+}
+`;
+
+exports[`Table 10`] = `
+Object {
+  "display": "table-footer-group",
+}
+`;
+
+exports[`Table 11`] = `
+Object {
+  "captionSide": "top",
+}
+`;
+
+exports[`Table 12`] = `
+Object {
+  "captionSide": "bottom",
+}
+`;
+
+exports[`Table 13`] = `
+Object {
+  "emptyCells": "show",
+}
+`;
+
+exports[`Table 14`] = `
+Object {
+  "emptyCells": "hide",
+}
+`;
+
+exports[`Top/Left/Bottom/Right 1`] = `
+Object {
+  "top": "0px",
+}
+`;
+
+exports[`Top/Left/Bottom/Right 2`] = `
+Object {
+  "top": "0.75rem",
+}
+`;
+
+exports[`Top/Left/Bottom/Right 3`] = `
+Object {
+  "top": "-1.25rem",
+}
+`;
+
+exports[`Top/Left/Bottom/Right 4`] = `
+Object {
+  "top": "1px",
+}
+`;
+
+exports[`Top/Left/Bottom/Right 5`] = `
+Object {
+  "left": "-33.333333%",
+}
+`;
+
+exports[`Top/Left/Bottom/Right 6`] = `
+Object {
+  "bottom": "-100%",
+}
+`;
+
+exports[`Top/Left/Bottom/Right 7`] = `
+Object {
+  "right": "3rem",
+}
+`;
+
+exports[`Top/Left/Bottom/Right 8`] = `
+Object {
+  "top": "auto",
+}
+`;
+
+exports[`Top/Left/Bottom/Right 9`] = `
+Object {
+  "left": "100%",
+}
+`;
+
+exports[`Visibility 1`] = `
+Object {
+  "visibility": "visible",
+}
+`;
+
+exports[`Visibility 2`] = `
+Object {
+  "visibility": "hidden",
+}
+`;
+
+exports[`ZIndex 1`] = `
+Object {
+  "zIndex": "auto",
+}
+`;
+
+exports[`ZIndex 2`] = `
+Object {
+  "zIndex": "10",
+}
+`;
+
+exports[`ZIndex 3`] = `
+Object {
+  "zIndex": "50",
+}
+`;
