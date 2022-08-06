@@ -1,9 +1,9 @@
-import { createUtility, heightUtility, maxHeightUtility, maxWidthUtility, minHeightUtility, minWidthUtility, widthUtility } from "utilities";
+import { configHandler, createUtility } from "utilities";
 import { heightConfig, widthConfig } from "config";
 
 test("Width", () => {
   const w = createUtility("w")
-    .use(widthUtility(widthConfig))
+    .use(configHandler(widthConfig, "width"))
     .init();
 
   expect(w["1/5"].css).toMatchSnapshot();
@@ -19,8 +19,8 @@ test("Width", () => {
 
 test("Min Width", () => {
   const w = createUtility("w")
-    .case("min", minWidthUtility(widthConfig))
-    .use(widthUtility(widthConfig))
+    .case("min", configHandler(widthConfig, "minWidth"))
+    .use(configHandler(widthConfig, "width"))
     .init();
 
   // TODO: fix this conflict
@@ -38,8 +38,8 @@ test("Min Width", () => {
 
 test("Max Width", () => {
   const w = createUtility("w")
-    .case("max", maxWidthUtility(widthConfig))
-    .use(widthUtility(widthConfig))
+    .case("max", configHandler(widthConfig, "maxWidth"))
+    .use(configHandler(widthConfig, "width"))
     .init();
 
   expect(w.max["1/5"].css).toMatchSnapshot();
@@ -55,7 +55,7 @@ test("Max Width", () => {
 
 test("Height", () => {
   const h = createUtility("h")
-    .use(heightUtility(heightConfig))
+    .use(configHandler(heightConfig, "height"))
     .init();
 
   expect(h["1/5"].css).toMatchSnapshot();
@@ -71,8 +71,8 @@ test("Height", () => {
 
 test("Min Height", () => {
   const h = createUtility("h")
-    .case("min", minHeightUtility(heightConfig))
-    .use(heightUtility(heightConfig))
+    .case("min", configHandler(heightConfig, "minHeight"))
+    .use(configHandler(heightConfig, "height"))
     .init();
 
   expect(h.min.none.css).toMatchSnapshot();
@@ -89,8 +89,8 @@ test("Min Height", () => {
 
 test("Max Height", () => {
   const h = createUtility("h")
-    .case("max", maxHeightUtility(heightConfig))
-    .use(heightUtility(heightConfig))
+    .case("max", configHandler(heightConfig, "maxHeight"))
+    .use(configHandler(heightConfig, "height"))
     .init();
 
   expect(h.max.none.css).toMatchSnapshot();
