@@ -1,10 +1,12 @@
-import { createUtility, gapUtility, gapXUtility, gapYUtility, gridAutoColumnsUtility, gridAutoFlowUtility, gridAutoRowsUtility, gridColumnEndUtility, gridColumnStartUtility, gridColumnUtility, gridRowEndUtility, gridRowStartUtility, gridRowUtility, gridTemplateColumnsUtility, gridTemplateRowsUtility, gridUtility, inlineGridUtility } from "utilities";
+import { configHandler, createUtility, cssHandler } from "utilities";
 import { gridAutoColumnsConfig, gridAutoFlowConfig, gridAutoRowsConfig, gridColumnConfig, gridColumnEndConfig, gridColumnStartConfig, gridRowConfig, gridRowEndConfig, gridRowStartConfig, gridTemplateColumnsConfig, gridTemplateRowsConfig, spacingConfig } from "config";
+
+import { prop } from "index";
 
 test("Grid", () => {
   const grid = createUtility("grid")
-    .use(gridUtility())
-    .case("inline", inlineGridUtility())
+    .use(cssHandler({ display: ["-ms-grid", "grid"] }))
+    .case("inline", cssHandler({ display: ["-ms-inline-grid", "inline-grid"] }))
     .init();
 
   expect(grid.css).toMatchSnapshot();
@@ -13,7 +15,7 @@ test("Grid", () => {
 
 test("Grid Template Columns", () => {
   const grid = createUtility("grid")
-    .case("cols", gridTemplateColumnsUtility(gridTemplateColumnsConfig))
+    .case("cols", configHandler(gridTemplateColumnsConfig, "gridTemplateColumns"))
     .init();
 
   expect(grid.cols[4].css).toMatchSnapshot();
@@ -22,7 +24,7 @@ test("Grid Template Columns", () => {
 
 test("Grid Template Rows", () => {
   const grid = createUtility("grid")
-    .case("rows", gridTemplateRowsUtility(gridTemplateRowsConfig))
+    .case("rows", configHandler(gridTemplateRowsConfig, "gridTemplateRows"))
     .init();
 
   expect(grid.rows[4].css).toMatchSnapshot();
@@ -31,7 +33,7 @@ test("Grid Template Rows", () => {
 
 test("Grid Column Span", () => {
   const col = createUtility("col")
-    .use(gridColumnUtility(gridColumnConfig))
+    .use(configHandler(gridColumnConfig, "gridColumn"))
     .init();
 
   expect(col.auto.css).toMatchSnapshot();
@@ -40,7 +42,7 @@ test("Grid Column Span", () => {
 
 test("Grid Row Span", () => {
   const row = createUtility("row")
-    .use(gridRowUtility(gridRowConfig))
+    .use(configHandler(gridRowConfig, "gridRow"))
     .init();
 
   expect(row.auto.css).toMatchSnapshot();
@@ -49,7 +51,7 @@ test("Grid Row Span", () => {
 
 test("Grid Column Start", () => {
   const col = createUtility("col")
-    .case("start", gridColumnStartUtility(gridColumnStartConfig))
+    .case("start", configHandler(gridColumnStartConfig, "gridColumnStart"))
     .init();
 
   expect(col.start.auto.css).toMatchSnapshot();
@@ -58,7 +60,7 @@ test("Grid Column Start", () => {
 
 test("Grid Column End", () => {
   const col = createUtility("col")
-    .case("end", gridColumnEndUtility(gridColumnEndConfig))
+    .case("end", configHandler(gridColumnEndConfig, "gridColumnEnd"))
     .init();
 
   expect(col.end.auto.css).toMatchSnapshot();
@@ -67,7 +69,7 @@ test("Grid Column End", () => {
 
 test("Grid Row Start", () => {
   const row = createUtility("row")
-    .case("start", gridRowStartUtility(gridRowStartConfig))
+    .case("start", configHandler(gridRowStartConfig, "gridRowStart"))
     .init();
 
   expect(row.start.auto.css).toMatchSnapshot();
@@ -76,7 +78,7 @@ test("Grid Row Start", () => {
 
 test("Grid Row End", () => {
   const row = createUtility("row")
-    .case("end", gridRowEndUtility(gridRowEndConfig))
+    .case("end", configHandler(gridRowEndConfig, "gridRowEnd"))
     .init();
 
   expect(row.end.auto.css).toMatchSnapshot();
@@ -85,7 +87,7 @@ test("Grid Row End", () => {
 
 test("Grid Auto Flow", () => {
   const grid = createUtility("grid")
-    .case("flow", gridAutoFlowUtility(gridAutoFlowConfig))
+    .case("flow", configHandler(gridAutoFlowConfig, "gridAutoFlow"))
     .init();
 
   expect(grid.flow.row.css).toMatchSnapshot();
@@ -94,8 +96,8 @@ test("Grid Auto Flow", () => {
 
 test("Grid Auto Rows/Columns", () => {
   const auto = createUtility("auto")
-    .case("rows", gridAutoRowsUtility(gridAutoRowsConfig))
-    .case("cols", gridAutoColumnsUtility(gridAutoColumnsConfig))
+    .case("rows", configHandler(gridAutoRowsConfig, "gridAutoRows"))
+    .case("cols", configHandler(gridAutoColumnsConfig, "gridAutoColumns"))
     .init();
 
   expect(auto.rows.auto.css).toMatchSnapshot();
@@ -104,9 +106,9 @@ test("Grid Auto Rows/Columns", () => {
 
 test("Gap", () => {
   const gap = createUtility("gap")
-    .use(gapUtility(spacingConfig))
-    .case("x", gapXUtility(spacingConfig))
-    .case("y", gapYUtility(spacingConfig))
+    .use(configHandler(spacingConfig, ["gridGap", "gap"]))
+    .case("x", configHandler(spacingConfig, [prop`-webkit-column-gap`, prop`-moz-column-gap`, "gridColumnGap", "columnGap"]))
+    .case("y", configHandler(spacingConfig, [prop`-webkit-row-gap`, prop`-moz-row-gap`, "gridRowGap", "rowGap"]))
     .init();
 
   expect(gap[2].css).toMatchSnapshot();
