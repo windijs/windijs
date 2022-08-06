@@ -35,6 +35,11 @@ export const fontFamilyConfig = {
   ],
 };
 
+export const fontStyleConfig = {
+  italic: "italic",
+  normal: "normal",
+};
+
 export const fontSizeConfig = {
   xs: ["0.75rem", { lineHeight: "1rem" }],
   sm: ["0.875rem", { lineHeight: "1.25rem" }],
