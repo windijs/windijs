@@ -1,5 +1,5 @@
 import { alignContentConfig, alignItemsConfig, alignSelfConfig, insetConfig, justifyContentConfig, justifyItemsConfig, justifySelfConfig, objectFitConfig, objectPositionConfig, placeContentConfig, placeItemsConfig, placeSelfConfig, tableDisplayConfig, zIndexConfig } from "config";
-import { bind, configHandler, createUtility, displayUtility, styleProperty } from "utilities";
+import { bind, configHandler, createUtility, styleProperty } from "utilities";
 import { css, prop } from "helpers";
 
 const style = createUtility("style").use(styleProperty({
@@ -249,7 +249,7 @@ test("Box Sizing", () => {
 });
 
 test("Table", () => {
-  const table = createUtility("table").use(displayUtility(tableDisplayConfig)).init();
+  const table = createUtility("table").use(configHandler(tableDisplayConfig, "display")).init();
   const caption = style.captionSide;
   const emptyCells = style.emptyCells;
 

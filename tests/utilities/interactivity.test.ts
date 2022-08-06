@@ -1,4 +1,4 @@
-import { createUtility, css, styleProperty, touchAction, touchActionConfig, userSelect, userSelectConfig } from "index";
+import { createUtility, css, styleProperty, touchActionConfig } from "index";
 
 const style = createUtility("style").use(styleProperty({
   touchAction: touchActionConfig,
@@ -66,7 +66,6 @@ test("Scroll Behavior", () => {
 
 test("Touch Action", () => {
   const touch = style.touchAction;
-  // const touch = createUtility("touch").use(touchAction(touchActionConfig)).init();
   expect(touch.auto.css).toMatchSnapshot();
   expect(touch.none.css).toMatchSnapshot();
   expect(touch.pan.x.css).toMatchSnapshot();
@@ -81,7 +80,6 @@ test("Touch Action", () => {
 
 test("User Select", () => {
   const select = style.userSelect;
-  // const select = createUtility("select").use(userSelect(userSelectConfig)).init();
   expect(select.none.css).toMatchSnapshot();
   expect(select.text.css).toMatchSnapshot();
   expect(select.all.css).toMatchSnapshot();
