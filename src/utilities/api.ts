@@ -13,20 +13,10 @@ import { SymbolCSS, SymbolMeta, isStyleObject } from "helpers/common";
 import { buildColor, buildStatic } from "./builder";
 import { getMeta, pushMetaProp, resetMeta, updateMetaType } from "helpers/meta";
 
-import { Utility } from "./base";
 import { css } from "helpers/css";
 import { useProxy } from "helpers/proxy";
 
 type BuildFunc = (value: unknown) => StyleObject | undefined;
-
-/**
- * Create a new utility.
- * @param uid Utility ID, usually it should be consistent with the variiable name you declared. Such as, `const bg = createUtility("bg")`
- * @returns {Utility} Utility
- */
-export function createUtility (uid: string) {
-  return new Utility(uid);
-}
 
 /**
  * Use single plugin.

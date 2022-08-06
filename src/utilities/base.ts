@@ -1,9 +1,8 @@
 import { SymbolProxy } from "helpers/common";
-import { firstRet } from "utils";
 import { guard } from "./api";
 import { resetMeta } from "helpers/meta";
 
-export class Utility<T = {}> implements ProxyHandler<Function> {
+export class Utility<T = {}> implements ProxyHandler<object> {
   private plugins: ((p: string) => any)[];
 
   readonly uid: string;
@@ -13,8 +12,18 @@ export class Utility<T = {}> implements ProxyHandler<Function> {
     this.plugins = [];
   }
 
-  get (target: Function, p: string): any {
-    return firstRet(this.plugins, [p]);
+  get (target: object, prop: string | symbol) {
+    if (Reflect.has(target, prop)) return Reflect.get(target, prop);
+    resetMeta(this.uid);
+    let result;
+    for (const plugin of this.plugins) {
+      result = plugin(prop as string);
+      if (result) return result;
+    }
+  }
+
+  set (target: object, prop: string | symbol, value: any) {
+    return Reflect.defineProperty(target, prop, { value, writable: true });
   }
 
   public case<K extends string, U> (trigger: K, plugin: (prop: string) => U): Utility<T & Record<K, U>> {
@@ -28,25 +37,15 @@ export class Utility<T = {}> implements ProxyHandler<Function> {
   }
 
   public init (): T {
-    const uid = this.uid;
-    const plugins = this.plugins;
-    const target = function () {};
-    Reflect.defineProperty(target, SymbolProxy, { value: true });
-
-    const handler: ProxyHandler<Function> = {
-      get (target, prop) {
-        if (Reflect.has(target, prop)) return Reflect.get(target, prop);
-        resetMeta(uid);
-        let result;
-        for (const plugin of plugins) {
-          result = plugin(prop as string);
-          if (result) return result;
-        }
-      },
-      set (target, p, value) {
-        return Reflect.defineProperty(target, p, { value, writable: true });
-      },
-    };
-    return new Proxy(target, handler) as unknown as T;
+    return new Proxy({ [SymbolProxy]: true }, this) as unknown as T;
   }
+}
+
+/**
+ * Create a new utility.
+ * @param uid Utility ID, usually it should be consistent with the variiable name you declared. Such as, `const bg = createUtility("bg")`
+ * @returns {Utility} Utility
+ */
+export function createUtility (uid: string) {
+  return new Utility(uid);
 }

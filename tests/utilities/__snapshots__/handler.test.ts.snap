@@ -68,9 +68,3 @@ Object {
   "backgroundColor": "rgb(22, 22, 22)",
 }
 `;
-
-exports[`useGeneric With Trigger2 1`] = `
-Object {
-  "backgroundColor": "rgb(22, 22, 22)",
-}
-`;
