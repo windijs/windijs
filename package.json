@@ -41,6 +41,6 @@
     "sucrase": "^3.25.0",
     "tsc-alias": "^1.7.0",
     "tsconfig-paths": "^4.0.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.0-dev.20220803"
   }
 }
