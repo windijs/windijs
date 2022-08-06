@@ -54,14 +54,6 @@ export function hash (str: string): string {
   return (hash >>> 0).toString(36);
 }
 
-export function firstRet (fns: Function[], args: any[] = []) {
-  let result;
-  for (const fn of fns) {
-    result = fn.apply(undefined, args);
-    if (result) return result;
-  }
-}
-
 export function indent (value: string, count: number = 2) {
   return " ".repeat(count) + value;
 }
