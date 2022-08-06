@@ -1,7 +1,6 @@
 import { alignContentConfig, alignItemsConfig, alignSelfConfig, insetConfig, justifyContentConfig, justifyItemsConfig, justifySelfConfig, objectFitConfig, objectPositionConfig, placeContentConfig, placeItemsConfig, placeSelfConfig, tableDisplayConfig, zIndexConfig } from "config";
-import { alignContentUtility, alignItemsUtility, alignSelfUtility, bind, createUtility, displayUtility, justifyContentUtility, justifyItemsUtility, justifySelfUtility, objectFitUtility, objectPositionUtility, placeContentUtility, placeItemsUtility, placeSelfUtility, styleProperty } from "utilities";
-
-import { css } from "helpers";
+import { bind, configHandler, createUtility, displayUtility, styleProperty } from "utilities";
+import { css, prop } from "helpers";
 
 const style = createUtility("style").use(styleProperty({
   inset: insetConfig,
@@ -117,9 +116,9 @@ test("Order", () => {
 
 test("Justify", () => {
   const justify = createUtility("justify")
-    .case("content", justifyContentUtility(justifyContentConfig))
-    .case("items", justifyItemsUtility(justifyItemsConfig))
-    .case("self", justifySelfUtility(justifySelfConfig))
+    .case("content", configHandler(justifyContentConfig, [prop`-webkit-justify-content`, "justifyContent"]))
+    .case("items", configHandler(justifyItemsConfig, "justifyItems"))
+    .case("self", configHandler(justifySelfConfig, [prop`-ms-grid-column-align`, "justifySelf"]))
     .init();
 
   expect(justify.content.evenly.css).toMatchSnapshot();
@@ -130,9 +129,9 @@ test("Justify", () => {
 
 test("Align", () => {
   const align = createUtility("align")
-    .case("content", alignContentUtility(alignContentConfig))
-    .case("items", alignItemsUtility(alignItemsConfig))
-    .case("self", alignSelfUtility(alignSelfConfig))
+    .case("content", configHandler(alignContentConfig, [prop`-webkit-align-content`, "alignContent"]))
+    .case("items", configHandler(alignItemsConfig, [prop`-webkit-box-align`, prop`-ms-flex-align`, prop`-webkit-align-items`, "alignItems"]))
+    .case("self", configHandler(alignSelfConfig, [prop`-webkit-align-self`, "alignSelf"]))
     .init();
 
   expect(align.content.evenly.css).toMatchSnapshot();
@@ -143,9 +142,9 @@ test("Align", () => {
 
 test("Place", () => {
   const place = createUtility("place")
-    .case("content", placeContentUtility(placeContentConfig))
-    .case("items", placeItemsUtility(placeItemsConfig))
-    .case("self", placeSelfUtility(placeSelfConfig))
+    .case("content", configHandler(placeContentConfig, "placeContent"))
+    .case("items", configHandler(placeItemsConfig, "placeItems"))
+    .case("self", configHandler(placeSelfConfig, [prop`-ms-grid-row-align`, prop`-ms-grid-column-align`, "placeSelf"]))
     .init();
 
   expect(place.content.evenly.css).toMatchSnapshot();
@@ -219,7 +218,9 @@ test("Isolation", () => {
 });
 
 test("Object", () => {
-  const object = createUtility("object").use(objectFitUtility(objectFitConfig)).use(objectPositionUtility(objectPositionConfig)).init();
+  const object = createUtility("object")
+    .use(configHandler(objectFitConfig, ["objectFit", prop`-o-object-fit`]))
+    .use(configHandler(objectPositionConfig, ["objectPosition", prop`-o-object-position`])).init();
   expect(object.contain.css).toMatchSnapshot();
   expect(object.cover.css).toMatchSnapshot();
   expect(object.fill.css).toMatchSnapshot();
