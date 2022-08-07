@@ -1,41 +1,7 @@
-import type { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSBorderRadiusItem, CSSDimension, CSSFillRule, CSSFlex, CSSFunctions, CSSLength, CSSLengthPercentage, CSSPercentage, CSSPosition } from "types";
+import type { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSBorderRadiusItem, CSSFillRule, CSSFunctions, CSSLength, CSSLengthPercentage, CSSPercentage, CSSPosition } from "types";
 import { camelToDash, parenWrap } from "utils";
 
 import { useProxy } from "./proxy";
-
-// TODO: should return object, like CSSPercentage/CSSDimension...
-// TODO: support multiple add/sub/mul/div
-
-export function sub (left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage) {
-  if (typeof left === "object" && typeof right === "object") {
-    if (left.type === right.type) return (left.value - right.value) + (left.type === "percent" ? "%" : left.type);
-  }
-  return left + " - " + right;
-}
-
-export function add (left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage) {
-  if (typeof left === "object" && typeof right === "object") {
-    if (left.type === right.type) return (left.value + right.value) + (left.type === "percent" ? "%" : left.type);
-  }
-  return left + " + " + right;
-}
-
-export function mul (left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage) {
-  if (typeof left === "number" && typeof right === "object") return (left * right.value) + (right.type === "percent" ? "%" : right.type);
-  if (typeof left === "object" && typeof right === "number") return (left.value * right) + (left.type === "percent" ? "%" : left.type);
-  if (typeof left === "number" && typeof right === "number") return (left * right) + "";
-  return left + " * " + right;
-}
-
-export function div (left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage) {
-  if (typeof left === "object" && typeof right === "number") return (left.value / right) + (left.type === "percent" ? "%" : left.type);
-  if (typeof left === "number" && typeof right === "number") return (left / right) + "";
-  return left + " / " + right;
-}
-
-export function join (...args: (string | number | CSSDimension | CSSFlex | CSSPercentage)[]) {
-  return args.join(" ");
-}
 
 export function quote (str: string) {
   return `${JSON.stringify(str)}`;
@@ -135,8 +101,11 @@ export function polygon (fillRule?: "nonzero" | "evenodd" | [CSSLengthPercentage
   return parenWrap("polygon", [fillRule, ...lengthOrPercent].filter(i => i != null).map(i => Array.isArray(i) ? i.join(" ") : i).join(", "));
 }
 
-export const { matrix, matrix3d, perspective, rotate, rotate3d, rotateX, rotateY, rotateZ, scale, scale3d, scaleX, scaleY, scaleZ, skew, skewX, skewY, translate, translate3d, translateX, translateY, translateZ, steps, calc, clamp, max, min, abs, sign, blur, brightness, contrast, grayscale, invert, opacity, saturate, sepia, rgb, rgba, hsl, hsla, counter, env, minmax, repeat } =
-  useProxy<CSSFunctions, Function>(prop => (...args: any[]) => prop + "(" + args.filter(i => i != null).join(", ") + ")");
+const funcProxy = useProxy<CSSFunctions, Function>(prop => (...args: any[]) => prop + "(" + args.filter(i => i != null).join(", ") + ")");
+
+export const { matrix, matrix3d, perspective, rotate, rotate3d, rotateX, rotateY, rotateZ, scale, scale3d, scaleX, scaleY, scaleZ, skew, skewX, skewY, translate, translate3d, translateX, translateY, translateZ, steps, calc, clamp, max, min, abs, sign, blur, brightness, contrast, grayscale, invert, opacity, saturate, sepia, rgb, rgba, hsl, hsla, counter, env, minmax, repeat } = funcProxy;
 
 export const { hueRotate, fitContent, cubicBezier, linearGradient, radialGradient, conicGradient, repeatingConicGradient, repeatingLinearGradient, repeatingRadialGradient } =
   useProxy<CSSFunctions, Function>(prop => (...args: any[]) => camelToDash(prop) + "(" + args.map(i => Array.isArray(i) ? i.join(" ") : i).filter(i => i != null).join(", ") + ")");
+
+export const filters = { blur, brightness, contrast, dropShadow, grayscale, hueRotate, invert, saturate, sepia };
