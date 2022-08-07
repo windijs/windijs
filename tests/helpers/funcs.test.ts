@@ -1,4 +1,4 @@
-import { $in, $var, abs, add, attr, blur, brightness, calc, ch, circle, clamp, color, conicGradient, contrast, counter, counters, cubicBezier, deg, div, dropShadow, ellipse, em, env, ex, fitContent, fr, grayscale, hsl, hsla, hueRotate, hwb, inherit, inset, invert, join, linearGradient, matrix, matrix3d, max, min, minmax, mm, mul, none, opacity, path, percent, perspective, polygon, px, quote, rad, radialGradient, rem, repeat, repeatingConicGradient, repeatingLinearGradient, repeatingRadialGradient, rgb, rgba, rotate, rotate3d, rotateX, rotateY, rotateZ, saturate, scale, scale3d, scaleX, scaleY, scaleZ, sepia, sign, skew, skewX, skewY, steps, sub, translate, translate3d, translateX, translateY, translateZ, turn, url, vw } from "index";
+import { $in, $var, abs, add, attr, blur, brightness, calc, ch, circle, clamp, color, conicGradient, contrast, counter, counters, cubicBezier, deg, div, dropShadow, ellipse, em, env, ex, fitContent, fr, grayscale, hsl, hsla, hueRotate, hwb, inherit, inset, invert, linearGradient, matrix, matrix3d, max, min, minmax, mm, mul, none, opacity, path, percent, perspective, polygon, px, quote, rad, radialGradient, rem, repeat, repeatingConicGradient, repeatingLinearGradient, repeatingRadialGradient, rgb, rgba, rotate, rotate3d, rotateX, rotateY, rotateZ, saturate, scale, scale3d, scaleX, scaleY, scaleZ, sepia, sign, skew, skewX, skewY, steps, sub, translate, translate3d, translateX, translateY, translateZ, turn, url, vw } from "index";
 
 test("sub", () => {
   expect(sub(rem[3], rem[1])).toEqual("2rem");
@@ -28,10 +28,6 @@ test("div", () => {
   expect(div(3, 4)).toEqual("0.75");
   expect(div(3, rem[1.5])).toEqual("3 / 1.5rem");
   expect(div(rem[1], px[2])).toEqual("1rem / 2px");
-});
-
-test("join", () => {
-  expect(join(rem[2], px[4], em[3])).toEqual("2rem 4px 3em");
 });
 
 test("quote", () => {
@@ -335,7 +331,7 @@ test("rgba", () => {
 test("linearGradient", () => {
   expect(linearGradient(deg[45], color.blue, color.red)).toEqual("linear-gradient(45deg, blue, red)");
   expect(linearGradient("to left top", color.blue, color.red)).toEqual("linear-gradient(to left top, blue, red)");
-  expect(linearGradient(deg[0], color.blue, join(color.green, percent[40]), color.red)).toEqual("linear-gradient(0deg, blue, green 40%, red)");
+  expect(linearGradient(deg[0], color.blue, [color.green, percent[40]].join(" "), color.red)).toEqual("linear-gradient(0deg, blue, green 40%, red)");
   expect(linearGradient(deg[0], color.blue, [color.green, percent[40]], color.red)).toEqual("linear-gradient(0deg, blue, green 40%, red)");
   expect(linearGradient(turn[0.25], color.red, percent[10], color.blue)).toEqual("linear-gradient(0.25turn, red, 10%, blue)");
   expect(linearGradient(deg[45], [color.red, 0, percent[50]], [color.blue, percent[50], percent[100]])).toEqual("linear-gradient(45deg, red 0 50%, blue 50% 100%)");
@@ -357,7 +353,7 @@ test("conicGradient", () => {
 test("repeatingLinearGradient", () => {
   expect(repeatingLinearGradient(deg[45], color.blue, color.red)).toEqual("repeating-linear-gradient(45deg, blue, red)");
   expect(repeatingLinearGradient("to left top", color.blue, color.red)).toEqual("repeating-linear-gradient(to left top, blue, red)");
-  expect(repeatingLinearGradient(deg[0], color.blue, join(color.green, percent[40]), color.red)).toEqual("repeating-linear-gradient(0deg, blue, green 40%, red)");
+  expect(repeatingLinearGradient(deg[0], color.blue, [color.green, percent[40]].join(" "), color.red)).toEqual("repeating-linear-gradient(0deg, blue, green 40%, red)");
   expect(repeatingLinearGradient(deg[0], color.blue, [color.green, percent[40]], color.red)).toEqual("repeating-linear-gradient(0deg, blue, green 40%, red)");
   expect(repeatingLinearGradient(turn[0.25], color.red, percent[10], color.blue)).toEqual("repeating-linear-gradient(0.25turn, red, 10%, blue)");
   expect(repeatingLinearGradient(deg[45], [color.red, 0, percent[50]], [color.blue, percent[50], percent[100]])).toEqual("repeating-linear-gradient(45deg, red 0 50%, blue 50% 100%)");

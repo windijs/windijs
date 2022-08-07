@@ -12,7 +12,7 @@ export const after = createVariant("&::after");
  *
  * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/::backdrop)
  */
-export const backdrop = createVariant("&::backdrop");
+// export const backdrop = createVariant("&::backdrop");
 
 /**
  * Represents a styleable child pseudo-element immediately before the originating element’s actual content.

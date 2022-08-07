@@ -1,4 +1,4 @@
-import { after, backdrop, backgroundClipConfig, before, bundle, colorHandler, colors, configHandler, createUtility, firstLetter, firstLine, marker, prop, selection } from "index";
+import { after, backgroundClipConfig, before, bundle, colorHandler, colors, configHandler, createUtility, firstLetter, firstLine, marker, prop, selection } from "index";
 
 const bg = createUtility("bg")
   .use(colorHandler(colors, "backgroundColor", "--w-bg-opacity"))
@@ -9,10 +9,6 @@ const utilities = [bg.blue[500], bg.clip.content];
 
 test("after", () => {
   expect(bundle(after(...utilities))).toMatchSnapshot();
-});
-
-test("backdrop", () => {
-  expect(bundle(backdrop(...utilities))).toMatchSnapshot();
 });
 
 test("before", () => {

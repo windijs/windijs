@@ -11,17 +11,6 @@ Object {
 }
 `;
 
-exports[`backdrop 1`] = `
-Object {
-  "&::backdrop": Object {
-    "--w-bg-opacity": "1",
-    "-webkit-background-clip": "content-box",
-    "backgroundClip": "content-box",
-    "backgroundColor": "rgba(59, 130, 246, var(--w-bg-opacity))",
-  },
-}
-`;
-
 exports[`before 1`] = `
 Object {
   "&::before": Object {
