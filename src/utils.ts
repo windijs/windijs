@@ -58,6 +58,8 @@ export function indent (value: string, count: number = 2) {
   return " ".repeat(count) + value;
 }
 
+export const entries = <T extends object | Map<any, any>> (t: T) => t instanceof Map ? t.entries() : Object.entries(t);
+
 export function negative <T extends Record<string | number, string>> (t: T): Negative<T> {
   return Object.fromEntries(Object.entries(t).filter(([, v]) => !/^0(px|rem|em)?$/.test(v)).map(([k, v]) => ["-" + k, "-" + v])) as Negative<T>;
 }
@@ -73,3 +75,11 @@ export function fractions<S extends number, E extends number> (start: S, end: E)
 export function spacings<T extends Array<any>> (numbers: T) {
   return Object.fromEntries(numbers.map(i => [i, i / 4 + (i === 0 ? "px" : "rem")])) as Record<T[number], string>;
 }
+
+export function degrees<T extends number> (numbers: T[]) {
+  return Object.fromEntries(numbers.map(i => [i, i + "deg"])) as Record<T, string>;
+};
+
+export function scales<T extends number> (numbers: T[]) {
+  return Object.fromEntries(numbers.map(i => [i, i / 100 + ""])) as Record<T, string>;
+};
