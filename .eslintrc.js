@@ -32,6 +32,8 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": 1,
     "no-redeclare": 0,
     "@typescript-eslint/no-redeclare": 1,
+    "no-dupe-class-members": 0,
+    "@typescript-eslint/no-dupe-class-members": 2,
     "no-use-before-define": 0,
     "@typescript-eslint/no-use-before-define": 1,
     "object-curly-spacing": [2, "always"],
