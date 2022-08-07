@@ -23,6 +23,14 @@ export function getStyleIdent (style: StyleObject): string {
   return getStyleVariants(style).map(i => i + ":").join("") + getStyleProps(style).join(".");
 }
 
+export function getFirstVar (style: StyleObject): string {
+  const css = style[SymbolCSS];
+  for (const [k, v] of css instanceof Map ? css.entries() : Object.entries(css)) {
+    if (k.startsWith("--w-")) return v as string;
+  }
+  return "";
+}
+
 export function applyVariant (utility: StyleObject): CSSObject | CSSMap {
   let css = utility[SymbolCSS];
   for (const variant of utility[SymbolMeta].variants) {

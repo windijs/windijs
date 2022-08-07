@@ -1,7 +1,6 @@
 import type { CSSMap, CSSObject, StyleObject, StyleProperties } from "types";
 import { calcRgba, parenWrap, sliceColor } from "utils";
-
-import { css } from "helpers/css";
+import { css, getFirstVar } from "helpers";
 
 export function buildStatic (property: StyleProperties | StyleProperties[], value: unknown): StyleObject | undefined {
   if (typeof value !== "string") return undefined;
@@ -110,4 +109,16 @@ export function buildSpaceBetweenX (v: unknown) {
       marginLeft: `calc(${v} * calc(1 - var(--w-space-x-reverse)))`,
     },
   });
+}
+
+const joinFilters = (filters: (string | StyleObject)[]) => filters.map(i => typeof i === "string" ? i : getFirstVar(i)).join(" ");
+
+export function buildFilter (...filters: (string | StyleObject)[]) {
+  const v = joinFilters(filters);
+  return css({ "-webkit-filter": v, filter: v });
+}
+
+export function buildBackdropFilter (...filters: (string | StyleObject)[]) {
+  const v = joinFilters(filters);
+  return css({ "-webkit-backdrop-filter": v, backdropFilter: v });
 }

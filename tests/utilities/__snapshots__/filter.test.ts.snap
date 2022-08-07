@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backdrop Filter 1`] = `
+Object {
+  "-webkit-backdrop-filter": "blur(3px) brightness(10%)",
+  "backdropFilter": "blur(3px) brightness(10%)",
+}
+`;
+
+exports[`Backdrop Filter 2`] = `
+Object {
+  "-webkit-backdrop-filter": "blur(16px) brightness(.5)",
+  "backdropFilter": "blur(16px) brightness(.5)",
+}
+`;
+
+exports[`Backdrop Filter 3`] = `
+Array [
+  Object {
+    "--w-backdrop-blur": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-backdrop-brightness": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-backdrop-contrast": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-backdrop-grayscale": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-backdrop-hue-rotate": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-backdrop-invert": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-backdrop-opacity": "var(--tw-empty,/*!*/ /*!*/)",
+    "--w-backdrop-saturate": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-backdrop-sepia": "var(--w-empty,/*!*/ /*!*/)",
+    "-webkit-backdrop-filter": "var(--w-backdrop-blur) var(--w-backdrop-brightness) var(--w-backdrop-contrast) var(--w-backdrop-grayscale) var(--w-backdrop-hue-rotate) var(--w-backdrop-invert) var(--w-backdrop-opacity) var(--w-backdrop-saturate) var(--w-backdrop-sepia)",
+    "backdropFilter": "var(--w-backdrop-blur) var(--w-backdrop-brightness) var(--w-backdrop-contrast) var(--w-backdrop-grayscale) var(--w-backdrop-hue-rotate) var(--w-backdrop-invert) var(--w-backdrop-opacity) var(--w-backdrop-saturate) var(--w-backdrop-sepia)",
+  },
+  Object {
+    "--w-backdrop-blur": "blur(16px)",
+  },
+  Object {
+    "--w-backdrop-brightness": "brightness(.75)",
+  },
+]
+`;
+
+exports[`Blur 1`] = `
+Object {
+  "--w-blur": "blur(8px)",
+}
+`;
+
+exports[`Blur 2`] = `
+Object {
+  "--w-blur": "blur(4px)",
+}
+`;
+
+exports[`Blur 3`] = `
+Object {
+  "--w-blur": "blur(16px)",
+}
+`;
+
+exports[`Brightness 1`] = `
+Object {
+  "--w-brightness": "brightness(1)",
+}
+`;
+
+exports[`Brightness 2`] = `
+Object {
+  "--w-brightness": "brightness(.75)",
+}
+`;
+
+exports[`Contrast 1`] = `
+Object {
+  "--w-contrast": "contrast(1)",
+}
+`;
+
+exports[`Contrast 2`] = `
+Object {
+  "--w-contrast": "contrast(.75)",
+}
+`;
+
+exports[`Drop Shadow 1`] = `
+Object {
+  "--w-drop-shadow": "drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06))",
+}
+`;
+
+exports[`Drop Shadow 2`] = `
+Object {
+  "--w-drop-shadow": "drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05))",
+}
+`;
+
+exports[`Drop Shadow 3`] = `
+Object {
+  "--w-drop-shadow": "drop-shadow(0 20px 13px rgba(0, 0, 0, 0.03)) drop-shadow(0 8px 5px rgba(0, 0, 0, 0.08))",
+}
+`;
+
+exports[`Filter 1`] = `
+Object {
+  "-webkit-filter": "blur(3px) brightness(10%)",
+  "filter": "blur(3px) brightness(10%)",
+}
+`;
+
+exports[`Filter 2`] = `
+Object {
+  "-webkit-filter": "blur(16px) brightness(.5)",
+  "filter": "blur(16px) brightness(.5)",
+}
+`;
+
+exports[`Filter 3`] = `
+Array [
+  Object {
+    "--w-blur": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-brightness": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-contrast": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-drop-shadow": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-grayscale": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-hue-rotate": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-invert": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-saturate": "var(--w-empty,/*!*/ /*!*/)",
+    "--w-sepia": "var(--w-empty,/*!*/ /*!*/)",
+    "-webkit-filter": "var(--w-blur) var(--w-brightness) var(--w-contrast) var(--w-grayscale) var(--w-hue-rotate) var(--w-invert) var(--w-saturate) var(--w-sepia) var(--w-drop-shadow)",
+    "filter": "var(--w-blur) var(--w-brightness) var(--w-contrast) var(--w-grayscale) var(--w-hue-rotate) var(--w-invert) var(--w-saturate) var(--w-sepia) var(--w-drop-shadow)",
+  },
+  Object {
+    "--w-blur": "blur(16px)",
+  },
+  Object {
+    "--w-brightness": "brightness(.75)",
+  },
+]
+`;
+
+exports[`Grayscale 1`] = `
+Object {
+  "--w-grayscale": "grayscale(100%)",
+}
+`;
+
+exports[`Grayscale 2`] = `
+Object {
+  "--w-grayscale": "grayscale(0.1)",
+}
+`;
+
+exports[`Grayscale 3`] = `
+Object {
+  "--w-grayscale": "grayscale(0.75)",
+}
+`;
+
+exports[`Hue Rotate 1`] = `
+Object {
+  "--w-hue-rotate": "hue-rotate(-30deg)",
+}
+`;
+
+exports[`Hue Rotate 2`] = `
+Object {
+  "--w-hue-rotate": "hue-rotate(60deg)",
+}
+`;
+
+exports[`Invert 1`] = `
+Object {
+  "--w-invert": "invert(100%)",
+}
+`;
+
+exports[`Invert 2`] = `
+Object {
+  "--w-invert": "invert(0.2)",
+}
+`;
+
+exports[`Invert 3`] = `
+Object {
+  "--w-invert": "invert(0.5)",
+}
+`;
+
+exports[`Saturate 1`] = `
+Object {
+  "--w-saturate": "saturate(0)",
+}
+`;
+
+exports[`Saturate 2`] = `
+Object {
+  "--w-saturate": "saturate(.75)",
+}
+`;
+
+exports[`Saturate 3`] = `
+Object {
+  "--w-saturate": "saturate(.5)",
+}
+`;
+
+exports[`Sepia 1`] = `
+Object {
+  "--w-sepia": "sepia(100%)",
+}
+`;
+
+exports[`Sepia 2`] = `
+Object {
+  "--w-sepia": "sepia(0.2)",
+}
+`;
+
+exports[`Sepia 3`] = `
+Object {
+  "--w-sepia": "sepia(0.5)",
+}
+`;

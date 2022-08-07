@@ -3,6 +3,7 @@ export * from "./bg";
 export * from "./flex";
 export * from "./grid";
 export * from "./border";
+export * from "./filter";
 export * from "./opacity";
 export * from "./sizing";
 export * from "./spacing";
