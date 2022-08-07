@@ -2,17 +2,16 @@ import { SymbolProxy } from "helpers/common";
 import { guard } from "./api";
 import { resetMeta } from "helpers/meta";
 
-export class Utility<T = {}> implements ProxyHandler<object> {
-  private plugins: ((p: string) => any)[];
-
-  readonly uid: string;
+export class Utility<T extends object = {}> implements ProxyHandler<T> {
+  uid: string;
+  plugins: ((p: string) => any)[];
 
   constructor (uid: string) {
     this.uid = uid;
     this.plugins = [];
   }
 
-  get (target: object, prop: string | symbol) {
+  get (target: T, prop: string | symbol) {
     if (Reflect.has(target, prop)) return Reflect.get(target, prop);
     resetMeta(this.uid);
     let result;
@@ -22,7 +21,7 @@ export class Utility<T = {}> implements ProxyHandler<object> {
     }
   }
 
-  set (target: object, prop: string | symbol, value: any) {
+  set (target: T, prop: string | symbol, value: any) {
     return Reflect.defineProperty(target, prop, { value, writable: true });
   }
 
@@ -36,8 +35,13 @@ export class Utility<T = {}> implements ProxyHandler<object> {
     return this as unknown as Utility<T & U>;
   }
 
-  public init (): T {
-    return new Proxy({ [SymbolProxy]: true }, this) as unknown as T;
+  public init (): T;
+  public init <F extends Function> (target: F): F & T;
+  public init <F extends Function> (target: F, handler: ProxyHandler<F>): F & T;
+  public init <F extends Function> (target?: F | T, handler?: ProxyHandler<F>) {
+    if (!target) target = function () {} as T;
+    Object.defineProperty(target, SymbolProxy, { value: true });
+    return new Proxy(target, handler || this);
   }
 }
 
