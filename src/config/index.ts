@@ -7,6 +7,7 @@ export * from "./filter";
 export * from "./opacity";
 export * from "./sizing";
 export * from "./spacing";
+export * from "./transform";
 export * from "./positioning";
 export * from "./interactivity";
 export * from "./typography";

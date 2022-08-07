@@ -1,5 +1,7 @@
 import type { CSSMap, CSSObject, StyleObject, StyleProperties } from "types";
 
+import { entries } from "utils";
+
 export const SymbolCSS = Symbol.for("css");
 export const SymbolMeta = Symbol.for("meta");
 export const SymbolData = Symbol.for("data");
@@ -25,7 +27,7 @@ export function getStyleIdent (style: StyleObject): string {
 
 export function getFirstVar (style: StyleObject): string {
   const css = style[SymbolCSS];
-  for (const [k, v] of css instanceof Map ? css.entries() : Object.entries(css)) {
+  for (const [k, v] of entries(css)) {
     if (k.startsWith("--w-")) return v as string;
   }
   return "";
@@ -60,7 +62,7 @@ export function bundle (utilities: (StyleObject | StyleObject[])[]): CSSObject {
   const css: CSSObject = {};
   for (const utility of utilities.flat()) {
     vcss = applyVariant(utility);
-    for (const [k, v] of vcss instanceof Map ? vcss.entries() : Object.entries(vcss)) {
+    for (const [k, v] of entries(vcss)) {
       if (v != null) css[k] = k in css ? Object.assign(css[k], v) : v;
     }
   }

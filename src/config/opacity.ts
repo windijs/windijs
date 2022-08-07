@@ -1,1 +1,3 @@
-export const opacityConfig = Object.fromEntries([0, 5, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95, 100].map(i => [i, i / 100 + ""])) as Record<0 | 5 | 10 | 20 | 25 | 30 | 40 | 50 | 60 | 70 | 75 | 80 | 90 | 95 | 100, string>;
+import { range, scales } from "utils";
+
+export const opacityConfig = scales(range(0, 21).map(i => i * 5) as [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]);

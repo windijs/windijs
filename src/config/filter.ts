@@ -1,3 +1,5 @@
+import { rotateConfig, scaleConfig } from "./transform";
+
 import { opacityConfig } from "./opacity";
 
 export const blurConfig = {
@@ -11,21 +13,9 @@ export const blurConfig = {
   "3xl": "64px",
 };
 
-export const brightnessConfig = {
-  0: "0",
-  50: ".5",
-  75: ".75",
-  90: ".9",
-  95: ".95",
-  100: "1",
-  105: "1.05",
-  110: "1.1",
-  125: "1.25",
-  150: "1.5",
-  200: "2",
-};
+export const brightnessConfig = scaleConfig;
 
-export const contrastConfig = brightnessConfig;
+export const contrastConfig = scaleConfig;
 
 export const dropShadowConfig = {
   DEFAULT: ["0 1px 2px rgba(0, 0, 0, 0.1)", "0 1px 1px rgba(0, 0, 0, 0.06)"],
@@ -42,25 +32,13 @@ export const grayscaleConfig = {
   ...opacityConfig,
 };
 
-export const hueRotateConfig = {
-  "-180": "-180deg",
-  "-90": "-90deg",
-  "-60": "-60deg",
-  "-30": "-30deg",
-  "-15": "-15deg",
-  0: "0deg",
-  15: "15deg",
-  30: "30deg",
-  60: "60deg",
-  90: "90deg",
-  180: "180deg",
-};
+export const hueRotateConfig = rotateConfig;
 
 export const invertConfig = grayscaleConfig;
 
 export const saturateConfig = {
   DEFAULT: "0",
-  ...brightnessConfig,
+  ...scaleConfig,
 };
 
 export const sepiaConfig = grayscaleConfig;
