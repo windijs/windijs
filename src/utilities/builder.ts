@@ -1,6 +1,7 @@
 import type { CSSMap, CSSObject, StyleObject, StyleProperties } from "types";
-import { calcRgba, parenWrap, sliceColor } from "utils";
 import { css, getFirstVar } from "helpers";
+import { dashToCamel, parenWrap } from "utils";
+import { hexToRGB, sliceColor } from "helpers/color";
 
 export function buildStatic (property: StyleProperties | StyleProperties[], value: unknown): StyleObject | undefined {
   if (typeof value !== "string") return undefined;
@@ -21,7 +22,7 @@ export function buildColor (colorProperty: StyleProperties, colorOpacityProperty
 
   if (colorOpacityProperty != null) {
     if (value.startsWith("#")) {
-      const [r, g, b, a] = calcRgba(value);
+      const [r, g, b, a] = hexToRGB(value);
       decl = {
         [colorProperty]: parenWrap("rgba", [r, g, b, parenWrap("var", colorOpacityProperty)].join(", ")),
         [colorOpacityProperty]: a.toString(),
@@ -111,14 +112,16 @@ export function buildSpaceBetweenX (v: unknown) {
   });
 }
 
-const joinFilters = (filters: (string | StyleObject)[]) => filters.map(i => typeof i === "string" ? i : getFirstVar(i)).join(" ");
+export const joinFilters = (filters: (string | StyleObject)[]) => filters.map(i => typeof i === "string" ? i : getFirstVar(i)?.[1]).join(" ");
 
-export function buildFilter (...filters: (string | StyleObject)[]) {
-  const v = joinFilters(filters);
-  return css({ "-webkit-filter": v, filter: v });
-}
+export const buildFilter = (...filters: (string | StyleObject)[]) => css(Object.fromEntries(["-webkit-filter", "filter"].map(i => [i, joinFilters(filters)])));
 
-export function buildBackdropFilter (...filters: (string | StyleObject)[]) {
-  const v = joinFilters(filters);
-  return css({ "-webkit-backdrop-filter": v, backdropFilter: v });
-}
+export const buildBackdropFilter = (...filters: (string | StyleObject)[]) => css(Object.fromEntries(["-webkit-backdrop-filter", "backdropFilter"].map(i => [i, joinFilters(filters)])));
+
+export const joinTransforms = (transformations: (string | StyleObject)[]) => transformations.map(t => {
+  if (typeof t === "string") return t;
+  const [k, v] = getFirstVar(t) ?? [];
+  return k && v ? parenWrap(dashToCamel(k.slice(4)), v) : "";
+}).join(" ");
+
+export const buildTransform = (...transformations: (string | StyleObject)[]) => css(Object.fromEntries(["-webkit-transform", "-ms-transform", "transform"].map(i => [i, joinTransforms(transformations)])));

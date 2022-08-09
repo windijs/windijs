@@ -29,3 +29,9 @@ export function div (left: string | number | CSSDimension | CSSFlex | CSSPercent
   if (typeof left === "number" && typeof right === "number") return (left / right) + "";
   return left + " / " + right;
 }
+
+const WindiPrecision = 10;
+
+export function prec (n: number) {
+  return +n.toFixed(WindiPrecision);
+}

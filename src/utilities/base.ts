@@ -36,9 +36,9 @@ export class Utility<T extends object = {}> implements ProxyHandler<T> {
   }
 
   public init (): T;
-  public init <F extends Function> (target: F): F & T;
-  public init <F extends Function> (target: F, handler: ProxyHandler<F>): F & T;
-  public init <F extends Function> (target?: F | T, handler?: ProxyHandler<F>) {
+  public init <F extends Function | object> (target: F): F & T;
+  public init <F extends Function | object> (target: F, handler: ProxyHandler<F>): F & T;
+  public init <F extends Function | object> (target?: F | T, handler?: ProxyHandler<F>) {
     if (!target) target = function () {} as T;
     Object.defineProperty(target, SymbolProxy, { value: true });
     return new Proxy(target, handler || this);

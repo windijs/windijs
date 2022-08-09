@@ -25,12 +25,12 @@ export function getStyleIdent (style: StyleObject): string {
   return getStyleVariants(style).map(i => i + ":").join("") + getStyleProps(style).join(".");
 }
 
-export function getFirstVar (style: StyleObject): string {
+export function getFirstVar (style: StyleObject): [string, string] | undefined {
   const css = style[SymbolCSS];
   for (const [k, v] of entries(css)) {
-    if (k.startsWith("--w-")) return v as string;
+    if (k.startsWith("--w-")) return [k, v];
   }
-  return "";
+  return undefined;
 }
 
 export function applyVariant (utility: StyleObject): CSSObject | CSSMap {

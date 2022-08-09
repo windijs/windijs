@@ -101,11 +101,13 @@ export function polygon (fillRule?: "nonzero" | "evenodd" | [CSSLengthPercentage
   return parenWrap("polygon", [fillRule, ...lengthOrPercent].filter(i => i != null).map(i => Array.isArray(i) ? i.join(" ") : i).join(", "));
 }
 
-const funcProxy = useProxy<CSSFunctions, Function>(prop => (...args: any[]) => prop + "(" + args.filter(i => i != null).join(", ") + ")");
-
-export const { matrix, matrix3d, perspective, rotate, rotate3d, rotateX, rotateY, rotateZ, scale, scale3d, scaleX, scaleY, scaleZ, skew, skewX, skewY, translate, translate3d, translateX, translateY, translateZ, steps, calc, clamp, max, min, abs, sign, blur, brightness, contrast, grayscale, invert, opacity, saturate, sepia, rgb, rgba, hsl, hsla, counter, env, minmax, repeat } = funcProxy;
+export const { matrix, matrix3d, perspective, rotate, rotate3d, rotateX, rotateY, rotateZ, scale, scale3d, scaleX, scaleY, scaleZ, skew, skewX, skewY, translate, translate3d, translateX, translateY, translateZ, steps, calc, clamp, max, min, abs, sign, blur, brightness, contrast, grayscale, invert, opacity, saturate, sepia, rgb, rgba, hsl, hsla, counter, env, minmax, repeat } =
+  useProxy<CSSFunctions, Function>(prop => (...args: any[]) => prop + "(" + args.filter(i => i != null).join(", ") + ")");
 
 export const { hueRotate, fitContent, cubicBezier, linearGradient, radialGradient, conicGradient, repeatingConicGradient, repeatingLinearGradient, repeatingRadialGradient } =
   useProxy<CSSFunctions, Function>(prop => (...args: any[]) => camelToDash(prop) + "(" + args.map(i => Array.isArray(i) ? i.join(" ") : i).filter(i => i != null).join(", ") + ")");
 
 export const filters = { blur, brightness, contrast, dropShadow, grayscale, hueRotate, invert, saturate, sepia };
+// export const transforms = { rotate, rotate3d, rotateX, rotateY, rotateZ, scale, scale3d, scaleX, scaleY, scaleZ, skew, skewX, skewY, translate, translate3d, translateX, translateY, translateZ };
+
+export const transforms = { rotate, scale, skew, translate };

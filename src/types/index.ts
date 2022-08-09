@@ -97,3 +97,7 @@ export type ColorOpacityProxy<T> = NestedProxy<T, StyleObject<{
 }>>;
 
 export type PickValue<T, ValueType> = Pick<T, { [key in keyof T]-?: T[key] extends ValueType ? key : never }[keyof T]>;
+
+export type CamelCase<S extends string> = S extends `${infer P1}_${infer P2}${infer P3}`
+  ? `${Lowercase<P1>}${Uppercase<P2>}${CamelCase<P3>}`
+  : Lowercase<S>;
