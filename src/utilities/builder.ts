@@ -36,21 +36,19 @@ export function buildColor (colorProperty: StyleProperties, colorOpacityProperty
       };
     }
 
-    const gradient = {
+    const gradient = (obj: CSSObject) => ({
       get gradient () {
-        const obj: CSSObject = { ...decl };
-        obj.backgroundImage = "linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))";
-        return css(obj);
+        return css({ ...obj, backgroundImage: "linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))" });
       },
-    };
+    });
 
     return css(decl, {
       opacity (op: number) {
         const obj: CSSObject = { ...decl };
         obj[colorOpacityProperty] = (op / 100).toString();
-        return css(obj, gradient);
+        return css(obj, gradient(obj));
       },
-      ...gradient,
+      ...gradient(decl),
     }) as ColorStyleObject;
   }
   return css(decl);
