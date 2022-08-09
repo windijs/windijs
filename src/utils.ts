@@ -21,28 +21,11 @@ export function parenWrap (key: string, value: string) {
 }
 
 export function camelToDash (str: string) {
-  return str.replace(/([A-Z])/g, val => `-${val.toLowerCase()}`);
+  return str.replace(/([A-Z])/g, v => `-${v.toLowerCase()}`);
 }
 
-export function calcRgba (hex: string): [number, number, number, number] {
-  if (hex.length === 4) hex = "#" + [hex[1], hex[1], hex[2], hex[2], hex[3], hex[3]].join("");
-  else if (hex.length === 5) hex = "#" + [hex[1], hex[1], hex[2], hex[2], hex[3], hex[3], hex[4], hex[4]].join("");
-  const c = +("0x" + hex.substring(1));
-  if (hex.length === 9) return [(c >> 24) & 255, (c >> 16) & 255, (c >> 8) & 255, (c & 255) / 256];
-  return [(c >> 16) & 255, (c >> 8) & 255, c & 255, 1];
-}
-
-export function sliceColor (str: string): string[] {
-  const params = str.slice(str.indexOf("(") + 1, str.indexOf(")"));
-  return params.indexOf(",") !== -1 ? params.split(/,\s*/) : params.split(/\s+\/?\s*/);
-}
-
-export function hexToRgb (hex: string): string {
-  return parenWrap("rgb", calcRgba(hex).slice(0, 3).join(", "));
-}
-
-export function hexToRgba (hex: string) {
-  return parenWrap("rgba", calcRgba(hex).join(", "));
+export function dashToCamel (str: string) {
+  return str.replace(/(-[a-z])/g, v => v.toUpperCase().replace("-", ""));
 }
 
 export function hash (str: string): string {
