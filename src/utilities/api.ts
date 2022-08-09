@@ -1,6 +1,6 @@
 import type {
   CSSObject,
-  ColorOpacityProxy,
+  ColorStyleProxy,
   Handler,
   MetaType,
   StyleObject,
@@ -66,10 +66,10 @@ export function configHandler<T extends object> (statics: T, propertyOrBuildFunc
 };
 
 export function colorHandler<T extends object> (colors: T, colorProperty: StyleProperties): StyleProxyHandler<T>;
-export function colorHandler<T extends object> (colors: T, colorProperty: StyleProperties, colorOpacityProperty: string): Handler<ColorOpacityProxy<T>>;
+export function colorHandler<T extends object> (colors: T, colorProperty: StyleProperties, colorOpacityProperty: string): Handler<ColorStyleProxy<T>>;
 export function colorHandler<T extends object> (colors: T, colorPropertyOrBuildFunc: StyleProperties | BuildFunc, colorOpacityProperty?: string) {
   const build: BuildFunc = typeof colorPropertyOrBuildFunc === "function" ? colorPropertyOrBuildFunc : value => buildColor(colorPropertyOrBuildFunc, colorOpacityProperty, value);
-  return (p: string) => handleConfig(build, colors, "color", p) as StyleProxy<T> | ColorOpacityProxy<T> | undefined;
+  return (p: string) => handleConfig(build, colors, "color", p) as StyleProxy<T> | ColorStyleProxy<T> | undefined;
 }
 
 export function cssHandler (cssOrStyle: StyleObject | CSSObject) {

@@ -92,9 +92,12 @@ export type StyleProxy<T, O = {}> = NestedProxy<T, StyleObject<O>>;
 
 export type StyleProxyHandler<T> = Handler<StyleProxy<T>>
 
-export type ColorOpacityProxy<T> = NestedProxy<T, StyleObject<{
-  opacity: (op: number) => StyleObject
-}>>;
+export type ColorStyleObject = StyleObject<{
+  opacity: (op: number) => StyleObject<{ get gradient (): StyleObject }>;
+  get gradient (): StyleObject;
+}>;
+
+export type ColorStyleProxy<T> = NestedProxy<T, ColorStyleObject>;
 
 export type PickValue<T, ValueType> = Pick<T, { [key in keyof T]-?: T[key] extends ValueType ? key : never }[keyof T]>;
 

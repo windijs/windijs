@@ -1,4 +1,4 @@
-import type { CSSMap, CSSObject, StyleObject, StyleProperties } from "types";
+import type { CSSMap, CSSObject, ColorStyleObject, StyleObject, StyleProperties } from "types";
 import { css, getFirstVar } from "helpers";
 import { dashToCamel, parenWrap } from "utils";
 import { hexToRGB, sliceColor } from "helpers/color";
@@ -15,6 +15,7 @@ export function buildStatic (property: StyleProperties | StyleProperties[], valu
   return css(decl);
 }
 
+// TODO: consider put this into api, allow use to define their methods
 export function buildColor (colorProperty: StyleProperties, colorOpacityProperty: string | undefined, value: unknown): StyleObject | undefined {
   if (typeof value !== "string") return undefined;
 
@@ -34,13 +35,23 @@ export function buildColor (colorProperty: StyleProperties, colorOpacityProperty
         [colorOpacityProperty]: values[3] ?? "1",
       };
     }
+
+    const gradient = {
+      get gradient () {
+        const obj: CSSObject = { ...decl };
+        obj.backgroundImage = "linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))";
+        return css(obj);
+      },
+    };
+
     return css(decl, {
       opacity (op: number) {
         const obj: CSSObject = { ...decl };
         obj[colorOpacityProperty] = (op / 100).toString();
-        return css(obj);
+        return css(obj, gradient);
       },
-    }) as StyleObject<{ opacity(op: number): StyleObject }>;
+      ...gradient,
+    }) as ColorStyleObject;
   }
   return css(decl);
 }
