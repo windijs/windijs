@@ -1,4 +1,4 @@
-import { Color, hexToRGB, hslToRGB, rgbToHEX, rgbToHSL } from "helpers";
+import { Color, colorLuminance, getDarkColor, getLightColor, hexToRGB, hslToRGB, rgbToHEX, rgbToHSL } from "helpers";
 
 test("rgbToHex", () => {
   expect(rgbToHEX([22, 22, 22, 1])).toEqual("#161616");
@@ -166,4 +166,16 @@ test("Color desaturate set", () => {
     "#857a7a",
     "#837c7c",
   ]);
+});
+
+test("colorLuminance", () => {
+  expect(colorLuminance(Color.hex("#1c1c1e"))).toEqual(0.0245739516);
+});
+
+test("getLightColor", () => {
+  expect(getLightColor(Color.hex("#485fc7")).hex).toEqual("#eff1fa");
+});
+
+test("getDarkColor", () => {
+  expect(getDarkColor(Color.hex("#485fc7")).hex).toEqual("#384fb8");
 });

@@ -1,4 +1,4 @@
-import { fuzzyRound, prec } from "./math";
+import { prec } from "./math";
 
 export type RGB = [number, number, number];
 export type RGBA = [number, number, number, number];
@@ -150,7 +150,7 @@ export class Color {
 
     function toRgb (hue: number) {
       const channel = hueToRGB(0, 1, hue) * factor + scaledWhiteness;
-      return fuzzyRound(channel * 255);
+      return Math.round(channel * 255);
     }
 
     return Color.rgba(toRgb(scaledHue + 1 / 3), toRgb(scaledHue), toRgb(scaledHue - 1 / 3), alpha);
@@ -194,9 +194,9 @@ export class Color {
     const weight2 = 1 - weight1;
 
     const newcolor: RGBA = [
-      fuzzyRound(color1.red * weight1 + color2.red * weight2),
-      fuzzyRound(color1.green * weight1 + color2.green * weight2),
-      fuzzyRound(color1.blue * weight1 + color2.blue * weight2),
+      Math.round(color1.red * weight1 + color2.red * weight2),
+      Math.round(color1.green * weight1 + color2.green * weight2),
+      Math.round(color1.blue * weight1 + color2.blue * weight2),
       color1.alpha * weightScale + color2.alpha * (1 - weightScale),
     ];
 
@@ -536,3 +536,16 @@ export class Color {
     return arr;
   }
 };
+
+export function colorLuminance (color: Color): number {
+  const rgb = color.rgb.map(i => i / 255).map(v => v < 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2);
+  return prec(rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722);
+}
+
+export function getLightColor (color: Color, lightness = 96) {
+  return color.change({ lightness: color.lightness > 96 ? color.lightness : lightness });
+}
+
+export function getDarkColor (color: Color, lightness = 29) {
+  return color.change({ lightness: Math.max(lightness, Math.round(lightness + ((0.53 - colorLuminance(color)) * 53))) });
+}
