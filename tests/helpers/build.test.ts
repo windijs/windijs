@@ -1,11 +1,11 @@
-import { atomic, atomicNamer, borderRadiusConfig, borderWidthConfig, colors, configHandler, createUtility, dark, fontSizeConfig, fontSizeHandler, hashNamer, hover, sm, unify, useNamer } from "index";
+import { atomic, atomicNamer, borderRadiusConfig, borderWidthConfig, configHandler, createUtility, dark, fontSizeConfig, fontSizeHandler, hashNamer, hover, sm, unify, useNamer, windiColors } from "index";
 
 const text = createUtility("text")
   .use(fontSizeHandler(fontSizeConfig))
   .init();
 
 const bg = createUtility("bg")
-  .use(configHandler(colors, "backgroundColor"))
+  .use(configHandler(windiColors, "backgroundColor"))
   .init();
 
 const rounded = createUtility("rounded")

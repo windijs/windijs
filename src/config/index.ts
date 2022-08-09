@@ -1,4 +1,3 @@
-export * from "./colors";
 export * from "./bg";
 export * from "./flex";
 export * from "./grid";

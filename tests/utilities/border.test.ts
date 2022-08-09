@@ -1,6 +1,6 @@
+import { baseColors, createUtility, prop, windiColors } from "index";
 import { borderRadiusConfig, borderStyleConfig, borderWidthConfig } from "config/border";
 import { colorHandler, configHandler } from "utilities";
-import { colors, createUtility, prop } from "index";
 
 import type { PickValue } from "types";
 import { opacityConfig } from "config";
@@ -108,7 +108,7 @@ test("Border Width", () => {
 
 test("Border Color", () => {
   const border = createUtility("border")
-    .use(colorHandler(colors, "borderColor", "--w-border-opacity"))
+    .use(colorHandler({ ...baseColors, ...windiColors }, "borderColor", "--w-border-opacity"))
     .init();
 
   expect(border.current.css).toMatchSnapshot();

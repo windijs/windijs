@@ -1,10 +1,10 @@
-import { backgroundAttachmentConfig, backgroundClipConfig, backgroundGenericHandler, colorHandler, colors, configHandler, createUtility } from "index";
+import { backgroundAttachmentConfig, backgroundClipConfig, backgroundGenericHandler, baseColors, colorHandler, configHandler, createUtility, windiColors } from "index";
 
 import { prop } from "helpers";
 
 test("Background Color", () => {
   const bg = createUtility("bg")
-    .use(colorHandler(colors, "backgroundColor", "--w-bg-opacity"))
+    .use(colorHandler({ ...baseColors, ...windiColors }, "backgroundColor", "--w-bg-opacity"))
     .init();
 
   expect(bg.current.css).toMatchSnapshot();
@@ -15,7 +15,7 @@ test("Background Color", () => {
 
 test("Background Color With Opacity", () => {
   const bg = createUtility("bg")
-    .use(colorHandler(colors, "backgroundColor", "--w-bg-opacity"))
+    .use(colorHandler({ ...baseColors, ...windiColors }, "backgroundColor", "--w-bg-opacity"))
     .init();
   expect(bg.black.opacity(50).css).toMatchSnapshot();
   expect(bg.amber[100].opacity(50).css).toMatchSnapshot();
@@ -23,7 +23,7 @@ test("Background Color With Opacity", () => {
 
 test("Background Color With Gradient", () => {
   const bg = createUtility("bg")
-    .use(colorHandler(colors, "backgroundColor", "--w-bg-opacity"))
+    .use(colorHandler({ ...baseColors, ...windiColors }, "backgroundColor", "--w-bg-opacity"))
     .init();
   expect(bg.black.gradient.css).toMatchSnapshot();
   expect(bg.amber[100].gradient.css).toMatchSnapshot();
@@ -33,7 +33,7 @@ test("Background Color With Gradient", () => {
 
 test("Background Color With Different Opacity Name", () => {
   const bg = createUtility("bg")
-    .use(colorHandler(colors, "backgroundColor", "--my-opacity"))
+    .use(colorHandler({ ...baseColors, ...windiColors }, "backgroundColor", "--my-opacity"))
     .init();
   expect(bg.black.opacity(50).css).toMatchSnapshot();
   expect(bg.amber[100].opacity(50).css).toMatchSnapshot();
@@ -41,7 +41,7 @@ test("Background Color With Different Opacity Name", () => {
 
 test("Background Color Without Opacity", () => {
   const bg = createUtility("bg")
-    .use(colorHandler(colors, "backgroundColor"))
+    .use(colorHandler({ ...baseColors, ...windiColors }, "backgroundColor"))
     .init();
   expect(bg.black.css).toMatchSnapshot();
   expect(bg.amber[100].css).toMatchSnapshot();

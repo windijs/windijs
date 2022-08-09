@@ -1,7 +1,7 @@
-import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, backgroundClipConfig, bundle, colorHandler, colors, configHandler, createUtility, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, prop, rtl, sm, xl, xxl } from "index";
+import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, backgroundClipConfig, bundle, colorHandler, configHandler, createUtility, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, prop, rtl, sm, windiColors, xl, xxl } from "index";
 
 const bg = createUtility("bg")
-  .use(colorHandler(colors, "backgroundColor", "--w-bg-opacity"))
+  .use(colorHandler(windiColors, "backgroundColor", "--w-bg-opacity"))
   .case("clip", configHandler(backgroundClipConfig, ["backgroundClip", prop`-webkit-background-clip`]))
   .init();
 
