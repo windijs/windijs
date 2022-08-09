@@ -1,12 +1,18 @@
+import type { CamelCase } from "types";
 import { prec } from "./math";
+import { range } from "utils";
 
 export type RGB = [number, number, number];
 export type RGBA = [number, number, number, number];
 export type HSL = [number, number, number];
 export type HWB = [number, number, number];
 export type HSLA = [number, number, number, number];
-type AdjustColorOptions = Partial<Record<"red" | "green" | "blue" | "hue" | "saturation" | "lightness" | "alpha", number>>
-type ScaleColorOptions = Partial<Record<"red" | "green" | "blue" | "saturation" | "lightness" | "alpha", number>>
+
+type AdjustColorOptions = Partial<Record<"red" | "green" | "blue" | "hue" | "saturation" | "lightness" | "alpha", number>>;
+type ScaleColorOptions = Omit<AdjustColorOptions, "hue">;
+
+type AdjustColorFuncs = CamelCase<`adjust_${keyof AdjustColorOptions}`>;
+type ScaleColorFuncs = CamelCase<`adjust_${keyof ScaleColorOptions}`>;
 
 export function digitToHEX (d: number) {
   let hex = d.toString(16);
@@ -86,14 +92,91 @@ export function hslToRGB (hsla: HSLA): RGBA {
   return [r, g, b].map(function (c) { return Math.round(c * 255); }).concat([hsla[3]]) as RGBA;
 }
 
+export function hwbToRGB (hue: number, whiteness: number, blackness: number, alpha: number = 1): RGBA {
+  const scaledHue = hue % 360 / 360;
+  let scaledWhiteness = whiteness / 100;
+  let scaledBlackness = blackness / 100;
+
+  const sum = scaledWhiteness + scaledBlackness;
+  if (sum > 1) {
+    scaledWhiteness /= sum;
+    scaledBlackness /= sum;
+  }
+
+  const factor = 1 - scaledWhiteness - scaledBlackness;
+
+  function toRgb (hue: number) {
+    const channel = hueToRGB(0, 1, hue) * factor + scaledWhiteness;
+    return Math.round(channel * 255);
+  }
+
+  return [toRgb(scaledHue + 1 / 3), toRgb(scaledHue), toRgb(scaledHue - 1 / 3), alpha];
+}
+
+function adjustWithScale (rgba: RGBA | HSLA, deg?: number, scale: number = 0, index: 0 | 1 | 2 | 3 = 0, len = 100): RGBA | HSLA {
+  rgba = [...rgba];
+  rgba[index] = deg
+    ? Math.max(Math.min(rgba[index] + deg, len), 0)
+    : scale >= 0
+      ? Math.floor((len - rgba[index]) * scale / 100 + rgba[index])
+      : Math.floor(rgba[index] - rgba[index] * Math.abs(scale) / 100);
+
+  return rgba;
+}
+
+export function adjustHue (hsla: HSLA, deg: number): HSLA {
+  hsla = [...hsla];
+  hsla[0] = hsla[0] + deg;
+  return hsla;
+}
+
+export const adjustSaturation = (hsla: HSLA, deg?: number, scale: number = 0): HSLA => adjustWithScale(hsla, deg, scale, 1);
+
+export const adjustLightness = (hsla: HSLA, deg?: number, scale: number = 0): HSLA => adjustWithScale(hsla, deg, scale, 2);
+
+export const adjustRed = (rgba: RGBA, deg?: number, scale: number = 0): RGBA => adjustWithScale(rgba, deg, scale, 0, 255);
+
+export const adjustGreen = (rgba: RGBA, deg?: number, scale: number = 0): RGBA => adjustWithScale(rgba, deg, scale, 1, 255);
+
+export const adjustBlue = (rgba: RGBA, deg?: number, scale: number = 0): RGBA => adjustWithScale(rgba, deg, scale, 2, 255);
+
+export const adjustAlpha: ((hsla: HSLA, deg?: number, scale?: number) => HSLA) & ((hsla: RGBA, deg?: number, scale?: number) => RGBA) = (hsla, deg, scale = 0) => {
+  hsla = [...hsla];
+  hsla[3] = deg
+    ? Math.round(Math.max(Math.min(hsla[3] + deg, 1), 0) * 100) / 100
+    : scale >= 0
+      ? Math.floor((1 - hsla[3]) * scale + (hsla[3] * 100)) / 100
+      : Math.floor(hsla[3] * (100 + scale)) / 100;
+  return hsla;
+};
+
+export function mixColor (color1: RGBA, color2: RGBA, w: number = 50): RGBA {
+  const weightScale = w / 100;
+  const normalizedWeight = weightScale * 2 - 1;
+  const alphaDistance = color1[3] - color2[3];
+
+  const combinedWeight1 = normalizedWeight * alphaDistance === -1
+    ? normalizedWeight
+    : (normalizedWeight + alphaDistance) /
+    (1 + normalizedWeight * alphaDistance);
+  const weight1 = (combinedWeight1 + 1) / 2;
+  const weight2 = 1 - weight1;
+
+  return [Math.round(color1[0] * weight1 + color2[0] * weight2), Math.round(color1[1] * weight1 + color2[1] * weight2), Math.round(color1[2] * weight1 + color2[2] * weight2), color1[3] * weightScale + color2[3] * (1 - weightScale)];
+}
+
+export function subMixColor (color1: RGBA, color2: RGBA, w: number = 50): RGBA {
+  return color1.map((c, i) => i === 3 ? color2[i] + (c - color2[i]) * (w / 100) : Math.floor(color2[i] + (c - color2[i]) * (w / 100))) as RGBA;
+}
+
 export class Color {
   private hexval: string;
   private rgbaval: RGBA;
   private hslaval: HSLA;
 
-  constructor (hexval: string);
-  constructor (rgbaval: RGB | RGBA);
-  constructor (hexval: string, rgbaval: RGBA, hslaval: HSLA);
+  constructor(hexval: string);
+  constructor(rgbaval: RGB | RGBA);
+  constructor(hexval: string, rgbaval: RGBA, hslaval: HSLA);
   constructor (hexval: string | RGB | RGBA, rgbaval?: RGBA, hslaval?: HSLA) {
     if (Array.isArray(hexval)) {
       if (hexval[3] == null) hexval.push(1);
@@ -136,24 +219,7 @@ export class Color {
   }
 
   static hwb (hue: number, whiteness: number, blackness: number, alpha: number = 1) {
-    const scaledHue = hue % 360 / 360;
-    let scaledWhiteness = whiteness / 100;
-    let scaledBlackness = blackness / 100;
-
-    const sum = scaledWhiteness + scaledBlackness;
-    if (sum > 1) {
-      scaledWhiteness /= sum;
-      scaledBlackness /= sum;
-    }
-
-    const factor = 1 - scaledWhiteness - scaledBlackness;
-
-    function toRgb (hue: number) {
-      const channel = hueToRGB(0, 1, hue) * factor + scaledWhiteness;
-      return Math.round(channel * 255);
-    }
-
-    return Color.rgba(toRgb(scaledHue + 1 / 3), toRgb(scaledHue), toRgb(scaledHue - 1 / 3), alpha);
+    return Color.rgba(...hwbToRGB(hue, whiteness, blackness, alpha));
   }
 
   get hex (): string {
@@ -181,38 +247,12 @@ export class Color {
     return [this.hue, this.whiteness, this.blackness];
   }
 
-  static mix (color1: Color, color2: Color, w: number = 50): Color {
-    const weightScale = w / 100;
-    const normalizedWeight = weightScale * 2 - 1;
-    const alphaDistance = color1.alpha - color2.alpha;
-
-    const combinedWeight1 = normalizedWeight * alphaDistance === -1
-      ? normalizedWeight
-      : (normalizedWeight + alphaDistance) /
-          (1 + normalizedWeight * alphaDistance);
-    const weight1 = (combinedWeight1 + 1) / 2;
-    const weight2 = 1 - weight1;
-
-    const newcolor: RGBA = [
-      Math.round(color1.red * weight1 + color2.red * weight2),
-      Math.round(color1.green * weight1 + color2.green * weight2),
-      Math.round(color1.blue * weight1 + color2.blue * weight2),
-      color1.alpha * weightScale + color2.alpha * (1 - weightScale),
-    ];
-
-    return new Color(rgbToHEX(newcolor), newcolor, rgbToHSL(newcolor));
+  static mix (c1: Color, c2: Color, w: number = 50): Color {
+    return Color.rgba(...mixColor(c1.rgbaval, c2.rgbaval, w));
   }
 
-  static subcolormix (c1: Color, c2: Color, w: number): Color {
-    const weight = w || 50;
-    const base = c1.rgba;
-    const brend = c2.rgba;
-    const newcolor = base.map(function (c, i) {
-      if (i === 3) return brend[i] + (c - brend[i]) * (weight / 100);
-      return Math.floor(brend[i] + (c - brend[i]) * (weight / 100));
-    }) as RGBA;
-
-    return new Color(rgbToHEX(newcolor), newcolor, rgbToHSL(newcolor).concat([newcolor[3]]) as HSLA);
+  static subcolormix (c1: Color, c2: Color, w: number = 50): Color {
+    return Color.rgba(...subMixColor(c1.rgbaval, c2.rgbaval, w));
   }
 
   get red () {
@@ -262,120 +302,37 @@ export class Color {
   }
 
   invert (weight = 100): Color {
-    const inverted = this.rgba.map(function (c, i) {
-      if (i === 3) { return c; }
-      return Math.round(255 - c);
-    }) as RGBA;
+    const inverted = this.rgba.map((c, i) => i === 3 ? c : Math.round(255 - c)) as RGBA;
 
     return Color.mix(new Color(rgbToHEX(inverted), inverted, rgbToHSL(inverted).concat([inverted[3]]) as HSLA), this, weight);
   }
 
   adjustRed (deg?: number, scale: number = 0): Color {
-    const rgba = this.rgbaval;
-
-    if (deg) {
-      rgba[0] = Math.max(Math.min(rgba[0] + deg, 255), 0);
-    } else {
-      scale >= 0
-        ? rgba[0] = Math.floor((255 - rgba[0]) * scale / 100 + rgba[0])
-        : rgba[0] = Math.floor(rgba[0] - rgba[0] * Math.abs(scale) / 100);
-    }
-
-    const hsla = rgbToHSL(rgba);
-    return new Color(rgbToHEX(rgba), rgba, hsla);
+    return Color.rgba(...adjustRed(this.rgbaval, deg, scale));
   }
 
   adjustGreen (deg?: number, scale: number = 0): Color {
-    const rgba = this.rgbaval;
-
-    if (deg) {
-      rgba[1] = Math.max(Math.min(rgba[1] + deg, 255), 0);
-    } else {
-      scale >= 0
-        ? rgba[1] = Math.floor((255 - rgba[1]) * scale / 100 + rgba[1])
-        : rgba[1] = Math.floor(rgba[1] - rgba[1] * Math.abs(scale) / 100);
-    }
-
-    const hsla = rgbToHSL(rgba);
-
-    return new Color(rgbToHEX(rgba), rgba, hsla);
+    return Color.rgba(...adjustGreen(this.rgbaval, deg, scale));
   }
 
   adjustBlue (deg?: number, scale: number = 0): Color {
-    const rgba = this.rgbaval;
-
-    if (deg) {
-      rgba[2] = Math.max(Math.min(rgba[2] + deg, 255), 0);
-    } else {
-      scale >= 0
-        ? rgba[2] = Math.floor((255 - rgba[2]) * scale / 100 + rgba[2])
-        : rgba[2] = Math.floor(rgba[2] - rgba[2] * Math.abs(scale) / 100);
-    }
-
-    const hsla = rgbToHSL(rgba);
-
-    return new Color(rgbToHEX(rgba), rgba, hsla);
+    return Color.rgba(...adjustBlue(this.rgbaval, deg, scale));
   }
 
   adjustHue (deg: number): Color {
-    const hsla = this.hslaval;
-    hsla[0] = hsla[0] + deg;
-    const rgba = hslToRGB(hsla);
-
-    return new Color(rgbToHEX(rgba), rgba, hsla);
+    return Color.hsla(...adjustHue(this.hslaval, deg));
   }
 
   adjustSaturation (deg?: number, scale: number = 0): Color {
-    const hsla = this.hslaval;
-
-    if (deg) {
-      hsla[1] = Math.max(Math.min(hsla[1] + deg, 100), 0);
-    } else {
-      scale >= 0
-        ? hsla[1] = Math.floor((100 - hsla[1]) * scale / 100 + hsla[1])
-        : hsla[1] = Math.floor(hsla[1] - hsla[1] * Math.abs(scale) / 100);
-    }
-
-    const rgba = hslToRGB(hsla);
-
-    return new Color(rgbToHEX(rgba), rgba, hsla);
+    return Color.hsla(...adjustSaturation(this.hslaval, deg, scale));
   }
 
   adjustLightness (deg?: number, scale: number = 0): Color {
-    const hsla = this.hslaval;
-
-    if (deg) {
-      hsla[2] = Math.max(Math.min(hsla[2] + deg, 100), 0);
-    } else {
-      scale >= 0
-        ? hsla[2] = Math.floor((100 - hsla[2]) * scale / 100 + hsla[2])
-        : hsla[2] = Math.floor(hsla[2] - hsla[2] * Math.abs(scale) / 100);
-    }
-
-    const rgba = hslToRGB(hsla);
-
-    return new Color(rgbToHEX(rgba), rgba, hsla);
+    return Color.hsla(...adjustLightness(this.hslaval, deg, scale));
   }
 
   adjustAlpha (deg?: number, scale: number = 0): Color {
-    const rgba = this.rgbaval;
-    const hsla = this.hslaval;
-    let a;
-
-    const alpha = this.alpha;
-
-    if (deg) {
-      a = Math.round(Math.max(Math.min(alpha + deg, 1), 0) * 100) / 100;
-    } else {
-      scale >= 0
-        ? a = Math.floor((1 - alpha) * scale + (alpha * 100)) / 100
-        : a = Math.floor(alpha * (100 + scale)) / 100;
-    }
-
-    rgba[3] = a;
-    hsla[3] = a;
-
-    return new Color(rgbToHEX(rgba), rgba, hsla);
+    return Color.hsla(...adjustAlpha(this.hslaval, deg, scale));
   }
 
   complement () {
@@ -420,18 +377,9 @@ export class Color {
 
   adjust (opt: AdjustColorOptions): Color {
     let color: Color = this;
-    const operations = {
-      red: (deg: number) => color.adjustRed(deg),
-      green: (deg: number) => color.adjustGreen(deg),
-      blue: (deg: number) => color.adjustBlue(deg),
-      hue: (deg: number) => color.adjustHue(deg),
-      saturation: (deg: number) => color.adjustSaturation(deg),
-      lightness: (deg: number) => color.adjustLightness(deg),
-      alpha: (deg: number) => color.adjustAlpha(deg),
-    };
 
     for (const [k, v] of Object.entries(opt)) {
-      color = operations[k as keyof typeof operations](v);
+      color = color["adjust" + k[0].toUpperCase() + k.slice(1) as AdjustColorFuncs](v);
     }
 
     return color;
@@ -439,17 +387,9 @@ export class Color {
 
   scale (opt: ScaleColorOptions): Color {
     let color: Color = this;
-    const operations = {
-      red: (scale: number) => color.adjustRed(undefined, scale),
-      green: (scale: number) => color.adjustGreen(undefined, scale),
-      blue: (scale: number) => color.adjustBlue(undefined, scale),
-      saturation: (scale: number) => color.adjustSaturation(undefined, scale),
-      lightness: (scale: number) => color.adjustLightness(undefined, scale),
-      alpha: (scale: number) => color.adjustAlpha(undefined, scale),
-    };
 
     for (const [k, v] of Object.entries(opt)) {
-      color = operations[k as keyof typeof operations](v);
+      color = color["adjust" + k[0].toUpperCase() + k.slice(1) as ScaleColorFuncs](undefined, v);
     }
 
     return color;
@@ -459,18 +399,16 @@ export class Color {
     let rgba = this.rgba;
     let hsla = this.hsla;
 
-    const operations = {
-      red: (val: number) => { rgba[0] = val; hsla = rgbToHSL(rgba); },
-      green: (val: number) => { rgba[1] = val; hsla = rgbToHSL(rgba); },
-      blue: (val: number) => { rgba[2] = val; hsla = rgbToHSL(rgba); },
-      hue: (val: number) => { hsla[0] = val; rgba = hslToRGB(hsla); },
-      saturation: (val: number) => { hsla[1] = val; rgba = hslToRGB(hsla); },
-      lightness: (val: number) => { hsla[2] = val; rgba = hslToRGB(hsla); },
-      alpha: (val: number) => { rgba[3] = val; hsla[3] = val; },
-    };
-
     for (const [k, v] of Object.entries(opt)) {
-      operations[k as keyof typeof operations](v);
+      switch (k) {
+      case "red": rgba[0] = v; hsla = rgbToHSL(rgba); break;
+      case "green": rgba[1] = v; hsla = rgbToHSL(rgba); break;
+      case "blue": rgba[2] = v; hsla = rgbToHSL(rgba); break;
+      case "hue": hsla[0] = v; rgba = hslToRGB(hsla); break;
+      case "saturation": hsla[1] = v; rgba = hslToRGB(hsla); break;
+      case "lightness": hsla[2] = v; rgba = hslToRGB(hsla); break;
+      case "alpha": rgba[3] = v; hsla[3] = v; break;
+      }
     }
 
     return new Color(rgbToHEX(rgba), rgba, hsla);
@@ -478,62 +416,25 @@ export class Color {
 
   // Color Sets
   lightenSet (n: number) {
-    const arr: Color[] = [this];
-    const step = 100 / n;
-    for (let i = 1; i < n; i++) {
-      arr.push(this.adjustLightness(undefined, step * i));
-    }
-    return arr;
+    return [this as Color].concat(range(1, n as 10).map(i => this.adjustLightness(undefined, 100 / n * i)));
   }
 
   darkenSet (n: number) {
-    const arr: Color[] = [this];
-    const step = 100 / n;
-    for (let i = n - 1; i > 0; i--) {
-      arr.push(this.adjustLightness(undefined, -(step * i)));
-    }
-    return arr;
-  }
-
-  complementSet (n: number) {
-    const base = this;
-    const comp = this.complement();
-    const arr: Color[] = [this];
-    const step = 100 / (n - 1);
-
-    for (let i = n - 1; i >= 0; i--) {
-      if (i === n - 1) {
-        arr.push(base);
-      } else if (i === 0) {
-        arr.push(comp);
-      } else { arr.push(Color.subcolormix(base, comp, step * i)); }
-    }
-    return arr;
-  }
-
-  invertSet (n: number) {
-    const base = this;
-    const inv = this.invert();
-    const arr: Color[] = [this];
-    const step = 100 / (n - 1);
-
-    for (let i = n - 1; i >= 0; i--) {
-      if (i === n - 1) {
-        arr.push(base);
-      } else if (i === 0) {
-        arr.push(inv);
-      } else { arr.push(Color.subcolormix(base, inv, step * i)); }
-    }
-    return arr;
+    return [this as Color].concat(range(1, n as 10).map(i => this.adjustLightness(undefined, -(100 / n * i))));
   }
 
   desaturateSet (n: number) {
-    const arr: Color[] = [this];
-    const step = 100 / n;
-    for (let i = n - 1; i > 0; i--) {
-      arr.push(this.adjustSaturation(undefined, -(step * i)));
-    }
-    return arr;
+    return [this as Color].concat(range(1, n as 10).map(i => this.adjustSaturation(undefined, -(100 / n * i))));
+  }
+
+  complementSet (n: number) {
+    const comp = this.complement();
+    return range(0, n as 10).reverse().map(i => i === n - 1 ? this : i === 0 ? comp : Color.subcolormix(this, comp, 100 / (n - 1) * i));
+  }
+
+  invertSet (n: number) {
+    const inv = this.invert();
+    return range(0, n as 10).reverse().map(i => i === n - 1 ? this : i === 0 ? inv : Color.subcolormix(this, inv, 100 / (n - 1) * i));
   }
 };
 
