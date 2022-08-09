@@ -245,6 +245,38 @@ Object {
 }
 `;
 
+exports[`Background Color With Gradient 1`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(0, 0, 0, var(--w-bg-opacity))",
+  "backgroundImage": "linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))",
+}
+`;
+
+exports[`Background Color With Gradient 2`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(254, 243, 199, var(--w-bg-opacity))",
+  "backgroundImage": "linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))",
+}
+`;
+
+exports[`Background Color With Gradient 3`] = `
+Object {
+  "--w-bg-opacity": "0.9",
+  "backgroundColor": "rgba(0, 0, 0, var(--w-bg-opacity))",
+  "backgroundImage": "linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))",
+}
+`;
+
+exports[`Background Color With Gradient 4`] = `
+Object {
+  "--w-bg-opacity": "0.9",
+  "backgroundColor": "rgba(252, 211, 77, var(--w-bg-opacity))",
+  "backgroundImage": "linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))",
+}
+`;
+
 exports[`Background Color With Opacity 1`] = `
 Object {
   "--w-bg-opacity": "0.5",

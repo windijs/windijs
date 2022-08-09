@@ -21,6 +21,16 @@ test("Background Color With Opacity", () => {
   expect(bg.amber[100].opacity(50).css).toMatchSnapshot();
 });
 
+test("Background Color With Gradient", () => {
+  const bg = createUtility("bg")
+    .use(colorHandler(colors, "backgroundColor", "--w-bg-opacity"))
+    .init();
+  expect(bg.black.gradient.css).toMatchSnapshot();
+  expect(bg.amber[100].gradient.css).toMatchSnapshot();
+  expect(bg.black.opacity(90).gradient.css).toMatchSnapshot();
+  expect(bg.amber[300].opacity(90).gradient.css).toMatchSnapshot();
+});
+
 test("Background Color With Different Opacity Name", () => {
   const bg = createUtility("bg")
     .use(colorHandler(colors, "backgroundColor", "--my-opacity"))
