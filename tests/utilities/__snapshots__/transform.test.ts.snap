@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Perspective 1`] = `
+Object {
+  "-webkit-perspective": "24rem",
+  "perspective": "24rem",
+}
+`;
+
+exports[`Perspective 2`] = `
+Object {
+  "-webkit-perspective": "3rem",
+  "perspective": "3rem",
+}
+`;
+
+exports[`Perspective 3`] = `
+Object {
+  "-webkit-perspective-origin": "center",
+  "perspectiveOrigin": "center",
+}
+`;
+
+exports[`Perspective 4`] = `
+Object {
+  "-webkit-perspective-origin": "left bottom",
+  "perspectiveOrigin": "left bottom",
+}
+`;
+
+exports[`Rotate 1`] = `
+Object {
+  "--w-rotate": "90deg",
+}
+`;
+
+exports[`Rotate 2`] = `
+Object {
+  "--w-rotate": "-45deg",
+}
+`;
+
+exports[`Rotate 3`] = `
+Object {
+  "--w-rotate-x": "30deg",
+}
+`;
+
+exports[`Rotate 4`] = `
+Object {
+  "--w-rotate-y": "45deg",
+}
+`;
+
+exports[`Rotate 5`] = `
+Object {
+  "--w-rotate-z": "60deg",
+}
+`;
+
+exports[`Scale 1`] = `
+Object {
+  "--w-scale-x": "0.9",
+  "--w-scale-y": "0.9",
+  "--w-scale-z": "0.9",
+}
+`;
+
+exports[`Scale 2`] = `
+Object {
+  "--w-scale-x": "0.3",
+}
+`;
+
+exports[`Scale 3`] = `
+Object {
+  "--w-scale-y": "0.45",
+}
+`;
+
+exports[`Scale 4`] = `
+Object {
+  "--w-scale-z": "0.6",
+}
+`;
+
+exports[`Skew 1`] = `
+Object {
+  "--w-skew-x": "90deg",
+  "--w-skew-y": "90deg",
+}
+`;
+
+exports[`Skew 2`] = `
+Object {
+  "--w-skew-x": "-45deg",
+  "--w-skew-y": "-45deg",
+}
+`;
+
+exports[`Skew 3`] = `
+Object {
+  "--w-skew-x": "30deg",
+}
+`;
+
+exports[`Skew 4`] = `
+Object {
+  "--w-skew-y": "45deg",
+}
+`;
+
+exports[`Transform 1`] = `
+Object {
+  "-ms-transform": "rotate(60deg) skewY(-30deg) translateX(2rem)",
+  "-webkit-transform": "rotate(60deg) skewY(-30deg) translateX(2rem)",
+  "transform": "rotate(60deg) skewY(-30deg) translateX(2rem)",
+}
+`;
+
+exports[`Transform 2`] = `
+Array [
+  Object {
+    "--w-rotate": "0",
+    "--w-rotate-x": "0",
+    "--w-rotate-y": "0",
+    "--w-rotate-z": "0",
+    "--w-scale-x": "1",
+    "--w-scale-y": "1",
+    "--w-scale-z": "1",
+    "--w-skew-x": "0",
+    "--w-skew-y": "0",
+    "--w-translate-x": "0",
+    "--w-translate-y": "0",
+    "--w-translate-z": "0",
+    "-ms-transform": "translateX(var(--w-translate-x)) translateY(var(--w-translate-y)) translateZ(var(--w-translate-z)) rotate(var(--w-rotate)) rotateX(var(--w-rotate-x)) rotateY(var(--w-rotate-y)) rotateZ(var(--w-rotate-z)) skewX(var(--w-skew-x)) skewY(var(--w-skew-y)) scaleX(var(--w-scale-x)) scaleY(var(--w-scale-y)) scaleZ(var(--w-scale-z))",
+    "-webkit-transform": "translateX(var(--w-translate-x)) translateY(var(--w-translate-y)) translateZ(var(--w-translate-z)) rotate(var(--w-rotate)) rotateX(var(--w-rotate-x)) rotateY(var(--w-rotate-y)) rotateZ(var(--w-rotate-z)) skewX(var(--w-skew-x)) skewY(var(--w-skew-y)) scaleX(var(--w-scale-x)) scaleY(var(--w-scale-y)) scaleZ(var(--w-scale-z))",
+    "transform": "translateX(var(--w-translate-x)) translateY(var(--w-translate-y)) translateZ(var(--w-translate-z)) rotate(var(--w-rotate)) rotateX(var(--w-rotate-x)) rotateY(var(--w-rotate-y)) rotateZ(var(--w-rotate-z)) skewX(var(--w-skew-x)) skewY(var(--w-skew-y)) scaleX(var(--w-scale-x)) scaleY(var(--w-scale-y)) scaleZ(var(--w-scale-z))",
+  },
+  Object {
+    "--w-rotate": "60deg",
+  },
+  Object {
+    "--w-skew-y": "-30deg",
+  },
+  Object {
+    "--w-translate-x": "2rem",
+  },
+]
+`;
+
+exports[`Transform Origin 1`] = `
+Object {
+  "-ms-transform-origin": "center",
+  "-webkit-transform-origin": "center",
+  "transformOrigin": "center",
+}
+`;
+
+exports[`Transform Origin 2`] = `
+Object {
+  "-ms-transform-origin": "left top",
+  "-webkit-transform-origin": "left top",
+  "transformOrigin": "left top",
+}
+`;
+
+exports[`Transform Origin 3`] = `
+Object {
+  "-ms-transform-origin": "left bottom",
+  "-webkit-transform-origin": "left bottom",
+  "transformOrigin": "left bottom",
+}
+`;
+
+exports[`Transform Style 1`] = `
+Object {
+  "-webkit-transform-style": "preserve-3d",
+  "transformStyle": "preserve-3d",
+}
+`;
+
+exports[`Transform Style 2`] = `
+Object {
+  "-webkit-transform-style": "flat",
+  "transformStyle": "flat",
+}
+`;
+
+exports[`Translate 1`] = `
+Object {
+  "--w-translate-x": "1.5rem",
+  "--w-translate-y": "1.5rem",
+  "--w-translate-z": "1.5rem",
+}
+`;
+
+exports[`Translate 2`] = `
+Object {
+  "--w-translate-x": "3rem",
+}
+`;
+
+exports[`Translate 3`] = `
+Object {
+  "--w-translate-y": "-33.333333%",
+}
+`;
+
+exports[`Translate 4`] = `
+Object {
+  "--w-translate-z": "-7rem",
+}
+`;
