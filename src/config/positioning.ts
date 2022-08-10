@@ -1,4 +1,6 @@
-import { translateConfig } from "./transform";
+import { fractions, negative } from "utils";
+
+import { spacingConfig } from "./spacing";
 
 export const justifyContentConfig = {
   start: "flex-start",
@@ -53,7 +55,12 @@ export const placeSelfConfig = justifyItemsConfig;
 
 export const insetConfig = {
   auto: "auto",
-  ...translateConfig,
+  full: "100%",
+  "-full": "-100%",
+  ...spacingConfig,
+  ...negative(spacingConfig),
+  ...fractions(2, 5),
+  ...negative(fractions(2, 5)),
 };
 
 export const objectFitConfig = {
@@ -64,7 +71,7 @@ export const objectFitConfig = {
   "scale-down": "scale-down",
 };
 
-export const objectPositionConfig = {
+export const positionConfig = {
   bottom: {
     DEFAULT: "bottom",
     left: "left bottom",
@@ -87,6 +94,8 @@ export const objectPositionConfig = {
     right: "right top",
   },
 };
+
+export const objectPositionConfig = positionConfig;
 
 export const zIndexConfig = {
   auto: "auto",
