@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`all 1`] = `
-Object {
-  "& *": Object {
+Map {
+  "& *" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -12,8 +12,8 @@ Object {
 `;
 
 exports[`children 1`] = `
-Object {
-  "& > *": Object {
+Map {
+  "& > *" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -23,8 +23,8 @@ Object {
 `;
 
 exports[`sibling 1`] = `
-Object {
-  "& + *": Object {
+Map {
+  "& + *" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -34,8 +34,8 @@ Object {
 `;
 
 exports[`siblings 1`] = `
-Object {
-  "& ~ *": Object {
+Map {
+  "& ~ *" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -45,8 +45,8 @@ Object {
 `;
 
 exports[`svg 1`] = `
-Object {
-  "& svg": Object {
+Map {
+  "& svg" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",

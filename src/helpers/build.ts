@@ -1,6 +1,6 @@
 import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSMap, CSSObject, CSSRule, CSSRules, StyleObject } from "types";
 import { applyVariant, bundle, isStyleObject } from "./common";
-import { camelToDash, indent } from "utils";
+import { camelToDash, entries, indent } from "utils";
 
 import { nameStyle } from "./namer";
 
@@ -46,26 +46,24 @@ function cssBlock (selector: string, body: CSSBlockBody = [], rootIndent = 0, ch
 
 export function createRules (css: CSSObject | CSSMap, selector: string) {
   const rules: CSSRules = [];
-
-  let atRule: CSSAtRule | undefined;
   const rootRule: CSSRule = { selector, children: [] };
 
-  for (const [key, value] of Object.entries(css)) {
+  for (const [key, value] of entries(css)) {
     if (typeof value === "string" || value instanceof String) {
       rootRule.children.push({ property: key, value: value as string });
     } else if (typeof value === "number") {
       rootRule.children.push({ property: key, value: value.toString() });
     } else if (value != null) {
+      if (rootRule.children[0]) rules.push({ ...rootRule }); rootRule.children = [];
       if (key.startsWith("@")) {
-        atRule = { rule: key, children: createRules(value, selector) };
-        rules.push(atRule);
+        rules.push({ rule: key, children: createRules(value, selector) });
       } else {
         rules.push(...createRules(value, key.replace(/&/g, selector)));
       }
     }
   }
 
-  rootRule.children[0] && rules.unshift(rootRule);
+  rootRule.children[0] && rules.push(rootRule);
 
   return rules;
 }

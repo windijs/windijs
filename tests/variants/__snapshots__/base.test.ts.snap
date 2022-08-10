@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`media 1`] = `
-Object {
-  "@media print": Object {
+Map {
+  "@media print" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -12,8 +12,8 @@ Object {
 `;
 
 exports[`media 2`] = `
-Object {
-  "@media (min-width: 1000px) and (max-width: 2000px)": Object {
+Map {
+  "@media (min-width: 1000px) and (max-width: 2000px)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -23,8 +23,8 @@ Object {
 `;
 
 exports[`useMedia 1`] = `
-Object {
-  "@media print": Object {
+Map {
+  "@media print" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -34,8 +34,8 @@ Object {
 `;
 
 exports[`useMedia 2`] = `
-Object {
-  "@media (min-width: 1000px) and (max-width: 2000px)": Object {
+Map {
+  "@media (min-width: 1000px) and (max-width: 2000px)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -45,8 +45,8 @@ Object {
 `;
 
 exports[`useVariant 1`] = `
-Object {
-  "span": Object {
+Map {
+  "span" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -56,8 +56,8 @@ Object {
 `;
 
 exports[`useVariant 2`] = `
-Object {
-  "&:hover": Object {
+Map {
+  "&:hover" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -67,8 +67,8 @@ Object {
 `;
 
 exports[`variant 1`] = `
-Object {
-  "span": Object {
+Map {
+  "span" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -78,8 +78,8 @@ Object {
 `;
 
 exports[`variant 2`] = `
-Object {
-  "&:hover": Object {
+Map {
+  "&:hover" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`active 1`] = `
-Object {
-  "&:active": Object {
+Map {
+  "&:active" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -12,8 +12,8 @@ Object {
 `;
 
 exports[`checked 1`] = `
-Object {
-  "&:checked": Object {
+Map {
+  "&:checked" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -23,8 +23,8 @@ Object {
 `;
 
 exports[`default 1`] = `
-Object {
-  "&:default": Object {
+Map {
+  "&:default" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -34,8 +34,8 @@ Object {
 `;
 
 exports[`empty 1`] = `
-Object {
-  "&:empty": Object {
+Map {
+  "&:empty" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -45,8 +45,8 @@ Object {
 `;
 
 exports[`enabled 1`] = `
-Object {
-  "&:enabled": Object {
+Map {
+  "&:enabled" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -56,8 +56,8 @@ Object {
 `;
 
 exports[`even 1`] = `
-Object {
-  "&:nth-child(even)": Object {
+Map {
+  "&:nth-child(even)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -67,8 +67,8 @@ Object {
 `;
 
 exports[`evenOfType 1`] = `
-Object {
-  "&:nth-of-type(even)": Object {
+Map {
+  "&:nth-of-type(even)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -78,8 +78,8 @@ Object {
 `;
 
 exports[`first 1`] = `
-Object {
-  "&:first-child": Object {
+Map {
+  "&:first-child" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -89,8 +89,8 @@ Object {
 `;
 
 exports[`firstOfType 1`] = `
-Object {
-  "&:first-of-type": Object {
+Map {
+  "&:first-of-type" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -100,8 +100,8 @@ Object {
 `;
 
 exports[`focus 1`] = `
-Object {
-  "&:focus": Object {
+Map {
+  "&:focus" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -111,8 +111,8 @@ Object {
 `;
 
 exports[`focusVisible 1`] = `
-Object {
-  "&:focus-visible": Object {
+Map {
+  "&:focus-visible" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -122,8 +122,8 @@ Object {
 `;
 
 exports[`focusWithin 1`] = `
-Object {
-  "&:focus-within": Object {
+Map {
+  "&:focus-within" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -133,8 +133,8 @@ Object {
 `;
 
 exports[`hover 1`] = `
-Object {
-  "&:hover": Object {
+Map {
+  "&:hover" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -144,8 +144,8 @@ Object {
 `;
 
 exports[`indeterminate 1`] = `
-Object {
-  "&:indeterminate": Object {
+Map {
+  "&:indeterminate" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -155,8 +155,8 @@ Object {
 `;
 
 exports[`invalid 1`] = `
-Object {
-  "&:invalid": Object {
+Map {
+  "&:invalid" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -166,8 +166,8 @@ Object {
 `;
 
 exports[`last 1`] = `
-Object {
-  "&:last-child": Object {
+Map {
+  "&:last-child" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -177,8 +177,8 @@ Object {
 `;
 
 exports[`lastOfType 1`] = `
-Object {
-  "&:last-of-type": Object {
+Map {
+  "&:last-of-type" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -188,8 +188,8 @@ Object {
 `;
 
 exports[`link 1`] = `
-Object {
-  "&:link": Object {
+Map {
+  "&:link" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -199,8 +199,8 @@ Object {
 `;
 
 exports[`notChecked 1`] = `
-Object {
-  "&:not(:checked)": Object {
+Map {
+  "&:not(:checked)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -210,8 +210,8 @@ Object {
 `;
 
 exports[`notDisabled 1`] = `
-Object {
-  "&:not(:disabled)": Object {
+Map {
+  "&:not(:disabled)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -221,8 +221,8 @@ Object {
 `;
 
 exports[`notFirst 1`] = `
-Object {
-  "&:not(:first-child)": Object {
+Map {
+  "&:not(:first-child)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -232,8 +232,8 @@ Object {
 `;
 
 exports[`notFirstOfType 1`] = `
-Object {
-  "&:not(:first-of-type)": Object {
+Map {
+  "&:not(:first-of-type)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -243,8 +243,8 @@ Object {
 `;
 
 exports[`notLast 1`] = `
-Object {
-  "&:not(:last-child)": Object {
+Map {
+  "&:not(:last-child)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -254,8 +254,8 @@ Object {
 `;
 
 exports[`notLastOfType 1`] = `
-Object {
-  "&:not(:last-of-type)": Object {
+Map {
+  "&:not(:last-of-type)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -265,8 +265,8 @@ Object {
 `;
 
 exports[`notOnlyChild 1`] = `
-Object {
-  "&:not(:only-child)": Object {
+Map {
+  "&:not(:only-child)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -276,8 +276,8 @@ Object {
 `;
 
 exports[`notOnlyOfType 1`] = `
-Object {
-  "&:not(:only-of-type)": Object {
+Map {
+  "&:not(:only-of-type)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -287,8 +287,8 @@ Object {
 `;
 
 exports[`odd 1`] = `
-Object {
-  "&:nth-child(odd)": Object {
+Map {
+  "&:nth-child(odd)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -298,8 +298,8 @@ Object {
 `;
 
 exports[`oddOfType 1`] = `
-Object {
-  "&:nth-of-type(odd)": Object {
+Map {
+  "&:nth-of-type(odd)" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -309,8 +309,8 @@ Object {
 `;
 
 exports[`onlyChild 1`] = `
-Object {
-  "&:only-child": Object {
+Map {
+  "&:only-child" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -320,8 +320,8 @@ Object {
 `;
 
 exports[`onlyOfType 1`] = `
-Object {
-  "&:only-of-type": Object {
+Map {
+  "&:only-of-type" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -331,8 +331,8 @@ Object {
 `;
 
 exports[`optional 1`] = `
-Object {
-  "&:optional": Object {
+Map {
+  "&:optional" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -342,8 +342,8 @@ Object {
 `;
 
 exports[`placeholderShown 1`] = `
-Object {
-  "&:placeholder-shown": Object {
+Map {
+  "&:placeholder-shown" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -353,8 +353,8 @@ Object {
 `;
 
 exports[`readOnly 1`] = `
-Object {
-  "&:read-only": Object {
+Map {
+  "&:read-only" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -364,8 +364,8 @@ Object {
 `;
 
 exports[`readWrite 1`] = `
-Object {
-  "&:read-write": Object {
+Map {
+  "&:read-write" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -375,8 +375,8 @@ Object {
 `;
 
 exports[`required 1`] = `
-Object {
-  "&:required": Object {
+Map {
+  "&:required" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -386,8 +386,8 @@ Object {
 `;
 
 exports[`root 1`] = `
-Object {
-  "&:root": Object {
+Map {
+  "&:root" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -397,8 +397,8 @@ Object {
 `;
 
 exports[`target 1`] = `
-Object {
-  "&:target": Object {
+Map {
+  "&:target" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -408,8 +408,8 @@ Object {
 `;
 
 exports[`valid 1`] = `
-Object {
-  "&:valid": Object {
+Map {
+  "&:valid" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -419,8 +419,8 @@ Object {
 `;
 
 exports[`visited 1`] = `
-Object {
-  "&:visited": Object {
+Map {
+  "&:visited" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",

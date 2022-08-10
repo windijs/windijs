@@ -57,13 +57,13 @@ export function useArrayHelper () {
  * @param utilities Utilities and Variants
  * @returns CSSObject
  */
-export function bundle (utilities: (StyleObject | StyleObject[])[]): CSSObject {
+export function bundle (utilities: (StyleObject | StyleObject[])[]): CSSMap {
   let vcss: CSSMap | CSSObject;
-  const css: CSSObject = {};
+  const css: CSSMap = new Map();
   for (const utility of utilities.flat()) {
     vcss = applyVariant(utility);
     for (const [k, v] of entries(vcss)) {
-      if (v != null) css[k] = k in css ? Object.assign(css[k], v) : v;
+      if (v != null) css.set(k, css.has(k) && typeof v === "object" ? Object.assign(css.get(k) as any, v) : v);
     }
   }
   return css;

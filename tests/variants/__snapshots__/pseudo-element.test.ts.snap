@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`after 1`] = `
-Object {
-  "&::after": Object {
+Map {
+  "&::after" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -12,8 +12,8 @@ Object {
 `;
 
 exports[`before 1`] = `
-Object {
-  "&::before": Object {
+Map {
+  "&::before" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -23,8 +23,8 @@ Object {
 `;
 
 exports[`firstLetter 1`] = `
-Object {
-  "&::first-letter": Object {
+Map {
+  "&::first-letter" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -34,8 +34,8 @@ Object {
 `;
 
 exports[`firstLine 1`] = `
-Object {
-  "&::first-line": Object {
+Map {
+  "&::first-line" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -45,8 +45,8 @@ Object {
 `;
 
 exports[`marker 1`] = `
-Object {
-  "& *::marker, &::marker": Object {
+Map {
+  "& *::marker, &::marker" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
@@ -56,8 +56,8 @@ Object {
 `;
 
 exports[`selection 1`] = `
-Object {
-  "& *::selection, &::selection": Object {
+Map {
+  "& *::selection, &::selection" => Object {
     "--w-bg-opacity": "1",
     "-webkit-background-clip": "content-box",
     "backgroundClip": "content-box",
