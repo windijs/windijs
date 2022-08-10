@@ -2,6 +2,7 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from './components/HelloWorld.vue'
+import Gradient from './components/Gradient.vue';
 import { lg } from 'windijs';
 import { bg } from './windi';
 
@@ -19,6 +20,7 @@ const logo = [ bg.indigo[400] ]
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
+  <Gradient />
 </template>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { bg } from '../windi'
-import type { NestedColors } from "windijs"
+import type { WindiColors } from "windijs"
 
 const btn = ref([bg.pink[400]])
 
@@ -9,7 +9,7 @@ defineProps<{ msg: string }>()
 
 const count = ref(0)
 
-const colors: NestedColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
+const colors: WindiColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
 
 const increment = () => {
   btn.value = [bg[colors[count.value % 8]][400]]
