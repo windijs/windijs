@@ -1,6 +1,8 @@
-import { degrees, fractions, negative, range, scales } from "utils";
+import { degrees, negative, omit, range, scales } from "utils";
+import { insetConfig, positionConfig } from "./positioning";
 
 import { spacingConfig } from "./spacing";
+import { tShirtScale } from "./sizing";
 
 export const degreeConfig = degrees<0|1|2|3|6|12|15|30|45|60|90|180>([0, 1, 2, 3, 6, 12, 15, 30, 45, 60, 90, 180]);
 
@@ -13,11 +15,19 @@ export const scaleConfig = scales(range(0, 41).map(i => i * 5) as [0, 5, 10, 15,
 
 export const skewConfig = rotateConfig;
 
-export const translateConfig = {
-  full: "100%",
-  "-full": "-100%",
-  ...spacingConfig,
-  ...negative(spacingConfig),
-  ...fractions(2, 5),
-  ...negative(fractions(2, 5)),
+export const translateConfig = omit(insetConfig, { auto: 1 });
+
+export const transformOriginConfig = positionConfig;
+
+export const transformStyleConfig = {
+  flat: "flat",
+  box: "preserve-3d",
 };
+
+export const perspectiveConfig = {
+  none: "none",
+  ...tShirtScale,
+  ...spacingConfig,
+};
+
+export const perspectiveOriginConfig = positionConfig;
