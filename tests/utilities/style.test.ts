@@ -1,6 +1,6 @@
-import { createUtility, percent, styleProperty, windiColors } from "index";
+import { createUtility, percent, stylePropertyHandler, windiColors } from "index";
 
-const style = createUtility("style").use(styleProperty()).init();
+const style = createUtility("style").use(stylePropertyHandler()).init();
 
 test("style with color entry", () => {
   expect(style.backgroundColor.aliceblue.css).toMatchSnapshot();
@@ -120,7 +120,7 @@ test("style with string", () => {
 });
 
 test("style with config", () => {
-  const style = createUtility("style").use(styleProperty({ backgroundColor: windiColors, willChange: { scroll: "scroll-position", transform: "transform" } })).init();
+  const style = createUtility("style").use(stylePropertyHandler({ backgroundColor: windiColors, willChange: { scroll: "scroll-position", transform: "transform" } })).init();
 
   expect(style.willChange.scroll.css).toMatchSnapshot();
   expect(style.willChange.transform.css).toMatchSnapshot();
@@ -131,20 +131,3 @@ test("style with config", () => {
   expect(style.clipPath.ellipse("closest-side", "closest-side", percent[10]).meta).toMatchSnapshot();
   expect(style.fontSize.em[2].meta).toMatchSnapshot();
 });
-
-// test("style redirect", () => {
-//   // const list = {
-//   // none: style.listStyle.none,
-//   // ...style.listStyleType,
-//   // ...style.listStylePosition,
-//   // };
-//   const list = new Proxy({}, {
-//     get (target, p: string, receiver) {
-//       if (["inside", "outside"].includes(p)) return style.listStylePosition[p];
-//       return style.listStyleType[p];
-//     },
-//   }) as typeof style.listStyleType & typeof style.listStylePosition;
-//   // console.log(list.);
-
-//   // expect(list.none).toMatchSnapshot();
-// });

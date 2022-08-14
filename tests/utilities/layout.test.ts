@@ -1,8 +1,8 @@
 import { alignContentConfig, alignItemsConfig, alignSelfConfig, insetConfig, justifyContentConfig, justifyItemsConfig, justifySelfConfig, objectFitConfig, objectPositionConfig, placeContentConfig, placeItemsConfig, placeSelfConfig, tableDisplayConfig, zIndexConfig } from "config";
-import { bind, configHandler, createUtility, styleProperty } from "utilities";
+import { bind, configHandler, createUtility, stylePropertyHandler } from "utilities";
 import { css, prop } from "helpers";
 
-const style = createUtility("style").use(styleProperty({
+const style = createUtility("style").use(stylePropertyHandler({
   inset: insetConfig,
   top: insetConfig,
   left: insetConfig,
