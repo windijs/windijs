@@ -1,3 +1,6 @@
+import { degreeConfig } from "./transform";
+import { positionConfig } from "./positioning";
+
 export const backgroundAttachmentConfig = {
   fixed: "fixed",
   local: "local",
@@ -11,29 +14,17 @@ export const backgroundClipConfig = {
   content: "content-box",
 };
 
-export const backgroundPositionConfig = {
-  bottom: "bottom",
-  center: "center",
-  left: {
-    "": "left",
-    bottom: "left bottom",
-    top: "left top",
-  },
-  right: {
-    "": "right",
-    bottom: "right bottom",
-    top: "right top",
-  },
-  top: "top",
-};
+export const backgroundPositionConfig = positionConfig;
 
 export const backgroundRepeatConfig = {
-  "": "repeat",
-  not: "no-repeat",
-  x: "repeat-x",
-  y: "repeat-y",
-  round: "round",
-  space: "space",
+  repeat: {
+    DEFAULT: "repeat",
+    x: "repeat-x",
+    y: "repeat-y",
+    round: "round",
+    space: "space",
+  },
+  noRepeat: "no-repeat",
 };
 
 export const backgroundSizeConfig = {
@@ -46,6 +37,24 @@ export const backgroundOriginConfig = {
   border: "border-box",
   padding: "padding-box",
   content: "content-box",
+};
+
+export const backgroundImageConfig = {
+  none: "none",
+};
+
+export const gradientDirectionConfig = {
+  to: {
+    t: "top",
+    tr: "top right",
+    r: "right",
+    br: "bottom right",
+    b: "bottom",
+    bl: "bottom left",
+    l: "left",
+    tl: "top left",
+  },
+  deg: degreeConfig,
 };
 
 export const gradientConfig = {
