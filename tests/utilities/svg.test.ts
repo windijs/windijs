@@ -1,12 +1,6 @@
-import { baseColors, windiColors } from "colors";
-import { colorHandler, configHandler, createUtility, numberHandler } from "core";
-import { strokeLineCapConfig, strokeLineJoinConfig } from "config";
-
-import type { StyleObject } from "types";
+import { fill, stroke } from "utilities";
 
 test("Fill", () => {
-  const fill = createUtility("fill").use(colorHandler({ none: "none", ...baseColors, ...windiColors }, "fill")).init();
-
   expect(fill.none.css).toMatchSnapshot();
   expect(fill.transparent.css).toMatchSnapshot();
   expect(fill.current.css).toMatchSnapshot();
@@ -14,15 +8,6 @@ test("Fill", () => {
 });
 
 test("Stroke", () => {
-  const stroke = createUtility("stroke")
-    .use(colorHandler({ none: "none", ...baseColors, ...windiColors }, "stroke"))
-    .case("dash", numberHandler<Record<0 | 1 | 2 | 3 | 4 | 5 | 10 | 100, StyleObject>>("strokeDasharray"))
-    .case("offset", numberHandler<Record<0 | 1 | 2 | 3 | 4 | 5 | 10 | 100, StyleObject>>("strokeDashoffset"))
-    .case("cap", configHandler(strokeLineCapConfig, "strokeLinecap"))
-    .case("join", configHandler(strokeLineJoinConfig, "strokeLinejoin"))
-    .use(numberHandler<Record<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10, StyleObject>>("strokeWidth"))
-    .init();
-
   expect(stroke.none.css).toMatchSnapshot();
   expect(stroke.transparent.css).toMatchSnapshot();
   expect(stroke.current.css).toMatchSnapshot();
