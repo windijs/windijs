@@ -31,44 +31,67 @@ const types = (dest = "index", subdir = "") => {
   };
 };
 
-export default defineConfig([{
-  input: "src/index.ts",
-  output: [
-    {
-      file: dump("index.js"),
-      format: "cjs",
-      paths: (id) => `./${path.relative("./src", id)}/index.js`,
-    },
-    {
-      file: dump("index.mjs"),
-      format: "esm",
-      paths: (id) => `./${path.relative("./src", id)}/index.mjs`,
-    },
-  ],
-  plugins: [
-    tsPlugin,
-    rmdir(outDir),
-    mkdir(outDir),
-    copy(["package.json"]), //, "README.md", "LICENSE"]),
-    types(),
-  ],
-}, {
-  input: "src/plugins/index.ts",
-  output: [
-    {
-      file: dump("plugins.js"),
-      format: "cjs",
-      paths: (id) => `./${path.relative("./src", id)}/index.js`,
-    },
-    {
-      file: dump("plugins.mjs"),
-      format: "esm",
-      paths: (id) => `./${path.relative("./src", id)}/index.mjs`,
-    },
-  ],
-  plugins: [
-    tsPlugin,
-    types("plugins"),
-    types("global", "/types/global"),
-  ],
-}]);
+export default defineConfig([
+  {
+    input: "src/index.ts",
+    output: [
+      {
+        file: dump("index.js"),
+        format: "cjs",
+        paths: (id) => `./${path.relative("./src", id)}/index.js`,
+      },
+      {
+        file: dump("index.mjs"),
+        format: "esm",
+        paths: (id) => `./${path.relative("./src", id)}/index.mjs`,
+      },
+    ],
+    plugins: [
+      tsPlugin,
+      rmdir(outDir),
+      mkdir(outDir),
+      copy(["package.json"]), //, "README.md", "LICENSE"]),
+      types(),
+    ],
+  },
+  {
+    input: "src/utilities/index.ts",
+    output: [
+      {
+        file: dump("utilities.js"),
+        format: "cjs",
+        paths: (id) => `./${path.relative("./src", id)}/index.js`,
+      },
+      {
+        file: dump("utilities.mjs"),
+        format: "esm",
+        paths: (id) => `./${path.relative("./src", id)}/index.mjs`,
+      },
+    ],
+    plugins: [
+      tsPlugin,
+      types("utilities"),
+      types("global", "/types/global"),
+    ],
+  },
+  {
+    input: "src/variants/index.ts",
+    output: [
+      {
+        file: dump("variants.js"),
+        format: "cjs",
+        paths: (id) => `./${path.relative("./src", id)}/index.js`,
+      },
+      {
+        file: dump("variants.mjs"),
+        format: "esm",
+        paths: (id) => `./${path.relative("./src", id)}/index.mjs`,
+      },
+    ],
+    plugins: [
+      tsPlugin,
+      types("variants"),
+      types("global", "/types/global"),
+    ],
+  },
+]);

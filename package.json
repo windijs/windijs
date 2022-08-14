@@ -10,9 +10,13 @@
       "import": "./index.mjs",
       "require": "./index.js"
     },
-    "./plugins": {
-      "import": "./plugins.mjs",
-      "require": "./plugins.js"
+    "./variants": {
+      "import": "./variants.mjs",
+      "require": "./variants.js"
+    },
+    "./utilities": {
+      "import": "./utilities.mjs",
+      "require": "./utilities.js"
     }
   },
   "scripts": {
