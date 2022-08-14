@@ -1,5 +1,5 @@
 import type { CSSAngle, CSSLinearColorStopOrHint, CSSMap, CSSObject, CSSPrefixer, CSSSideOrCorner, ColorStyleObject, StyleObject, StyleProperties } from "types";
-import { css, getFirstVar, prop } from "helpers";
+import { SymbolCSS, css, getFirstVar, prop } from "helpers";
 import { dashToCamel, parenWrap } from "utils";
 import { hexToRGB, sliceColor } from "helpers/color";
 import { prefixImageRendering, prefixKeyframes, prefixNotHidden, prefixPlaceholder, prefixWritingMode } from "./prefixer";
@@ -139,6 +139,10 @@ export const joinTransforms = (transformations: (string | StyleObject)[]) => tra
 }).join(" ");
 
 export const buildTransform = (...transformations: (string | StyleObject)[]) => css(Object.fromEntries(["-webkit-transform", "-ms-transform", "transform"].map(i => [i, joinTransforms(transformations)])));
+
+export function buildTransition (property: string, ...styles: StyleObject[]): StyleObject {
+  return css(Object.assign({ transitionProperty: property }, ...styles.map(i => i[SymbolCSS])));
+}
 
 export function buildKeyframes (name: string, keyframes: Record<string, CSSObject>): CSSObject {
   keyframes = Object.fromEntries(Object.entries(keyframes).map(([k, v]) => [k, prefixKeyframes(v)]));
