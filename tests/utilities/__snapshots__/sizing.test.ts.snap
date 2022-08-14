@@ -228,7 +228,11 @@ Object {
 }
 `;
 
-exports[`Min Width 1`] = `undefined`;
+exports[`Min Width 1`] = `
+Object {
+  "width": "min-content",
+}
+`;
 
 exports[`Min Width 2`] = `
 Object {
