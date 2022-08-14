@@ -1,6 +1,6 @@
-import { buildTransform, configHandler, createUtility, cssHandler } from "core";
-import { perspectiveConfig, perspectiveOriginConfig, rotateConfig, scaleConfig, skewConfig, transformOriginConfig, transformStyleConfig, translateConfig } from "config";
-import { prop, transforms } from "helpers";
+import { buildTransform, configHandler, createUtility, cssHandler } from "@windi/core";
+import { perspectiveConfig, perspectiveOriginConfig, rotateConfig, scaleConfig, skewConfig, transformOriginConfig, transformStyleConfig, translateConfig } from "@windi/config";
+import { prop, transforms } from "@windi/helpers";
 
 export const transform = createUtility("transform")
   .use(cssHandler({

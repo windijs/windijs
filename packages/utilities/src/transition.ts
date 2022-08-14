@@ -1,6 +1,6 @@
-import { buildTransition, configHandler, createUtility } from "core";
-import { css, prop } from "helpers";
-import { transitionDelayConfig, transitionDurationConfig, transitionPropertyConfig, transitionTimingFunctionConfig } from "config";
+import { buildTransition, configHandler, createUtility } from "@windi/core";
+import { css, prop } from "@windi/helpers";
+import { transitionDelayConfig, transitionDurationConfig, transitionPropertyConfig, transitionTimingFunctionConfig } from "@windi/config";
 
 export const transition = createUtility("transition").use(configHandler(transitionPropertyConfig, (v) => {
   const timef = transitionTimingFunctionConfig.DEFAULT;

@@ -1,5 +1,5 @@
-import { buildSpaceBetweenX, buildSpaceBetweenY, configHandler, createUtility, guard, meld, spaceBetweenXReverseHandler, spaceBetweenYReverseHandler } from "core";
-import { marginConfig, paddingConfig, spaceBetweenConfig } from "config";
+import { buildSpaceBetweenX, buildSpaceBetweenY, configHandler, createUtility, guard, meld, spaceBetweenXReverseHandler, spaceBetweenYReverseHandler } from "@windi/core";
+import { marginConfig, paddingConfig, spaceBetweenConfig } from "@windi/config";
 
 export const p = createUtility("p")
   .use(configHandler(paddingConfig, "padding"))

@@ -1,6 +1,6 @@
-import { blurConfig, brightnessConfig, contrastConfig, dropShadowConfig, grayscaleConfig, hueRotateConfig, invertConfig, opacityConfig, saturateConfig, sepiaConfig } from "config";
-import { buildBackdropFilter, buildFilter, configHandler, createUtility, cssHandler } from "core";
-import { css, filters } from "helpers";
+import { blurConfig, brightnessConfig, contrastConfig, dropShadowConfig, grayscaleConfig, hueRotateConfig, invertConfig, opacityConfig, saturateConfig, sepiaConfig } from "@windi/config";
+import { buildBackdropFilter, buildFilter, configHandler, createUtility, cssHandler } from "@windi/core";
+import { css, filters } from "@windi/helpers";
 
 export const filter = createUtility("filter")
   .use(cssHandler({

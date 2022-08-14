@@ -1,8 +1,8 @@
-import { buildImageRendering, buildPlaceholder, colorHandler, configHandler, createUtility, cssHandler } from "core";
-import { imageRenderingConfig, listStylePositionConfig, listStyleTypeConfig, opacityConfig, overflowConfig, overscrollConfig } from "config";
+import { buildImageRendering, buildPlaceholder, colorHandler, configHandler, createUtility, cssHandler } from "@windi/core";
+import { imageRenderingConfig, listStylePositionConfig, listStyleTypeConfig, opacityConfig, overflowConfig, overscrollConfig } from "@windi/config";
 
 import { colors } from "./colors";
-import { prop } from "helpers";
+import { prop } from "@windi/helpers";
 
 export const image = createUtility("image")
   .case("render", configHandler(imageRenderingConfig, buildImageRendering))

@@ -1,8 +1,8 @@
-import { CSSObject, StyleObject } from "types";
-import { aspectRatioConfig, spacingConfig } from "config";
-import { configHandler, createUtility, cssHandler, genericHandler, numberHandler } from "core";
+import type { CSSObject, StyleObject } from "@windi/helpers";
+import { aspectRatioConfig, spacingConfig } from "@windi/config";
+import { configHandler, createUtility, cssHandler, genericHandler, numberHandler } from "@windi/core";
 
-import { css } from "helpers";
+import { css } from "@windi/helpers";
 
 export const aspectBase: CSSObject = {
   position: "relative",

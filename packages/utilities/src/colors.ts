@@ -1,3 +1,3 @@
-import { baseColors, windiColors } from "colors";
+import { baseColors, windiColors } from "@windi/colors";
 
 export const colors = { ...baseColors, ...windiColors };
