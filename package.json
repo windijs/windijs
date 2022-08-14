@@ -6,6 +6,10 @@
   "module": "index.mjs",
   "types": "index.d.ts",
   "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    },
     "./plugins": {
       "import": "./plugins.mjs",
       "require": "./plugins.js"
