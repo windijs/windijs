@@ -1,5 +1,6 @@
-import { buildSpaceBetweenX, buildSpaceBetweenY, configHandler, createUtility, guard, meld, spaceBetweenXReverseHandler, spaceBetweenYReverseHandler } from "index";
-import { marginConfig, paddingConfig, spaceBetweenConfig } from "config";
+import { configHandler, createUtility } from "index";
+import { m, mb, ml, mr, mt, mx, my, p, pb, pl, pr, pt, px, py, space } from "utilities";
+import { marginConfig, paddingConfig } from "config";
 
 import { unify } from "helpers";
 
@@ -25,14 +26,6 @@ test("Padding Combined", () => {
 });
 
 test("Padding Separated", () => {
-  const p = createUtility("p").use(configHandler(paddingConfig, "padding")).init();
-  const py = createUtility("py").use(configHandler(paddingConfig, ["paddingTop", "paddingBottom"])).init();
-  const px = createUtility("px").use(configHandler(paddingConfig, ["paddingLeft", "paddingRight"])).init();
-  const pt = createUtility("pt").use(configHandler(paddingConfig, "paddingTop")).init();
-  const pl = createUtility("pl").use(configHandler(paddingConfig, "paddingLeft")).init();
-  const pb = createUtility("pb").use(configHandler(paddingConfig, "paddingBottom")).init();
-  const pr = createUtility("pr").use(configHandler(paddingConfig, "paddingRight")).init();
-
   expect(p[4].css).toMatchSnapshot();
   expect(p[20].css).toMatchSnapshot();
   expect(px[1.5].css).toMatchSnapshot();
@@ -66,14 +59,6 @@ test("Margin Combined", () => {
 });
 
 test("Margin Separated", () => {
-  const m = createUtility("m").use(configHandler(marginConfig, "margin")).init();
-  const my = createUtility("my").use(configHandler(marginConfig, ["marginTop", "marginBottom"])).init();
-  const mx = createUtility("mx").use(configHandler(marginConfig, ["marginLeft", "marginRight"])).init();
-  const mt = createUtility("mt").use(configHandler(marginConfig, "marginTop")).init();
-  const ml = createUtility("ml").use(configHandler(marginConfig, "marginLeft")).init();
-  const mb = createUtility("mb").use(configHandler(marginConfig, "marginBottom")).init();
-  const mr = createUtility("mr").use(configHandler(marginConfig, "marginRight")).init();
-
   expect(m[4].css).toMatchSnapshot();
   expect(m.auto.css).toMatchSnapshot();
   expect(m[-10].css).toMatchSnapshot();
@@ -86,17 +71,6 @@ test("Margin Separated", () => {
 });
 
 test("Space Between", () => {
-  const space = createUtility("space")
-    .case("x", meld(
-      guard("reverse", spaceBetweenXReverseHandler()),
-      configHandler(spaceBetweenConfig, buildSpaceBetweenX),
-    ))
-    .case("y", meld(
-      guard("reverse", spaceBetweenYReverseHandler()),
-      configHandler(spaceBetweenConfig, buildSpaceBetweenY),
-    ))
-    .init();
-
   expect(space.x.reverse.css).toMatchSnapshot();
   expect(space.x[4].css).toMatchSnapshot();
   expect(space.x[-10].css).toMatchSnapshot();
@@ -106,17 +80,6 @@ test("Space Between", () => {
 });
 
 test("Build Space Between", () => {
-  const space = createUtility("space")
-    .case("x", meld(
-      guard("reverse", spaceBetweenXReverseHandler()),
-      configHandler(spaceBetweenConfig, buildSpaceBetweenX),
-    ))
-    .case("y", meld(
-      guard("reverse", spaceBetweenYReverseHandler()),
-      configHandler(spaceBetweenConfig, buildSpaceBetweenY),
-    ))
-    .init();
-
   expect(unify(".space-x-reverse", space.x.reverse)).toMatchSnapshot();
 
   expect(unify(".space-y-2", space.y[2])).toMatchSnapshot();
