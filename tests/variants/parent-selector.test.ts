@@ -1,9 +1,7 @@
-import { backgroundClipConfig, bundle, colorHandler, configHandler, createUtility, groupActive, groupFocus, groupHover, groupVisited, prop, windiColors } from "index";
+import { groupActive, groupFocus, groupHover, groupVisited } from "variants";
 
-const bg = createUtility("bg")
-  .use(colorHandler(windiColors, "backgroundColor", "--w-bg-opacity"))
-  .case("clip", configHandler(backgroundClipConfig, ["backgroundClip", prop`-webkit-background-clip`]))
-  .init();
+import { bg } from "utilities";
+import { bundle } from "helpers";
 
 const utilities = [bg.blue[500], bg.clip.content];
 

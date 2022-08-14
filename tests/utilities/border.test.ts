@@ -1,9 +1,9 @@
 import { border, divide, outline, ring, rounded } from "utilities";
-import { createUtility, prop } from "index";
+import { configHandler, createUtility } from "core";
 
 import type { PickValue } from "types";
-import { configHandler } from "core";
 import { opacityConfig } from "config";
+import { prop } from "helpers";
 
 test("Border Radius", () => {
   expect(rounded.css).toMatchSnapshot();

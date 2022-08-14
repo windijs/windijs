@@ -1,4 +1,9 @@
-import { all, backgroundClipConfig, bundle, children, colorHandler, configHandler, createUtility, prop, sibling, siblings, svg, windiColors } from "index";
+import { all, children, sibling, siblings, svg } from "variants";
+import { bundle, prop } from "helpers";
+import { colorHandler, configHandler, createUtility } from "core";
+
+import { backgroundClipConfig } from "config";
+import { windiColors } from "colors";
 
 const bg = createUtility("bg")
   .use(colorHandler(windiColors, "backgroundColor", "--w-bg-opacity"))

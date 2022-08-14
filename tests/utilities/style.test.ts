@@ -1,4 +1,7 @@
-import { createUtility, percent, stylePropertyHandler, windiColors } from "index";
+import { createUtility, stylePropertyHandler } from "core";
+
+import { percent } from "helpers";
+import { windiColors } from "colors";
 
 const style = createUtility("style").use(stylePropertyHandler()).init();
 

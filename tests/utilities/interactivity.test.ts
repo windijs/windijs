@@ -1,4 +1,7 @@
-import { createUtility, css, stylePropertyHandler, touchActionConfig } from "index";
+import { createUtility, stylePropertyHandler } from "core";
+
+import { css } from "helpers";
+import { touchActionConfig } from "config";
 
 const style = createUtility("style").use(stylePropertyHandler({
   touchAction: touchActionConfig,

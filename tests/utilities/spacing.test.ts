@@ -1,4 +1,4 @@
-import { configHandler, createUtility } from "index";
+import { configHandler, createUtility } from "core";
 import { m, mb, ml, mr, mt, mx, my, p, pb, pl, pr, pt, px, py, space } from "utilities";
 import { marginConfig, paddingConfig } from "config";
 

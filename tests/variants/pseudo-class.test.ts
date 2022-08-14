@@ -1,9 +1,7 @@
-import { $default, active, backgroundClipConfig, bundle, checked, colorHandler, configHandler, createUtility, empty, enabled, even, evenOfType, first, firstOfType, focus, focusVisible, focusWithin, hover, indeterminate, invalid, last, lastOfType, link, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, prop, readOnly, readWrite, required, root, target, valid, visited, windiColors } from "index";
+import { $default, active, checked, empty, enabled, even, evenOfType, first, firstOfType, focus, focusVisible, focusWithin, hover, indeterminate, invalid, last, lastOfType, link, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, readOnly, readWrite, required, root, target, valid, visited } from "variants";
 
-const bg = createUtility("bg")
-  .use(colorHandler(windiColors, "backgroundColor", "--w-bg-opacity"))
-  .case("clip", configHandler(backgroundClipConfig, ["backgroundClip", prop`-webkit-background-clip`]))
-  .init();
+import { bg } from "utilities";
+import { bundle } from "helpers";
 
 const utilities = [bg.blue[500], bg.clip.content];
 

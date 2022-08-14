@@ -1,4 +1,4 @@
-import { cm, color, deg, dpi, em, mm, ms, percent, pt, px, rem, s, vh, vw } from "index";
+import { cm, color, deg, dpi, em, mm, ms, percent, pt, px, rem, s, vh, vw } from "helpers";
 
 test("em", () => {
   expect(em[3].toString()).toEqual("3em");

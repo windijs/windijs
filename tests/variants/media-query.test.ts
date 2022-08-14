@@ -1,9 +1,7 @@
-import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, backgroundClipConfig, bundle, colorHandler, configHandler, createUtility, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, prop, rtl, sm, windiColors, xl, xxl } from "index";
+import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, rtl, sm, xl, xxl } from "variants";
 
-const bg = createUtility("bg")
-  .use(colorHandler(windiColors, "backgroundColor", "--w-bg-opacity"))
-  .case("clip", configHandler(backgroundClipConfig, ["backgroundClip", prop`-webkit-background-clip`]))
-  .init();
+import { bg } from "utilities";
+import { bundle } from "helpers";
 
 const utilities = [bg.blue[500], bg.clip.content];
 

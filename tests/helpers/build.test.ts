@@ -1,20 +1,6 @@
-import { atomic, atomicNamer, borderRadiusConfig, borderWidthConfig, configHandler, createUtility, dark, fontSizeConfig, fontSizeHandler, hashNamer, hover, sm, unify, useNamer, windiColors } from "index";
-
-const text = createUtility("text")
-  .use(fontSizeHandler(fontSizeConfig))
-  .init();
-
-const bg = createUtility("bg")
-  .use(configHandler(windiColors, "backgroundColor"))
-  .init();
-
-const rounded = createUtility("rounded")
-  .use(configHandler(borderRadiusConfig, "borderRadius"))
-  .init();
-
-const border = createUtility("border")
-  .use(configHandler(borderWidthConfig, "borderWidth"))
-  .init();
+import { atomic, atomicNamer, hashNamer, unify, useNamer } from "helpers";
+import { bg, border, rounded, text } from "utilities";
+import { dark, hover, sm } from "variants";
 
 test("unify with utilities", () => {
   expect(unify(".test", bg.blue[500], text.lg, sm(border, rounded, bg.blue[400]))).toMatchSnapshot();

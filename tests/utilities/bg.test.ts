@@ -1,4 +1,5 @@
-import { backgroundClipConfig, backgroundGenericHandler, colorHandler, configHandler, createUtility, gradientDirectionConfig } from "index";
+import { backgroundClipConfig, gradientDirectionConfig } from "config";
+import { backgroundGenericHandler, colorHandler, configHandler, createUtility } from "core";
 import { bg, colors, from, to, via } from "utilities";
 import { percent, prop } from "helpers";
 
