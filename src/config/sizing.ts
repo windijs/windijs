@@ -6,7 +6,17 @@ export const screens = {
   md: "768px",
   lg: "1024px",
   xl: "1280px",
-  "2xl": "1536px",
+  xxl: "1536px",
+};
+
+export const orientations = {
+  portrait: "portrait",
+  landscape: "landscape",
+};
+
+export const motions = {
+  motionSafe: "no-preference",
+  motionReduce: "reduce",
 };
 
 export const tShirtScale = {
@@ -29,8 +39,10 @@ const spaceCommonConfig = {
   ...fractions(2, 7),
   ...fractions(12, 13),
   full: "100%",
-  min: "min-content",
-  max: "max-content",
+  content: {
+    min: "min-content",
+    max: "max-content",
+  },
   prose: "65ch",
 };
 
