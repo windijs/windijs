@@ -1,0 +1,35 @@
+{
+  "name": "windijs",
+  "version": "0.1.0",
+  "description": "utility-first css-in-js framework",
+  "main": "index.js",
+  "module": "dist/windijs.mjs",
+  "types": "dist/windijs.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    },
+    "./variants": {
+      "import": "./variants.mjs",
+      "require": "./variants.js"
+    },
+    "./utilities": {
+      "import": "./utilities.mjs",
+      "require": "./utilities.js"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "author": "Raven Satir",
+  "license": "MIT",
+  "dependencies": {
+    "@windi/core": "1.0.0",
+    "@windi/shared": "1.0.0",
+    "@windi/config": "1.0.0",
+    "@windi/colors": "1.0.0",
+    "@windi/helpers": "1.0.0",
+    "@windi/utilities": "1.0.0",
+    "@windi/variants": "1.0.0"
+  }
+}
