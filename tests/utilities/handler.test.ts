@@ -1,7 +1,6 @@
-import { backgroundGenericHandler, borderStyleConfig, borderWidthConfig, createUtility, use, windiColors } from "index";
-import { colorHandler, configHandler, genericHandler, guard, meld } from "utilities";
-
-import { isNumber } from "utils";
+import { StyleObject, backgroundGenericHandler, borderStyleConfig, borderWidthConfig, createUtility, css, rgb, use, windiColors } from "index";
+import { callHandler, colorHandler, configHandler, genericHandler, guard, meld } from "utilities";
+import { isNumber, parenWrap } from "utils";
 
 test("useGeneric With Trigger", () => {
   const backgroundGeneric = genericHandler("backgroundColor", prop => {
@@ -16,6 +15,24 @@ test("useGeneric With Trigger", () => {
     .init();
 
   expect(bg.trigger["rgb(22, 22, 22)"].css).toMatchSnapshot();
+});
+
+test("Call Handler", () => {
+  const rgbCSS: (red: number, green: number, blue: number) => StyleObject = (red: number, green: number, blue: number) => css({ backgroundColor: rgb(red, green, blue) });
+  Object.defineProperty(rgbCSS, "abc", { value: rgbCSS });
+
+  const bg = createUtility("bg")
+    .use(colorHandler(windiColors, "backgroundColor"))
+    .case("rgb", callHandler(
+      rgbCSS as typeof rgbCSS & { abc: typeof rgbCSS },
+      genericHandler("backgroundColor", v => parenWrap("rgb", v)),
+    ),
+    ).init();
+  expect(bg.red[500].css).toMatchSnapshot();
+  expect(bg.rgb(22, 22, 22).css).toMatchSnapshot();
+  expect(bg.rgb(22, 22, 22).meta).toMatchSnapshot();
+  expect(bg.rgb.abc(22, 22, 22).css).toMatchSnapshot();
+  expect(bg.rgb["22, 22, 22"].css).toMatchSnapshot();
 });
 
 test("guard with meld", () => {
