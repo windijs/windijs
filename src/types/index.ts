@@ -43,6 +43,8 @@ export type CSSObject = CSSProps & Partial<CSSAtRules<CSSObject>> & Partial<CSSC
 
 export type CSSMap = Map<keyof CSSProps, string> & Map<keyof CSSAtRules<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSClasses<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSElements<CSSObject>, CSSObject | CSSMap> & Map<keyof HTMLTags<CSSObject>, CSSObject | CSSMap> & Map<string, CSSObject | CSSMap | String | string[] | number>
 
+export type CSSPrefixer = (css: CSSObject) => CSSObject;
+
 export type NumberDict = { [key: number]: string };
 
 export type MetaType = "css" | "static" | "color" | "generic" | "variant";
@@ -104,3 +106,5 @@ export type PickValue<T, ValueType> = Pick<T, { [key in keyof T]-?: T[key] exten
 export type CamelCase<S extends string> = S extends `${infer P1}_${infer P2}${infer P3}`
   ? `${Lowercase<P1>}${Uppercase<P2>}${CamelCase<P3>}`
   : Lowercase<S>;
+
+export type BuildFunc<V = unknown, O extends object = {}> = (value: V) => StyleObject<O> | undefined;

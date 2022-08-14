@@ -55,6 +55,8 @@ export type CSSResolution = (CSSDimensionObject & { type: CSSResolutionType }) |
 
 export type CSSDimension = CSSLength | CSSAngle | CSSTime | CSSResolution
 
+export type CSSDimensionType = CSSLengthType | CSSAngleType | CSSResolutionType | CSSTimeType | CSSFlexType | CSSFrequencyType;
+
 export type CSSLengthPercentage = CSSLength | CSSPercentage;
 
 export type CSSAnglePercentage = CSSAngle | CSSPercentage;
