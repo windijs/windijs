@@ -10,6 +10,27 @@ export function isNumber (value: string) {
   return !isNaN(value);
 }
 
+export function isFraction (amount: string): boolean {
+  return /^\d+\/\d+$/.test(amount);
+}
+
+export function isSize (amount: string): boolean {
+  return /^-?(\d+(\.\d+)?)+(rem|em|px|rpx|vh|vw|ch|ex|cm|mm|in|pt|pc)$/.test(amount);
+}
+
+export function roundUp (num: number, precision = 0): number {
+  precision = Math.pow(10, precision);
+  return Math.round(num * precision) / precision;
+}
+
+export function fracToPercent (amount: string): string | undefined {
+  const matches = amount.match(/[^/]+/g);
+  if (!matches || matches.length < 2) return;
+  const a = +matches[0];
+  const b = +matches[1];
+  return roundUp((a / b) * 100, 6) + "%";
+}
+
 export const hasKey = <T extends object>(obj: T, k: keyof any): k is keyof T => k in obj;
 
 export function commaJoin (...items: (string|number|undefined)[]) {
@@ -41,7 +62,7 @@ export function indent (value: string, count: number = 2) {
   return " ".repeat(count) + value;
 }
 
-export const entries = <T extends object | Map<any, any>> (t: T) => t instanceof Map ? t.entries() : Object.entries(t);
+export const entries = <T extends object | Map<string, any>> (t: T) => t instanceof Map ? t.entries() : Object.entries(t);
 
 export function negative <T extends Record<string | number, string>> (t: T): Negative<T> {
   return Object.fromEntries(Object.entries(t).filter(([, v]) => !/^0(px|rem|em)?$/.test(v)).map(([k, v]) => ["-" + k, "-" + v])) as Negative<T>;
@@ -66,3 +87,7 @@ export function degrees<T extends number> (numbers: T[]) {
 export function scales<T extends number> (numbers: T[]) {
   return Object.fromEntries(numbers.map(i => [i, i / 100 + ""])) as Record<T, string>;
 };
+
+export function omit<T extends object, K extends object> (t: T, keys: K) {
+  return Object.fromEntries(Object.entries(t).filter(([k]) => !(k in keys))) as Omit<T, keyof K>;
+}
