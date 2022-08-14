@@ -1,7 +1,7 @@
 import * as funcs from "helpers/funcs";
 import * as units from "helpers/unit";
 
-import type { CSSDecls, CSSMap, CSSObject, GeneralCSSData, Handler, StyleObject, StyleProxy } from "types";
+import type { BuildFunc, CSSDecls, CSSMap, CSSObject, GeneralCSSData, Handler, StyleObject, StyleProxy } from "types";
 import { buildFontSize, buildKeyframes, buildProperty } from "./builder";
 import { configHandler, cssHandler, genericHandler, guard, handleConfig } from "./api";
 import { css, useProxy } from "helpers";
@@ -71,9 +71,7 @@ export function spaceBetweenYReverseHandler () {
   }));
 }
 
-type BuildFunc = (value: string) => StyleObject | undefined;
-
-export function stylePropertyHandler<T extends Partial<Record<keyof CSSDecls, unknown | BuildFunc>> = {}> (cfg: T = {} as T) {
+export function stylePropertyHandler<T extends Partial<Record<keyof CSSDecls, unknown | BuildFunc<string>>> = {}> (cfg: T = {} as T) {
   const build = (prop: string, value: string) => {
     const meta = getMeta();
     if (meta.props.length === 1) meta.props.push(value);
