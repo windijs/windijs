@@ -1,5 +1,5 @@
 import { boxDecorationBreakConfig, imageRenderingConfig, listStylePositionConfig, listStyleTypeConfig, opacityConfig, overflowConfig, overscrollConfig } from "config";
-import { buildImageRendering, buildPlaceholder, colorHandler, configHandler, createUtility, cssHandler } from "utilities";
+import { buildImageRendering, buildPlaceholder, colorHandler, configHandler, createUtility, cssHandler } from "core";
 
 import { prop } from "helpers";
 import { windiColors } from "colors";

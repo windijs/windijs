@@ -1,6 +1,6 @@
 import { baseColors, createUtility, prop, windiColors } from "index";
 import { borderRadiusConfig, borderStyleConfig, borderWidthConfig, opacityConfig, outlineOffsetConfig, ringOffsetConfig } from "config";
-import { buildDivideColor, buildDivideOpacity, buildDivideStyle, buildDivideX, buildDivideY, buildRingWidth, colorHandler, configHandler, cssHandler, divideXReverseHandler, divideYReverseHandler, guard, meld } from "utilities";
+import { buildDivideColor, buildDivideOpacity, buildDivideStyle, buildDivideX, buildDivideY, buildRingWidth, colorHandler, configHandler, cssHandler, divideXReverseHandler, divideYReverseHandler, guard, meld } from "core";
 
 import type { PickValue } from "types";
 

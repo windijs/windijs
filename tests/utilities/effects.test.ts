@@ -1,5 +1,5 @@
 import { blendModeConfig, boxShadowConfig, opacityConfig } from "config";
-import { buildBoxShadowColor, buildBoxShadowSize, colorHandler, configHandler, createUtility } from "utilities";
+import { buildBoxShadowColor, buildBoxShadowSize, colorHandler, configHandler, createUtility } from "core";
 
 import { prop } from "helpers";
 import { windiColors } from "colors";

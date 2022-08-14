@@ -1,5 +1,5 @@
 import { StyleObject, backgroundGenericHandler, borderStyleConfig, borderWidthConfig, createUtility, css, rgb, use, windiColors } from "index";
-import { callHandler, colorHandler, configHandler, genericHandler, guard, meld } from "utilities";
+import { callHandler, colorHandler, configHandler, genericHandler, guard, meld } from "core";
 import { isNumber, parenWrap } from "utils";
 
 test("useGeneric With Trigger", () => {

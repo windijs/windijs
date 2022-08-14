@@ -1,4 +1,4 @@
-import { buildFlexDirection, buildFlexStretch, configHandler, createUtility, cssHandler } from "utilities";
+import { buildFlexDirection, buildFlexStretch, configHandler, createUtility, cssHandler } from "core";
 import { flexDirectionConfig, flexGrowConfig, flexShrinkConfig, flexStretchConfig, flexWrapConfig } from "config";
 
 import { prop } from "index";

@@ -1,4 +1,4 @@
-import { buildTransition, configHandler, createUtility, msHandler } from "utilities";
+import { buildTransition, configHandler, createUtility, msHandler } from "core";
 import { css, prop } from "helpers";
 import { transitionDelayConfig, transitionDurationConfig, transitionPropertyConfig, transitionTimingFunctionConfig } from "config";
 

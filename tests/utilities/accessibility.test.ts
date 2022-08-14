@@ -1,4 +1,4 @@
-import { createUtility, cssHandler } from "utilities";
+import { createUtility, cssHandler } from "core";
 
 test("Screen Readers", () => {
   const sr = createUtility("sr")

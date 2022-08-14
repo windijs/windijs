@@ -1,5 +1,5 @@
 import { $ } from "index";
-import { style } from "plugins";
+import { style } from "utilities";
 
 const utilities = [style.background.blue, style.padding.rem[4], style.borderRadius.px[4]];
 

@@ -1,4 +1,4 @@
-import { buildTransform, configHandler, createUtility, cssHandler } from "utilities";
+import { buildTransform, configHandler, createUtility, cssHandler } from "core";
 import { deg, prop, rem, transforms } from "helpers";
 import { perspectiveConfig, perspectiveOriginConfig, rotateConfig, scaleConfig, skewConfig, transformOriginConfig, transformStyleConfig, translateConfig } from "config";
 

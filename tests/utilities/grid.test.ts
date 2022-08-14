@@ -1,4 +1,4 @@
-import { configHandler, createUtility, cssHandler } from "utilities";
+import { configHandler, createUtility, cssHandler } from "core";
 import { gridAutoColumnsConfig, gridAutoFlowConfig, gridAutoRowsConfig, gridColumnConfig, gridColumnEndConfig, gridColumnStartConfig, gridRowConfig, gridRowEndConfig, gridRowStartConfig, gridTemplateColumnsConfig, gridTemplateRowsConfig, spacingConfig } from "config";
 
 import { prop } from "index";

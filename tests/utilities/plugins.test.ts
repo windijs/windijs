@@ -1,6 +1,6 @@
 import type { CSSObject, StyleObject } from "types";
 import { aspectRatioConfig, spacingConfig } from "config";
-import { configHandler, createUtility, cssHandler, genericHandler, numberHandler } from "utilities";
+import { configHandler, createUtility, cssHandler, genericHandler, numberHandler } from "core";
 
 import { css } from "helpers";
 

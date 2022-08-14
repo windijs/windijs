@@ -1,5 +1,5 @@
 import { backgroundGenericHandler, baseColors, borderWidthConfig, createUtility, opacityConfig, prop, windiColors } from "index";
-import { colorHandler, configHandler, guard, meld } from "utilities";
+import { colorHandler, configHandler, guard, meld } from "core";
 
 test("Color Meta", () => {
   const bg = createUtility("bg")

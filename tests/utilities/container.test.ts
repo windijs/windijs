@@ -1,4 +1,4 @@
-import { buildContainer } from "utilities";
+import { buildContainer } from "core";
 import { unify } from "helpers";
 
 const screens = {

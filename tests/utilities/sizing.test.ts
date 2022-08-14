@@ -1,4 +1,4 @@
-import { configHandler, createUtility } from "utilities";
+import { configHandler, createUtility } from "core";
 import { heightConfig, widthConfig } from "config";
 
 test("Width", () => {

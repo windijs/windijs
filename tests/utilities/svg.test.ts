@@ -1,5 +1,5 @@
 import { baseColors, windiColors } from "colors";
-import { colorHandler, configHandler, createUtility, numberHandler } from "utilities";
+import { colorHandler, configHandler, createUtility, numberHandler } from "core";
 import { strokeLineCapConfig, strokeLineJoinConfig } from "config";
 
 import type { StyleObject } from "types";

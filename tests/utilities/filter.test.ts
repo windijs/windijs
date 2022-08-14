@@ -1,5 +1,5 @@
 import { blurConfig, brightnessConfig, contrastConfig, dropShadowConfig, grayscaleConfig, hueRotateConfig, invertConfig, opacityConfig, saturateConfig, sepiaConfig } from "config";
-import { buildBackdropFilter, buildFilter, configHandler, createUtility, cssHandler } from "utilities";
+import { buildBackdropFilter, buildFilter, configHandler, createUtility, cssHandler } from "core";
 import { css, deg, filters, percent, px, rem, rgba } from "helpers";
 
 test("Blur", () => {
