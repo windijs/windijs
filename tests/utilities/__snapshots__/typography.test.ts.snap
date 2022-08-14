@@ -93,6 +93,60 @@ Object {
 }
 `;
 
+exports[`Font Variant Numeric 1`] = `
+Object {
+  "fontVariantNumeric": "normal",
+}
+`;
+
+exports[`Font Variant Numeric 2`] = `
+Object {
+  "fontVariantNumeric": "ordinal",
+}
+`;
+
+exports[`Font Variant Numeric 3`] = `
+Object {
+  "fontVariantNumeric": "slashed-zero",
+}
+`;
+
+exports[`Font Variant Numeric 4`] = `
+Object {
+  "fontVariantNumeric": "lining-nums",
+}
+`;
+
+exports[`Font Variant Numeric 5`] = `
+Object {
+  "fontVariantNumeric": "oldstyle-nums",
+}
+`;
+
+exports[`Font Variant Numeric 6`] = `
+Object {
+  "fontVariantNumeric": "proportional-nums",
+}
+`;
+
+exports[`Font Variant Numeric 7`] = `
+Object {
+  "fontVariantNumeric": "tabular-nums",
+}
+`;
+
+exports[`Font Variant Numeric 8`] = `
+Object {
+  "fontVariantNumeric": "diagonal-fractions",
+}
+`;
+
+exports[`Font Variant Numeric 9`] = `
+Object {
+  "fontVariantNumeric": "stacked-fractions",
+}
+`;
+
 exports[`Font Weight 1`] = `
 Object {
   "fontWeight": "700",
@@ -102,6 +156,19 @@ Object {
 exports[`Font Weight 2`] = `
 Object {
   "fontWeight": "500",
+}
+`;
+
+exports[`Font Weight 3`] = `
+Object {
+  "fontStyle": "normal",
+  "fontWeight": "400",
+}
+`;
+
+exports[`Font Weight 4`] = `
+Object {
+  "fontStyle": "italic",
 }
 `;
 
@@ -176,5 +243,339 @@ Object {
 exports[`Text Alignment 2`] = `
 Object {
   "textAlign": "justify",
+}
+`;
+
+exports[`Text Alignment 3`] = `
+Object {
+  "textAlign": "center",
+}
+`;
+
+exports[`Text Alignment 4`] = `
+Object {
+  "textAlign": "right",
+}
+`;
+
+exports[`Text Alignment 5`] = `
+Object {
+  "verticalAlign": "baseline",
+}
+`;
+
+exports[`Text Alignment 6`] = `
+Object {
+  "verticalAlign": "top",
+}
+`;
+
+exports[`Text Alignment 7`] = `
+Object {
+  "verticalAlign": "middle",
+}
+`;
+
+exports[`Text Alignment 8`] = `
+Object {
+  "verticalAlign": "text-top",
+}
+`;
+
+exports[`Text Alignment 9`] = `
+Object {
+  "verticalAlign": "text-bottom",
+}
+`;
+
+exports[`Text Color 1`] = `
+Object {
+  "--w-text-opacity": "1",
+  "color": "rgba(239, 68, 68, var(--w-text-opacity))",
+}
+`;
+
+exports[`Text Color 2`] = `
+Object {
+  "--w-text-opacity": "0.1",
+  "color": "rgba(59, 130, 246, var(--w-text-opacity))",
+}
+`;
+
+exports[`Text Color 3`] = `
+Object {
+  "--w-text-opacity": "0.4",
+}
+`;
+
+exports[`Text Decoration 1`] = `
+Object {
+  "-webkit-text-decoration-line": "underline",
+  "textDecorationLine": "underline",
+}
+`;
+
+exports[`Text Decoration 2`] = `
+Object {
+  "-webkit-text-decoration-line": "line-through",
+  "textDecorationLine": "line-through",
+}
+`;
+
+exports[`Text Decoration 3`] = `
+Object {
+  "-webkit-text-decoration-line": "overline",
+  "textDecorationLine": "overline",
+}
+`;
+
+exports[`Text Decoration 4`] = `
+Object {
+  "-webkit-text-decoration-line": "none",
+  "textDecorationLine": "none",
+}
+`;
+
+exports[`Text Decoration 5`] = `
+Object {
+  "-webkit-text-decoration-style": "solid",
+  "textDecorationStyle": "solid",
+}
+`;
+
+exports[`Text Decoration 6`] = `
+Object {
+  "-webkit-text-decoration-style": "wavy",
+  "textDecorationStyle": "wavy",
+}
+`;
+
+exports[`Text Decoration 7`] = `
+Object {
+  "textDecorationThickness": "2px",
+}
+`;
+
+exports[`Text Decoration 8`] = `
+Object {
+  "textDecorationThickness": "auto",
+}
+`;
+
+exports[`Text Decoration 9`] = `
+Object {
+  "--w-text-decoration-opacity": "1",
+  "-webkit-text-decoration-color": "rgba(239, 68, 68, var(--w-text-decoration-opacity))",
+  "textDecorationColor": "rgba(239, 68, 68, var(--w-text-decoration-opacity))",
+}
+`;
+
+exports[`Text Decoration 10`] = `
+Object {
+  "--w-text-decoration-opacity": "0.2",
+}
+`;
+
+exports[`Text Decoration 11`] = `
+Object {
+  "textUnderlineOffset": "3px",
+}
+`;
+
+exports[`Text Indent 1`] = `
+Object {
+  "textIndent": "1.5rem",
+}
+`;
+
+exports[`Text Indent 2`] = `
+Object {
+  "textIndent": "2rem",
+}
+`;
+
+exports[`Text Indent 3`] = `
+Object {
+  "textIndent": "2.5rem",
+}
+`;
+
+exports[`Text Shadow 1`] = `
+Object {
+  "textShadow": "0px 0px 1px rgb(0 0 0 / 20%), 0px 0px 1px rgb(1 0 5 / 10%)",
+}
+`;
+
+exports[`Text Shadow 2`] = `
+Object {
+  "textShadow": "1px 1px 3px rgb(36 37 47 / 25%)",
+}
+`;
+
+exports[`Text Shadow 3`] = `
+Object {
+  "textShadow": "none",
+}
+`;
+
+exports[`Text Stroke 1`] = `
+Object {
+  "--w-text-stroke-opacity": "1",
+  "-webkit-text-stroke-color": "rgba(252, 211, 77, var(--w-text-stroke-opacity))",
+}
+`;
+
+exports[`Text Stroke 2`] = `
+Object {
+  "--w-text-stroke-opacity": "0.1",
+  "-webkit-text-stroke-color": "rgba(147, 197, 253, var(--w-text-stroke-opacity))",
+}
+`;
+
+exports[`Text Stroke 3`] = `
+Object {
+  "--w-text-stroke-opacity": "0.2",
+}
+`;
+
+exports[`Text Stroke 4`] = `
+Object {
+  "-webkit-text-stroke-width": "thin",
+}
+`;
+
+exports[`Text Stroke 5`] = `
+Object {
+  "-webkit-text-stroke-width": "0",
+}
+`;
+
+exports[`Text Stroke 6`] = `
+Object {
+  "-webkit-text-stroke-width": "medium",
+}
+`;
+
+exports[`Text Stroke 7`] = `
+Object {
+  "-webkit-text-stroke-width": "thick",
+}
+`;
+
+exports[`Text Stroke 8`] = `
+Object {
+  "-webkit-text-stroke-width": "5px",
+}
+`;
+
+exports[`Text transform 1`] = `
+Object {
+  "textTransform": "none",
+}
+`;
+
+exports[`Text transform 2`] = `
+Object {
+  "textTransform": "uppercase",
+}
+`;
+
+exports[`Text transform 3`] = `
+Object {
+  "textTransform": "capitalize",
+}
+`;
+
+exports[`Whitespace 1`] = `
+Object {
+  "whiteSpace": "normal",
+}
+`;
+
+exports[`Whitespace 2`] = `
+Object {
+  "whiteSpace": "nowrap",
+}
+`;
+
+exports[`Whitespace 3`] = `
+Object {
+  "whiteSpace": "pre",
+}
+`;
+
+exports[`Whitespace 4`] = `
+Object {
+  "whiteSpace": "pre-line",
+}
+`;
+
+exports[`Whitespace 5`] = `
+Object {
+  "whiteSpace": "pre-wrap",
+}
+`;
+
+exports[`WordBreak 1`] = `
+Object {
+  "wordBreak": "break-all",
+}
+`;
+
+exports[`WordBreak 2`] = `
+Object {
+  "overflowWrap": "break-word",
+}
+`;
+
+exports[`WordBreak 3`] = `
+Object {
+  "overflowWrap": "normal",
+  "wordBreak": "normal",
+}
+`;
+
+exports[`Writing Mode & Text Orientation 1`] = `
+Object {
+  "-ms-writing-mode": "lr-tb",
+  "-webkit-writing-mode": "horizontal-tb",
+  "writingMode": "horizontal-tb",
+}
+`;
+
+exports[`Writing Mode & Text Orientation 2`] = `
+Object {
+  "-ms-writing-mode": "tb-rl",
+  "-webkit-writing-mode": "vertical-rl",
+  "writingMode": "vertical-rl",
+}
+`;
+
+exports[`Writing Mode & Text Orientation 3`] = `
+Object {
+  "-ms-writing-mode": "tb-lr",
+  "-webkit-writing-mode": "vertical-lr",
+  "writingMode": "vertical-lr",
+}
+`;
+
+exports[`Writing Mode & Text Orientation 4`] = `
+Object {
+  "-webkit-text-orientation": "mixed",
+  "textOrientation": "mixed",
+}
+`;
+
+exports[`Writing Mode & Text Orientation 5`] = `
+Object {
+  "-webkit-text-orientation": "upright",
+  "textOrientation": "upright",
+}
+`;
+
+exports[`Writing Mode & Text Orientation 6`] = `
+Object {
+  "-webkit-text-orientation": "sideways",
+  "textOrientation": "sideways",
 }
 `;

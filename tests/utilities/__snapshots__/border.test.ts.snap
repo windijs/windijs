@@ -111,93 +111,93 @@ Object {
 }
 `;
 
-exports[`Border Radius: 1 1`] = `
-Object {
-  "borderRadius": "100%",
-}
-`;
-
-exports[`Border Radius: default 1`] = `
+exports[`Border Radius 1`] = `
 Object {
   "borderRadius": "0.25rem",
 }
 `;
 
-exports[`Border Radius: full 1`] = `
+exports[`Border Radius 2`] = `
 Object {
   "borderRadius": "9999px",
 }
 `;
 
-exports[`Border Radius: lg 1`] = `
+exports[`Border Radius 3`] = `
 Object {
-  "borderRadius": "0.5rem",
+  "borderRadius": "100%",
 }
 `;
 
-exports[`Border Radius: md 1`] = `
-Object {
-  "borderRadius": "0.375rem",
-}
-`;
-
-exports[`Border Radius: none 1`] = `
+exports[`Border Radius 4`] = `
 Object {
   "borderRadius": "0px",
 }
 `;
 
-exports[`Border Radius: sm 1`] = `
+exports[`Border Radius 5`] = `
 Object {
   "borderRadius": "0.125rem",
 }
 `;
 
-exports[`Border Radius: xl 1`] = `
+exports[`Border Radius 6`] = `
+Object {
+  "borderRadius": "0.375rem",
+}
+`;
+
+exports[`Border Radius 7`] = `
+Object {
+  "borderRadius": "0.5rem",
+}
+`;
+
+exports[`Border Radius 8`] = `
 Object {
   "borderRadius": "0.75rem",
 }
 `;
 
-exports[`Border Radius: xxl 1`] = `
+exports[`Border Radius 9`] = `
 Object {
   "borderRadius": "1rem",
 }
 `;
 
-exports[`Border Radius: xxxl 1`] = `
+exports[`Border Radius 10`] = `
 Object {
   "borderRadius": "1.5rem",
 }
 `;
 
-exports[`Border Style: dashed 1`] = `
+exports[`Border Style 1`] = `
+Object {
+  "borderStyle": "solid",
+}
+`;
+
+exports[`Border Style 2`] = `
 Object {
   "borderStyle": "dashed",
 }
 `;
 
-exports[`Border Style: dotted 1`] = `
+exports[`Border Style 3`] = `
 Object {
   "borderStyle": "dotted",
 }
 `;
 
-exports[`Border Style: double 1`] = `
+exports[`Border Style 4`] = `
 Object {
   "borderStyle": "double",
 }
 `;
 
-exports[`Border Style: none 1`] = `
+exports[`Border Style 5`] = `
 Object {
   "borderStyle": "none",
-}
-`;
-
-exports[`Border Style: solid 1`] = `
-Object {
-  "borderStyle": "solid",
 }
 `;
 
@@ -240,5 +240,346 @@ Object {
 exports[`Border With Nested Config 4`] = `
 Object {
   "borderStyle": "double",
+}
+`;
+
+exports[`Divider Color 1`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "borderColor": "currentColor",
+  },
+}
+`;
+
+exports[`Divider Color 2`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-opacity": "1",
+    "borderColor": "rgba(255, 255, 255, var(--w-divide-opacity))",
+  },
+}
+`;
+
+exports[`Divider Color 3`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-opacity": "1",
+    "borderColor": "rgba(29, 78, 216, var(--w-divide-opacity))",
+  },
+}
+`;
+
+exports[`Divider Color 4`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-opacity": "1",
+    "borderColor": "rgba(239, 68, 68, var(--w-divide-opacity))",
+  },
+}
+`;
+
+exports[`Divider Color 5`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-opacity": "0.1",
+    "borderColor": "rgba(103, 232, 249, var(--w-divide-opacity))",
+  },
+}
+`;
+
+exports[`Divider Opacity 1`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-opacity": "0",
+  },
+}
+`;
+
+exports[`Divider Opacity 2`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-opacity": "0.5",
+  },
+}
+`;
+
+exports[`Divider Style 1`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "borderStyle": "solid",
+  },
+}
+`;
+
+exports[`Divider Style 2`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "borderStyle": "dashed",
+  },
+}
+`;
+
+exports[`Divider Style 3`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "borderStyle": "dotted",
+  },
+}
+`;
+
+exports[`Divider Style 4`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "borderStyle": "double",
+  },
+}
+`;
+
+exports[`Divider Style 5`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "borderStyle": "none",
+  },
+}
+`;
+
+exports[`Divider Width 1`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-x-reverse": "0",
+    "borderLeftWidth": "calc(0px * calc(1 - var(--w-divide-x-reverse)))",
+    "borderRightWidth": "calc(0px * var(--w-divide-x-reverse))",
+  },
+}
+`;
+
+exports[`Divider Width 2`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-x-reverse": "0",
+    "borderLeftWidth": "calc(4px * calc(1 - var(--w-divide-x-reverse)))",
+    "borderRightWidth": "calc(4px * var(--w-divide-x-reverse))",
+  },
+}
+`;
+
+exports[`Divider Width 3`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-x-reverse": "0",
+    "borderLeftWidth": "calc(1px * calc(1 - var(--w-divide-x-reverse)))",
+    "borderRightWidth": "calc(1px * var(--w-divide-x-reverse))",
+  },
+}
+`;
+
+exports[`Divider Width 4`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-x-reverse": "1",
+  },
+}
+`;
+
+exports[`Divider Width 5`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-y-reverse": "0",
+    "borderBottomWidth": "calc(0px * var(--w-divide-y-reverse))",
+    "borderTopWidth": "calc(0px * calc(1 - var(--w-divide-y-reverse)))",
+  },
+}
+`;
+
+exports[`Divider Width 6`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-y-reverse": "0",
+    "borderBottomWidth": "calc(4px * var(--w-divide-y-reverse))",
+    "borderTopWidth": "calc(4px * calc(1 - var(--w-divide-y-reverse)))",
+  },
+}
+`;
+
+exports[`Divider Width 7`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-y-reverse": "0",
+    "borderBottomWidth": "calc(1px * var(--w-divide-y-reverse))",
+    "borderTopWidth": "calc(1px * calc(1 - var(--w-divide-y-reverse)))",
+  },
+}
+`;
+
+exports[`Divider Width 8`] = `
+Object {
+  "& > :not([hidden]) ~ :not([hidden])": Object {
+    "--w-divide-y-reverse": "1",
+  },
+}
+`;
+
+exports[`Outline Color 1`] = `
+Object {
+  "--w-outline-opacity": "1",
+  "outlineColor": "rgba(252, 211, 77, var(--w-outline-opacity))",
+}
+`;
+
+exports[`Outline Color 2`] = `
+Object {
+  "--w-outline-opacity": "0.1",
+  "outlineColor": "rgba(96, 165, 250, var(--w-outline-opacity))",
+}
+`;
+
+exports[`Outline Offset 1`] = `
+Object {
+  "outlineOffset": "2px",
+}
+`;
+
+exports[`Outline Opacity 1`] = `
+Object {
+  "--w-outline-opacity": "0",
+}
+`;
+
+exports[`Outline Opacity 2`] = `
+Object {
+  "--w-outline-opacity": "0.5",
+}
+`;
+
+exports[`Outline Style 1`] = `
+Object {
+  "outlineStyle": "solid",
+}
+`;
+
+exports[`Outline Style 2`] = `
+Object {
+  "outlineStyle": "dashed",
+}
+`;
+
+exports[`Outline Style 3`] = `
+Object {
+  "outlineStyle": "dotted",
+}
+`;
+
+exports[`Outline Style 4`] = `
+Object {
+  "outlineStyle": "double",
+}
+`;
+
+exports[`Outline Style 5`] = `
+Object {
+  "outlineStyle": "none",
+}
+`;
+
+exports[`Outline Width 1`] = `
+Object {
+  "outlineWidth": "0px",
+}
+`;
+
+exports[`Outline Width 2`] = `
+Object {
+  "outlineWidth": "4px",
+}
+`;
+
+exports[`Outline Width 3`] = `
+Object {
+  "outlineWidth": "1px",
+}
+`;
+
+exports[`Ring Color 1`] = `
+Object {
+  "--w-ring-color": "rgba(252, 211, 77, var(--w-ring-opacity))",
+  "--w-ring-opacity": "1",
+}
+`;
+
+exports[`Ring Color 2`] = `
+Object {
+  "--w-ring-color": "rgba(96, 165, 250, var(--w-ring-opacity))",
+  "--w-ring-opacity": "0.1",
+}
+`;
+
+exports[`Ring Offset 1`] = `
+Object {
+  "--w-ring-offset-width": "2px",
+}
+`;
+
+exports[`Ring Offset 2`] = `
+Object {
+  "--w-ring-offset-color": "rgba(103, 232, 249, var(--w-ring-offset-opacity))",
+  "--w-ring-offset-opacity": "1",
+}
+`;
+
+exports[`Ring Offset 3`] = `
+Object {
+  "--w-ring-offset-color": "rgba(209, 213, 219, var(--w-ring-offset-opacity))",
+  "--w-ring-offset-opacity": "0.2",
+}
+`;
+
+exports[`Ring Offset 4`] = `
+Object {
+  "--w-ring-offset-opacity": "0.2",
+}
+`;
+
+exports[`Ring Opacity 1`] = `
+Object {
+  "--w-ring-opacity": "0",
+}
+`;
+
+exports[`Ring Opacity 2`] = `
+Object {
+  "--w-ring-opacity": "0.5",
+}
+`;
+
+exports[`Ring Width 1`] = `
+Object {
+  "--w-ring-offset-shadow": "var(--w-ring-inset) 0 0 0 var(--w-ring-offset-width) var(--w-ring-offset-color)",
+  "--w-ring-shadow": "var(--w-ring-inset) 0 0 0 calc(0px + var(--w-ring-offset-width)) var(--w-ring-color)",
+  "-webkit-box-shadow": "var(--w-ring-offset-shadow), var(--w-ring-shadow), var(--w-shadow, 0 0 #0000)",
+  "boxShadow": "var(--w-ring-offset-shadow), var(--w-ring-shadow), var(--w-shadow, 0 0 #0000)",
+}
+`;
+
+exports[`Ring Width 2`] = `
+Object {
+  "--w-ring-offset-shadow": "var(--w-ring-inset) 0 0 0 var(--w-ring-offset-width) var(--w-ring-offset-color)",
+  "--w-ring-shadow": "var(--w-ring-inset) 0 0 0 calc(4px + var(--w-ring-offset-width)) var(--w-ring-color)",
+  "-webkit-box-shadow": "var(--w-ring-offset-shadow), var(--w-ring-shadow), var(--w-shadow, 0 0 #0000)",
+  "boxShadow": "var(--w-ring-offset-shadow), var(--w-ring-shadow), var(--w-shadow, 0 0 #0000)",
+}
+`;
+
+exports[`Ring Width 3`] = `
+Object {
+  "--w-ring-inset": "inset",
+}
+`;
+
+exports[`Ring Width 4`] = `
+Object {
+  "--w-ring-offset-shadow": "var(--w-ring-inset) 0 0 0 var(--w-ring-offset-width) var(--w-ring-offset-color)",
+  "--w-ring-shadow": "var(--w-ring-inset) 0 0 0 calc(1px + var(--w-ring-offset-width)) var(--w-ring-color)",
+  "-webkit-box-shadow": "var(--w-ring-offset-shadow), var(--w-ring-shadow), var(--w-shadow, 0 0 #0000)",
+  "boxShadow": "var(--w-ring-offset-shadow), var(--w-ring-shadow), var(--w-shadow, 0 0 #0000)",
 }
 `;

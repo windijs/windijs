@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Box Decoration Break 1`] = `
+Object {
+  "-webkit-box-decoration-break": "slice",
+  "box-decoration-break": "slice",
+}
+`;
+
+exports[`Box Decoration Break 2`] = `
+Object {
+  "-webkit-box-decoration-break": "clone",
+  "box-decoration-break": "clone",
+}
+`;
+
+exports[`Image Rendering 1`] = `
+Object {
+  "imageRendering": "auto",
+}
+`;
+
+exports[`Image Rendering 2`] = `
+Object {
+  "-ms-interpolation-mode": "nearest-neighbor",
+  "imageRendering": Array [
+    "-webkit-optimize-contrast",
+    "-moz-crisp-edges",
+    "-o-pixelated",
+    "pixelated",
+  ],
+}
+`;
+
+exports[`Image Rendering 3`] = `
+Object {
+  "imageRendering": "crisp-edges",
+}
+`;
+
+exports[`List 1`] = `
+Object {
+  "listStyleType": "disc",
+}
+`;
+
+exports[`List 2`] = `
+Object {
+  "listStyleType": "decimal-leading-zero",
+}
+`;
+
+exports[`List 3`] = `
+Object {
+  "listStyleType": "upper-roman",
+}
+`;
+
+exports[`List 4`] = `
+Object {
+  "listStylePosition": "inside",
+}
+`;
+
+exports[`List 5`] = `
+Object {
+  "listStylePosition": "outside",
+}
+`;
+
+exports[`OverScroll 1`] = `
+Object {
+  "overscrollBehavior": "contain",
+}
+`;
+
+exports[`OverScroll 2`] = `
+Object {
+  "overscrollBehaviorX": "none",
+}
+`;
+
+exports[`OverScroll 3`] = `
+Object {
+  "overscrollBehaviorY": "auto",
+}
+`;
+
+exports[`Overflow 1`] = `
+Object {
+  "overflow": "scroll",
+}
+`;
+
+exports[`Overflow 2`] = `
+Object {
+  "overflowX": "hidden",
+}
+`;
+
+exports[`Overflow 3`] = `
+Object {
+  "overflowY": "visible",
+}
+`;
+
+exports[`Overflow 4`] = `
+Object {
+  "-o-text-overflow": "ellipsis",
+  "overflow": "hidden",
+  "textOverflow": "ellipsis",
+  "whiteSpace": "nowrap",
+}
+`;
+
+exports[`Overflow 5`] = `
+Object {
+  "-o-text-overflow": "ellipsis",
+  "textOverflow": "ellipsis",
+}
+`;
+
+exports[`Overflow 6`] = `
+Object {
+  "overflow": "clip",
+}
+`;
+
+exports[`Placeholder 1`] = `
+Object {
+  "&:-ms-input-placeholder": Object {
+    "--w-placeholder-opacity": "1",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+  "&::-moz-placeholder": Object {
+    "--w-placeholder-opacity": "1",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+  "&::-ms-input-placeholder": Object {
+    "--w-placeholder-opacity": "1",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+  "&::-webkit-input-placeholder": Object {
+    "--w-placeholder-opacity": "1",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+  "&::placeholder": Object {
+    "--w-placeholder-opacity": "1",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+}
+`;
+
+exports[`Placeholder 2`] = `
+Object {
+  "&:-ms-input-placeholder": Object {
+    "--w-placeholder-opacity": "0.2",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+  "&::-moz-placeholder": Object {
+    "--w-placeholder-opacity": "0.2",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+  "&::-ms-input-placeholder": Object {
+    "--w-placeholder-opacity": "0.2",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+  "&::-webkit-input-placeholder": Object {
+    "--w-placeholder-opacity": "0.2",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+  "&::placeholder": Object {
+    "--w-placeholder-opacity": "0.2",
+    "color": "rgba(252, 211, 77, var(--w-placeholder-opacity))",
+  },
+}
+`;
+
+exports[`Placeholder 3`] = `
+Object {
+  "--w-placeholder-opacity": "0.2",
+}
+`;

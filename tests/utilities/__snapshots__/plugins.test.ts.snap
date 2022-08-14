@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Aspect Ratio 1`] = `
+Object {
+  "aspectRatio": "auto",
+}
+`;
+
+exports[`Aspect Ratio 2`] = `
+Object {
+  "> *": Object {
+    "bottom": "auto",
+    "height": "auto",
+    "left": "auto",
+    "position": "static",
+    "right": "auto",
+    "top": "auto",
+    "width": "auto",
+  },
+  "paddingBottom": "0",
+  "position": "static",
+}
+`;
+
+exports[`Aspect Ratio 3`] = `
+Object {
+  "aspectRatio": "16 / 9",
+}
+`;
+
+exports[`Aspect Ratio 4`] = `
+Object {
+  "--w-aspect-w": "9",
+  "> *": Object {
+    "bottom": "0",
+    "height": "100%",
+    "left": "0",
+    "position": "absolute",
+    "right": "0",
+    "top": "0",
+    "width": "100%",
+  },
+  "paddingBottom": "calc(var(--w-aspect-h) / var(--w-aspect-w) * 100%)",
+  "position": "relative",
+}
+`;
+
+exports[`Aspect Ratio 5`] = `
+Object {
+  "--w-aspect-h": "16",
+}
+`;
+
+exports[`Aspect Ratio 6`] = `
+Object {
+  "> *": Object {
+    "bottom": "0",
+    "height": "100%",
+    "left": "0",
+    "position": "absolute",
+    "right": "0",
+    "top": "0",
+    "width": "100%",
+  },
+  "paddingBottom": "80%",
+  "position": "relative",
+}
+`;

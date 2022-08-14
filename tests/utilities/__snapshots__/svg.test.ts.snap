@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fill 1`] = `
+Object {
+  "fill": "none",
+}
+`;
+
+exports[`Fill 2`] = `
+Object {
+  "fill": "transparent",
+}
+`;
+
+exports[`Fill 3`] = `
+Object {
+  "fill": "currentColor",
+}
+`;
+
+exports[`Fill 4`] = `
+Object {
+  "fill": "#6b7280",
+}
+`;
+
+exports[`Stroke 1`] = `
+Object {
+  "stroke": "none",
+}
+`;
+
+exports[`Stroke 2`] = `
+Object {
+  "stroke": "transparent",
+}
+`;
+
+exports[`Stroke 3`] = `
+Object {
+  "stroke": "currentColor",
+}
+`;
+
+exports[`Stroke 4`] = `
+Object {
+  "stroke": "#3b82f6",
+}
+`;
+
+exports[`Stroke 5`] = `
+Object {
+  "strokeDasharray": "0",
+}
+`;
+
+exports[`Stroke 6`] = `
+Object {
+  "strokeDasharray": "10",
+}
+`;
+
+exports[`Stroke 7`] = `
+Object {
+  "strokeDashoffset": "10",
+}
+`;
+
+exports[`Stroke 8`] = `
+Object {
+  "strokeLinecap": "butt",
+}
+`;
+
+exports[`Stroke 9`] = `
+Object {
+  "strokeLinecap": "round",
+}
+`;
+
+exports[`Stroke 10`] = `
+Object {
+  "strokeLinecap": "square",
+}
+`;
+
+exports[`Stroke 11`] = `
+Object {
+  "strokeLinejoin": "miter",
+}
+`;
+
+exports[`Stroke 12`] = `
+Object {
+  "strokeLinejoin": "bevel",
+}
+`;
+
+exports[`Stroke 13`] = `
+Object {
+  "strokeWidth": "2",
+}
+`;

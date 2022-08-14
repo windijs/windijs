@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mix Blend Mode 1`] = `
+Object {
+  "mixBlendMode": "normal",
+}
+`;
+
+exports[`Mix Blend Mode 2`] = `
+Object {
+  "mixBlendMode": "darken",
+}
+`;
+
+exports[`Mix Blend Mode 3`] = `
+Object {
+  "mixBlendMode": "color",
+}
+`;
+
+exports[`Mix Blend Mode 4`] = `
+Object {
+  "mixBlendMode": "color-dodge",
+}
+`;
+
+exports[`Mix Blend Mode 5`] = `
+Object {
+  "mixBlendMode": "color-burn",
+}
+`;
+
+exports[`Mix Blend Mode 6`] = `
+Object {
+  "mixBlendMode": "hard-light",
+}
+`;
+
+exports[`Opacity 1`] = `
+Object {
+  "opacity": "0",
+}
+`;
+
+exports[`Opacity 2`] = `
+Object {
+  "opacity": "0.5",
+}
+`;
+
+exports[`Opacity 3`] = `
+Object {
+  "opacity": "1",
+}
+`;
+
+exports[`Shadow 1`] = `
+Object {
+  "--w-shadow": "0 1px 3px 0 rgb(0 0 0/0.1),0 1px 2px -1px rgb(0 0 0/0.1)",
+  "--w-shadow-colored": "0 1px 3px 0 var(--w-shadow-color),0 1px 2px -1px var(--w-shadow-color)",
+  "-webkit-box-shadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+  "boxShadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+}
+`;
+
+exports[`Shadow 2`] = `
+Object {
+  "--w-shadow": "0 1px 2px 0 rgb(0 0 0/0.05)",
+  "--w-shadow-colored": "0 1px 2px 0 var(--w-shadow-color)",
+  "-webkit-box-shadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+  "boxShadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+}
+`;
+
+exports[`Shadow 3`] = `
+Object {
+  "--w-shadow": "0 25px 50px -12px rgb(0 0 0/0.25)",
+  "--w-shadow-colored": "0 25px 50px -12px var(--w-shadow-color)",
+  "-webkit-box-shadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+  "boxShadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+}
+`;
+
+exports[`Shadow 4`] = `
+Object {
+  "--w-shadow": "inset 0 2px 4px 0 rgb(0 0 0/0.05)",
+  "--w-shadow-colored": "inset 0 2px 4px 0 var(--w-shadow-color)",
+  "-webkit-box-shadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+  "boxShadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+}
+`;
+
+exports[`Shadow 5`] = `
+Object {
+  "--w-shadow": "0 0 #0000",
+  "--w-shadow-colored": "0 0 #0000",
+  "-webkit-box-shadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+  "boxShadow": "var(--w-ring-offset-shadow, 0 0 #0000), var(--w-ring-shadow, 0 0 #0000), var(--w-shadow)",
+}
+`;
+
+exports[`Shadow 6`] = `
+Object {
+  "--w-shadow": "var(--w-shadow-colored)",
+  "--w-shadow-color": "rgba(234, 179, 8, var(--w-shadow-color-opacity))",
+  "--w-shadow-color-opacity": "1",
+}
+`;
+
+exports[`Shadow 7`] = `
+Object {
+  "--w-shadow": "var(--w-shadow-colored)",
+  "--w-shadow-color": "rgba(234, 179, 8, var(--w-shadow-color-opacity))",
+  "--w-shadow-color-opacity": "0.9",
+}
+`;
+
+exports[`Shadow 8`] = `
+Object {
+  "--w-shadow-color-opacity": "0.3",
+}
+`;

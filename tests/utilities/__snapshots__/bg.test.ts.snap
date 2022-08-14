@@ -18,6 +18,36 @@ Object {
 }
 `;
 
+exports[`Background Blend Mode 1`] = `
+Object {
+  "backgroundBlendMode": "luminosity",
+}
+`;
+
+exports[`Background Blend Mode 2`] = `
+Object {
+  "backgroundBlendMode": "soft-light",
+}
+`;
+
+exports[`Background Blend Mode 3`] = `
+Object {
+  "backgroundBlendMode": "color",
+}
+`;
+
+exports[`Background Blend Mode 4`] = `
+Object {
+  "backgroundBlendMode": "color-burn",
+}
+`;
+
+exports[`Background Blend Mode 5`] = `
+Object {
+  "backgroundBlendMode": "color-dodge",
+}
+`;
+
 exports[`Background Clip 1`] = `
 Object {
   "-webkit-background-clip": "border-box",
@@ -393,6 +423,109 @@ Object {
 }
 `;
 
+exports[`Background Opacity 1`] = `
+Object {
+  "--w-bg-opacity": "1",
+  "backgroundColor": "rgba(147, 197, 253, var(--w-bg-opacity))",
+}
+`;
+
+exports[`Background Opacity 2`] = `
+Object {
+  "--w-bg-opacity": "0",
+}
+`;
+
+exports[`Background Opacity 3`] = `
+Object {
+  "--w-bg-opacity": "0.2",
+}
+`;
+
+exports[`Background Origin 1`] = `
+Object {
+  "backgroundOrigin": "border-box",
+}
+`;
+
+exports[`Background Origin 2`] = `
+Object {
+  "backgroundOrigin": "padding-box",
+}
+`;
+
+exports[`Background Origin 3`] = `
+Object {
+  "backgroundOrigin": "content-box",
+}
+`;
+
+exports[`Background Position 1`] = `
+Object {
+  "backgroundPosition": "bottom",
+}
+`;
+
+exports[`Background Position 2`] = `
+Object {
+  "backgroundPosition": "left bottom",
+}
+`;
+
+exports[`Background Repeat 1`] = `
+Object {
+  "backgroundRepeat": "repeat",
+}
+`;
+
+exports[`Background Repeat 2`] = `
+Object {
+  "backgroundRepeat": "repeat-x",
+}
+`;
+
+exports[`Background Repeat 3`] = `
+Object {
+  "backgroundRepeat": "repeat-y",
+}
+`;
+
+exports[`Background Repeat 4`] = `
+Object {
+  "backgroundRepeat": "round",
+}
+`;
+
+exports[`Background Repeat 5`] = `
+Object {
+  "backgroundRepeat": "space",
+}
+`;
+
+exports[`Background Repeat 6`] = `
+Object {
+  "backgroundRepeat": "no-repeat",
+}
+`;
+
+exports[`Background Size 1`] = `
+Object {
+  "backgroundSize": "auto",
+}
+`;
+
+exports[`Background Size 2`] = `
+Object {
+  "backgroundSize": "cover",
+}
+`;
+
+exports[`Background Size 3`] = `
+Object {
+  "backgroundSize": "contain",
+}
+`;
+
 exports[`Background With Deep Nested Color 1`] = `
 Object {
   "--w-bg-opacity": "1",
@@ -466,4 +599,217 @@ Array [
   "blue",
   "600",
 ]
+`;
+
+exports[`Gradient From 1`] = `
+Object {
+  "--w-from-opacity": "1",
+  "--w-gradient-from": "rgba(234, 179, 8, var(--w-from-opacity))",
+  "--w-gradient-stops": "var(--w-gradient-from), var(--w-gradient-to, rgba(255, 255, 255, 0))",
+}
+`;
+
+exports[`Gradient From 2`] = `
+Object {
+  "--w-from-opacity": "0.1",
+  "--w-gradient-from": "rgba(59, 130, 246, var(--w-from-opacity))",
+  "--w-gradient-stops": "var(--w-gradient-from), var(--w-gradient-to, rgba(255, 255, 255, 0))",
+}
+`;
+
+exports[`Gradient Function 1`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, right bottom, left top, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(bottom right, var(--w-gradient-stops))",
+    "linear-gradient(to top left, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradient Function 2`] = `
+Object {
+  "backgroundImage": Array [
+    "-o-linear-gradient(75deg, var(--w-gradient-stops))",
+    "linear-gradient(15deg, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradient Function 3`] = `
+Object {
+  "backgroundImage": "linear-gradient(135deg, #2096ff, #05ffa3)",
+}
+`;
+
+exports[`Gradient Function 4`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, left top, right bottom, from(#ef4444), color-stop(10%, #3b82f6))",
+    "-o-linear-gradient(top left, #ef4444, #3b82f6 10%)",
+    "linear-gradient(to bottom right, #ef4444, #3b82f6 10%)",
+  ],
+}
+`;
+
+exports[`Gradient Function 5`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, left top, right bottom, from(#fde68a), color-stop(#bbf7d0), color-stop(#3c3c3c), to(#e5e7eb))",
+    "-o-linear-gradient(top left, #fde68a, #bbf7d0, #3c3c3c, #e5e7eb)",
+    "linear-gradient(to bottom right, #fde68a, #bbf7d0, #3c3c3c, #e5e7eb)",
+  ],
+}
+`;
+
+exports[`Gradient To 1`] = `
+Object {
+  "--w-gradient-to": "rgba(234, 179, 8, var(--w-to-opacity))",
+  "--w-to-opacity": "1",
+}
+`;
+
+exports[`Gradient To 2`] = `
+Object {
+  "--w-gradient-to": "rgba(234, 179, 8, var(--w-to-opacity))",
+  "--w-to-opacity": "0.2",
+}
+`;
+
+exports[`Gradient Via 1`] = `
+Object {
+  "--w-gradient-stops": "var(--w-gradient-from), rgba(234, 179, 8, var(--w-via-opacity)), var(--w-gradient-to, rgba(255, 255, 255, 0))",
+}
+`;
+
+exports[`Gradient Via 2`] = `
+Object {
+  "--w-gradient-stops": "var(--w-gradient-from), rgba(59, 130, 246, var(--w-via-opacity)), var(--w-gradient-to, rgba(255, 255, 255, 0))",
+}
+`;
+
+exports[`Gradients 1`] = `
+Object {
+  "backgroundImage": "none",
+}
+`;
+
+exports[`Gradients 2`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, left bottom, left top, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(bottom, var(--w-gradient-stops))",
+    "linear-gradient(to top, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 3`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, left bottom, right top, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(bottom left, var(--w-gradient-stops))",
+    "linear-gradient(to top right, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 4`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, left top, right top, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(left, var(--w-gradient-stops))",
+    "linear-gradient(to right, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 5`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, left top, right bottom, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(top left, var(--w-gradient-stops))",
+    "linear-gradient(to bottom right, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 6`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, left top, left bottom, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(top, var(--w-gradient-stops))",
+    "linear-gradient(to bottom, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 7`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, right top, left bottom, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(top right, var(--w-gradient-stops))",
+    "linear-gradient(to bottom left, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 8`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, right top, left top, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(right, var(--w-gradient-stops))",
+    "linear-gradient(to left, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 9`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, right bottom, left top, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(bottom right, var(--w-gradient-stops))",
+    "linear-gradient(to top left, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 10`] = `
+Object {
+  "backgroundImage": Array [
+    "-o-linear-gradient(75deg, var(--w-gradient-stops))",
+    "linear-gradient(15deg, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 11`] = `
+Object {
+  "backgroundImage": Array [
+    "-webkit-gradient(linear, left top, right top, from(var(--w-gradient-stops)))",
+    "-o-linear-gradient(left, var(--w-gradient-stops))",
+    "linear-gradient(90deg, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 12`] = `
+Object {
+  "backgroundImage": Array [
+    "-o-linear-gradient(330deg, var(--w-gradient-stops))",
+    "linear-gradient(120deg, var(--w-gradient-stops))",
+  ],
+}
+`;
+
+exports[`Gradients 13`] = `
+Object {
+  "backgroundImage": "linear-gradient(135deg, #2096ff, #05ffa3)",
+}
+`;
+
+exports[`Gradients 14`] = `
+Object {
+  "backgroundImage": "linear-gradient(135deg, rgb(171, 220, 255) 10%, rgb(3, 150, 255) 100%)",
+}
 `;

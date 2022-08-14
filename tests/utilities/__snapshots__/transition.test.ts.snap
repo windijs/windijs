@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transition 1`] = `
+Object {
+  "-o-transition-duration": "150ms",
+  "-o-transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+  "-webkit-transition-duration": "150ms",
+  "-webkit-transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+  "transitionDuration": "150ms",
+  "transitionProperty": "background-color, border-color, color, fill, stroke, opacity, box-shadow, -webkit-box-shadow, transform, -webkit-transform, filter, backdrop-filter",
+  "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+}
+`;
+
+exports[`Transition 2`] = `
+Object {
+  "-o-transition-duration": "150ms",
+  "-o-transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+  "-webkit-transition-duration": "150ms",
+  "-webkit-transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+  "transitionDuration": "150ms",
+  "transitionProperty": "all",
+  "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+}
+`;
+
+exports[`Transition 3`] = `
+Object {
+  "transitionProperty": "none",
+}
+`;
+
+exports[`Transition 4`] = `
+Object {
+  "-o-transition-duration": "150ms",
+  "-o-transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+  "-webkit-transition-duration": "150ms",
+  "-webkit-transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+  "transitionDuration": "150ms",
+  "transitionProperty": "box-shadow, -webkit-box-shadow",
+  "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+}
+`;
+
+exports[`Transition As Function 1`] = `
+Object {
+  "-o-transition-delay": "100ms",
+  "-o-transition-duration": "150ms",
+  "-o-transition-timing-function": "linear",
+  "-webkit-transition-delay": "100ms",
+  "-webkit-transition-duration": "150ms",
+  "-webkit-transition-timing-function": "linear",
+  "transitionDelay": "100ms",
+  "transitionDuration": "150ms",
+  "transitionProperty": "all",
+  "transitionTimingFunction": "linear",
+}
+`;
+
+exports[`Transition Delay 1`] = `
+Object {
+  "-o-transition-delay": "75ms",
+  "-webkit-transition-delay": "75ms",
+  "transitionDelay": "75ms",
+}
+`;
+
+exports[`Transition Delay 2`] = `
+Object {
+  "-o-transition-delay": "200ms",
+  "-webkit-transition-delay": "200ms",
+  "transitionDelay": "200ms",
+}
+`;
+
+exports[`Transition Delay without config 1`] = `
+Object {
+  "-o-transition-delay": "50ms",
+  "-webkit-transition-delay": "50ms",
+  "transitionDelay": "50ms",
+}
+`;
+
+exports[`Transition Delay without config 2`] = `
+Object {
+  "-o-transition-delay": "350ms",
+  "-webkit-transition-delay": "350ms",
+  "transitionDelay": "350ms",
+}
+`;
+
+exports[`Transition Delay without config 3`] = `
+Object {
+  "-o-transition-delay": "456ms",
+  "-webkit-transition-delay": "456ms",
+  "transitionDelay": "456ms",
+}
+`;
+
+exports[`Transition Duration 1`] = `
+Object {
+  "-o-transition-duration": "75ms",
+  "-webkit-transition-duration": "75ms",
+  "transitionDuration": "75ms",
+}
+`;
+
+exports[`Transition Duration 2`] = `
+Object {
+  "-o-transition-duration": "200ms",
+  "-webkit-transition-duration": "200ms",
+  "transitionDuration": "200ms",
+}
+`;
+
+exports[`Transition Duration without config 1`] = `
+Object {
+  "-o-transition-duration": "50ms",
+  "-webkit-transition-duration": "50ms",
+  "transitionDuration": "50ms",
+}
+`;
+
+exports[`Transition Duration without config 2`] = `
+Object {
+  "-o-transition-duration": "350ms",
+  "-webkit-transition-duration": "350ms",
+  "transitionDuration": "350ms",
+}
+`;
+
+exports[`Transition Duration without config 3`] = `
+Object {
+  "-o-transition-duration": "456ms",
+  "-webkit-transition-duration": "456ms",
+  "transitionDuration": "456ms",
+}
+`;
+
+exports[`Transition Timing Function 1`] = `
+Object {
+  "-o-transition-timing-function": "linear",
+  "-webkit-transition-timing-function": "linear",
+  "transitionTimingFunction": "linear",
+}
+`;
+
+exports[`Transition Timing Function 2`] = `
+Object {
+  "-o-transition-timing-function": "cubic-bezier(0.4, 0, 1, 1)",
+  "-webkit-transition-timing-function": "cubic-bezier(0.4, 0, 1, 1)",
+  "transitionTimingFunction": "cubic-bezier(0.4, 0, 1, 1)",
+}
+`;
+
+exports[`Transition Timing Function 3`] = `
+Object {
+  "-o-transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+  "-webkit-transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+  "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+}
+`;

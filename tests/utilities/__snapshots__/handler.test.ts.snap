@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Call Handler 1`] = `
+Object {
+  "backgroundColor": "#ef4444",
+}
+`;
+
+exports[`Call Handler 2`] = `
+Object {
+  "backgroundColor": "rgb(22, 22, 22)",
+}
+`;
+
+exports[`Call Handler 3`] = `
+Object {
+  "props": Array [
+    "rgb(22,22,22)",
+  ],
+  "type": "color",
+  "uid": "bg",
+  "variants": Array [],
+}
+`;
+
+exports[`Call Handler 4`] = `
+Object {
+  "backgroundColor": "rgb(22, 22, 22)",
+}
+`;
+
+exports[`Call Handler 5`] = `
+Object {
+  "backgroundColor": "rgb(22, 22, 22)",
+}
+`;
+
 exports[`guard with meld 1`] = `
 Object {
   "--w-border-opacity": "1",
