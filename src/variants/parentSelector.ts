@@ -1,4 +1,4 @@
-import { createVariant } from "./base";
+import { createVariant } from "core/api";
 
 /**
  * Targets an element when a marked parent matches the hover pseudo-class.

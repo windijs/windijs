@@ -1,4 +1,4 @@
-import { createMedia, createVariant } from "./base";
+import { createMedia, createVariant } from "core/api";
 
 // screens
 

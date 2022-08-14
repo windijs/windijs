@@ -1,4 +1,4 @@
-import { createVariant } from "./base";
+import { createVariant } from "core/api";
 
 /**
  * Targets svg nodes.

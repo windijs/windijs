@@ -1,4 +1,4 @@
-import { createVariant } from "./base";
+import { createVariant } from "core/api";
 
 /**
  * Represents a styleable child pseudo-element immediately after the originating element’s actual content.

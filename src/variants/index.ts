@@ -1,4 +1,3 @@
-export * from "./base";
 export * from "./pseudoClass";
 export * from "./pseudoElement";
 export * from "./parentSelector";

@@ -1,7 +1,7 @@
 import type { VariantBuilder } from "types";
 import { camelToDash } from "utils";
+import { createVariant } from "core/api";
 import { useProxy } from "helpers/proxy";
-import { createVariant } from "./base";
 
 // TODO: the document of variants need to be improved.
 
