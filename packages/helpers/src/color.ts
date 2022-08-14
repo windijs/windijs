@@ -1,6 +1,6 @@
-import type { CamelCase } from "types";
+import type { CamelCase } from "./types";
 import { prec } from "./math";
-import { range } from "utils";
+import { range } from "@windi/shared";
 
 export type RGB = [number, number, number];
 export type RGBA = [number, number, number, number];

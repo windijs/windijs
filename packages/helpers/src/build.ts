@@ -1,6 +1,6 @@
-import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSMap, CSSObject, CSSRule, CSSRules, StyleObject } from "types";
+import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSMap, CSSObject, CSSRule, CSSRules, StyleObject } from "./types";
 import { applyVariant, bundle, isStyleObject } from "./common";
-import { camelToDash, entries, indent } from "utils";
+import { camelToDash, entries, indent } from "@windi/shared";
 
 import { nameStyle } from "./namer";
 

@@ -1,8 +1,8 @@
-import type { StyleNamer, StyleObject } from "types";
+import type { StyleNamer, StyleObject } from "./types";
 import { getStyleIdent, getStyleProps } from "./common";
 
 import { escapeCSS } from "./escape";
-import { hash } from "utils";
+import { hash } from "@windi/shared";
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 let CURRENT_NAMER = alphaNamer;

@@ -1,4 +1,4 @@
-import type { MetaType, UtilityMeta } from "types";
+import type { MetaType, UtilityMeta } from "./types";
 
 let CurrentMeta: UtilityMeta;
 

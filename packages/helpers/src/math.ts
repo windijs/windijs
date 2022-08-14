@@ -1,4 +1,4 @@
-import type { CSSDimension, CSSFlex, CSSPercentage } from "types";
+import type { CSSDimension, CSSFlex, CSSPercentage } from "./types";
 
 // TODO: should return object, like CSSPercentage/CSSDimension...
 // TODO: support multiple add/sub/mul/div

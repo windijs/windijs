@@ -1,6 +1,6 @@
-import type { CSSMap, CSSObject, StyleObject, StyleProperties } from "types";
+import type { CSSMap, CSSObject, StyleObject, StyleProperties } from "./types";
 
-import { entries } from "utils";
+import { entries } from "@windi/shared";
 
 export const SymbolCSS = Symbol.for("css");
 export const SymbolMeta = Symbol.for("meta");

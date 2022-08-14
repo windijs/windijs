@@ -1,0 +1,23 @@
+{
+  "name": "@windi/helpers",
+  "version": "1.0.0",
+  "description": "@windi/helpers",
+  "main": "dist/helpers.js",
+  "module": "dist/helpers.mjs",
+  "types": "dist/helpers.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "windi"
+  ],
+  "author": "Raven Satir",
+  "license": "MIT",
+  "dependencies": {
+    "@windi/shared": "1.0.0"
+  },
+  "devDependencies": {
+    "@windi/utilities": "1.0.0",
+    "@windi/variants": "1.0.0"
+  }
+}
