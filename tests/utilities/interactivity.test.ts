@@ -1,6 +1,6 @@
-import { createUtility, css, styleProperty, touchActionConfig } from "index";
+import { createUtility, css, stylePropertyHandler, touchActionConfig } from "index";
 
-const style = createUtility("style").use(styleProperty({
+const style = createUtility("style").use(stylePropertyHandler({
   touchAction: touchActionConfig,
   willChange: { scroll: "scroll-position", transform: "transform" },
   resize: { DEFAULT: "both", y: "vertical", x: "horizontal" },
