@@ -1,4 +1,4 @@
-import { h, w } from "utilities";
+import { h, w } from "../src/sizing";
 
 test("Width", () => {
   expect(w["1/5"].css).toMatchSnapshot();

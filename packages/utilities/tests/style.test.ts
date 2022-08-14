@@ -1,7 +1,7 @@
-import { createUtility, stylePropertyHandler } from "core";
+import { createUtility, stylePropertyHandler } from "@windi/core";
 
-import { percent } from "helpers";
-import { windiColors } from "colors";
+import { colors } from "../src/colors";
+import { percent } from "@windi/helpers";
 
 const style = createUtility("style").use(stylePropertyHandler()).init();
 
@@ -123,7 +123,7 @@ test("style with string", () => {
 });
 
 test("style with config", () => {
-  const style = createUtility("style").use(stylePropertyHandler({ backgroundColor: windiColors, willChange: { scroll: "scroll-position", transform: "transform" } })).init();
+  const style = createUtility("style").use(stylePropertyHandler({ backgroundColor: colors, willChange: { scroll: "scroll-position", transform: "transform" } })).init();
 
   expect(style.willChange.scroll.css).toMatchSnapshot();
   expect(style.willChange.transform.css).toMatchSnapshot();

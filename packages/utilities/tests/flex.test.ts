@@ -1,6 +1,6 @@
-import { createUtility, cssHandler } from "core";
+import { createUtility, cssHandler } from "@windi/core";
 
-import { flex } from "utilities";
+import { flex } from "../src/layout";
 
 test("Flex", () => {
   expect(flex.css).toMatchSnapshot();

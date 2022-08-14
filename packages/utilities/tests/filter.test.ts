@@ -1,5 +1,5 @@
-import { backdrop, blur, brightness, contrast, dropShadow, filter, grayscale, hueRotate, invert, saturate, sepia } from "utilities";
-import { deg, percent, px, rem, rgba } from "helpers";
+import { backdrop, blur, brightness, contrast, dropShadow, filter, grayscale, hueRotate, invert, saturate, sepia } from "../src/filters";
+import { deg, percent, px, rem, rgba } from "@windi/helpers";
 
 test("Blur", () => {
   expect(blur.css).toMatchSnapshot();

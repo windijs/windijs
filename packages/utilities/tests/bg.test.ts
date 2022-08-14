@@ -1,7 +1,9 @@
-import { backgroundClipConfig, gradientDirectionConfig } from "config";
-import { backgroundGenericHandler, colorHandler, configHandler, createUtility } from "core";
-import { bg, colors, from, to, via } from "utilities";
-import { percent, prop } from "helpers";
+import { backgroundClipConfig, gradientDirectionConfig } from "@windi/config";
+import { backgroundGenericHandler, colorHandler, configHandler, createUtility } from "@windi/core";
+import { bg, from, to, via } from "../src/bg";
+import { percent, prop } from "@windi/helpers";
+
+import { colors } from "../src/colors";
 
 test("Background Color", () => {
   expect(bg.current.css).toMatchSnapshot();

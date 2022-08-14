@@ -1,4 +1,4 @@
-import { aspect } from "utilities";
+import { aspect } from "../src/aspect";
 
 test("Aspect Ratio", () => {
   expect(aspect.auto.css).toMatchSnapshot();

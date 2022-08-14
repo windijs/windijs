@@ -1,4 +1,4 @@
-import { blend, opacity, shadow } from "utilities";
+import { blend, opacity, shadow } from "../src/effect";
 
 test("Shadow", () => {
   expect(shadow.css).toMatchSnapshot();

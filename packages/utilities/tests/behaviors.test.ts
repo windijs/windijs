@@ -1,4 +1,6 @@
-import { decoration, image, list, overflow, overscroll, placeholder } from "utilities";
+import { image, list, overflow, overscroll, placeholder } from "../src/behaviors";
+
+import { decoration } from "../src/typography";
 
 test("Box Decoration Break", () => {
   expect(decoration.slice.css).toMatchSnapshot();

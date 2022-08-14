@@ -1,5 +1,5 @@
-import { deg, rem } from "helpers";
-import { origin, perspect, preserve, rotate, scale, skew, transform, translate } from "utilities";
+import { deg, rem } from "@windi/helpers";
+import { origin, perspect, preserve, rotate, scale, skew, transform, translate } from "../src/transform";
 
 test("Rotate", () => {
   expect(rotate[90].css).toMatchSnapshot();

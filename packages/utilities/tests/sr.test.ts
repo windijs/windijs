@@ -1,4 +1,4 @@
-import { sr } from "utilities";
+import { sr } from "../src/sr";
 
 test("Screen Readers", () => {
   expect(sr.only.css).toMatchSnapshot();
