@@ -1,24 +1,7 @@
 {
-  "name": "windijs",
-  "version": "0.0.1",
-  "description": "utility-first css-in-js framework",
-  "main": "index.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    },
-    "./variants": {
-      "import": "./variants.mjs",
-      "require": "./variants.js"
-    },
-    "./utilities": {
-      "import": "./utilities.mjs",
-      "require": "./utilities.js"
-    }
-  },
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@7.9.0",
   "scripts": {
     "tsd": "tsc -p ./src --emitDeclarationOnly && tsc-alias -p tsconfig.json",
     "typecheck": "tsc -p ./src --noEmit",
