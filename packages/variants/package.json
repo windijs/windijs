@@ -1,0 +1,25 @@
+{
+  "name": "@windi/variants",
+  "version": "1.0.0",
+  "description": "@windi/variants",
+  "main": "dist/variants.js",
+  "module": "dist/variants.mjs",
+  "types": "dist/variants.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "windi"
+  ],
+  "author": "Raven Satir",
+  "license": "MIT",
+  "dependencies": {
+    "@windi/core": "1.0.0",
+    "@windi/helpers": "1.0.0",
+    "@windi/shared": "1.0.0"
+  },
+  "devDependencies": {
+    "@windi/config": "1.0.0",
+    "@windi/utilities": "1.0.0"
+  }
+}

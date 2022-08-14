@@ -1,4 +1,4 @@
-import { createMedia, createVariant } from "core/api";
+import { createMedia, createVariant } from "@windi/core";
 
 // screens
 

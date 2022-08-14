@@ -1,4 +1,4 @@
-import { createVariant } from "core/api";
+import { createVariant } from "@windi/core";
 
 /**
  * Targets svg nodes.
