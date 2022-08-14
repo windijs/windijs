@@ -1,5 +1,5 @@
-import { $ } from "helpers";
-import { style } from "utilities";
+import { $ } from "../src";
+import { style } from "@windi/utilities";
 
 const utilities = [style.background.blue, style.padding.rem[4], style.borderRadius.px[4]];
 

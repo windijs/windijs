@@ -1,4 +1,4 @@
-import { Color, colorLuminance, getDarkColor, getLightColor, hexToRGB, hslToRGB, rgbToHEX, rgbToHSL } from "helpers";
+import { Color, colorLuminance, getDarkColor, getLightColor, hexToRGB, hslToRGB, rgbToHEX, rgbToHSL } from "../src";
 
 test("rgbToHex", () => {
   expect(rgbToHEX([22, 22, 22, 1])).toEqual("#161616");
