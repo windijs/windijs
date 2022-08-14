@@ -4,7 +4,7 @@ import { insetConfig, positionConfig } from "./positioning";
 import { spacingConfig } from "./spacing";
 import { tShirtScale } from "./sizing";
 
-export const degreeConfig = degrees<0|1|2|3|6|12|15|30|45|60|90|180>([0, 1, 2, 3, 6, 12, 15, 30, 45, 60, 90, 180]);
+export const degreeConfig = degrees<0|1|2|3|6|12|15|30|45|60|90|120|160|180>([0, 1, 2, 3, 6, 12, 15, 30, 45, 60, 90, 120, 160, 180]);
 
 export const rotateConfig = {
   ...negative(degreeConfig),
