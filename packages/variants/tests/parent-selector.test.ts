@@ -1,7 +1,7 @@
-import { groupActive, groupFocus, groupHover, groupVisited } from "variants";
+import { groupActive, groupFocus, groupHover, groupVisited } from "../src/parentSelector";
 
-import { bg } from "utilities";
-import { bundle } from "helpers";
+import { bg } from "@windi/utilities";
+import { bundle } from "@windi/helpers";
 
 const utilities = [bg.blue[500], bg.clip.content];
 
