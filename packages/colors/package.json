@@ -1,0 +1,16 @@
+{
+  "name": "@windi/colors",
+  "version": "1.0.0",
+  "description": "@windi/colors",
+  "main": "dist/colors.js",
+  "module": "dist/colors.mjs",
+  "types": "dist/colors.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "windi"
+  ],
+  "author": "Raven Satir",
+  "license": "MIT"
+}
