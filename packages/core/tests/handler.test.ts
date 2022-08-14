@@ -1,10 +1,10 @@
-import { backgroundGenericHandler, callHandler, colorHandler, configHandler, createUtility, genericHandler, guard, meld, use } from "core";
-import { borderStyleConfig, borderWidthConfig } from "config";
-import { css, rgb } from "helpers";
-import { isNumber, parenWrap } from "utils";
+import { backgroundGenericHandler, callHandler, colorHandler, configHandler, createUtility, genericHandler, guard, meld, use } from "../src";
+import { borderStyleConfig, borderWidthConfig } from "@windi/config";
+import { css, rgb } from "@windi/helpers";
+import { isNumber, parenWrap } from "@windi/shared";
 
-import { StyleObject } from "types";
-import { colors } from "utilities";
+import type { StyleObject } from "@windi/helpers";
+import { colors } from "@windi/utilities";
 
 test("useGeneric With Trigger", () => {
   const backgroundGeneric = genericHandler("backgroundColor", prop => {
