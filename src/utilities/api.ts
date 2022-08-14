@@ -1,4 +1,5 @@
 import type {
+  BuildFunc,
   CSSDimensionType,
   CSSMap,
   CSSObject,
@@ -12,16 +13,109 @@ import type {
   StyleProxyHandler,
   UtilityMeta,
 } from "types";
-import { SymbolCSS, SymbolMeta, isStyleObject, prop } from "helpers/common";
-import { buildColor, buildKeyframes, buildProperty, buildStatic } from "./builder";
+import { SymbolCSS, SymbolMeta, isStyleObject } from "helpers/common";
+import { buildColor, buildProperty, buildStatic } from "./builder";
 import { fracToPercent, isFraction, isNumber, parenWrap } from "utils";
 import { getMeta, pushMetaProp, resetMeta, updateMetaType } from "helpers/meta";
 import { isProxy, setProxy, useProxy } from "helpers/proxy";
 
 import { css } from "helpers/css";
-import { prefixAnimation } from "./prefixer";
 
-type BuildFunc<O extends object = {}> = (value: unknown) => StyleObject<O> | undefined;
+export function handleConfig<T extends object> (build: BuildFunc, statics: T, type: MetaType, p: string): StyleObject | UtilityMeta | undefined {
+  updateMetaType(type);
+
+  // handle DEFAULT
+  if (p === "meta" || p as unknown as Symbol === SymbolMeta) return getMeta();
+  // @ts-ignore, generate default css
+  if ((p === "css" || p === SymbolCSS) && "DEFAULT" in statics) return build(statics.DEFAULT).css;
+  // if (p === "toString") return
+  // TODO: fix toString
+  const value = (statics as Record<string, unknown>)[p];
+  if (value != null && pushMetaProp(p)) {
+    if (typeof value === "object" && !Array.isArray(value)) {
+      if (SymbolCSS in value) {
+        (value as StyleObject)[SymbolMeta] = getMeta();
+        return value as StyleObject;
+      }
+      return useProxy(p2 => handleConfig(build, value as any, type, p2)) as StyleObject;
+    }
+    return build(value);
+  }
+};
+
+export function cssHandler (cssOrStyle: StyleObject | CSSObject | CSSMap) {
+  return (p => {
+    cssOrStyle = isStyleObject(cssOrStyle) ? cssOrStyle : css(cssOrStyle);
+    cssOrStyle[SymbolMeta].props = []; // remove meta prop
+    return Reflect.get(cssOrStyle, p);
+  }) as Handler<StyleObject>;
+}
+
+export function callHandler <F extends Function, R extends object = {}> (call: F, get?: Handler<R>): Handler<F & R> {
+  return setProxy((prop: string) => new Proxy(setProxy(call), {
+    get (target, p: string, receiver) {
+      if (p in target) return Reflect.get(target, p, receiver);
+      if (get) return get(p);
+    },
+    apply (target, thisArg, argArray) {
+      pushMetaProp(parenWrap(prop, argArray.toString()));
+      return Reflect.apply(target, thisArg, argArray);
+    },
+  })) as Handler<F & R>;
+}
+
+export function colorHandler<T extends object> (colors: T, colorProperty: StyleProperties | StyleProperties[]): StyleProxyHandler<T>;
+export function colorHandler<T extends object, O extends object = {}> (colors: T, build: (value: unknown) => StyleObject<O> | undefined): Handler<NestedProxy<T, StyleObject<O>>>;
+export function colorHandler<T extends object> (colors: T, colorProperty: StyleProperties | StyleProperties[], colorOpacityProperty: string): Handler<ColorStyleProxy<T>>;
+export function colorHandler<T extends object> (colors: T, colorPropertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc, colorOpacityProperty?: string) {
+  const build: BuildFunc = typeof colorPropertyOrBuildFunc === "function" ? colorPropertyOrBuildFunc : value => buildColor(colorPropertyOrBuildFunc, colorOpacityProperty!, value);
+  return (p: string) => handleConfig(build, colors, "color", p) as StyleProxy<T> | ColorStyleProxy<T> | undefined;
+}
+
+export function configHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[]): StyleProxyHandler<T>;
+export function configHandler<T extends object, O extends object = {}> (statics: T, build: (value: unknown) => StyleObject<O> | undefined): Handler<NestedProxy<T, StyleObject<O>>>;
+export function configHandler<T extends object> (statics: T, propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) {
+  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
+  return (p => handleConfig(build, statics, "static", p)) as StyleProxyHandler<T>;
+};
+
+type handleDynamic = ((prop: string) => CSSObject | StyleObject | undefined);
+type handleDynamicWithValue = ((prop: string) => string | undefined);
+
+export function genericHandler <R = { [key: string]: StyleObject }> (property: StyleProperties | StyleProperties[], handler: handleDynamicWithValue): Handler<R>
+export function genericHandler <R = { [key: string]: StyleObject }> (builder: BuildFunc, handler: handleDynamicWithValue): Handler<R>
+export function genericHandler <R = { [key: string]: StyleObject }> (handler: handleDynamic): Handler<R>
+export function genericHandler <R = { [key: string]: StyleObject }> (a: StyleProperties | StyleProperties[] | Function, b?: handleDynamicWithValue): Handler<R> {
+  return (p: string) => {
+    let v: string | undefined, r: StyleObject | CSSObject;
+    pushMetaProp(p) && updateMetaType("generic");
+    if (typeof b === "function" && (v = b(p))) return v == null ? undefined : typeof a === "function" ? a(v) : css(buildProperty(a, v));
+    if (typeof a === "function" && (r = a(p))) return isStyleObject(r) ? r : css(r);
+  };
+}
+
+export function numberHandler<T extends object = { [key:number]: StyleObject }> (propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc, size: "" | CSSDimensionType = "") {
+  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
+  return (p => isNumber(p) ? build(p + size) : undefined) as Handler<T>;
+}
+
+export const pxHandler = <T extends object = { [key:number]: StyleObject }>(propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) => numberHandler<T>(propertyOrBuildFunc, "px");
+
+export const remHandler = <T extends object = { [key:number]: StyleObject }>(propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) => numberHandler<T>(propertyOrBuildFunc, "rem");
+
+export const degHandler = <T extends object = { [key:number]: StyleObject }>(propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) => numberHandler<T>(propertyOrBuildFunc, "deg");
+
+export const msHandler = <T extends object = { [key:number]: StyleObject }>(propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) => numberHandler<T>(propertyOrBuildFunc, "ms");
+
+export function spacingHandler<T extends object = { [key:number]: StyleObject }> (propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) {
+  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
+  return (p => isNumber(p) ? build((+p / 4) + (p === "0" ? "px" : "rem")) : undefined) as Handler<T>;
+}
+
+export function fractionHandler<T extends object = { [key:string]: StyleObject }> (propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) {
+  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
+  return (p => isFraction(p) ? build(fracToPercent(p)) : undefined) as Handler<T>;
+}
 
 /**
  * Use single plugin.
@@ -37,6 +131,10 @@ export function use<U> (uid: string, plugin: (prop: string) => U): U {
       if (res) return res;
     },
   }) as unknown as U;
+}
+
+export function bind <T extends Record<string, string>> (cfg: T, f: (v: string) => StyleObject | undefined) {
+  return ((v: string) => f(v in cfg ? cfg[v as keyof typeof cfg] : v)) as unknown as T;
 }
 
 export function guard <K extends string, R> (key: K, handler: Handler<R>): Handler<Record<K, R>> {
@@ -82,108 +180,3 @@ export function meld (...handlers: Handler<unknown>[]) {
     }
   }) as any;
 }
-
-export function handleConfig<T extends object> (build: BuildFunc, statics: T, type: MetaType, p: string): StyleObject | UtilityMeta | undefined {
-  updateMetaType(type);
-
-  // handle DEFAULT
-  if (p === "meta" || p as unknown as Symbol === SymbolMeta) return getMeta();
-  // @ts-ignore, generate default css
-  if ((p === "css" || p === SymbolCSS) && "DEFAULT" in statics) return build(statics.DEFAULT).css;
-  // if (p === "toString") return
-  // TODO: fix toString
-  const value = (statics as Record<string, unknown>)[p];
-  if (value != null && pushMetaProp(p)) {
-    if (typeof value === "object" && !Array.isArray(value)) {
-      if (SymbolCSS in value) {
-        (value as StyleObject)[SymbolMeta] = getMeta();
-        return value as StyleObject;
-      }
-      return useProxy(p2 => handleConfig(build, value as any, type, p2)) as StyleObject;
-    }
-    return build(value);
-  }
-};
-
-export function configHandler<T extends object> (statics: T, property: StyleProperties | StyleProperties[]): StyleProxyHandler<T>;
-export function configHandler<T extends object, O extends object = {}> (statics: T, build: (value: unknown) => StyleObject<O> | undefined): Handler<NestedProxy<T, StyleObject<O>>>;
-export function configHandler<T extends object> (statics: T, propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) {
-  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
-  return (p => handleConfig(build, statics, "static", p)) as StyleProxyHandler<T>;
-};
-
-export function colorHandler<T extends object> (colors: T, colorProperty: StyleProperties | StyleProperties[]): StyleProxyHandler<T>;
-export function colorHandler<T extends object, O extends object = {}> (colors: T, build: (value: unknown) => StyleObject<O> | undefined): Handler<NestedProxy<T, StyleObject<O>>>;
-export function colorHandler<T extends object> (colors: T, colorProperty: StyleProperties | StyleProperties[], colorOpacityProperty: string): Handler<ColorStyleProxy<T>>;
-export function colorHandler<T extends object> (colors: T, colorPropertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc, colorOpacityProperty?: string) {
-  const build: BuildFunc = typeof colorPropertyOrBuildFunc === "function" ? colorPropertyOrBuildFunc : value => buildColor(colorPropertyOrBuildFunc, colorOpacityProperty!, value);
-  return (p: string) => handleConfig(build, colors, "color", p) as StyleProxy<T> | ColorStyleProxy<T> | undefined;
-}
-
-export function cssHandler (cssOrStyle: StyleObject | CSSObject | CSSMap) {
-  return (p => {
-    cssOrStyle = isStyleObject(cssOrStyle) ? cssOrStyle : css(cssOrStyle);
-    cssOrStyle[SymbolMeta].props = []; // remove meta prop
-    return Reflect.get(cssOrStyle, p);
-  }) as Handler<StyleObject>;
-}
-
-type handleDynamic = ((prop: string) => CSSObject | StyleObject | undefined);
-type handleDynamicWithValue = ((prop: string) => string | undefined);
-
-export function genericHandler <R = { [key: string]: StyleObject }> (property: StyleProperties | StyleProperties[], handler: handleDynamicWithValue): Handler<R>
-export function genericHandler <R = { [key: string]: StyleObject }> (builder: BuildFunc, handler: handleDynamicWithValue): Handler<R>
-export function genericHandler <R = { [key: string]: StyleObject }> (handler: handleDynamic): Handler<R>
-export function genericHandler <R = { [key: string]: StyleObject }> (a: StyleProperties | StyleProperties[] | Function, b?: handleDynamicWithValue): Handler<R> {
-  return (p: string) => {
-    let v: string | undefined, r: StyleObject | CSSObject;
-    pushMetaProp(p) && updateMetaType("generic");
-    if (typeof b === "function" && (v = b(p))) return v == null ? undefined : typeof a === "function" ? a(v) : css(buildProperty(a, v));
-    if (typeof a === "function" && (r = a(p))) return isStyleObject(r) ? r : css(r);
-  };
-}
-
-export function callHandler <F extends Function, R extends object = {}> (call: F, get?: Handler<R>): Handler<F & R> {
-  return setProxy((prop: string) => new Proxy(setProxy(call), {
-    get (target, p: string, receiver) {
-      if (p in target) return Reflect.get(target, p, receiver);
-      if (get) return get(p);
-    },
-    apply (target, thisArg, argArray) {
-      pushMetaProp(parenWrap(prop, argArray.toString()));
-      return Reflect.apply(target, thisArg, argArray);
-    },
-  })) as Handler<F & R>;
-}
-
-export function numberHandler<T extends object = { [key:number]: StyleObject }> (propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc, size: "" | CSSDimensionType = "") {
-  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
-  return (p => isNumber(p) ? build(p + size) : undefined) as Handler<T>;
-}
-
-export const pxHandler = <T extends object = { [key:number]: StyleObject }>(propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) => numberHandler<T>(propertyOrBuildFunc, "px");
-
-export const remHandler = <T extends object = { [key:number]: StyleObject }>(propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) => numberHandler<T>(propertyOrBuildFunc, "rem");
-
-export const degHandler = <T extends object = { [key:number]: StyleObject }>(propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) => numberHandler<T>(propertyOrBuildFunc, "deg");
-
-export const msHandler = <T extends object = { [key:number]: StyleObject }>(propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) => numberHandler<T>(propertyOrBuildFunc, "ms");
-
-export function spacingHandler<T extends object = { [key:number]: StyleObject }> (propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) {
-  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
-  return (p => isNumber(p) ? build((+p / 4) + (p === "0" ? "px" : "rem")) : undefined) as Handler<T>;
-}
-
-export function fractionHandler<T extends object = { [key:string]: StyleObject }> (propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) {
-  const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
-  return (p => isFraction(p) ? build(fracToPercent(p)) : undefined) as Handler<T>;
-}
-
-export const animateHandler = <T extends string> (name: T, value: string | CSSObject, keyframes?: Record<string, CSSObject>) => {
-  const map: CSSMap = new Map();
-  const setValue = (o: CSSObject) => Object.entries(o).map(([k, v]) => map.set(k, v));
-  if (keyframes) setValue(buildKeyframes(name, keyframes));
-  setValue(typeof value === "string" ? buildProperty([prop`-webkit-animation`, "animation"], value) : prefixAnimation(value));
-
-  return guard(name, cssHandler(map));
-};
