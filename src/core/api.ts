@@ -144,6 +144,25 @@ export const createVariant = (rule: string): VariantBuilder => (...utilities) =>
 
 export const createMedia = (rule: string): VariantBuilder => (...utilities) => useMedia(rule, utilities);
 
+export function createScreenVariants<T extends object> (screens: T, mobile = true) {
+  return Object.fromEntries(Object.entries(screens).map(([k, v]) => [k, createMedia(`(${mobile ? "min" : "max"}-width: ${v})`)])) as Record<keyof T, VariantBuilder>;
+}
+
+export function createDarkModeVariants (media = true) {
+  return {
+    dark: media ? createMedia("(prefers-color-scheme: dark)") : createVariant(".dark &"),
+    light: media ? createMedia("(prefers-color-scheme: light)") : createVariant(".light &"),
+  };
+}
+
+export function createOrientationVariants<T extends object> (orientations: T) {
+  return Object.fromEntries(Object.entries(orientations).map(([k, v]) => [k, createMedia(`(orientation: ${v})`)])) as Record<keyof T, VariantBuilder>;
+}
+
+export function createMotionVariants<T extends object> (motions: T) {
+  return Object.fromEntries(Object.entries(motions).map(([k, v]) => [k, createMedia(`(prefers-reduced-motion: ${v})`)])) as Record<keyof T, VariantBuilder>;
+}
+
 export const variant = (rule: string, ...utilities: (StyleObject | StyleObject[])[]) => useVariant(rule, utilities);
 
 export const media = (rule: string, ...utilities: (StyleObject | StyleObject[])[]) => useMedia(rule, utilities);
