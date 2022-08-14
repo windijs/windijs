@@ -1,13 +1,6 @@
 import { buildContainer } from "core";
+import { screens } from "config";
 import { unify } from "helpers";
-
-const screens = {
-  sm: "640px",
-  md: "768px",
-  lg: "1024px",
-  xl: "1280px",
-  "2xl": "1536px",
-};
 
 test("Container", () => {
   const container = buildContainer(screens);
