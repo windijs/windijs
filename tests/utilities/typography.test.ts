@@ -1,4 +1,4 @@
-import { createUtility, fontSizeHandler } from "index";
+import { createUtility, fontSizeHandler } from "core";
 import { decoration, font, hyphens, indent, leading, tab, text, tracking, write } from "utilities";
 
 test("Font Family", () => {
