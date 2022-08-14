@@ -76,6 +76,7 @@ Object {
 exports[`Font Style and Font Smoothing 2`] = `
 Object {
   "fontStyle": "normal",
+  "fontWeight": "400",
 }
 `;
 
