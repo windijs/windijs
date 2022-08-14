@@ -1,6 +1,5 @@
-import { backgroundAttachmentConfig, backgroundClipConfig, backgroundGenericHandler, baseColors, colorHandler, configHandler, createUtility, windiColors } from "index";
-
-import { prop } from "helpers";
+import { backgroundAttachmentConfig, backgroundClipConfig, backgroundGenericHandler, backgroundImageConfig, backgroundOriginConfig, backgroundPositionConfig, backgroundRepeatConfig, backgroundSizeConfig, baseColors, blendModeConfig, buildGradientDirection, buildGradientFrom, buildGradientTo, buildGradientVia, buildLinearGradient, callHandler, colorHandler, configHandler, createUtility, gradientConfig, gradientDirectionConfig, meld, opacityConfig, windiColors } from "index";
+import { percent, prop } from "helpers";
 
 test("Background Color", () => {
   const bg = createUtility("bg")
@@ -117,6 +116,17 @@ test("Background Color Without Opacity With Different Color Value Type", () => {
   expect(bg.hwba.css).toMatchSnapshot("hwba");
 });
 
+test("Background Opacity", () => {
+  const bg = createUtility("bg")
+    .use(colorHandler({ ...baseColors, ...windiColors }, "backgroundColor", "--w-bg-opacity"))
+    .case("opacity", configHandler(opacityConfig, prop`--w-bg-opacity`))
+    .init();
+
+  expect(bg.blue[300].css).toMatchSnapshot();
+  expect(bg.opacity[0].css).toMatchSnapshot();
+  expect(bg.opacity[20].css).toMatchSnapshot();
+});
+
 test("Background Attachment", () => {
   const bg = createUtility("bg")
     .use(configHandler(backgroundAttachmentConfig, "backgroundAttachment"))
@@ -145,6 +155,59 @@ test("Background Clip With Different Key", () => {
   expect(bg.clipped.padding.css).toMatchSnapshot();
   expect(bg.clipped.content.css).toMatchSnapshot();
   expect(bg.clipped.text.css).toMatchSnapshot();
+});
+
+test("Background Position", () => {
+  const bg = createUtility("bg")
+    .use(configHandler(backgroundPositionConfig, "backgroundPosition"))
+    .init();
+
+  expect(bg.bottom.css).toMatchSnapshot();
+  expect(bg.left.bottom.css).toMatchSnapshot();
+});
+
+test("Background Repeat", () => {
+  const bg = createUtility("bg")
+    .use(configHandler(backgroundRepeatConfig, "backgroundRepeat"))
+    .init();
+
+  expect(bg.repeat.css).toMatchSnapshot();
+  expect(bg.repeat.x.css).toMatchSnapshot();
+  expect(bg.repeat.y.css).toMatchSnapshot();
+  expect(bg.repeat.round.css).toMatchSnapshot();
+  expect(bg.repeat.space.css).toMatchSnapshot();
+  expect(bg.noRepeat.css).toMatchSnapshot();
+});
+
+test("Background Size", () => {
+  const bg = createUtility("bg")
+    .use(configHandler(backgroundSizeConfig, "backgroundSize"))
+    .init();
+
+  expect(bg.auto.css).toMatchSnapshot();
+  expect(bg.cover.css).toMatchSnapshot();
+  expect(bg.contain.css).toMatchSnapshot();
+});
+
+test("Background Origin", () => {
+  const bg = createUtility("bg")
+    .case("origin", configHandler(backgroundOriginConfig, "backgroundOrigin"))
+    .init();
+
+  expect(bg.origin.border.css).toMatchSnapshot();
+  expect(bg.origin.padding.css).toMatchSnapshot();
+  expect(bg.origin.content.css).toMatchSnapshot();
+});
+
+test("Background Blend Mode", () => {
+  const bg = createUtility("bg")
+    .case("blend", configHandler(blendModeConfig, "backgroundBlendMode"))
+    .init();
+  expect(bg.blend.luminosity.css).toMatchSnapshot();
+  expect(bg.blend.softLight.css).toMatchSnapshot();
+  expect(bg.blend.color.css).toMatchSnapshot();
+  expect(bg.blend.color.burn.css).toMatchSnapshot();
+  expect(bg.blend.color.dodge.css).toMatchSnapshot();
 });
 
 test("Background Generic", () => {
@@ -189,4 +252,74 @@ test("Background With Deep Nested Color", () => {
   expect(bg.rose.dark[100].meta.props).toMatchSnapshot();
   expect(bg.rose.dark.night[300].meta.props).toMatchSnapshot();
   expect(bg.rose.dark.night.blue[600].meta.props).toMatchSnapshot();
+});
+
+// TODO: support radial gradient
+
+test("Gradients", () => {
+  const bg = createUtility("bg")
+    .use(configHandler(backgroundImageConfig, "backgroundImage"))
+    .case("gradient", meld(
+      configHandler(gradientDirectionConfig, buildGradientDirection),
+      configHandler(gradientConfig, "backgroundImage"),
+    ))
+    .init();
+
+  expect(bg.none.css).toMatchSnapshot();
+  expect(bg.gradient.to.t.css).toMatchSnapshot();
+  expect(bg.gradient.to.tr.css).toMatchSnapshot();
+  expect(bg.gradient.to.r.css).toMatchSnapshot();
+  expect(bg.gradient.to.br.css).toMatchSnapshot();
+  expect(bg.gradient.to.b.css).toMatchSnapshot();
+  expect(bg.gradient.to.bl.css).toMatchSnapshot();
+  expect(bg.gradient.to.l.css).toMatchSnapshot();
+  expect(bg.gradient.to.tl.css).toMatchSnapshot();
+  expect(bg.gradient.deg[15].css).toMatchSnapshot();
+  expect(bg.gradient.deg[90].css).toMatchSnapshot();
+  expect(bg.gradient.deg[120].css).toMatchSnapshot();
+  expect(bg.gradient.aqua.css).toMatchSnapshot();
+  expect(bg.gradient.sky.css).toMatchSnapshot();
+});
+
+test("Gradient Function", () => {
+  const colors = windiColors;
+  const to = gradientDirectionConfig.to;
+  const bg = createUtility("bg")
+    .use(configHandler(backgroundImageConfig, "backgroundImage"))
+    .case("gradient", callHandler(buildLinearGradient, meld(
+      configHandler(gradientDirectionConfig, buildGradientDirection),
+      configHandler(gradientConfig, "backgroundImage"),
+    )))
+    .init();
+  expect(bg.gradient.to.tl.css).toMatchSnapshot();
+  expect(bg.gradient.deg[15].css).toMatchSnapshot();
+  expect(bg.gradient.aqua.css).toMatchSnapshot();
+  expect(bg.gradient(to.br, colors.red[500], [colors.blue[500], percent[10]]).css).toMatchSnapshot();
+  expect(bg.gradient(to.br, colors.amber[200], colors.green[200], colors.dark[100], colors.gray[200]).css).toMatchSnapshot();
+});
+
+test("Gradient From", () => {
+  const from = createUtility("from")
+    .use(colorHandler(windiColors, buildGradientFrom))
+    .init();
+
+  expect(from.yellow[500].css).toMatchSnapshot();
+  expect(from.blue[500].opacity(10).css).toMatchSnapshot();
+});
+
+test("Gradient Via", () => {
+  const via = createUtility("via")
+    .use(colorHandler(windiColors, buildGradientVia))
+    .init();
+  expect(via.yellow[500].css).toMatchSnapshot();
+  expect(via.blue[500].opacity(10).css).toMatchSnapshot();
+});
+
+test("Gradient To", () => {
+  const to = createUtility("to")
+    .use(colorHandler(windiColors, buildGradientTo))
+    .init();
+
+  expect(to.yellow[500].css).toMatchSnapshot();
+  expect(to.yellow[500].opacity(20).css).toMatchSnapshot();
 });
