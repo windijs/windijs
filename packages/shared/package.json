@@ -1,0 +1,16 @@
+{
+  "name": "@windi/shared",
+  "version": "1.0.0",
+  "description": "@windi/shared",
+  "main": "index.js",
+  "module": "dist/shared.mjs",
+  "types": "dist/shared.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "windi"
+  ],
+  "author": "Raven Satir",
+  "license": "MIT"
+}

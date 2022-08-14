@@ -1,4 +1,4 @@
-import type { FractionObject, Negative, RangeTuple } from "types";
+import type { FractionObject, Negative, RangeTuple } from "./types";
 
 /**
  * Check if value is a number
