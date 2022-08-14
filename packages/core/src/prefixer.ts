@@ -1,5 +1,5 @@
-import type { CSSPrefixer } from "types";
-import { camelToDash } from "utils";
+import type { CSSPrefixer } from "@windi/helpers";
+import { camelToDash } from "@windi/shared";
 
 export function prefixer (filter: ((k: string, v: string) => boolean) | string | Array<string>, updater: (k: string, v: string) => object): CSSPrefixer {
   let updated;

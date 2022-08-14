@@ -1,6 +1,6 @@
-import { SymbolProxy } from "helpers/common";
+import { SymbolProxy, resetMeta } from "@windi/helpers";
+
 import { guard } from "./api";
-import { resetMeta } from "helpers/meta";
 
 export class Utility<T extends object = {}> implements ProxyHandler<T> {
   uid: string;

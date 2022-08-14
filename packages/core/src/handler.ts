@@ -1,15 +1,9 @@
-import * as funcs from "helpers/funcs";
-import * as units from "helpers/unit";
-
-import type { BuildFunc, CSSDecls, CSSMap, CSSObject, GeneralCSSData, Handler, StyleObject, StyleProxy } from "types";
+import type { BuildFunc, CSSDecls, CSSMap, CSSObject, GeneralCSSData, Handler, StyleObject, StyleProxy } from "@windi/helpers";
 import { buildFontSize, buildKeyframes, buildProperty } from "./builder";
 import { configHandler, cssHandler, genericHandler, guard, handleConfig } from "./api";
-import { css, useProxy } from "helpers";
-import { getMeta, pushMetaProp } from "helpers/meta";
-import { hasKey, isNumber } from "utils";
+import { css, funcs, getMeta, prop, pushMetaProp, units, useProxy } from "@windi/helpers";
+import { hasKey, isNumber } from "@windi/shared";
 import { prefixAnimation, prefixNotHidden } from "./prefixer";
-
-import { prop } from "helpers/common";
 
 export const animateHandler = <T extends string> (name: T, value: string | CSSObject, keyframes?: Record<string, CSSObject>) => {
   const map: CSSMap = new Map();
