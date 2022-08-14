@@ -1,4 +1,4 @@
-import { degrees, negative, omit, range, scales } from "utils";
+import { degrees, negative, omit, range, scales } from "@windi/shared";
 import { insetConfig, positionConfig } from "./positioning";
 
 import { spacingConfig } from "./spacing";

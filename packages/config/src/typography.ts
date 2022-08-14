@@ -1,4 +1,4 @@
-import { range, spacings } from "utils";
+import { range, spacings } from "@windi/shared";
 
 export const fontFamilyConfig = {
   sans: [

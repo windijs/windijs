@@ -1,0 +1,19 @@
+{
+  "name": "@windi/config",
+  "version": "1.0.0",
+  "description": "@windi/config",
+  "main": "dist/config.js",
+  "module": "dist/config.mjs",
+  "types": "dist/config.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "windi"
+  ],
+  "author": "Raven Satir",
+  "license": "MIT",
+  "dependencies": {
+    "@windi/shared": "1.0.0"
+  }
+}

@@ -1,4 +1,4 @@
-import { fractions } from "utils";
+import { fractions } from "@windi/shared";
 import { spacingConfig } from "./spacing";
 
 export const screens = {
