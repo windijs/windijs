@@ -1,4 +1,4 @@
-import type { style } from "plugins/style";
+import type { style } from "utilities/style";
 
 declare global {
   const accentColor: typeof style["accentColor"];
