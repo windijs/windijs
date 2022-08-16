@@ -177,7 +177,7 @@ export const bootstrapThemeBaseColors = {
   dark: "#212529", // gray[900]
 };
 
-export const bootstrapShade500 = {
+export const bootstrapShade500Colors = {
   blue: "#0d6efd", // blue[500]
   indigo: "#6610f2", // indigo[500],
   purple: "#6f42c1", // purple[500],
