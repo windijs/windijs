@@ -120,7 +120,7 @@ const packageFormats = inlineFormats || packageOptions.formats || defaultFormats
 
 if (process.env.TYPES && !packageFormats.includes("dts")) packageFormats.push("dts");
 
-const packageConfigs = process.env.PROD_ONLY ? [] : packageFormats.map(format => createConfig(format, outputConfigs[format]));
+const packageConfigs = packageFormats.map(format => createConfig(format, outputConfigs[format]));
 
 if (process.env.NODE_ENV === "production") {
   packageFormats.forEach(format => {

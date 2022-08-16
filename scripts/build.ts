@@ -14,7 +14,7 @@ const prodOnly = !devOnly && (args.prodOnly || args.p);
 const sourceMap = args.sourcemap || args.s;
 const isRelease = args.release;
 const isCheckSize = args.checkSize || args.c;
-const buildTypes = args.t || args.types || isRelease;
+const buildTypes = args.t || args.types || prodOnly || isRelease;
 const buildAllMatching = args.all || args.a;
 const minify = args.minify || args.m;
 
