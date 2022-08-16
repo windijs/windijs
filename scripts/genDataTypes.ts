@@ -1,4 +1,4 @@
-import * as funcs from "../src/helpers/funcs";
+import * as funcs from "../packages/helpers/src/funcs";
 
 /* eslint-disable no-console */
 import { EntryStatus, IAtDirectiveData, IPropertyData, IPseudoClassData, IPseudoElementData, IReference, IValueData, cssData } from "../data/cssData";
@@ -19,7 +19,7 @@ function indent (str: string, count = 2) {
 }
 
 function escape (str: string) {
-  return str.replace(/</g, "\\<");
+  return str.replace(/</g, "\\<").replace(/@/g, "\\@").replace(/\{/g, "\\{").replace(/\}/g, "\\}");
 }
 
 function doc (str: string[], indentCount = 0): string | undefined {
@@ -140,7 +140,7 @@ function genEndTypes (prop: IPropertyData, header?: string): string {
 
 function genCSSDecls () {
   const depends = ["StyleObject", "ColorEntry", "LengthEntry", "PercentEntry", "AlphaEntry", "IntegerEntry", "URLEntry", "StringEntry", "AngleEntry", "TimeEntry", "WideEntry", "PositionEntry", "RepeatStyleEntry", "LineStyleEntry", "LineWidthEntry", "BoxEntry", "GeometryBoxEntry", "ColorFunctions", "ImageFunctions", "BasicShapeFunctions", "TransitionTimingFunctions"];
-  codes.push(`import { ${depends.sort().join(", ")} } from "./index";`);
+  codes.push(`import { ${depends.sort().join(", ")} } from "./types";`);
   codes.push("");
   codes.push("export interface CSSDecls {");
 
@@ -182,7 +182,7 @@ function genCSSDecls () {
 
   console.log("Collect function depends...\n");
 
-  codes.splice(2, 0, `import { ${funcDepends.sort().join(", ")} } from "helpers/funcs";`);
+  codes.splice(2, 0, `import { ${funcDepends.sort().join(", ")} } from "./funcs";`);
 
   codes.push("}");
   codes.push("");
@@ -299,8 +299,8 @@ console.log("Generating HTML Attributes..\n");
 
 genHTMLAttrs();
 
-console.log("Write to ./src/types/data.ts\n");
+console.log("Write to ./packages/helpers/src/data.ts\n");
 
-writeFileSync("./src/types/data.ts", codes.join("\n"));
+writeFileSync("./packages/helpers/src/data.ts", codes.join("\n"));
 
 console.log("Done.\n");
