@@ -54,7 +54,7 @@ export function useArrayHelper () {
 
 /**
  * Bundle all utilities to a single css object.
- * @param utilities Utilities and Variants
+ * @param utilities - Utilities and Variants
  * @returns CSSObject
  */
 export function bundle (utilities: (StyleObject | StyleObject[])[]): CSSMap {

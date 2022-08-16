@@ -1,4 +1,4 @@
-import { Range, range } from "@windi/shared";
+import { range } from "@windi/shared";
 
 export const gridAutoColumnsConfig = {
   auto: "auto",
@@ -28,7 +28,7 @@ export const gridColumnConfig = {
   },
 } as {
   auto: string,
-  span: Record<"full" | Range<1, 13>, string>
+  span: Record<"full" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12, string>
 };
 
 export const gridRowConfig = gridColumnConfig;
@@ -36,7 +36,7 @@ export const gridRowConfig = gridColumnConfig;
 export const gridColumnEndConfig = {
   auto: "auto",
   ...Object.fromEntries(range(1, 14).map(i => [i, i + ""])),
-} as Record<"auto" | Range<1, 14>, string>;
+} as Record<"auto" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13, string>;
 
 export const gridColumnStartConfig = gridColumnEndConfig;
 
@@ -47,6 +47,6 @@ export const gridRowEndConfig = gridColumnEndConfig;
 export const gridTemplateColumnsConfig = {
   none: "none",
   ...Object.fromEntries(range(1, 13).map(i => [i, `repeat(${i}, minmax(0, 1fr))`])),
-} as Record<"none" | Range<1, 13>, string>;
+} as Record<"none" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12, string>;
 
 export const gridTemplateRowsConfig = gridTemplateColumnsConfig;

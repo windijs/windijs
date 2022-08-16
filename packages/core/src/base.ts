@@ -48,7 +48,7 @@ export class Utility<T extends object = {}> implements ProxyHandler<T> {
 /**
  * Create a new utility.
  * @param uid Utility ID, usually it should be consistent with the variiable name you declared. Such as, `const bg = createUtility("bg")`
- * @returns {Utility} Utility
+ * @returns Utility
  */
 export function createUtility (uid: string) {
   return new Utility(uid);

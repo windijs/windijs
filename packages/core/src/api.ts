@@ -22,7 +22,8 @@ export function handleConfig<T extends object> (build: BuildFunc, statics: T, ty
   updateMetaType(type);
 
   // handle DEFAULT
-  if (p === "meta" || p as unknown as Symbol === SymbolMeta) return getMeta();
+  // @ts-ignore
+  if (p === "meta" || p === SymbolMeta) return getMeta();
   // @ts-ignore, generate default css
   if ((p === "css" || p === SymbolCSS) && "DEFAULT" in statics) return build(statics.DEFAULT).css;
   // if (p === "toString") return
@@ -73,7 +74,7 @@ export function configHandler<T extends object> (statics: T, property: StyleProp
 export function configHandler<T extends object, O extends object = {}> (statics: T, build: (value: unknown) => StyleObject<O> | undefined): Handler<NestedProxy<T, StyleObject<O>>>;
 export function configHandler<T extends object> (statics: T, propertyOrBuildFunc: StyleProperties | StyleProperties[] | BuildFunc) {
   const build: BuildFunc = typeof propertyOrBuildFunc === "function" ? propertyOrBuildFunc : value => buildStatic(propertyOrBuildFunc, value);
-  return (p => handleConfig(build, statics, "static", p)) as StyleProxyHandler<T>;
+  return ((p: string) => handleConfig(build, statics, "static", p)) as unknown as StyleProxyHandler<T>;
 };
 
 type handleDynamic = ((prop: string) => CSSObject | StyleObject | undefined);

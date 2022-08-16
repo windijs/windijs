@@ -1,9 +1,10 @@
-import type { FractionObject, Negative, RangeTuple } from "./types";
+import { FractionObject, Negative, RangeTuple } from "./types";
 
 /**
- * Check if value is a number
- * @param value {string}
- * @returns {boolean}
+ * Check if input is a number
+ *
+ * @param value A numeric string
+ * @returns Boolean
  */
 export function isNumber (value: string) {
   // @ts-ignore

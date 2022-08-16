@@ -7,7 +7,7 @@ export function useProxy<T extends object, S = StyleObject> (f: (prop: string) =
   });
 }
 
-export function isProxy (i: unknown) {
+export function isProxy<T extends object | Function> (i: T) {
   return i != null && SymbolProxy in i;
 }
 
