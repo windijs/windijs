@@ -1,16 +1,19 @@
 // TODO: we need typescript 4.8 to support infer number from template
-export type ParseInt<T> = T extends `${infer N extends number}` ? N : never
+// export type ParseInt<T> = T extends `${infer N extends number}` ? N : never
 
+// export type Negative<T extends object> = {
+//   [k in keyof T as k extends 0 | "0" ? k : k extends number ? `-${k}` : `-${string & k}`]: T[k] extends number | string ? `-${T[k]}` : T[k]
+// };
+
+// export type NonNegativeInteger<T extends number> =
+//   number extends T
+//   ? never
+//   : `${T}` extends `-${string}` | `${string}.${string}`
+//   ? never
+//   : T;
 export type Negative<T extends object> = {
-  [k in keyof T as k extends 0 | "0" ? k : k extends number ? ParseInt<`-${k}`> : `-${string & k}`]: T[k] extends number | string ? `-${T[k]}` : T[k]
+  [k in keyof T as k extends 0 | "0" ? k : k extends number ? `-${k}` : `-${string & k}`]: T[k] extends number | string ? `-${T[k]}` : T[k]
 };
-
-export type NonNegativeInteger<T extends number> =
-  number extends T
-  ? never
-  : `${T}` extends `-${string}` | `${string}.${string}`
-  ? never
-  : T;
 
 // Range Type
 // https://www.codegrepper.com/code-examples/typescript/typescript+type+number+in+range
