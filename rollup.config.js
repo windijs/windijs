@@ -1,97 +1,132 @@
+// @ts-check
+
 import { defineConfig } from "rollup";
-import fs from "fs";
+import dts from "rollup-plugin-dts";
 import path from "path";
-import pluginTS from "@rollup/plugin-typescript";
-import typescript from "typescript";
+// @ts-ignore
+import sucrase from "@rollup/plugin-sucrase";
+import ts from "rollup-plugin-typescript2";
 
-const outDir = "./dist";
+if (!process.env.TARGET) throw new Error("TARGET package must be specified via --environment flag.");
 
-const tsPlugin = pluginTS({
-  target: "es6",
-  include: "src/**",
-  outDir,
-  typescript,
-});
+const packagesDir = path.resolve(__dirname, "packages");
+const packageDir = path.resolve(packagesDir, process.env.TARGET);
+const resolve = p => path.resolve(packageDir, p);
+const pkg = require(resolve("package.json"));
+const packageOptions = pkg.buildOptions || {};
+const name = packageOptions.filename || path.basename(packageDir);
 
-const dump = (file) => path.join(outDir, file);
+// ensure TS checks only once for each build
+let hasTSChecked = false;
 
-const copy = (files) => files.forEach((file) => fs.copyFileSync(file, dump(file)));
-
-const rmdir = (dir) => fs.existsSync(dir) && fs.statSync(dir).isDirectory() && fs.rmSync(dir, { recursive: true });
-
-const mkdir = (dir) => !(fs.existsSync(dir) && fs.statSync(dir).isDirectory()) && fs.mkdirSync(dir);
-
-const types = (dest = "index", subdir = "") => {
-  if (dest !== "index" && subdir === "") subdir = "/" + dest;
-
-  return {
-    writeBundle () {
-      fs.writeFileSync(dump(dest + ".d.ts"), `export * from "${"./types" + subdir}";`);
-    },
-  };
+const outputConfigs = {
+  cjs: {
+    file: resolve(`dist/${name}.js`),
+    format: "cjs",
+  },
+  mjs: {
+    file: resolve(`dist/${name}.mjs`),
+    format: "es",
+  },
+  esm: {
+    file: resolve(`dist/${name}.esm.js`),
+    format: "es",
+  },
+  iife: {
+    file: resolve(`dist/${name}.iife.js`),
+    format: "iife",
+  },
+  dts: {
+    file: resolve(`dist/${name}.d.ts`),
+    format: "es",
+  },
 };
 
-export default defineConfig([
-  {
-    input: "src/index.ts",
-    output: [
-      {
-        file: dump("index.js"),
-        format: "cjs",
-        paths: (id) => `./${path.relative("./src", id)}/index.js`,
+function createConfig (format, output, plugins = []) {
+  if (!output) {
+    // eslint-disable-next-line no-console
+    console.log(require("chalk").yellow(`invalid format: "${format}"`));
+    process.exit(1);
+  }
+
+  output.exports = "named";
+  output.sourcemap = !!process.env.SOURCE_MAP;
+  output.externalLiveBindings = false;
+
+  if (format === "iife") output.name = packageOptions.name;
+
+  const tsPlugin = process.env.NODE_ENV === "production"
+    ? ts({
+      check: process.env.NODE_ENV === "production" && !hasTSChecked,
+      tsconfig: path.resolve(__dirname, "tsconfig.json"),
+      cacheRoot: path.resolve(__dirname, "node_modules/.rts2_cache"),
+      tsconfigOverride: {
+        compilerOptions: {
+          target: format === "cjs" ? "es2019" : "es2015",
+          sourceMap: output.sourcemap,
+          declaration: false,
+          declarationMap: false,
+        },
+        exclude: ["**/tests"],
       },
-      {
-        file: dump("index.mjs"),
-        format: "esm",
-        paths: (id) => `./${path.relative("./src", id)}/index.mjs`,
-      },
+    })
+    : sucrase({
+      exclude: ["node_modules/**", "tests/**"],
+      transforms: ["typescript"],
+    });
+
+  hasTSChecked = true;
+
+  const external = [
+    ...Object.keys(pkg.dependencies || {}),
+    ...Object.keys(pkg.peerDependencies || {}),
+  ];
+
+  return defineConfig({
+    input: resolve("src/index.ts"),
+    external,
+    plugins: format === "dts" ? [dts()] : [tsPlugin, ...plugins],
+    output,
+    treeshake: {
+      moduleSideEffects: false,
+    },
+  });
+}
+
+function createMinifiedConfig (format) {
+  const { terser } = require("rollup-plugin-terser");
+  return createConfig(
+    format,
+    {
+      file: outputConfigs[format].file.replace(/\.js$/, ".min.js").replace(/\.mjs$/, ".min.mjs"),
+      format: outputConfigs[format].format,
+    },
+    [
+      terser({
+        module: /^esm/.test(format),
+        compress: {
+          ecma: 2015,
+          pure_getters: true,
+        },
+        safari10: true,
+      }),
     ],
-    plugins: [
-      tsPlugin,
-      rmdir(outDir),
-      mkdir(outDir),
-      copy(["package.json"]), //, "README.md", "LICENSE"]),
-      types(),
-    ],
-  },
-  {
-    input: "src/utilities/index.ts",
-    output: [
-      {
-        file: dump("utilities.js"),
-        format: "cjs",
-        paths: (id) => `./${path.relative("./src", id)}/index.js`,
-      },
-      {
-        file: dump("utilities.mjs"),
-        format: "esm",
-        paths: (id) => `./${path.relative("./src", id)}/index.mjs`,
-      },
-    ],
-    plugins: [
-      tsPlugin,
-      types("utilities"),
-      types("global", "/types/global"),
-    ],
-  },
-  {
-    input: "src/variants/index.ts",
-    output: [
-      {
-        file: dump("variants.js"),
-        format: "cjs",
-        paths: (id) => `./${path.relative("./src", id)}/index.js`,
-      },
-      {
-        file: dump("variants.mjs"),
-        format: "esm",
-        paths: (id) => `./${path.relative("./src", id)}/index.mjs`,
-      },
-    ],
-    plugins: [
-      tsPlugin,
-      types("variants"),
-      types("global", "/types/global"),
-    ],
-  },
-]);
+  );
+}
+
+const defaultFormats = ["cjs", "mjs"];
+const inlineFormats = process.env.FORMATS && process.env.FORMATS.split(",");
+const packageFormats = inlineFormats || packageOptions.formats || defaultFormats;
+
+if (process.env.TYPES && !packageFormats.includes("dts")) packageFormats.push("dts");
+
+const packageConfigs = process.env.PROD_ONLY ? [] : packageFormats.map(format => createConfig(format, outputConfigs[format]));
+
+if (process.env.NODE_ENV === "production") {
+  packageFormats.forEach(format => {
+    if (packageOptions.prod === false) return;
+    if (process.env.MINIFY) packageConfigs.push(createMinifiedConfig(format));
+  });
+}
+
+export default packageConfigs;
