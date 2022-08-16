@@ -11,6 +11,10 @@
   "keywords": [
     "windi"
   ],
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "displayName": "@windi/colors"
+  },
   "author": "Raven Satir",
   "license": "MIT"
 }

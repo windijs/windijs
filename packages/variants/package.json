@@ -13,6 +13,10 @@
   ],
   "author": "Raven Satir",
   "license": "MIT",
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "displayName": "@windi/variants"
+  },
   "dependencies": {
     "@windi/core": "1.0.0",
     "@windi/helpers": "1.0.0",

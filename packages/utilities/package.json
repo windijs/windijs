@@ -11,6 +11,10 @@
   "keywords": [
     "windi"
   ],
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "displayName": "@windi/utilities"
+  },
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {

@@ -15,5 +15,9 @@
   "license": "MIT",
   "dependencies": {
     "@windi/shared": "1.0.0"
+  },
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "displayName": "@windi/config"
   }
 }

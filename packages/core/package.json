@@ -20,5 +20,9 @@
   "devDependencies": {
     "@windi/utilities": "1.0.0",
     "@windi/config": "1.0.0"
+  },
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "displayName": "@windi/core"
   }
 }

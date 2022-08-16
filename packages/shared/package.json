@@ -2,7 +2,7 @@
   "name": "@windi/shared",
   "version": "1.0.0",
   "description": "@windi/shared",
-  "main": "index.js",
+  "main": "dist/shared.js",
   "module": "dist/shared.mjs",
   "types": "dist/shared.d.ts",
   "files": [
@@ -11,6 +11,10 @@
   "keywords": [
     "windi"
   ],
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "displayName": "@windi/shared"
+  },
   "author": "Raven Satir",
   "license": "MIT"
 }

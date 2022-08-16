@@ -17,5 +17,19 @@
     "paths": {
       "@windi/*": ["packages/*/src"],
     }
+  },
+  "include": [
+    "packages/*/src",
+  ],
+  "typedocOptions": {
+    "out": "docs",
+    "theme": "default",
+    "name": "Windi Docs",
+    "exclude": "*.test.ts",
+    "excludeInternal": true,
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeNotDocumented": true
   }
 }
