@@ -15,5 +15,3 @@ export * from "./namer";
 export * from "./proxy";
 export * from "./types";
 export * from "./unit";
-export * as funcs from "./funcs";
-export * as units from "./unit";

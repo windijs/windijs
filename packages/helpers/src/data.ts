@@ -7,7 +7,7 @@ import { attr, blur, brightness, contrast, counter, dropShadow, grayscale, hueRo
 
 export interface CSSDecls {
   /**
-   * @counter-style descriptor. Specifies the symbols used by the marker-construction algorithm specified by the system descriptor. Needs to be specified if the counter system is 'additive'.
+   * \@counter-style descriptor. Specifies the symbols used by the marker-construction algorithm specified by the system descriptor. Needs to be specified if the counter system is 'additive'.
    *
    * (Firefox 33)
    *
@@ -160,11 +160,11 @@ export interface CSSDecls {
     "alternate": StyleObject,
     /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
     "alternate-reverse": StyleObject,
-    /** The beginning property value (as defined in the first @keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
+    /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
     "backwards": StyleObject,
     /** Both forwards and backwards fill modes are applied. */
     "both": StyleObject,
-    /** The final property value (as defined in the last @keyframes at-rule) is maintained after the animation completes. */
+    /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
     "forwards": StyleObject,
     /** Causes the animation to repeat forever. */
     "infinite": StyleObject,
@@ -216,11 +216,11 @@ export interface CSSDecls {
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode)
    */
   animationFillMode: {
-    /** The beginning property value (as defined in the first @keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
+    /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
     "backwards": StyleObject,
     /** Both forwards and backwards fill modes are applied. */
     "both": StyleObject,
-    /** The final property value (as defined in the last @keyframes at-rule) is maintained after the animation completes. */
+    /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
     "forwards": StyleObject,
     /** There is no change to the property value between the time the animation is applied and the time the animation begins playing or after the animation completes. */
     "none": StyleObject,
@@ -598,7 +598,7 @@ export interface CSSDecls {
   /**
    * Defines the radii of the bottom left outer border edge.
    *
-   * Syntax: \<length-percentage>{1,2}
+   * Syntax: \<length-percentage>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius)
    */
@@ -606,7 +606,7 @@ export interface CSSDecls {
   /**
    * Defines the radii of the bottom right outer border edge.
    *
-   * Syntax: \<length-percentage>{1,2}
+   * Syntax: \<length-percentage>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius)
    */
@@ -643,7 +643,7 @@ export interface CSSDecls {
   /**
    * The color of the border around all four edges of an element.
    *
-   * Syntax: \<color>{1,4}
+   * Syntax: \<color>\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-color)
    */
@@ -675,7 +675,7 @@ export interface CSSDecls {
   /**
    * The values specify the amount by which the border image area extends beyond the border box on the top, right, bottom, and left sides respectively. If the fourth value is absent, it is the same as the second. If the third one is also absent, it is the same as the first. If the second one is also absent, it is the same as the first. Numbers represent multiples of the corresponding border-width.
    *
-   * Syntax: [ \<length> | \<number> ]{1,4}
+   * Syntax: [ \<length> | \<number> ]\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-outset)
    */
@@ -683,7 +683,7 @@ export interface CSSDecls {
   /**
    * Specifies how the images for the sides and the middle part of the border image are scaled and tiled. If the second keyword is absent, it is assumed to be the same as the first.
    *
-   * Syntax: [ stretch | repeat | round | space ]{1,2}
+   * Syntax: [ stretch | repeat | round | space ]\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-repeat)
    */
@@ -700,7 +700,7 @@ export interface CSSDecls {
   /**
    * Specifies inward offsets from the top, right, bottom, and left edges of the image, dividing it into nine regions: four corners, four edges and a middle.
    *
-   * Syntax: \<number-percentage>{1,4} && fill?
+   * Syntax: \<number-percentage>\{1,4\} && fill?
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-slice)
    */
@@ -722,7 +722,7 @@ export interface CSSDecls {
   /**
    * The four values of 'border-image-width' specify offsets that are used to divide the border image area into nine parts. They represent inward distances from the top, right, bottom, and left sides of the area, respectively.
    *
-   * Syntax: [ \<length-percentage> | \<number> | auto ]{1,4}
+   * Syntax: [ \<length-percentage> | \<number> | auto ]\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-width)
    */
@@ -845,7 +845,7 @@ export interface CSSDecls {
   /**
    * Defines the radii of the outer border edge.
    *
-   * Syntax: \<length-percentage>{1,4} [ / \<length-percentage>{1,4} ]?
+   * Syntax: \<length-percentage>\{1,4\} [ / \<length-percentage>\{1,4\} ]?
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-radius)
    */
@@ -893,7 +893,7 @@ export interface CSSDecls {
   /**
    * The style of the border around edges of an element.
    *
-   * Syntax: \<line-style>{1,4}
+   * Syntax: \<line-style>\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-style)
    */
@@ -917,7 +917,7 @@ export interface CSSDecls {
   /**
    * Defines the radii of the top left outer border edge.
    *
-   * Syntax: \<length-percentage>{1,2}
+   * Syntax: \<length-percentage>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius)
    */
@@ -925,7 +925,7 @@ export interface CSSDecls {
   /**
    * Defines the radii of the top right outer border edge.
    *
-   * Syntax: \<length-percentage>{1,2}
+   * Syntax: \<length-percentage>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius)
    */
@@ -949,7 +949,7 @@ export interface CSSDecls {
   /**
    * Shorthand that sets the four 'border-*-width' properties. If it has four values, they set top, right, bottom and left in that order. If left is missing, it is the same as right; if bottom is missing, it is the same as top; if right is missing, it is the same as top.
    *
-   * Syntax: \<line-width>{1,4}
+   * Syntax: \<line-width>\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-width)
    */
@@ -1554,7 +1554,7 @@ export interface CSSDecls {
     "new": StyleObject,
   } & LengthEntry & PercentEntry & IntegerEntry & WideEntry
   /**
-   * @counter-style descriptor. Specifies a fallback counter style to be used when the current counter style can’t create a representation for a given counter value.
+   * \@counter-style descriptor. Specifies a fallback counter style to be used when the current counter style can’t create a representation for a given counter value.
    *
    * (Firefox 33)
    *
@@ -2148,7 +2148,7 @@ export interface CSSDecls {
   /**
    * Selects a normal, condensed, or expanded face from a font family.
    *
-   * Syntax: \<font-stretch-absolute>{1,2}
+   * Syntax: \<font-stretch-absolute>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-stretch)
    */
@@ -2170,7 +2170,7 @@ export interface CSSDecls {
   /**
    * Allows italic or oblique faces to be selected. Italic forms are generally cursive in nature while oblique faces are typically sloped versions of the regular face.
    *
-   * Syntax: normal | italic | oblique \<angle>{0,2}
+   * Syntax: normal | italic | oblique \<angle>\{0,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-style)
    */
@@ -2391,7 +2391,7 @@ export interface CSSDecls {
   /**
    * Specifies weight of glyphs in the font, their degree of blackness or stroke thickness.
    *
-   * Syntax: \<font-weight-absolute>{1,2}
+   * Syntax: \<font-weight-absolute>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-weight)
    */
@@ -2435,7 +2435,7 @@ export interface CSSDecls {
    *
    * (Edge 16, Firefox 52, Safari 10.1, Chrome 57, Opera 44)
    *
-   * Syntax: \<grid-line> [ / \<grid-line> ]{0,3}
+   * Syntax: \<grid-line> [ / \<grid-line> ]\{0,3\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-area)
    */
@@ -2713,7 +2713,7 @@ export interface CSSDecls {
   /**
    * Specifies the height of the content area, padding area or border area (depending on 'box-sizing') of certain boxes.
    *
-   * Syntax: \<viewport-length>{1,2}
+   * Syntax: \<viewport-length>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/height)
    */
@@ -3035,7 +3035,7 @@ export interface CSSDecls {
   /**
    * Shorthand property to set values for the thickness of the margin area. If left is omitted, it is the same as right. If bottom is omitted it is the same as top, if right is omitted it is the same as top. Negative values for margin properties are allowed, but there may be implementation-specific limits.
    *
-   * Syntax: [ \<length> | \<percentage> | auto ]{1,4}
+   * Syntax: [ \<length> | \<percentage> | auto ]\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin)
    */
@@ -3476,11 +3476,11 @@ export interface CSSDecls {
     "alternate": StyleObject,
     /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
     "alternate-reverse": StyleObject,
-    /** The beginning property value (as defined in the first @keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
+    /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
     "backwards": StyleObject,
     /** Both forwards and backwards fill modes are applied. */
     "both": StyleObject,
-    /** The final property value (as defined in the last @keyframes at-rule) is maintained after the animation completes. */
+    /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
     "forwards": StyleObject,
     /** Causes the animation to repeat forever. */
     "infinite": StyleObject,
@@ -4553,7 +4553,7 @@ export interface CSSDecls {
    *
    * (Edge, IE 10)
    *
-   * Syntax: auto | \<integer>{1,3}
+   * Syntax: auto | \<integer>\{1,3\}
    */
   "-ms-hyphenate-limit-chars": {
     /** The user agent chooses a value that adapts to the current layout. */
@@ -5414,7 +5414,7 @@ export interface CSSDecls {
     "root": StyleObject,
   } & StringEntry & WideEntry
   /**
-   * @counter-style descriptor. Defines how to alter the representation when the counter value is negative.
+   * \@counter-style descriptor. Defines how to alter the representation when the counter value is negative.
    *
    * (Firefox 33)
    *
@@ -5431,11 +5431,11 @@ export interface CSSDecls {
     "alternate": StyleObject,
     /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
     "alternate-reverse": StyleObject,
-    /** The beginning property value (as defined in the first @keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
+    /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
     "backwards": StyleObject,
     /** Both forwards and backwards fill modes are applied. */
     "both": StyleObject,
-    /** The final property value (as defined in the last @keyframes at-rule) is maintained after the animation completes. */
+    /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
     "forwards": StyleObject,
     /** Causes the animation to repeat forever. */
     "infinite": StyleObject,
@@ -5479,11 +5479,11 @@ export interface CSSDecls {
    * (Opera 12)
    */
   "-o-animation-fill-mode": {
-    /** The beginning property value (as defined in the first @keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
+    /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
     "backwards": StyleObject,
     /** Both forwards and backwards fill modes are applied. */
     "both": StyleObject,
-    /** The final property value (as defined in the last @keyframes at-rule) is maintained after the animation completes. */
+    /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
     "forwards": StyleObject,
     /** There is no change to the property value between the time the animation is applied and the time the animation begins playing or after the animation completes. */
     "none": StyleObject,
@@ -5832,7 +5832,7 @@ export interface CSSDecls {
   /**
    * Shorthand for setting 'overflow-x' and 'overflow-y'.
    *
-   * Syntax: [ visible | hidden | clip | scroll | auto ]{1,2}
+   * Syntax: [ visible | hidden | clip | scroll | auto ]\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow)
    */
@@ -5896,7 +5896,7 @@ export interface CSSDecls {
     "visible": StyleObject,
   } & WideEntry
   /**
-   * @counter-style descriptor. Specifies a “fixed-width” counter style, where representations shorter than the pad value are padded with a particular \<symbol>
+   * \@counter-style descriptor. Specifies a “fixed-width” counter style, where representations shorter than the pad value are padded with a particular \<symbol>
    *
    * (Firefox 33)
    *
@@ -5906,7 +5906,7 @@ export interface CSSDecls {
   /**
    * Shorthand property to set values for the thickness of the padding area. If left is omitted, it is the same as right. If bottom is omitted it is the same as top, if right is omitted it is the same as top. The value may not be negative.
    *
-   * Syntax: [ \<length> | \<percentage> ]{1,4}
+   * Syntax: [ \<length> | \<percentage> ]\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding)
    */
@@ -6122,7 +6122,7 @@ export interface CSSDecls {
     "-webkit-sticky": StyleObject,
   } & WideEntry
   /**
-   * @counter-style descriptor. Specifies a \<symbol> that is prepended to the marker representation.
+   * \@counter-style descriptor. Specifies a \<symbol> that is prepended to the marker representation.
    *
    * (Firefox 33)
    *
@@ -6141,11 +6141,11 @@ export interface CSSDecls {
     "none": StyleObject,
   } & StringEntry & WideEntry
   /**
-   * @counter-style descriptor. Defines the ranges over which the counter style is defined.
+   * \@counter-style descriptor. Defines the ranges over which the counter style is defined.
    *
    * (Firefox 33)
    *
-   * Syntax: [ [ \<integer> | infinite ]{2} ]# | auto
+   * Syntax: [ [ \<integer> | infinite ]\{2\} ]# | auto
    */
   range: {
     /** The range depends on the counter system. */
@@ -6494,15 +6494,15 @@ export interface CSSDecls {
     "optimizeSpeed": StyleObject,
   } & WideEntry
   /**
-   * The size CSS at-rule descriptor, used with the @page at-rule, defines the size and orientation of the box which is used to represent a page. Most of the time, this size corresponds to the target size of the printed page if applicable.
+   * The size CSS at-rule descriptor, used with the \@page at-rule, defines the size and orientation of the box which is used to represent a page. Most of the time, this size corresponds to the target size of the printed page if applicable.
    *
    * (Chrome, Opera 8)
    *
-   * Syntax: \<length>{1,2} | auto | [ \<page-size> || [ portrait | landscape ] ]
+   * Syntax: \<length>\{1,2\} | auto | [ \<page-size> || [ portrait | landscape ] ]
    */
   size: LengthEntry & WideEntry
   /**
-   * @font-face descriptor. Specifies the resource containing font data. It is required, whether the font is downloadable or locally installed.
+   * \@font-face descriptor. Specifies the resource containing font data. It is required, whether the font is downloadable or locally installed.
    *
    * Syntax: [ \<url> [ format( \<string># ) ]? | local( \<family-name> ) ]#
    */
@@ -6557,7 +6557,7 @@ export interface CSSDecls {
   /** Specifies the width of the stroke on the current object. */
   strokeWidth: LengthEntry & PercentEntry & WideEntry
   /**
-   * @counter-style descriptor. Specifies a \<symbol> that is appended to the marker representation.
+   * \@counter-style descriptor. Specifies a \<symbol> that is appended to the marker representation.
    *
    * (Firefox 33)
    *
@@ -6565,7 +6565,7 @@ export interface CSSDecls {
    */
   suffix: StringEntry & ImageFunctions & WideEntry
   /**
-   * @counter-style descriptor. Specifies which algorithm will be used to construct the counter’s representation based on the counter value.
+   * \@counter-style descriptor. Specifies which algorithm will be used to construct the counter’s representation based on the counter value.
    *
    * (Firefox 33)
    *
@@ -6588,7 +6588,7 @@ export interface CSSDecls {
     "symbolic": StyleObject,
   } & IntegerEntry & WideEntry
   /**
-   * @counter-style descriptor. Specifies the symbols used by the marker-construction algorithm specified by the system descriptor.
+   * \@counter-style descriptor. Specifies the symbols used by the marker-construction algorithm specified by the system descriptor.
    *
    * (Firefox 33)
    *
@@ -6809,7 +6809,7 @@ export interface CSSDecls {
   /**
    * Text can overflow for example when it is prevented from wrapping.
    *
-   * Syntax: [ clip | ellipsis | \<string> ]{1,2}
+   * Syntax: [ clip | ellipsis | \<string> ]\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-overflow)
    */
@@ -7064,7 +7064,7 @@ export interface CSSDecls {
     "plaintext": StyleObject,
   } & WideEntry
   /**
-   * @font-face descriptor. Defines the set of Unicode codepoints that may be supported by the font face for which it is declared.
+   * \@font-face descriptor. Defines the set of Unicode codepoints that may be supported by the font face for which it is declared.
    *
    * Syntax: \<unicode-range>#
    */
@@ -7295,11 +7295,11 @@ export interface CSSDecls {
     "alternate": StyleObject,
     /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
     "alternate-reverse": StyleObject,
-    /** The beginning property value (as defined in the first @keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
+    /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
     "backwards": StyleObject,
     /** Both forwards and backwards fill modes are applied. */
     "both": StyleObject,
-    /** The final property value (as defined in the last @keyframes at-rule) is maintained after the animation completes. */
+    /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
     "forwards": StyleObject,
     /** Causes the animation to repeat forever. */
     "infinite": StyleObject,
@@ -7343,11 +7343,11 @@ export interface CSSDecls {
    * (Chrome, Safari 5)
    */
   "-webkit-animation-fill-mode": {
-    /** The beginning property value (as defined in the first @keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
+    /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
     "backwards": StyleObject,
     /** Both forwards and backwards fill modes are applied. */
     "both": StyleObject,
-    /** The final property value (as defined in the last @keyframes at-rule) is maintained after the animation completes. */
+    /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
     "forwards": StyleObject,
     /** There is no change to the property value between the time the animation is applied and the time the animation begins playing or after the animation completes. */
     "none": StyleObject,
@@ -8305,7 +8305,7 @@ export interface CSSDecls {
   /**
    * Specifies the width of the content area, padding area or border area (depending on 'box-sizing') of certain boxes.
    *
-   * Syntax: \<viewport-length>{1,2}
+   * Syntax: \<viewport-length>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/width)
    */
@@ -8500,7 +8500,7 @@ export interface CSSDecls {
    *
    * (Firefox 1)
    *
-   * Syntax: \<outline-radius>{1,4} [ / \<outline-radius>{1,4} ]?
+   * Syntax: \<outline-radius>\{1,4\} [ / \<outline-radius>\{1,4\} ]?
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-moz-outline-radius)
    */
@@ -8762,7 +8762,7 @@ export interface CSSDecls {
    */
   alignTracks: WideEntry
   /**
-   * Specifies the names of one or more @scroll-timeline at-rules to describe the element's scroll animations.
+   * Specifies the names of one or more \@scroll-timeline at-rules to describe the element's scroll animations.
    *
    * (Firefox 97)
    *
@@ -8828,7 +8828,7 @@ export interface CSSDecls {
    *
    * (Edge 87, Firefox 66, Safari 14.1, Chrome 87, Opera 73)
    *
-   * Syntax: \<'border-top-color'>{1,2}
+   * Syntax: \<'border-top-color'>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-color)
    */
@@ -8858,7 +8858,7 @@ export interface CSSDecls {
    *
    * (Edge 89, Firefox 66, Safari 15, Chrome 89, Opera 75)
    *
-   * Syntax: \<length-percentage>{1,2}
+   * Syntax: \<length-percentage>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius)
    */
@@ -8868,7 +8868,7 @@ export interface CSSDecls {
    *
    * (Edge 89, Firefox 66, Safari 15, Chrome 89, Opera 75)
    *
-   * Syntax: \<length-percentage>{1,2}
+   * Syntax: \<length-percentage>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius)
    */
@@ -8888,7 +8888,7 @@ export interface CSSDecls {
    *
    * (Edge 87, Firefox 66, Safari 14.1, Chrome 87, Opera 73)
    *
-   * Syntax: \<'border-top-color'>{1,2}
+   * Syntax: \<'border-top-color'>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-color)
    */
@@ -8918,7 +8918,7 @@ export interface CSSDecls {
    *
    * (Edge 89, Firefox 66, Safari 15, Chrome 89, Opera 75)
    *
-   * Syntax: \<length-percentage>{1,2}
+   * Syntax: \<length-percentage>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius)
    */
@@ -8928,7 +8928,7 @@ export interface CSSDecls {
    *
    * (Edge 89, Firefox 66, Safari 15, Chrome 89, Opera 75)
    *
-   * Syntax: \<length-percentage>{1,2}
+   * Syntax: \<length-percentage>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius)
    */
@@ -9182,7 +9182,7 @@ export interface CSSDecls {
    *
    * (Edge 87, Firefox 66, Safari 14.1, Chrome 87, Opera 73)
    *
-   * Syntax: \<'top'>{1,4}
+   * Syntax: \<'top'>\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset)
    */
@@ -9192,7 +9192,7 @@ export interface CSSDecls {
    *
    * (Edge 87, Firefox 63, Safari 14.1, Chrome 87, Opera 73)
    *
-   * Syntax: \<'top'>{1,2}
+   * Syntax: \<'top'>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-block)
    */
@@ -9222,7 +9222,7 @@ export interface CSSDecls {
    *
    * (Edge 87, Firefox 63, Safari 14.1, Chrome 87, Opera 73)
    *
-   * Syntax: \<'top'>{1,2}
+   * Syntax: \<'top'>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-inline)
    */
@@ -9284,7 +9284,7 @@ export interface CSSDecls {
    *
    * (Edge 87, Firefox 66, Safari 14.1, Chrome 87, Opera 73)
    *
-   * Syntax: \<'margin-left'>{1,2}
+   * Syntax: \<'margin-left'>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-block)
    */
@@ -9294,7 +9294,7 @@ export interface CSSDecls {
    *
    * (Edge 87, Firefox 66, Safari 14.1, Chrome 87, Opera 73)
    *
-   * Syntax: \<'margin-left'>{1,2}
+   * Syntax: \<'margin-left'>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline)
    */
@@ -9342,7 +9342,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Safari 3.1, Chrome 1, Opera 15)
    *
-   * Syntax: [ \<length> | \<number> ]{1,4}
+   * Syntax: [ \<length> | \<number> ]\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-outset)
    */
@@ -9352,7 +9352,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Safari 3.1, Chrome 1, Opera 15)
    *
-   * Syntax: [ stretch | repeat | round | space ]{1,2}
+   * Syntax: [ stretch | repeat | round | space ]\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-repeat)
    */
@@ -9362,7 +9362,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Safari 3.1, Chrome 1, Opera 15)
    *
-   * Syntax: \<number-percentage>{1,4} fill?
+   * Syntax: \<number-percentage>\{1,4\} fill?
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-slice)
    */
@@ -9384,7 +9384,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Safari 3.1, Chrome 1, Opera 15)
    *
-   * Syntax: [ \<length-percentage> | \<number> | auto ]{1,4}
+   * Syntax: [ \<length-percentage> | \<number> | auto ]\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-width)
    */
@@ -9556,7 +9556,7 @@ export interface CSSDecls {
    *
    * (Edge 18, Firefox 59, Chrome 63, Opera 50)
    *
-   * Syntax: [ contain | none | auto ]{1,2}
+   * Syntax: [ contain | none | auto ]\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior)
    */
@@ -9606,7 +9606,7 @@ export interface CSSDecls {
    *
    * (Edge 87, Firefox 66, Safari 14.1, Chrome 87, Opera 73)
    *
-   * Syntax: \<'padding-left'>{1,2}
+   * Syntax: \<'padding-left'>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-block)
    */
@@ -9616,7 +9616,7 @@ export interface CSSDecls {
    *
    * (Edge 87, Firefox 66, Safari 14.1, Chrome 87, Opera 73)
    *
-   * Syntax: \<'padding-left'>{1,2}
+   * Syntax: \<'padding-left'>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-inline)
    */
@@ -9656,7 +9656,7 @@ export interface CSSDecls {
    *
    * (Firefox 72, Safari 14.1)
    *
-   * Syntax: none | \<angle> | [ x | y | z | \<number>{3} ] && \<angle>
+   * Syntax: none | \<angle> | [ x | y | z | \<number>\{3\} ] && \<angle>
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/rotate)
    */
@@ -9682,7 +9682,7 @@ export interface CSSDecls {
    *
    * (Firefox 72, Safari 14.1)
    *
-   * Syntax: none | \<number>{1,3}
+   * Syntax: none | \<number>\{1,3\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scale)
    */
@@ -9692,7 +9692,7 @@ export interface CSSDecls {
    *
    * (Firefox 64)
    *
-   * Syntax: auto | \<color>{2}
+   * Syntax: auto | \<color>\{2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scrollbar-color)
    */
@@ -9722,7 +9722,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Firefox 90, Safari 14.1, Chrome 69, Opera 56)
    *
-   * Syntax: \<length>{1,4}
+   * Syntax: \<length>\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin)
    */
@@ -9732,7 +9732,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Firefox 68, Safari 14.1, Chrome 69, Opera 56)
    *
-   * Syntax: \<length>{1,2}
+   * Syntax: \<length>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block)
    */
@@ -9772,7 +9772,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Firefox 68, Safari 14.1, Chrome 69, Opera 56)
    *
-   * Syntax: \<length>{1,2}
+   * Syntax: \<length>\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline)
    */
@@ -9832,7 +9832,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Firefox 68, Safari 14.1, Chrome 69, Opera 56)
    *
-   * Syntax: [ auto | \<length-percentage> ]{1,4}
+   * Syntax: [ auto | \<length-percentage> ]\{1,4\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding)
    */
@@ -9842,7 +9842,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Firefox 68, Safari 15, Chrome 69, Opera 56)
    *
-   * Syntax: [ auto | \<length-percentage> ]{1,2}
+   * Syntax: [ auto | \<length-percentage> ]\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block)
    */
@@ -9882,7 +9882,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Firefox 68, Safari 15, Chrome 69, Opera 56)
    *
-   * Syntax: [ auto | \<length-percentage> ]{1,2}
+   * Syntax: [ auto | \<length-percentage> ]\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline)
    */
@@ -9942,7 +9942,7 @@ export interface CSSDecls {
    *
    * (Edge 79, Firefox 68, Safari 11, Chrome 69, Opera 56)
    *
-   * Syntax: [ none | start | end | center ]{1,2}
+   * Syntax: [ none | start | end | center ]\{1,2\}
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align)
    */
@@ -10118,7 +10118,7 @@ export interface CSSDecls {
    */
   whiteSpace: WideEntry
   /**
-   * The speak-as descriptor specifies how a counter symbol constructed with a given @counter-style will be represented in the spoken form. For example, an author can specify a counter symbol to be either spoken as its numerical value or just represented with an audio cue.
+   * The speak-as descriptor specifies how a counter symbol constructed with a given \@counter-style will be represented in the spoken form. For example, an author can specify a counter symbol to be either spoken as its numerical value or just represented with an audio cue.
    *
    * Syntax: auto | bullets | numbers | words | spell-out | \<counter-style-name>
    */
@@ -10164,13 +10164,13 @@ export interface CSSDecls {
    */
   sizeAdjust: PercentEntry & WideEntry
   /**
-   * The bleed CSS at-rule descriptor, used with the @page at-rule, specifies the extent of the page bleed area outside the page box. This property only has effect if crop marks are enabled using the marks property.
+   * The bleed CSS at-rule descriptor, used with the \@page at-rule, specifies the extent of the page bleed area outside the page box. This property only has effect if crop marks are enabled using the marks property.
    *
    * Syntax: auto | \<length>
    */
   bleed: LengthEntry & WideEntry
   /**
-   * The marks CSS at-rule descriptor, used with the @page at-rule, adds crop and/or cross marks to the presentation of the document. Crop marks indicate where the page should be cut. Cross marks are used to align sheets.
+   * The marks CSS at-rule descriptor, used with the \@page at-rule, adds crop and/or cross marks to the presentation of the document. Crop marks indicate where the page should be cut. Cross marks are used to align sheets.
    *
    * Syntax: none | [ crop || cross ]
    */
@@ -10178,7 +10178,7 @@ export interface CSSDecls {
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
-   * Specifies the syntax of the custom property registration represented by the @property rule, controlling how the property’s value is parsed at computed value time.
+   * Specifies the syntax of the custom property registration represented by the \@property rule, controlling how the property’s value is parsed at computed value time.
    *
    * Syntax: \<string>
    */
@@ -10186,7 +10186,7 @@ export interface CSSDecls {
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
-   * Specifies the inherit flag of the custom property registration represented by the @property rule, controlling whether or not the property inherits by default.
+   * Specifies the inherit flag of the custom property registration represented by the \@property rule, controlling whether or not the property inherits by default.
    *
    * Syntax: true | false
    */
@@ -10194,13 +10194,13 @@ export interface CSSDecls {
   /**
    * ⚠️ Property is experimental. Be cautious when using it.️
    *
-   * Specifies the initial value of the custom property registration represented by the @property rule, controlling the property’s initial value.
+   * Specifies the initial value of the custom property registration represented by the \@property rule, controlling the property’s initial value.
    *
    * Syntax: \<string>
    */
   initialValue: StringEntry & WideEntry
   /**
-   * The max-zoom CSS descriptor sets the maximum zoom factor of a document defined by the @viewport at-rule. The browser will not zoom in any further than this, whether automatically or at the user's request.
+   * The max-zoom CSS descriptor sets the maximum zoom factor of a document defined by the \@viewport at-rule. The browser will not zoom in any further than this, whether automatically or at the user's request.
    *
    * A zoom factor of 1.0 or 100% corresponds to no zooming. Larger values are zoomed in. Smaller values are zoomed out.
    *
@@ -10208,7 +10208,7 @@ export interface CSSDecls {
    */
   maxZoom: PercentEntry & { [value: number]: StyleObject } & WideEntry
   /**
-   * The min-zoom CSS descriptor sets the minimum zoom factor of a document defined by the @viewport at-rule. The browser will not zoom out any further than this, whether automatically or at the user's request.
+   * The min-zoom CSS descriptor sets the minimum zoom factor of a document defined by the \@viewport at-rule. The browser will not zoom out any further than this, whether automatically or at the user's request.
    *
    * A zoom factor of 1.0 or 100% corresponds to no zooming. Larger values are zoomed in. Smaller values are zoomed out.
    *
@@ -10216,13 +10216,13 @@ export interface CSSDecls {
    */
   minZoom: PercentEntry & { [value: number]: StyleObject } & WideEntry
   /**
-   * The orientation CSS @media media feature can be used to apply styles based on the orientation of the viewport (or the page box, for paged media).
+   * The orientation CSS \@media media feature can be used to apply styles based on the orientation of the viewport (or the page box, for paged media).
    *
    * Syntax: auto | portrait | landscape
    */
   orientation: WideEntry
   /**
-   * The user-zoom CSS descriptor controls whether or not the user can change the zoom factor of a document defined by @viewport.
+   * The user-zoom CSS descriptor controls whether or not the user can change the zoom factor of a document defined by \@viewport.
    *
    * Syntax: zoom | fixed
    */
@@ -10239,7 +10239,7 @@ export interface CSSAtRules<T> {
   /**
    * Defines character set of the document.
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@charset)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@charset)
    */
   "@charset": T
   /**
@@ -10247,13 +10247,13 @@ export interface CSSAtRules<T> {
    *
    * (Edge 91, Firefox 33, Chrome 91, Opera 77)
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@counter-style)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@counter-style)
    */
   "@counter-style": T
   /**
    * Allows for linking to fonts that are automatically activated when needed. This permits authors to work around the limitation of 'web-safe' fonts, allowing for consistent rendering independent of the fonts available in a given user's environment.
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@font-face)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@font-face)
    */
   "@font-face": T
   /**
@@ -10261,25 +10261,25 @@ export interface CSSAtRules<T> {
    *
    * (Firefox 34, Safari 9.1)
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@font-feature-values)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@font-feature-values)
    */
   "@font-feature-values": T
   /**
    * Includes content of another file.
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@import)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@import)
    */
   "@import": T
   /**
    * Defines set of animation key frames.
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@keyframes)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@keyframes)
    */
   "@keyframes": T
   /**
    * Defines a stylesheet for a particular media type.
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@media)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@media)
    */
   "@media": T
   /**
@@ -10303,7 +10303,7 @@ export interface CSSAtRules<T> {
   /**
    * Declares a prefix and associates it with a namespace name.
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@namespace)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@namespace)
    */
   "@namespace": T
   /**
@@ -10323,7 +10323,7 @@ export interface CSSAtRules<T> {
    *
    * (Edge 12, Firefox 19, Chrome 2, IE 8, Opera 6)
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@page)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@page)
    */
   "@page": T
   /**
@@ -10331,7 +10331,7 @@ export interface CSSAtRules<T> {
    *
    * (Edge 12, Firefox 22, Safari 9, Chrome 28, Opera 12.1)
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/@supports)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@supports)
    */
   "@supports": T
   /**
@@ -12126,7 +12126,7 @@ export interface HTMLAttrs<T> {
    *
    * **Notes:**
    *
-   * *   In HTML 4, this can only be a simple white-space-separated list of media description literals, i.e., [media types and groups](https://developer.mozilla.org/en-US/docs/Web/CSS/@media), where defined and allowed as values for this attribute, such as `print`, `screen`, `aural`, `braille`. HTML5 extended this to any kind of [media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_queries), which are a superset of the allowed values of HTML 4.
+   * *   In HTML 4, this can only be a simple white-space-separated list of media description literals, i.e., [media types and groups](https://developer.mozilla.org/en-US/docs/Web/CSS/\@media), where defined and allowed as values for this attribute, such as `print`, `screen`, `aural`, `braille`. HTML5 extended this to any kind of [media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_queries), which are a superset of the allowed values of HTML 4.
    * *   Browsers not supporting [CSS3 Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_queries) won't necessarily recognize the adequate link; do not forget to set fallback links, the restricted set of media queries defined in HTML 4.
    */
   "link[media]": T
@@ -12167,58 +12167,58 @@ export interface HTMLAttrs<T> {
    * This metadata name is associated with the value contained by the [`content`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-content) attribute. The possible values for the name attribute are:
    *
    * *   `application-name` which defines the name of the application running in the web page.
-   *
+   * 
    * **Note:**
-   *
+   * 
    * *   Browsers may use this to identify the application. It is different from the [`\<title>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title "The HTML Title element (\<title>) defines the document's title that is shown in a browser's title bar or a page's tab.") element, which usually contain the application name, but may also contain information like the document name or a status.
    * *   Simple web pages shouldn't define an application-name.
-   *
+   * 
    * *   `author` which defines the name of the document's author.
    * *   `description` which contains a short and accurate summary of the content of the page. Several browsers, like Firefox and Opera, use this as the default description of bookmarked pages.
    * *   `generator` which contains the identifier of the software that generated the page.
    * *   `keywords` which contains words relevant to the page's content separated by commas.
    * *   `referrer` which controls the [`Referer` HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) attached to requests sent from the document:
-   *
+   * 
    * Values for the `content` attribute of `\<meta name="referrer">`
-   *
+   * 
    * `no-referrer`
-   *
+   * 
    * Do not send a HTTP `Referrer` header.
-   *
+   * 
    * `origin`
-   *
+   * 
    * Send the [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin) of the document.
-   *
+   * 
    * `no-referrer-when-downgrade`
-   *
+   * 
    * Send the [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin) as a referrer to URLs as secure as the current page, (https→https), but does not send a referrer to less secure URLs (https→http). This is the default behaviour.
-   *
+   * 
    * `origin-when-cross-origin`
-   *
+   * 
    * Send the full URL (stripped of parameters) for same-origin requests, but only send the [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin) for other cases.
-   *
+   * 
    * `same-origin`
-   *
+   * 
    * A referrer will be sent for [same-site origins](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy), but cross-origin requests will contain no referrer information.
-   *
+   * 
    * `strict-origin`
-   *
+   * 
    * Only send the origin of the document as the referrer to a-priori as-much-secure destination (HTTPS->HTTPS), but don't send it to a less secure destination (HTTPS->HTTP).
-   *
+   * 
    * `strict-origin-when-cross-origin`
-   *
+   * 
    * Send a full URL when performing a same-origin request, only send the origin of the document to a-priori as-much-secure destination (HTTPS->HTTPS), and send no header to a less secure destination (HTTPS->HTTP).
-   *
+   * 
    * `unsafe-URL`
-   *
+   * 
    * Send the full URL (stripped of parameters) for same-origin or cross-origin requests.
-   *
+   * 
    * **Notes:**
-   *
+   * 
    * *   Some browsers support the deprecated values of `always`, `default`, and `never` for referrer.
    * *   Dynamically inserting `\<meta name="referrer">` (with [`document.write`](https://developer.mozilla.org/en-US/docs/Web/API/Document/write) or [`appendChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)) makes the referrer behaviour unpredictable.
    * *   When several conflicting policies are defined, the no-referrer policy is applied.
-   *
+   * 
    *
    * This attribute may also have a value taken from the extended list defined on [WHATWG Wiki MetaExtensions page](https://wiki.whatwg.org/wiki/MetaExtensions). Although none have been formally accepted yet, a few commonly used names are:
    *
@@ -12226,147 +12226,147 @@ export interface HTMLAttrs<T> {
    * *   `googlebot`, a synonym of `robots`, is only followed by Googlebot (the indexing crawler for Google).
    * *   `publisher` which defines the name of the document's publisher.
    * *   `robots` which defines the behaviour that cooperative crawlers, or "robots", should use with the page. It is a comma-separated list of the values below:
-   *
+   * 
    * Values for the content of `\<meta name="robots">`
-   *
+   * 
    * Value
-   *
+   * 
    * Description
-   *
+   * 
    * Used by
-   *
+   * 
    * `index`
-   *
+   * 
    * Allows the robot to index the page (default).
-   *
+   * 
    * All
-   *
+   * 
    * `noindex`
-   *
+   * 
    * Requests the robot to not index the page.
-   *
+   * 
    * All
-   *
+   * 
    * `follow`
-   *
+   * 
    * Allows the robot to follow the links on the page (default).
-   *
+   * 
    * All
-   *
+   * 
    * `nofollow`
-   *
+   * 
    * Requests the robot to not follow the links on the page.
-   *
+   * 
    * All
-   *
+   * 
    * `none`
-   *
+   * 
    * Equivalent to `noindex, nofollow`
-   *
+   * 
    * [Google](https://support.google.com/webmasters/answer/79812)
-   *
+   * 
    * `noodp`
-   *
+   * 
    * Prevents using the [Open Directory Project](https://www.dmoz.org/) description, if any, as the page description in search engine results.
-   *
+   * 
    * [Google](https://support.google.com/webmasters/answer/35624#nodmoz), [Yahoo](https://help.yahoo.com/kb/search-for-desktop/meta-tags-robotstxt-yahoo-search-sln2213.html#cont5), [Bing](https://www.bing.com/webmaster/help/which-robots-metatags-does-bing-support-5198d240)
-   *
+   * 
    * `noarchive`
-   *
+   * 
    * Requests the search engine not to cache the page content.
-   *
+   * 
    * [Google](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag#valid-indexing--serving-directives), [Yahoo](https://help.yahoo.com/kb/search-for-desktop/SLN2213.html), [Bing](https://www.bing.com/webmaster/help/which-robots-metatags-does-bing-support-5198d240)
-   *
+   * 
    * `nosnippet`
-   *
+   * 
    * Prevents displaying any description of the page in search engine results.
-   *
+   * 
    * [Google](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag#valid-indexing--serving-directives), [Bing](https://www.bing.com/webmaster/help/which-robots-metatags-does-bing-support-5198d240)
-   *
+   * 
    * `noimageindex`
-   *
+   * 
    * Requests this page not to appear as the referring page of an indexed image.
-   *
+   * 
    * [Google](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag#valid-indexing--serving-directives)
-   *
+   * 
    * `nocache`
-   *
+   * 
    * Synonym of `noarchive`.
-   *
+   * 
    * [Bing](https://www.bing.com/webmaster/help/which-robots-metatags-does-bing-support-5198d240)
-   *
+   * 
    * **Notes:**
-   *
+   * 
    * *   Only cooperative robots follow these rules. Do not expect to prevent e-mail harvesters with them.
    * *   The robot still needs to access the page in order to read these rules. To prevent bandwidth consumption, use a _[robots.txt](https://developer.mozilla.org/en-US/docs/Glossary/robots.txt "robots.txt: Robots.txt is a file which is usually placed in the root of any website. It decides whether crawlers are permitted or forbidden access to the web site.")_ file.
    * *   If you want to remove a page, `noindex` will work, but only after the robot visits the page again. Ensure that the `robots.txt` file is not preventing revisits.
    * *   Some values are mutually exclusive, like `index` and `noindex`, or `follow` and `nofollow`. In these cases the robot's behaviour is undefined and may vary between them.
    * *   Some crawler robots, like Google, Yahoo and Bing, support the same values for the HTTP header `X-Robots-Tag`; this allows non-HTML documents like images to use these rules.
-   *
+   * 
    * *   `slurp`, is a synonym of `robots`, but only for Slurp - the crawler for Yahoo Search.
    * *   `viewport`, which gives hints about the size of the initial size of the [viewport](https://developer.mozilla.org/en-US/docs/Glossary/viewport "viewport: A viewport represents a polygonal (normally rectangular) area in computer graphics that is currently being viewed. In web browser terms, it refers to the part of the document you're viewing which is currently visible in its window (or the screen, if the document is being viewed in full screen mode). Content outside the viewport is not visible onscreen until scrolled into view."). Used by mobile devices only.
-   *
+   * 
    * Values for the content of `\<meta name="viewport">`
-   *
+   * 
    * Value
-   *
+   * 
    * Possible subvalues
-   *
+   * 
    * Description
-   *
+   * 
    * `width`
-   *
+   * 
    * A positive integer number, or the text `device-width`
-   *
+   * 
    * Defines the pixel width of the viewport that you want the web site to be rendered at.
-   *
+   * 
    * `height`
-   *
+   * 
    * A positive integer, or the text `device-height`
-   *
+   * 
    * Defines the height of the viewport. Not used by any browser.
-   *
+   * 
    * `initial-scale`
-   *
+   * 
    * A positive number between `0.0` and `10.0`
-   *
+   * 
    * Defines the ratio between the device width (`device-width` in portrait mode or `device-height` in landscape mode) and the viewport size.
-   *
+   * 
    * `maximum-scale`
-   *
+   * 
    * A positive number between `0.0` and `10.0`
-   *
+   * 
    * Defines the maximum amount to zoom in. It must be greater or equal to the `minimum-scale` or the behaviour is undefined. Browser settings can ignore this rule and iOS10+ ignores it by default.
-   *
+   * 
    * `minimum-scale`
-   *
+   * 
    * A positive number between `0.0` and `10.0`
-   *
+   * 
    * Defines the minimum zoom level. It must be smaller or equal to the `maximum-scale` or the behaviour is undefined. Browser settings can ignore this rule and iOS10+ ignores it by default.
-   *
+   * 
    * `user-scalable`
-   *
+   * 
    * `yes` or `no`
-   *
+   * 
    * If set to `no`, the user is not able to zoom in the webpage. The default is `yes`. Browser settings can ignore this rule, and iOS10+ ignores it by default.
-   *
+   * 
    * Specification
-   *
+   * 
    * Status
-   *
+   * 
    * Comment
-   *
+   * 
    * [CSS Device Adaptation
    * The definition of '\<meta name="viewport">' in that specification.](https://drafts.csswg.org/css-device-adapt/#viewport-meta)
-   *
+   * 
    * Working Draft
-   *
+   * 
    * Non-normatively describes the Viewport META element
-   *
-   * See also: [`@viewport`](https://developer.mozilla.org/en-US/docs/Web/CSS/@viewport "The @viewport CSS at-rule lets you configure the viewport through which the document is viewed. It's primarily used for mobile devices, but is also used by desktop browsers that support features like "snap to edge" (such as Microsoft Edge).")
-   *
+   * 
+   * See also: [`\@viewport`](https://developer.mozilla.org/en-US/docs/Web/CSS/\@viewport "The \@viewport CSS at-rule lets you configure the viewport through which the document is viewed. It's primarily used for mobile devices, but is also used by desktop browsers that support features like "snap to edge" (such as Microsoft Edge).")
+   * 
    * **Notes:**
-   *
+   * 
    * *   Though unstandardized, this declaration is respected by most mobile browsers due to de-facto dominance.
    * *   The default values may vary between devices and browsers.
    * *   To learn about this declaration in Firefox for Mobile, see [this article](https://developer.mozilla.org/en-US/docs/Mobile/Viewport_meta_tag "Mobile/Viewport meta tag").
@@ -12377,25 +12377,25 @@ export interface HTMLAttrs<T> {
    *
    * *   `"content-language"`
    * Defines the default language of the page. It can be overridden by the [lang](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) attribute on any element.
-   *
+   * 
    * **Warning:** Do not use this value, as it is obsolete. Prefer the `lang` attribute on the [`\<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html "The HTML \<html> element represents the root (top-level element) of an HTML document, so it is also referred to as the root element. All other elements must be descendants of this element.") element.
-   *
+   * 
    * *   `"content-security-policy"`
    * Allows page authors to define a [content policy](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives) for the current page. Content policies mostly specify allowed server origins and script endpoints which help guard against cross-site scripting attacks.
    * *   `"content-type"`
    * Defines the [MIME type](https://developer.mozilla.org/en-US/docs/Glossary/MIME_type) of the document, followed by its character encoding. It follows the same syntax as the HTTP `content-type` entity-header field, but as it is inside a HTML page, most values other than `text/html` are impossible. Therefore the valid syntax for its `content` is the string '`text/html`' followed by a character set with the following syntax: '`; charset=_IANAcharset_`', where `IANAcharset` is the _preferred MIME name_ for a character set as [defined by the IANA.](https://www.iana.org/assignments/character-sets)
-   *
+   * 
    * **Warning:** Do not use this value, as it is obsolete. Use the [`charset`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-charset) attribute on the [`\<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta "The HTML \<meta> element represents metadata that cannot be represented by other HTML meta-related elements, like \<base>, \<link>, \<script>, \<style> or \<title>.") element.
-   *
+   * 
    * **Note:** As [`\<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta "The HTML \<meta> element represents metadata that cannot be represented by other HTML meta-related elements, like \<base>, \<link>, \<script>, \<style> or \<title>.") can't change documents' types in XHTML or HTML5's XHTML serialization, never set the MIME type to an XHTML MIME type with `\<meta>`.
-   *
+   * 
    * *   `"refresh"`
    * This instruction specifies:
    * *   The number of seconds until the page should be reloaded - only if the [`content`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-content) attribute contains a positive integer.
    * *   The number of seconds until the page should redirect to another - only if the [`content`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-content) attribute contains a positive integer followed by the string '`;url=`', and a valid URL.
    * *   `"set-cookie"`
    * Defines a [cookie](https://developer.mozilla.org/en-US/docs/cookie) for the page. Its content must follow the syntax defined in the [IETF HTTP Cookie Specification](https://tools.ietf.org/html/draft-ietf-httpstate-cookie-14).
-   *
+   * 
    * **Warning:** Do not use this instruction, as it is obsolete. Use the HTTP header [`Set-Cookie`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie) instead.
    */
   "meta[http-equiv]": T
@@ -13025,7 +13025,7 @@ export interface HTMLAttrs<T> {
    *
    * *   To achieve the same effect as the `left`, `center`, `right` or `justify` values:
    * *   Do not try to set the [`text-align`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align "The text-align CSS property sets the horizontal alignment of an inline or table-cell box. This means it works like vertical-align but in the horizontal direction.") property on a selector giving a [`\<col>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/col "The HTML \<col> element defines a column within a table and is used for defining common semantics on all common cells. It is generally found within a \<colgroup> element.") element. Because [`\<td>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td "The HTML \<td> element defines a cell of a table that contains data. It participates in the table model.") elements are not descendant of the [`\<col>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/col "The HTML \<col> element defines a column within a table and is used for defining common semantics on all common cells. It is generally found within a \<colgroup> element.") element, they won't inherit it.
-   * *   If the table doesn't use a [`colspan`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td#attr-colspan) attribute, use the `td:nth-child(an+b)` CSS selector. Set `a` to zero and `b` to the position of the column in the table, e.g. `td:nth-child(2) { text-align: right; }` to right-align the second column.
+   * *   If the table doesn't use a [`colspan`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td#attr-colspan) attribute, use the `td:nth-child(an+b)` CSS selector. Set `a` to zero and `b` to the position of the column in the table, e.g. `td:nth-child(2) \{ text-align: right; \}` to right-align the second column.
    * *   If the table does use a [`colspan`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td#attr-colspan) attribute, the effect can be achieved by combining adequate CSS attribute selectors like `[colspan=n]`, though this is not trivial.
    * *   To achieve the same effect as the `char` value, in CSS3, you can use the value of the [`char`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/col#attr-char) as the value of the [`text-align`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align "The text-align CSS property sets the horizontal alignment of an inline or table-cell box. This means it works like vertical-align but in the horizontal direction.") property Unimplemented.
    */
@@ -13144,67 +13144,67 @@ export interface HTMLAttrs<T> {
   /**
    * This attribute defines the background color of each cell in a column. It consists of a 6-digit hexadecimal code as defined in [sRGB](https://www.w3.org/Graphics/Color/sRGB) and is prefixed by '#'. This attribute may be used with one of sixteen predefined color strings:
    *
-   *
+   * 
    *
    * `black` = "#000000"
    *
-   *
+   * 
    *
    * `green` = "#008000"
    *
-   *
+   * 
    *
    * `silver` = "#C0C0C0"
    *
-   *
+   * 
    *
    * `lime` = "#00FF00"
    *
-   *
+   * 
    *
    * `gray` = "#808080"
    *
-   *
+   * 
    *
    * `olive` = "#808000"
    *
-   *
+   * 
    *
    * `white` = "#FFFFFF"
    *
-   *
+   * 
    *
    * `yellow` = "#FFFF00"
    *
-   *
+   * 
    *
    * `maroon` = "#800000"
    *
-   *
+   * 
    *
    * `navy` = "#000080"
    *
-   *
+   * 
    *
    * `red` = "#FF0000"
    *
-   *
+   * 
    *
    * `blue` = "#0000FF"
    *
-   *
+   * 
    *
    * `purple` = "#800080"
    *
-   *
+   * 
    *
    * `teal` = "#008080"
    *
-   *
+   * 
    *
    * `fuchsia` = "#FF00FF"
    *
-   *
+   * 
    *
    * `aqua` = "#00FFFF"
    *
@@ -13244,67 +13244,67 @@ export interface HTMLAttrs<T> {
   /**
    * This attribute defines the background color of each cell in a column. It consists of a 6-digit hexadecimal code as defined in [sRGB](https://www.w3.org/Graphics/Color/sRGB) and is prefixed by '#'. This attribute may be used with one of sixteen predefined color strings:
    *
-   *
+   * 
    *
    * `black` = "#000000"
    *
-   *
+   * 
    *
    * `green` = "#008000"
    *
-   *
+   * 
    *
    * `silver` = "#C0C0C0"
    *
-   *
+   * 
    *
    * `lime` = "#00FF00"
    *
-   *
+   * 
    *
    * `gray` = "#808080"
    *
-   *
+   * 
    *
    * `olive` = "#808000"
    *
-   *
+   * 
    *
    * `white` = "#FFFFFF"
    *
-   *
+   * 
    *
    * `yellow` = "#FFFF00"
    *
-   *
+   * 
    *
    * `maroon` = "#800000"
    *
-   *
+   * 
    *
    * `navy` = "#000080"
    *
-   *
+   * 
    *
    * `red` = "#FF0000"
    *
-   *
+   * 
    *
    * `blue` = "#0000FF"
    *
-   *
+   * 
    *
    * `purple` = "#800080"
    *
-   *
+   * 
    *
    * `teal` = "#008080"
    *
-   *
+   * 
    *
    * `fuchsia` = "#FF00FF"
    *
-   *
+   * 
    *
    * `aqua` = "#00FFFF"
    *
@@ -13684,7 +13684,7 @@ export interface HTMLAttrs<T> {
   "canvas[width]": T
   /** The height of the coordinate space in CSS pixels. Defaults to 150. */
   "canvas[height]": T
-  /** Lets the canvas know whether or not translucency will be a factor. If the canvas knows there's no translucency, painting performance can be optimized. This is only supported by Mozilla-based browsers; use the standardized [`canvas.getContext('2d', { alpha: false })`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext "The HTMLCanvasElement.getContext() method returns a drawing context on the canvas, or null if the context identifier is not supported.") instead. */
+  /** Lets the canvas know whether or not translucency will be a factor. If the canvas knows there's no translucency, painting performance can be optimized. This is only supported by Mozilla-based browsers; use the standardized [`canvas.getContext('2d', \{ alpha: false \})`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext "The HTMLCanvasElement.getContext() method returns a drawing context on the canvas, or null if the context identifier is not supported.") instead. */
   "canvas[moz-opaque]": T
   /**
    * Provides a hint for generating a keyboard shortcut for the current element. This attribute consists of a space-separated list of characters. The browser should use the first one that exists on the computer keyboard layout.
