@@ -12,6 +12,7 @@
     "dev": "pnpm build -d",
     "build": "node -r sucrase/register ./scripts/build.ts",
     "build:dts": "pnpm build -f dts",
+    "build:prod": "pnpm build -p",
     "release": "pnpm build --release",
     "gen:docs": "typedoc --entryPointStrategy packages .",
     "gen:style": "node -r sucrase/register ./scripts/genDataTypes.ts",
