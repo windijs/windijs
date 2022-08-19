@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fix StyleObject 1`] = `
+"type StyleObject<T = {}> = StyleObjectBase & {
+    readonly css: CSSObject | CSSMap;
+    readonly meta: UtilityMeta;
+} & T;
+"
+`;
+
+exports[`fix StyleProxy 1`] = `
+"type StyleProxy<T, O = {}> = NestedProxy<T, StyleObject<O>>;
+"
+`;
