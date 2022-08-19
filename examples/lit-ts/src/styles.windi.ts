@@ -1,5 +1,4 @@
-import { $, em } from "windijs";
-import { focus, focusVisible, hover, light } from "windijs/variants";
+import { $, em, focus, focusVisible, hover, light } from "windijs";
 
 import { css as litCSS } from "lit";
 

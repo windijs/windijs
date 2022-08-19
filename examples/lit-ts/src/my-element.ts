@@ -1,9 +1,10 @@
-import type { NestedColors, StyleObject } from 'windijs'
+import type { WindiColors, StyleObject, ColorStyleObject } from 'windijs'
 import { html, css } from 'lit'
 import { styles } from './styles.windi'
 import { customElement, property } from 'lit/decorators.js'
 import litLogo from './assets/lit.svg'
 import WindiElement from './base'
+import { bg } from "windijs";
 
 /**
  * An example element.
@@ -25,11 +26,11 @@ export class MyElement extends WindiElement {
   @property({ type: Number })
   count = 0
 
-  @property({ type: Array<StyleObject | StyleObject[]> })
+  @property({ type: Array<StyleObject | (StyleObject|ColorStyleObject)[]> })
   button = [bg.pink[400]]
 
-  @property({ type: Array<NestedColors> })
-  colors: NestedColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
+  @property({ type: Array<WindiColors> })
+  colors: WindiColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
 
   render() {
     return html`
