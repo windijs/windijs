@@ -1,5 +1,7 @@
 import { $ } from "../src";
-import { style } from "@windi/utilities";
+import { style } from "@windi/style";
+
+// TODO: fix type bundler error
 
 const utilities = [style.background.blue, style.padding.rem[4], style.borderRadius.px[4]];
 
