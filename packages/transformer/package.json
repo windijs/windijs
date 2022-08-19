@@ -1,0 +1,24 @@
+{
+  "name": "@windi/transformer",
+  "version": "1.0.0",
+  "description": "@windi/transformer",
+  "main": "dist/transformer.js",
+  "module": "dist/transformer.mjs",
+  "types": "dist/transformer.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "windi"
+  ],
+  "author": "Raven Satir",
+  "license": "MIT",
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "displayName": "@windi/transformer"
+  },
+  "dependencies": {
+    "typescript": "^4.7.4",
+    "@typescript-eslint/typescript-estree": "^5.33.1"
+  }
+}
