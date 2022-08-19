@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transform colorHandler 1`] = `
+"export const bg = createUtility(\\"bg\\")
+    .use(() => ({ $colors: \\"\\" as \\"windiColorInject\\" }))
+    .init();
+"
+`;
+
+exports[`Transform configHandler 1`] = `
+"export const rounded = createUtility(\\"rounded\\")
+    .use(() => ({ $borderRadiusConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .init();
+"
+`;
+
+exports[`Transform with cases 1`] = `
+"export const bg = createUtility(\\"bg\\")
+    .use(() => ({ $colors: \\"\\" as \\"windiColorInject\\" }))
+    .use(() => ({ $backgroundAttachmentConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .use(() => ({ $backgroundPositionConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .use(() => ({ $backgroundRepeatConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .use(() => ({ $backgroundSizeConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .use(() => ({ $backgroundImageConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .case(\\"clip\\", () => ({ $backgroundClipConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .case(\\"blend\\", () => ({ $blendModeConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .case(\\"origin\\", () => ({ $backgroundOriginConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .case(\\"opacity\\", () => ({ $opacityConfig: \\"\\" as \\"windiConfigInject\\" }))
+    .case(\\"gradient\\", callHandler(buildLinearGradient, meld(() => ({ $gradientDirectionConfig: \\"\\" as \\"windiConfigInject\\" }), () => ({ $gradientConfig: \\"\\" as \\"windiConfigInject\\" }))))
+    .init();
+"
+`;
