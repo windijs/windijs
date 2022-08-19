@@ -29,6 +29,7 @@
     "packages/core",
     "packages/helpers",
     "packages/shared",
+    "packages/style",
     "packages/utilities",
     "packages/variants",
     "packages/transformer",
