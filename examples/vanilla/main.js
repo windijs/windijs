@@ -1,8 +1,8 @@
 import './style.css'
 
-import { bg } from "./windi"
+import { bg, lg } from "./windi"
+
 import javascriptLogo from './javascript.svg'
-import { lg } from 'windijs'
 import { setupCounter } from './counter.js'
 
 const logo = [ bg.yellow[400].opacity(30), lg(bg.green[400].opacity(40)) ]
