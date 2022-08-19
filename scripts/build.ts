@@ -12,13 +12,24 @@ import rollupTs from "rollup-plugin-ts";
 import sucrase from "@rollup/plugin-sucrase";
 import { terser } from "rollup-plugin-terser";
 
-type BuildFormat = "cjs" | "mjs" | "esm" | "iife" | "dts" | "proxy";
+type BuildFormat = "cjs" | "mjs" | "esm" | "iife" | "dts";
 
 type Pkg = {
   dependencies?: Record<string, string>,
   devDependencies?: Record<string, string>,
-  peerDependencies: Record<string, string>,
-  buildOptions?: { name?: string, formats?: BuildFormat[], prod?: boolean }
+  peerDependencies?: Record<string, string>,
+  exports?: Record<string, {
+    import?: string,
+    require?: string
+    types?: string
+    node?: string
+    default?: string
+  }>
+  buildOptions?: {
+    name?: string,
+    formats?: BuildFormat[],
+    prod?: boolean
+  }
   private?: boolean
 };
 
@@ -55,6 +66,10 @@ class Builder {
 
   get dist () {
     return this.resolve("dist");
+  }
+
+  ext (format: BuildFormat): string {
+    return "." + { cjs: "js", mjs: "mjs", esm: "esm.js", iife: "iife.js", dts: "d.ts" }[format];
   }
 
   resolve (p: string) {
@@ -96,7 +111,7 @@ class Builder {
       });
   }
 
-  createInput (format: BuildFormat): InputOptions & { input: string } {
+  createInput (inputEntry: string, format: BuildFormat): InputOptions & { input: string } {
     const external = [
       ...Object.keys(this.pkg.dependencies || {}),
       ...Object.keys(this.pkg.peerDependencies || {}),
@@ -104,7 +119,7 @@ class Builder {
 
     const plugins = [this.createTSPlugin(format)];
 
-    if (this.target === "utilities" && format === "proxy") {
+    if (this.target === "utilities" && inputEntry.includes("proxy")) {
       plugins.unshift({
         name: "proxyUtilities",
         transform (code) {
@@ -112,6 +127,8 @@ class Builder {
         },
       });
     }
+
+    if (this.target === "style" && inputEntry.includes("global")) external.push("./utility");
 
     if (minify) {
       plugins.push(terser({
@@ -125,7 +142,7 @@ class Builder {
     }
 
     return {
-      input: this.resolve("src/index.ts"),
+      input: path.join(this.path, "src", inputEntry),
       external,
       plugins,
       treeshake: {
@@ -134,12 +151,10 @@ class Builder {
     };
   }
 
-  createOutput (format: BuildFormat): OutputOptions & { file: string } {
-    const ext = { cjs: "js", mjs: "mjs", esm: "esm.js", iife: "iife.js", dts: "d.ts", proxy: "d.ts" }[format];
-    let file = path.join(this.dist, (format === "proxy" ? format : this.target) + "." + ext);
-    if (minify) file = file.replace(/\.js$/, ".min.js").replace(/\.mjs$/, ".min.mjs");
+  createOutput (outputEntry: string, format: BuildFormat): OutputOptions & { file: string } {
+    if (minify) outputEntry = outputEntry.replace(/\.js$/, ".min.js").replace(/\.mjs$/, ".min.mjs");
     return {
-      file,
+      file: this.resolve(outputEntry),
       name: this.pkg.buildOptions?.name || this.target,
       format: format === "cjs" || format === "iife" ? format : "es",
       exports: "named",
@@ -147,16 +162,16 @@ class Builder {
     };
   }
 
-  async buildFormat (format: BuildFormat) {
-    const inputOptions = this.createInput(format);
-    const outputOptions = this.createOutput(format);
+  async rollup (inputEntry: string, outputEntry: string, format: BuildFormat) {
+    const inputOptions = this.createInput(inputEntry, format);
+    const outputOptions = this.createOutput(outputEntry, format);
     console.log(chalk.bold(chalk.cyan(`${this.relative(inputOptions.input)} → ${this.relative(outputOptions.file)}`)));
 
     rollup(inputOptions).then((bundle) => {
       console.log(chalk.bold(chalk.green(`${this.relative(inputOptions.input)} → ${this.relative(outputOptions.file)} [${(Date.now() - start) / 1000 + "s"}]`)));
       start = Date.now();
 
-      bundle.write(this.createOutput(format)).then(() => {
+      bundle.write(this.createOutput(outputEntry, format)).then(() => {
         if (isCheckSize) checkFileSize(outputOptions.file, minify);
       });
     });
@@ -173,15 +188,42 @@ class Builder {
 
     const packageFormats = (inlineFormats || this.pkg.buildOptions?.formats || defaultFormats) as BuildFormat[];
 
-    runParallel(countCPU(), packageFormats, async (format) => this.buildFormat(format));
+    const tasks: {
+      input: string;
+      output: string;
+      format: BuildFormat;
+    }[] = [];
+
+    for (const [k, v] of Object.entries(this.pkg.exports ?? { ".": {} })) {
+      if (Object.keys(v).length === 0) {
+        for (const format of packageFormats) {
+          tasks.push({
+            input: "./index.ts",
+            output: "./dist/" + this.target + this.ext(format),
+            format,
+          });
+        }
+        continue;
+      }
+      for (const [t, p] of Object.entries(v)) {
+        if (t === "types" && "require" in v) continue;
+        tasks.push({
+          input: k === "." ? "./index.ts" : k + ".ts",
+          output: p,
+          format: t === "import" ? "mjs" : t === "types" ? "dts" : "cjs",
+        });
+      }
+    }
+
+    runParallel(countCPU(), tasks, async (task) => this.rollup(task.input, task.output, task.format));
 
     if (isWatch) {
-      for (const format of packageFormats) {
-        const inputOptions = this.createInput(format);
+      for (const task of tasks) {
+        const inputOptions = this.createInput(task.input, task.format);
 
         watch(inputOptions).addListener("change", (id, change) => {
           console.log(chalk.bold(chalk.blue(`[${change.event}]: ${this.relative(id)}`)));
-          this.buildFormat(format);
+          this.rollup(task.input, task.output, task.format);
         });
       }
     }
