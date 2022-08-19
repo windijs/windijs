@@ -1,13 +1,9 @@
 // @ts-check
 
-import { backgroundColor, colors, createUtility, cssInJsLoader, useArrayHelper, useStyleLoader } from "windijs";
+import { cssInJsLoader, useArrayHelper, useStyleLoader } from "windijs";
 
 useArrayHelper();
 useStyleLoader(cssInJsLoader);
-
-export const bg = createUtility("bg")
-  .use(backgroundColor(colors))
-  .init();
 
 /**
  * @typedef {import("windijs").StyleObject} StyleObject
@@ -30,3 +26,5 @@ export function w (node, utilities) {
     },
   };
 }
+
+export * from "windijs";

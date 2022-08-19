@@ -1,9 +1,7 @@
 <script>
-import { lg } from 'windijs';
-
   import svelteLogo from './assets/svelte.svg'
   import Counter from './lib/Counter.svelte'
-  import { bg, w } from "./windi"
+  import { bg, lg, w } from "./windi"
 
   const logo = [bg.orange[300], lg(bg.green[400])];
 </script>
