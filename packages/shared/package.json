@@ -15,6 +15,9 @@
     "entryPoint": "./src/index.ts",
     "displayName": "@windi/shared"
   },
+  "devDependencies": {
+    "@windi/config": "1.0.0"
+  },
   "author": "Raven Satir",
   "license": "MIT"
 }
