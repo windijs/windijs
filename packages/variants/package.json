@@ -23,6 +23,7 @@
     "@windi/shared": "1.0.0"
   },
   "devDependencies": {
+    "@windi/colors": "1.0.0",
     "@windi/config": "1.0.0",
     "@windi/utilities": "1.0.0"
   }
