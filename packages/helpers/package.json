@@ -18,7 +18,8 @@
   },
   "devDependencies": {
     "@windi/utilities": "1.0.0",
-    "@windi/variants": "1.0.0"
+    "@windi/variants": "1.0.0",
+    "@windi/style": "1.0.0"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",
