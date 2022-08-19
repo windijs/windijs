@@ -1,12 +1,10 @@
 // @ts-check
 
-import { atomic, backgroundColor, colors, createUtility, nameStyle } from "windijs";
+import { atomic, nameStyle } from "windijs";
 
 import { LitElement } from 'lit'
 
-export const bg = createUtility("bg")
-  .use(backgroundColor(colors))
-  .init();
+export * from "windijs";
 
 export class WindiElement extends LitElement {
   constructor() {
