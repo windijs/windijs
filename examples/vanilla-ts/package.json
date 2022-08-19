@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "windijs": "file:../../dist"
+    "windijs": "workspace:^1.0.0"
   },
   "devDependencies": {
     "typescript": "^4.6.4",

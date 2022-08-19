@@ -1,7 +1,7 @@
 import './style.css'
 
-import { bg } from "./windi"
-import { lg } from 'windijs'
+import { bg, lg } from "./windi"
+
 import { setupCounter } from './counter'
 import typescriptLogo from './typescript.svg'
 
