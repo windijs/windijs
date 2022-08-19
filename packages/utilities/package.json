@@ -5,6 +5,18 @@
   "main": "dist/utilities.js",
   "module": "dist/utilities.mjs",
   "types": "dist/utilities.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/utilities.mjs",
+      "require": "./dist/utilities.js",
+      "types": "./dist/utilities.d.ts"
+    },
+    "./proxy": {
+      "import": "./dist/proxy.mjs",
+      "require": "./dist/proxy.js",
+      "types": "./dist/proxy.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
