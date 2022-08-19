@@ -1,0 +1,355 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Analyze multi utilities 1`] = `
+Object {
+  "blend": Array [
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "blendModeConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"mixBlendMode\\"",
+          "type": "Literal",
+          "value": "mixBlendMode",
+        },
+      ],
+      "type": "configHandler",
+    },
+  ],
+  "opacity": Array [
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "opacityConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"opacity\\"",
+          "type": "Literal",
+          "value": "opacity",
+        },
+      ],
+      "type": "configHandler",
+    },
+  ],
+  "shadow": Array [
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "boxShadowConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "name": "buildBoxShadowSize",
+          "type": "Identifier",
+        },
+      ],
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "colors",
+          "type": "Identifier",
+        },
+        Object {
+          "name": "buildBoxShadowColor",
+          "type": "Identifier",
+        },
+      ],
+      "type": "colorHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "opacityConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "quasi": Object {
+            "expressions": Array [],
+            "quasis": Array [
+              Object {
+                "tail": true,
+                "type": "TemplateElement",
+                "value": Object {
+                  "cooked": "--w-shadow-color-opacity",
+                  "raw": "--w-shadow-color-opacity",
+                },
+              },
+            ],
+            "type": "TemplateLiteral",
+          },
+          "tag": Object {
+            "name": "prop",
+            "type": "Identifier",
+          },
+          "type": "TaggedTemplateExpression",
+          "typeParameters": undefined,
+        },
+      ],
+      "guard": "opacity",
+      "type": "configHandler",
+    },
+  ],
+}
+`;
+
+exports[`Analyze single utility 1`] = `
+Object {
+  "bg": Array [
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "colors",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"backgroundColor\\"",
+          "type": "Literal",
+          "value": "backgroundColor",
+        },
+        Object {
+          "raw": "\\"--w-bg-opacity\\"",
+          "type": "Literal",
+          "value": "--w-bg-opacity",
+        },
+      ],
+      "type": "colorHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "backgroundAttachmentConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"backgroundAttachment\\"",
+          "type": "Literal",
+          "value": "backgroundAttachment",
+        },
+      ],
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "backgroundPositionConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"backgroundPosition\\"",
+          "type": "Literal",
+          "value": "backgroundPosition",
+        },
+      ],
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "backgroundRepeatConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"backgroundRepeat\\"",
+          "type": "Literal",
+          "value": "backgroundRepeat",
+        },
+      ],
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "backgroundSizeConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"backgroundSize\\"",
+          "type": "Literal",
+          "value": "backgroundSize",
+        },
+      ],
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "backgroundImageConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"backgroundImage\\"",
+          "type": "Literal",
+          "value": "backgroundImage",
+        },
+      ],
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "backgroundClipConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "elements": Array [
+            Object {
+              "raw": "\\"backgroundClip\\"",
+              "type": "Literal",
+              "value": "backgroundClip",
+            },
+            Object {
+              "quasi": Object {
+                "expressions": Array [],
+                "quasis": Array [
+                  Object {
+                    "tail": true,
+                    "type": "TemplateElement",
+                    "value": Object {
+                      "cooked": "-webkit-background-clip",
+                      "raw": "-webkit-background-clip",
+                    },
+                  },
+                ],
+                "type": "TemplateLiteral",
+              },
+              "tag": Object {
+                "name": "prop",
+                "type": "Identifier",
+              },
+              "type": "TaggedTemplateExpression",
+              "typeParameters": undefined,
+            },
+          ],
+          "type": "ArrayExpression",
+        },
+      ],
+      "guard": "clip",
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "blendModeConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"backgroundBlendMode\\"",
+          "type": "Literal",
+          "value": "backgroundBlendMode",
+        },
+      ],
+      "guard": "blend",
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "backgroundOriginConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "raw": "\\"backgroundOrigin\\"",
+          "type": "Literal",
+          "value": "backgroundOrigin",
+        },
+      ],
+      "guard": "origin",
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "opacityConfig",
+          "type": "Identifier",
+        },
+        Object {
+          "quasi": Object {
+            "expressions": Array [],
+            "quasis": Array [
+              Object {
+                "tail": true,
+                "type": "TemplateElement",
+                "value": Object {
+                  "cooked": "--w-bg-opacity",
+                  "raw": "--w-bg-opacity",
+                },
+              },
+            ],
+            "type": "TemplateLiteral",
+          },
+          "tag": Object {
+            "name": "prop",
+            "type": "Identifier",
+          },
+          "type": "TaggedTemplateExpression",
+          "typeParameters": undefined,
+        },
+      ],
+      "guard": "opacity",
+      "type": "configHandler",
+    },
+    Object {
+      "arguments": Array [
+        Object {
+          "name": "buildLinearGradient",
+          "type": "Identifier",
+        },
+        Object {
+          "arguments": Array [
+            Object {
+              "arguments": Array [
+                Object {
+                  "name": "gradientDirectionConfig",
+                  "type": "Identifier",
+                },
+                Object {
+                  "name": "buildGradientDirection",
+                  "type": "Identifier",
+                },
+              ],
+              "callee": Object {
+                "name": "configHandler",
+                "type": "Identifier",
+              },
+              "optional": false,
+              "type": "CallExpression",
+            },
+            Object {
+              "arguments": Array [
+                Object {
+                  "name": "gradientConfig",
+                  "type": "Identifier",
+                },
+                Object {
+                  "raw": "\\"backgroundImage\\"",
+                  "type": "Literal",
+                  "value": "backgroundImage",
+                },
+              ],
+              "callee": Object {
+                "name": "configHandler",
+                "type": "Identifier",
+              },
+              "optional": false,
+              "type": "CallExpression",
+            },
+          ],
+          "callee": Object {
+            "name": "meld",
+            "type": "Identifier",
+          },
+          "optional": false,
+          "type": "CallExpression",
+        },
+      ],
+      "guard": "gradient",
+      "type": "callHandler",
+    },
+  ],
+}
+`;
