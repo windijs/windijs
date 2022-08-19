@@ -168,8 +168,8 @@ export function bind <T extends Record<string, string>> (cfg: T, f: (v: string) 
   return ((v: string) => f(v in cfg ? cfg[v as keyof typeof cfg] : v)) as unknown as T;
 }
 
-export function guard <K extends string, R> (key: K, handler: Handler<R>): Handler<Record<K, R>> {
-  return (p => p === key ? (isProxy(handler) ? handler(p) : (pushMetaProp(p) && useProxy(handler))) : undefined) as Handler<Record<K, R>>;
+export function guard <K extends string, R> (key: K, handler: Handler<R>): Handler<{ [P in K]: R }> {
+  return (p => p === key ? (isProxy(handler) ? handler(p) : (pushMetaProp(p) && useProxy(handler))) : undefined) as Handler<{ [P in K]: R }>;
 }
 
 // TODO: not sure if there is a way to do this better

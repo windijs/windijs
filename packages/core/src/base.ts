@@ -25,9 +25,9 @@ export class Utility<T extends object = {}> implements ProxyHandler<T> {
     return Reflect.defineProperty(target, prop, { value, writable: true });
   }
 
-  public case<K extends string, U> (trigger: K, plugin: (prop: string) => U): Utility<T & Record<K, U>> {
+  public case<K extends string, U> (trigger: K, plugin: (prop: string) => U): Utility<T & { [P in K] : U }> {
     this.plugins.push(guard(trigger, plugin));
-    return this as unknown as Utility<T & Record<K, U>>;
+    return this as unknown as Utility<T & { [P in K] : U }>;
   }
 
   public use<U> (plugin: (prop: string) => U): Utility<T & U> {
