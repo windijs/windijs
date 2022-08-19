@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dst with array should be replaced 1`] = `
+"{
+    a: string;
+};"
+`;
+
+exports[`dts 1`] = `
+"{
+    auto: string;
+    cover: string;
+    contain: string;
+};"
+`;
+
+exports[`dts ignore DEFAULT 1`] = `
+"{
+    1: StyleObject<{}>;
+    none: StyleObject<{}>;
+    sm: StyleObject<{}>;
+    md: StyleObject<{}>;
+    lg: StyleObject<{}>;
+    xl: StyleObject<{}>;
+    xxl: StyleObject<{}>;
+    xxxl: StyleObject<{}>;
+    full: StyleObject<{}>;
+};"
+`;
+
+exports[`dts nested 1`] = `
+"{
+    auto: string;
+    none: string;
+    pan: {
+        x: string;
+        y: string;
+        left: string;
+        right: string;
+        up: string;
+        down: string;
+    };
+    \\"pinch-zoom\\": string;
+    manipulation: string;
+};"
+`;
+
+exports[`dts nested 2`] = `
+"{
+    a: {
+        b: {
+            c: {
+                d: string;
+            };
+        };
+    };
+};"
+`;
+
+exports[`dts number and string 1`] = `
+"{
+    2: string;
+    $: string;
+    1.5: string;
+    \\"dts-test\\": string;
+};"
+`;
+
+exports[`dts with default type 1`] = `
+"{
+    auto: StyleObject<{}>;
+    none: StyleObject<{}>;
+    pan: {
+        x: StyleObject<{}>;
+        y: StyleObject<{}>;
+        left: StyleObject<{}>;
+        right: StyleObject<{}>;
+        up: StyleObject<{}>;
+        down: StyleObject<{}>;
+    };
+    \\"pinch-zoom\\": StyleObject<{}>;
+    manipulation: StyleObject<{}>;
+};"
+`;
