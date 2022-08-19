@@ -4,7 +4,7 @@
 
 import './App.css'
 
-import type { NestedColors } from 'windijs'
+import type { WindiColors } from 'windijs'
 import { bg } from './windi'
 import reactLogo from './assets/react.svg'
 import { useState } from 'react'
@@ -12,7 +12,7 @@ import { useState } from 'react'
 function App() {
   const [count, setCount] = useState(0)
   const [button, setButtonStyle] = useState([bg.pink[400]])
-  const colors: NestedColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
+  const colors: WindiColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
   return (
     <div className="App">
       <div>
