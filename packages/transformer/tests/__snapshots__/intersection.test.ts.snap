@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Intersection shouldn't bundle index signature 1`] = `
+"declare const animate: {
+    none: StyleObject<{}>;
+    w: Record<1 | 2 | 3, StyleObject<{}>> & Record<number, StyleObject<{}>>;
+    h: Record<1 | 2 | 3, StyleObject<{}>> & Record<number, StyleObject<{}>>;
+} & {
+    [key: string]: StyleObject<{}>;
+};
+"
+`;
+
+exports[`Intersection type 1`] = `
+"declare const test: {
+    reverse: StyleObject<{}>;
+    ring: StyleObject<{}>;
+    shadow: StyleObject<{}>;
+    color: StyleObject<{}>;
+};
+"
+`;
