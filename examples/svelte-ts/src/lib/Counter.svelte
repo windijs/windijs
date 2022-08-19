@@ -1,12 +1,12 @@
 <script lang="ts">
   import { bg, w } from "../windi"
-  import type { NestedColors } from "windijs"
+  import type { WindiColors } from "../windi"
 
   let btn = [bg.pink[400]]
 
   let count: number = 0
 
-  const colors: NestedColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
+  const colors: WindiColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
 
   const increment = () => {
     btn = [bg[colors[count % 8]][400]]
