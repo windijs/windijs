@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.2.37",
-    "windijs": "file:../../dist"
+    "windijs": "workspace:^1.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.0",

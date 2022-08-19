@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { bg } from '../windi'
-import type { WindiColors } from "windijs"
+import type { WindiColors } from "../windi"
 
 const btn = ref([bg.pink[400]])
 

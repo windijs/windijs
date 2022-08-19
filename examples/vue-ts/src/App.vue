@@ -3,8 +3,7 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from './components/HelloWorld.vue'
 import Gradient from './components/Gradient.vue';
-import { lg } from 'windijs';
-import { bg } from './windi';
+import { bg, lg } from './windi';
 
 const logo = [ bg.indigo[400] ]
 </script>
