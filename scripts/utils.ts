@@ -1,6 +1,6 @@
-import { basename, resolve } from "path";
 import { existsSync, readFileSync, readdirSync, rmSync, statSync } from "fs";
 
+import { basename } from "path";
 /* eslint-disable no-console */
 import chalk from "chalk";
 import { compress } from "brotli";
@@ -22,15 +22,8 @@ export function checkFileSize (filePath: string, minify = false) {
   console.log(
     `${chalk.blue(
       chalk.bold(basename(filePath)),
-    )} ${minify ? "min" : "raw"}:${minSize} / gzip:${gzippedSize} / brotli:${compressedSize}\n`,
+    )} ${minify ? "min" : "raw"}:${minSize} / gzip:${gzippedSize} / brotli:${compressedSize}`,
   );
-}
-
-const isBundler = (format: string) => format === "cjs" || format === "mjs";
-
-export function checkSize (target: string, format: string, minify: boolean = false) {
-  const pkgDir = resolve(`packages/${target}`);
-  checkFileSize(`${pkgDir}/dist/${target}${isBundler(format) ? "" : "." + format}.${minify ? "min." : ""}${format === "mjs" ? "mjs" : "js"}`);
 }
 
 export function getTargets () {
@@ -67,7 +60,7 @@ export function countCPU () {
   return cpus().length;
 }
 
-export async function runParallel (maxConcurrency: number, source: string[], iteratorFn: (target: string, source: string[]) => void) {
+export async function runParallel<T> (maxConcurrency: number, source: T[], iteratorFn: (target: T, source: T[]) => void) {
   const ret: Promise<void>[] = [];
   const executing: void[] = [];
   for (const item of source) {

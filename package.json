@@ -10,6 +10,7 @@
     "test:update": "jest --updateSnapshot",
     "coverage": "jest --coverage",
     "dev": "pnpm build -d",
+    "watch": "pnpm build -dw",
     "build": "node -r sucrase/register ./scripts/build.ts",
     "build:dts": "pnpm build -f dts",
     "build:prod": "pnpm build -p",
@@ -17,9 +18,9 @@
     "gen:docs": "typedoc --entryPointStrategy packages .",
     "gen:style": "node -r sucrase/register ./scripts/genDataTypes.ts",
     "size": "pnpm size:esm && pnpm size:iife && pnpm size:baseline",
-    "size:esm": "pnpm build windijs core utilities variants config colors helpers shared -cmf esm",
-    "size:iife": "pnpm build windijs core utilities variants config colors helpers shared -cmf iife",
-    "size:baseline": "pnpm build config core -f mjs && cd packages/size-check && pnpm build && node -r sucrase/register brotli.ts"
+    "size:esm": "pnpm build windijs core utilities variants config colors helpers shared -dcmf esm",
+    "size:iife": "pnpm build windijs core utilities variants config colors helpers shared -dcmf iife",
+    "size:baseline": "pnpm build config core -df mjs && cd packages/size-check && pnpm build && node -r sucrase/register brotli.ts"
   },
   "author": "Raven Satir",
   "workspaces": [
@@ -30,6 +31,7 @@
     "packages/shared",
     "packages/utilities",
     "packages/variants",
+    "packages/transformer",
     "packages/windijs"
   ],
   "license": "MIT",
@@ -41,6 +43,7 @@
     "@types/node": "^18.7.3",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
+    "@typescript-eslint/typescript-estree": "^5.33.1",
     "brotli": "^1.3.3",
     "chalk": "4.1.2",
     "eslint": "^8.0.1",
@@ -51,9 +54,8 @@
     "jest": "^28.1.2",
     "minimist": "^1.2.6",
     "rollup": "^2.77.1",
-    "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.32.1",
+    "rollup-plugin-ts": "^3.0.2",
     "sucrase": "^3.25.0",
     "tsc-alias": "^1.7.0",
     "tsconfig-paths": "^4.0.0",
