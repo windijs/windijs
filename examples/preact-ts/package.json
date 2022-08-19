@@ -10,9 +10,10 @@
   },
   "dependencies": {
     "preact": "^10.9.0",
-    "windijs": "file:../../dist"
+    "windijs": "workspace:^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.10",
     "@preact/preset-vite": "^2.3.0",
     "typescript": "^4.6.4",
     "vite": "^3.0.0"

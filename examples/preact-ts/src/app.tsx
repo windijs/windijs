@@ -1,6 +1,6 @@
 import './app.css'
 
-import type { NestedColors } from 'windijs'
+import type { WindiColors } from 'windijs'
 import { bg } from './windi'
 import preactLogo from './assets/preact.svg'
 import { useState } from 'preact/hooks'
@@ -8,7 +8,7 @@ import { useState } from 'preact/hooks'
 export function App() {
   const [count, setCount] = useState(0)
   const [button, setButtonStyle] = useState([bg.pink[400]])
-  const colors: NestedColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
+  const colors: WindiColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
 
   return (
     <>
