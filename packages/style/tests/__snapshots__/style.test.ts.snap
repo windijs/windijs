@@ -1,0 +1,398 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`style with alpha entry 1`] = `
+Object {
+  "fillOpacity": "0.5",
+}
+`;
+
+exports[`style with alpha entry 2`] = `
+Object {
+  "fillOpacity": "0.52",
+}
+`;
+
+exports[`style with angle entry 1`] = `
+Object {
+  "imageOrientation": "30deg",
+}
+`;
+
+exports[`style with angle entry 2`] = `
+Object {
+  "imageOrientation": "30turn",
+}
+`;
+
+exports[`style with angle entry 3`] = `
+Object {
+  "imageOrientation": "30rad",
+}
+`;
+
+exports[`style with angle entry 4`] = `
+Object {
+  "imageOrientation": "30grad",
+}
+`;
+
+exports[`style with box entry 1`] = `
+Object {
+  "background": "border-box",
+}
+`;
+
+exports[`style with box entry 2`] = `
+Object {
+  "background": "content-box",
+}
+`;
+
+exports[`style with color entry 1`] = `
+Object {
+  "backgroundColor": "aliceblue",
+}
+`;
+
+exports[`style with color entry 2`] = `
+Object {
+  "backgroundColor": "rgba(22, 22, 22, 0.5)",
+}
+`;
+
+exports[`style with color entry 3`] = `
+Object {
+  "borderColor": "hsl(10, 10%, 20%)",
+}
+`;
+
+exports[`style with color entry 4`] = `
+Object {
+  "color": "hwb(10 10% 20% / 0.2)",
+}
+`;
+
+exports[`style with color entry 5`] = `
+Object {
+  "borderColor": "azure",
+}
+`;
+
+exports[`style with config 1`] = `
+Object {
+  "willChange": "scroll-position",
+}
+`;
+
+exports[`style with config 2`] = `
+Object {
+  "willChange": "transform",
+}
+`;
+
+exports[`style with config 3`] = `
+Object {
+  "backgroundColor": "#ef4444",
+}
+`;
+
+exports[`style with config 4`] = `
+Object {
+  "props": Array [
+    "backgroundColor",
+    "blue",
+    "300",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
+exports[`style with config 5`] = `
+Object {
+  "props": Array [
+    "fontSize",
+    "1rem",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
+exports[`style with config 6`] = `
+Object {
+  "props": Array [
+    "width",
+    "calc(100% - 1rem)",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
+exports[`style with config 7`] = `
+Object {
+  "props": Array [
+    "clipPath",
+    "ellipse(closest-side closest-side at 10%)",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
+exports[`style with config 8`] = `
+Object {
+  "props": Array [
+    "fontSize",
+    "2em",
+  ],
+  "type": "css",
+  "uid": "style",
+  "variants": Array [],
+}
+`;
+
+exports[`style with geometry-box entry 1`] = `
+Object {
+  "clipPath": "margin-box",
+}
+`;
+
+exports[`style with geometry-box entry 2`] = `
+Object {
+  "clipPath": "stroke-box",
+}
+`;
+
+exports[`style with image entry 1`] = `
+Object {
+  "background": "image()",
+}
+`;
+
+exports[`style with integer entry 1`] = `
+Object {
+  "order": "3",
+}
+`;
+
+exports[`style with length entry 1`] = `
+Object {
+  "width": "1.5rem",
+}
+`;
+
+exports[`style with length entry 2`] = `
+Object {
+  "width": "3px",
+}
+`;
+
+exports[`style with length entry 3`] = `
+Object {
+  "width": "3cm",
+}
+`;
+
+exports[`style with length entry 4`] = `
+Object {
+  "width": "4mm",
+}
+`;
+
+exports[`style with length entry 5`] = `
+Object {
+  "width": "5Q",
+}
+`;
+
+exports[`style with length entry 6`] = `
+Object {
+  "width": "6in",
+}
+`;
+
+exports[`style with line-style entry 1`] = `
+Object {
+  "border": "solid",
+}
+`;
+
+exports[`style with line-style entry 2`] = `
+Object {
+  "border": "dashed",
+}
+`;
+
+exports[`style with line-style entry 3`] = `
+Object {
+  "border": "hidden",
+}
+`;
+
+exports[`style with line-style entry 4`] = `
+Object {
+  "border": "none",
+}
+`;
+
+exports[`style with line-width entry 1`] = `
+Object {
+  "border": "medium",
+}
+`;
+
+exports[`style with line-width entry 2`] = `
+Object {
+  "border": "thick",
+}
+`;
+
+exports[`style with line-width entry 3`] = `
+Object {
+  "border": "thin",
+}
+`;
+
+exports[`style with number entry 1`] = `
+Object {
+  "lineHeight": "5",
+}
+`;
+
+exports[`style with number entry 2`] = `
+Object {
+  "lineHeight": "5.5",
+}
+`;
+
+exports[`style with percentage entry 1`] = `
+Object {
+  "width": "2fr",
+}
+`;
+
+exports[`style with percentage entry 2`] = `
+Object {
+  "width": "10%",
+}
+`;
+
+exports[`style with position entry 1`] = `
+Object {
+  "backgroundPosition": "bottom",
+}
+`;
+
+exports[`style with position entry 2`] = `
+Object {
+  "backgroundPosition": "center",
+}
+`;
+
+exports[`style with position entry 3`] = `
+Object {
+  "backgroundPosition": "left",
+}
+`;
+
+exports[`style with repeat entry 1`] = `
+Object {
+  "backgroundRepeat": "repeat-x",
+}
+`;
+
+exports[`style with repeat entry 2`] = `
+Object {
+  "backgroundRepeat": "no-repeat",
+}
+`;
+
+exports[`style with shape entry 1`] = `
+Object {
+  "clipPath": "circle(closest-side at 40%)",
+}
+`;
+
+exports[`style with shape entry 2`] = `
+Object {
+  "clipPath": "ellipse(closest-side closest-side at 10%)",
+}
+`;
+
+exports[`style with string 1`] = `
+Object {
+  "fontSize": "1rem",
+}
+`;
+
+exports[`style with string 2`] = `
+Object {
+  "borderColor": "rgb(22, 22, 22)",
+}
+`;
+
+exports[`style with string entry 1`] = `
+Object {
+  "content": "\\"Hello World\\"",
+}
+`;
+
+exports[`style with time entry 1`] = `
+Object {
+  "transitionDelay": "300ms",
+}
+`;
+
+exports[`style with time entry 2`] = `
+Object {
+  "transitionDelay": "3s",
+}
+`;
+
+exports[`style with timing-function entry 1`] = `
+Object {
+  "transitionTimingFunction": "cubic-bezier(0.075, 0.82, 0.165, 1)",
+}
+`;
+
+exports[`style with timing-function entry 2`] = `
+Object {
+  "transitionTimingFunction": "ease",
+}
+`;
+
+exports[`style with timing-function entry 3`] = `
+Object {
+  "transitionTimingFunction": "steps(3)",
+}
+`;
+
+exports[`style with timing-function entry 4`] = `
+Object {
+  "transitionTimingFunction": "cubic-bezier(0.075, 0.82, 0.165, 1)",
+}
+`;
+
+exports[`style with url entry 1`] = `
+Object {
+  "background": "url(https://example.com/test.png)",
+}
+`;
+
+exports[`style with wide entry 1`] = `
+Object {
+  "width": "calc(100% - 1rem)",
+}
+`;
+
+exports[`style with wide entry 2`] = `
+Object {
+  "outlineColor": "var(--w-outline-color, blue)",
+}
+`;

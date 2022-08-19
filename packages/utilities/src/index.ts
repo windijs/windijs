@@ -12,7 +12,6 @@ export * from "./layout";
 export * from "./sizing";
 export * from "./spacing";
 export * from "./sr";
-export * from "./style";
 export * from "./svg";
 export * from "./transform";
 export * from "./transition";

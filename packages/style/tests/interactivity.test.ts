@@ -1,6 +1,6 @@
-import { createUtility, stylePropertyHandler } from "@windi/core";
-
+import { createUtility } from "@windi/core";
 import { css } from "@windi/helpers";
+import { stylePropertyHandler } from "../src/handler";
 import { touchActionConfig } from "@windi/config";
 
 const style = createUtility("style").use(stylePropertyHandler({

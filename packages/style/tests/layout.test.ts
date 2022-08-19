@@ -1,6 +1,8 @@
 import { alignContentConfig, alignItemsConfig, alignSelfConfig, insetConfig, justifyContentConfig, justifyItemsConfig, justifySelfConfig, objectFitConfig, objectPositionConfig, placeContentConfig, placeItemsConfig, placeSelfConfig, tableDisplayConfig, zIndexConfig } from "@windi/config";
-import { bind, configHandler, createUtility, stylePropertyHandler } from "@windi/core";
+import { bind, configHandler, createUtility } from "@windi/core";
 import { css, prop } from "@windi/helpers";
+
+import { stylePropertyHandler } from "../src/handler";
 
 const style = createUtility("style").use(stylePropertyHandler({
   inset: insetConfig,
