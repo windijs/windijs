@@ -1,4 +1,4 @@
-import { FractionObject, Negative, RangeTuple } from "./types";
+import { FractionObject, Negative } from "./types";
 
 /**
  * Check if input is a number
@@ -17,6 +17,10 @@ export function isFraction (amount: string): boolean {
 
 export function isSize (amount: string): boolean {
   return /^-?(\d+(\.\d+)?)+(rem|em|px|rpx|vh|vw|ch|ex|cm|mm|in|pt|pc)$/.test(amount);
+}
+
+export function isVarName (value: string): boolean {
+  return /^[a-zA-Z_$]+[a-zA-Z_$\d]*$/.test(value);
 }
 
 export function roundUp (num: number, precision = 0): number {
@@ -69,8 +73,8 @@ export function negative <T extends Record<string | number, string>> (t: T): Neg
   return Object.fromEntries(Object.entries(t).filter(([, v]) => !/^0(px|rem|em)?$/.test(v)).map(([k, v]) => ["-" + k, "-" + v])) as Negative<T>;
 }
 
-export function range<S extends number, E extends number> (start: S, end: E): RangeTuple<S, E> {
-  return new Array(end - start).fill(0).map((_, i) => i + start) as RangeTuple<S, E>;
+export function range (start: number, end: number): number[] {
+  return new Array(end - start).fill(0).map((_, i) => i + start);
 }
 
 export function fractions<S extends number, E extends number> (start: S, end: E) {
@@ -92,3 +96,13 @@ export function scales<T extends number> (numbers: T[]) {
 export function omit<T extends object, K extends object> (t: T, keys: K) {
   return Object.fromEntries(Object.entries(t).filter(([k]) => !(k in keys))) as Omit<T, keyof K>;
 }
+
+/**
+ * Generate type interface for config object
+ */
+export function dtsConfig<T extends object> (obj: T, defaultType = "string", ignores: string[] = [], indentLevel = 0, indentation = 4): string {
+  const contents = Object.entries(obj).filter(([k]) => !ignores.includes(k)).map(([k, v]) => (isVarName(k) || isNumber(k) ? k : JSON.stringify(k)) + ": " + (typeof v === "object" && v != null && !Array.isArray(v) ? dtsConfig(v, defaultType, ignores, indentLevel + 1, indentation) : defaultType + ";"));
+  return "{\n" + contents.map(i => indent(i, indentation * (indentLevel + 1))).join("\n") + "\n" + indent("};", indentation * indentLevel);
+}
+
+// TODO: create a vite plugin for inject generated dts config
