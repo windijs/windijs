@@ -1,0 +1,228 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Windi Docs</title><meta name="description" content="Documentation for Windi Docs"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Windi Docs</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2>Windi Docs</h2></div>
+<div class="tsd-panel tsd-typography"><h1 align="center">
+<a href="https://github.com/windicss/windicss/wiki">
+  <img src="https://next.windicss.org/assets/logo.svg" alt="Windi Logo" height="120" width="120"/><br>
+</a>
+  Windi JS
+</h1>
+
+<p align="center">The Utility-first CSS-In-JS Framework Powered by ES6 Proxy API and TypeScript.</p>
+
+
+<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+  <h2>Getting Started</h2>
+</a>
+<p>Windi JS is still in beta. Expect bugs! Read more <a href="">here</a>, and track progress towards 1.0 <a href="">here</a>.</p>
+
+<a href="#quick-examples" id="quick-examples" style="color: inherit; text-decoration: none;">
+  <h3>Quick Examples</h3>
+</a>
+
+<a href="#utility" id="utility" style="color: inherit; text-decoration: none;">
+  <h4>Utility</h4>
+</a>
+<pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">btn</span><span class="hl-1"> = [</span><span class="hl-3">bg</span><span class="hl-1">.</span><span class="hl-3">gray</span><span class="hl-1">[</span><span class="hl-4">400</span><span class="hl-1">], </span><span class="hl-3">text</span><span class="hl-1">.</span><span class="hl-3">lg</span><span class="hl-1">, </span><span class="hl-3">p</span><span class="hl-1">[</span><span class="hl-4">2</span><span class="hl-1">], </span><span class="hl-3">rounded</span><span class="hl-1">.</span><span class="hl-3">sm</span><span class="hl-1">, </span><span class="hl-5">dark</span><span class="hl-1">(</span><span class="hl-3">bg</span><span class="hl-1">.</span><span class="hl-3">gray</span><span class="hl-1">[</span><span class="hl-4">700</span><span class="hl-1">], </span><span class="hl-3">text</span><span class="hl-1">.</span><span class="hl-3">gray</span><span class="hl-1">[</span><span class="hl-4">100</span><span class="hl-1">])]</span>
+</code></pre>
+
+<a href="#native" id="native" style="color: inherit; text-decoration: none;">
+  <h4>Native</h4>
+</a>
+<pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">btn</span><span class="hl-1"> = [</span><span class="hl-3">backgroundColor</span><span class="hl-1">.</span><span class="hl-3">gray</span><span class="hl-1">, </span><span class="hl-3">fontSize</span><span class="hl-1">.</span><span class="hl-3">rem</span><span class="hl-1">[</span><span class="hl-4">2</span><span class="hl-1">], </span><span class="hl-3">borderRadius</span><span class="hl-1">.</span><span class="hl-3">px</span><span class="hl-1">[</span><span class="hl-4">4</span><span class="hl-1">], </span><span class="hl-5">dark</span><span class="hl-1">(</span><span class="hl-3">backgroundColor</span><span class="hl-1">.</span><span class="hl-3">blue</span><span class="hl-1">)]</span>
+</code></pre>
+
+<a href="#jss-object" id="jss-object" style="color: inherit; text-decoration: none;">
+  <h4>JSS Object</h4>
+</a>
+<pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">btn</span><span class="hl-1"> = </span><span class="hl-5">css</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-3">backgroundColor:</span><span class="hl-1"> </span><span class="hl-6">&quot;gray&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-3">fontSize:</span><span class="hl-1"> </span><span class="hl-6">&quot;2rem&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">&quot;&amp;:hover&quot;</span><span class="hl-3">:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-3">backgroundColor:</span><span class="hl-1"> </span><span class="hl-6">&quot;black&quot;</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">})</span>
+</code></pre>
+
+<a href="#mixed" id="mixed" style="color: inherit; text-decoration: none;">
+  <h4>Mixed</h4>
+</a>
+<pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">btn</span><span class="hl-1"> = [</span><span class="hl-3">bg</span><span class="hl-1">.</span><span class="hl-3">gray</span><span class="hl-1">[</span><span class="hl-4">400</span><span class="hl-1">], </span><span class="hl-3">fontSize</span><span class="hl-1">.</span><span class="hl-3">rem</span><span class="hl-1">[</span><span class="hl-4">2</span><span class="hl-1">], </span><span class="hl-5">css</span><span class="hl-1">({ </span><span class="hl-3">borderRadius:</span><span class="hl-1"> </span><span class="hl-6">&quot;4px&quot;</span><span class="hl-1"> })]</span>
+</code></pre>
+
+<a href="#integrations" id="integrations" style="color: inherit; text-decoration: none;">
+  <h3>Integrations</h3>
+</a>
+<p>Windi JS is written by <a href="">TypeScript</a>, the greate type system give us <a href="">awesome intelligence</a> completions. So without import even any extensions, you can use it with all <strong>js/ts projects</strong>.</p>
+
+<a href="#as-a-css-in-js-framework" id="as-a-css-in-js-framework" style="color: inherit; text-decoration: none;">
+  <h4><strong>As a css-in-js framework</strong></h4>
+</a>
+<p>You can use <strong>inline style</strong>, or extract utilities into a <strong>variable</strong> or component, as mentioned above.</p>
+<p>Vanilla</p>
+<pre><code class="language-js"><span class="hl-3">element</span><span class="hl-1">.</span><span class="hl-3">innerHTML</span><span class="hl-1"> = </span><span class="hl-6">`</span><br/><span class="hl-6">  &lt;div class=&quot;logo </span><span class="hl-0">${</span><span class="hl-3">bg</span><span class="hl-7">.</span><span class="hl-3">indigo</span><span class="hl-7">[</span><span class="hl-4">500</span><span class="hl-7">].</span><span class="hl-5">opacity</span><span class="hl-7">(</span><span class="hl-4">50</span><span class="hl-7">)</span><span class="hl-0">}</span><span class="hl-6">&quot; /&gt;</span><br/><span class="hl-6">  &lt;button class=&quot;</span><span class="hl-0">${</span><span class="hl-3">btn</span><span class="hl-0">}</span><span class="hl-6">&quot; /&gt;</span><br/><span class="hl-6">`</span>
+</code></pre>
+<p>React</p>
+<pre><code class="language-jsx"><span class="hl-8">&lt;</span><span class="hl-9">div</span><span class="hl-1"> </span><span class="hl-10">className</span><span class="hl-1">=</span><span class="hl-0">{</span><span class="hl-7">[</span><span class="hl-6">&quot;logo&quot;</span><span class="hl-7">, </span><span class="hl-6">&quot;react&quot;</span><span class="hl-7">, </span><span class="hl-3">bg</span><span class="hl-7">.</span><span class="hl-3">blue</span><span class="hl-7">[</span><span class="hl-4">400</span><span class="hl-7">].</span><span class="hl-5">opacity</span><span class="hl-7">(</span><span class="hl-4">20</span><span class="hl-7">)]</span><span class="hl-0">}</span><span class="hl-1"> </span><span class="hl-8">/&gt;</span>
+</code></pre>
+<p>Svelte</p>
+<pre><code class="language-svelte"><span class="hl-8">&lt;</span><span class="hl-9">div</span><span class="hl-1"> </span><span class="hl-10">class</span><span class="hl-1">=</span><span class="hl-6">&quot;logo&quot;</span><span class="hl-1"> </span><span class="hl-11">use</span><span class="hl-1">:</span><span class="hl-3">w</span><span class="hl-1">=</span><span class="hl-0">{</span><span class="hl-7">[</span><span class="hl-3">bg</span><span class="hl-7">.</span><span class="hl-3">indigo</span><span class="hl-7">[</span><span class="hl-4">300</span><span class="hl-7">], </span><span class="hl-3">text</span><span class="hl-7">.</span><span class="hl-3">lg</span><span class="hl-7">, </span><span class="hl-3">p</span><span class="hl-7">[</span><span class="hl-4">2</span><span class="hl-7">]]</span><span class="hl-0">}</span><span class="hl-1"> </span><span class="hl-8">/&gt;</span>
+</code></pre>
+<p>Vue</p>
+<pre><code class="language-vue"><span class="hl-1">&lt;div class=&quot;logo vue&quot; :class=&quot;[bg.green[300], text.lg, p[2]]&quot; /&gt;</span>
+</code></pre>
+
+<a href="#as-a-css-compiler" id="as-a-css-compiler" style="color: inherit; text-decoration: none;">
+  <h4><strong>As a css compiler</strong></h4>
+</a>
+<p>You can also use Windi JS to compile <code>.css</code> files just like <a href="">sass</a> did. But windi is completely built with TypeScript, so all the features of JavaScript/TypeScript included, like <strong>type checking</strong>. Also windi provide a <code>$</code> shorthand for this usecase.</p>
+<pre><code class="language-js"><span class="hl-3">$</span><span class="hl-1">.</span><span class="hl-5">btn</span><span class="hl-1">(</span><br/><span class="hl-1">    </span><span class="hl-3">px</span><span class="hl-1">[</span><span class="hl-4">2</span><span class="hl-1">], </span><span class="hl-3">py</span><span class="hl-1">[</span><span class="hl-4">4</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-3">bg</span><span class="hl-1">.</span><span class="hl-3">blue</span><span class="hl-1">[</span><span class="hl-4">200</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-5">hover</span><span class="hl-1">(</span><span class="hl-3">rounded</span><span class="hl-1">.</span><span class="hl-3">lg</span><span class="hl-1">)</span><br/><span class="hl-1">)</span><br/><span class="hl-12">// Should Generate .btn { ... } .btn:hover { ... }</span>
+</code></pre>
+
+<a href="#as-a-css-generator" id="as-a-css-generator" style="color: inherit; text-decoration: none;">
+  <h4><strong>As a css generator</strong></h4>
+</a>
+<p>Windi JS includes all core functions of Windi CSS, so the next generation of <a href="https://github.com/windicss">Windi CSS</a> will be released as a monorepo based on Windi JS.</p>
+<p>The <code>windicss@next</code> will include a <code>parser</code> and a <code>vm</code>. So that you can use both the classic <code>class=&quot;bg-red-500 p-2&quot;</code> type and <code>class=&quot;bg.red.500 p[2]&quot;</code> type (which the typeof <em>JavaScript Expression Virtual Machine</em>). And you can also import part of the runtime(<a href="">Windi JS</a>) into your project when necessary. After this, all the puzzles of <a href="">Windi</a> should be completed.</p>
+
+<a href="#faq" id="faq" style="color: inherit; text-decoration: none;">
+  <h2>FAQ</h2>
+</a>
+<p>You may have a question like, &quot;Do I need to <code>import { bg, text ... }</code> all the time?&quot;. </p>
+<p>The Answer is <strong>No</strong>. In Modern bundlers, such as <a href="">vite</a>. You can inject all utilities at once by using a <a href="">plugin</a>, and then solve the type problem by definiing a <code>global.d.ts</code> or <code>vite-env.d.ts</code>. Then with the help of tree-shaking, only the utilities that you used would be bundled. So even the css-in-js case. which has a runtime, is actually very small and can be ignored.</p>
+
+<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+  <h2>API</h2>
+</a>
+<p>The api of Windi JS is very simple yet powerful, such as the example we use, <code>bg</code> utility.</p>
+<pre><code class="language-js"><span class="hl-11">export</span><span class="hl-1"> </span><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">bg</span><span class="hl-1"> = </span><span class="hl-5">createUtility</span><span class="hl-1">(</span><span class="hl-6">&quot;bg&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">colorHandler</span><span class="hl-1">(</span><span class="hl-3">colors</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundColor&quot;</span><span class="hl-1">, </span><span class="hl-6">&quot;--w-bg-opacity&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">int</span><span class="hl-1">();</span>
+</code></pre>
+<p>The full implementation like below, which can handle <code>bg.blue[500], bg.fixed, bg.clip.border, bg.origin.top, bg.opacity[10], bg.gradient.to.r ...</code></p>
+<pre><code class="language-js"><span class="hl-11">export</span><span class="hl-1"> </span><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">bg</span><span class="hl-1"> = </span><span class="hl-5">createUtility</span><span class="hl-1">(</span><span class="hl-6">&quot;bg&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">colorHandler</span><span class="hl-1">(</span><span class="hl-3">colors</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundColor&quot;</span><span class="hl-1">, </span><span class="hl-6">&quot;--w-bg-opacity&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">backgroundAttachmentConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundAttachment&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">backgroundPositionConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundPosition&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">backgroundRepeatConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundRepeat&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">backgroundSizeConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundSize&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">backgroundImageConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundImage&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">case</span><span class="hl-1">(</span><span class="hl-6">&quot;clip&quot;</span><span class="hl-1">, </span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">backgroundClipConfig</span><span class="hl-1">, [</span><span class="hl-6">&quot;backgroundClip&quot;</span><span class="hl-1">, </span><span class="hl-5">prop</span><span class="hl-6">`-webkit-background-clip`</span><span class="hl-1">]))</span><br/><span class="hl-1">  .</span><span class="hl-5">case</span><span class="hl-1">(</span><span class="hl-6">&quot;blend&quot;</span><span class="hl-1">, </span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">blendModeConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundBlendMode&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">case</span><span class="hl-1">(</span><span class="hl-6">&quot;origin&quot;</span><span class="hl-1">, </span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">backgroundOriginConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundOrigin&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">case</span><span class="hl-1">(</span><span class="hl-6">&quot;opacity&quot;</span><span class="hl-1">, </span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">opacityConfig</span><span class="hl-1">, </span><span class="hl-5">prop</span><span class="hl-6">`--w-bg-opacity`</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">case</span><span class="hl-1">(</span><span class="hl-6">&quot;gradient&quot;</span><span class="hl-1">, </span><span class="hl-5">callHandler</span><span class="hl-1">(</span><span class="hl-3">buildLinearGradient</span><span class="hl-1">, </span><span class="hl-5">meld</span><span class="hl-1">(</span><br/><span class="hl-1">    </span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">gradientDirectionConfig</span><span class="hl-1">, </span><span class="hl-3">buildGradientDirection</span><span class="hl-1">),</span><br/><span class="hl-1">    </span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">gradientConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundImage&quot;</span><span class="hl-1">),</span><br/><span class="hl-1">  )))</span><br/><span class="hl-1">  .</span><span class="hl-5">init</span><span class="hl-1">();</span>
+</code></pre>
+<p>And if you want just gradient ?</p>
+<pre><code class="language-js"><span class="hl-11">export</span><span class="hl-1"> </span><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">gradient</span><span class="hl-1"> = </span><span class="hl-5">createUtility</span><span class="hl-1">(</span><span class="hl-6">&quot;gradient&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">gradientDirectionConfig</span><span class="hl-1">, </span><span class="hl-3">buildGradientDirection</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">gradientConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundImage&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">init</span><span class="hl-1">()</span>
+</code></pre>
+<p>Each created utility is an <a href="">ES6 Proxy</a>, which wll only be called at runtime. At the same time, by using <code>config Object</code> like <a href="">gradientDirectionConfig</a>, we can merge all types, so you should have a perfect completion system.</p>
+<p>Creating your utilities has never been easier, you can even create your own framework by using windi&#39;s api. If you want to do this. you can refer to <a href="">@windi/utilities</a> which should be a perfect example.</p>
+<p>To learn more, please check <a href="">the documentation website</a>.</p>
+
+<a href="#packages" id="packages" style="color: inherit; text-decoration: none;">
+  <h2>Packages</h2>
+</a>
+
+<a href="#windicore" id="windicore" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windi/core</a></h3>
+</a>
+<p>Core apis of windijs, like <code>createUtility</code>, <code>createVariant</code>, <code>colorHandler</code>, <code>configHandler</code>, ...</p>
+
+<a href="#windicolors" id="windicolors" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windi/colors</a></h3>
+</a>
+<p>Colors of some popular web framework (<a href="">apple</a>/<a href="">bootstrap</a>/<a href="">bulma</a>/<a href="">material</a>/<a href="">tailwind</a>/<a href="">web</a>/<a href="">windi</a>), you can choose the best for yourself. And also don&#39;t forget to say thanks to all these frameworks and their developers.</p>
+
+<a href="#windiconfig" id="windiconfig" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windi/config</a></h3>
+</a>
+<p>The config variables of windi utilities. Also modular, you can import or expand the config of corresponding utility. The naming rule is <code>camelCased(utilityName) + Config</code>.
+for example, <code>backgroundSizeConfig</code>.</p>
+
+<a href="#windipreflight" id="windipreflight" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windi/preflight</a></h3>
+</a>
+<p>Generate reset css.</p>
+
+<a href="#windiutilities" id="windiutilities" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windi/utilities</a></h3>
+</a>
+<p>All windi utilities, like <code>bg</code>, <code>text</code>, <code>p</code>, <code>m</code>, ...</p>
+
+<a href="#windivariants" id="windivariants" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windi/variants</a></h3>
+</a>
+<p>All windi variants, like <code>sm</code>, <code>md</code>, <code>hover</code>, <code>focus</code>, <code>dark</code>, ...</p>
+
+<a href="#windihelpers" id="windihelpers" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windi/helpers</a></h3>
+</a>
+<p>Operations related to css.</p>
+<ul>
+<li>css-in-js: [<code>css</code>, <code>prop</code>, <code>unify</code>, <code>bundle</code>, ...]</li>
+<li>color process: [<code>darken</code>, <code>lighten</code>, <code>adjustLightness</code>, ...]</li>
+<li>css units: [<code>rem</code>, <code>px</code>, <code>em</code>, ...]</li>
+<li>css funcs: [<code>rgb</code>, <code>rgba</code>, <code>linearGradient</code>, ...]</li>
+<li>others: [<code>useProxy</code>, <code>alphaNamer</code>, <code>hashNamer</code>, ...]</li>
+</ul>
+
+<a href="#windishared" id="windishared" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windi/shared</a></h3>
+</a>
+<p>Internal shared funcs and utils.</p>
+
+<a href="#discussions" id="discussions" style="color: inherit; text-decoration: none;">
+  <h2>Discussions</h2>
+</a>
+<p>We’re using <a href="https://github.com/windicss/windijs/discussions">GitHub Discussions</a> as a place to connect with other members of our community. You are free to ask questions and share ideas, so enjoy yourself.</p>
+
+<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+  <h2>Contributing</h2>
+</a>
+<p>If you&#39;re interested in contributing to windijs, please read our <a href="https://github.com/windicss/windijs/blob/main/CONTRIBUTING.md">contributing docs</a> <strong>before submitting a pull request</strong>.</p>
+
+<a href="#supporting" id="supporting" style="color: inherit; text-decoration: none;">
+  <h2>Supporting</h2>
+</a>
+<p>Windi is an MIT-licensed open source project with its ongoing development made possible entirely by fantastic volunteers. If you&#39;d like to support their efforts, please consider <a href="">Becoming a backer on Open Collective</a>.</p>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p><a href="https://github.com/windicss/windijs/blob/main/LICENSE">MIT</a></p>
+<p>Copyright (c) 2022, Raven Satir</p>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current selected"><a href="modules.html">Windi <wbr/>Docs</a>
+<ul>
+<li class="tsd-kind-module"><a href="modules/_windi_colors.html">@windi/colors -<wbr/> v1.0.0</a></li>
+<li class="tsd-kind-module"><a href="modules/_windi_config.html">@windi/config -<wbr/> v1.0.0</a></li>
+<li class="tsd-kind-module"><a href="modules/_windi_core.html">@windi/core -<wbr/> v1.0.0</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_core.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windi_helpers.html">@windi/helpers -<wbr/> v1.0.0</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_helpers.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windi_shared.html">@windi/shared -<wbr/> v1.0.0</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_shared.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windi_style.html">@windi/style -<wbr/> v1.0.0</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_style.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windi_transformer.html">@windi/transformer -<wbr/> v1.0.0</a></li>
+<li class="tsd-kind-module"><a href="modules/_windi_utilities.html">@windi/utilities -<wbr/> v1.0.0</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_utilities.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windi_variants.html">@windi/variants -<wbr/> v1.0.0</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_variants.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/windijs.html">windijs -<wbr/> v1.0.0</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/windijs.internal.html">internal</a></li></ul></li></ul></li></ul></div></details></nav></div></div>
+<div class="overlay"></div><script src="assets/main.js"></script></body></html>
