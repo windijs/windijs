@@ -7,7 +7,6 @@ export * from "./colors";
 export * from "./container";
 export * from "./effect";
 export * from "./filters";
-// export * from "./interactivity";
 export * from "./layout";
 export * from "./sizing";
 export * from "./spacing";

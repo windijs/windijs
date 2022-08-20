@@ -25,10 +25,16 @@
     "theme": "default",
     "name": "Windi Docs",
     "exclude": "*.test.ts",
+    "includeVersion": true,
     "excludeInternal": true,
     "excludeExternals": true,
     "excludePrivate": true,
     "excludeProtected": true,
-    "excludeNotDocumented": true
+    "hideGenerator": true,
+    // TODO: fix this, if we set excludeNotDocumented, typedoc will not generate docs for variants repo, not sure why.
+    // "excludeNotDocumented": true,
+    "compilerOptions": {
+      "skipLibCheck": true,
+    },
   }
 }
