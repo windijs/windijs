@@ -10,6 +10,11 @@
   ],
   "author": "Raven Satir",
   "license": "MIT",
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "displayName": "windijs",
+    "readmeFile": "./README.md"
+  },
   "dependencies": {
     "@windi/colors": "1.0.0",
     "@windi/config": "1.0.0",

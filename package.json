@@ -15,7 +15,7 @@
     "build:dts": "pnpm build -f dts",
     "build:prod": "pnpm build -p",
     "release": "pnpm build --release",
-    "gen:docs": "typedoc --entryPointStrategy packages .",
+    "gen:docs": "typedoc --entryPointStrategy packages . --readme ./README.md",
     "gen:style": "node -r sucrase/register ./scripts/genDataTypes.ts",
     "size": "pnpm size:esm && pnpm size:iife && pnpm size:baseline",
     "size:esm": "pnpm build windijs core utilities variants config colors helpers shared -dcmf esm",

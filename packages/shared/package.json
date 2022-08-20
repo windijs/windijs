@@ -13,7 +13,8 @@
   ],
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/shared"
+    "displayName": "@windi/shared",
+    "readmeFile": "./README.md"
   },
   "devDependencies": {
     "@windi/config": "1.0.0"

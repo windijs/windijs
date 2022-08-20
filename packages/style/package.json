@@ -22,7 +22,8 @@
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/style"
+    "displayName": "@windi/style",
+    "readmeFile": "./README.md"
   },
   "author": "Raven Satir",
   "license": "MIT"

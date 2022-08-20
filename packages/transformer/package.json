@@ -15,7 +15,8 @@
   "license": "MIT",
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/transformer"
+    "displayName": "@windi/transformer",
+    "readmeFile": "./README.md"
   },
   "dependencies": {
     "typescript": "^4.7.4",
