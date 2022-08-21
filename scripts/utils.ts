@@ -75,3 +75,9 @@ export async function runParallel<T> (maxConcurrency: number, source: T[], itera
   }
   return Promise.all(ret);
 }
+
+export function handleError<T> (err: T | null) {
+  if (err) {
+    console.error(`${chalk.red(err)}`);
+  }
+}
