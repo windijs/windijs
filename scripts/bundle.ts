@@ -95,6 +95,9 @@ const organizeImportsExports: TransformerFactory<SourceFile> = context => {
       }
 
       if (isImportDeclaration(node)) {
+        // remove all import ... from './..', this maybe dangerous, but works for now.
+        if (isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith("./")) return undefined;
+
         imports.push(node);
         return undefined;
       }
@@ -182,6 +185,14 @@ bundleDts([
   {
     input: "packages/core/src/index.ts",
     output: "packages/core/dist/core.d.ts",
+  },
+  {
+    input: "packages/helpers/src/index.ts",
+    output: "packages/helpers/dist/helpers.d.ts",
+  },
+  {
+    input: "packages/shared/src/index.ts",
+    output: "packages/shared/dist/shared.d.ts",
   },
 ],
 {
