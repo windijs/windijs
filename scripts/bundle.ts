@@ -88,8 +88,10 @@ const organizeImportsExports: TransformerFactory<SourceFile> = context => {
   const exports: ExportDeclaration[] = [];
   return sourceFile => {
     const visitor: Visitor = (node: Node) => {
-      // extract all relative path from entry
       if (isExportDeclaration(node)) {
+        // export * from "./xxx"
+        if (node.moduleSpecifier && isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith("./")) return undefined;
+
         exports.push(node);
         return undefined;
       }
@@ -127,7 +129,12 @@ export function emitDecl (fileNames: string[], options: CompilerOptions) {
   };
 
   const program = createProgram(fileNames, options, host);
-  program.emit();
+  const emitted = program.emit();
+
+  if (emitted.emitSkipped) {
+    handleError(`Emit failed, found ${emitted.diagnostics.length} errors`);
+    handleError(emitted.diagnostics.map((d, i) => i + 1 + ". " + d.messageText).join("\n"));
+  }
 }
 
 /** Bundle .ts files, organize imports and exports */
@@ -146,6 +153,7 @@ export function bundleTS (entry: string): string {
 /** Bundle .ts first, then generate dts for bundled file, then remove bundled .ts file, only keep generated .dts */
 export function bundleDts (entries: { input: string, output: string }[], options: CompilerOptions) {
   options = Object.assign(options, {
+    lib: undefined, // If we set only ESNext and Dom, types like 'HTMLElement'/'CSSStyleDeclaration' will throw 'using private name' error.
     declaration: true,
     emitDeclarationOnly: true,
     skipLibCheck: true,
@@ -194,12 +202,19 @@ bundleDts([
     input: "packages/shared/src/index.ts",
     output: "packages/shared/dist/shared.d.ts",
   },
+  {
+    input: "packages/style/src/index.ts",
+    output: "packages/style/dist/style.d.ts",
+  },
+  {
+    input: "packages/windijs/src/index.ts",
+    output: "packages/windijs/dist/windijs.d.ts",
+  },
 ],
 {
-  lib: ["ESNext", "DOM"],
   target: ScriptTarget.ES2017,
   module: ModuleKind.ESNext,
   paths: {
-    "@windi/*": ["packages/*/src"],
+    "@windi/*": ["packages/*/src/index.ts"],
   },
 });
