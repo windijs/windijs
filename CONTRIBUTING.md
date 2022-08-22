@@ -54,18 +54,66 @@ Next, use `pnpm` to install the project' dependencies
 pnpm install
 ```
 
-### Build the project
+### Command Integrations
 
-Development Version
+#### Build development Version
 
 ```bash
 pnpm dev
 ```
 
-Production Version
+#### Build development version with types bundled
+
+```bash
+pnpm dev -t
+```
+
+#### Build production version
+
+```bash
+pnpm build
+```
+
+#### Build production version with types bundled
 
 ```bash
 pnpm build:prod
+```
+
+or
+
+```bash
+pnpm build -t
+```
+
+#### Build dts build only
+
+```bash
+pnpm build:dts
+```
+
+#### Watch Build
+
+```bash
+pnpm watch
+```
+
+#### Watch dts build only
+
+```bash
+pnpm watch:dts
+```
+
+#### Run all tests
+
+```bash
+pnpm test
+```
+
+#### Run a specific test
+
+```bash
+pnpm test -t <Description>
 ```
 
 ## Submit a Pull Request
