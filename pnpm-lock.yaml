@@ -21,6 +21,7 @@ importers:
       eslint-plugin-import: ^2.25.2
       eslint-plugin-n: ^15.0.0
       eslint-plugin-promise: ^6.0.0
+      expr-eval: ^2.0.2
       jest: ^28.1.2
       minimist: ^1.2.6
       rollup: ^2.77.1
@@ -50,6 +51,7 @@ importers:
       eslint-plugin-import: 2.26.0_iom7pm3yknyiblqpw2vvqvxs5i
       eslint-plugin-n: 15.2.4_eslint@8.19.0
       eslint-plugin-promise: 6.0.0_eslint@8.19.0
+      expr-eval: 2.0.2
       jest: 28.1.2_@types+node@18.7.3
       minimist: 1.2.6
       rollup: 2.77.1
@@ -86,6 +88,7 @@ importers:
 
   packages/helpers:
     specifiers:
+      '@windi/helpers': 1.0.0
       '@windi/shared': 1.0.0
       '@windi/style': 1.0.0
       '@windi/utilities': 1.0.0
@@ -93,6 +96,7 @@ importers:
     dependencies:
       '@windi/shared': link:../shared
     devDependencies:
+      '@windi/helpers': 'link:'
       '@windi/style': link:../style
       '@windi/utilities': link:../utilities
       '@windi/variants': link:../variants
@@ -157,6 +161,26 @@ importers:
       '@windi/colors': link:../colors
       '@windi/config': link:../config
       '@windi/utilities': link:../utilities
+
+  packages/windicss:
+    specifiers:
+      '@windi/colors': 1.0.0
+      '@windi/config': 1.0.0
+      '@windi/core': 1.0.0
+      '@windi/helpers': 1.0.0
+      '@windi/shared': 1.0.0
+      '@windi/style': 1.0.0
+      '@windi/utilities': 1.0.0
+      '@windi/variants': 1.0.0
+    dependencies:
+      '@windi/colors': link:../colors
+      '@windi/config': link:../config
+      '@windi/core': link:../core
+      '@windi/helpers': link:../helpers
+      '@windi/shared': link:../shared
+      '@windi/style': link:../style
+      '@windi/utilities': link:../utilities
+      '@windi/variants': link:../variants
 
   packages/windijs:
     specifiers:
@@ -1982,6 +2006,10 @@ packages:
       jest-matcher-utils: 28.1.1
       jest-message-util: 28.1.1
       jest-util: 28.1.1
+    dev: true
+
+  /expr-eval/2.0.2:
+    resolution: {integrity: sha512-4EMSHGOPSwAfBiibw3ndnP0AvjDWLsMvGOvWEZ2F96IGk0bIVdjQisOHxReSkE13mHcfbuCiXw+G4y0zv6N8Eg==}
     dev: true
 
   /fast-deep-equal/3.1.3:
