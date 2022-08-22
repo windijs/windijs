@@ -1,11 +1,17 @@
 /**
  * Script for generating dts.
+ *
+ * api-extractor doesn't support ignore external.
+ * rollup-plugin-dts bundle is messy and doesn't support multi entry.
+ * rollup-plugin-ts ignore type generic default value and also slow.
+ * so we have to create our own dts bundler.
  */
 
-import { CompilerOptions, ExportDeclaration, ImportDeclaration, ModuleKind, Node, ScriptTarget, SourceFile, TransformerFactory, Visitor, createCompilerHost, createProgram, factory, isExportDeclaration, isImportDeclaration, isNamedImports, isNamespaceImport, isStringLiteral, visitEachChild, visitNode } from "typescript";
+import { CompilerOptions, CustomTransformers, ExportDeclaration, ImportDeclaration, Node, SourceFile, TransformerFactory, Visitor, createCompilerHost, createProgram, factory, isExportDeclaration, isImportDeclaration, isNamedImports, isNamespaceImport, isStringLiteral, visitEachChild, visitNode } from "typescript";
 /* eslint-disable no-console */
 import fs, { readFileSync } from "fs";
 
+import chalk from "chalk";
 import { handleError } from "./utils";
 import path from "path";
 import { useTransformer } from "../packages/transformer/src";
@@ -118,18 +124,18 @@ const organizeImportsExports: TransformerFactory<SourceFile> = context => {
 };
 
 /** Emit typescript declarations */
-export function emitDecl (fileNames: string[], options: CompilerOptions) {
+export function emitDecl (fileNames: string[], options: CompilerOptions, transformers?: CustomTransformers, beforeWriteFile = (output: string, contents: string) => ({ output, contents })) {
   const host = createCompilerHost(options);
   const outputs = fileNames.map(i => i.replace(".ts", ".d.ts"));
   host.writeFile = (output: string, contents: string) => {
     if (outputs.includes(output)) {
-      console.log(`generate ${output}`);
-      fs.writeFile(output, contents, handleError);
+      const processed = beforeWriteFile(output, contents);
+      fs.writeFile(processed.output, processed.contents, handleError);
     }
   };
 
   const program = createProgram(fileNames, options, host);
-  const emitted = program.emit();
+  const emitted = program.emit(undefined, undefined, undefined, undefined, transformers);
 
   if (emitted.emitSkipped) {
     handleError(`Emit failed, found ${emitted.diagnostics.length} errors`);
@@ -151,7 +157,7 @@ export function bundleTS (entry: string): string {
 }
 
 /** Bundle .ts first, then generate dts for bundled file, then remove bundled .ts file, only keep generated .dts */
-export function bundleDts (entries: { input: string, output: string }[], options: CompilerOptions) {
+export function bundleDts (entries: { input: string, output: string }[], options: CompilerOptions, transformers?: CustomTransformers) {
   options = Object.assign(options, {
     lib: undefined, // If we set only ESNext and Dom, types like 'HTMLElement'/'CSSStyleDeclaration' will throw 'using private name' error.
     declaration: true,
@@ -163,58 +169,26 @@ export function bundleDts (entries: { input: string, output: string }[], options
   });
 
   const temps = entries.map(({ input, output }) => {
+    console.log(chalk.bold(chalk.cyan(`${input} → ${output}...`)));
+
     const temp = output.replace(".d.ts", ".ts");
+    if (!fs.existsSync(path.dirname(temp))) fs.mkdirSync(path.dirname(temp));
     fs.writeFileSync(temp, bundleTS(input));
     return temp;
   });
 
-  emitDecl(temps, options);
+  let start = Date.now();
+
+  emitDecl(temps, options, transformers, (output, contents) => {
+    console.log(chalk.green("created ") + chalk.bold(chalk.green(output)) + chalk.green(" in ") + chalk.bold(chalk.green(`${((Date.now() - start) / 1000).toFixed(1) + "s"}\n`)));
+
+    start = Date.now();
+
+    return {
+      output,
+      contents: contents.replace(/export {};\n/g, ""),
+    };
+  });
 
   temps.map(i => fs.rm(i, handleError));
 };
-
-bundleDts([
-  {
-    input: "packages/utilities/src/index.ts",
-    output: "packages/utilities/dist/utilities.d.ts",
-  },
-  {
-    input: "packages/config/src/index.ts",
-    output: "packages/config/dist/config.d.ts",
-  },
-  {
-    input: "packages/colors/src/index.ts",
-    output: "packages/colors/dist/colors.d.ts",
-  },
-  {
-    input: "packages/variants/src/index.ts",
-    output: "packages/variants/dist/variants.d.ts",
-  },
-  {
-    input: "packages/core/src/index.ts",
-    output: "packages/core/dist/core.d.ts",
-  },
-  {
-    input: "packages/helpers/src/index.ts",
-    output: "packages/helpers/dist/helpers.d.ts",
-  },
-  {
-    input: "packages/shared/src/index.ts",
-    output: "packages/shared/dist/shared.d.ts",
-  },
-  {
-    input: "packages/style/src/index.ts",
-    output: "packages/style/dist/style.d.ts",
-  },
-  {
-    input: "packages/windijs/src/index.ts",
-    output: "packages/windijs/dist/windijs.d.ts",
-  },
-],
-{
-  target: ScriptTarget.ES2017,
-  module: ModuleKind.ESNext,
-  paths: {
-    "@windi/*": ["packages/*/src/index.ts"],
-  },
-});
