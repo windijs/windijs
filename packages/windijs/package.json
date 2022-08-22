@@ -1,6 +1,6 @@
 {
   "name": "windijs",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "utility-first css-in-js framework",
   "main": "dist/windijs.js",
   "module": "dist/windijs.mjs",

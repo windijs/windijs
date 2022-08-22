@@ -1,6 +1,6 @@
 {
   "name": "@windi/config",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "@windi/config",
   "main": "dist/config.js",
   "module": "dist/config.mjs",

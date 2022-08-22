@@ -1,6 +1,6 @@
 {
   "name": "@windi/shared",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "@windi/shared",
   "main": "dist/shared.js",
   "module": "dist/shared.mjs",

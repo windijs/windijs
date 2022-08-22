@@ -1,7 +1,7 @@
 {
   "name": "windicss",
   "private": true,
-  "version": "1.0.0-beta.0",
+  "version": "4.0.0-beta.1",
   "description": "Next generation utility-first CSS framework.",
   "main": "dist/windicss.js",
   "module": "dist/windicss.mjs",
