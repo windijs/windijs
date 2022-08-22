@@ -2,12 +2,18 @@
 
 import { defineConfig } from "rollup";
 import { terser } from "rollup-plugin-terser";
-import ts from "rollup-plugin-ts";
+import ts from "rollup-plugin-typescript2";
 
 const tsPlugin = ts({
-  tsconfig: {
-    target: "es2015",
-    declaration: false,
+  check: false,
+  tsconfig: "../../tsconfig.json",
+  tsconfigOverride: {
+    compilerOptions: {
+      target: "es2015",
+      declaration: false,
+      declarationMap: false,
+    },
+    exclude: ["node_modules/**", "**/tests"],
   },
 });
 
