@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`vm eval 1`] = `
+".bg\\\\.red\\\\.500 {
+  background-color: rgba(239, 68, 68, var(--w-bg-opacity));
+  --w-bg-opacity: 1;
+}
+
+.font\\\\.bold {
+  font-weight: 700;
+}
+
+.text\\\\.left {
+  text-align: left;
+}"
+`;
+
+exports[`vm with number calc 1`] = `
+".bg\\\\.red\\\\.500 {
+  background-color: rgba(239, 68, 68, var(--w-bg-opacity));
+  --w-bg-opacity: 1;
+}"
+`;
