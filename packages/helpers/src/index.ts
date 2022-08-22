@@ -1,6 +1,7 @@
 // TODO: maybe add more helpers reference sass?
 // https://sass-lang.com/documentation/modules
 
+export * from "./types";
 export * from "./build";
 export * from "./color";
 export * from "./common";
@@ -13,5 +14,4 @@ export * from "./math";
 export * from "./meta";
 export * from "./namer";
 export * from "./proxy";
-export * from "./types";
 export * from "./unit";

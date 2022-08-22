@@ -19,7 +19,7 @@ export function inline (...utilities: StyleObject[]): string;
 export function inline (el: HTMLElement, ...utilities: StyleObject[]): void;
 export function inline (x: HTMLElement | StyleObject, ...utilities: StyleObject[]): string | void {
   const isGet = isStyleObject(x);
-  const styles = [];
+  const styles: string[] = [];
   for (const [key, value] of Object.entries(bundle(utilities))) {
     if (typeof value === "string") isGet ? styles.push(key + ":" + value) : (x as HTMLElement).style.setProperty(key, value);
   }
