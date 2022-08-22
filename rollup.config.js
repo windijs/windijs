@@ -9,7 +9,7 @@ import ts from "rollup-plugin-typescript2";
 if (!process.env.TARGET) throw new Error("TARGET package must be specified via --environment flag.");
 
 const packageDir = path.join("packages", process.env.TARGET);
-/** @type { import("./scripts/utils").Pkg } */
+/** @type { import("./scripts/types").Pkg } */
 const pkg = require(path.resolve(packageDir, "package.json"));
 const buildOptions = pkg.buildOptions || {};
 const name = buildOptions.name || path.basename(packageDir);
