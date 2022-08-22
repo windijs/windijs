@@ -1,4 +1,4 @@
-import { atomic, atomicNamer, hashNamer, unify, useNamer } from "../src";
+import { atomic, atomicNamer, hashNamer, unify, useNamer } from "@windi/helpers";
 import { bg, border, rounded, text } from "@windi/utilities";
 import { dark, hover, sm } from "@windi/variants";
 

@@ -1,4 +1,4 @@
-import { $ } from "../src";
+import { $ } from "@windi/helpers";
 import { style } from "@windi/style";
 
 // TODO: fix type bundler error
