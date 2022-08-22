@@ -1,0 +1,29 @@
+{
+  "name": "windicss",
+  "private": true,
+  "version": "4.0.0-beta.1",
+  "description": "Next generation utility-first CSS framework.",
+  "main": "dist/windicss.js",
+  "module": "dist/windicss.mjs",
+  "types": "dist/windicss.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "Raven Satir",
+  "license": "MIT",
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "displayName": "windicss",
+    "readmeFile": "./README.md"
+  },
+  "dependencies": {
+    "@windi/colors": "1.0.0",
+    "@windi/config": "1.0.0",
+    "@windi/core": "1.0.0",
+    "@windi/helpers": "1.0.0",
+    "@windi/shared": "1.0.0",
+    "@windi/style": "1.0.0",
+    "@windi/utilities": "1.0.0",
+    "@windi/variants": "1.0.0"
+  }
+}
