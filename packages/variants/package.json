@@ -1,6 +1,6 @@
 {
   "name": "@windi/variants",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.0",
   "description": "@windi/variants",
   "main": "dist/variants.js",
   "module": "dist/variants.mjs",
