@@ -1,6 +1,8 @@
 export type BuildFormat = "cjs" | "mjs" | "esm" | "iife" | "dts";
 
 export type Pkg = {
+  name: string,
+  version: string,
   types?: string,
   dependencies?: Record<string, string>,
   devDependencies?: Record<string, string>,
