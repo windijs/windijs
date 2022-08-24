@@ -1,7 +1,7 @@
-import { colorHandler, configHandler, createUtility, numberHandler } from "@windi/core";
-import { strokeLineCapConfig, strokeLineJoinConfig } from "@windi/config";
+import { colorHandler, configHandler, createUtility, numberHandler } from "@windijs/core";
+import { strokeLineCapConfig, strokeLineJoinConfig } from "@windijs/config";
 
-import type { StyleObject } from "@windi/helpers";
+import type { StyleObject } from "@windijs/helpers";
 import { colors } from "./colors";
 
 export const fill = createUtility("fill")

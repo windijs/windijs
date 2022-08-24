@@ -1,8 +1,8 @@
-import { borderRadiusConfig, borderStyleConfig, borderWidthConfig, opacityConfig, outlineOffsetConfig, ringOffsetConfig } from "@windi/config";
-import { buildDivideColor, buildDivideOpacity, buildDivideStyle, buildDivideX, buildDivideY, buildRingWidth, colorHandler, configHandler, createUtility, cssHandler, divideXReverseHandler, divideYReverseHandler, guard, meld } from "@windi/core";
+import { borderRadiusConfig, borderStyleConfig, borderWidthConfig, opacityConfig, outlineOffsetConfig, ringOffsetConfig } from "@windijs/config";
+import { buildDivideColor, buildDivideOpacity, buildDivideStyle, buildDivideX, buildDivideY, buildRingWidth, colorHandler, configHandler, createUtility, cssHandler, divideXReverseHandler, divideYReverseHandler, guard, meld } from "@windijs/core";
 
 import { colors } from "./colors";
-import { prop } from "@windi/helpers";
+import { prop } from "@windijs/helpers";
 
 export const rounded = createUtility("rounded")
   .use(configHandler(borderRadiusConfig, "borderRadius"))

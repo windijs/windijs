@@ -5,7 +5,7 @@ import { Bundle, Node, SourceFile, TransformerFactory, factory, isIdentifier, is
 /**
  * Typescript Transform Plugin.
  *
- * when rollup-plugin-ts generate .dts file, it will leave some extras, for example `import("@windi/helper").StyleObject`, even when `StyleObject` is already imported.
+ * when rollup-plugin-ts generate .dts file, it will leave some extras, for example `import("@windijs/helper").StyleObject`, even when `StyleObject` is already imported.
  * this transformer fixed this.
  */
 export const importsTransformer: TransformerFactory<Bundle | SourceFile> = context => {
@@ -32,7 +32,7 @@ export const importsTransformer: TransformerFactory<Bundle | SourceFile> = conte
 /**
  * Typescript Transform Plugin.
  *
- * Change all Dynamic Imports to Global Imports. For Example, `import("@windi/helpers").StyleObject<{}>` -> `StyleObject<{}>`.
+ * Change all Dynamic Imports to Global Imports. For Example, `import("@windijs/helpers").StyleObject<{}>` -> `StyleObject<{}>`.
  */
 export const importTypesTransformer: TransformerFactory<Bundle | SourceFile> = context => {
   return sourceFile => {

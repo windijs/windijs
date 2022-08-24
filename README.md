@@ -145,38 +145,38 @@ export const gradient = createUtility("gradient")
 
 Each created utility is an [ES6 Proxy](), which wll only be called at runtime. At the same time, by using `config Object` like [gradientDirectionConfig](), we can merge all types, so you should have a perfect completion system.
 
-Creating your utilities has never been easier, you can even create your own framework by using windi's api. If you want to do this. you can refer to [@windi/utilities]() which should be a perfect example.
+Creating your utilities has never been easier, you can even create your own framework by using windi's api. If you want to do this. you can refer to [@windijs/utilities]() which should be a perfect example.
 
 To learn more, please check [the documentation website]().
 
 ## Packages
 
-### [@windi/core]()
+### [@windijs/core]()
 
 Core apis of windijs, like `createUtility`, `createVariant`, `colorHandler`, `configHandler`, ...
 
-### [@windi/colors]()
+### [@windijs/colors]()
 
 Colors of some popular web framework ([apple]()/[bootstrap]()/[bulma]()/[material]()/[tailwind]()/[web]()/[windi]()), you can choose the best for yourself. And also don't forget to say thanks to all these frameworks and their developers.
 
-### [@windi/config]()
+### [@windijs/config]()
 
 The config variables of windi utilities. Also modular, you can import or expand the config of corresponding utility. The naming rule is `camelCased(utilityName) + Config`.
 for example, `backgroundSizeConfig`.
 
-### [@windi/preflight]()
+### [@windijs/preflight]()
 
 Generate reset css.
 
-### [@windi/utilities]()
+### [@windijs/utilities]()
 
 All windi utilities, like `bg`, `text`, `p`, `m`, ...
 
-### [@windi/variants]()
+### [@windijs/variants]()
 
 All windi variants, like `sm`, `md`, `hover`, `focus`, `dark`, ...
 
-### [@windi/helpers]()
+### [@windijs/helpers]()
 
 Operations related to css.
 
@@ -186,7 +186,7 @@ Operations related to css.
 - css funcs: [`rgb`, `rgba`, `linearGradient`, ...]
 - others: [`useProxy`, `alphaNamer`, `hashNamer`, ...]
 
-### [@windi/shared]()
+### [@windijs/shared]()
 
 Internal shared funcs and utils.
 

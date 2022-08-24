@@ -1,7 +1,7 @@
 {
-  "name": "@windi/config",
+  "name": "@windijs/config",
   "version": "1.0.0",
-  "description": "@windi/config",
+  "description": "@windijs/config",
   "main": "dist/config.js",
   "module": "dist/config.mjs",
   "types": "dist/config.d.ts",
@@ -14,10 +14,10 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windi/shared": "1.0.0"
+    "@windijs/shared": "1.0.0"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/config"
+    "displayName": "@windijs/config"
   }
 }

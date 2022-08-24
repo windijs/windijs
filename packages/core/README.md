@@ -1,4 +1,4 @@
-# @windi/core
+# @windijs/core
 
 Core apis of windijs.
 

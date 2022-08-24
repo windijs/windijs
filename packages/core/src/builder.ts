@@ -1,6 +1,6 @@
-import type { CSSAngle, CSSLinearColorStopOrHint, CSSMap, CSSObject, CSSPrefixer, CSSSideOrCorner, ColorStyleObject, StyleObject, StyleProperties } from "@windi/helpers";
-import { SymbolCSS, css, getFirstVar, hexToRGB, prop, sliceColor } from "@windi/helpers";
-import { dashToCamel, parenWrap } from "@windi/shared";
+import type { CSSAngle, CSSLinearColorStopOrHint, CSSMap, CSSObject, CSSPrefixer, CSSSideOrCorner, ColorStyleObject, StyleObject, StyleProperties } from "@windijs/helpers";
+import { SymbolCSS, css, getFirstVar, hexToRGB, prop, sliceColor } from "@windijs/helpers";
+import { dashToCamel, parenWrap } from "@windijs/shared";
 import { prefixImageRendering, prefixKeyframes, prefixNotHidden, prefixPlaceholder, prefixWritingMode } from "./prefixer";
 
 export const buildProperty = (property: StyleProperties | StyleProperties[], value: string) => (Array.isArray(property) ? Object.fromEntries(property.map(i => [i, value as string])) : { [property]: value as string }) as CSSObject;

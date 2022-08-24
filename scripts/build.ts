@@ -29,7 +29,7 @@ const dtsConfig: CompilerOptions = {
   target: ScriptTarget.ESNext,
   module: ModuleKind.ESNext,
   paths: {
-    "@windi/*": ["packages/*/src/index.ts"],
+    "@windijs/*": ["packages/*/src/index.ts"],
   },
 };
 

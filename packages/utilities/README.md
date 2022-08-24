@@ -1,4 +1,4 @@
-# @windi/utilities
+# @windijs/utilities
 
 All windi utilities.
 

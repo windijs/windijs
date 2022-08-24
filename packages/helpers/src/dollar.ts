@@ -1,6 +1,6 @@
 import type { ElementSelectors, GeneralHTMLAttrs, StyleObject } from "./types";
 
-import { hasKey } from "@windi/shared";
+import { hasKey } from "@windijs/shared";
 import { unify } from "./build";
 
 // TODO: support variant group

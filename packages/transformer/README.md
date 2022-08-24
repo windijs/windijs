@@ -1,4 +1,4 @@
-# @windi/transformer
+# @windijs/transformer
 
 windi internal typescript transformers.
 

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Transform imports 1`] = `
-"import { VariantBuilder } from \\"@windi/helpers\\";
+"import { VariantBuilder } from \\"@windijs/helpers\\";
 declare const first: VariantBuilder;
 declare const notFirst: VariantBuilder;
 declare const after: VariantBuilder;
@@ -10,8 +10,8 @@ declare const before: VariantBuilder;
 `;
 
 exports[`Transform imports with type params 1`] = `
-"import { CSSObject, StyleObject } from \\"@windi/helpers\\";
-import { buildLinearGradient, buildTransition } from \\"@windi/core\\";
+"import { CSSObject, StyleObject } from \\"@windijs/helpers\\";
+import { buildLinearGradient, buildTransition } from \\"@windijs/core\\";
 declare const animate: {
     none: StyleObject<{}>;
     spin: StyleObject<{

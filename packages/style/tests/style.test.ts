@@ -1,7 +1,7 @@
-import { createUtility } from "@windi/core";
-import { percent } from "@windi/helpers";
+import { createUtility } from "@windijs/core";
+import { percent } from "@windijs/helpers";
 import { stylePropertyHandler } from "../src/handler";
-import { windiColors } from "@windi/colors";
+import { windiColors } from "@windijs/colors";
 
 const style = createUtility("style").use(stylePropertyHandler()).init();
 

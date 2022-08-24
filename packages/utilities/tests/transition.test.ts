@@ -1,9 +1,9 @@
-import { createUtility, msHandler } from "@windi/core";
+import { createUtility, msHandler } from "@windijs/core";
 import { delay, duration, ease, transition } from "../src/transition";
 
-import type { StyleObject } from "@windi/helpers";
-import { prop } from "@windi/helpers";
-import { transitionPropertyConfig as property } from "@windi/config";
+import type { StyleObject } from "@windijs/helpers";
+import { prop } from "@windijs/helpers";
+import { transitionPropertyConfig as property } from "@windijs/config";
 
 test("Transition", () => {
   expect(transition.css).toMatchSnapshot();

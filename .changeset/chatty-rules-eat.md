@@ -1,5 +1,5 @@
 ---
-"@windi/colors": patch
+"@windijs/colors": patch
 ---
 
 Initial commit

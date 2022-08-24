@@ -1,6 +1,6 @@
-import { buildContainer } from "@windi/core";
-import { screens } from "@windi/config";
-import { unify } from "@windi/helpers";
+import { buildContainer } from "@windijs/core";
+import { screens } from "@windijs/config";
+import { unify } from "@windijs/helpers";
 
 test("Container", () => {
   const container = buildContainer(screens);

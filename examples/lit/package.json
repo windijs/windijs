@@ -19,7 +19,7 @@
     "windijs": "workspace:^1.0.0"
   },
   "devDependencies": {
-    "@windi/style": "workspace:1.0.0",
+    "@windijs/style": "workspace:1.0.0",
     "vite": "^3.0.0"
   }
 }

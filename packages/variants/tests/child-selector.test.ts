@@ -1,9 +1,9 @@
 import { all, children, sibling, siblings, svg } from "../src/childSelector";
-import { bundle, prop } from "@windi/helpers";
-import { colorHandler, configHandler, createUtility } from "@windi/core";
+import { bundle, prop } from "@windijs/helpers";
+import { colorHandler, configHandler, createUtility } from "@windijs/core";
 
-import { backgroundClipConfig } from "@windi/config";
-import { windiColors } from "@windi/colors";
+import { backgroundClipConfig } from "@windijs/config";
+import { windiColors } from "@windijs/colors";
 
 const bg = createUtility("bg")
   .use(colorHandler(windiColors, "backgroundColor", "--w-bg-opacity"))

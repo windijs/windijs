@@ -2,7 +2,7 @@ import type { StyleNamer, StyleObject } from "./types";
 import { getStyleIdent, getStyleProps } from "./common";
 
 import { escapeCSS } from "./escape";
-import { hash } from "@windi/shared";
+import { hash } from "@windijs/shared";
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 let CURRENT_NAMER = alphaNamer;

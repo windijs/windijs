@@ -1,8 +1,8 @@
-import { backgroundAttachmentConfig, backgroundClipConfig, backgroundImageConfig, backgroundOriginConfig, backgroundPositionConfig, backgroundRepeatConfig, backgroundSizeConfig, blendModeConfig, gradientConfig, gradientDirectionConfig, opacityConfig } from "@windi/config";
-import { buildGradientDirection, buildGradientFrom, buildGradientTo, buildGradientVia, buildLinearGradient, callHandler, colorHandler, configHandler, createUtility, meld } from "@windi/core";
+import { backgroundAttachmentConfig, backgroundClipConfig, backgroundImageConfig, backgroundOriginConfig, backgroundPositionConfig, backgroundRepeatConfig, backgroundSizeConfig, blendModeConfig, gradientConfig, gradientDirectionConfig, opacityConfig } from "@windijs/config";
+import { buildGradientDirection, buildGradientFrom, buildGradientTo, buildGradientVia, buildLinearGradient, callHandler, colorHandler, configHandler, createUtility, meld } from "@windijs/core";
 
 import { colors } from "./colors";
-import { prop } from "@windi/helpers";
+import { prop } from "@windijs/helpers";
 
 export const bg = createUtility("bg")
   .use(colorHandler(colors, "backgroundColor", "--w-bg-opacity"))

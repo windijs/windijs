@@ -13,10 +13,10 @@ import type {
   StyleProxyHandler,
   UtilityMeta,
   VariantBuilder,
-} from "@windi/helpers";
-import { SymbolCSS, SymbolMeta, SymbolProxy, css, getMeta, isProxy, isStyleObject, pushMetaProp, resetMeta, setProxy, updateMetaType, useProxy } from "@windi/helpers";
+} from "@windijs/helpers";
+import { SymbolCSS, SymbolMeta, SymbolProxy, css, getMeta, isProxy, isStyleObject, pushMetaProp, resetMeta, setProxy, updateMetaType, useProxy } from "@windijs/helpers";
 import { buildColor, buildProperty, buildStatic } from "./builder";
-import { fracToPercent, isFraction, isNumber, parenWrap } from "@windi/shared";
+import { fracToPercent, isFraction, isNumber, parenWrap } from "@windijs/shared";
 
 export function handleConfig<T extends object> (build: BuildFunc, statics: T, type: MetaType, p: string): StyleObject | UtilityMeta | undefined {
   updateMetaType(type);

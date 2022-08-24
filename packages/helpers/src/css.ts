@@ -4,7 +4,7 @@ import { buildRules, createRules } from "./build";
 import { getMeta, pushMetaProp } from "./meta";
 
 import { nameStyle } from "./namer";
-import { parenWrap } from "@windi/shared";
+import { parenWrap } from "@windijs/shared";
 
 export const baseStyleTarget: TargetCreator = (css, meta, data) => {
   if (data != null) {

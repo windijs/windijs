@@ -1,5 +1,5 @@
-import { configHandler, createUtility } from "@windi/core";
-import { heightConfig, widthConfig } from "@windi/config";
+import { configHandler, createUtility } from "@windijs/core";
+import { heightConfig, widthConfig } from "@windijs/config";
 
 export const w = createUtility("w")
   .case("min", configHandler(widthConfig, "minWidth"))

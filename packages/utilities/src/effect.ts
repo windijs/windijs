@@ -1,8 +1,8 @@
-import { blendModeConfig, boxShadowConfig, opacityConfig } from "@windi/config";
-import { buildBoxShadowColor, buildBoxShadowSize, colorHandler, configHandler, createUtility } from "@windi/core";
+import { blendModeConfig, boxShadowConfig, opacityConfig } from "@windijs/config";
+import { buildBoxShadowColor, buildBoxShadowSize, colorHandler, configHandler, createUtility } from "@windijs/core";
 
 import { colors } from "./colors";
-import { prop } from "@windi/helpers";
+import { prop } from "@windijs/helpers";
 
 export const shadow = createUtility("shadow")
   .use(configHandler(boxShadowConfig, buildBoxShadowSize))

@@ -1,9 +1,9 @@
-import { CSSMap, CSSObject, StyleObject, prop } from "@windi/helpers";
+import { CSSMap, CSSObject, StyleObject, prop } from "@windijs/helpers";
 import { buildFontSize, buildKeyframes, buildProperty } from "./builder";
 import { configHandler, cssHandler, genericHandler, guard } from "./api";
 import { prefixAnimation, prefixNotHidden } from "./prefixer";
 
-import { isNumber } from "@windi/shared";
+import { isNumber } from "@windijs/shared";
 
 export const animateHandler = <T extends string> (name: T, value: string | CSSObject, keyframes?: Record<string, CSSObject>) => {
   const map: CSSMap = new Map();

@@ -1,4 +1,4 @@
-/// <reference types="@windi/style/global" />
+/// <reference types="@windijs/style/global" />
 
 import { $, em, focus, focusVisible, hover, light } from "windijs";
 

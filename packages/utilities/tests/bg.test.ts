@@ -1,7 +1,7 @@
-import { backgroundClipConfig, gradientDirectionConfig } from "@windi/config";
-import { backgroundGenericHandler, colorHandler, configHandler, createUtility } from "@windi/core";
+import { backgroundClipConfig, gradientDirectionConfig } from "@windijs/config";
+import { backgroundGenericHandler, colorHandler, configHandler, createUtility } from "@windijs/core";
 import { bg, from, to, via } from "../src/bg";
-import { percent, prop } from "@windi/helpers";
+import { percent, prop } from "@windijs/helpers";
 
 import { colors } from "../src/colors";
 

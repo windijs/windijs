@@ -1,5 +1,5 @@
-import { $ } from "@windi/helpers";
-import { style } from "@windi/style";
+import { $ } from "@windijs/helpers";
+import { style } from "@windijs/style";
 
 // TODO: fix type bundler error
 

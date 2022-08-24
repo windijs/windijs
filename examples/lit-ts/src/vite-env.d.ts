@@ -1,2 +1,2 @@
 /// <reference types="vite/client" />
-/// <reference types="@windi/style/global" />
+/// <reference types="@windijs/style/global" />

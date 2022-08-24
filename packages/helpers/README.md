@@ -1,4 +1,4 @@
-# @windi/helpers
+# @windijs/helpers
 
 Operations related to css.
 

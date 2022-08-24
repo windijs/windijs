@@ -1,4 +1,4 @@
-# @windi/config
+# @windijs/config
 
 The config variables of windi utilities. Also modular, you can import or expand the config of corresponding utility. The naming rule is `camelCased(utilityName) + Config`. For example, `backgroundSizeConfig`.
 

@@ -1,5 +1,5 @@
 import { animate } from "../src/animation";
-import { unify } from "@windi/helpers";
+import { unify } from "@windijs/helpers";
 
 test("Animation", () => {
   expect(animate.none.css).toMatchSnapshot();

@@ -1,9 +1,9 @@
 import { border, divide, outline, ring, rounded } from "../src/border";
-import { configHandler, createUtility } from "@windi/core";
+import { configHandler, createUtility } from "@windijs/core";
 
-import type { PickValue } from "@windi/helpers";
-import { opacityConfig } from "@windi/config";
-import { prop } from "@windi/helpers";
+import type { PickValue } from "@windijs/helpers";
+import { opacityConfig } from "@windijs/config";
+import { prop } from "@windijs/helpers";
 
 test("Border Radius", () => {
   expect(rounded.css).toMatchSnapshot();

@@ -1,7 +1,7 @@
 {
-  "name": "@windi/variants",
+  "name": "@windijs/variants",
   "version": "1.0.0",
-  "description": "@windi/variants",
+  "description": "@windijs/variants",
   "main": "dist/variants.js",
   "module": "dist/variants.mjs",
   "types": "dist/variants.d.ts",
@@ -15,16 +15,16 @@
   "license": "MIT",
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/variants"
+    "displayName": "@windijs/variants"
   },
   "dependencies": {
-    "@windi/core": "1.0.0",
-    "@windi/helpers": "1.0.0",
-    "@windi/shared": "1.0.0"
+    "@windijs/core": "1.0.0",
+    "@windijs/helpers": "1.0.0",
+    "@windijs/shared": "1.0.0"
   },
   "devDependencies": {
-    "@windi/colors": "1.0.0",
-    "@windi/config": "1.0.0",
-    "@windi/utilities": "1.0.0"
+    "@windijs/colors": "1.0.0",
+    "@windijs/config": "1.0.0",
+    "@windijs/utilities": "1.0.0"
   }
 }

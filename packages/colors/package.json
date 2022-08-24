@@ -1,7 +1,7 @@
 {
-  "name": "@windi/colors",
+  "name": "@windijs/colors",
   "version": "1.0.0",
-  "description": "@windi/colors",
+  "description": "@windijs/colors",
   "main": "dist/colors.js",
   "module": "dist/colors.mjs",
   "types": "dist/colors.d.ts",
@@ -13,7 +13,7 @@
   ],
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/colors"
+    "displayName": "@windijs/colors"
   },
   "author": "Raven Satir",
   "license": "MIT"

@@ -1,4 +1,4 @@
-import { range } from "@windi/shared";
+import { range } from "@windijs/shared";
 
 export const gridAutoColumnsConfig = {
   auto: "auto",

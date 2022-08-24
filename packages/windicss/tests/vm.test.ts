@@ -1,8 +1,8 @@
-import { atomic, atomicNamer, useNamer } from "@windi/helpers";
-import { bg, font, text } from "@windi/utilities";
+import { atomic, atomicNamer, useNamer } from "@windijs/helpers";
+import { bg, font, text } from "@windijs/utilities";
 
 import { Vm } from "../src";
-import { sm } from "@windi/variants";
+import { sm } from "@windijs/variants";
 
 useNamer(atomicNamer);
 const vm = new Vm(undefined, { bg, text, font, sm });

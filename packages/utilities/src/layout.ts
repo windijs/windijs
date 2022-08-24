@@ -1,7 +1,7 @@
-import { buildFlexDirection, buildFlexStretch, configHandler, createUtility, cssHandler } from "@windi/core";
-import { flexDirectionConfig, flexGrowConfig, flexShrinkConfig, flexStretchConfig, flexWrapConfig, gridAutoColumnsConfig, gridAutoFlowConfig, gridAutoRowsConfig, gridColumnConfig, gridColumnEndConfig, gridColumnStartConfig, gridRowConfig, gridRowEndConfig, gridRowStartConfig, gridTemplateColumnsConfig, gridTemplateRowsConfig, spacingConfig } from "@windi/config";
+import { buildFlexDirection, buildFlexStretch, configHandler, createUtility, cssHandler } from "@windijs/core";
+import { flexDirectionConfig, flexGrowConfig, flexShrinkConfig, flexStretchConfig, flexWrapConfig, gridAutoColumnsConfig, gridAutoFlowConfig, gridAutoRowsConfig, gridColumnConfig, gridColumnEndConfig, gridColumnStartConfig, gridRowConfig, gridRowEndConfig, gridRowStartConfig, gridTemplateColumnsConfig, gridTemplateRowsConfig, spacingConfig } from "@windijs/config";
 
-import { prop } from "@windi/helpers";
+import { prop } from "@windijs/helpers";
 
 export const flex = createUtility("flex")
   .use(cssHandler({ display: ["-webkit-box", "-ms-flexbox", "-webkit-flex", "flex"] }))

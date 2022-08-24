@@ -1,4 +1,4 @@
-import { backgroundSizeConfig, borderRadiusConfig, touchActionConfig } from "@windi/config";
+import { backgroundSizeConfig, borderRadiusConfig, touchActionConfig } from "@windijs/config";
 
 import { dtsConfig } from "../src";
 

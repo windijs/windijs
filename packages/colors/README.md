@@ -1,4 +1,4 @@
-# @windi/colors
+# @windijs/colors
 
 Colors of some popular web framework ([apple]()/[bootstrap]()/[bulma]()/[material]()/[tailwind]()/[web]()/[windi]()), you can choose the best for yourself. And also don't forget to say thanks to all these frameworks and their developers.
 

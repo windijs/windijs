@@ -1,6 +1,6 @@
-import { alignContentConfig, alignItemsConfig, alignSelfConfig, insetConfig, justifyContentConfig, justifyItemsConfig, justifySelfConfig, objectFitConfig, objectPositionConfig, placeContentConfig, placeItemsConfig, placeSelfConfig, tableDisplayConfig, zIndexConfig } from "@windi/config";
-import { bind, configHandler, createUtility } from "@windi/core";
-import { css, prop } from "@windi/helpers";
+import { alignContentConfig, alignItemsConfig, alignSelfConfig, insetConfig, justifyContentConfig, justifyItemsConfig, justifySelfConfig, objectFitConfig, objectPositionConfig, placeContentConfig, placeItemsConfig, placeSelfConfig, tableDisplayConfig, zIndexConfig } from "@windijs/config";
+import { bind, configHandler, createUtility } from "@windijs/core";
+import { css, prop } from "@windijs/helpers";
 
 import { stylePropertyHandler } from "../src/handler";
 

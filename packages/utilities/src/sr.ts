@@ -1,4 +1,4 @@
-import { createUtility, cssHandler } from "@windi/core";
+import { createUtility, cssHandler } from "@windijs/core";
 
 export const sr = createUtility("sr")
   .case("only", cssHandler({

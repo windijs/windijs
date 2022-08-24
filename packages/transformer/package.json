@@ -1,7 +1,7 @@
 {
-  "name": "@windi/transformer",
+  "name": "@windijs/transformer",
   "version": "1.0.0",
-  "description": "@windi/transformer",
+  "description": "@windijs/transformer",
   "main": "dist/transformer.js",
   "module": "dist/transformer.mjs",
   "types": "dist/transformer.d.ts",
@@ -15,7 +15,7 @@
   "license": "MIT",
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/transformer",
+    "displayName": "@windijs/transformer",
     "readmeFile": "./README.md"
   },
   "dependencies": {

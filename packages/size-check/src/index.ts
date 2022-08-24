@@ -1,6 +1,6 @@
-import { configHandler, createUtility } from "@windi/core";
+import { configHandler, createUtility } from "@windijs/core";
 
-import { paddingConfig } from "@windi/config";
+import { paddingConfig } from "@windijs/config";
 
 export const p = createUtility("p")
   .use(configHandler(paddingConfig, "padding"))

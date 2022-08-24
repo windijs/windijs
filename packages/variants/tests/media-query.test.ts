@@ -1,7 +1,7 @@
 import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, rtl, sm, xl, xxl } from "../src/mediaQuery";
 
-import { bg } from "@windi/utilities";
-import { bundle } from "@windi/helpers";
+import { bg } from "@windijs/utilities";
+import { bundle } from "@windijs/helpers";
 
 const utilities = [bg.blue[500], bg.clip.content];
 

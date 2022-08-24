@@ -1,8 +1,8 @@
-import { configHandler, createUtility } from "@windi/core";
+import { configHandler, createUtility } from "@windijs/core";
 import { m, mb, ml, mr, mt, mx, my, p, pb, pl, pr, pt, px, py, space } from "../src/spacing";
-import { marginConfig, paddingConfig } from "@windi/config";
+import { marginConfig, paddingConfig } from "@windijs/config";
 
-import { unify } from "@windi/helpers";
+import { unify } from "@windijs/helpers";
 
 test("Padding Combined", () => {
   const p = createUtility("p")

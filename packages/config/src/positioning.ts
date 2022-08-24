@@ -1,4 +1,4 @@
-import { fractions, negative } from "@windi/shared";
+import { fractions, negative } from "@windijs/shared";
 
 import { spacingConfig } from "./spacing";
 

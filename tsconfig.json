@@ -14,7 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "paths": {
-      "@windi/*": ["packages/*/src"],
+      "@windijs/*": ["packages/*/src"],
     }
   },
   "include": [

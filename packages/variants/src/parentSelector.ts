@@ -1,4 +1,4 @@
-import { createVariant } from "@windi/core";
+import { createVariant } from "@windijs/core";
 
 /**
  * Targets an element when a marked parent matches the hover pseudo-class.

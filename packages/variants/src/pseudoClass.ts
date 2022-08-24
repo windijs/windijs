@@ -1,7 +1,7 @@
-import type { VariantBuilder } from "@windi/helpers";
-import { camelToDash } from "@windi/shared";
-import { createVariant } from "@windi/core";
-import { useProxy } from "@windi/helpers";
+import type { VariantBuilder } from "@windijs/helpers";
+import { camelToDash } from "@windijs/shared";
+import { createVariant } from "@windijs/core";
+import { useProxy } from "@windijs/helpers";
 
 // TODO: the document of variants need to be improved.
 

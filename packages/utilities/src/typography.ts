@@ -1,9 +1,9 @@
-import { boxDecorationBreakConfig, fontFamilyConfig, fontSizeConfig, fontStyleConfig, fontVariantNumericConfig, fontWeightConfig, hyphensConfig, letterSpacingConfig, lineHeightConfig, opacityConfig, tabSizeConfig, textAlignConfig, textDecorationOffsetConfig, textDecorationStyleConfig, textDecorationThicknessConfig, textDecorationTypeConfig, textIndentConfig, textShadowConfig, textStrokeWidthConfig, textTransformConfig, verticalAlignConfig, whiteSpaceConfig, writingModeConfig, writingOrientationConfig } from "@windi/config";
-import { buildWritingMode, colorHandler, configHandler, createUtility, cssHandler, fontFamilyHandler, fontSizeHandler, guard, meld, pxHandler } from "@windi/core";
+import { boxDecorationBreakConfig, fontFamilyConfig, fontSizeConfig, fontStyleConfig, fontVariantNumericConfig, fontWeightConfig, hyphensConfig, letterSpacingConfig, lineHeightConfig, opacityConfig, tabSizeConfig, textAlignConfig, textDecorationOffsetConfig, textDecorationStyleConfig, textDecorationThicknessConfig, textDecorationTypeConfig, textIndentConfig, textShadowConfig, textStrokeWidthConfig, textTransformConfig, verticalAlignConfig, whiteSpaceConfig, writingModeConfig, writingOrientationConfig } from "@windijs/config";
+import { buildWritingMode, colorHandler, configHandler, createUtility, cssHandler, fontFamilyHandler, fontSizeHandler, guard, meld, pxHandler } from "@windijs/core";
 
-import type { StyleObject } from "@windi/helpers";
+import type { StyleObject } from "@windijs/helpers";
 import { colors } from "./colors";
-import { prop } from "@windi/helpers";
+import { prop } from "@windijs/helpers";
 
 export const font = createUtility("font")
   .case("normal", cssHandler({ fontStyle: "normal", fontWeight: fontWeightConfig.normal }))

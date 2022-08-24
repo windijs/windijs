@@ -1,6 +1,6 @@
-import { atomic, atomicNamer, hashNamer, unify, useNamer } from "@windi/helpers";
-import { bg, border, rounded, text } from "@windi/utilities";
-import { dark, hover, sm } from "@windi/variants";
+import { atomic, atomicNamer, hashNamer, unify, useNamer } from "@windijs/helpers";
+import { bg, border, rounded, text } from "@windijs/utilities";
+import { dark, hover, sm } from "@windijs/variants";
 
 test("unify with utilities", () => {
   expect(unify(".test", bg.blue[500], text.lg, sm(border, rounded, bg.blue[400]))).toMatchSnapshot();

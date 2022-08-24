@@ -77,61 +77,61 @@ importers:
 
   packages/config:
     specifiers:
-      '@windi/shared': 1.0.0
+      '@windijs/shared': 1.0.0
     dependencies:
-      '@windi/shared': link:../shared
+      '@windijs/shared': link:../shared
 
   packages/core:
     specifiers:
-      '@windi/config': 1.0.0
-      '@windi/helpers': 1.0.0
-      '@windi/shared': 1.0.0
-      '@windi/utilities': 1.0.0
+      '@windijs/config': 1.0.0
+      '@windijs/helpers': 1.0.0
+      '@windijs/shared': 1.0.0
+      '@windijs/utilities': 1.0.0
     dependencies:
-      '@windi/helpers': link:../helpers
-      '@windi/shared': link:../shared
+      '@windijs/helpers': link:../helpers
+      '@windijs/shared': link:../shared
     devDependencies:
-      '@windi/config': link:../config
-      '@windi/utilities': link:../utilities
+      '@windijs/config': link:../config
+      '@windijs/utilities': link:../utilities
 
   packages/helpers:
     specifiers:
-      '@windi/helpers': 1.0.0
-      '@windi/shared': 1.0.0
-      '@windi/style': 1.0.0
-      '@windi/utilities': 1.0.0
-      '@windi/variants': 1.0.0
+      '@windijs/helpers': 1.0.0
+      '@windijs/shared': 1.0.0
+      '@windijs/style': 1.0.0
+      '@windijs/utilities': 1.0.0
+      '@windijs/variants': 1.0.0
     dependencies:
-      '@windi/shared': link:../shared
+      '@windijs/shared': link:../shared
     devDependencies:
-      '@windi/helpers': 'link:'
-      '@windi/style': link:../style
-      '@windi/utilities': link:../utilities
-      '@windi/variants': link:../variants
+      '@windijs/helpers': 'link:'
+      '@windijs/style': link:../style
+      '@windijs/utilities': link:../utilities
+      '@windijs/variants': link:../variants
 
   packages/shared:
     specifiers:
-      '@windi/config': 1.0.0
+      '@windijs/config': 1.0.0
     devDependencies:
-      '@windi/config': link:../config
+      '@windijs/config': link:../config
 
   packages/size-check:
     specifiers: {}
 
   packages/style:
     specifiers:
-      '@windi/colors': 1.0.0
-      '@windi/config': 1.0.0
-      '@windi/core': 1.0.0
-      '@windi/helpers': 1.0.0
-      '@windi/shared': 1.0.0
+      '@windijs/colors': 1.0.0
+      '@windijs/config': 1.0.0
+      '@windijs/core': 1.0.0
+      '@windijs/helpers': 1.0.0
+      '@windijs/shared': 1.0.0
     dependencies:
-      '@windi/core': link:../core
-      '@windi/helpers': link:../helpers
-      '@windi/shared': link:../shared
+      '@windijs/core': link:../core
+      '@windijs/helpers': link:../helpers
+      '@windijs/shared': link:../shared
     devDependencies:
-      '@windi/colors': link:../colors
-      '@windi/config': link:../config
+      '@windijs/colors': link:../colors
+      '@windijs/config': link:../config
 
   packages/transformer:
     specifiers:
@@ -143,72 +143,72 @@ importers:
 
   packages/utilities:
     specifiers:
-      '@windi/colors': 1.0.0
-      '@windi/config': 1.0.0
-      '@windi/core': 1.0.0
-      '@windi/helpers': 1.0.0
+      '@windijs/colors': 1.0.0
+      '@windijs/config': 1.0.0
+      '@windijs/core': 1.0.0
+      '@windijs/helpers': 1.0.0
     dependencies:
-      '@windi/colors': link:../colors
-      '@windi/config': link:../config
-      '@windi/core': link:../core
-      '@windi/helpers': link:../helpers
+      '@windijs/colors': link:../colors
+      '@windijs/config': link:../config
+      '@windijs/core': link:../core
+      '@windijs/helpers': link:../helpers
 
   packages/variants:
     specifiers:
-      '@windi/colors': 1.0.0
-      '@windi/config': 1.0.0
-      '@windi/core': 1.0.0
-      '@windi/helpers': 1.0.0
-      '@windi/shared': 1.0.0
-      '@windi/utilities': 1.0.0
+      '@windijs/colors': 1.0.0
+      '@windijs/config': 1.0.0
+      '@windijs/core': 1.0.0
+      '@windijs/helpers': 1.0.0
+      '@windijs/shared': 1.0.0
+      '@windijs/utilities': 1.0.0
     dependencies:
-      '@windi/core': link:../core
-      '@windi/helpers': link:../helpers
-      '@windi/shared': link:../shared
+      '@windijs/core': link:../core
+      '@windijs/helpers': link:../helpers
+      '@windijs/shared': link:../shared
     devDependencies:
-      '@windi/colors': link:../colors
-      '@windi/config': link:../config
-      '@windi/utilities': link:../utilities
+      '@windijs/colors': link:../colors
+      '@windijs/config': link:../config
+      '@windijs/utilities': link:../utilities
 
   packages/windicss:
     specifiers:
-      '@windi/colors': 1.0.0
-      '@windi/config': 1.0.0
-      '@windi/core': 1.0.0
-      '@windi/helpers': 1.0.0
-      '@windi/shared': 1.0.0
-      '@windi/style': 1.0.0
-      '@windi/utilities': 1.0.0
-      '@windi/variants': 1.0.0
+      '@windijs/colors': 1.0.0
+      '@windijs/config': 1.0.0
+      '@windijs/core': 1.0.0
+      '@windijs/helpers': 1.0.0
+      '@windijs/shared': 1.0.0
+      '@windijs/style': 1.0.0
+      '@windijs/utilities': 1.0.0
+      '@windijs/variants': 1.0.0
     dependencies:
-      '@windi/colors': link:../colors
-      '@windi/config': link:../config
-      '@windi/core': link:../core
-      '@windi/helpers': link:../helpers
-      '@windi/shared': link:../shared
-      '@windi/style': link:../style
-      '@windi/utilities': link:../utilities
-      '@windi/variants': link:../variants
+      '@windijs/colors': link:../colors
+      '@windijs/config': link:../config
+      '@windijs/core': link:../core
+      '@windijs/helpers': link:../helpers
+      '@windijs/shared': link:../shared
+      '@windijs/style': link:../style
+      '@windijs/utilities': link:../utilities
+      '@windijs/variants': link:../variants
 
   packages/windijs:
     specifiers:
-      '@windi/colors': 1.0.0
-      '@windi/config': 1.0.0
-      '@windi/core': 1.0.0
-      '@windi/helpers': 1.0.0
-      '@windi/shared': 1.0.0
-      '@windi/style': 1.0.0
-      '@windi/utilities': 1.0.0
-      '@windi/variants': 1.0.0
+      '@windijs/colors': 1.0.0
+      '@windijs/config': 1.0.0
+      '@windijs/core': 1.0.0
+      '@windijs/helpers': 1.0.0
+      '@windijs/shared': 1.0.0
+      '@windijs/style': 1.0.0
+      '@windijs/utilities': 1.0.0
+      '@windijs/variants': 1.0.0
     dependencies:
-      '@windi/colors': link:../colors
-      '@windi/config': link:../config
-      '@windi/core': link:../core
-      '@windi/helpers': link:../helpers
-      '@windi/shared': link:../shared
-      '@windi/style': link:../style
-      '@windi/utilities': link:../utilities
-      '@windi/variants': link:../variants
+      '@windijs/colors': link:../colors
+      '@windijs/config': link:../config
+      '@windijs/core': link:../core
+      '@windijs/helpers': link:../helpers
+      '@windijs/shared': link:../shared
+      '@windijs/style': link:../style
+      '@windijs/utilities': link:../utilities
+      '@windijs/variants': link:../variants
 
 packages:
 

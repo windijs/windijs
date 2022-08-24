@@ -1,7 +1,7 @@
 {
-  "name": "@windi/utilities",
+  "name": "@windijs/utilities",
   "version": "1.0.0",
-  "description": "@windi/utilities",
+  "description": "@windijs/utilities",
   "main": "dist/utilities.js",
   "module": "dist/utilities.mjs",
   "types": "dist/utilities.d.ts",
@@ -25,14 +25,14 @@
   ],
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/utilities"
+    "displayName": "@windijs/utilities"
   },
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windi/core": "1.0.0",
-    "@windi/colors": "1.0.0",
-    "@windi/config": "1.0.0",
-    "@windi/helpers": "1.0.0"
+    "@windijs/core": "1.0.0",
+    "@windijs/colors": "1.0.0",
+    "@windijs/config": "1.0.0",
+    "@windijs/helpers": "1.0.0"
   }
 }

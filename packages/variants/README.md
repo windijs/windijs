@@ -1,4 +1,4 @@
-# @windi/variants
+# @windijs/variants
 
 All windi variants.
 

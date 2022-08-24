@@ -1,8 +1,8 @@
 import { backgroundGenericHandler, colorHandler, configHandler, createUtility, guard, meld } from "../src";
-import { borderWidthConfig, opacityConfig } from "@windi/config";
+import { borderWidthConfig, opacityConfig } from "@windijs/config";
 
-import { colors } from "@windi/utilities";
-import { prop } from "@windi/helpers";
+import { colors } from "@windijs/utilities";
+import { prop } from "@windijs/helpers";
 
 test("Color Meta", () => {
   const bg = createUtility("bg")

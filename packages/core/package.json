@@ -1,7 +1,7 @@
 {
-  "name": "@windi/core",
+  "name": "@windijs/core",
   "version": "1.0.0",
-  "description": "@windi/core",
+  "description": "@windijs/core",
   "main": "dist/core.js",
   "module": "dist/core.mjs",
   "types": "dist/core.d.ts",
@@ -14,15 +14,15 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windi/shared": "1.0.0",
-    "@windi/helpers": "1.0.0"
+    "@windijs/shared": "1.0.0",
+    "@windijs/helpers": "1.0.0"
   },
   "devDependencies": {
-    "@windi/utilities": "1.0.0",
-    "@windi/config": "1.0.0"
+    "@windijs/utilities": "1.0.0",
+    "@windijs/config": "1.0.0"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/core"
+    "displayName": "@windijs/core"
   }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "@windi/style",
+  "name": "@windijs/style",
   "version": "1.0.0",
-  "description": "@windi/style",
+  "description": "@windijs/style",
   "main": "dist/style.js",
   "module": "dist/style.mjs",
   "types": "dist/style.d.ts",
@@ -12,17 +12,17 @@
     "windi"
   ],
   "dependencies": {
-    "@windi/core": "1.0.0",
-    "@windi/helpers": "1.0.0",
-    "@windi/shared": "1.0.0"
+    "@windijs/core": "1.0.0",
+    "@windijs/helpers": "1.0.0",
+    "@windijs/shared": "1.0.0"
   },
   "devDependencies": {
-    "@windi/config": "1.0.0",
-    "@windi/colors": "1.0.0"
+    "@windijs/config": "1.0.0",
+    "@windijs/colors": "1.0.0"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/style",
+    "displayName": "@windijs/style",
     "readmeFile": "./README.md"
   },
   "author": "Raven Satir",

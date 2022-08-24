@@ -1,4 +1,4 @@
-import { buildContainer } from "@windi/core";
-import { screens } from "@windi/config";
+import { buildContainer } from "@windijs/core";
+import { screens } from "@windijs/config";
 
 export const container = buildContainer(screens);

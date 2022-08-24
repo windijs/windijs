@@ -1,5 +1,5 @@
 import type { CSSAlphaValue, CSSAngle, CSSAttributeType, CSSBorderRadiusItem, CSSFillRule, CSSFunctions, CSSLength, CSSLengthPercentage, CSSPercentage, CSSPosition } from "./types";
-import { camelToDash, parenWrap } from "@windi/shared";
+import { camelToDash, parenWrap } from "@windijs/shared";
 
 import { useProxy } from "./proxy";
 

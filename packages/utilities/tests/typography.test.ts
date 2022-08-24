@@ -1,4 +1,4 @@
-import { createUtility, fontSizeHandler } from "@windi/core";
+import { createUtility, fontSizeHandler } from "@windijs/core";
 import { decoration, font, hyphens, indent, leading, tab, text, tracking, write } from "../src/typography";
 
 test("Font Family", () => {

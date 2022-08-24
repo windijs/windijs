@@ -1,4 +1,4 @@
-import { createVariant } from "@windi/core";
+import { createVariant } from "@windijs/core";
 
 /**
  * Targets svg nodes.

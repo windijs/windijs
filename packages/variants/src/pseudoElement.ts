@@ -1,4 +1,4 @@
-import { createVariant } from "@windi/core";
+import { createVariant } from "@windijs/core";
 
 /**
  * Represents a styleable child pseudo-element immediately after the originating element’s actual content.

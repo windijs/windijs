@@ -1,4 +1,4 @@
-import { SymbolProxy, resetMeta } from "@windi/helpers";
+import { SymbolProxy, resetMeta } from "@windijs/helpers";
 
 import { guard } from "./api";
 

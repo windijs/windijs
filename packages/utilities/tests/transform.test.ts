@@ -1,4 +1,4 @@
-import { deg, rem } from "@windi/helpers";
+import { deg, rem } from "@windijs/helpers";
 import { origin, perspect, preserve, rotate, scale, skew, transform, translate } from "../src/transform";
 
 test("Rotate", () => {

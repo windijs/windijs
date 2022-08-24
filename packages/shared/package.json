@@ -1,7 +1,7 @@
 {
-  "name": "@windi/shared",
+  "name": "@windijs/shared",
   "version": "1.0.0",
-  "description": "@windi/shared",
+  "description": "@windijs/shared",
   "main": "dist/shared.js",
   "module": "dist/shared.mjs",
   "types": "dist/shared.d.ts",
@@ -13,11 +13,11 @@
   ],
   "typedoc": {
     "entryPoint": "./src/index.ts",
-    "displayName": "@windi/shared",
+    "displayName": "@windijs/shared",
     "readmeFile": "./README.md"
   },
   "devDependencies": {
-    "@windi/config": "1.0.0"
+    "@windijs/config": "1.0.0"
   },
   "author": "Raven Satir",
   "license": "MIT"

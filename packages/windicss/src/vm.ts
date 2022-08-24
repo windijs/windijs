@@ -1,6 +1,6 @@
 import { Expression, Parser, ParserOptions, Value } from "expr-eval";
 
-import { StyleObject } from "@windi/helpers";
+import { StyleObject } from "@windijs/helpers";
 
 type WindiExpression = Expression & { eval(ctx?: Value | undefined): StyleObject[] };
 
