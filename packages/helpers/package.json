@@ -18,7 +18,7 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/shared": "1.0.0-beta.0"
+    "@windijs/shared": "1.0.0"
   },
   "devDependencies": {
     "@windijs/utilities": "1.0.0-beta.0",
