@@ -9,7 +9,11 @@
     "dist"
   ],
   "keywords": [
-    "windi"
+    "css",
+    "css-in-js",
+    "windi",
+    "windijs",
+    "windicss"
   ],
   "dependencies": {
     "@windijs/core": "1.0.0",

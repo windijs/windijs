@@ -21,7 +21,11 @@
     "dist"
   ],
   "keywords": [
-    "windi"
+    "css",
+    "css-in-js",
+    "windi",
+    "windijs",
+    "windicss"
   ],
   "typedoc": {
     "entryPoint": "./src/index.ts",

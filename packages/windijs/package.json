@@ -8,6 +8,13 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "css",
+    "css-in-js",
+    "windi",
+    "windijs",
+    "windicss"
+  ],
   "author": "Raven Satir",
   "license": "MIT",
   "typedoc": {

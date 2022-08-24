@@ -9,7 +9,9 @@
     "dist"
   ],
   "keywords": [
-    "windi"
+    "typescript",
+    "transformer",
+    "windijs"
   ],
   "author": "Raven Satir",
   "license": "MIT",
