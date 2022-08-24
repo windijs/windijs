@@ -1,6 +1,6 @@
 {
   "name": "@windi/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "@windi/core",
   "main": "dist/core.js",
   "module": "dist/core.mjs",
@@ -18,7 +18,7 @@
     "@windi/helpers": "1.0.0"
   },
   "devDependencies": {
-    "@windi/utilities": "1.0.0",
+    "@windi/utilities": "1.0.1",
     "@windi/config": "1.0.0"
   },
   "typedoc": {

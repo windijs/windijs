@@ -1,6 +1,6 @@
 {
   "name": "@windi/style",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "@windi/style",
   "main": "dist/style.js",
   "module": "dist/style.mjs",
@@ -12,13 +12,13 @@
     "windi"
   ],
   "dependencies": {
-    "@windi/core": "1.0.0",
+    "@windi/core": "1.0.1",
     "@windi/helpers": "1.0.0",
     "@windi/shared": "1.0.0"
   },
   "devDependencies": {
     "@windi/config": "1.0.0",
-    "@windi/colors": "1.0.0"
+    "@windi/colors": "1.0.1"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

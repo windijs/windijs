@@ -1,0 +1,167 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.discoverMissingExports = exports.load = void 0;
+const typedoc_1 = require("typedoc");
+function load(app) {
+    const knownPrograms = new Map();
+    app.options.addDeclaration({
+        name: 'internalNamespace',
+        help: 'Define the name of the namespace that internal symbols which are not exported should be placed into.',
+        type: typedoc_1.ParameterType.String,
+        defaultValue: 'internal',
+    });
+    app.options.addDeclaration({
+        name: 'noMissingExports',
+        type: typedoc_1.ParameterType.Boolean,
+        help: 'Disabling missing export the plugin will only create links between exported Types',
+        defaultValue: false,
+    });
+    app.converter.on(typedoc_1.Converter.EVENT_CREATE_DECLARATION, (context) => {
+        if (context.scope.kindOf(typedoc_1.ReflectionKind.Project | typedoc_1.ReflectionKind.Module)) {
+            knownPrograms.set(context.scope, context.program);
+        }
+    });
+    app.converter.on(typedoc_1.Converter.EVENT_RESOLVE_BEGIN, onResolveBegin.bind(void 0, knownPrograms), void 0, 1e9);
+}
+exports.load = load;
+function onResolveBegin(knownPrograms, context) {
+    var _a;
+    const modules = context.project.getChildrenByKind(typedoc_1.ReflectionKind.Module);
+    if (modules.length === 0) {
+        modules.push(context.project);
+    }
+    const internalNamespace = context.converter.application.options.getValue('internalNamespace');
+    const noMissingExports = context.converter.application.options.getValue('noMissingExports');
+    const getModule = (ref) => {
+        return modules.find((mod) => {
+            return mod.getChildrenByKind(ref.kind).find((d) => d.id === ref.id);
+        });
+    };
+    for (const mod of modules) {
+        let missing = discoverMissingExports(mod);
+        if (missing.size === 0)
+            continue;
+        let internalContext;
+        const createInternalContext = () => {
+            if (internalContext)
+                return internalContext;
+            context.setActiveProgram(knownPrograms.get(mod));
+            const internalNs = context
+                .withScope(mod)
+                .createDeclarationReflection(typedoc_1.ReflectionKind.Namespace, undefined, undefined, internalNamespace);
+            context.finalizeDeclarationReflection(internalNs);
+            return (internalContext = {
+                internalContext: context.withScope(internalNs),
+                reflection: internalNs,
+            });
+        };
+        const tried = new Set();
+        do {
+            for (const m of missing) {
+                tried.add(m);
+                if (m.name === 'default')
+                    continue;
+                const ref = context.scope.findReflectionByName(m.name);
+                if (ref) {
+                    const modCtx = getModule(ref);
+                    if (modCtx) {
+                        context.withScope(modCtx).registerReflection(ref, m);
+                    }
+                    continue;
+                }
+                if (noMissingExports)
+                    continue;
+                const { internalContext } = createInternalContext();
+                internalContext.converter.convertSymbol(internalContext, m);
+            }
+            // If missing exported is disable no need to go recursive
+            if (!noMissingExports) {
+                const { reflection } = createInternalContext();
+                missing = discoverMissingExports(reflection);
+            }
+            for (const s of tried) {
+                missing.delete(s);
+            }
+        } while (missing.size > 0);
+        const { reflection } = createInternalContext();
+        //  TODO: Maybe its a problem on future
+        //  @ts-ignore
+        if (!((_a = reflection === null || reflection === void 0 ? void 0 : reflection.children) === null || _a === void 0 ? void 0 : _a.length)) {
+            context.project.removeReflection(reflection);
+        }
+        context.setActiveProgram(void 0);
+    }
+    knownPrograms.clear();
+}
+function discoverMissingExports(root) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+    // This code was copy from other plugin, thanks for the help
+    // https://github.com/Gerrit0/typedoc-plugin-missing-exports
+    const missing = new Set();
+    const queue = [];
+    let current = root;
+    const visitor = (0, typedoc_1.makeRecursiveVisitor)({
+        reference(type) {
+            if (!type.reflection) {
+                const symbol = type.getSymbol();
+                if (symbol) {
+                    missing.add(symbol);
+                }
+            }
+        },
+        reflection(type) {
+            queue.push(type.declaration);
+        },
+    });
+    const add = (item) => {
+        if (!item)
+            return;
+        if (item instanceof typedoc_1.Reflection) {
+            queue.push(item);
+        }
+        else {
+            queue.push(...item);
+        }
+    };
+    do {
+        // Ugly? Yeah, it is. TypeDoc doesn't have a "visit all types" function,
+        // so we have to build our own. This is modeled after the one in
+        // https://github.com/TypeStrong/typedoc/blob/beta/src/lib/validation/exports.ts
+        if (current instanceof typedoc_1.ContainerReflection) {
+            add(current.children);
+        }
+        if (current instanceof typedoc_1.DeclarationReflection) {
+            (_a = current.type) === null || _a === void 0 ? void 0 : _a.visit(visitor);
+            add(current.typeParameters);
+            add(current.signatures);
+            add(current.indexSignature);
+            add(current.getSignature);
+            add(current.setSignature);
+            (_b = current.overwrites) === null || _b === void 0 ? void 0 : _b.visit(visitor);
+            (_c = current.inheritedFrom) === null || _c === void 0 ? void 0 : _c.visit(visitor);
+            (_d = current.implementationOf) === null || _d === void 0 ? void 0 : _d.visit(visitor);
+            (_e = current.extendedTypes) === null || _e === void 0 ? void 0 : _e.forEach((type) => type.visit(visitor));
+            // do not validate extendedBy, guaranteed to all be in the documentation.
+            (_f = current.implementedTypes) === null || _f === void 0 ? void 0 : _f.forEach((type) => type.visit(visitor));
+            // do not validate implementedBy, guaranteed to all be in the documentation.
+        }
+        if (current instanceof typedoc_1.SignatureReflection) {
+            add(current.parameters);
+            add(current.typeParameters);
+            (_g = current.type) === null || _g === void 0 ? void 0 : _g.visit(visitor);
+            (_h = current.overwrites) === null || _h === void 0 ? void 0 : _h.visit(visitor);
+            (_j = current.inheritedFrom) === null || _j === void 0 ? void 0 : _j.visit(visitor);
+            (_k = current.implementationOf) === null || _k === void 0 ? void 0 : _k.visit(visitor);
+        }
+        if (current instanceof typedoc_1.ParameterReflection) {
+            (_l = current.type) === null || _l === void 0 ? void 0 : _l.visit(visitor);
+        }
+        if (current instanceof typedoc_1.TypeParameterReflection) {
+            (_m = current.type) === null || _m === void 0 ? void 0 : _m.visit(visitor);
+            (_o = current.default) === null || _o === void 0 ? void 0 : _o.visit(visitor);
+        }
+    } while ((current = queue.shift()));
+    return missing;
+}
+exports.discoverMissingExports = discoverMissingExports;
+//# sourceMappingURL=index.js.map

@@ -1,6 +1,6 @@
 {
   "name": "@windi/variants",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "@windi/variants",
   "main": "dist/variants.js",
   "module": "dist/variants.mjs",
@@ -18,13 +18,13 @@
     "displayName": "@windi/variants"
   },
   "dependencies": {
-    "@windi/core": "1.0.0",
+    "@windi/core": "1.0.1",
     "@windi/helpers": "1.0.0",
     "@windi/shared": "1.0.0"
   },
   "devDependencies": {
-    "@windi/colors": "1.0.0",
+    "@windi/colors": "1.0.1",
     "@windi/config": "1.0.0",
-    "@windi/utilities": "1.0.0"
+    "@windi/utilities": "1.0.1"
   }
 }

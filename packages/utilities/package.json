@@ -1,6 +1,6 @@
 {
   "name": "@windi/utilities",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "@windi/utilities",
   "main": "dist/utilities.js",
   "module": "dist/utilities.mjs",
@@ -30,8 +30,8 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windi/core": "1.0.0",
-    "@windi/colors": "1.0.0",
+    "@windi/core": "1.0.1",
+    "@windi/colors": "1.0.1",
     "@windi/config": "1.0.0",
     "@windi/helpers": "1.0.0"
   }

@@ -1,0 +1,40 @@
+{
+  "name": "typedoc-monorepo-link-types",
+  "version": "0.0.4",
+  "author": "Luiz Estácio",
+  "description": "Create cross package links and include non-exported types",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/luizstacio/typedoc-monorepo-link-types#readme",
+  "bugs": {
+    "url": "https://github.com/luizstacio/typedoc-monorepo-link-types/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luizstacio/typedoc-monorepo-link-types.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prettier-format": "prettier --write src"
+  },
+  "keywords": [
+    "typedocplugin",
+    "packages",
+    "monorepo",
+    "lerna",
+    "typedoc"
+  ],
+  "peerDependencies": {
+    "typedoc": "0.23.x"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "prettier": "^2.4.1",
+    "typedoc": "^0.23.0",
+    "typescript": "^4.7.4"
+  }
+}

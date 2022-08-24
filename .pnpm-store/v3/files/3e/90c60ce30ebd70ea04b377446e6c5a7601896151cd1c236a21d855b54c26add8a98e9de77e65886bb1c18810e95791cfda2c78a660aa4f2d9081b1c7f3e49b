@@ -1,0 +1,2281 @@
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined")
+    return require.apply(this, arguments);
+  throw new Error('Dynamic require of "' + x + '" is not supported');
+});
+var __objRest = (source, exclude) => {
+  var target = {};
+  for (var prop in source)
+    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
+      target[prop] = source[prop];
+  if (source != null && __getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(source)) {
+      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
+        target[prop] = source[prop];
+    }
+  return target;
+};
+var __esm = (fn, res) => function __init() {
+  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+};
+var __commonJS = (cb, mod) => function __require2() {
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+var __reExport = (target, module, copyDefault, desc) => {
+  if (module && typeof module === "object" || typeof module === "function") {
+    for (let key of __getOwnPropNames(module))
+      if (!__hasOwnProp.call(target, key) && (copyDefault || key !== "default"))
+        __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
+  }
+  return target;
+};
+var __toESM = (module, isNodeMode) => {
+  return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", !isNodeMode && module && module.__esModule ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
+};
+
+// node_modules/.pnpm/tsup@5.11.9_typescript@4.5.4/node_modules/tsup/assets/esm_shims.js
+var init_esm_shims = __esm({
+  "node_modules/.pnpm/tsup@5.11.9_typescript@4.5.4/node_modules/tsup/assets/esm_shims.js"() {
+  }
+});
+
+// node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js
+var require_color_name = __commonJS({
+  "node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    module.exports = {
+      "aliceblue": [240, 248, 255],
+      "antiquewhite": [250, 235, 215],
+      "aqua": [0, 255, 255],
+      "aquamarine": [127, 255, 212],
+      "azure": [240, 255, 255],
+      "beige": [245, 245, 220],
+      "bisque": [255, 228, 196],
+      "black": [0, 0, 0],
+      "blanchedalmond": [255, 235, 205],
+      "blue": [0, 0, 255],
+      "blueviolet": [138, 43, 226],
+      "brown": [165, 42, 42],
+      "burlywood": [222, 184, 135],
+      "cadetblue": [95, 158, 160],
+      "chartreuse": [127, 255, 0],
+      "chocolate": [210, 105, 30],
+      "coral": [255, 127, 80],
+      "cornflowerblue": [100, 149, 237],
+      "cornsilk": [255, 248, 220],
+      "crimson": [220, 20, 60],
+      "cyan": [0, 255, 255],
+      "darkblue": [0, 0, 139],
+      "darkcyan": [0, 139, 139],
+      "darkgoldenrod": [184, 134, 11],
+      "darkgray": [169, 169, 169],
+      "darkgreen": [0, 100, 0],
+      "darkgrey": [169, 169, 169],
+      "darkkhaki": [189, 183, 107],
+      "darkmagenta": [139, 0, 139],
+      "darkolivegreen": [85, 107, 47],
+      "darkorange": [255, 140, 0],
+      "darkorchid": [153, 50, 204],
+      "darkred": [139, 0, 0],
+      "darksalmon": [233, 150, 122],
+      "darkseagreen": [143, 188, 143],
+      "darkslateblue": [72, 61, 139],
+      "darkslategray": [47, 79, 79],
+      "darkslategrey": [47, 79, 79],
+      "darkturquoise": [0, 206, 209],
+      "darkviolet": [148, 0, 211],
+      "deeppink": [255, 20, 147],
+      "deepskyblue": [0, 191, 255],
+      "dimgray": [105, 105, 105],
+      "dimgrey": [105, 105, 105],
+      "dodgerblue": [30, 144, 255],
+      "firebrick": [178, 34, 34],
+      "floralwhite": [255, 250, 240],
+      "forestgreen": [34, 139, 34],
+      "fuchsia": [255, 0, 255],
+      "gainsboro": [220, 220, 220],
+      "ghostwhite": [248, 248, 255],
+      "gold": [255, 215, 0],
+      "goldenrod": [218, 165, 32],
+      "gray": [128, 128, 128],
+      "green": [0, 128, 0],
+      "greenyellow": [173, 255, 47],
+      "grey": [128, 128, 128],
+      "honeydew": [240, 255, 240],
+      "hotpink": [255, 105, 180],
+      "indianred": [205, 92, 92],
+      "indigo": [75, 0, 130],
+      "ivory": [255, 255, 240],
+      "khaki": [240, 230, 140],
+      "lavender": [230, 230, 250],
+      "lavenderblush": [255, 240, 245],
+      "lawngreen": [124, 252, 0],
+      "lemonchiffon": [255, 250, 205],
+      "lightblue": [173, 216, 230],
+      "lightcoral": [240, 128, 128],
+      "lightcyan": [224, 255, 255],
+      "lightgoldenrodyellow": [250, 250, 210],
+      "lightgray": [211, 211, 211],
+      "lightgreen": [144, 238, 144],
+      "lightgrey": [211, 211, 211],
+      "lightpink": [255, 182, 193],
+      "lightsalmon": [255, 160, 122],
+      "lightseagreen": [32, 178, 170],
+      "lightskyblue": [135, 206, 250],
+      "lightslategray": [119, 136, 153],
+      "lightslategrey": [119, 136, 153],
+      "lightsteelblue": [176, 196, 222],
+      "lightyellow": [255, 255, 224],
+      "lime": [0, 255, 0],
+      "limegreen": [50, 205, 50],
+      "linen": [250, 240, 230],
+      "magenta": [255, 0, 255],
+      "maroon": [128, 0, 0],
+      "mediumaquamarine": [102, 205, 170],
+      "mediumblue": [0, 0, 205],
+      "mediumorchid": [186, 85, 211],
+      "mediumpurple": [147, 112, 219],
+      "mediumseagreen": [60, 179, 113],
+      "mediumslateblue": [123, 104, 238],
+      "mediumspringgreen": [0, 250, 154],
+      "mediumturquoise": [72, 209, 204],
+      "mediumvioletred": [199, 21, 133],
+      "midnightblue": [25, 25, 112],
+      "mintcream": [245, 255, 250],
+      "mistyrose": [255, 228, 225],
+      "moccasin": [255, 228, 181],
+      "navajowhite": [255, 222, 173],
+      "navy": [0, 0, 128],
+      "oldlace": [253, 245, 230],
+      "olive": [128, 128, 0],
+      "olivedrab": [107, 142, 35],
+      "orange": [255, 165, 0],
+      "orangered": [255, 69, 0],
+      "orchid": [218, 112, 214],
+      "palegoldenrod": [238, 232, 170],
+      "palegreen": [152, 251, 152],
+      "paleturquoise": [175, 238, 238],
+      "palevioletred": [219, 112, 147],
+      "papayawhip": [255, 239, 213],
+      "peachpuff": [255, 218, 185],
+      "peru": [205, 133, 63],
+      "pink": [255, 192, 203],
+      "plum": [221, 160, 221],
+      "powderblue": [176, 224, 230],
+      "purple": [128, 0, 128],
+      "rebeccapurple": [102, 51, 153],
+      "red": [255, 0, 0],
+      "rosybrown": [188, 143, 143],
+      "royalblue": [65, 105, 225],
+      "saddlebrown": [139, 69, 19],
+      "salmon": [250, 128, 114],
+      "sandybrown": [244, 164, 96],
+      "seagreen": [46, 139, 87],
+      "seashell": [255, 245, 238],
+      "sienna": [160, 82, 45],
+      "silver": [192, 192, 192],
+      "skyblue": [135, 206, 235],
+      "slateblue": [106, 90, 205],
+      "slategray": [112, 128, 144],
+      "slategrey": [112, 128, 144],
+      "snow": [255, 250, 250],
+      "springgreen": [0, 255, 127],
+      "steelblue": [70, 130, 180],
+      "tan": [210, 180, 140],
+      "teal": [0, 128, 128],
+      "thistle": [216, 191, 216],
+      "tomato": [255, 99, 71],
+      "turquoise": [64, 224, 208],
+      "violet": [238, 130, 238],
+      "wheat": [245, 222, 179],
+      "white": [255, 255, 255],
+      "whitesmoke": [245, 245, 245],
+      "yellow": [255, 255, 0],
+      "yellowgreen": [154, 205, 50]
+    };
+  }
+});
+
+// node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js
+var require_conversions = __commonJS({
+  "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js"(exports, module) {
+    init_esm_shims();
+    var cssKeywords = require_color_name();
+    var reverseKeywords = {};
+    for (const key of Object.keys(cssKeywords)) {
+      reverseKeywords[cssKeywords[key]] = key;
+    }
+    var convert = {
+      rgb: { channels: 3, labels: "rgb" },
+      hsl: { channels: 3, labels: "hsl" },
+      hsv: { channels: 3, labels: "hsv" },
+      hwb: { channels: 3, labels: "hwb" },
+      cmyk: { channels: 4, labels: "cmyk" },
+      xyz: { channels: 3, labels: "xyz" },
+      lab: { channels: 3, labels: "lab" },
+      lch: { channels: 3, labels: "lch" },
+      hex: { channels: 1, labels: ["hex"] },
+      keyword: { channels: 1, labels: ["keyword"] },
+      ansi16: { channels: 1, labels: ["ansi16"] },
+      ansi256: { channels: 1, labels: ["ansi256"] },
+      hcg: { channels: 3, labels: ["h", "c", "g"] },
+      apple: { channels: 3, labels: ["r16", "g16", "b16"] },
+      gray: { channels: 1, labels: ["gray"] }
+    };
+    module.exports = convert;
+    for (const model of Object.keys(convert)) {
+      if (!("channels" in convert[model])) {
+        throw new Error("missing channels property: " + model);
+      }
+      if (!("labels" in convert[model])) {
+        throw new Error("missing channel labels property: " + model);
+      }
+      if (convert[model].labels.length !== convert[model].channels) {
+        throw new Error("channel and label counts mismatch: " + model);
+      }
+      const { channels, labels } = convert[model];
+      delete convert[model].channels;
+      delete convert[model].labels;
+      Object.defineProperty(convert[model], "channels", { value: channels });
+      Object.defineProperty(convert[model], "labels", { value: labels });
+    }
+    convert.rgb.hsl = function(rgb) {
+      const r = rgb[0] / 255;
+      const g = rgb[1] / 255;
+      const b = rgb[2] / 255;
+      const min = Math.min(r, g, b);
+      const max = Math.max(r, g, b);
+      const delta = max - min;
+      let h;
+      let s;
+      if (max === min) {
+        h = 0;
+      } else if (r === max) {
+        h = (g - b) / delta;
+      } else if (g === max) {
+        h = 2 + (b - r) / delta;
+      } else if (b === max) {
+        h = 4 + (r - g) / delta;
+      }
+      h = Math.min(h * 60, 360);
+      if (h < 0) {
+        h += 360;
+      }
+      const l = (min + max) / 2;
+      if (max === min) {
+        s = 0;
+      } else if (l <= 0.5) {
+        s = delta / (max + min);
+      } else {
+        s = delta / (2 - max - min);
+      }
+      return [h, s * 100, l * 100];
+    };
+    convert.rgb.hsv = function(rgb) {
+      let rdif;
+      let gdif;
+      let bdif;
+      let h;
+      let s;
+      const r = rgb[0] / 255;
+      const g = rgb[1] / 255;
+      const b = rgb[2] / 255;
+      const v = Math.max(r, g, b);
+      const diff = v - Math.min(r, g, b);
+      const diffc = function(c) {
+        return (v - c) / 6 / diff + 1 / 2;
+      };
+      if (diff === 0) {
+        h = 0;
+        s = 0;
+      } else {
+        s = diff / v;
+        rdif = diffc(r);
+        gdif = diffc(g);
+        bdif = diffc(b);
+        if (r === v) {
+          h = bdif - gdif;
+        } else if (g === v) {
+          h = 1 / 3 + rdif - bdif;
+        } else if (b === v) {
+          h = 2 / 3 + gdif - rdif;
+        }
+        if (h < 0) {
+          h += 1;
+        } else if (h > 1) {
+          h -= 1;
+        }
+      }
+      return [
+        h * 360,
+        s * 100,
+        v * 100
+      ];
+    };
+    convert.rgb.hwb = function(rgb) {
+      const r = rgb[0];
+      const g = rgb[1];
+      let b = rgb[2];
+      const h = convert.rgb.hsl(rgb)[0];
+      const w = 1 / 255 * Math.min(r, Math.min(g, b));
+      b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
+      return [h, w * 100, b * 100];
+    };
+    convert.rgb.cmyk = function(rgb) {
+      const r = rgb[0] / 255;
+      const g = rgb[1] / 255;
+      const b = rgb[2] / 255;
+      const k = Math.min(1 - r, 1 - g, 1 - b);
+      const c = (1 - r - k) / (1 - k) || 0;
+      const m = (1 - g - k) / (1 - k) || 0;
+      const y = (1 - b - k) / (1 - k) || 0;
+      return [c * 100, m * 100, y * 100, k * 100];
+    };
+    function comparativeDistance(x, y) {
+      return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
+    }
+    convert.rgb.keyword = function(rgb) {
+      const reversed = reverseKeywords[rgb];
+      if (reversed) {
+        return reversed;
+      }
+      let currentClosestDistance = Infinity;
+      let currentClosestKeyword;
+      for (const keyword of Object.keys(cssKeywords)) {
+        const value = cssKeywords[keyword];
+        const distance = comparativeDistance(rgb, value);
+        if (distance < currentClosestDistance) {
+          currentClosestDistance = distance;
+          currentClosestKeyword = keyword;
+        }
+      }
+      return currentClosestKeyword;
+    };
+    convert.keyword.rgb = function(keyword) {
+      return cssKeywords[keyword];
+    };
+    convert.rgb.xyz = function(rgb) {
+      let r = rgb[0] / 255;
+      let g = rgb[1] / 255;
+      let b = rgb[2] / 255;
+      r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
+      g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
+      b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
+      const x = r * 0.4124 + g * 0.3576 + b * 0.1805;
+      const y = r * 0.2126 + g * 0.7152 + b * 0.0722;
+      const z = r * 0.0193 + g * 0.1192 + b * 0.9505;
+      return [x * 100, y * 100, z * 100];
+    };
+    convert.rgb.lab = function(rgb) {
+      const xyz = convert.rgb.xyz(rgb);
+      let x = xyz[0];
+      let y = xyz[1];
+      let z = xyz[2];
+      x /= 95.047;
+      y /= 100;
+      z /= 108.883;
+      x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
+      y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
+      z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+      const l = 116 * y - 16;
+      const a = 500 * (x - y);
+      const b = 200 * (y - z);
+      return [l, a, b];
+    };
+    convert.hsl.rgb = function(hsl) {
+      const h = hsl[0] / 360;
+      const s = hsl[1] / 100;
+      const l = hsl[2] / 100;
+      let t2;
+      let t3;
+      let val;
+      if (s === 0) {
+        val = l * 255;
+        return [val, val, val];
+      }
+      if (l < 0.5) {
+        t2 = l * (1 + s);
+      } else {
+        t2 = l + s - l * s;
+      }
+      const t1 = 2 * l - t2;
+      const rgb = [0, 0, 0];
+      for (let i = 0; i < 3; i++) {
+        t3 = h + 1 / 3 * -(i - 1);
+        if (t3 < 0) {
+          t3++;
+        }
+        if (t3 > 1) {
+          t3--;
+        }
+        if (6 * t3 < 1) {
+          val = t1 + (t2 - t1) * 6 * t3;
+        } else if (2 * t3 < 1) {
+          val = t2;
+        } else if (3 * t3 < 2) {
+          val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
+        } else {
+          val = t1;
+        }
+        rgb[i] = val * 255;
+      }
+      return rgb;
+    };
+    convert.hsl.hsv = function(hsl) {
+      const h = hsl[0];
+      let s = hsl[1] / 100;
+      let l = hsl[2] / 100;
+      let smin = s;
+      const lmin = Math.max(l, 0.01);
+      l *= 2;
+      s *= l <= 1 ? l : 2 - l;
+      smin *= lmin <= 1 ? lmin : 2 - lmin;
+      const v = (l + s) / 2;
+      const sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
+      return [h, sv * 100, v * 100];
+    };
+    convert.hsv.rgb = function(hsv) {
+      const h = hsv[0] / 60;
+      const s = hsv[1] / 100;
+      let v = hsv[2] / 100;
+      const hi = Math.floor(h) % 6;
+      const f = h - Math.floor(h);
+      const p = 255 * v * (1 - s);
+      const q = 255 * v * (1 - s * f);
+      const t = 255 * v * (1 - s * (1 - f));
+      v *= 255;
+      switch (hi) {
+        case 0:
+          return [v, t, p];
+        case 1:
+          return [q, v, p];
+        case 2:
+          return [p, v, t];
+        case 3:
+          return [p, q, v];
+        case 4:
+          return [t, p, v];
+        case 5:
+          return [v, p, q];
+      }
+    };
+    convert.hsv.hsl = function(hsv) {
+      const h = hsv[0];
+      const s = hsv[1] / 100;
+      const v = hsv[2] / 100;
+      const vmin = Math.max(v, 0.01);
+      let sl;
+      let l;
+      l = (2 - s) * v;
+      const lmin = (2 - s) * vmin;
+      sl = s * vmin;
+      sl /= lmin <= 1 ? lmin : 2 - lmin;
+      sl = sl || 0;
+      l /= 2;
+      return [h, sl * 100, l * 100];
+    };
+    convert.hwb.rgb = function(hwb) {
+      const h = hwb[0] / 360;
+      let wh = hwb[1] / 100;
+      let bl = hwb[2] / 100;
+      const ratio = wh + bl;
+      let f;
+      if (ratio > 1) {
+        wh /= ratio;
+        bl /= ratio;
+      }
+      const i = Math.floor(6 * h);
+      const v = 1 - bl;
+      f = 6 * h - i;
+      if ((i & 1) !== 0) {
+        f = 1 - f;
+      }
+      const n = wh + f * (v - wh);
+      let r;
+      let g;
+      let b;
+      switch (i) {
+        default:
+        case 6:
+        case 0:
+          r = v;
+          g = n;
+          b = wh;
+          break;
+        case 1:
+          r = n;
+          g = v;
+          b = wh;
+          break;
+        case 2:
+          r = wh;
+          g = v;
+          b = n;
+          break;
+        case 3:
+          r = wh;
+          g = n;
+          b = v;
+          break;
+        case 4:
+          r = n;
+          g = wh;
+          b = v;
+          break;
+        case 5:
+          r = v;
+          g = wh;
+          b = n;
+          break;
+      }
+      return [r * 255, g * 255, b * 255];
+    };
+    convert.cmyk.rgb = function(cmyk) {
+      const c = cmyk[0] / 100;
+      const m = cmyk[1] / 100;
+      const y = cmyk[2] / 100;
+      const k = cmyk[3] / 100;
+      const r = 1 - Math.min(1, c * (1 - k) + k);
+      const g = 1 - Math.min(1, m * (1 - k) + k);
+      const b = 1 - Math.min(1, y * (1 - k) + k);
+      return [r * 255, g * 255, b * 255];
+    };
+    convert.xyz.rgb = function(xyz) {
+      const x = xyz[0] / 100;
+      const y = xyz[1] / 100;
+      const z = xyz[2] / 100;
+      let r;
+      let g;
+      let b;
+      r = x * 3.2406 + y * -1.5372 + z * -0.4986;
+      g = x * -0.9689 + y * 1.8758 + z * 0.0415;
+      b = x * 0.0557 + y * -0.204 + z * 1.057;
+      r = r > 31308e-7 ? 1.055 * r ** (1 / 2.4) - 0.055 : r * 12.92;
+      g = g > 31308e-7 ? 1.055 * g ** (1 / 2.4) - 0.055 : g * 12.92;
+      b = b > 31308e-7 ? 1.055 * b ** (1 / 2.4) - 0.055 : b * 12.92;
+      r = Math.min(Math.max(0, r), 1);
+      g = Math.min(Math.max(0, g), 1);
+      b = Math.min(Math.max(0, b), 1);
+      return [r * 255, g * 255, b * 255];
+    };
+    convert.xyz.lab = function(xyz) {
+      let x = xyz[0];
+      let y = xyz[1];
+      let z = xyz[2];
+      x /= 95.047;
+      y /= 100;
+      z /= 108.883;
+      x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
+      y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
+      z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+      const l = 116 * y - 16;
+      const a = 500 * (x - y);
+      const b = 200 * (y - z);
+      return [l, a, b];
+    };
+    convert.lab.xyz = function(lab) {
+      const l = lab[0];
+      const a = lab[1];
+      const b = lab[2];
+      let x;
+      let y;
+      let z;
+      y = (l + 16) / 116;
+      x = a / 500 + y;
+      z = y - b / 200;
+      const y2 = y ** 3;
+      const x2 = x ** 3;
+      const z2 = z ** 3;
+      y = y2 > 8856e-6 ? y2 : (y - 16 / 116) / 7.787;
+      x = x2 > 8856e-6 ? x2 : (x - 16 / 116) / 7.787;
+      z = z2 > 8856e-6 ? z2 : (z - 16 / 116) / 7.787;
+      x *= 95.047;
+      y *= 100;
+      z *= 108.883;
+      return [x, y, z];
+    };
+    convert.lab.lch = function(lab) {
+      const l = lab[0];
+      const a = lab[1];
+      const b = lab[2];
+      let h;
+      const hr = Math.atan2(b, a);
+      h = hr * 360 / 2 / Math.PI;
+      if (h < 0) {
+        h += 360;
+      }
+      const c = Math.sqrt(a * a + b * b);
+      return [l, c, h];
+    };
+    convert.lch.lab = function(lch) {
+      const l = lch[0];
+      const c = lch[1];
+      const h = lch[2];
+      const hr = h / 360 * 2 * Math.PI;
+      const a = c * Math.cos(hr);
+      const b = c * Math.sin(hr);
+      return [l, a, b];
+    };
+    convert.rgb.ansi16 = function(args, saturation = null) {
+      const [r, g, b] = args;
+      let value = saturation === null ? convert.rgb.hsv(args)[2] : saturation;
+      value = Math.round(value / 50);
+      if (value === 0) {
+        return 30;
+      }
+      let ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
+      if (value === 2) {
+        ansi += 60;
+      }
+      return ansi;
+    };
+    convert.hsv.ansi16 = function(args) {
+      return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
+    };
+    convert.rgb.ansi256 = function(args) {
+      const r = args[0];
+      const g = args[1];
+      const b = args[2];
+      if (r === g && g === b) {
+        if (r < 8) {
+          return 16;
+        }
+        if (r > 248) {
+          return 231;
+        }
+        return Math.round((r - 8) / 247 * 24) + 232;
+      }
+      const ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
+      return ansi;
+    };
+    convert.ansi16.rgb = function(args) {
+      let color = args % 10;
+      if (color === 0 || color === 7) {
+        if (args > 50) {
+          color += 3.5;
+        }
+        color = color / 10.5 * 255;
+        return [color, color, color];
+      }
+      const mult = (~~(args > 50) + 1) * 0.5;
+      const r = (color & 1) * mult * 255;
+      const g = (color >> 1 & 1) * mult * 255;
+      const b = (color >> 2 & 1) * mult * 255;
+      return [r, g, b];
+    };
+    convert.ansi256.rgb = function(args) {
+      if (args >= 232) {
+        const c = (args - 232) * 10 + 8;
+        return [c, c, c];
+      }
+      args -= 16;
+      let rem;
+      const r = Math.floor(args / 36) / 5 * 255;
+      const g = Math.floor((rem = args % 36) / 6) / 5 * 255;
+      const b = rem % 6 / 5 * 255;
+      return [r, g, b];
+    };
+    convert.rgb.hex = function(args) {
+      const integer = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
+      const string = integer.toString(16).toUpperCase();
+      return "000000".substring(string.length) + string;
+    };
+    convert.hex.rgb = function(args) {
+      const match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
+      if (!match) {
+        return [0, 0, 0];
+      }
+      let colorString = match[0];
+      if (match[0].length === 3) {
+        colorString = colorString.split("").map((char) => {
+          return char + char;
+        }).join("");
+      }
+      const integer = parseInt(colorString, 16);
+      const r = integer >> 16 & 255;
+      const g = integer >> 8 & 255;
+      const b = integer & 255;
+      return [r, g, b];
+    };
+    convert.rgb.hcg = function(rgb) {
+      const r = rgb[0] / 255;
+      const g = rgb[1] / 255;
+      const b = rgb[2] / 255;
+      const max = Math.max(Math.max(r, g), b);
+      const min = Math.min(Math.min(r, g), b);
+      const chroma = max - min;
+      let grayscale;
+      let hue;
+      if (chroma < 1) {
+        grayscale = min / (1 - chroma);
+      } else {
+        grayscale = 0;
+      }
+      if (chroma <= 0) {
+        hue = 0;
+      } else if (max === r) {
+        hue = (g - b) / chroma % 6;
+      } else if (max === g) {
+        hue = 2 + (b - r) / chroma;
+      } else {
+        hue = 4 + (r - g) / chroma;
+      }
+      hue /= 6;
+      hue %= 1;
+      return [hue * 360, chroma * 100, grayscale * 100];
+    };
+    convert.hsl.hcg = function(hsl) {
+      const s = hsl[1] / 100;
+      const l = hsl[2] / 100;
+      const c = l < 0.5 ? 2 * s * l : 2 * s * (1 - l);
+      let f = 0;
+      if (c < 1) {
+        f = (l - 0.5 * c) / (1 - c);
+      }
+      return [hsl[0], c * 100, f * 100];
+    };
+    convert.hsv.hcg = function(hsv) {
+      const s = hsv[1] / 100;
+      const v = hsv[2] / 100;
+      const c = s * v;
+      let f = 0;
+      if (c < 1) {
+        f = (v - c) / (1 - c);
+      }
+      return [hsv[0], c * 100, f * 100];
+    };
+    convert.hcg.rgb = function(hcg) {
+      const h = hcg[0] / 360;
+      const c = hcg[1] / 100;
+      const g = hcg[2] / 100;
+      if (c === 0) {
+        return [g * 255, g * 255, g * 255];
+      }
+      const pure = [0, 0, 0];
+      const hi = h % 1 * 6;
+      const v = hi % 1;
+      const w = 1 - v;
+      let mg = 0;
+      switch (Math.floor(hi)) {
+        case 0:
+          pure[0] = 1;
+          pure[1] = v;
+          pure[2] = 0;
+          break;
+        case 1:
+          pure[0] = w;
+          pure[1] = 1;
+          pure[2] = 0;
+          break;
+        case 2:
+          pure[0] = 0;
+          pure[1] = 1;
+          pure[2] = v;
+          break;
+        case 3:
+          pure[0] = 0;
+          pure[1] = w;
+          pure[2] = 1;
+          break;
+        case 4:
+          pure[0] = v;
+          pure[1] = 0;
+          pure[2] = 1;
+          break;
+        default:
+          pure[0] = 1;
+          pure[1] = 0;
+          pure[2] = w;
+      }
+      mg = (1 - c) * g;
+      return [
+        (c * pure[0] + mg) * 255,
+        (c * pure[1] + mg) * 255,
+        (c * pure[2] + mg) * 255
+      ];
+    };
+    convert.hcg.hsv = function(hcg) {
+      const c = hcg[1] / 100;
+      const g = hcg[2] / 100;
+      const v = c + g * (1 - c);
+      let f = 0;
+      if (v > 0) {
+        f = c / v;
+      }
+      return [hcg[0], f * 100, v * 100];
+    };
+    convert.hcg.hsl = function(hcg) {
+      const c = hcg[1] / 100;
+      const g = hcg[2] / 100;
+      const l = g * (1 - c) + 0.5 * c;
+      let s = 0;
+      if (l > 0 && l < 0.5) {
+        s = c / (2 * l);
+      } else if (l >= 0.5 && l < 1) {
+        s = c / (2 * (1 - l));
+      }
+      return [hcg[0], s * 100, l * 100];
+    };
+    convert.hcg.hwb = function(hcg) {
+      const c = hcg[1] / 100;
+      const g = hcg[2] / 100;
+      const v = c + g * (1 - c);
+      return [hcg[0], (v - c) * 100, (1 - v) * 100];
+    };
+    convert.hwb.hcg = function(hwb) {
+      const w = hwb[1] / 100;
+      const b = hwb[2] / 100;
+      const v = 1 - b;
+      const c = v - w;
+      let g = 0;
+      if (c < 1) {
+        g = (v - c) / (1 - c);
+      }
+      return [hwb[0], c * 100, g * 100];
+    };
+    convert.apple.rgb = function(apple) {
+      return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];
+    };
+    convert.rgb.apple = function(rgb) {
+      return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];
+    };
+    convert.gray.rgb = function(args) {
+      return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
+    };
+    convert.gray.hsl = function(args) {
+      return [0, 0, args[0]];
+    };
+    convert.gray.hsv = convert.gray.hsl;
+    convert.gray.hwb = function(gray) {
+      return [0, 100, gray[0]];
+    };
+    convert.gray.cmyk = function(gray) {
+      return [0, 0, 0, gray[0]];
+    };
+    convert.gray.lab = function(gray) {
+      return [gray[0], 0, 0];
+    };
+    convert.gray.hex = function(gray) {
+      const val = Math.round(gray[0] / 100 * 255) & 255;
+      const integer = (val << 16) + (val << 8) + val;
+      const string = integer.toString(16).toUpperCase();
+      return "000000".substring(string.length) + string;
+    };
+    convert.rgb.gray = function(rgb) {
+      const val = (rgb[0] + rgb[1] + rgb[2]) / 3;
+      return [val / 255 * 100];
+    };
+  }
+});
+
+// node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js
+var require_route = __commonJS({
+  "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js"(exports, module) {
+    init_esm_shims();
+    var conversions = require_conversions();
+    function buildGraph() {
+      const graph = {};
+      const models = Object.keys(conversions);
+      for (let len = models.length, i = 0; i < len; i++) {
+        graph[models[i]] = {
+          distance: -1,
+          parent: null
+        };
+      }
+      return graph;
+    }
+    function deriveBFS(fromModel) {
+      const graph = buildGraph();
+      const queue = [fromModel];
+      graph[fromModel].distance = 0;
+      while (queue.length) {
+        const current = queue.pop();
+        const adjacents = Object.keys(conversions[current]);
+        for (let len = adjacents.length, i = 0; i < len; i++) {
+          const adjacent = adjacents[i];
+          const node = graph[adjacent];
+          if (node.distance === -1) {
+            node.distance = graph[current].distance + 1;
+            node.parent = current;
+            queue.unshift(adjacent);
+          }
+        }
+      }
+      return graph;
+    }
+    function link(from, to) {
+      return function(args) {
+        return to(from(args));
+      };
+    }
+    function wrapConversion(toModel, graph) {
+      const path3 = [graph[toModel].parent, toModel];
+      let fn = conversions[graph[toModel].parent][toModel];
+      let cur = graph[toModel].parent;
+      while (graph[cur].parent) {
+        path3.unshift(graph[cur].parent);
+        fn = link(conversions[graph[cur].parent][cur], fn);
+        cur = graph[cur].parent;
+      }
+      fn.conversion = path3;
+      return fn;
+    }
+    module.exports = function(fromModel) {
+      const graph = deriveBFS(fromModel);
+      const conversion = {};
+      const models = Object.keys(graph);
+      for (let len = models.length, i = 0; i < len; i++) {
+        const toModel = models[i];
+        const node = graph[toModel];
+        if (node.parent === null) {
+          continue;
+        }
+        conversion[toModel] = wrapConversion(toModel, graph);
+      }
+      return conversion;
+    };
+  }
+});
+
+// node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js
+var require_color_convert = __commonJS({
+  "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js"(exports, module) {
+    init_esm_shims();
+    var conversions = require_conversions();
+    var route = require_route();
+    var convert = {};
+    var models = Object.keys(conversions);
+    function wrapRaw(fn) {
+      const wrappedFn = function(...args) {
+        const arg0 = args[0];
+        if (arg0 === void 0 || arg0 === null) {
+          return arg0;
+        }
+        if (arg0.length > 1) {
+          args = arg0;
+        }
+        return fn(args);
+      };
+      if ("conversion" in fn) {
+        wrappedFn.conversion = fn.conversion;
+      }
+      return wrappedFn;
+    }
+    function wrapRounded(fn) {
+      const wrappedFn = function(...args) {
+        const arg0 = args[0];
+        if (arg0 === void 0 || arg0 === null) {
+          return arg0;
+        }
+        if (arg0.length > 1) {
+          args = arg0;
+        }
+        const result = fn(args);
+        if (typeof result === "object") {
+          for (let len = result.length, i = 0; i < len; i++) {
+            result[i] = Math.round(result[i]);
+          }
+        }
+        return result;
+      };
+      if ("conversion" in fn) {
+        wrappedFn.conversion = fn.conversion;
+      }
+      return wrappedFn;
+    }
+    models.forEach((fromModel) => {
+      convert[fromModel] = {};
+      Object.defineProperty(convert[fromModel], "channels", { value: conversions[fromModel].channels });
+      Object.defineProperty(convert[fromModel], "labels", { value: conversions[fromModel].labels });
+      const routes = route(fromModel);
+      const routeModels = Object.keys(routes);
+      routeModels.forEach((toModel) => {
+        const fn = routes[toModel];
+        convert[fromModel][toModel] = wrapRounded(fn);
+        convert[fromModel][toModel].raw = wrapRaw(fn);
+      });
+    });
+    module.exports = convert;
+  }
+});
+
+// node_modules/.pnpm/ansi-styles@4.3.0/node_modules/ansi-styles/index.js
+var require_ansi_styles = __commonJS({
+  "node_modules/.pnpm/ansi-styles@4.3.0/node_modules/ansi-styles/index.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    var wrapAnsi16 = (fn, offset) => (...args) => {
+      const code = fn(...args);
+      return `[${code + offset}m`;
+    };
+    var wrapAnsi256 = (fn, offset) => (...args) => {
+      const code = fn(...args);
+      return `[${38 + offset};5;${code}m`;
+    };
+    var wrapAnsi16m = (fn, offset) => (...args) => {
+      const rgb = fn(...args);
+      return `[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
+    };
+    var ansi2ansi = (n) => n;
+    var rgb2rgb = (r, g, b) => [r, g, b];
+    var setLazyProperty = (object, property, get) => {
+      Object.defineProperty(object, property, {
+        get: () => {
+          const value = get();
+          Object.defineProperty(object, property, {
+            value,
+            enumerable: true,
+            configurable: true
+          });
+          return value;
+        },
+        enumerable: true,
+        configurable: true
+      });
+    };
+    var colorConvert;
+    var makeDynamicStyles = (wrap, targetSpace, identity, isBackground) => {
+      if (colorConvert === void 0) {
+        colorConvert = require_color_convert();
+      }
+      const offset = isBackground ? 10 : 0;
+      const styles = {};
+      for (const [sourceSpace, suite] of Object.entries(colorConvert)) {
+        const name = sourceSpace === "ansi16" ? "ansi" : sourceSpace;
+        if (sourceSpace === targetSpace) {
+          styles[name] = wrap(identity, offset);
+        } else if (typeof suite === "object") {
+          styles[name] = wrap(suite[targetSpace], offset);
+        }
+      }
+      return styles;
+    };
+    function assembleStyles() {
+      const codes = /* @__PURE__ */ new Map();
+      const styles = {
+        modifier: {
+          reset: [0, 0],
+          bold: [1, 22],
+          dim: [2, 22],
+          italic: [3, 23],
+          underline: [4, 24],
+          inverse: [7, 27],
+          hidden: [8, 28],
+          strikethrough: [9, 29]
+        },
+        color: {
+          black: [30, 39],
+          red: [31, 39],
+          green: [32, 39],
+          yellow: [33, 39],
+          blue: [34, 39],
+          magenta: [35, 39],
+          cyan: [36, 39],
+          white: [37, 39],
+          blackBright: [90, 39],
+          redBright: [91, 39],
+          greenBright: [92, 39],
+          yellowBright: [93, 39],
+          blueBright: [94, 39],
+          magentaBright: [95, 39],
+          cyanBright: [96, 39],
+          whiteBright: [97, 39]
+        },
+        bgColor: {
+          bgBlack: [40, 49],
+          bgRed: [41, 49],
+          bgGreen: [42, 49],
+          bgYellow: [43, 49],
+          bgBlue: [44, 49],
+          bgMagenta: [45, 49],
+          bgCyan: [46, 49],
+          bgWhite: [47, 49],
+          bgBlackBright: [100, 49],
+          bgRedBright: [101, 49],
+          bgGreenBright: [102, 49],
+          bgYellowBright: [103, 49],
+          bgBlueBright: [104, 49],
+          bgMagentaBright: [105, 49],
+          bgCyanBright: [106, 49],
+          bgWhiteBright: [107, 49]
+        }
+      };
+      styles.color.gray = styles.color.blackBright;
+      styles.bgColor.bgGray = styles.bgColor.bgBlackBright;
+      styles.color.grey = styles.color.blackBright;
+      styles.bgColor.bgGrey = styles.bgColor.bgBlackBright;
+      for (const [groupName, group] of Object.entries(styles)) {
+        for (const [styleName, style] of Object.entries(group)) {
+          styles[styleName] = {
+            open: `[${style[0]}m`,
+            close: `[${style[1]}m`
+          };
+          group[styleName] = styles[styleName];
+          codes.set(style[0], style[1]);
+        }
+        Object.defineProperty(styles, groupName, {
+          value: group,
+          enumerable: false
+        });
+      }
+      Object.defineProperty(styles, "codes", {
+        value: codes,
+        enumerable: false
+      });
+      styles.color.close = "[39m";
+      styles.bgColor.close = "[49m";
+      setLazyProperty(styles.color, "ansi", () => makeDynamicStyles(wrapAnsi16, "ansi16", ansi2ansi, false));
+      setLazyProperty(styles.color, "ansi256", () => makeDynamicStyles(wrapAnsi256, "ansi256", ansi2ansi, false));
+      setLazyProperty(styles.color, "ansi16m", () => makeDynamicStyles(wrapAnsi16m, "rgb", rgb2rgb, false));
+      setLazyProperty(styles.bgColor, "ansi", () => makeDynamicStyles(wrapAnsi16, "ansi16", ansi2ansi, true));
+      setLazyProperty(styles.bgColor, "ansi256", () => makeDynamicStyles(wrapAnsi256, "ansi256", ansi2ansi, true));
+      setLazyProperty(styles.bgColor, "ansi16m", () => makeDynamicStyles(wrapAnsi16m, "rgb", rgb2rgb, true));
+      return styles;
+    }
+    Object.defineProperty(module, "exports", {
+      enumerable: true,
+      get: assembleStyles
+    });
+  }
+});
+
+// node_modules/.pnpm/has-flag@4.0.0/node_modules/has-flag/index.js
+var require_has_flag = __commonJS({
+  "node_modules/.pnpm/has-flag@4.0.0/node_modules/has-flag/index.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    module.exports = (flag, argv = process.argv) => {
+      const prefix = flag.startsWith("-") ? "" : flag.length === 1 ? "-" : "--";
+      const position = argv.indexOf(prefix + flag);
+      const terminatorPosition = argv.indexOf("--");
+      return position !== -1 && (terminatorPosition === -1 || position < terminatorPosition);
+    };
+  }
+});
+
+// node_modules/.pnpm/supports-color@7.2.0/node_modules/supports-color/index.js
+var require_supports_color = __commonJS({
+  "node_modules/.pnpm/supports-color@7.2.0/node_modules/supports-color/index.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    var os = __require("os");
+    var tty = __require("tty");
+    var hasFlag = require_has_flag();
+    var { env } = process;
+    var forceColor;
+    if (hasFlag("no-color") || hasFlag("no-colors") || hasFlag("color=false") || hasFlag("color=never")) {
+      forceColor = 0;
+    } else if (hasFlag("color") || hasFlag("colors") || hasFlag("color=true") || hasFlag("color=always")) {
+      forceColor = 1;
+    }
+    if ("FORCE_COLOR" in env) {
+      if (env.FORCE_COLOR === "true") {
+        forceColor = 1;
+      } else if (env.FORCE_COLOR === "false") {
+        forceColor = 0;
+      } else {
+        forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
+      }
+    }
+    function translateLevel(level) {
+      if (level === 0) {
+        return false;
+      }
+      return {
+        level,
+        hasBasic: true,
+        has256: level >= 2,
+        has16m: level >= 3
+      };
+    }
+    function supportsColor(haveStream, streamIsTTY) {
+      if (forceColor === 0) {
+        return 0;
+      }
+      if (hasFlag("color=16m") || hasFlag("color=full") || hasFlag("color=truecolor")) {
+        return 3;
+      }
+      if (hasFlag("color=256")) {
+        return 2;
+      }
+      if (haveStream && !streamIsTTY && forceColor === void 0) {
+        return 0;
+      }
+      const min = forceColor || 0;
+      if (env.TERM === "dumb") {
+        return min;
+      }
+      if (process.platform === "win32") {
+        const osRelease = os.release().split(".");
+        if (Number(osRelease[0]) >= 10 && Number(osRelease[2]) >= 10586) {
+          return Number(osRelease[2]) >= 14931 ? 3 : 2;
+        }
+        return 1;
+      }
+      if ("CI" in env) {
+        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI", "GITHUB_ACTIONS", "BUILDKITE"].some((sign) => sign in env) || env.CI_NAME === "codeship") {
+          return 1;
+        }
+        return min;
+      }
+      if ("TEAMCITY_VERSION" in env) {
+        return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
+      }
+      if (env.COLORTERM === "truecolor") {
+        return 3;
+      }
+      if ("TERM_PROGRAM" in env) {
+        const version = parseInt((env.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
+        switch (env.TERM_PROGRAM) {
+          case "iTerm.app":
+            return version >= 3 ? 3 : 2;
+          case "Apple_Terminal":
+            return 2;
+        }
+      }
+      if (/-256(color)?$/i.test(env.TERM)) {
+        return 2;
+      }
+      if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
+        return 1;
+      }
+      if ("COLORTERM" in env) {
+        return 1;
+      }
+      return min;
+    }
+    function getSupportLevel(stream) {
+      const level = supportsColor(stream, stream && stream.isTTY);
+      return translateLevel(level);
+    }
+    module.exports = {
+      supportsColor: getSupportLevel,
+      stdout: translateLevel(supportsColor(true, tty.isatty(1))),
+      stderr: translateLevel(supportsColor(true, tty.isatty(2)))
+    };
+  }
+});
+
+// node_modules/.pnpm/chalk@4.1.2/node_modules/chalk/source/util.js
+var require_util = __commonJS({
+  "node_modules/.pnpm/chalk@4.1.2/node_modules/chalk/source/util.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    var stringReplaceAll = (string, substring, replacer) => {
+      let index = string.indexOf(substring);
+      if (index === -1) {
+        return string;
+      }
+      const substringLength = substring.length;
+      let endIndex = 0;
+      let returnValue = "";
+      do {
+        returnValue += string.substr(endIndex, index - endIndex) + substring + replacer;
+        endIndex = index + substringLength;
+        index = string.indexOf(substring, endIndex);
+      } while (index !== -1);
+      returnValue += string.substr(endIndex);
+      return returnValue;
+    };
+    var stringEncaseCRLFWithFirstIndex = (string, prefix, postfix, index) => {
+      let endIndex = 0;
+      let returnValue = "";
+      do {
+        const gotCR = string[index - 1] === "\r";
+        returnValue += string.substr(endIndex, (gotCR ? index - 1 : index) - endIndex) + prefix + (gotCR ? "\r\n" : "\n") + postfix;
+        endIndex = index + 1;
+        index = string.indexOf("\n", endIndex);
+      } while (index !== -1);
+      returnValue += string.substr(endIndex);
+      return returnValue;
+    };
+    module.exports = {
+      stringReplaceAll,
+      stringEncaseCRLFWithFirstIndex
+    };
+  }
+});
+
+// node_modules/.pnpm/chalk@4.1.2/node_modules/chalk/source/templates.js
+var require_templates = __commonJS({
+  "node_modules/.pnpm/chalk@4.1.2/node_modules/chalk/source/templates.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    var TEMPLATE_REGEX = /(?:\\(u(?:[a-f\d]{4}|\{[a-f\d]{1,6}\})|x[a-f\d]{2}|.))|(?:\{(~)?(\w+(?:\([^)]*\))?(?:\.\w+(?:\([^)]*\))?)*)(?:[ \t]|(?=\r?\n)))|(\})|((?:.|[\r\n\f])+?)/gi;
+    var STYLE_REGEX = /(?:^|\.)(\w+)(?:\(([^)]*)\))?/g;
+    var STRING_REGEX = /^(['"])((?:\\.|(?!\1)[^\\])*)\1$/;
+    var ESCAPE_REGEX = /\\(u(?:[a-f\d]{4}|{[a-f\d]{1,6}})|x[a-f\d]{2}|.)|([^\\])/gi;
+    var ESCAPES = /* @__PURE__ */ new Map([
+      ["n", "\n"],
+      ["r", "\r"],
+      ["t", "	"],
+      ["b", "\b"],
+      ["f", "\f"],
+      ["v", "\v"],
+      ["0", "\0"],
+      ["\\", "\\"],
+      ["e", ""],
+      ["a", "\x07"]
+    ]);
+    function unescape(c) {
+      const u = c[0] === "u";
+      const bracket = c[1] === "{";
+      if (u && !bracket && c.length === 5 || c[0] === "x" && c.length === 3) {
+        return String.fromCharCode(parseInt(c.slice(1), 16));
+      }
+      if (u && bracket) {
+        return String.fromCodePoint(parseInt(c.slice(2, -1), 16));
+      }
+      return ESCAPES.get(c) || c;
+    }
+    function parseArguments(name, arguments_) {
+      const results = [];
+      const chunks = arguments_.trim().split(/\s*,\s*/g);
+      let matches;
+      for (const chunk of chunks) {
+        const number = Number(chunk);
+        if (!Number.isNaN(number)) {
+          results.push(number);
+        } else if (matches = chunk.match(STRING_REGEX)) {
+          results.push(matches[2].replace(ESCAPE_REGEX, (m, escape, character) => escape ? unescape(escape) : character));
+        } else {
+          throw new Error(`Invalid Chalk template style argument: ${chunk} (in style '${name}')`);
+        }
+      }
+      return results;
+    }
+    function parseStyle(style) {
+      STYLE_REGEX.lastIndex = 0;
+      const results = [];
+      let matches;
+      while ((matches = STYLE_REGEX.exec(style)) !== null) {
+        const name = matches[1];
+        if (matches[2]) {
+          const args = parseArguments(name, matches[2]);
+          results.push([name].concat(args));
+        } else {
+          results.push([name]);
+        }
+      }
+      return results;
+    }
+    function buildStyle(chalk, styles) {
+      const enabled = {};
+      for (const layer of styles) {
+        for (const style of layer.styles) {
+          enabled[style[0]] = layer.inverse ? null : style.slice(1);
+        }
+      }
+      let current = chalk;
+      for (const [styleName, styles2] of Object.entries(enabled)) {
+        if (!Array.isArray(styles2)) {
+          continue;
+        }
+        if (!(styleName in current)) {
+          throw new Error(`Unknown Chalk style: ${styleName}`);
+        }
+        current = styles2.length > 0 ? current[styleName](...styles2) : current[styleName];
+      }
+      return current;
+    }
+    module.exports = (chalk, temporary) => {
+      const styles = [];
+      const chunks = [];
+      let chunk = [];
+      temporary.replace(TEMPLATE_REGEX, (m, escapeCharacter, inverse, style, close, character) => {
+        if (escapeCharacter) {
+          chunk.push(unescape(escapeCharacter));
+        } else if (style) {
+          const string = chunk.join("");
+          chunk = [];
+          chunks.push(styles.length === 0 ? string : buildStyle(chalk, styles)(string));
+          styles.push({ inverse, styles: parseStyle(style) });
+        } else if (close) {
+          if (styles.length === 0) {
+            throw new Error("Found extraneous } in Chalk template literal");
+          }
+          chunks.push(buildStyle(chalk, styles)(chunk.join("")));
+          chunk = [];
+          styles.pop();
+        } else {
+          chunk.push(character);
+        }
+      });
+      chunks.push(chunk.join(""));
+      if (styles.length > 0) {
+        const errMessage = `Chalk template literal is missing ${styles.length} closing bracket${styles.length === 1 ? "" : "s"} (\`}\`)`;
+        throw new Error(errMessage);
+      }
+      return chunks.join("");
+    };
+  }
+});
+
+// node_modules/.pnpm/chalk@4.1.2/node_modules/chalk/source/index.js
+var require_source = __commonJS({
+  "node_modules/.pnpm/chalk@4.1.2/node_modules/chalk/source/index.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    var ansiStyles = require_ansi_styles();
+    var { stdout: stdoutColor, stderr: stderrColor } = require_supports_color();
+    var {
+      stringReplaceAll,
+      stringEncaseCRLFWithFirstIndex
+    } = require_util();
+    var { isArray } = Array;
+    var levelMapping = [
+      "ansi",
+      "ansi",
+      "ansi256",
+      "ansi16m"
+    ];
+    var styles = Object.create(null);
+    var applyOptions = (object, options = {}) => {
+      if (options.level && !(Number.isInteger(options.level) && options.level >= 0 && options.level <= 3)) {
+        throw new Error("The `level` option should be an integer from 0 to 3");
+      }
+      const colorLevel = stdoutColor ? stdoutColor.level : 0;
+      object.level = options.level === void 0 ? colorLevel : options.level;
+    };
+    var ChalkClass = class {
+      constructor(options) {
+        return chalkFactory(options);
+      }
+    };
+    var chalkFactory = (options) => {
+      const chalk2 = {};
+      applyOptions(chalk2, options);
+      chalk2.template = (...arguments_) => chalkTag(chalk2.template, ...arguments_);
+      Object.setPrototypeOf(chalk2, Chalk.prototype);
+      Object.setPrototypeOf(chalk2.template, chalk2);
+      chalk2.template.constructor = () => {
+        throw new Error("`chalk.constructor()` is deprecated. Use `new chalk.Instance()` instead.");
+      };
+      chalk2.template.Instance = ChalkClass;
+      return chalk2.template;
+    };
+    function Chalk(options) {
+      return chalkFactory(options);
+    }
+    for (const [styleName, style] of Object.entries(ansiStyles)) {
+      styles[styleName] = {
+        get() {
+          const builder = createBuilder(this, createStyler(style.open, style.close, this._styler), this._isEmpty);
+          Object.defineProperty(this, styleName, { value: builder });
+          return builder;
+        }
+      };
+    }
+    styles.visible = {
+      get() {
+        const builder = createBuilder(this, this._styler, true);
+        Object.defineProperty(this, "visible", { value: builder });
+        return builder;
+      }
+    };
+    var usedModels = ["rgb", "hex", "keyword", "hsl", "hsv", "hwb", "ansi", "ansi256"];
+    for (const model of usedModels) {
+      styles[model] = {
+        get() {
+          const { level } = this;
+          return function(...arguments_) {
+            const styler = createStyler(ansiStyles.color[levelMapping[level]][model](...arguments_), ansiStyles.color.close, this._styler);
+            return createBuilder(this, styler, this._isEmpty);
+          };
+        }
+      };
+    }
+    for (const model of usedModels) {
+      const bgModel = "bg" + model[0].toUpperCase() + model.slice(1);
+      styles[bgModel] = {
+        get() {
+          const { level } = this;
+          return function(...arguments_) {
+            const styler = createStyler(ansiStyles.bgColor[levelMapping[level]][model](...arguments_), ansiStyles.bgColor.close, this._styler);
+            return createBuilder(this, styler, this._isEmpty);
+          };
+        }
+      };
+    }
+    var proto = Object.defineProperties(() => {
+    }, __spreadProps(__spreadValues({}, styles), {
+      level: {
+        enumerable: true,
+        get() {
+          return this._generator.level;
+        },
+        set(level) {
+          this._generator.level = level;
+        }
+      }
+    }));
+    var createStyler = (open, close, parent) => {
+      let openAll;
+      let closeAll;
+      if (parent === void 0) {
+        openAll = open;
+        closeAll = close;
+      } else {
+        openAll = parent.openAll + open;
+        closeAll = close + parent.closeAll;
+      }
+      return {
+        open,
+        close,
+        openAll,
+        closeAll,
+        parent
+      };
+    };
+    var createBuilder = (self, _styler, _isEmpty) => {
+      const builder = (...arguments_) => {
+        if (isArray(arguments_[0]) && isArray(arguments_[0].raw)) {
+          return applyStyle(builder, chalkTag(builder, ...arguments_));
+        }
+        return applyStyle(builder, arguments_.length === 1 ? "" + arguments_[0] : arguments_.join(" "));
+      };
+      Object.setPrototypeOf(builder, proto);
+      builder._generator = self;
+      builder._styler = _styler;
+      builder._isEmpty = _isEmpty;
+      return builder;
+    };
+    var applyStyle = (self, string) => {
+      if (self.level <= 0 || !string) {
+        return self._isEmpty ? "" : string;
+      }
+      let styler = self._styler;
+      if (styler === void 0) {
+        return string;
+      }
+      const { openAll, closeAll } = styler;
+      if (string.indexOf("") !== -1) {
+        while (styler !== void 0) {
+          string = stringReplaceAll(string, styler.close, styler.open);
+          styler = styler.parent;
+        }
+      }
+      const lfIndex = string.indexOf("\n");
+      if (lfIndex !== -1) {
+        string = stringEncaseCRLFWithFirstIndex(string, closeAll, openAll, lfIndex);
+      }
+      return openAll + string + closeAll;
+    };
+    var template;
+    var chalkTag = (chalk2, ...strings) => {
+      const [firstString] = strings;
+      if (!isArray(firstString) || !isArray(firstString.raw)) {
+        return strings.join(" ");
+      }
+      const arguments_ = strings.slice(1);
+      const parts = [firstString.raw[0]];
+      for (let i = 1; i < firstString.length; i++) {
+        parts.push(String(arguments_[i - 1]).replace(/[{}\\]/g, "\\$&"), String(firstString.raw[i]));
+      }
+      if (template === void 0) {
+        template = require_templates();
+      }
+      return template(chalk2, parts.join(""));
+    };
+    Object.defineProperties(Chalk.prototype, styles);
+    var chalk = Chalk();
+    chalk.supportsColor = stdoutColor;
+    chalk.stderr = Chalk({ level: stderrColor ? stderrColor.level : 0 });
+    chalk.stderr.supportsColor = stderrColor;
+    module.exports = chalk;
+  }
+});
+
+// node_modules/.pnpm/is-unicode-supported@0.1.0/node_modules/is-unicode-supported/index.js
+var require_is_unicode_supported = __commonJS({
+  "node_modules/.pnpm/is-unicode-supported@0.1.0/node_modules/is-unicode-supported/index.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    module.exports = () => {
+      if (process.platform !== "win32") {
+        return true;
+      }
+      return Boolean(process.env.CI) || Boolean(process.env.WT_SESSION) || process.env.TERM_PROGRAM === "vscode" || process.env.TERM === "xterm-256color" || process.env.TERM === "alacritty";
+    };
+  }
+});
+
+// node_modules/.pnpm/log-symbols@4.1.0/node_modules/log-symbols/index.js
+var require_log_symbols = __commonJS({
+  "node_modules/.pnpm/log-symbols@4.1.0/node_modules/log-symbols/index.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    var chalk = require_source();
+    var isUnicodeSupported = require_is_unicode_supported();
+    var main = {
+      info: chalk.blue("\u2139"),
+      success: chalk.green("\u2714"),
+      warning: chalk.yellow("\u26A0"),
+      error: chalk.red("\u2716")
+    };
+    var fallback = {
+      info: chalk.blue("i"),
+      success: chalk.green("\u221A"),
+      warning: chalk.yellow("\u203C"),
+      error: chalk.red("\xD7")
+    };
+    module.exports = isUnicodeSupported() ? main : fallback;
+  }
+});
+
+// node_modules/.pnpm/detect-newline@3.1.0/node_modules/detect-newline/index.js
+var require_detect_newline = __commonJS({
+  "node_modules/.pnpm/detect-newline@3.1.0/node_modules/detect-newline/index.js"(exports, module) {
+    "use strict";
+    init_esm_shims();
+    var detectNewline2 = (string) => {
+      if (typeof string !== "string") {
+        throw new TypeError("Expected a string");
+      }
+      const newlines = string.match(/(?:\r?\n)/g) || [];
+      if (newlines.length === 0) {
+        return;
+      }
+      const crlf = newlines.filter((newline) => newline === "\r\n").length;
+      const lf = newlines.length - crlf;
+      return crlf > lf ? "\r\n" : "\n";
+    };
+    module.exports = detectNewline2;
+    module.exports.graceful = (string) => typeof string === "string" && detectNewline2(string) || "\n";
+  }
+});
+
+// src/release-type.ts
+init_esm_shims();
+import { ReleaseType } from "semver";
+var prereleaseTypes = ["premajor", "preminor", "prepatch", "prerelease"];
+var releaseTypes = prereleaseTypes.concat(["major", "minor", "patch"]);
+function isPrerelease(value) {
+  return prereleaseTypes.includes(value);
+}
+function isReleaseType(value) {
+  return releaseTypes.includes(value);
+}
+
+// src/types/version-bump-progress.ts
+init_esm_shims();
+var ProgressEvent = /* @__PURE__ */ ((ProgressEvent2) => {
+  ProgressEvent2["FileUpdated"] = "file updated";
+  ProgressEvent2["FileSkipped"] = "file skipped";
+  ProgressEvent2["GitCommit"] = "git commit";
+  ProgressEvent2["GitTag"] = "git tag";
+  ProgressEvent2["GitPush"] = "git push";
+  ProgressEvent2["NpmScript"] = "npm script";
+  return ProgressEvent2;
+})(ProgressEvent || {});
+var NpmScript = /* @__PURE__ */ ((NpmScript2) => {
+  NpmScript2["PreVersion"] = "preversion";
+  NpmScript2["Version"] = "version";
+  NpmScript2["PostVersion"] = "postversion";
+  return NpmScript2;
+})(NpmScript || {});
+
+// src/version-bump.ts
+init_esm_shims();
+var import_log_symbols = __toESM(require_log_symbols());
+import * as ezSpawn3 from "@jsdevtools/ez-spawn";
+import { bold as bold2, cyan, green as green2 } from "kleur";
+import prompts2 from "prompts";
+
+// src/get-new-version.ts
+init_esm_shims();
+import { bold, green } from "kleur";
+import prompts from "prompts";
+import semver, { SemVer, clean as cleanVersion, valid as isValidVersion } from "semver";
+async function getNewVersion(operation) {
+  const { release } = operation.options;
+  const { oldVersion } = operation.state;
+  switch (release.type) {
+    case "prompt":
+      return promptForNewVersion(operation);
+    case "version":
+      return operation.update({
+        newVersion: new SemVer(release.version, true).version
+      });
+    default:
+      return operation.update({
+        release: release.type,
+        newVersion: getNextVersion(oldVersion, release)
+      });
+  }
+}
+function getNextVersion(oldVersion, bump) {
+  const oldSemVer = new SemVer(oldVersion);
+  const newSemVer = oldSemVer.inc(bump.type, bump.preid);
+  if (isPrerelease(bump.type) && newSemVer.prerelease.length === 2 && newSemVer.prerelease[0] === bump.preid && String(newSemVer.prerelease[1]) === "0") {
+    newSemVer.prerelease[1] = "1";
+    newSemVer.format();
+  }
+  return newSemVer.version;
+}
+function getNextVersions(oldVersion, preid) {
+  var _a;
+  const next = {};
+  const parse = semver.parse(oldVersion);
+  if (typeof (parse == null ? void 0 : parse.prerelease[0]) === "string")
+    preid = (parse == null ? void 0 : parse.prerelease[0]) || "preid";
+  for (const type of releaseTypes)
+    next[type] = semver.inc(oldVersion, type, preid);
+  next.next = ((_a = parse == null ? void 0 : parse.prerelease) == null ? void 0 : _a.length) ? semver.inc(oldVersion, "prerelease", preid) : semver.inc(oldVersion, "patch");
+  return next;
+}
+async function promptForNewVersion(operation) {
+  const { oldVersion } = operation.state;
+  const release = operation.options.release;
+  const next = getNextVersions(oldVersion, release.preid);
+  const PADDING = 13;
+  const answers = await prompts([
+    {
+      type: "autocomplete",
+      name: "release",
+      message: `Current version ${green(oldVersion)}`,
+      initial: "next",
+      choices: [
+        { value: "major", title: `${"major".padStart(PADDING, " ")} ${bold(next.major)}` },
+        { value: "minor", title: `${"minor".padStart(PADDING, " ")} ${bold(next.minor)}` },
+        { value: "patch", title: `${"patch".padStart(PADDING, " ")} ${bold(next.patch)}` },
+        { value: "next", title: `${"next".padStart(PADDING, " ")} ${bold(next.next)}` },
+        { value: "prepatch", title: `${"pre-patch".padStart(PADDING, " ")} ${bold(next.prepatch)}` },
+        { value: "preminor", title: `${"pre-minor".padStart(PADDING, " ")} ${bold(next.preminor)}` },
+        { value: "premajor", title: `${"pre-major".padStart(PADDING, " ")} ${bold(next.premajor)}` },
+        { value: "none", title: `${"as-is".padStart(PADDING, " ")} ${bold(oldVersion)}` },
+        { value: "custom", title: "custom ...".padStart(PADDING + 4, " ") }
+      ]
+    },
+    {
+      type: (prev) => prev === "custom" ? "text" : null,
+      name: "custom",
+      message: "Enter the new version number:",
+      initial: oldVersion,
+      validate: (custom) => {
+        return isValidVersion(custom) ? true : "That's not a valid version number";
+      }
+    }
+  ]);
+  const newVersion = answers.release === "none" ? oldVersion : answers.release === "custom" ? cleanVersion(answers.custom) : next[answers.release];
+  if (!newVersion)
+    process.exit(1);
+  switch (answers.release) {
+    case "custom":
+    case "next":
+    case "none":
+      return operation.update({ newVersion });
+    default:
+      return operation.update({ release: answers.release, newVersion });
+  }
+}
+
+// src/get-old-version.ts
+init_esm_shims();
+import { valid as isValidVersion2 } from "semver";
+
+// src/fs.ts
+init_esm_shims();
+import fs from "fs";
+import path from "path";
+
+// node_modules/.pnpm/detect-indent@7.0.0/node_modules/detect-indent/index.js
+init_esm_shims();
+var INDENT_REGEX = /^(?:( )+|\t+)/;
+var INDENT_TYPE_SPACE = "space";
+var INDENT_TYPE_TAB = "tab";
+function makeIndentsMap(string, ignoreSingleSpaces) {
+  const indents = /* @__PURE__ */ new Map();
+  let previousSize = 0;
+  let previousIndentType;
+  let key;
+  for (const line of string.split(/\n/g)) {
+    if (!line) {
+      continue;
+    }
+    let indent;
+    let indentType;
+    let weight;
+    let entry;
+    const matches = line.match(INDENT_REGEX);
+    if (matches === null) {
+      previousSize = 0;
+      previousIndentType = "";
+    } else {
+      indent = matches[0].length;
+      indentType = matches[1] ? INDENT_TYPE_SPACE : INDENT_TYPE_TAB;
+      if (ignoreSingleSpaces && indentType === INDENT_TYPE_SPACE && indent === 1) {
+        continue;
+      }
+      if (indentType !== previousIndentType) {
+        previousSize = 0;
+      }
+      previousIndentType = indentType;
+      weight = 0;
+      const indentDifference = indent - previousSize;
+      previousSize = indent;
+      if (indentDifference === 0) {
+        weight++;
+      } else {
+        const absoluteIndentDifference = indentDifference > 0 ? indentDifference : -indentDifference;
+        key = encodeIndentsKey(indentType, absoluteIndentDifference);
+      }
+      entry = indents.get(key);
+      entry = entry === void 0 ? [1, 0] : [++entry[0], entry[1] + weight];
+      indents.set(key, entry);
+    }
+  }
+  return indents;
+}
+function encodeIndentsKey(indentType, indentAmount) {
+  const typeCharacter = indentType === INDENT_TYPE_SPACE ? "s" : "t";
+  return typeCharacter + String(indentAmount);
+}
+function decodeIndentsKey(indentsKey) {
+  const keyHasTypeSpace = indentsKey[0] === "s";
+  const type = keyHasTypeSpace ? INDENT_TYPE_SPACE : INDENT_TYPE_TAB;
+  const amount = Number(indentsKey.slice(1));
+  return { type, amount };
+}
+function getMostUsedKey(indents) {
+  let result;
+  let maxUsed = 0;
+  let maxWeight = 0;
+  for (const [key, [usedCount, weight]] of indents) {
+    if (usedCount > maxUsed || usedCount === maxUsed && weight > maxWeight) {
+      maxUsed = usedCount;
+      maxWeight = weight;
+      result = key;
+    }
+  }
+  return result;
+}
+function makeIndentString(type, amount) {
+  const indentCharacter = type === INDENT_TYPE_SPACE ? " " : "	";
+  return indentCharacter.repeat(amount);
+}
+function detectIndent(string) {
+  if (typeof string !== "string") {
+    throw new TypeError("Expected a string");
+  }
+  let indents = makeIndentsMap(string, true);
+  if (indents.size === 0) {
+    indents = makeIndentsMap(string, false);
+  }
+  const keyOfMostUsedIndent = getMostUsedKey(indents);
+  let type;
+  let amount = 0;
+  let indent = "";
+  if (keyOfMostUsedIndent !== void 0) {
+    ({ type, amount } = decodeIndentsKey(keyOfMostUsedIndent));
+    indent = makeIndentString(type, amount);
+  }
+  return {
+    amount,
+    type,
+    indent
+  };
+}
+
+// src/fs.ts
+var import_detect_newline = __toESM(require_detect_newline());
+async function readJsonFile(name, cwd) {
+  const file = await readTextFile(name, cwd);
+  const data = JSON.parse(file.data);
+  const indent = detectIndent(file.data).indent;
+  const newline = (0, import_detect_newline.default)(file.data);
+  return __spreadProps(__spreadValues({}, file), { data, indent, newline });
+}
+async function writeJsonFile(file) {
+  let json = JSON.stringify(file.data, void 0, file.indent);
+  if (file.newline)
+    json += file.newline;
+  return writeTextFile(__spreadProps(__spreadValues({}, file), { data: json }));
+}
+function readTextFile(name, cwd) {
+  return new Promise((resolve, reject) => {
+    const filePath = path.join(cwd, name);
+    fs.readFile(filePath, "utf8", (err, text) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve({
+          path: filePath,
+          data: text
+        });
+      }
+    });
+  });
+}
+function writeTextFile(file) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(file.path, file.data, (err) => {
+      if (err)
+        reject(err);
+      else
+        resolve();
+    });
+  });
+}
+
+// src/manifest.ts
+init_esm_shims();
+function isManifest(obj) {
+  return obj && typeof obj === "object" && isOptionalString(obj.name) && isOptionalString(obj.version) && isOptionalString(obj.description);
+}
+function isOptionalString(value) {
+  const type = typeof value;
+  return value === null || type === "undefined" || type === "string";
+}
+
+// src/get-old-version.ts
+async function getOldVersion(operation) {
+  const { cwd, files } = operation.options;
+  const filesToCheck = files.filter((file) => file.endsWith(".json"));
+  if (!filesToCheck.includes("package.json"))
+    filesToCheck.push("package.json");
+  for (const file of filesToCheck) {
+    const version = await readVersion(file, cwd);
+    if (version) {
+      return operation.update({
+        oldVersionSource: file,
+        oldVersion: version
+      });
+    }
+  }
+  throw new Error(`Unable to determine the current version number. Checked ${filesToCheck.join(", ")}.`);
+}
+async function readVersion(file, cwd) {
+  try {
+    const { data: manifest } = await readJsonFile(file, cwd);
+    if (isManifest(manifest)) {
+      if (isValidVersion2(manifest.version))
+        return manifest.version;
+    }
+  } catch (error) {
+    return void 0;
+  }
+}
+
+// src/git.ts
+init_esm_shims();
+import * as ezSpawn from "@jsdevtools/ez-spawn";
+async function gitCommit(operation) {
+  if (!operation.options.commit)
+    return operation;
+  const { all, noVerify, message } = operation.options.commit;
+  const { updatedFiles, newVersion } = operation.state;
+  let args = [];
+  if (all) {
+    args.push("--all");
+  }
+  if (noVerify) {
+    args.push("--no-verify");
+  }
+  const commitMessage = formatVersionString(message, newVersion);
+  args.push("--message", commitMessage);
+  if (!all)
+    args = args.concat(updatedFiles);
+  await ezSpawn.async("git", ["commit", ...args]);
+  return operation.update({ event: "git commit" /* GitCommit */, commitMessage });
+}
+async function gitTag(operation) {
+  if (!operation.options.tag)
+    return operation;
+  const { commit, tag } = operation.options;
+  const { newVersion } = operation.state;
+  const args = [
+    "--annotate",
+    "--message",
+    formatVersionString(commit.message, newVersion)
+  ];
+  const tagName = formatVersionString(tag.name, newVersion);
+  args.push(tagName);
+  await ezSpawn.async("git", ["tag", ...args]);
+  return operation.update({ event: "git tag" /* GitTag */, tagName });
+}
+async function gitPush(operation) {
+  if (!operation.options.push)
+    return operation;
+  await ezSpawn.async("git", "push");
+  if (operation.options.tag) {
+    await ezSpawn.async("git", ["push", "--tags"]);
+  }
+  return operation.update({ event: "git push" /* GitPush */ });
+}
+function formatVersionString(template, newVersion) {
+  if (template.includes("%s"))
+    return template.replace(/%s/g, newVersion);
+  else
+    return template + newVersion;
+}
+
+// src/operation.ts
+init_esm_shims();
+
+// src/normalize-options.ts
+init_esm_shims();
+import fg from "fast-glob";
+async function normalizeOptions(raw) {
+  var _a;
+  const preid = typeof raw.preid === "string" ? raw.preid : "beta";
+  const push = Boolean(raw.push);
+  const all = Boolean(raw.all);
+  const noVerify = Boolean(raw.noVerify);
+  const cwd = raw.cwd || process.cwd();
+  const ignoreScripts = Boolean(raw.ignoreScripts);
+  const execute = raw.execute;
+  let release;
+  if (!raw.release || raw.release === "prompt")
+    release = { type: "prompt", preid };
+  else if (isReleaseType(raw.release))
+    release = { type: raw.release, preid };
+  else
+    release = { type: "version", version: raw.release };
+  let tag;
+  if (typeof raw.tag === "string")
+    tag = { name: raw.tag };
+  else if (raw.tag)
+    tag = { name: "v" };
+  let commit;
+  if (typeof raw.commit === "string")
+    commit = { all, noVerify, message: raw.commit };
+  else if (raw.commit || tag || push)
+    commit = { all, noVerify, message: "chore: release v" };
+  const files = await fg(((_a = raw.files) == null ? void 0 : _a.length) ? raw.files : ["package.json", "package-lock.json"], { cwd, onlyFiles: true });
+  let ui;
+  if (raw.interface === false) {
+    ui = { input: false, output: false };
+  } else if (raw.interface === true || !raw.interface) {
+    ui = { input: process.stdin, output: process.stdout };
+  } else {
+    let _b = raw.interface, { input, output } = _b, other = __objRest(_b, ["input", "output"]);
+    if (input === true || input !== false && !input)
+      input = process.stdin;
+    if (output === true || output !== false && !output)
+      output = process.stdout;
+    ui = __spreadValues({ input, output }, other);
+  }
+  if (release.type === "prompt" && !(ui.input && ui.output))
+    throw new Error("Cannot prompt for the version number because input or output has been disabled.");
+  return { release, commit, tag, push, files, cwd, interface: ui, ignoreScripts, execute };
+}
+
+// src/operation.ts
+var Operation = class {
+  constructor(options, progress) {
+    this.state = {
+      release: void 0,
+      oldVersion: "",
+      oldVersionSource: "",
+      newVersion: "",
+      commitMessage: "",
+      tagName: "",
+      updatedFiles: [],
+      skippedFiles: []
+    };
+    this.options = options;
+    this._progress = progress;
+  }
+  get results() {
+    const options = this.options;
+    const state = this.state;
+    return {
+      release: state.release,
+      oldVersion: state.oldVersion,
+      newVersion: state.newVersion,
+      commit: options.commit ? state.commitMessage : false,
+      tag: options.tag ? state.tagName : false,
+      updatedFiles: state.updatedFiles.slice(),
+      skippedFiles: state.skippedFiles.slice()
+    };
+  }
+  static async start(input) {
+    const options = await normalizeOptions(input);
+    return new Operation(options, input.progress);
+  }
+  update(_a) {
+    var _b = _a, { event, script } = _b, newState = __objRest(_b, ["event", "script"]);
+    Object.assign(this.state, newState);
+    if (event && this._progress) {
+      this._progress(__spreadValues({ event, script }, this.results));
+    }
+    return this;
+  }
+};
+
+// src/run-npm-script.ts
+init_esm_shims();
+import * as ezSpawn2 from "@jsdevtools/ez-spawn";
+async function runNpmScript(script, operation) {
+  const { cwd, ignoreScripts } = operation.options;
+  if (!ignoreScripts) {
+    const { data: manifest } = await readJsonFile("package.json", cwd);
+    if (isManifest(manifest) && hasScript(manifest, script)) {
+      await ezSpawn2.async("npm", ["run", script, "--silent"], { stdio: "inherit" });
+      operation.update({ event: "npm script" /* NpmScript */, script });
+    }
+  }
+  return operation;
+}
+function hasScript(manifest, script) {
+  const scripts = manifest.scripts;
+  if (scripts && typeof scripts === "object")
+    return Boolean(scripts[script]);
+  return false;
+}
+
+// src/update-files.ts
+init_esm_shims();
+import * as path2 from "path";
+async function updateFiles(operation) {
+  const { files } = operation.options;
+  for (const relPath of files) {
+    const modified = await updateFile(relPath, operation);
+    if (modified) {
+      operation.update({
+        event: "file updated" /* FileUpdated */,
+        updatedFiles: operation.state.updatedFiles.concat(relPath)
+      });
+    } else {
+      operation.update({
+        event: "file skipped" /* FileSkipped */,
+        skippedFiles: operation.state.skippedFiles.concat(relPath)
+      });
+    }
+  }
+  return operation;
+}
+async function updateFile(relPath, operation) {
+  const name = path2.basename(relPath).trim().toLowerCase();
+  switch (name) {
+    case "package.json":
+    case "package-lock.json":
+    case "bower.json":
+    case "component.json":
+      return updateManifestFile(relPath, operation);
+    default:
+      return updateTextFile(relPath, operation);
+  }
+}
+async function updateManifestFile(relPath, operation) {
+  const { cwd } = operation.options;
+  const { newVersion } = operation.state;
+  let modified = false;
+  const file = await readJsonFile(relPath, cwd);
+  if (isManifest(file.data) && file.data.version !== newVersion) {
+    file.data.version = newVersion;
+    await writeJsonFile(file);
+    modified = true;
+  }
+  return modified;
+}
+async function updateTextFile(relPath, operation) {
+  const { cwd } = operation.options;
+  const { oldVersion, newVersion } = operation.state;
+  const modified = false;
+  const file = await readTextFile(relPath, cwd);
+  if (file.data.includes(oldVersion)) {
+    const sanitizedVersion = oldVersion.replace(/(\W)/g, "\\$1");
+    const replacePattern = new RegExp(`(\\b|v)${sanitizedVersion}\\b`, "g");
+    file.data = file.data.replace(replacePattern, `$1${newVersion}`);
+    await writeTextFile(file);
+    return true;
+  }
+  return modified;
+}
+
+// src/version-bump.ts
+async function versionBump(arg = {}) {
+  if (typeof arg === "string")
+    arg = { release: arg };
+  const operation = await Operation.start(arg);
+  await getOldVersion(operation);
+  await getNewVersion(operation);
+  if (arg.confirm) {
+    printSummary(operation);
+    if (!await prompts2({
+      name: "yes",
+      type: "confirm",
+      message: "Bump?",
+      initial: true
+    }).then((r) => r.yes))
+      process.exit(1);
+  }
+  await runNpmScript("preversion" /* PreVersion */, operation);
+  await updateFiles(operation);
+  if (operation.options.execute) {
+    console.log(import_log_symbols.info, "Executing script", operation.options.execute);
+    await ezSpawn3.async(operation.options.execute, { stdio: "inherit" });
+    console.log(import_log_symbols.success, "Script finished");
+  }
+  await runNpmScript("version" /* Version */, operation);
+  await gitCommit(operation);
+  await gitTag(operation);
+  await runNpmScript("postversion" /* PostVersion */, operation);
+  await gitPush(operation);
+  return operation.results;
+}
+function printSummary(operation) {
+  console.log();
+  console.log(`   files ${operation.options.files.map((i) => bold2(i)).join(", ")}`);
+  if (operation.options.commit)
+    console.log(`  commit ${bold2(formatVersionString(operation.options.commit.message, operation.state.newVersion))}`);
+  if (operation.options.tag)
+    console.log(`     tag ${bold2(formatVersionString(operation.options.tag.name, operation.state.newVersion))}`);
+  if (operation.options.execute)
+    console.log(` execute ${bold2(operation.options.execute)}`);
+  if (operation.options.push)
+    console.log(`    push ${cyan(bold2("yes"))}`);
+  console.log();
+  console.log(`    from ${bold2(operation.state.oldVersion)}`);
+  console.log(`      to ${green2(bold2(operation.state.newVersion))}`);
+  console.log();
+}
+async function versionBumpInfo(arg = {}) {
+  if (typeof arg === "string")
+    arg = { release: arg };
+  const operation = await Operation.start(arg);
+  await getOldVersion(operation);
+  await getNewVersion(operation);
+  return operation;
+}
+
+export {
+  __toESM,
+  init_esm_shims,
+  require_log_symbols,
+  ReleaseType,
+  isReleaseType,
+  ProgressEvent,
+  NpmScript,
+  versionBump,
+  versionBumpInfo
+};
