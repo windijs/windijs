@@ -107,46 +107,46 @@
 <pre><code class="language-js"><span class="hl-11">export</span><span class="hl-1"> </span><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">gradient</span><span class="hl-1"> = </span><span class="hl-5">createUtility</span><span class="hl-1">(</span><span class="hl-6">&quot;gradient&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">gradientDirectionConfig</span><span class="hl-1">, </span><span class="hl-3">buildGradientDirection</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">use</span><span class="hl-1">(</span><span class="hl-5">configHandler</span><span class="hl-1">(</span><span class="hl-3">gradientConfig</span><span class="hl-1">, </span><span class="hl-6">&quot;backgroundImage&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">  .</span><span class="hl-5">init</span><span class="hl-1">()</span>
 </code></pre>
 <p>Each created utility is an <a href="">ES6 Proxy</a>, which wll only be called at runtime. At the same time, by using <code>config Object</code> like <a href="">gradientDirectionConfig</a>, we can merge all types, so you should have a perfect completion system.</p>
-<p>Creating your utilities has never been easier, you can even create your own framework by using windi&#39;s api. If you want to do this. you can refer to <a href="">@windi/utilities</a> which should be a perfect example.</p>
+<p>Creating your utilities has never been easier, you can even create your own framework by using windi&#39;s api. If you want to do this. you can refer to <a href="">@windijs/utilities</a> which should be a perfect example.</p>
 <p>To learn more, please check <a href="">the documentation website</a>.</p>
 
 <a href="#packages" id="packages" style="color: inherit; text-decoration: none;">
   <h2>Packages</h2>
 </a>
 
-<a href="#windicore" id="windicore" style="color: inherit; text-decoration: none;">
-  <h3><a href="">@windi/core</a></h3>
+<a href="#windijscore" id="windijscore" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windijs/core</a></h3>
 </a>
 <p>Core apis of windijs, like <code>createUtility</code>, <code>createVariant</code>, <code>colorHandler</code>, <code>configHandler</code>, ...</p>
 
-<a href="#windicolors" id="windicolors" style="color: inherit; text-decoration: none;">
-  <h3><a href="">@windi/colors</a></h3>
+<a href="#windijscolors" id="windijscolors" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windijs/colors</a></h3>
 </a>
 <p>Colors of some popular web framework (<a href="">apple</a>/<a href="">bootstrap</a>/<a href="">bulma</a>/<a href="">material</a>/<a href="">tailwind</a>/<a href="">web</a>/<a href="">windi</a>), you can choose the best for yourself. And also don&#39;t forget to say thanks to all these frameworks and their developers.</p>
 
-<a href="#windiconfig" id="windiconfig" style="color: inherit; text-decoration: none;">
-  <h3><a href="">@windi/config</a></h3>
+<a href="#windijsconfig" id="windijsconfig" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windijs/config</a></h3>
 </a>
 <p>The config variables of windi utilities. Also modular, you can import or expand the config of corresponding utility. The naming rule is <code>camelCased(utilityName) + Config</code>.
 for example, <code>backgroundSizeConfig</code>.</p>
 
-<a href="#windipreflight" id="windipreflight" style="color: inherit; text-decoration: none;">
-  <h3><a href="">@windi/preflight</a></h3>
+<a href="#windijspreflight" id="windijspreflight" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windijs/preflight</a></h3>
 </a>
 <p>Generate reset css.</p>
 
-<a href="#windiutilities" id="windiutilities" style="color: inherit; text-decoration: none;">
-  <h3><a href="">@windi/utilities</a></h3>
+<a href="#windijsutilities" id="windijsutilities" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windijs/utilities</a></h3>
 </a>
 <p>All windi utilities, like <code>bg</code>, <code>text</code>, <code>p</code>, <code>m</code>, ...</p>
 
-<a href="#windivariants" id="windivariants" style="color: inherit; text-decoration: none;">
-  <h3><a href="">@windi/variants</a></h3>
+<a href="#windijsvariants" id="windijsvariants" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windijs/variants</a></h3>
 </a>
 <p>All windi variants, like <code>sm</code>, <code>md</code>, <code>hover</code>, <code>focus</code>, <code>dark</code>, ...</p>
 
-<a href="#windihelpers" id="windihelpers" style="color: inherit; text-decoration: none;">
-  <h3><a href="">@windi/helpers</a></h3>
+<a href="#windijshelpers" id="windijshelpers" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windijs/helpers</a></h3>
 </a>
 <p>Operations related to css.</p>
 <ul>
@@ -157,8 +157,8 @@ for example, <code>backgroundSizeConfig</code>.</p>
 <li>others: [<code>useProxy</code>, <code>alphaNamer</code>, <code>hashNamer</code>, ...]</li>
 </ul>
 
-<a href="#windishared" id="windishared" style="color: inherit; text-decoration: none;">
-  <h3><a href="">@windi/shared</a></h3>
+<a href="#windijsshared" id="windijsshared" style="color: inherit; text-decoration: none;">
+  <h3><a href="">@windijs/shared</a></h3>
 </a>
 <p>Internal shared funcs and utils.</p>
 
@@ -201,27 +201,27 @@ for example, <code>backgroundSizeConfig</code>.</p>
 <ul>
 <li class="current selected"><a href="modules.html">Windi <wbr/>Docs</a>
 <ul>
-<li class="tsd-kind-module"><a href="modules/_windi_colors.html">@windi/colors -<wbr/> v1.0.0</a></li>
-<li class="tsd-kind-module"><a href="modules/_windi_config.html">@windi/config -<wbr/> v1.0.0</a></li>
-<li class="tsd-kind-module"><a href="modules/_windi_core.html">@windi/core -<wbr/> v1.0.0</a>
+<li class="tsd-kind-module"><a href="modules/_windijs_colors.html">@windijs/colors -<wbr/> v1.0.0</a></li>
+<li class="tsd-kind-module"><a href="modules/_windijs_config.html">@windijs/config -<wbr/> v1.0.0</a></li>
+<li class="tsd-kind-module"><a href="modules/_windijs_core.html">@windijs/core -<wbr/> v1.0.0</a>
 <ul>
-<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_core.internal.html">internal</a></li></ul></li>
-<li class="tsd-kind-module"><a href="modules/_windi_helpers.html">@windi/helpers -<wbr/> v1.0.0</a>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windijs_core.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windijs_helpers.html">@windijs/helpers -<wbr/> v1.0.0</a>
 <ul>
-<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_helpers.internal.html">internal</a></li></ul></li>
-<li class="tsd-kind-module"><a href="modules/_windi_shared.html">@windi/shared -<wbr/> v1.0.0</a>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windijs_helpers.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windijs_shared.html">@windijs/shared -<wbr/> v1.0.0</a>
 <ul>
-<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_shared.internal.html">internal</a></li></ul></li>
-<li class="tsd-kind-module"><a href="modules/_windi_style.html">@windi/style -<wbr/> v1.0.0</a>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windijs_shared.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windijs_style.html">@windijs/style -<wbr/> v1.0.0</a>
 <ul>
-<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_style.internal.html">internal</a></li></ul></li>
-<li class="tsd-kind-module"><a href="modules/_windi_transformer.html">@windi/transformer -<wbr/> v1.0.0</a></li>
-<li class="tsd-kind-module"><a href="modules/_windi_utilities.html">@windi/utilities -<wbr/> v1.0.0</a>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windijs_style.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windijs_transformer.html">@windijs/transformer -<wbr/> v1.0.0</a></li>
+<li class="tsd-kind-module"><a href="modules/_windijs_utilities.html">@windijs/utilities -<wbr/> v1.0.0</a>
 <ul>
-<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_utilities.internal.html">internal</a></li></ul></li>
-<li class="tsd-kind-module"><a href="modules/_windi_variants.html">@windi/variants -<wbr/> v1.0.0</a>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windijs_utilities.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-module"><a href="modules/_windijs_variants.html">@windijs/variants -<wbr/> v1.0.0</a>
 <ul>
-<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windi_variants.internal.html">internal</a></li></ul></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/_windijs_variants.internal.html">internal</a></li></ul></li>
 <li class="tsd-kind-module"><a href="modules/windijs.html">windijs -<wbr/> v1.0.0</a>
 <ul>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/windijs.internal.html">internal</a></li></ul></li></ul></li></ul></div></details></nav></div></div>
