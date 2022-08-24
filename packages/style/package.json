@@ -1,6 +1,6 @@
 {
   "name": "@windijs/style",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.0",
   "description": "@windijs/style",
   "main": "dist/style.js",
   "module": "dist/style.mjs",
@@ -16,9 +16,9 @@
     "windicss"
   ],
   "dependencies": {
-    "@windijs/core": "1.0.0",
-    "@windijs/helpers": "1.0.0",
-    "@windijs/shared": "1.0.0"
+    "@windijs/core": "1.0.0-beta.0",
+    "@windijs/helpers": "1.0.0-beta.0",
+    "@windijs/shared": "1.0.0-beta.0"
   },
   "devDependencies": {
     "@windijs/config": "1.0.0",
