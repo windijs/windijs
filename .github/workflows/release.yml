@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run tests
-        run: pnpm tests
+        run: pnpm test
       - name: Build project
         run: pnpm build:prod
       - name: Publish to npm
