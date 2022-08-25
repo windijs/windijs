@@ -20,4 +20,4 @@ export function w (node: HTMLElement, utilities: (StyleObject | StyleObject[])[]
   };
 }
 
-export * from "windijs";
+export { bg, text, lg, font } from "windijs";
