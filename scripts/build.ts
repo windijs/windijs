@@ -31,6 +31,7 @@ const dtsConfig: CompilerOptions = {
   paths: {
     "@windijs/*": ["packages/*/src/index.ts"],
   },
+  stripInternal: true,
 };
 
 async function build (target: string) {

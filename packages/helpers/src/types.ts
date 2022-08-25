@@ -58,9 +58,13 @@ export type UtilityMeta = {
 };
 
 export interface StyleObjectBase {
+  /** @internal */
   [SymbolCSS]: CSSObject | CSSMap;
+  /** @internal */
   [SymbolMeta]: UtilityMeta;
+  /** @internal */
   [SymbolData]: object | undefined,
+  /** @internal */
   [SymbolProxy]: true;
 }
 
