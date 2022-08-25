@@ -1,6 +1,6 @@
 {
   "name": "@windijs/colors",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "@windijs/colors",
   "main": "dist/colors.js",
   "module": "dist/colors.mjs",

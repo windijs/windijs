@@ -1,6 +1,6 @@
 {
   "name": "@windijs/variants",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "@windijs/variants",
   "main": "dist/variants.js",
   "module": "dist/variants.mjs",
@@ -17,18 +17,24 @@
   ],
   "author": "Raven Satir",
   "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/variants.mjs",
+      "require": "./dist/variants.js"
+    }
+  },
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "displayName": "@windijs/variants"
   },
   "dependencies": {
-    "@windijs/core": "1.0.0-beta.0",
-    "@windijs/helpers": "1.0.0-beta.0",
+    "@windijs/core": "1.0.0",
+    "@windijs/helpers": "1.0.0",
     "@windijs/shared": "1.0.0"
   },
   "devDependencies": {
-    "@windijs/colors": "1.0.0",
-    "@windijs/config": "1.0.0",
-    "@windijs/utilities": "1.0.0-beta.0"
+    "@windijs/colors": "1.0.1",
+    "@windijs/config": "1.0.1",
+    "@windijs/utilities": "1.0.0"
   }
 }

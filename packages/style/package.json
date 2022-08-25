@@ -1,6 +1,6 @@
 {
   "name": "@windijs/style",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "@windijs/style",
   "main": "dist/style.js",
   "module": "dist/style.mjs",
@@ -15,14 +15,20 @@
     "windijs",
     "windicss"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/style.mjs",
+      "require": "./dist/style.js"
+    }
+  },
   "dependencies": {
-    "@windijs/core": "1.0.0-beta.0",
-    "@windijs/helpers": "1.0.0-beta.0",
+    "@windijs/core": "1.0.0",
+    "@windijs/helpers": "1.0.0",
     "@windijs/shared": "1.0.0"
   },
   "devDependencies": {
-    "@windijs/config": "1.0.0",
-    "@windijs/colors": "1.0.0"
+    "@windijs/config": "1.0.1",
+    "@windijs/colors": "1.0.1"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

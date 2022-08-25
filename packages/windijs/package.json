@@ -1,6 +1,6 @@
 {
   "name": "windijs",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "utility-first css-in-js framework",
   "main": "dist/windijs.js",
   "module": "dist/windijs.mjs",
@@ -17,19 +17,25 @@
   ],
   "author": "Raven Satir",
   "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/windijs.mjs",
+      "require": "./dist/windijs.js"
+    }
+  },
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "displayName": "windijs",
     "readmeFile": "./README.md"
   },
   "dependencies": {
-    "@windijs/colors": "1.0.0",
-    "@windijs/config": "1.0.0",
-    "@windijs/core": "1.0.0-beta.0",
-    "@windijs/helpers": "1.0.0-beta.0",
+    "@windijs/colors": "1.0.1",
+    "@windijs/config": "1.0.1",
+    "@windijs/core": "1.0.0",
+    "@windijs/helpers": "1.0.0",
     "@windijs/shared": "1.0.0",
-    "@windijs/style": "1.0.0-beta.0",
-    "@windijs/utilities": "1.0.0-beta.0",
-    "@windijs/variants": "1.0.0-beta.0"
+    "@windijs/style": "1.0.0",
+    "@windijs/utilities": "1.0.0",
+    "@windijs/variants": "1.0.0"
   }
 }

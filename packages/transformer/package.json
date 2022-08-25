@@ -1,6 +1,7 @@
 {
   "name": "@windijs/transformer",
   "version": "1.0.0",
+  "private": true,
   "description": "@windijs/transformer",
   "main": "dist/transformer.js",
   "module": "dist/transformer.mjs",

@@ -15,13 +15,19 @@
     "windijs",
     "windicss"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/shared.mjs",
+      "require": "./dist/shared.js"
+    }
+  },
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "displayName": "@windijs/shared",
     "readmeFile": "./README.md"
   },
   "devDependencies": {
-    "@windijs/config": "1.0.0"
+    "@windijs/config": "1.0.1"
   },
   "author": "Raven Satir",
   "license": "MIT"
