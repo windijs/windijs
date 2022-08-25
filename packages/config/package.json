@@ -15,6 +15,12 @@
     "windijs",
     "windicss"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/config.mjs",
+      "require": "./dist/config.js"
+    }
+  },
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
