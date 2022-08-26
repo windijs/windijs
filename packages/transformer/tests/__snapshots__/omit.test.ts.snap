@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transform omit 1`] = `
+"export declare const fill: {
+    $colors: StyleObject<{}>;
+    \\"none\\": StyleObject<{}>;
+};
+export declare const stroke: {
+    $colors: StyleObject<{}>;
+    \\"none\\": StyleObject<{}>;
+};
+"
+`;
