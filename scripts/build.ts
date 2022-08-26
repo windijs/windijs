@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 
-import { CompilerOptions, ModuleKind, ScriptTarget, sys } from "typescript";
+import { CompilerOptions, ModuleKind, ScriptTarget, factory, sys } from "typescript";
 import { checkFileSize, countCPU, fuzzyMatchTarget, getTargets, removeDir, runParallel } from "./utils";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { importTypesTransformer, injectTransformer, intersectionTransformer, omitTransformer, updateVariableType, utilityTransformer } from "../packages/transformer/src";
 
 import { bundleDts } from "./bundle";
 import chalk from "chalk";
@@ -49,6 +51,8 @@ async function build (target: string) {
 
   const env = (pkg.buildOptions && pkg.buildOptions.env) || (isDev ? "development" : "production");
 
+  const isUtilities = target === "utilities";
+
   const rollup = await spawn("rollup", ["-c",
     "--environment",
     [
@@ -70,7 +74,19 @@ async function build (target: string) {
     if (code !== 0) sys.exit(1);
     if ((buildTypes || formats?.includes("dts")) && pkg.types) {
       console.log();
-      bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig);
+      if (isUtilities) {
+        bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig, {
+          afterDeclarations: [importTypesTransformer, omitTransformer, intersectionTransformer, injectTransformer, updateVariableType({
+            animate: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.animationConfig"))]),
+            colors: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.colorsConfig"))]),
+          })],
+        }, [utilityTransformer]);
+        // entry for import gen/utilities
+        if (!existsSync(path.join(pkgDir, "gen"))) mkdirSync(path.join(pkgDir, "gen"));
+        writeFileSync(path.join(pkgDir, "gen/index.d.ts"), "export * from \"./utilities\";\n");
+      } else {
+        bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig);
+      }
     }
     if (isCheckSize) {
       checkFileSize(path.join(pkgDir, `dist/${target}.${formats}.js`), minify);
