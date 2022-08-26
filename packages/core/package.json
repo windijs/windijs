@@ -1,6 +1,6 @@
 {
   "name": "@windijs/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "@windijs/core",
   "main": "dist/core.js",
   "module": "dist/core.mjs",
@@ -24,12 +24,12 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/shared": "1.0.0",
-    "@windijs/helpers": "1.0.0"
+    "@windijs/shared": "1.0.1",
+    "@windijs/helpers": "1.0.1"
   },
   "devDependencies": {
-    "@windijs/utilities": "1.0.0",
-    "@windijs/config": "1.0.1"
+    "@windijs/utilities": "1.0.1",
+    "@windijs/config": "1.0.2"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@windijs/config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "@windijs/config",
   "main": "dist/config.js",
   "module": "dist/config.mjs",
@@ -24,7 +24,7 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/shared": "1.0.0"
+    "@windijs/shared": "1.0.1"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

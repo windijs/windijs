@@ -1,6 +1,6 @@
 {
   "name": "@windijs/helpers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "@windijs/helpers",
   "main": "dist/helpers.js",
   "module": "dist/helpers.mjs",
@@ -24,13 +24,13 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/shared": "1.0.0"
+    "@windijs/shared": "1.0.1"
   },
   "devDependencies": {
-    "@windijs/utilities": "1.0.0",
-    "@windijs/variants": "1.0.0",
-    "@windijs/style": "1.0.0",
-    "@windijs/helpers": "1.0.0"
+    "@windijs/utilities": "1.0.1",
+    "@windijs/variants": "1.0.1",
+    "@windijs/style": "1.0.1",
+    "@windijs/helpers": "1.0.1"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

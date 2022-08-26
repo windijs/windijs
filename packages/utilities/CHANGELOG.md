@@ -1,5 +1,16 @@
 # @windijs/utilities
 
+## 1.0.1
+
+### Patch Changes
+
+- chore: release v1.0.1
+- feat: use new utilities generator
+- Updated dependencies
+  - @windijs/core@1.0.1
+  - @windijs/helpers@1.0.1
+  - @windijs/config@1.0.2
+
 ## 1.0.0
 
 ### Patch Changes
