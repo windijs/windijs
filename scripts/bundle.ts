@@ -144,20 +144,20 @@ export function emitDecl (fileNames: string[], options: CompilerOptions, transfo
 }
 
 /** Bundle .ts files, organize imports and exports */
-export function bundleTS (entry: string): string {
+export function bundleTS (entry: string, ...transformers: TransformerFactory<SourceFile>[]): string {
   const base = path.dirname(entry);
   const src = readFileSync(entry).toString();
 
   const dest = [
-    useTransformer(src, extractExports),
-    ...EXPORTS.map(i => path.join(base, i)).map(i => fs.existsSync(i) && fs.statSync(i).isDirectory() ? path.join(i, "index.ts") : (i.endsWith(".ts") ? i : (i + ".ts"))).map(i => readFileSync(i).toString()),
+    useTransformer(src, extractExports, ...transformers),
+    ...EXPORTS.map(i => path.join(base, i)).map(i => fs.existsSync(i) && fs.statSync(i).isDirectory() ? path.join(i, "index.ts") : (i.endsWith(".ts") ? i : (i + ".ts"))).map(i => useTransformer(readFileSync(i).toString(), ...transformers)),
   ].join("\n");
 
   return useTransformer(dest, organizeImportsExports);
 }
 
 /** Bundle .ts first, then generate dts for bundled file, then remove bundled .ts file, only keep generated .dts */
-export function bundleDts (entries: { input: string, output: string }[], options: CompilerOptions, transformers?: CustomTransformers) {
+export function bundleDts (entries: { input: string, output: string }[], options: CompilerOptions, transformers?: CustomTransformers, sourceTransformers: TransformerFactory<SourceFile>[] = []) {
   options = Object.assign(options, {
     lib: undefined, // If we set only ESNext and Dom, types like 'HTMLElement'/'CSSStyleDeclaration' will throw 'using private name' error.
     declaration: true,
@@ -173,7 +173,7 @@ export function bundleDts (entries: { input: string, output: string }[], options
 
     const temp = output.replace(".d.ts", ".ts");
     if (!fs.existsSync(path.dirname(temp))) fs.mkdirSync(path.dirname(temp));
-    fs.writeFileSync(temp, bundleTS(input));
+    fs.writeFileSync(temp, bundleTS(input, ...sourceTransformers));
     return temp;
   });
 
