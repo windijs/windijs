@@ -1,4 +1,4 @@
-import { Bundle, Node, SourceFile, TransformerFactory, factory, isIdentifier, isImportDeclaration, isImportTypeNode, isLiteralTypeNode, isNamedImports, isStringLiteral, visitEachChild, visitNode } from "typescript";
+import { Bundle, Node, SourceFile, TransformerFactory, Visitor, factory, isIdentifier, isImportDeclaration, isImportTypeNode, isLiteralTypeNode, isNamedImports, isStringLiteral, visitEachChild, visitNode } from "typescript";
 
 // TODO: we switched our dts plugin, maybe this transformer no longer needed.
 
@@ -37,9 +37,16 @@ export const importsTransformer: TransformerFactory<Bundle | SourceFile> = conte
 export const importTypesTransformer: TransformerFactory<Bundle | SourceFile> = context => {
   return sourceFile => {
     const imports: Record<string, string[]> = {};
-    const visitor = (node: Node): Node => {
+    const visitor: Visitor = (node) => {
       let item: string;
-      if (isImportTypeNode(node)) {
+      if (isImportDeclaration(node) && isStringLiteral(node.moduleSpecifier) && node.importClause?.namedBindings) {
+        if (isNamedImports(node.importClause.namedBindings)) {
+          imports[node.moduleSpecifier.text] = node.importClause.namedBindings.elements.map(i => i.name.escapedText.toString());
+          return undefined;
+        }
+      }
+
+      if (isImportTypeNode(node) && !node.isTypeOf) {
         if (isLiteralTypeNode(node.argument) && isStringLiteral(node.argument.literal) && node.qualifier && isIdentifier(node.qualifier)) {
           item = node.qualifier.escapedText.toString();
           if (!(node.argument.literal.text in imports)) {

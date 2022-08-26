@@ -1,4 +1,4 @@
-import { importsTransformer, useTransformer } from "../src";
+import { importTypesTransformer, importsTransformer, useTransformer } from "../src";
 
 test("Transform imports", () => {
   const code = `
@@ -26,4 +26,26 @@ declare const animate: {
     flash: StyleObject<{}>;
   `;
   expect(useTransformer(code, importsTransformer)).toMatchSnapshot();
+});
+
+test("Transform imports should keep typeof", () => {
+  const code = `
+export declare const dropShadow: {
+  lg: StyleObject<{}>;
+  xl: StyleObject<{}>;
+} & typeof import("@windijs/helpers").dropShadow & import("@windijs/helpers").StyleObjectBase;
+  `;
+  expect(useTransformer(code, importTypesTransformer)).toMatchSnapshot();
+});
+
+test("Transform imports should join old imports", () => {
+  const code = `
+import { buildLinearGradient, buildTransition } from "@windijs/core";
+import { CSSObject } from "@windijs/helpers";
+export declare const animate: {
+  none: import("@windijs/helpers").StyleObject<{}>;
+  spin: StyleObject<{}>;
+}
+  `;
+  expect(useTransformer(code, importTypesTransformer)).toMatchSnapshot();
 });

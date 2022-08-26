@@ -9,6 +9,25 @@ declare const before: VariantBuilder;
 "
 `;
 
+exports[`Transform imports should join old imports 1`] = `
+"import { buildLinearGradient, buildTransition } from \\"@windijs/core\\";
+import { CSSObject, StyleObject } from \\"@windijs/helpers\\";
+export declare const animate: {
+    none: StyleObject<{}>;
+    spin: StyleObject<{}>;
+};
+"
+`;
+
+exports[`Transform imports should keep typeof 1`] = `
+"import { StyleObjectBase } from \\"@windijs/helpers\\";
+export declare const dropShadow: {
+    lg: StyleObject<{}>;
+    xl: StyleObject<{}>;
+} & typeof import(\\"@windijs/helpers\\").dropShadow & StyleObjectBase;
+"
+`;
+
 exports[`Transform imports with type params 1`] = `
 "import { CSSObject, StyleObject } from \\"@windijs/helpers\\";
 import { buildLinearGradient, buildTransition } from \\"@windijs/core\\";
