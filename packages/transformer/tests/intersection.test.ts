@@ -28,3 +28,13 @@ declare const animate: {
 
   expect(useTransformer(code, intersectionTransformer)).toMatchSnapshot();
 });
+
+test("Intersection should remove duplicate signature", () => {
+  const code = `
+declare const animate: {
+  none: StyleObject<{}>;
+} & {
+  none: StyleObject2<{}>;
+}`;
+  expect(useTransformer(code, intersectionTransformer)).toMatchSnapshot();
+});

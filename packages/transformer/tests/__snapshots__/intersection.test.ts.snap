@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Intersection should remove duplicate signature 1`] = `
+"declare const animate: {
+    none: StyleObject2<{}>;
+};
+"
+`;
+
 exports[`Intersection shouldn't bundle index signature 1`] = `
 "declare const animate: {
     none: StyleObject<{}>;

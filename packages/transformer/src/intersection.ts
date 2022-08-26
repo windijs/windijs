@@ -1,4 +1,4 @@
-import { Bundle, Node, SourceFile, TransformerFactory, factory, isIndexSignatureDeclaration, isIntersectionTypeNode, isTypeLiteralNode, visitEachChild, visitNode } from "typescript";
+import { Bundle, Node, PropertySignature, SourceFile, TransformerFactory, factory, isIdentifier, isIndexSignatureDeclaration, isIntersectionTypeNode, isPropertySignature, isStringLiteral, isTypeLiteralNode, visitEachChild, visitNode } from "typescript";
 
 /**
  * Typescript Transform Plugin.
@@ -13,17 +13,25 @@ export const intersectionTransformer: TransformerFactory<Bundle | SourceFile> = 
   return sourceFile => {
     const visitor = (node: Node): Node => {
       if (isIntersectionTypeNode(node)) {
-        const literals = [];
+        const sigs: Record<string, PropertySignature> = {};
         const newTypes = [];
         for (const type of node.types) {
           if (isTypeLiteralNode(type) && !type.members.find(i => isIndexSignatureDeclaration(i))) {
-            literals.push(...type.members);
+            for (const m of type.members) {
+              if (isPropertySignature(m)) {
+                if (isIdentifier(m.name)) {
+                  sigs[m.name.escapedText.toString()] = m;
+                } else if (isStringLiteral(m.name)) {
+                  sigs[m.name.text] = m;
+                }
+              }
+            }
           } else {
             newTypes.push(type);
           }
         }
 
-        if (literals.length > 0) newTypes.unshift(factory.createTypeLiteralNode(literals));
+        if (Object.values(sigs).length > 0) newTypes.unshift(factory.createTypeLiteralNode(Object.values(sigs)));
 
         return factory.createIntersectionTypeNode(newTypes);
       }
