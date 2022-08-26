@@ -13,13 +13,13 @@ export const utilityTransformer: TransformerFactory<SourceFile> = context => {
         if (isIdentifier(node.expression)) {
           if ((node.expression.escapedText === "configHandler" || node.expression.escapedText === "fontSizeHandler") && isIdentifier(node.arguments[0])) {
             return factory.createArrowFunction(undefined, undefined, [], undefined, undefined,
-              factory.createAsExpression(factory.createObjectLiteralExpression([], false), factory.createTypeReferenceNode("Pick", [factory.createTypeReferenceNode("StyleProxy", [factory.createTypeQueryNode(factory.createIdentifier(node.arguments[0].escapedText.toString()))]), factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config." + node.arguments[0].escapedText.toString()))])),
+              factory.createAsExpression(factory.createObjectLiteralExpression([], false), factory.createTypeReferenceNode("Pick", [factory.createTypeReferenceNode("StyleProxy", [factory.createTypeQueryNode(factory.createIdentifier(node.arguments[0].escapedText.toString()))]), factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config." + node.arguments[0].escapedText.toString() + ".proxy"))])),
             );
           }
 
           if (node.expression.escapedText === "colorHandler" && isIdentifier(node.arguments[0])) {
             return factory.createArrowFunction(undefined, undefined, [], undefined, undefined,
-              factory.createAsExpression(factory.createObjectLiteralExpression([], false), factory.createTypeReferenceNode("Pick", [factory.createTypeReferenceNode("ColorStyleProxy", [factory.createTypeQueryNode(factory.createIdentifier(node.arguments[0].escapedText.toString()))]), factory.createLiteralTypeNode(factory.createStringLiteral("$windi.color." + node.arguments[0].escapedText.toString()))])),
+              factory.createAsExpression(factory.createObjectLiteralExpression([], false), factory.createTypeReferenceNode("Pick", [factory.createTypeReferenceNode("ColorStyleProxy", [factory.createTypeQueryNode(factory.createIdentifier(node.arguments[0].escapedText.toString()))]), factory.createLiteralTypeNode(factory.createStringLiteral("$windi.color." + node.arguments[0].escapedText.toString() + ".proxy"))])),
             );
           }
         }

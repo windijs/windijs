@@ -77,7 +77,7 @@ async function build (target: string) {
       if (isUtilities) {
         bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig, {
           afterDeclarations: [importTypesTransformer, omitTransformer, intersectionTransformer, injectTransformer, updateVariableType({
-            animate: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.animationConfig"))]),
+            animate: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.animationConfig.proxy"))]),
             colors: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.colorsConfig"))]),
           })],
         }, [utilityTransformer]);
