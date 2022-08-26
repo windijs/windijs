@@ -1,5 +1,16 @@
 # windijs
 
+## 1.0.2
+
+### Patch Changes
+
+- perf: remove utilities and variants entry
+- fix: shared exports
+  - @windijs/core@1.0.2
+  - @windijs/style@1.0.2
+  - @windijs/utilities@1.0.2
+  - @windijs/variants@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
