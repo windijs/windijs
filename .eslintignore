@@ -1,4 +1,5 @@
 dist/
+gen/
 node_modules/
 data/
 examples/
