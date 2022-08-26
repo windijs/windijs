@@ -11,14 +11,15 @@
       "require": "./dist/utilities.js",
       "types": "./dist/utilities.d.ts"
     },
-    "./proxy": {
-      "import": "./dist/proxy.mjs",
-      "require": "./dist/proxy.js",
-      "types": "./dist/proxy.d.ts"
+    "./gen": {
+      "import": "./gen/utilities.mjs",
+      "require": "./gen/utilities.js",
+      "types": "./gen/utilities.d.ts"
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "gen"
   ],
   "keywords": [
     "css",
