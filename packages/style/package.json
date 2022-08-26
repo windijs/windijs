@@ -1,12 +1,13 @@
 {
   "name": "@windijs/style",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "@windijs/style",
   "main": "dist/style.js",
   "module": "dist/style.mjs",
   "types": "dist/style.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "keywords": [
     "css",
@@ -22,13 +23,13 @@
     }
   },
   "dependencies": {
-    "@windijs/core": "1.0.2",
-    "@windijs/helpers": "1.0.1",
-    "@windijs/shared": "1.0.1"
+    "@windijs/core": "1.0.3",
+    "@windijs/helpers": "1.0.2",
+    "@windijs/shared": "1.0.2"
   },
   "devDependencies": {
-    "@windijs/config": "1.0.2",
-    "@windijs/colors": "1.0.1"
+    "@windijs/config": "1.0.3",
+    "@windijs/colors": "1.0.2"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

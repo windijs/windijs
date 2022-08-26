@@ -1,12 +1,13 @@
 {
   "name": "@windijs/helpers",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "@windijs/helpers",
   "main": "dist/helpers.js",
   "module": "dist/helpers.mjs",
   "types": "dist/helpers.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "keywords": [
     "css",
@@ -24,13 +25,13 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/shared": "1.0.1"
+    "@windijs/shared": "1.0.2"
   },
   "devDependencies": {
-    "@windijs/utilities": "1.0.2",
-    "@windijs/variants": "1.0.2",
-    "@windijs/style": "1.0.2",
-    "@windijs/helpers": "1.0.1"
+    "@windijs/utilities": "1.0.3",
+    "@windijs/variants": "1.0.3",
+    "@windijs/style": "1.0.3",
+    "@windijs/helpers": "1.0.2"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

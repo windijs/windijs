@@ -1,5 +1,15 @@
 # @windijs/style
 
+## 1.0.3
+
+### Patch Changes
+
+- fix: should publish CHANGELOG.md
+- Updated dependencies
+  - @windijs/core@1.0.3
+  - @windijs/helpers@1.0.2
+  - @windijs/shared@1.0.2
+
 ## 1.0.2
 
 ### Patch Changes

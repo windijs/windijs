@@ -1,12 +1,13 @@
 {
   "name": "@windijs/core",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "@windijs/core",
   "main": "dist/core.js",
   "module": "dist/core.mjs",
   "types": "dist/core.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "keywords": [
     "css",
@@ -24,12 +25,12 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/shared": "1.0.1",
-    "@windijs/helpers": "1.0.1"
+    "@windijs/shared": "1.0.2",
+    "@windijs/helpers": "1.0.2"
   },
   "devDependencies": {
-    "@windijs/utilities": "1.0.2",
-    "@windijs/config": "1.0.2"
+    "@windijs/utilities": "1.0.3",
+    "@windijs/config": "1.0.3"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

@@ -1,5 +1,16 @@
 # @windijs/utilities
 
+## 1.0.3
+
+### Patch Changes
+
+- fix: should publish CHANGELOG.md
+- Updated dependencies
+  - @windijs/colors@1.0.2
+  - @windijs/config@1.0.3
+  - @windijs/core@1.0.3
+  - @windijs/helpers@1.0.2
+
 ## 1.0.2
 
 ### Patch Changes
