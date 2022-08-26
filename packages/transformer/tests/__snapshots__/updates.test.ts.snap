@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transform omit 1`] = `
+"export declare const fill: \\"hello\\";
+export declare const stroke: Pick<{}, 3>;
+"
+`;
