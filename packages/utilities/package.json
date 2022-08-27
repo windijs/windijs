@@ -10,16 +10,10 @@
       "import": "./dist/utilities.mjs",
       "require": "./dist/utilities.js",
       "types": "./dist/utilities.d.ts"
-    },
-    "./gen": {
-      "import": "./gen/utilities.mjs",
-      "require": "./gen/utilities.js",
-      "types": "./gen/utilities.d.ts"
     }
   },
   "files": [
     "dist",
-    "gen",
     "CHANGELOG.md"
   ],
   "keywords": [
