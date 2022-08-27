@@ -16,3 +16,4 @@ export * from "./interactivity";
 export * from "./transitions";
 export * from "./typography";
 export * from "./keyframes";
+export * from "./interface";
