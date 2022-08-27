@@ -1,6 +1,6 @@
 {
   "name": "@windijs/style",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "@windijs/style",
   "main": "dist/style.js",
   "module": "dist/style.mjs",
@@ -23,12 +23,12 @@
     }
   },
   "dependencies": {
-    "@windijs/core": "1.0.3",
-    "@windijs/helpers": "1.0.2",
-    "@windijs/shared": "1.0.2"
+    "@windijs/core": "1.0.4",
+    "@windijs/helpers": "1.0.3",
+    "@windijs/shared": "1.0.3"
   },
   "devDependencies": {
-    "@windijs/config": "1.0.3",
+    "@windijs/config": "1.0.4",
     "@windijs/colors": "1.0.2"
   },
   "typedoc": {

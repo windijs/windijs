@@ -1,5 +1,13 @@
 # @windijs/config
 
+## 1.0.4
+
+### Patch Changes
+
+- af3c0c04: feat: add defineConfig interface
+- Updated dependencies [939f0398]
+  - @windijs/shared@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes

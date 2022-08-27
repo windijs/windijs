@@ -1,5 +1,15 @@
 # @windijs/utilities
 
+## 1.0.4
+
+### Patch Changes
+
+- 115f5014: perf: Remove gen entry. We switched to virtual module, this entry no longer needed.
+- Updated dependencies [af3c0c04]
+  - @windijs/config@1.0.4
+  - @windijs/core@1.0.4
+  - @windijs/helpers@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes

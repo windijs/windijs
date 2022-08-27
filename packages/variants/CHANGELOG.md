@@ -1,5 +1,14 @@
 # @windijs/variants
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [939f0398]
+  - @windijs/shared@1.0.3
+  - @windijs/core@1.0.4
+  - @windijs/helpers@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes
