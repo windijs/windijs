@@ -1,6 +1,6 @@
 {
   "name": "@windijs/variants",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "@windijs/variants",
   "main": "dist/variants.js",
   "module": "dist/variants.mjs",
@@ -29,13 +29,13 @@
     "displayName": "@windijs/variants"
   },
   "dependencies": {
-    "@windijs/core": "1.0.4",
+    "@windijs/core": "1.0.5",
     "@windijs/helpers": "1.0.3",
     "@windijs/shared": "1.0.3"
   },
   "devDependencies": {
     "@windijs/colors": "1.0.2",
     "@windijs/config": "1.0.4",
-    "@windijs/utilities": "1.0.4"
+    "@windijs/utilities": "1.0.5"
   }
 }

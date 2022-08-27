@@ -1,6 +1,6 @@
 {
   "name": "@windijs/core",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "@windijs/core",
   "main": "dist/core.js",
   "module": "dist/core.mjs",
@@ -29,7 +29,7 @@
     "@windijs/helpers": "1.0.3"
   },
   "devDependencies": {
-    "@windijs/utilities": "1.0.4",
+    "@windijs/utilities": "1.0.5",
     "@windijs/config": "1.0.4"
   },
   "typedoc": {

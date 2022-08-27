@@ -28,9 +28,9 @@
     "@windijs/shared": "1.0.3"
   },
   "devDependencies": {
-    "@windijs/utilities": "1.0.4",
-    "@windijs/variants": "1.0.4",
-    "@windijs/style": "1.0.4",
+    "@windijs/utilities": "1.0.5",
+    "@windijs/variants": "1.0.5",
+    "@windijs/style": "1.0.5",
     "@windijs/helpers": "1.0.3"
   },
   "typedoc": {
