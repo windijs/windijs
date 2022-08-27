@@ -160,34 +160,3 @@ const overflow = core.createUtility(\\"overflow\\")
     .init();
   "
 `;
-
-exports[`generate mjs 1`] = `
-"import { createUtility } from '@windijs/core';
-
-const listStyleTypeWindiConfigInject = {\\"a\\":1,\\"b\\":2};
-const overflowWindiConfigInject = {\\"c\\":3,\\"d\\":4};
-const colorsWindiConfigInject = {\\"red\\":\\"#ff0\\"};
-const animate = createUtility(\\"animate\\")
-    .use(animateHandler(\\"none\\", \\"none\\"))
-    .use(animateHandler(\\"spin\\", \\"spin 1s linear infinite\\", spinKeyframes))
-    .use(animateHandler(\\"ping\\", \\"ping 1s cubic-bezier(0, 0, 0.2, 1) infinite\\", pingKeyframes))
-    .use(animateHandler(\\"pulse\\", \\"pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite\\", pulseKeyframes))
-    .init();
-
-const colors = colorsWindiConfigInject;
-
-const image = createUtility(\\"image\\")
-    .case(\\"render\\", configHandler(imageRenderingConfig, buildImageRendering))
-    .init();
-const list = createUtility(\\"list\\")
-    .use(configHandler(listStyleTypeWindiConfigInject, \\"listStyleType\\"))
-    .use(configHandler(listStylePositionConfig, \\"listStylePosition\\"))
-    .init();
-const overflow = createUtility(\\"overflow\\")
-    .use(configHandler(overflowWindiConfigInject, \\"overflow\\"))
-    .case(\\"truncate\\", cssHandler({ overflow: \\"hidden\\", \\"-o-text-overflow\\": \\"ellipsis\\", textOverflow: \\"ellipsis\\", whiteSpace: \\"nowrap\\" }))
-    .case(\\"ellipsis\\", cssHandler({ \\"-o-text-overflow\\": \\"ellipsis\\", textOverflow: \\"ellipsis\\" }))
-    .case(\\"x\\", configHandler(overflowWindiConfigInject, \\"overflowX\\"))
-    .case(\\"y\\", configHandler(overflowWindiConfigInject, \\"overflowY\\"))
-    .init();"
-`;

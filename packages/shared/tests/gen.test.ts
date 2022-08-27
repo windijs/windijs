@@ -1,5 +1,5 @@
 import { backgroundSizeConfig, borderRadiusConfig, touchActionConfig } from "@windijs/config";
-import { dtsConfig, genUtilitiesDts, genUtilitiesJs, genUtilitiesMjs } from "../src";
+import { dtsConfig, genUtilitiesDts, genUtilitiesJs } from "../src";
 
 test("dts", () => {
   expect(dtsConfig(backgroundSizeConfig)).toMatchSnapshot();
@@ -108,33 +108,4 @@ const overflow = core.createUtility("overflow")
   `;
 
   expect(genUtilitiesJs(tmpl, { listStyleType: { a: 1, b: 2 }, overflow: { c: 3, d: 4 }, colors: { red: "#ff0" } })).toMatchSnapshot();
-});
-
-test("generate mjs", () => {
-  const tmpl = `import { createUtility } from '@windijs/core';
-const animate = createUtility("animate")
-    .use(animateHandler("none", "none"))
-    .use(animateHandler("spin", "spin 1s linear infinite", spinKeyframes))
-    .use(animateHandler("ping", "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite", pingKeyframes))
-    .use(animateHandler("pulse", "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite", pulseKeyframes))
-    .init();
-
-const colors = Object.assign(Object.assign({}, baseColors), windiColors);
-
-const image = createUtility("image")
-    .case("render", configHandler(imageRenderingConfig, buildImageRendering))
-    .init();
-const list = createUtility("list")
-    .use(configHandler(listStyleTypeConfig, "listStyleType"))
-    .use(configHandler(listStylePositionConfig, "listStylePosition"))
-    .init();
-const overflow = createUtility("overflow")
-    .use(configHandler(overflowConfig, "overflow"))
-    .case("truncate", cssHandler({ overflow: "hidden", "-o-text-overflow": "ellipsis", textOverflow: "ellipsis", whiteSpace: "nowrap" }))
-    .case("ellipsis", cssHandler({ "-o-text-overflow": "ellipsis", textOverflow: "ellipsis" }))
-    .case("x", configHandler(overflowConfig, "overflowX"))
-    .case("y", configHandler(overflowConfig, "overflowY"))
-    .init();`;
-
-  expect(genUtilitiesMjs(tmpl, { listStyleType: { a: 1, b: 2 }, overflow: { c: 3, d: 4 }, colors: { red: "#ff0" } })).toMatchSnapshot();
 });

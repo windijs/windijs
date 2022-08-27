@@ -35,8 +35,3 @@ export function genUtilitiesJs<T extends object> (tmpl: string, config: T): stri
 
   return [tmpl.slice(0, start), ...Object.entries(config).map(([k, v]) => `const ${k}WindiConfigInject = ${JSON.stringify(v)};`), code].join("\n");
 }
-
-/**
- * Generate utilities.mjs with config
- */
-export const genUtilitiesMjs = genUtilitiesJs;
