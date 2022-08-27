@@ -12,17 +12,20 @@ export function stylePropertyHandler<T extends Partial<Record<keyof CSSDecls, un
     if (meta.props.length === 1) meta.props.push(value);
     return css({ [prop]: value }, undefined, meta);
   };
-  return (prop => useProxy(value => {
-    pushMetaProp(prop);
-    if (hasKey(cfg, prop)) {
-      const cv = cfg[prop];
-      const result = typeof cv === "function" ? cv(value) : handleConfig(v => build(prop, v as string), cv as unknown as object, "css", value);
-      if (result) return result;
-    }
-    if (value === "var") return (name: string, defaultValue?: string | undefined) => build(prop, funcs.$var(name, defaultValue));
-    if (value in funcs) return (...args: any[]) => build(prop, ((funcs as unknown as { [key: string]: Function })[value])(...args));
-    if (value === "in") return useProxy(v => build(prop, units.$in[+v].toString()));
-    if (value in units && value !== "color") return useProxy(v => build(prop, (units as any)[value][v].toString()));
-    return build(prop, value);
-  })) as Handler<GeneralCSSData & StyleProxy<T>>;
+  return {
+    type: "style",
+    get: (prop) => useProxy(value => {
+      pushMetaProp(prop);
+      if (hasKey(cfg, prop)) {
+        const cv = cfg[prop];
+        const result = typeof cv === "function" ? cv(value) : handleConfig(v => build(prop, v as string), cv as unknown as object, "css", value);
+        if (result) return result;
+      }
+      if (value === "var") return (name: string, defaultValue?: string | undefined) => build(prop, funcs.$var(name, defaultValue));
+      if (value in funcs) return (...args: any[]) => build(prop, ((funcs as unknown as { [key: string]: Function })[value])(...args));
+      if (value === "in") return useProxy(v => build(prop, units.$in[+v].toString()));
+      if (value in units && value !== "color") return useProxy(v => build(prop, (units as any)[value][v].toString()));
+      return build(prop, value);
+    }),
+  } as Handler<GeneralCSSData & StyleProxy<T>>;
 }

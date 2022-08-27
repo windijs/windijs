@@ -1,5 +1,6 @@
 import { SymbolProxy, resetMeta } from "@windijs/helpers";
 
+import type { Handler } from "@windijs/helpers";
 import { guard } from "./api";
 
 export class Utility<T extends object = {}> implements ProxyHandler<T> {
@@ -25,13 +26,13 @@ export class Utility<T extends object = {}> implements ProxyHandler<T> {
     return Reflect.defineProperty(target, prop, { value, writable: true });
   }
 
-  public case<K extends string, U> (trigger: K, plugin: (prop: string) => U): Utility<T & { [P in K] : U }> {
-    this.plugins.push(guard(trigger, plugin));
+  public case<K extends string, U> (trigger: K, plugin: Handler<U>): Utility<T & { [P in K] : U }> {
+    this.plugins.push(guard(trigger, plugin).get);
     return this as unknown as Utility<T & { [P in K] : U }>;
   }
 
-  public use<U> (plugin: (prop: string) => U): Utility<T & U> {
-    this.plugins.push(plugin);
+  public use<U> (plugin: Handler<U>): Utility<T & U> {
+    this.plugins.push(plugin.get);
     return this as unknown as Utility<T & U>;
   }
 

@@ -77,7 +77,11 @@ export type SafeEntry<T extends {DEFAULT?: unknown}> = T["DEFAULT"] extends unde
 
 export type StyleEntry<T> = SafeEntry<{ [key in keyof T]: StyleObject }>
 
-export type Handler<R> = (prop: string) => R;
+export type Handler<R> = {
+  type: string;
+  meta?: object;
+  get: (prop: string) => R;
+}
 
 export type UnknownDict = { [key: string]: unknown };
 
