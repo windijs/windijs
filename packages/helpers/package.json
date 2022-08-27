@@ -1,6 +1,6 @@
 {
   "name": "@windijs/helpers",
-  "version": "1.0.3",
+  "version": "1.1.0-beta.0",
   "description": "@windijs/helpers",
   "main": "dist/helpers.js",
   "module": "dist/helpers.mjs",
@@ -28,10 +28,10 @@
     "@windijs/shared": "1.0.3"
   },
   "devDependencies": {
-    "@windijs/utilities": "1.0.5",
-    "@windijs/variants": "1.0.5",
-    "@windijs/style": "1.0.5",
-    "@windijs/helpers": "1.0.3"
+    "@windijs/utilities": "1.0.6-beta.0",
+    "@windijs/variants": "1.0.6-beta.0",
+    "@windijs/style": "1.1.0-beta.0",
+    "@windijs/helpers": "1.1.0-beta.0"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

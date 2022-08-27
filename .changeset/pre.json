@@ -13,5 +13,7 @@
     "@windijs/variants": "1.0.5",
     "windijs": "1.0.5"
   },
-  "changesets": []
+  "changesets": [
+    "good-games-allow"
+  ]
 }
