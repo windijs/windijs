@@ -1,9 +1,8 @@
-import { backgroundGenericHandler, callHandler, colorHandler, configHandler, createUtility, genericHandler, guard, meld, use } from "../src";
-import { borderStyleConfig, borderWidthConfig } from "@windijs/config";
-import { css, rgb } from "@windijs/helpers";
+import { StyleObject, css, rgb } from "@windijs/helpers";
+import { backgroundClipConfig, backgroundRepeatConfig, backgroundSizeConfig, borderStyleConfig, borderWidthConfig, fontStyleConfig, justifyItemsConfig, overflowConfig } from "@windijs/config";
+import { backgroundGenericHandler, callHandler, colorHandler, configHandler, createUtility, genericHandler, guard, meld, setup, setupHandler, setupUtility, use } from "../src";
 import { isNumber, parenWrap } from "@windijs/shared";
 
-import type { StyleObject } from "@windijs/helpers";
 import { colors } from "@windijs/utilities";
 
 test("useGeneric With Trigger", () => {
@@ -79,4 +78,108 @@ test("use multi plugin with meld and use", () => {
   expect(border2[4].css).toEqual(border[4].css);
   expect(border2.emerald[500].css).toEqual(border.emerald[500].css);
   expect(border2.dashed.css).toMatchSnapshot();
+});
+
+test("setup", () => {
+  const bg = setup({
+    red: css({ backgroundColor: "red" }),
+    size: configHandler(backgroundSizeConfig, "backgroundSize"),
+    repeat: configHandler(backgroundRepeatConfig.repeat, "backgroundRepeat"),
+    multi: meld(
+      configHandler(justifyItemsConfig, "justifyItems"),
+      configHandler(fontStyleConfig, "fontStyle"),
+    ),
+    nested: {
+      blue: css({ backgroundColor: "blue" }),
+      opacity: {
+        10: css({ backgroundColor: "aqua" }),
+      },
+      size: configHandler(backgroundSizeConfig, "backgroundSize"),
+    },
+  });
+  expect(bg.red.css).toMatchSnapshot();
+  expect(bg.size.auto.css).toMatchSnapshot();
+  expect(bg.repeat.css).toMatchSnapshot();
+  expect(bg.repeat.x.css).toMatchSnapshot();
+  expect(bg.multi.end.css).toMatchSnapshot();
+  expect(bg.multi.italic.css).toMatchSnapshot();
+  expect(bg.nested.blue.css).toMatchSnapshot();
+  expect(bg.nested.size.auto.css).toMatchSnapshot();
+  expect(bg.nested.opacity[10].css).toMatchSnapshot();
+});
+
+test("setupHandler", () => {
+  const bg = createUtility("bg")
+    .use(setupHandler({
+      red: css({ backgroundColor: "red" }),
+      size: configHandler(backgroundSizeConfig, "backgroundSize"),
+    }))
+    .use(configHandler(backgroundRepeatConfig, "backgroundRepeat"))
+    .init();
+
+  expect(bg.red.css).toMatchSnapshot();
+  expect(bg.size.auto.css).toMatchSnapshot();
+  expect(bg.repeat.css).toMatchSnapshot();
+  expect(bg.repeat.x.css).toMatchSnapshot();
+  expect(bg.noRepeat.css).toMatchSnapshot();
+
+  expect(bg.size.auto.meta).toMatchSnapshot();
+  expect(bg.repeat.x.meta).toMatchSnapshot();
+});
+
+test("setupUtility with css", () => {
+  const red = setupUtility("red", css({ backgroundColor: "red" }));
+  expect(red.css).toMatchSnapshot();
+  expect(red.meta).toMatchSnapshot();
+});
+
+test("setupUtility with handler", () => {
+  const bg = setupUtility("bg", configHandler(backgroundRepeatConfig, "backgroundRepeat"));
+  expect(bg.repeat.css).toMatchSnapshot();
+  expect(bg.noRepeat.css).toMatchSnapshot();
+  expect(bg.repeat.x.css).toMatchSnapshot();
+  expect(bg.repeat.meta).toMatchSnapshot();
+  expect(bg.repeat.x.meta).toMatchSnapshot();
+});
+
+test("setupUtility with config", () => {
+  const overflow = setupUtility("overflow", {
+    DEFAULT: meld(
+      configHandler(overflowConfig, "overflow"),
+      configHandler(backgroundClipConfig, "overflow"),
+    ),
+    ellpsis: css({ "-o-text-overflow": "ellipsis", textOverflow: "ellipsis" }),
+    x: configHandler(overflowConfig, "overflowX"),
+    multi: meld(
+      configHandler(justifyItemsConfig, "justifyItems"),
+      configHandler(fontStyleConfig, "fontStyle"),
+    ),
+    nested: {
+      blue: css({ backgroundColor: "blue" }),
+      opacity: {
+        10: css({ backgroundColor: "aqua" }),
+      },
+      size: configHandler(backgroundSizeConfig, "backgroundSize"),
+    },
+  });
+
+  expect(overflow.border.css).toMatchSnapshot();
+  expect(overflow.clip.css).toMatchSnapshot();
+  expect(overflow.ellpsis.css).toMatchSnapshot();
+  expect(overflow.x.clip.css).toMatchSnapshot();
+  expect(overflow.multi.center.css).toMatchSnapshot();
+  expect(overflow.multi.italic.css).toMatchSnapshot();
+  expect(overflow.nested.blue.css).toMatchSnapshot();
+  expect(overflow.nested.opacity[10].css).toMatchSnapshot();
+  expect(overflow.nested.size.contain.css).toMatchSnapshot();
+
+  expect(overflow.border.meta).toMatchSnapshot();
+  expect(overflow.clip.meta).toMatchSnapshot();
+  expect(overflow.ellpsis.meta).toMatchSnapshot();
+  expect(overflow.x.clip.meta).toMatchSnapshot();
+  expect(overflow.multi.center.meta).toMatchSnapshot();
+  expect(overflow.multi.italic.meta).toMatchSnapshot();
+  expect(overflow.nested.blue.meta).toMatchSnapshot();
+  expect(overflow.nested.opacity[10].meta).toMatchSnapshot();
+  expect(overflow.nested.size.contain.meta).toMatchSnapshot();
 });

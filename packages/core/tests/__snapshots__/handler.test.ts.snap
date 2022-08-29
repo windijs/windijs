@@ -55,6 +55,332 @@ Object {
 }
 `;
 
+exports[`setup 1`] = `
+Object {
+  "backgroundColor": "red",
+}
+`;
+
+exports[`setup 2`] = `
+Object {
+  "backgroundSize": "auto",
+}
+`;
+
+exports[`setup 3`] = `
+Object {
+  "backgroundRepeat": "repeat",
+}
+`;
+
+exports[`setup 4`] = `
+Object {
+  "backgroundRepeat": "repeat-x",
+}
+`;
+
+exports[`setup 5`] = `
+Object {
+  "justifyItems": "end",
+}
+`;
+
+exports[`setup 6`] = `
+Object {
+  "fontStyle": "italic",
+}
+`;
+
+exports[`setup 7`] = `
+Object {
+  "backgroundColor": "blue",
+}
+`;
+
+exports[`setup 8`] = `
+Object {
+  "backgroundSize": "auto",
+}
+`;
+
+exports[`setup 9`] = `
+Object {
+  "backgroundColor": "aqua",
+}
+`;
+
+exports[`setupHandler 1`] = `
+Object {
+  "backgroundColor": "red",
+}
+`;
+
+exports[`setupHandler 2`] = `
+Object {
+  "backgroundSize": "auto",
+}
+`;
+
+exports[`setupHandler 3`] = `
+Object {
+  "backgroundRepeat": "repeat",
+}
+`;
+
+exports[`setupHandler 4`] = `
+Object {
+  "backgroundRepeat": "repeat-x",
+}
+`;
+
+exports[`setupHandler 5`] = `
+Object {
+  "backgroundRepeat": "no-repeat",
+}
+`;
+
+exports[`setupHandler 6`] = `
+Object {
+  "props": Array [
+    "size",
+    "auto",
+  ],
+  "type": "static",
+  "uid": "bg",
+  "variants": Array [],
+}
+`;
+
+exports[`setupHandler 7`] = `
+Object {
+  "props": Array [
+    "repeat",
+    "x",
+  ],
+  "type": "static",
+  "uid": "bg",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 1`] = `
+Object {
+  "overflow": "border-box",
+}
+`;
+
+exports[`setupUtility with config 2`] = `
+Object {
+  "overflow": "clip",
+}
+`;
+
+exports[`setupUtility with config 3`] = `
+Object {
+  "-o-text-overflow": "ellipsis",
+  "textOverflow": "ellipsis",
+}
+`;
+
+exports[`setupUtility with config 4`] = `
+Object {
+  "overflowX": "clip",
+}
+`;
+
+exports[`setupUtility with config 5`] = `
+Object {
+  "justifyItems": "center",
+}
+`;
+
+exports[`setupUtility with config 6`] = `
+Object {
+  "fontStyle": "italic",
+}
+`;
+
+exports[`setupUtility with config 7`] = `
+Object {
+  "backgroundColor": "blue",
+}
+`;
+
+exports[`setupUtility with config 8`] = `
+Object {
+  "backgroundColor": "aqua",
+}
+`;
+
+exports[`setupUtility with config 9`] = `
+Object {
+  "backgroundSize": "contain",
+}
+`;
+
+exports[`setupUtility with config 10`] = `
+Object {
+  "props": Array [
+    "border",
+  ],
+  "type": "static",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 11`] = `
+Object {
+  "props": Array [
+    "clip",
+  ],
+  "type": "static",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 12`] = `
+Object {
+  "props": Array [
+    "ellpsis",
+  ],
+  "type": "css",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 13`] = `
+Object {
+  "props": Array [
+    "x",
+    "clip",
+  ],
+  "type": "static",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 14`] = `
+Object {
+  "props": Array [
+    "multi",
+    "center",
+  ],
+  "type": "static",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 15`] = `
+Object {
+  "props": Array [
+    "multi",
+    "italic",
+  ],
+  "type": "static",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 16`] = `
+Object {
+  "props": Array [
+    "nested",
+    "blue",
+  ],
+  "type": "css",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 17`] = `
+Object {
+  "props": Array [
+    "nested",
+    "opacity",
+    "10",
+  ],
+  "type": "css",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 18`] = `
+Object {
+  "props": Array [
+    "nested",
+    "size",
+    "contain",
+  ],
+  "type": "static",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with css 1`] = `
+Object {
+  "backgroundColor": "red",
+}
+`;
+
+exports[`setupUtility with css 2`] = `
+Object {
+  "props": Array [],
+  "type": "css",
+  "uid": "red",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with handler 1`] = `
+Object {
+  "backgroundRepeat": "repeat",
+}
+`;
+
+exports[`setupUtility with handler 2`] = `
+Object {
+  "backgroundRepeat": "no-repeat",
+}
+`;
+
+exports[`setupUtility with handler 3`] = `
+Object {
+  "backgroundRepeat": "repeat-x",
+}
+`;
+
+exports[`setupUtility with handler 4`] = `
+Object {
+  "props": Array [
+    "repeat",
+  ],
+  "type": "static",
+  "uid": "bg",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with handler 5`] = `
+Object {
+  "props": Array [
+    "repeat",
+    "x",
+  ],
+  "type": "static",
+  "uid": "bg",
+  "variants": Array [],
+}
+`;
+
 exports[`use multi plugin with meld and use 1`] = `
 Object {
   "borderWidth": "0px",
