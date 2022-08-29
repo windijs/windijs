@@ -1,4 +1,4 @@
-import type {
+import {
   BuildFunc,
   CSSDimensionType,
   CSSMap,
@@ -11,10 +11,21 @@ import type {
   StyleProperties,
   StyleProxy,
   StyleProxyHandler,
+  SymbolCSS,
+  SymbolMeta,
+  SymbolProxy,
   UtilityMeta,
   VariantBuilder,
+  css,
+  getMeta,
+  getUid,
+  isStyleObject,
+  pushMetaProp,
+  resetMeta,
+  resetStyleMeta,
+  updateMetaType,
+  useProxy,
 } from "@windijs/helpers";
-import { SymbolCSS, SymbolMeta, SymbolProxy, css, getMeta, isStyleObject, pushMetaProp, resetMeta, updateMetaType, useProxy } from "@windijs/helpers";
 import { buildColor, buildProperty, buildStatic } from "./builder";
 import { fracToPercent, isFraction, isNumber, parenWrap } from "@windijs/shared";
 
@@ -45,12 +56,15 @@ export function handler<R> (type: string, get: (prop: string) => R, meta?: objec
   return { type, meta, get };
 }
 
+export function isHandler <R> (i: unknown): i is Handler<R> {
+  return i != null && typeof i === "object" && "get" in i && "type" in i;
+}
+
 export function cssHandler (cssOrStyle: StyleObject | CSSObject | CSSMap) {
   return {
     type: "css",
     get (p) {
-      cssOrStyle = isStyleObject(cssOrStyle) ? cssOrStyle : css(cssOrStyle);
-      cssOrStyle[SymbolMeta].props = []; // remove meta prop
+      cssOrStyle = isStyleObject(cssOrStyle) ? resetStyleMeta(cssOrStyle) : css(cssOrStyle);
       return Reflect.get(cssOrStyle, p);
     },
   } as Handler<StyleObject>;
@@ -249,4 +263,52 @@ export function meld (...handlers: Handler<unknown>[]) {
       }
     },
   } as Handler<unknown>;
+}
+
+type HandleValue<V> = V extends Handler<unknown> ? ReturnType<V["get"]> : V extends StyleObject ? V : V extends object ? SetUp<V> : V;
+type ExposeDefault<T> = T extends { DEFAULT: Handler<unknown> } ? ReturnType<T["DEFAULT"]["get"]>
+  : T extends { DEFAULT: StyleObject } ? T["DEFAULT"]
+  : T;
+
+type HandleDefault<T extends { DEFAULT?: unknown } & object> = ExposeDefault<Pick<{
+  [k in Extract<keyof T, "DEFAULT">]: k extends "DEFAULT" ? T[k] : never
+}, Extract<keyof T, "DEFAULT">>>
+
+export type SetUp<T extends object> = {
+  [k in Exclude<keyof T, "DEFAULT">]: HandleValue<T[k]>
+} & HandleDefault<T>
+
+export function setup<T extends object> (t: T, root = true): SetUp<T> {
+  return new Proxy(t, ({
+    get (target, p) {
+      let v: unknown;
+      if (root) resetMeta(getUid());
+      if (typeof p === "symbol") return p === SymbolProxy ? true : undefined;
+      if (p in target) {
+        v = Reflect.get(target, p);
+        if (v == null) return;
+        return pushMetaProp(p) && (isHandler(v) ? useProxy(v.get) : isStyleObject(v) ? resetStyleMeta(v) : typeof v === "object" ? setup(v, false) : v);
+      }
+      // @ts-ignore
+      v = target.DEFAULT;
+      return isHandler(v) ? v.get(p) : v;
+    },
+  })) as SetUp<T>;
+}
+
+export function setupHandler<T extends object> (config: T): Handler<SetUp<T>> {
+  return {
+    type: "setup",
+    meta: { config },
+    get: p => Reflect.get(setup(config), p),
+  };
+}
+
+export function setupUtility<T extends StyleObject> (uid: string, css: T): T;
+export function setupUtility<U> (uid: string, handler: Handler<U>): U;
+export function setupUtility<T extends object> (uid: string, config: T): SetUp<T>;
+export function setupUtility<T extends object> (uid: string, t: T) {
+  resetMeta(uid);
+  if (isStyleObject(t)) return resetStyleMeta(t);
+  return isHandler(t) ? use(uid, t) : setup(t);
 }
