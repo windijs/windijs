@@ -77,11 +77,67 @@ export type SafeEntry<T extends {DEFAULT?: unknown}> = T["DEFAULT"] extends unde
 
 export type StyleEntry<T> = SafeEntry<{ [key in keyof T]: StyleObject }>
 
-export type Handler<R> = {
-  type: string;
+export interface BaseHandler<R> {
+  type: string | String;
   meta?: object;
   get: (prop: string) => R;
+};
+
+export interface ConfigHandler<R> extends BaseHandler<R> {
+  type: "config";
+  meta: { config: object };
 }
+
+export interface ColorHandler<R> extends BaseHandler<R> {
+  type: "color";
+  meta: { colors: object, op: string | undefined };
+}
+
+export interface CSSHandler<R> extends BaseHandler<R> {
+  type: "css";
+}
+
+export interface StyleHandler<R> extends BaseHandler<R> {
+  type: "style";
+}
+
+export interface CallHandler<R> extends BaseHandler<R> {
+  type: "call";
+}
+
+export interface NumberHandler<R> extends BaseHandler<R> {
+  type: "number";
+  meta: { size: "" | CSSDimensionType };
+}
+
+export interface SpacingHandler<R> extends BaseHandler<R> {
+  type: "spacing";
+}
+
+export interface FractionHandler<R> extends BaseHandler<R> {
+  type: "fraction";
+}
+
+export interface GenericHandler<R> extends BaseHandler<R> {
+  type: "generic";
+}
+
+export interface MeldHandler<R> extends BaseHandler<R> {
+  type: "meld";
+  meta: { handlers: Handler<unknown>[] };
+}
+
+export interface SetupHandler<R> extends BaseHandler<R> {
+  type: "setup";
+  meta: { config: object }
+}
+
+export interface GuardHandler<R> extends BaseHandler<R> {
+  type: "guard";
+  meta: { key: string, handler: Handler<unknown> };
+}
+
+export type Handler<R> = ConfigHandler<R> | ColorHandler<R> | CSSHandler<R> | StyleHandler<R> | CallHandler<R> | NumberHandler<R> | SpacingHandler<R> | FractionHandler<R> | GenericHandler<R> | SetupHandler<R> | GuardHandler<R> | MeldHandler<R>;
 
 export type UnknownDict = { [key: string]: unknown };
 
