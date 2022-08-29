@@ -1,5 +1,16 @@
 # @windijs/helpers
 
+## 1.1.0-beta.2
+
+### Patch Changes
+
+- [`d0d14195`](https://github.com/windijs/windijs/commit/d0d14195bea0f846097a9738da82278ca97468bc) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new handler types
+
+* [`6a71ee76`](https://github.com/windijs/windijs/commit/6a71ee76737a9309b31b06adc33a695461d1583d) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: add dtsSetup and dtsHandler
+
+* Updated dependencies [[`831cae71`](https://github.com/windijs/windijs/commit/831cae71465e13a4d00188cca914710c54cd29cf)]:
+  - @windijs/shared@1.0.4-beta.0
+
 ## 1.1.0-beta.1
 
 ### Patch Changes

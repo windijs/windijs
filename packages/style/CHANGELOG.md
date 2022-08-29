@@ -1,5 +1,16 @@
 # @windijs/style
 
+## 1.1.0-beta.2
+
+### Patch Changes
+
+- [`602c375b`](https://github.com/windijs/windijs/commit/602c375bde2aeddc16399613d9bc45b42e3c5879) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: style handler type
+
+- Updated dependencies [[`bd59c497`](https://github.com/windijs/windijs/commit/bd59c49748a68f189bfa8f529d8ba7d6bc0a22ae), [`d0d14195`](https://github.com/windijs/windijs/commit/d0d14195bea0f846097a9738da82278ca97468bc), [`6a71ee76`](https://github.com/windijs/windijs/commit/6a71ee76737a9309b31b06adc33a695461d1583d), [`831cae71`](https://github.com/windijs/windijs/commit/831cae71465e13a4d00188cca914710c54cd29cf)]:
+  - @windijs/core@1.1.0-beta.2
+  - @windijs/helpers@1.1.0-beta.2
+  - @windijs/shared@1.0.4-beta.0
+
 ## 1.1.0-beta.1
 
 ### Patch Changes

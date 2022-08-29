@@ -1,6 +1,6 @@
 {
   "name": "@windijs/shared",
-  "version": "1.0.3",
+  "version": "1.0.4-beta.0",
   "description": "@windijs/shared",
   "main": "dist/shared.js",
   "module": "dist/shared.mjs",
@@ -28,7 +28,7 @@
     "readmeFile": "./README.md"
   },
   "devDependencies": {
-    "@windijs/config": "1.0.4"
+    "@windijs/config": "1.0.5-beta.0"
   },
   "author": "Raven Satir",
   "license": "MIT"
