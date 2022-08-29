@@ -52,8 +52,8 @@ export function handleConfig<T extends object> (build: BuildFunc, statics: T, ty
   }
 };
 
-export function handler<R> (type: string, get: (prop: string) => R, meta?: object): Handler<R> {
-  return { type, meta, get };
+export function handler<R> (type: Handler<R>["type"] | String, get: (prop: string) => R, meta?: object): Handler<R> {
+  return { type, meta, get } as Handler<R>;
 }
 
 export function isHandler <R> (i: unknown): i is Handler<R> {
