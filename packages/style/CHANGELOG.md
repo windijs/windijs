@@ -1,5 +1,15 @@
 # @windijs/style
 
+## 1.1.0-beta.1
+
+### Patch Changes
+
+- [`8ab80baf`](https://github.com/windijs/windijs/commit/8ab80bafda9ab832d8d53f287e200f7fd497b7b6) Thanks [@voorjaar](https://github.com/voorjaar)! - chore: new versions
+
+- Updated dependencies [[`8ab80baf`](https://github.com/windijs/windijs/commit/8ab80bafda9ab832d8d53f287e200f7fd497b7b6), [`e9a948cd`](https://github.com/windijs/windijs/commit/e9a948cd44d003a2c1e91ea2927658f59e3746dc), [`a03eabf8`](https://github.com/windijs/windijs/commit/a03eabf88e4ff96099bfc9a050a8440a500b0316)]:
+  - @windijs/core@1.1.0-beta.1
+  - @windijs/helpers@1.1.0-beta.1
+
 ## 1.1.0-beta.0
 
 ### Minor Changes

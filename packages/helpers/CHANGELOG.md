@@ -1,5 +1,13 @@
 # @windijs/helpers
 
+## 1.1.0-beta.1
+
+### Patch Changes
+
+- [`8ab80baf`](https://github.com/windijs/windijs/commit/8ab80bafda9ab832d8d53f287e200f7fd497b7b6) Thanks [@voorjaar](https://github.com/voorjaar)! - chore: new versions
+
+* [`e9a948cd`](https://github.com/windijs/windijs/commit/e9a948cd44d003a2c1e91ea2927658f59e3746dc) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new resetStyleMeta helper
+
 ## 1.1.0-beta.0
 
 ### Minor Changes

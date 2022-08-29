@@ -1,6 +1,6 @@
 {
   "name": "@windijs/core",
-  "version": "1.1.0-beta.0",
+  "version": "1.1.0-beta.1",
   "description": "@windijs/core",
   "main": "dist/core.js",
   "module": "dist/core.mjs",
@@ -26,10 +26,10 @@
   "license": "MIT",
   "dependencies": {
     "@windijs/shared": "1.0.3",
-    "@windijs/helpers": "1.1.0-beta.0"
+    "@windijs/helpers": "1.1.0-beta.1"
   },
   "devDependencies": {
-    "@windijs/utilities": "1.0.6-beta.0",
+    "@windijs/utilities": "1.0.6-beta.1",
     "@windijs/config": "1.0.4"
   },
   "typedoc": {
