@@ -1,4 +1,6 @@
-import type { MetaType, UtilityMeta } from "./types";
+import type { MetaType, StyleObject, UtilityMeta } from "./types";
+
+import { SymbolMeta } from "./common";
 
 let CurrentMeta: UtilityMeta;
 
@@ -22,4 +24,9 @@ export function pushMetaProp (prop: string) {
 
 export function updateMetaType (type: MetaType) {
   CurrentMeta.type = type;
+}
+
+export function resetStyleMeta (style: StyleObject, meta: UtilityMeta = CurrentMeta) {
+  style[SymbolMeta] = meta;
+  return style;
 }

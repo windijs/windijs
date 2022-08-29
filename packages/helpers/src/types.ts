@@ -46,7 +46,7 @@ export type CSSPrefixer = (css: CSSObject) => CSSObject;
 
 export type NumberDict = { [key: number]: string };
 
-export type MetaType = "css" | "static" | "color" | "generic" | "variant";
+export type MetaType = "css" | "setup" | "static" | "color" | "generic" | "variant";
 
 export type UtilityMeta = {
   uid: string;
