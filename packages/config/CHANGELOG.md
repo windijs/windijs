@@ -1,5 +1,12 @@
 # @windijs/config
 
+## 1.0.5-beta.1
+
+### Patch Changes
+
+- Updated dependencies [[`d285c569`](https://github.com/windijs/windijs/commit/d285c569ec7d4cdd0921f92c7dfe892e58c9cd75)]:
+  - @windijs/shared@1.0.4-beta.1
+
 ## 1.0.5-beta.0
 
 ### Patch Changes

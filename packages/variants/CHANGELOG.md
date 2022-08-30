@@ -1,5 +1,16 @@
 # @windijs/variants
 
+## 1.0.6-beta.3
+
+### Patch Changes
+
+- [`d285c569`](https://github.com/windijs/windijs/commit/d285c569ec7d4cdd0921f92c7dfe892e58c9cd75) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: remove circular devDependencies
+
+- Updated dependencies [[`d285c569`](https://github.com/windijs/windijs/commit/d285c569ec7d4cdd0921f92c7dfe892e58c9cd75)]:
+  - @windijs/core@1.1.0-beta.3
+  - @windijs/helpers@1.1.0-beta.3
+  - @windijs/shared@1.0.4-beta.1
+
 ## 1.0.6-beta.2
 
 ### Patch Changes

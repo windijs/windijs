@@ -1,5 +1,16 @@
 # @windijs/utilities
 
+## 1.0.6-beta.3
+
+### Patch Changes
+
+- [`12ec1747`](https://github.com/windijs/windijs/commit/12ec1747178968ed8f73f449e759dad6663e02ed) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: utility types transformer
+
+- Updated dependencies [[`d285c569`](https://github.com/windijs/windijs/commit/d285c569ec7d4cdd0921f92c7dfe892e58c9cd75)]:
+  - @windijs/core@1.1.0-beta.3
+  - @windijs/helpers@1.1.0-beta.3
+  - @windijs/config@1.0.5-beta.1
+
 ## 1.0.6-beta.2
 
 ### Patch Changes
