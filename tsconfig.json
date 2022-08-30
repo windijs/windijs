@@ -19,6 +19,7 @@
   },
   "include": [
     "packages/*/src",
+    "packages/*/tests",
   ],
   "typedocOptions": {
     "out": "docs",
