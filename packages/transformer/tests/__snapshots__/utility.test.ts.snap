@@ -3,7 +3,7 @@
 exports[`Transform colorHandler 1`] = `
 "import { StyleProxy, ColorStyleProxy } from \\"@windijs/helpers\\";
 export const bg = createUtility(\\"bg\\")
-    .use(() => ({} as Pick<ColorStyleProxy<typeof colors>, \\"$windi.color.colors.proxy\\">))
+    .use({ type: \\"color\\", get: () => ({} as Pick<ColorStyleProxy<typeof colors>, \\"$windi.color.colors.proxy\\">) })
     .init();
 "
 `;
@@ -11,7 +11,7 @@ export const bg = createUtility(\\"bg\\")
 exports[`Transform configHandler 1`] = `
 "import { StyleProxy, ColorStyleProxy } from \\"@windijs/helpers\\";
 export const rounded = createUtility(\\"rounded\\")
-    .use(() => ({} as Pick<StyleProxy<typeof borderRadiusConfig>, \\"$windi.config.borderRadiusConfig.proxy\\">))
+    .use({ type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof borderRadiusConfig>, \\"$windi.config.borderRadiusConfig.proxy\\">) })
     .init();
 "
 `;
@@ -19,17 +19,17 @@ export const rounded = createUtility(\\"rounded\\")
 exports[`Transform with cases 1`] = `
 "import { StyleProxy, ColorStyleProxy } from \\"@windijs/helpers\\";
 export const bg = createUtility(\\"bg\\")
-    .use(() => ({} as Pick<ColorStyleProxy<typeof colors>, \\"$windi.color.colors.proxy\\">))
-    .use(() => ({} as Pick<StyleProxy<typeof backgroundAttachmentConfig>, \\"$windi.config.backgroundAttachmentConfig.proxy\\">))
-    .use(() => ({} as Pick<StyleProxy<typeof backgroundPositionConfig>, \\"$windi.config.backgroundPositionConfig.proxy\\">))
-    .use(() => ({} as Pick<StyleProxy<typeof backgroundRepeatConfig>, \\"$windi.config.backgroundRepeatConfig.proxy\\">))
-    .use(() => ({} as Pick<StyleProxy<typeof backgroundSizeConfig>, \\"$windi.config.backgroundSizeConfig.proxy\\">))
-    .use(() => ({} as Pick<StyleProxy<typeof backgroundImageConfig>, \\"$windi.config.backgroundImageConfig.proxy\\">))
-    .case(\\"clip\\", () => ({} as Pick<StyleProxy<typeof backgroundClipConfig>, \\"$windi.config.backgroundClipConfig.proxy\\">))
-    .case(\\"blend\\", () => ({} as Pick<StyleProxy<typeof blendModeConfig>, \\"$windi.config.blendModeConfig.proxy\\">))
-    .case(\\"origin\\", () => ({} as Pick<StyleProxy<typeof backgroundOriginConfig>, \\"$windi.config.backgroundOriginConfig.proxy\\">))
-    .case(\\"opacity\\", () => ({} as Pick<StyleProxy<typeof opacityConfig>, \\"$windi.config.opacityConfig.proxy\\">))
-    .case(\\"gradient\\", callHandler(buildLinearGradient, meld(() => ({} as Pick<StyleProxy<typeof gradientDirectionConfig>, \\"$windi.config.gradientDirectionConfig.proxy\\">), () => ({} as Pick<StyleProxy<typeof gradientConfig>, \\"$windi.config.gradientConfig.proxy\\">))))
+    .use({ type: \\"color\\", get: () => ({} as Pick<ColorStyleProxy<typeof colors>, \\"$windi.color.colors.proxy\\">) })
+    .use({ type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof backgroundAttachmentConfig>, \\"$windi.config.backgroundAttachmentConfig.proxy\\">) })
+    .use({ type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof backgroundPositionConfig>, \\"$windi.config.backgroundPositionConfig.proxy\\">) })
+    .use({ type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof backgroundRepeatConfig>, \\"$windi.config.backgroundRepeatConfig.proxy\\">) })
+    .use({ type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof backgroundSizeConfig>, \\"$windi.config.backgroundSizeConfig.proxy\\">) })
+    .use({ type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof backgroundImageConfig>, \\"$windi.config.backgroundImageConfig.proxy\\">) })
+    .case(\\"clip\\", { type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof backgroundClipConfig>, \\"$windi.config.backgroundClipConfig.proxy\\">) })
+    .case(\\"blend\\", { type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof blendModeConfig>, \\"$windi.config.blendModeConfig.proxy\\">) })
+    .case(\\"origin\\", { type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof backgroundOriginConfig>, \\"$windi.config.backgroundOriginConfig.proxy\\">) })
+    .case(\\"opacity\\", { type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof opacityConfig>, \\"$windi.config.opacityConfig.proxy\\">) })
+    .case(\\"gradient\\", callHandler(buildLinearGradient, meld({ type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof gradientDirectionConfig>, \\"$windi.config.gradientDirectionConfig.proxy\\">) }, { type: \\"config\\", get: () => ({} as Pick<StyleProxy<typeof gradientConfig>, \\"$windi.config.gradientConfig.proxy\\">) })))
     .init();
 "
 `;
