@@ -1,5 +1,11 @@
 # @windijs/helpers
 
+## 1.1.0-beta.4
+
+### Patch Changes
+
+- [`9940db66`](https://github.com/windijs/windijs/commit/9940db664965f9e7c04b8e6831cb035b79f2b212) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: genUtilitiesDts with theme
+
 ## 1.1.0-beta.3
 
 ### Patch Changes

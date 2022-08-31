@@ -1,6 +1,6 @@
 {
   "name": "@windijs/config",
-  "version": "1.0.5-beta.2",
+  "version": "1.0.5-beta.3",
   "description": "@windijs/config",
   "main": "dist/config.js",
   "module": "dist/config.mjs",

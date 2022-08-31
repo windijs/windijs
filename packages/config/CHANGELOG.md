@@ -1,5 +1,11 @@
 # @windijs/config
 
+## 1.0.5-beta.3
+
+### Patch Changes
+
+- [`3bfacd6e`](https://github.com/windijs/windijs/commit/3bfacd6e745c01f650f1f5e7b65574585ee8c5bc) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: important config with string
+
 ## 1.0.5-beta.2
 
 ### Patch Changes

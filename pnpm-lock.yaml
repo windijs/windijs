@@ -85,7 +85,7 @@ importers:
 
   packages/core:
     specifiers:
-      '@windijs/helpers': 1.1.0-beta.3
+      '@windijs/helpers': 1.1.0-beta.4
       '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/helpers': link:../helpers
@@ -105,8 +105,8 @@ importers:
 
   packages/style:
     specifiers:
-      '@windijs/core': 1.1.0-beta.6
-      '@windijs/helpers': 1.1.0-beta.3
+      '@windijs/core': 1.1.0-beta.7
+      '@windijs/helpers': 1.1.0-beta.4
       '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/core': link:../core
@@ -124,9 +124,9 @@ importers:
   packages/utilities:
     specifiers:
       '@windijs/colors': 1.0.2
-      '@windijs/config': 1.0.5-beta.2
-      '@windijs/core': 1.1.0-beta.6
-      '@windijs/helpers': 1.1.0-beta.3
+      '@windijs/config': 1.0.5-beta.3
+      '@windijs/core': 1.1.0-beta.7
+      '@windijs/helpers': 1.1.0-beta.4
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config
@@ -135,8 +135,8 @@ importers:
 
   packages/variants:
     specifiers:
-      '@windijs/core': 1.1.0-beta.6
-      '@windijs/helpers': 1.1.0-beta.3
+      '@windijs/core': 1.1.0-beta.7
+      '@windijs/helpers': 1.1.0-beta.4
       '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/core': link:../core
@@ -166,9 +166,9 @@ importers:
   packages/windijs:
     specifiers:
       '@windijs/colors': 1.0.2
-      '@windijs/config': 1.0.5-beta.2
-      '@windijs/core': 1.1.0-beta.6
-      '@windijs/helpers': 1.1.0-beta.3
+      '@windijs/config': 1.0.5-beta.3
+      '@windijs/core': 1.1.0-beta.7
+      '@windijs/helpers': 1.1.0-beta.4
       '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/colors': link:../colors
