@@ -2,7 +2,12 @@ export type DarkModeConfig = "class" | "media";
 
 export type ThemeType = Record<string, any> | undefined
 
+// TODO: document this
 export interface BaseTheme {
+  /** The accent-color utilities like accent-green-700 */
+  // accentColor: ThemeType,
+  /** The sr-only and not-sr-only utilities */
+  accessibility: ThemeType,
   alignContent: ThemeType,
   alignItems: ThemeType,
   alignSelf: ThemeType,
@@ -151,6 +156,7 @@ export interface BaseTheme {
   tableDisplay: ThemeType,
   textAlign: ThemeType,
   textColor: ThemeType,
+  /** The text-decoration utilities like overline */
   textDecorationColor: ThemeType,
   textDecorationLength: ThemeType,
   textDecorationOffset: ThemeType,
@@ -158,12 +164,14 @@ export interface BaseTheme {
   textDecorationStyle: ThemeType,
   textDecorationThickness: ThemeType,
   textDecorationType: ThemeType,
+  /** The text-indent utilities like indent-28 */
   textIndent: ThemeType,
   textOpacity: ThemeType,
   textShadow: ThemeType,
   textStrokeColor: ThemeType,
   textStrokeWidth: ThemeType,
   textTransform: ThemeType,
+  /** The touch-action utilities like touch-pan-right */
   touchAction: ThemeType,
   transformOrigin: ThemeType,
   transformStyle: ThemeType,
@@ -171,15 +179,18 @@ export interface BaseTheme {
   transitionDuration: ThemeType,
   transitionProperty: ThemeType,
   transitionTimingFunction: ThemeType,
+  /** The translate utilities like translate-x-full */
   translate: ThemeType,
   typography: ThemeType,
   userSelect: ThemeType,
   vars: ThemeType,
   verticalAlign: ThemeType,
   whiteSpace: ThemeType,
+  /** The width utilities like w-1.5 */
   width: ThemeType,
   writingMode: ThemeType,
   writingOrientation: ThemeType,
+  /** The z-index utilities like z-30 */
   zIndex: ThemeType
 }
 
@@ -187,7 +198,6 @@ export type Theme = Partial<BaseTheme> | ({ [ key:string ]: ThemeType } & { exte
 
 // export type Shortcut = string | NestObject;
 
-// TODO: document this
 export interface Config {
   // presets?: Config[];
   // prefixer?: boolean;
@@ -197,7 +207,7 @@ export interface Config {
   //   disable?: string[]
   // }
   separator?: string;
-  important?: boolean;
+  important?: boolean | string;
   darkMode?: DarkModeConfig;
   theme?: Theme;
   // variantOrder?: string[];
