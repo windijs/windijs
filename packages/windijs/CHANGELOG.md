@@ -1,5 +1,12 @@
 # windijs
 
+## 1.1.0-beta.4
+
+### Patch Changes
+
+- Updated dependencies [[`0b4d2f45`](https://github.com/windijs/windijs/commit/0b4d2f455a91b2c1eb09ac86e4f3783f36a86366)]:
+  - @windijs/core@1.1.0-beta.4
+
 ## 1.1.0-beta.3
 
 ### Patch Changes
