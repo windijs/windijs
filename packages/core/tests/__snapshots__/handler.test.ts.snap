@@ -381,6 +381,15 @@ Object {
 }
 `;
 
+exports[`setupVariant 1`] = `
+"@media (min-width: 640px) {
+  .dark .test:hover {
+    background-color: rgba(239, 68, 68, var(--w-bg-opacity));
+    --w-bg-opacity: 1;
+  }
+}"
+`;
+
 exports[`use multi plugin with meld and use 1`] = `
 Object {
   "borderWidth": "0px",

@@ -1,9 +1,8 @@
-import { StyleObject, css, rgb } from "@windijs/helpers";
+import { StyleObject, css, rgb, unify } from "@windijs/helpers";
 import { backgroundClipConfig, backgroundRepeatConfig, backgroundSizeConfig, borderStyleConfig, borderWidthConfig, fontStyleConfig, justifyItemsConfig, overflowConfig } from "@windijs/config";
-import { backgroundGenericHandler, callHandler, colorHandler, configHandler, createUtility, genericHandler, guard, meld, setup, setupHandler, setupUtility, use } from "../src";
+import { backgroundGenericHandler, callHandler, colorHandler, configHandler, createUtility, genericHandler, guard, meld, setup, setupHandler, setupUtility, setupVariant, use } from "../src";
+import { bg, colors } from "@windijs/utilities";
 import { isNumber, parenWrap } from "@windijs/shared";
-
-import { colors } from "@windijs/utilities";
 
 test("useGeneric With Trigger", () => {
   const backgroundGeneric = genericHandler("backgroundColor", prop => {
@@ -182,4 +181,14 @@ test("setupUtility with config", () => {
   expect(overflow.nested.blue.meta).toMatchSnapshot();
   expect(overflow.nested.opacity[10].meta).toMatchSnapshot();
   expect(overflow.nested.size.contain.meta).toMatchSnapshot();
+});
+
+test("setupVariant", () => {
+  const { sm, hover, dark } = setupVariant({
+    sm: "@media (min-width: 640px)",
+    hover: "&:hover",
+    dark: ".dark &",
+  });
+
+  expect(unify(".test", sm(hover(dark(bg.red[500]))))).toMatchSnapshot();
 });
