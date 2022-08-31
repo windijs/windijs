@@ -312,3 +312,7 @@ export function setupUtility<T extends object> (uid: string, t: T) {
   if (isStyleObject(t)) return css(t[SymbolCSS]);
   return isHandler(t) ? use(uid, t) : setup(t);
 }
+
+export function setupVariant<T extends object> (config: T): { [key in keyof T]: VariantBuilder } {
+  return Object.fromEntries(Object.entries(config).map(([k, v]) => [k, createVariant(v as string)])) as { [key in keyof T]: VariantBuilder };
+}
