@@ -1,5 +1,12 @@
 # @windijs/style
 
+## 1.1.0-beta.5
+
+### Patch Changes
+
+- Updated dependencies [[`bbcd6f7f`](https://github.com/windijs/windijs/commit/bbcd6f7f355d015ed0e6a6183ce9204e5eb91892)]:
+  - @windijs/core@1.1.0-beta.5
+
 ## 1.1.0-beta.4
 
 ### Patch Changes

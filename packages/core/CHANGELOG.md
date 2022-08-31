@@ -1,5 +1,11 @@
 # @windijs/core
 
+## 1.1.0-beta.5
+
+### Patch Changes
+
+- [`bbcd6f7f`](https://github.com/windijs/windijs/commit/bbcd6f7f355d015ed0e6a6183ce9204e5eb91892) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new setupVariant api
+
 ## 1.1.0-beta.4
 
 ### Patch Changes
