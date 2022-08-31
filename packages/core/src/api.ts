@@ -287,7 +287,7 @@ export function setup<T extends object> (t: T, root = true): SetUp<T> {
       if (p in target) {
         v = Reflect.get(target, p);
         if (v == null) return;
-        return pushMetaProp(p) && (isHandler(v) ? useProxy(v.get) : isStyleObject(v) ? resetStyleMeta(v) : typeof v === "object" ? setup(v, false) : v);
+        return pushMetaProp(p) && (isHandler(v) ? useProxy(v.get) : isStyleObject(v) ? css(v[SymbolCSS]) : typeof v === "object" ? setup(v, false) : v);
       }
       // @ts-ignore
       v = target.DEFAULT;
@@ -309,6 +309,6 @@ export function setupUtility<U> (uid: string, handler: Handler<U>): U;
 export function setupUtility<T extends object> (uid: string, config: T): SetUp<T>;
 export function setupUtility<T extends object> (uid: string, t: T) {
   resetMeta(uid);
-  if (isStyleObject(t)) return resetStyleMeta(t);
+  if (isStyleObject(t)) return css(t[SymbolCSS]);
   return isHandler(t) ? use(uid, t) : setup(t);
 }

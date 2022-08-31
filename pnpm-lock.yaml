@@ -79,21 +79,21 @@ importers:
 
   packages/config:
     specifiers:
-      '@windijs/shared': 1.0.4-beta.0
+      '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/shared': link:../shared
 
   packages/core:
     specifiers:
-      '@windijs/helpers': 1.1.0-beta.2
-      '@windijs/shared': 1.0.4-beta.0
+      '@windijs/helpers': 1.1.0-beta.3
+      '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/helpers': link:../helpers
       '@windijs/shared': link:../shared
 
   packages/helpers:
     specifiers:
-      '@windijs/shared': 1.0.4-beta.0
+      '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/shared': link:../shared
 
@@ -105,9 +105,9 @@ importers:
 
   packages/style:
     specifiers:
-      '@windijs/core': 1.1.0-beta.2
-      '@windijs/helpers': 1.1.0-beta.2
-      '@windijs/shared': 1.0.4-beta.0
+      '@windijs/core': 1.1.0-beta.3
+      '@windijs/helpers': 1.1.0-beta.3
+      '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/core': link:../core
       '@windijs/helpers': link:../helpers
@@ -124,9 +124,9 @@ importers:
   packages/utilities:
     specifiers:
       '@windijs/colors': 1.0.2
-      '@windijs/config': 1.0.5-beta.0
-      '@windijs/core': 1.1.0-beta.2
-      '@windijs/helpers': 1.1.0-beta.2
+      '@windijs/config': 1.0.5-beta.1
+      '@windijs/core': 1.1.0-beta.3
+      '@windijs/helpers': 1.1.0-beta.3
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config
@@ -135,9 +135,9 @@ importers:
 
   packages/variants:
     specifiers:
-      '@windijs/core': 1.1.0-beta.2
-      '@windijs/helpers': 1.1.0-beta.2
-      '@windijs/shared': 1.0.4-beta.0
+      '@windijs/core': 1.1.0-beta.3
+      '@windijs/helpers': 1.1.0-beta.3
+      '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/core': link:../core
       '@windijs/helpers': link:../helpers
@@ -166,10 +166,10 @@ importers:
   packages/windijs:
     specifiers:
       '@windijs/colors': 1.0.2
-      '@windijs/config': 1.0.5-beta.0
-      '@windijs/core': 1.1.0-beta.2
-      '@windijs/helpers': 1.1.0-beta.2
-      '@windijs/shared': 1.0.4-beta.0
+      '@windijs/config': 1.0.5-beta.1
+      '@windijs/core': 1.1.0-beta.3
+      '@windijs/helpers': 1.1.0-beta.3
+      '@windijs/shared': 1.0.4-beta.1
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config
