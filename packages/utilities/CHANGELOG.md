@@ -1,5 +1,13 @@
 # @windijs/utilities
 
+## 1.0.6-beta.6
+
+### Patch Changes
+
+- Updated dependencies [[`b38b5607`](https://github.com/windijs/windijs/commit/b38b5607dccfb2d5b22af15f1b62af9ad9caf3ae)]:
+  - @windijs/config@1.0.5-beta.2
+  - @windijs/core@1.1.0-beta.6
+
 ## 1.0.6-beta.5
 
 ### Patch Changes

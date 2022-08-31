@@ -1,5 +1,12 @@
 # @windijs/variants
 
+## 1.0.6-beta.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @windijs/core@1.1.0-beta.6
+
 ## 1.0.6-beta.5
 
 ### Patch Changes

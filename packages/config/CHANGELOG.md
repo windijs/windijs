@@ -1,5 +1,11 @@
 # @windijs/config
 
+## 1.0.5-beta.2
+
+### Patch Changes
+
+- [`b38b5607`](https://github.com/windijs/windijs/commit/b38b5607dccfb2d5b22af15f1b62af9ad9caf3ae) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: complete config define
+
 ## 1.0.5-beta.1
 
 ### Patch Changes
