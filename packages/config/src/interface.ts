@@ -1,126 +1,220 @@
-export type ConfigName =
-  "colors" |
-  "theme" |
-  "backgroundAttachment" |
-  "backgroundClip" |
-  "backgroundPosition" |
-  "backgroundRepeat" |
-  "backgroundSize" |
-  "backgroundOrigin" |
-  "backgroundImage" |
-  "gradientDirection" |
-  "gradient" |
-  "strokeLineCap" |
-  "strokeLineJoin" |
-  "flexDirection" |
-  "flexWrap" |
-  "flexStretch" |
-  "flexGrow" |
-  "flexShrink" |
-  "gridAutoColumns" |
-  "gridAutoFlow" |
-  "gridAutoRows" |
-  "gridColumn" |
-  "gridRow" |
-  "gridColumnEnd" |
-  "gridColumnStart" |
-  "gridRowStart" |
-  "gridRowEnd" |
-  "gridTemplateColumns" |
-  "gridTemplateRows" |
-  "borderRadius" |
-  "borderStyle" |
-  "borderWidth" |
-  "outlineOffset" |
-  "ringOffset" |
-  "blendMode" |
-  "boxShadow" |
-  "boxDecorationBreak" |
-  "imageRendering" |
-  "listStyleType" |
-  "listStylePosition" |
-  "overflow" |
-  "overscroll" |
-  "aspectRatio" |
-  "blur" |
-  "brightness" |
-  "contrast" |
-  "dropShadow" |
-  "grayscale" |
-  "hueRotate" |
-  "invert" |
-  "saturate" |
-  "sepia" |
-  "opacity" |
-  "screens" |
-  "orientations" |
-  "motions" |
-  "tShirtScale" |
-  "width" |
-  "height" |
-  "spacing" |
-  "spaceBetween" |
-  "margin" |
-  "padding" |
-  "animation" |
-  "animationDuration" |
-  "animationDelay" |
-  "animationIterationCount" |
-  "animationTimingFunction" |
-  "degree" |
-  "rotate" |
-  "scale" |
-  "skew" |
-  "translate" |
-  "transformOrigin" |
-  "transformStyle" |
-  "perspective" |
-  "perspectiveOrigin" |
-  "justifyContent" |
-  "justifyItems" |
-  "justifySelf" |
-  "alignContent" |
-  "alignItems" |
-  "alignSelf" |
-  "placeContent" |
-  "placeItems" |
-  "placeSelf" |
-  "inset" |
-  "objectFit" |
-  "position" |
-  "objectPosition" |
-  "zIndex" |
-  "touchAction" |
-  "userSelect" |
-  "tableDisplay" |
-  "transitionProperty" |
-  "transitionDelay" |
-  "transitionDuration" |
-  "transitionTimingFunction" |
-  "fontFamily" |
-  "fontStyle" |
-  "fontSize" |
-  "fontWeight" |
-  "hyphens" |
-  "letterSpacing" |
-  "lineHeight" |
-  "tabSize" |
-  "textAlign" |
-  "verticalAlign" |
-  "fontVariantNumeric" |
-  "textDecorationType" |
-  "textDecorationStyle" |
-  "textDecorationThickness" |
-  "textDecorationOffset" |
-  "textIndent" |
-  "textStrokeWidth" |
-  "textShadow" |
-  "textTransform" |
-  "whiteSpace" |
-  "writingMode" |
-  "writingOrientation";
+export type DarkModeConfig = "class" | "media";
+
+export type ThemeType = Record<string, any> | undefined
+
+export interface BaseTheme {
+  alignContent: ThemeType,
+  alignItems: ThemeType,
+  alignSelf: ThemeType,
+  animation: ThemeType,
+  animationDelay: ThemeType,
+  animationDuration: ThemeType,
+  animationIterationCount: ThemeType,
+  animationTimingFunction: ThemeType,
+  aspectRatio: ThemeType,
+  backdropBlur: ThemeType,
+  backdropBrightness: ThemeType,
+  backdropContrast: ThemeType,
+  backdropFilter: ThemeType,
+  backdropGrayscale: ThemeType,
+  backdropHueRotate: ThemeType,
+  backdropInvert: ThemeType,
+  backdropOpacity: ThemeType,
+  backdropSaturate: ThemeType,
+  backdropSepia: ThemeType,
+  backgroundAttachment: ThemeType,
+  backgroundClip: ThemeType,
+  backgroundColor: ThemeType,
+  backgroundImage: ThemeType,
+  backgroundOpacity: ThemeType,
+  backgroundOrigin: ThemeType,
+  backgroundPosition: ThemeType,
+  backgroundRepeat: ThemeType,
+  backgroundSize: ThemeType,
+  blendMode: ThemeType,
+  blur: ThemeType,
+  borderColor: ThemeType,
+  borderOpacity: ThemeType,
+  borderRadius: ThemeType,
+  borderStyle: ThemeType,
+  borderWidth: ThemeType,
+  boxDecorationBreak: ThemeType,
+  boxShadow: ThemeType,
+  boxShadowColor: ThemeType,
+  brightness: ThemeType,
+  caretColor: ThemeType,
+  caretOpacity: ThemeType,
+  colors: ThemeType,
+  container: ThemeType,
+  contrast: ThemeType,
+  cursor: ThemeType,
+  degree: ThemeType,
+  divideColor: ThemeType,
+  divideOpacity: ThemeType,
+  divideWidth: ThemeType,
+  dropShadow: ThemeType,
+  fill: ThemeType,
+  filter: ThemeType,
+  flex: ThemeType,
+  flexDirection: ThemeType,
+  flexGrow: ThemeType,
+  flexShrink: ThemeType,
+  flexStretch: ThemeType,
+  flexWrap: ThemeType,
+  fontFamily: ThemeType,
+  fontSize: ThemeType,
+  fontStyle: ThemeType,
+  fontVariantNumeric: ThemeType,
+  fontWeight: ThemeType,
+  gap: ThemeType,
+  gradient: ThemeType,
+  gradientColorStops: ThemeType,
+  gradientDirection: ThemeType,
+  grayscale: ThemeType,
+  gridAutoColumns: ThemeType,
+  gridAutoFlow: ThemeType,
+  gridAutoRows: ThemeType,
+  gridColumn: ThemeType,
+  gridColumnEnd: ThemeType,
+  gridColumnStart: ThemeType,
+  gridRow: ThemeType,
+  gridRowEnd: ThemeType,
+  gridRowStart: ThemeType,
+  gridTemplateColumns: ThemeType,
+  gridTemplateRows: ThemeType,
+  height: ThemeType,
+  hueRotate: ThemeType,
+  hyphens: ThemeType,
+  imageRendering: ThemeType,
+  inset: ThemeType,
+  invert: ThemeType,
+  justifyContent: ThemeType,
+  justifyItems: ThemeType,
+  justifySelf: ThemeType,
+  keyframes: ThemeType,
+  letterSpacing: ThemeType,
+  lineClamp: ThemeType,
+  lineHeight: ThemeType,
+  listStylePosition: ThemeType,
+  listStyleType: ThemeType,
+  margin: ThemeType,
+  maxHeight: ThemeType,
+  maxWidth: ThemeType,
+  minHeight: ThemeType,
+  minWidth: ThemeType,
+  motions: ThemeType,
+  objectFit: ThemeType,
+  objectPosition: ThemeType,
+  opacity: ThemeType,
+  order: ThemeType,
+  orientation: ThemeType,
+  orientations: ThemeType,
+  outline: ThemeType,
+  outlineColor: ThemeType,
+  outlineOffset: ThemeType,
+  overflow: ThemeType,
+  overscroll: ThemeType,
+  padding: ThemeType,
+  perspective: ThemeType,
+  perspectiveOrigin: ThemeType,
+  placeContent: ThemeType,
+  placeItems: ThemeType,
+  placeSelf: ThemeType,
+  placeholderColor: ThemeType,
+  placeholderOpacity: ThemeType,
+  position: ThemeType,
+  ringColor: ThemeType,
+  ringOffset: ThemeType,
+  ringOffsetColor: ThemeType,
+  ringOffsetWidth: ThemeType,
+  ringOpacity: ThemeType,
+  ringWidth: ThemeType,
+  rotate: ThemeType,
+  saturate: ThemeType,
+  scale: ThemeType,
+  screens: ThemeType,
+  sepia: ThemeType,
+  skew: ThemeType,
+  snapMargin: ThemeType,
+  snapPadding: ThemeType,
+  space: ThemeType,
+  spaceBetween: ThemeType,
+  spacing: ThemeType,
+  stroke: ThemeType,
+  strokeDashArray: ThemeType,
+  strokeDashOffset: ThemeType,
+  strokeLineCap: ThemeType,
+  strokeLineJoin: ThemeType,
+  strokeWidth: ThemeType,
+  tShirtScale: ThemeType,
+  tabSize: ThemeType,
+  tableDisplay: ThemeType,
+  textAlign: ThemeType,
+  textColor: ThemeType,
+  textDecorationColor: ThemeType,
+  textDecorationLength: ThemeType,
+  textDecorationOffset: ThemeType,
+  textDecorationOpacity: ThemeType,
+  textDecorationStyle: ThemeType,
+  textDecorationThickness: ThemeType,
+  textDecorationType: ThemeType,
+  textIndent: ThemeType,
+  textOpacity: ThemeType,
+  textShadow: ThemeType,
+  textStrokeColor: ThemeType,
+  textStrokeWidth: ThemeType,
+  textTransform: ThemeType,
+  touchAction: ThemeType,
+  transformOrigin: ThemeType,
+  transformStyle: ThemeType,
+  transitionDelay: ThemeType,
+  transitionDuration: ThemeType,
+  transitionProperty: ThemeType,
+  transitionTimingFunction: ThemeType,
+  translate: ThemeType,
+  typography: ThemeType,
+  userSelect: ThemeType,
+  vars: ThemeType,
+  verticalAlign: ThemeType,
+  whiteSpace: ThemeType,
+  width: ThemeType,
+  writingMode: ThemeType,
+  writingOrientation: ThemeType,
+  zIndex: ThemeType
+}
+
+export type Theme = Partial<BaseTheme> | ({ [ key:string ]: ThemeType } & { extend?: Theme & { extend?: undefined } })
+
+// export type Shortcut = string | NestObject;
+
+// TODO: document this
+export interface Config {
+  // presets?: Config[];
+  // prefixer?: boolean;
+  // attributify?: boolean | {
+  //   prefix?: string
+  //   separator?: string
+  //   disable?: string[]
+  // }
+  separator?: string;
+  important?: boolean;
+  darkMode?: DarkModeConfig;
+  theme?: Theme;
+  // variantOrder?: string[];
+  // plugins?: Plugin[];
+  // handlers?: Handlers;
+  // corePlugins?: (keyof BaseTheme)[] | string[] | { [ T in keyof BaseTheme ] : boolean } | { [ key:string ] : boolean };
+  // prefix?: string;
+  // exclude?: RegExp[];
+  // alias?: { [key:string]: string };
+  // shortcuts?: { [key:string]: Shortcut };
+  // purge?: unknown;
+  utilities?: { [key: string]: object };
+  variants?: { [key: string]: string | string[] };
+  [key:string]: any;
+}
 
 // TODO: define utilities type, we need use handler and style type, maybe move this to utilities or windijs ?
-export function defineConfig<K extends ConfigName, T extends object | undefined> (config: (Record<K, T> | Record<string, T>) & { variants?: Record<string, string>, utilities?: Record<string, object> }) {
+export function defineConfig (config: Config) {
   return config;
 }
