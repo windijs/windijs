@@ -3,7 +3,7 @@ import { dtsConfig, dtsHandler, genUtilitiesDts, genUtilitiesJs } from "../src/g
 
 import { css } from "../src/css";
 
-const get = (prop) => prop;
+const get = (prop: string) => prop;
 
 test("dts", () => {
   expect(dtsConfig(backgroundSizeConfig)).toMatchSnapshot();
@@ -57,21 +57,23 @@ export declare const colors: Inject<{}, "$windi.config.colorsConfig">;
 `;
 
   expect(genUtilitiesDts(tmpl, {
-    colors: {
-      blue: {
-        50: "#ecfeff",
-        100: "#cffafe",
+    theme: {
+      colors: {
+        blue: {
+          50: "#ecfeff",
+          100: "#cffafe",
+        },
+        cyan: {
+          50: "#ecfeff",
+          100: "#cffafe",
+          200: "#a5f3fc",
+        },
       },
-      cyan: {
-        50: "#ecfeff",
-        100: "#cffafe",
-        200: "#a5f3fc",
+      imageRendering: {
+        auto: "auto",
+        pixel: "pixelated",
+        edge: "crisp-edges",
       },
-    },
-    imageRendering: {
-      auto: "auto",
-      pixel: "pixelated",
-      edge: "crisp-edges",
     },
   })).toMatchSnapshot();
 });
