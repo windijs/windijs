@@ -1,4 +1,5 @@
-import { WindiColors, bg } from "./windi"
+import { WindiColors } from "windijs"
+import { bg } from "./windi"
 
 export function setupCounter(element: HTMLButtonElement) {
   let counter = 0

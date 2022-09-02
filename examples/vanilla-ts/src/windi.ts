@@ -3,4 +3,5 @@ import { cssInJsLoader, useArrayHelper, useStyleLoader } from "windijs";
 useArrayHelper();
 useStyleLoader(cssInJsLoader);
 
-export * from "windijs";
+export * from "@windijs/utilities";
+export * from "@windijs/variants";
