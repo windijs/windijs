@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import { bg } from '../windi'
 
 defineProps({
   msg: String
@@ -10,7 +9,7 @@ const count = ref(0)
 
 const btn = ref([bg.pink[400]])
 
-/** @type { import("windijs").NestedColors[] } */
+/** @type { import("windijs").BootstrapColors[] } */
 const colors = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"];
 
 const increment = () => {
