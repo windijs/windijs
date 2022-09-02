@@ -1,13 +1,14 @@
+/// <reference path="./windi-global.d.ts" />
+
 import './App.css'
 
-import { bg } from './windi'
 import reactLogo from './assets/react.svg'
 import { useState } from 'react'
 
 function App() {
   const [count, setCount] = useState(0)
   const [button, setButtonStyle] = useState([bg.pink[400]])
-  /** @type {import("windijs").NestedColors} */
+  /** @type {import("windijs").BootstrapColors} */
   const colors = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
 
   return (
@@ -17,7 +18,7 @@ function App() {
           <img src="/vite.svg" className="logo" alt="Vite logo" />
         </a>
         <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className={["logo", "react", bg.blue[400].opacity(20)]} alt="React logo" />
+          <img src={reactLogo} className={["logo", "react", rounded.xl, bg.blue[400].opacity(20)]} alt="React logo" />
         </a>
       </div>
       <h1>Vite + React</h1>
