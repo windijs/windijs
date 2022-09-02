@@ -9,7 +9,7 @@ function injectDepend(src: string) {
 
   const codes = []
 
-  codes.push(`import { style } from "windijs"`)
+  codes.push(`import { style } from "@windijs/style"`)
   codes.push(`const { ${depends.join(", ")} } = style`)
 
   return codes.map(i => i + ";").join("\n") + src;

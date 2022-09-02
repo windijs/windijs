@@ -1,10 +1,10 @@
 import type { WindiColors, StyleObject, ColorStyleObject } from 'windijs'
-import { html, css } from 'lit'
+import { html } from 'lit'
 import { styles } from './styles.windi'
 import { customElement, property } from 'lit/decorators.js'
 import litLogo from './assets/lit.svg'
 import WindiElement from './base'
-import { bg } from "windijs";
+import { bg } from "@windijs/utilities";
 
 /**
  * An example element.
