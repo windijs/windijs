@@ -1,8 +1,8 @@
+<!-- svelte-ignore missing-declaration -->
+
 <script lang="ts">
   import svelteLogo from './assets/svelte.svg'
   import Counter from './lib/Counter.svelte'
-
-  import { bg, lg, w } from "./windi"
 
   const logo = [bg.orange[300], lg(bg.green[400])];
 </script>
@@ -10,13 +10,13 @@
 <main>
   <div>
     <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" use:w={[bg.indigo[300]]} alt="Vite Logo" />
+      <img src="/vite.svg" class={["logo", bg.indigo[300]].toString()} alt="Vite Logo" />
     </a>
     <a href="https://svelte.dev" target="_blank">
-      <img src={svelteLogo} class="logo svelte" use:w={logo} alt="Svelte Logo" />
+      <img src={svelteLogo} class={["logo", "svelte", logo].toString()} alt="Svelte Logo" />
     </a>
   </div>
-  <h1 class={[bg.blue[300], bg.red[500]].toString()}>Vite + Svelte</h1>
+  <h1 class={[bg.blue[300], hocus(myColor.red)].toString()}>Vite + Svelte</h1>
 
   <div class="card">
     <Counter />

@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { bg, w } from "../windi"
-  import type { WindiColors } from "../windi"
+  import type { BootstrapColors } from "windijs"
 
   let btn = [bg.pink[400]]
 
   let count: number = 0
 
-  const colors: WindiColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
+  const colors: BootstrapColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
 
   const increment = () => {
     btn = [bg[colors[count % 8]][400]]
@@ -14,6 +13,6 @@
   }
 </script>
 
-<button use:w={btn} on:click={increment}>
+<button class={[btn].toString()} on:click={increment}>
   count is {count}
 </button>
