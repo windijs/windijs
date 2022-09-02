@@ -1,7 +1,16 @@
 import { defineConfig } from 'vite'
+import { vitePlugins } from "@windijs/plugin-utils"
 import vue from '@vitejs/plugin-vue'
+import windiConfig from './windi.config'
 
-// https://vitejs.dev/config/
+const { plugins, windijs } = vitePlugins.vue({
+  config: windiConfig
+});
+
 export default defineConfig({
-  plugins: [vue()]
+  plugins: [
+    ...plugins,
+    windijs(),
+    vue()
+  ]
 })
