@@ -25,9 +25,6 @@
   },
   "author": "Raven Satir",
   "license": "MIT",
-  "dependencies": {
-    "@windijs/shared": "1.0.5"
-  },
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "displayName": "@windijs/config"

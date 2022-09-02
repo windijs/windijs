@@ -1,6 +1,4 @@
-import { fractions, negative } from "@windijs/shared";
-
-import { spacingConfig } from "./spacing";
+import { fractionConfig, negativeSpacingConfig, spacingConfig } from "./spacing";
 
 export const justifyContentConfig = {
   start: "flex-start",
@@ -55,12 +53,9 @@ export const placeSelfConfig = justifyItemsConfig;
 
 export const insetConfig = {
   auto: "auto",
-  full: "100%",
-  "-full": "-100%",
   ...spacingConfig,
-  ...negative(spacingConfig),
-  ...fractions(2, 5),
-  ...negative(fractions(2, 5)),
+  ...negativeSpacingConfig,
+  ...fractionConfig,
 };
 
 export const objectFitConfig = {
