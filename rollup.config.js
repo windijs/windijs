@@ -100,6 +100,8 @@ function createConfig (format, output) {
   return defineConfig({
     input: resolve("src/index.ts"),
     external: [
+      "path",
+      "fs",
       ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.peerDependencies || {}),
     ],
