@@ -1,6 +1,6 @@
 {
   "name": "@windijs/utilities",
-  "version": "1.0.6-beta.8",
+  "version": "1.0.6",
   "description": "@windijs/utilities",
   "main": "dist/utilities.js",
   "module": "dist/utilities.mjs",
@@ -30,9 +30,9 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/core": "1.1.0-beta.8",
+    "@windijs/core": "1.1.0",
     "@windijs/colors": "1.0.2",
-    "@windijs/config": "1.0.5-beta.3",
-    "@windijs/helpers": "1.1.0-beta.5"
+    "@windijs/config": "1.0.5",
+    "@windijs/helpers": "1.1.0"
   }
 }

@@ -1,5 +1,16 @@
 # @windijs/config
 
+## 1.0.5
+
+### Patch Changes
+
+- [`b38b5607`](https://github.com/windijs/windijs/commit/b38b5607dccfb2d5b22af15f1b62af9ad9caf3ae) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: complete config define
+
+* [`3bfacd6e`](https://github.com/windijs/windijs/commit/3bfacd6e745c01f650f1f5e7b65574585ee8c5bc) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: important config with string
+
+* Updated dependencies [[`d285c569`](https://github.com/windijs/windijs/commit/d285c569ec7d4cdd0921f92c7dfe892e58c9cd75), [`831cae71`](https://github.com/windijs/windijs/commit/831cae71465e13a4d00188cca914710c54cd29cf)]:
+  - @windijs/shared@1.0.4
+
 ## 1.0.5-beta.3
 
 ### Patch Changes

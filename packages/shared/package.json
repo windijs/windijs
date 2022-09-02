@@ -1,6 +1,6 @@
 {
   "name": "@windijs/shared",
-  "version": "1.0.4-beta.1",
+  "version": "1.0.4",
   "description": "@windijs/shared",
   "main": "dist/shared.js",
   "module": "dist/shared.mjs",

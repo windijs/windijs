@@ -1,5 +1,32 @@
 # @windijs/helpers
 
+## 1.1.0
+
+### Minor Changes
+
+- [`a8e51fe2`](https://github.com/windijs/windijs/commit/a8e51fe2d193dc7e6b450fb4e7b5ad6ab330bd33) Thanks [@voorjaar](https://github.com/voorjaar)! - refactor: new handler api with meta data
+
+### Patch Changes
+
+- [`8ab80baf`](https://github.com/windijs/windijs/commit/8ab80bafda9ab832d8d53f287e200f7fd497b7b6) Thanks [@voorjaar](https://github.com/voorjaar)! - chore: new versions
+
+* [`d285c569`](https://github.com/windijs/windijs/commit/d285c569ec7d4cdd0921f92c7dfe892e58c9cd75) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: remove circular devDependencies
+
+- [`e9a948cd`](https://github.com/windijs/windijs/commit/e9a948cd44d003a2c1e91ea2927658f59e3746dc) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new resetStyleMeta helper
+
+* [`9940db66`](https://github.com/windijs/windijs/commit/9940db664965f9e7c04b8e6831cb035b79f2b212) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: genUtilitiesDts with theme
+
+- [`d0d14195`](https://github.com/windijs/windijs/commit/d0d14195bea0f846097a9738da82278ca97468bc) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new handler types
+
+* [`6a71ee76`](https://github.com/windijs/windijs/commit/6a71ee76737a9309b31b06adc33a695461d1583d) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: add dtsSetup and dtsHandler
+
+- [`da5e3466`](https://github.com/windijs/windijs/commit/da5e3466071e7c780b3875e177dad87e14495d3c) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: genUtilitiesJs with theme
+
+* [`ba98151d`](https://github.com/windijs/windijs/commit/ba98151d7050fe6832999cf4c7ce0bec48d26fe0) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: nested StyleObject in ArrayHelper
+
+* Updated dependencies [[`d285c569`](https://github.com/windijs/windijs/commit/d285c569ec7d4cdd0921f92c7dfe892e58c9cd75), [`831cae71`](https://github.com/windijs/windijs/commit/831cae71465e13a4d00188cca914710c54cd29cf)]:
+  - @windijs/shared@1.0.4
+
 ## 1.1.0-beta.5
 
 ### Patch Changes
