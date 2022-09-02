@@ -74,49 +74,45 @@ importers:
       typedoc-monorepo-link-types: 0.0.4_typedoc@0.23.10
       typescript: 4.7.4
 
-  examples/vue-ts:
+  examples/vue:
     specifiers:
       '@vitejs/plugin-vue': ^3.0.0
       '@windijs/plugin-utils': workspace:*
       '@windijs/utilities': workspace:*
       '@windijs/variants': workspace:*
-      typescript: ^4.6.4
       vite: ^3.0.9
       vue: ^3.2.37
-      vue-tsc: ^0.38.4
       windijs: workspace:*
     dependencies:
+      vue: 3.2.38
+    devDependencies:
+      '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.38
       '@windijs/plugin-utils': link:../../packages/plugin-utils
       '@windijs/utilities': link:../../packages/utilities
       '@windijs/variants': link:../../packages/variants
-      vue: 3.2.38
-      windijs: link:../../packages/windijs
-    devDependencies:
-      '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.38
-      typescript: 4.7.4
       vite: 3.0.9
-      vue-tsc: 0.38.9_typescript@4.7.4
+      windijs: link:../../packages/windijs
 
   packages/colors:
     specifiers: {}
 
   packages/config:
     specifiers:
-      '@windijs/shared': 1.0.4-beta.1
+      '@windijs/shared': 1.0.4
     dependencies:
       '@windijs/shared': link:../shared
 
   packages/core:
     specifiers:
-      '@windijs/helpers': 1.1.0-beta.4
-      '@windijs/shared': 1.0.4-beta.1
+      '@windijs/helpers': 1.1.0
+      '@windijs/shared': 1.0.4
     dependencies:
       '@windijs/helpers': link:../helpers
       '@windijs/shared': link:../shared
 
   packages/helpers:
     specifiers:
-      '@windijs/shared': 1.0.4-beta.1
+      '@windijs/shared': 1.0.4
     dependencies:
       '@windijs/shared': link:../shared
 
@@ -125,8 +121,8 @@ importers:
       '@windijs/config': 1.0.5-beta.3
       '@windijs/helpers': 1.1.0-beta.4
     dependencies:
-      '@windijs/config': link:../config
-      '@windijs/helpers': link:../helpers
+      '@windijs/config': 1.0.5-beta.3
+      '@windijs/helpers': 1.1.0-beta.4
 
   packages/shared:
     specifiers: {}
@@ -136,9 +132,9 @@ importers:
 
   packages/style:
     specifiers:
-      '@windijs/core': 1.1.0-beta.7
-      '@windijs/helpers': 1.1.0-beta.4
-      '@windijs/shared': 1.0.4-beta.1
+      '@windijs/core': 1.1.0
+      '@windijs/helpers': 1.1.0
+      '@windijs/shared': 1.0.4
     dependencies:
       '@windijs/core': link:../core
       '@windijs/helpers': link:../helpers
@@ -155,9 +151,9 @@ importers:
   packages/utilities:
     specifiers:
       '@windijs/colors': 1.0.2
-      '@windijs/config': 1.0.5-beta.3
-      '@windijs/core': 1.1.0-beta.7
-      '@windijs/helpers': 1.1.0-beta.4
+      '@windijs/config': 1.0.5
+      '@windijs/core': 1.1.0
+      '@windijs/helpers': 1.1.0
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config
@@ -166,9 +162,9 @@ importers:
 
   packages/variants:
     specifiers:
-      '@windijs/core': 1.1.0-beta.7
-      '@windijs/helpers': 1.1.0-beta.4
-      '@windijs/shared': 1.0.4-beta.1
+      '@windijs/core': 1.1.0
+      '@windijs/helpers': 1.1.0
+      '@windijs/shared': 1.0.4
     dependencies:
       '@windijs/core': link:../core
       '@windijs/helpers': link:../helpers
@@ -197,10 +193,10 @@ importers:
   packages/windijs:
     specifiers:
       '@windijs/colors': 1.0.2
-      '@windijs/config': 1.0.5-beta.3
-      '@windijs/core': 1.1.0-beta.7
-      '@windijs/helpers': 1.1.0-beta.4
-      '@windijs/shared': 1.0.4-beta.1
+      '@windijs/config': 1.0.5
+      '@windijs/core': 1.1.0
+      '@windijs/helpers': 1.1.0
+      '@windijs/shared': 1.0.4
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config
@@ -1452,36 +1448,6 @@ packages:
       vue: 3.2.38
     dev: true
 
-  /@volar/code-gen/0.38.9:
-    resolution: {integrity: sha512-n6LClucfA+37rQeskvh9vDoZV1VvCVNy++MAPKj2dT4FT+Fbmty/SDQqnsEBtdEe6E3OQctFvA/IcKsx3Mns0A==}
-    dependencies:
-      '@volar/source-map': 0.38.9
-    dev: true
-
-  /@volar/source-map/0.38.9:
-    resolution: {integrity: sha512-ba0UFoHDYry+vwKdgkWJ6xlQT+8TFtZg1zj9tSjj4PykW1JZDuM0xplMotLun4h3YOoYfY9K1huY5gvxmrNLIw==}
-    dev: true
-
-  /@volar/vue-code-gen/0.38.9:
-    resolution: {integrity: sha512-tzj7AoarFBKl7e41MR006ncrEmNPHALuk8aG4WdDIaG387X5//5KhWC5Ff3ZfB2InGSeNT+CVUd74M0gS20rjA==}
-    dependencies:
-      '@volar/code-gen': 0.38.9
-      '@volar/source-map': 0.38.9
-      '@vue/compiler-core': 3.2.38
-      '@vue/compiler-dom': 3.2.38
-      '@vue/shared': 3.2.38
-    dev: true
-
-  /@volar/vue-typescript/0.38.9:
-    resolution: {integrity: sha512-iJMQGU91ADi98u8V1vXd2UBmELDAaeSP0ZJaFjwosClQdKlJQYc6MlxxKfXBZisHqfbhdtrGRyaryulnYtliZw==}
-    dependencies:
-      '@volar/code-gen': 0.38.9
-      '@volar/source-map': 0.38.9
-      '@volar/vue-code-gen': 0.38.9
-      '@vue/compiler-sfc': 3.2.38
-      '@vue/reactivity': 3.2.38
-    dev: true
-
   /@vue/compiler-core/3.2.38:
     resolution: {integrity: sha512-/FsvnSu7Z+lkd/8KXMa4yYNUiqQrI22135gfsQYVGuh5tqEgOB0XqrUdb/KnCLa5+TmQLPwvyUnKMyCpu+SX3Q==}
     dependencies:
@@ -1565,6 +1531,12 @@ packages:
       '@windijs/shared': 1.0.0
     dev: false
 
+  /@windijs/config/1.0.5-beta.3:
+    resolution: {integrity: sha512-0AqgaGpRoA8QhO/3mvhHFu3v1ues0f9FEPS7M2GB5PP0TLmcWlxiDIWdtFYxtlbE+50VeSXlqzY9ltCFUHk28g==}
+    dependencies:
+      '@windijs/shared': 1.0.4-beta.1
+    dev: false
+
   /@windijs/core/1.0.0-beta.0:
     resolution: {integrity: sha512-Zh4xvQrfQuaeZh1V4szNn6zjb504wRXTRGgCv2IOQsgl3jnR+l5szttfEK4tf1FX6JjxGdKncoMlo+gSxespzw==}
     dependencies:
@@ -1578,12 +1550,22 @@ packages:
       '@windijs/shared': 1.0.0-beta.0
     dev: false
 
+  /@windijs/helpers/1.1.0-beta.4:
+    resolution: {integrity: sha512-1Rs1FcFH/n+qdJcw5Wu5bLaMqMT67Puiyy5Lb45GpyCJkxK0rTzAOTWZqRiVi0HeKoOvd82dZfC0P69r7pjBFg==}
+    dependencies:
+      '@windijs/shared': 1.0.4-beta.1
+    dev: false
+
   /@windijs/shared/1.0.0:
     resolution: {integrity: sha512-ywDhZ8BcZoxRBJQDnzFaUHpqGZSn0faOMCjwl3tumzvHIj6yCsYUHOPN1dBgp6aWpPPKF33rEwiW65MHr7qxQA==}
     dev: false
 
   /@windijs/shared/1.0.0-beta.0:
     resolution: {integrity: sha512-bGq+QIcKyrbcRl2xyyKBtAEfs6yX4FbupdIYOpSdrjhd84BX1v0g5TbuI/+RhkgmXNSPctM7h1KxEAYzYxb2Pw==}
+    dev: false
+
+  /@windijs/shared/1.0.4-beta.1:
+    resolution: {integrity: sha512-uC43GGZOQXw/4RpAKZkqMtX1bSg/jWMZwqUTejwmgWBErzWOrBlQziOoJXzZApUKngZbKZyg+ufa3+2hyIo5Lg==}
     dev: false
 
   /@windijs/style/1.0.0-beta.0:
@@ -5165,16 +5147,6 @@ packages:
 
   /vscode-textmate/5.2.0:
     resolution: {integrity: sha512-Uw5ooOQxRASHgu6C7GVvUxisKXfSgW4oFlO+aa+PAkgmH89O3CXxEEzNRNtHSqtXFTl0nAC1uYj0GMSH27uwtQ==}
-    dev: true
-
-  /vue-tsc/0.38.9_typescript@4.7.4:
-    resolution: {integrity: sha512-Yoy5phgvGqyF98Fb4mYqboR4Q149jrdcGv5kSmufXJUq++RZJ2iMVG0g6zl+v3t4ORVWkQmRpsV4x2szufZ0LQ==}
-    hasBin: true
-    peerDependencies:
-      typescript: '*'
-    dependencies:
-      '@volar/vue-typescript': 0.38.9
-      typescript: 4.7.4
     dev: true
 
   /vue/3.2.38:
