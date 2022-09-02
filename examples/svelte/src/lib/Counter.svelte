@@ -1,6 +1,4 @@
 <script>
-  import { bg, w } from "../windi";
-
   let btn = [bg.pink[400]];
 
   let count = 0
@@ -16,6 +14,6 @@
 
 </script>
 
-<button use:w={btn} on:click={increment}>
+<button class={btn.toString()} on:click={increment}>
   count is {count}
 </button>
