@@ -11,6 +11,10 @@ export function isStyleObject (i: unknown): i is StyleObject {
   return i != null && typeof i === "object" && SymbolCSS in i;
 }
 
+export function isStyleArray (i: unknown): boolean {
+  return Array.isArray(i) && i.find(o => isStyleObject(o) || isStyleArray(o));
+}
+
 export function getStyleVariants (style: StyleObject): string[] {
   return style[SymbolMeta].variants;
 }
@@ -47,8 +51,7 @@ export function applyVariant (utility: StyleObject): CSSObject | CSSMap {
 export function useArrayHelper () {
   // eslint-disable-next-line no-extend-native
   Array.prototype.toString = function () {
-    if (this.find(isStyleObject)) return this.join(" ");
-    return this.join(",");
+    return this.join(isStyleArray(this) ? " " : ",");
   };
 }
 
