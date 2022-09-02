@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Windi JS
+windi-global.d.ts
+windi-module.d.ts
