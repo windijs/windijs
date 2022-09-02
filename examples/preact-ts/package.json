@@ -9,13 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.9.0",
-    "windijs": "workspace:^1.0.0"
+    "preact": "^10.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@preact/preset-vite": "^2.3.0",
+    "@windijs/plugin-utils": "workspace:*",
+    "@windijs/utilities": "workspace:*",
+    "@windijs/variants": "workspace:*",
     "typescript": "^4.6.4",
-    "vite": "^3.0.0"
+    "vite": "^3.0.9",
+    "windijs": "workspace:*"
   }
 }

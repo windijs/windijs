@@ -1,24 +1,25 @@
 import './app.css'
 
-import type { WindiColors } from 'windijs'
-import { bg } from './windi'
+import type { BootstrapColors } from 'windijs'
 import preactLogo from './assets/preact.svg'
 import { useState } from 'preact/hooks'
 
 export function App() {
   const [count, setCount] = useState(0)
   const [button, setButtonStyle] = useState([bg.pink[400]])
-  const colors: WindiColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
+  const colors: BootstrapColors[] = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
+
+  const logo = [rounded.xl, m[4]]
 
   return (
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" class="logo" alt="Vite logo" />
+          <img src="/vite.svg" class={["logo", logo, bg.purple[400].opacity(20)]} alt="Vite logo" />
         </a>
         <a href="https://preactjs.com" target="_blank">
           {/* TODO: same problem with react, can we make class support Array? */}
-          <img src={preactLogo} class={["logo", "preact", bg.blue[400].opacity(20)]} alt="Preact logo" />
+          <img src={preactLogo} class={["logo", "preact", logo, bg.blue[400].opacity(20)]} alt="Preact logo" />
         </a>
       </div>
       <h1>Vite + Preact</h1>
