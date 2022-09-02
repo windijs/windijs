@@ -1,6 +1,6 @@
 {
   "name": "windijs",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "utility-first css-in-js framework",
   "main": "dist/windijs.js",
   "module": "dist/windijs.mjs",
@@ -31,10 +31,10 @@
     "readmeFile": "./README.md"
   },
   "dependencies": {
-    "@windijs/colors": "1.0.2",
-    "@windijs/config": "1.0.5",
-    "@windijs/core": "1.1.0",
-    "@windijs/helpers": "1.1.0",
-    "@windijs/shared": "1.0.4"
+    "@windijs/colors": "1.0.3",
+    "@windijs/config": "1.0.6",
+    "@windijs/core": "1.1.1",
+    "@windijs/helpers": "1.1.1",
+    "@windijs/shared": "1.0.5"
   }
 }

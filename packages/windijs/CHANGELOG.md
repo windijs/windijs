@@ -1,5 +1,20 @@
 # windijs
 
+## 1.1.1
+
+### Patch Changes
+
+- [`134427d6`](https://github.com/windijs/windijs/commit/134427d666a61704de77d52f0e6e4ffbfe085cd3) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: export package.json
+
+* [`99ecf595`](https://github.com/windijs/windijs/commit/99ecf5956d7fa1124c1561d8f58b7a0a2f1af0f2) Thanks [@voorjaar](https://github.com/voorjaar)! - build: switch to es2018 for better tree shaking
+
+* Updated dependencies [[`134427d6`](https://github.com/windijs/windijs/commit/134427d666a61704de77d52f0e6e4ffbfe085cd3), [`99ecf595`](https://github.com/windijs/windijs/commit/99ecf5956d7fa1124c1561d8f58b7a0a2f1af0f2)]:
+  - @windijs/colors@1.0.3
+  - @windijs/config@1.0.6
+  - @windijs/core@1.1.1
+  - @windijs/helpers@1.1.1
+  - @windijs/shared@1.0.5
+
 ## 1.1.0
 
 ### Patch Changes
