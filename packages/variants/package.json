@@ -19,6 +19,7 @@
   "author": "Raven Satir",
   "license": "MIT",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "import": "./dist/variants.mjs",
       "require": "./dist/variants.js"

@@ -17,6 +17,7 @@
     "windicss"
   ],
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "import": "./dist/core.mjs",
       "require": "./dist/core.js"

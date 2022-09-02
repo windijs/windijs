@@ -17,6 +17,7 @@
     "windicss"
   ],
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "import": "./dist/colors.mjs",
       "require": "./dist/colors.js"
