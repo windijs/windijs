@@ -1,5 +1,13 @@
 # @windijs/helpers
 
+## 1.1.0-beta.5
+
+### Patch Changes
+
+- [`da5e3466`](https://github.com/windijs/windijs/commit/da5e3466071e7c780b3875e177dad87e14495d3c) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: genUtilitiesJs with theme
+
+* [`ba98151d`](https://github.com/windijs/windijs/commit/ba98151d7050fe6832999cf4c7ce0bec48d26fe0) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: nested StyleObject in ArrayHelper
+
 ## 1.1.0-beta.4
 
 ### Patch Changes
