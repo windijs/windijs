@@ -1,7 +1,13 @@
+import './index.css'
+
+import { cssInJsLoader, useArrayHelper, useStyleLoader } from 'windijs'
+
+import App from './App'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+
+useArrayHelper();
+useStyleLoader(cssInJsLoader);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
