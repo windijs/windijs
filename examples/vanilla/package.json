@@ -8,10 +8,10 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "windijs": "workspace:^1.0.0"
-  },
   "devDependencies": {
-    "vite": "^3.0.0"
+    "@windijs/utilities": "workspace:*",
+    "@windijs/variants": "workspace:*",
+    "vite": "^3.0.9",
+    "windijs": "workspace:*"
   }
 }
