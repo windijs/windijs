@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { gradientConfig } from '../windi';
-import { bg, gradient } from '../windi'
-
 const btn = ref([bg.pink[400]])
 
 const count = ref(0)

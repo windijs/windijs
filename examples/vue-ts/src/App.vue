@@ -3,7 +3,6 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from './components/HelloWorld.vue'
 import Gradient from './components/Gradient.vue';
-import { bg, lg } from './windi';
 
 const logo = [ bg.indigo[400] ]
 </script>
@@ -14,7 +13,7 @@ const logo = [ bg.indigo[400] ]
       <img src="/vite.svg" class="logo" :class="logo" alt="Vite logo" />
     </a>
     <a href="https://vuejs.org/" target="_blank">
-      <!-- TODO: Volar doesn't trigger suggestions when bind class with an Array. -->
+      <!-- TODO: fix lint error is wrong -->
       <img src="./assets/vue.svg" class="logo vue" :class="[bg.green[300], lg(bg.blue[300])]" alt="Vue logo" />
     </a>
   </div>
