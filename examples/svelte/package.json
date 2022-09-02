@@ -10,8 +10,12 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.1",
+    "@windijs/plugin-utils": "workspace:*",
+    "@windijs/utilities": "workspace:*",
+    "@windijs/variants": "workspace:*",
     "svelte": "^3.49.0",
-    "vite": "^3.0.0"
+    "vite": "^3.0.9",
+    "windijs": "workspace:*"
   },
   "dependencies": {
     "windijs": "workspace:^1.0.0"
