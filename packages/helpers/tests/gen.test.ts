@@ -113,7 +113,7 @@ const overflow = core.createUtility("overflow")
     .init();
   `;
 
-  expect(genUtilitiesJs(tmpl, { listStyleType: { a: 1, b: 2 }, overflow: { c: 3, d: 4 }, colors: { red: "#ff0" } })).toMatchSnapshot();
+  expect(genUtilitiesJs(tmpl, { theme: { listStyleType: { a: 1, b: 2 }, overflow: { c: 3, d: 4 }, colors: { red: "#ff0" } } })).toMatchSnapshot();
 });
 
 test("dtsHandler with configHandler", () => {

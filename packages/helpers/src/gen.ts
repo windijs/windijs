@@ -66,12 +66,13 @@ export function genUtilitiesDts<T extends object & { theme?: object }> (tmpl: st
 /**
  * Generate utilities.js with config
  */
-export function genUtilitiesJs<T extends object> (tmpl: string, config: T): string {
+export function genUtilitiesJs<T extends object & { theme?: object }> (tmpl: string, config: T): string {
   const start = tmpl.match(/const\s+\S+\s*=/)?.index ?? 0;
+  const theme = config.theme ?? {};
 
-  let code = Object.keys(config).reduce((prev, k) => prev.replace(new RegExp(`(?<=configHandler\\().*?${k}Config`, "g"), k + "WindiConfigInject"), tmpl.slice(start));
+  let code = Object.keys(theme).reduce((prev, k) => prev.replace(new RegExp(`(?<=configHandler\\().*?${k}Config`, "g"), k + "WindiConfigInject"), tmpl.slice(start));
   // @ts-ignore
-  if ("colors" in config) code = code.replace(/const\s+colors\s*=[\s\S]+?;/, "const colors = colorsWindiConfigInject;");
+  if ("colors" in theme) code = code.replace(/const\s+colors\s*=[\s\S]+?;/, "const colors = colorsWindiConfigInject;");
 
-  return [tmpl.slice(0, start), ...Object.entries(config).map(([k, v]) => `const ${k}WindiConfigInject = ${JSON.stringify(v)};`), code].join("\n");
+  return [tmpl.slice(0, start), ...Object.entries(theme).map(([k, v]) => `const ${k}WindiConfigInject = ${JSON.stringify(v)};`), code].join("\n");
 }
