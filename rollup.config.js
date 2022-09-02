@@ -48,7 +48,7 @@ function createTS (format) {
       tsconfig: "tsconfig.json",
       tsconfigOverride: {
         compilerOptions: {
-          target: format === "cjs" ? "es2019" : "es2015",
+          target: format === "cjs" ? "es2020" : "es2018",
           sourceMap,
           declaration: false,
           declarationMap: false,
