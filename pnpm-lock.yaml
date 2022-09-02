@@ -74,6 +74,27 @@ importers:
       typedoc-monorepo-link-types: 0.0.4_typedoc@0.23.10
       typescript: 4.7.4
 
+  examples/preact:
+    specifiers:
+      '@babel/core': ^7.18.10
+      '@preact/preset-vite': ^2.3.0
+      '@windijs/plugin-utils': workspace:*
+      '@windijs/utilities': workspace:*
+      '@windijs/variants': workspace:*
+      preact: ^10.9.0
+      vite: ^3.0.9
+      windijs: workspace:*
+    dependencies:
+      preact: 10.10.6
+    devDependencies:
+      '@babel/core': 7.18.13
+      '@preact/preset-vite': 2.3.0_wibdudaz52xr4lhcmpvnys3x3u
+      '@windijs/plugin-utils': link:../../packages/plugin-utils
+      '@windijs/utilities': link:../../packages/utilities
+      '@windijs/variants': link:../../packages/variants
+      vite: 3.0.9
+      windijs: link:../../packages/windijs
+
   examples/preact-ts:
     specifiers:
       '@babel/core': ^7.18.10
