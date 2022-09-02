@@ -9,8 +9,8 @@ Object {
 
 exports[`Backdrop Filter 2`] = `
 Object {
-  "-webkit-backdrop-filter": "blur(16px) brightness(0.5)",
-  "backdropFilter": "blur(16px) brightness(0.5)",
+  "-webkit-backdrop-filter": "blur(16px) brightness(.5)",
+  "backdropFilter": "blur(16px) brightness(.5)",
 }
 `;
 
@@ -33,7 +33,7 @@ Array [
     "--w-backdrop-blur": "blur(16px)",
   },
   Object {
-    "--w-backdrop-brightness": "brightness(0.75)",
+    "--w-backdrop-brightness": "brightness(.75)",
   },
 ]
 `;
@@ -64,7 +64,7 @@ Object {
 
 exports[`Brightness 2`] = `
 Object {
-  "--w-brightness": "brightness(0.75)",
+  "--w-brightness": "brightness(.75)",
 }
 `;
 
@@ -76,7 +76,7 @@ Object {
 
 exports[`Contrast 2`] = `
 Object {
-  "--w-contrast": "contrast(0.75)",
+  "--w-contrast": "contrast(.75)",
 }
 `;
 
@@ -107,8 +107,8 @@ Object {
 
 exports[`Filter 2`] = `
 Object {
-  "-webkit-filter": "blur(16px) brightness(0.5)",
-  "filter": "blur(16px) brightness(0.5)",
+  "-webkit-filter": "blur(16px) brightness(.5)",
+  "filter": "blur(16px) brightness(.5)",
 }
 `;
 
@@ -131,7 +131,7 @@ Array [
     "--w-blur": "blur(16px)",
   },
   Object {
-    "--w-brightness": "brightness(0.75)",
+    "--w-brightness": "brightness(.75)",
   },
 ]
 `;
@@ -192,13 +192,13 @@ Object {
 
 exports[`Saturate 2`] = `
 Object {
-  "--w-saturate": "saturate(0.75)",
+  "--w-saturate": "saturate(.75)",
 }
 `;
 
 exports[`Saturate 3`] = `
 Object {
-  "--w-saturate": "saturate(0.5)",
+  "--w-saturate": "saturate(.5)",
 }
 `;
 

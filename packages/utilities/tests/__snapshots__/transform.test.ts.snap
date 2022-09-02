@@ -60,27 +60,27 @@ Object {
 
 exports[`Scale 1`] = `
 Object {
-  "--w-scale-x": "0.9",
-  "--w-scale-y": "0.9",
-  "--w-scale-z": "0.9",
+  "--w-scale-x": ".9",
+  "--w-scale-y": ".9",
+  "--w-scale-z": ".9",
 }
 `;
 
 exports[`Scale 2`] = `
 Object {
-  "--w-scale-x": "0.3",
+  "--w-scale-x": ".3",
 }
 `;
 
 exports[`Scale 3`] = `
 Object {
-  "--w-scale-y": "0.45",
+  "--w-scale-y": ".45",
 }
 `;
 
 exports[`Scale 4`] = `
 Object {
-  "--w-scale-z": "0.6",
+  "--w-scale-z": ".6",
 }
 `;
 
