@@ -3,7 +3,7 @@
 
   let count = 0
 
-  /** @type {import("windijs").NestedColors} */
+  /** @type {import("windijs").BootstrapColors} */
   const colors = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"]
 
   const increment = () => {
