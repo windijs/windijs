@@ -18,10 +18,9 @@
     "build:prod": "pnpm build -t",
     "gen:docs": "typedoc --entryPointStrategy packages . --readme ./README.md",
     "gen:style": "node -r sucrase/register ./scripts/genDataTypes.ts",
-    "size": "pnpm size:esm && pnpm size:iife && pnpm size:baseline",
-    "size:esm": "pnpm build windijs core utilities variants config colors helpers shared -dcmf esm",
-    "size:iife": "pnpm build windijs core utilities variants config colors helpers shared -dcmf iife",
-    "size:baseline": "pnpm build config core -df mjs && cd packages/size-check && pnpm build && node -r sucrase/register brotli.ts"
+    "size": "pnpm size:mod && pnpm size:units",
+    "size:mod": "pnpm build windijs core utilities variants config colors helpers shared -dcmf iife",
+    "size:units": "cd packages/size-check && pnpm build && node -r sucrase/register index.ts"
   },
   "author": "Raven Satir",
   "workspaces": [
