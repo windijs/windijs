@@ -1,4 +1,4 @@
-import { animate } from "../src/animation";
+import { animate } from "../src";
 import { unify } from "@windijs/helpers";
 
 test("Animation", () => {

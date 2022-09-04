@@ -1,4 +1,4 @@
-import { border, divide, outline, ring, rounded } from "../src/border";
+import { border, divide, outline, ring, rounded } from "../src";
 import { configHandler, createUtility } from "@windijs/core";
 
 import type { PickValue } from "@windijs/helpers";

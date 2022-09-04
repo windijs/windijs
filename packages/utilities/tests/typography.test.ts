@@ -1,5 +1,5 @@
 import { createUtility, fontSizeHandler } from "@windijs/core";
-import { decoration, font, hyphens, indent, leading, tab, text, tracking, write } from "../src/typography";
+import { decoration, font, hyphens, indent, leading, tab, text, tracking, write } from "../src";
 
 test("Font Family", () => {
   expect(font.mono.css).toMatchSnapshot();

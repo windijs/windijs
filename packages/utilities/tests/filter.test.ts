@@ -1,4 +1,4 @@
-import { backdrop, blur, brightness, contrast, dropShadow, filter, grayscale, hueRotate, invert, saturate, sepia } from "../src/filters";
+import { backdrop, blur, brightness, contrast, dropShadow, filter, grayscale, hueRotate, invert, saturate, sepia } from "../src";
 import { deg, percent, px, rem, rgba } from "@windijs/helpers";
 
 test("Blur", () => {

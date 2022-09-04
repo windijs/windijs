@@ -1,4 +1,4 @@
-import { fill, stroke } from "../src/svg";
+import { fill, stroke } from "../src";
 
 test("Fill", () => {
   expect(fill.none.css).toMatchSnapshot();

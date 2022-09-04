@@ -1,5 +1,5 @@
 import { configHandler, createUtility } from "@windijs/core";
-import { m, mb, ml, mr, mt, mx, my, p, pb, pl, pr, pt, px, py, space } from "../src/spacing";
+import { m, mb, ml, mr, mt, mx, my, p, pb, pl, pr, pt, px, py, space } from "../src";
 import { marginConfig, paddingConfig } from "@windijs/config";
 
 import { unify } from "@windijs/helpers";

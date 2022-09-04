@@ -1,5 +1,5 @@
 import { createUtility, msHandler } from "@windijs/core";
-import { delay, duration, ease, transition } from "../src/transition";
+import { delay, duration, ease, transition } from "../src";
 
 import type { StyleObject } from "@windijs/helpers";
 import { prop } from "@windijs/helpers";

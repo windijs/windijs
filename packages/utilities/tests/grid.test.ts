@@ -1,4 +1,4 @@
-import { auto, col, gap, grid, row } from "../src/layout";
+import { auto, col, gap, grid, row } from "../src";
 
 test("Grid", () => {
   expect(grid.css).toMatchSnapshot();

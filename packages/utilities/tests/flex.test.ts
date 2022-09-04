@@ -1,6 +1,6 @@
 import { createUtility, cssHandler } from "@windijs/core";
 
-import { flex } from "../src/layout";
+import { flex } from "../src";
 
 test("Flex", () => {
   expect(flex.css).toMatchSnapshot();

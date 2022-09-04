@@ -1,9 +1,7 @@
 import { backgroundClipConfig, gradientDirectionConfig } from "@windijs/config";
 import { backgroundGenericHandler, colorHandler, configHandler, createUtility } from "@windijs/core";
-import { bg, from, to, via } from "../src/bg";
+import { bg, colors, from, to, via } from "../src";
 import { percent, prop } from "@windijs/helpers";
-
-import { colors } from "../src/colors";
 
 test("Background Color", () => {
   expect(bg.current.css).toMatchSnapshot();
