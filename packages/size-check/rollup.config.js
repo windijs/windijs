@@ -1,5 +1,7 @@
 // @ts-check
 
+import { existsSync, readdirSync, rmSync } from "fs";
+
 import { defineConfig } from "rollup";
 import { terser } from "rollup-plugin-terser";
 import ts from "rollup-plugin-typescript2";
@@ -9,7 +11,7 @@ const tsPlugin = ts({
   tsconfig: "../../tsconfig.json",
   tsconfigOverride: {
     compilerOptions: {
-      target: "es2015",
+      target: "es2018",
       declaration: false,
       declarationMap: false,
     },
@@ -17,21 +19,28 @@ const tsPlugin = ts({
   },
 });
 
-export default defineConfig({
-  input: ["src/index.ts"],
+const plugins = [
+  tsPlugin,
+  terser({
+    compress: {
+      ecma: 2015,
+      pure_getters: true,
+    },
+    safari10: true,
+  }),
+];
+
+if (existsSync("./dist")) rmSync("./dist", { recursive: true });
+
+export default readdirSync("./src").map(i => defineConfig({
+  input: ["src/" + i],
   output: {
-    name: "SizeCheck",
-    file: "./dist/index.js",
+    name: i.replace(".ts", ""),
+    file: "./dist/" + i.replace(".ts", ".js"),
     format: "iife",
   },
-  plugins: [
-    tsPlugin,
-    terser({
-      compress: {
-        ecma: 2015,
-        pure_getters: true,
-      },
-      safari10: true,
-    }),
-  ],
-});
+  plugins,
+  treeshake: {
+    moduleSideEffects: false,
+  },
+}));
