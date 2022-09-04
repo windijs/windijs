@@ -1,7 +1,7 @@
 <script>
-  import { windiLight } from "@windijs/colors";
+  import { tracking, bg, font, text  } from "@windijs/utilities";
 	export let name;
-  console.log(windiLight);
+  export { tracking };
 </script>
 
 <main>

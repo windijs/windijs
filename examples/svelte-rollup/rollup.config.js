@@ -73,8 +73,4 @@ export default {
 	watch: {
 		clearScreen: false
 	},
-  treeshake: {
-    preset: 'smallest',
-    moduleSideEffects: 'no-external',
-  },
 };
