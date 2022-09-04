@@ -113,4 +113,15 @@ function createConfig (format, output) {
   });
 }
 
-export default packageFormats.map(format => createConfig(format, outputConfigs[format]));
+const options = packageFormats.map(format => createConfig(format, outputConfigs[format]));
+
+if (name === "utilities") {
+  // build es modules, good for tree-shaking.
+  options.push(createConfig("es", {
+    dir: resolve("dist/es"),
+    format: "esm",
+    preserveModules: true,
+  }));
+}
+
+export default options;
