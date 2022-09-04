@@ -1,3 +1,3 @@
 import { baseColors, windiColors } from "@windijs/colors";
 
-export const colors = { ...baseColors, ...windiColors };
+export default { ...baseColors, ...windiColors };

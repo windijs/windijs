@@ -4,7 +4,7 @@ import { configHandler, createUtility, cssHandler, genericHandler, numberHandler
 
 import { css } from "@windijs/helpers";
 
-export const aspectBase: CSSObject = {
+const aspectBase: CSSObject = {
   position: "relative",
   "> *": {
     position: "absolute",
@@ -17,7 +17,7 @@ export const aspectBase: CSSObject = {
   },
 };
 
-export const aspect = createUtility("aspect")
+export default createUtility("aspect")
   .use(configHandler(aspectRatioConfig, "aspectRatio"))
   .case("none", cssHandler({
     position: "static",

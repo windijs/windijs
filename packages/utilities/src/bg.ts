@@ -1,10 +1,10 @@
 import { backgroundAttachmentConfig, backgroundClipConfig, backgroundImageConfig, backgroundOriginConfig, backgroundPositionConfig, backgroundRepeatConfig, backgroundSizeConfig, blendModeConfig, gradientConfig, gradientDirectionConfig, opacityConfig } from "@windijs/config";
-import { buildGradientDirection, buildGradientFrom, buildGradientTo, buildGradientVia, buildLinearGradient, callHandler, colorHandler, configHandler, createUtility, meld } from "@windijs/core";
+import { buildGradientDirection, buildLinearGradient, callHandler, colorHandler, configHandler, createUtility, meld } from "@windijs/core";
 
-import { colors } from "./colors";
+import colors from "./colors";
 import { prop } from "@windijs/helpers";
 
-export const bg = createUtility("bg")
+export default createUtility("bg")
   .use(colorHandler(colors, "backgroundColor", "--w-bg-opacity"))
   .use(configHandler(backgroundAttachmentConfig, "backgroundAttachment"))
   .use(configHandler(backgroundPositionConfig, "backgroundPosition"))
@@ -19,16 +19,4 @@ export const bg = createUtility("bg")
     configHandler(gradientDirectionConfig, buildGradientDirection),
     configHandler(gradientConfig, "backgroundImage"),
   )))
-  .init();
-
-export const from = createUtility("from")
-  .use(colorHandler(colors, buildGradientFrom))
-  .init();
-
-export const via = createUtility("via")
-  .use(colorHandler(colors, buildGradientVia))
-  .init();
-
-export const to = createUtility("to")
-  .use(colorHandler(colors, buildGradientTo))
   .init();

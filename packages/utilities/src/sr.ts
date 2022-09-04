@@ -1,6 +1,6 @@
 import { createUtility, cssHandler } from "@windijs/core";
 
-export const sr = createUtility("sr")
+export default createUtility("sr")
   .case("only", cssHandler({
     position: "absolute",
     width: "1px",

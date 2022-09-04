@@ -1,14 +1,10 @@
 import { colorHandler, configHandler, createUtility, numberHandler } from "@windijs/core";
 import { strokeLineCapConfig, strokeLineJoinConfig } from "@windijs/config";
 
-import type { StyleObject } from "@windijs/helpers";
-import { colors } from "./colors";
+import { StyleObject } from "@windijs/helpers";
+import colors from "./colors";
 
-export const fill = createUtility("fill")
-  .use(colorHandler({ none: "none", ...colors }, "fill"))
-  .init();
-
-export const stroke = createUtility("stroke")
+export default createUtility("stroke")
   .use(colorHandler({ none: "none", ...colors }, "stroke"))
   .case("dash", numberHandler<Record<0 | 1 | 2 | 3 | 4 | 5 | 10 | 100, StyleObject>>("strokeDasharray"))
   .case("offset", numberHandler<Record<0 | 1 | 2 | 3 | 4 | 5 | 10 | 100, StyleObject>>("strokeDashoffset"))
