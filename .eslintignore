@@ -3,3 +3,4 @@ node_modules/
 data/
 examples/
 packages/helpers/src/data.ts
+__proxy__/

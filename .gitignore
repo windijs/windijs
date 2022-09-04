@@ -4,3 +4,4 @@ docs/
 coverage/
 .DS_Store
 .pnpm-store/
+__proxy__/
