@@ -4,6 +4,8 @@ import { resolve } from "path";
 
 export const configPath = resolve("./windi.config");
 
+export const isProduction = process.env.NODE_ENV === "production";
+
 export const replaceEntry = (input: string) => input.replace(/@windijs\/(core|colors|helpers|config|shared)/g, "windijs");
 
 export const filterConflict = (src: string, entries: string[]) => entries.filter(i => !src.match(new RegExp(`(const|let|var)\\s+${i}\\s*=`)));
@@ -21,9 +23,9 @@ export const writeFile = (path: string, content: string | undefined) => {
   else if (existsSync(path)) rmSync(path);
 };
 
-export function readModule (name: string) {
+export function readModule (name: string, module?: string) {
   const pkg = JSON.parse(readFileSync(`./node_modules/${name}/package.json`).toString());
   const dts = readFileSync(`./node_modules/${name}/${pkg.types}`).toString();
-  const mjs = readFileSync(`./node_modules/${name}/${pkg.module}`).toString();
+  const mjs = readFileSync(`./node_modules/${name}/${module ?? pkg.module}`).toString();
   return { pkg, dts, mjs };
 }
