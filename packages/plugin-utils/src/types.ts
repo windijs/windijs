@@ -9,6 +9,7 @@ export type EntryOptions = {
 }
 
 export type PluginOptions = {
+  exts?: string[],
   config?: Config,
   configPath?: string,
   env?: Partial<Record<"config" | "utilities" | "variants", EntryOptions>> & {
@@ -17,21 +18,14 @@ export type PluginOptions = {
   }
 };
 
-export type VirtualPlugins = {
+export type VitePlugin = {
   name: string;
+  api: {
+    sveltePreprocess: (ts?: { script: Function } & object) => ({
+      script: (options: object) => Promise<any>;
+    })
+  };
   resolveId(id: string): string | undefined;
-}[];
-
-export type VitePlugins = {
-  plugins: VirtualPlugins,
-  windijs: (exts?: string[]) => ({
-    name: string;
-    transform(code: string, id: string): string;
-  })
-}
-export type SvelteVitePlugins = {
-  plugins: VirtualPlugins,
-  windijs: (ts?: { script: Function } & object) => ({
-    script: (options: object) => Promise<any>;
-  })
+  load(id: string): string | undefined;
+  transform: (code: string, id: string) => string;
 }

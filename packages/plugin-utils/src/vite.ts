@@ -1,4 +1,4 @@
-import { PluginOptions, SvelteVitePlugins, VitePlugins } from "./types";
+import { PluginOptions, VitePlugin } from "./types";
 import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, isProduction, readModule, replaceEntry, writeFile } from "./utils";
 import { dirname, resolve } from "path";
 import { dtsSetup, dtsUtilities } from "./gen";
@@ -186,43 +186,23 @@ export function genRuntime (options: PluginOptions) {
   };
 }
 
-export function virtualUtilities (utilities: string) {
-  const virtualModuleId = "virtual:utilities";
-  const resolvedVirtualModuleId = "\0" + virtualModuleId;
+export function virtualPlugin (utilities: string, variants: string) {
+  const virtualConfigId = "virtual:config";
+  const virtualUtilitiesId = "virtual:utilities";
+  const resolvedVirtualUtilitiesId = "\0" + virtualUtilitiesId;
+  const virtualVariantsId = "virtual:variants";
+  const resolvedVirtualVariantsId = "\0" + virtualVariantsId;
 
   return {
-    name: "virtual-utilities",
+    name: "virtual-plugin-windijs",
     resolveId (id: string) {
-      if (id === virtualModuleId) return resolvedVirtualModuleId;
+      if (id === virtualConfigId) return configPath;
+      if (id === virtualUtilitiesId) return resolvedVirtualUtilitiesId;
+      if (id === virtualVariantsId) return resolvedVirtualVariantsId;
     },
     load (id: string) {
-      if (id === resolvedVirtualModuleId) return utilities;
-    },
-  };
-}
-
-export function virtualVariants (variants: string) {
-  const virtualModuleId = "virtual:variants";
-  const resolvedVirtualModuleId = "\0" + virtualModuleId;
-
-  return {
-    name: "virtual-variants",
-    resolveId (id: string) {
-      if (id === virtualModuleId) return resolvedVirtualModuleId;
-    },
-    load (id: string) {
-      if (id === resolvedVirtualModuleId) return variants;
-    },
-  };
-}
-
-export function virtualConfig () {
-  const virtualModuleId = "virtual:config";
-
-  return {
-    name: "virtual-config",
-    resolveId (id: string) {
-      if (id === virtualModuleId) return configPath;
+      if (id === resolvedVirtualUtilitiesId) return utilities;
+      if (id === resolvedVirtualVariantsId) return variants;
     },
   };
 }
@@ -245,80 +225,43 @@ export function createRuntime (options: PluginOptions = {}) {
   return { utilities: utilities.code, variants: variants.code, preprocess };
 }
 
-export const vitePlugins = new Proxy({}, {
-  get (target, p) {
-    return (options: PluginOptions = {}) => {
-      const { utilities, variants, preprocess } = createRuntime(options);
-      const basePlugins = [
-        virtualConfig(),
-        virtualUtilities(utilities),
-        virtualVariants(variants),
-      ];
+export default function vitePlugin (options: PluginOptions = {}) {
+  const { utilities, variants, preprocess } = createRuntime(options);
+  const plugin = virtualPlugin(utilities, variants);
+  const exts = (options.exts ?? [".js", ".ts"]).filter(i => i !== ".svelte");
 
-      function vanillaPreprocess (exts = [".js", ".ts"]) {
-        return {
-          name: "vanilla-preprocess-windijs",
-          transform (code: string, id: string) {
-            if (exts.find(i => id.endsWith(i))) {
-              return preprocess(code);
-            }
-            return code;
-          },
-        };
-      }
-
-      if (p === "vanilla") {
-        return {
-          plugins: basePlugins,
-          windijs: vanillaPreprocess,
-        };
-      }
-
-      if (p === "vue") {
-        function vuePreprocess (exts = [".vue"]) {
-          return {
-            name: "vue-preprocess-windijs",
-            transform (code: string, id: string) {
-              if (id.endsWith(".vue")) {
-                const regex = /<script.*>/;
-                const match = regex.exec(code);
-                if (!match) { return `<script>\n${preprocess("")}</script>` + code; }
-                const start = regex.lastIndex + match[0].length;
-                return code.slice(0, start) + "\n" + preprocess(code.slice(start));
-              }
-              return vanillaPreprocess(exts);
-            },
-          };
-        }
-
-        return {
-          plugins: basePlugins,
-          windijs: vuePreprocess,
-        };
-      };
-
-      if (p === "svelte") {
-        function sveltePreprocess (ts: { script: Function } & object) {
-          return {
-            script: async (options: object) => {
-              // @ts-ignore
-              if (options.attributes?.lang !== "ts") return { code: preprocess(options.content) };
-              const res = await ts.script(options);
-              res.code = preprocess(res.code);
-              return res;
-            },
-          };
-        }
-
-        return {
-          plugins: basePlugins,
-          windijs: sveltePreprocess,
-        };
-      }
+  function sveltePreprocess (ts?: { script: Function } & object) {
+    return {
+      script: async (options: object) => {
+        // @ts-ignore
+        if (!ts || options.attributes?.lang !== "ts") return { code: preprocess(options.content) };
+        const res = await ts.script(options);
+        res.code = preprocess(res.code);
+        return res;
+      },
     };
-  },
-}) as {
-  vue: (options: PluginOptions) => VitePlugins,
-  vanilla: (options: PluginOptions) => VitePlugins,
-  svelte: (options: PluginOptions) => SvelteVitePlugins
-};
+  }
+
+  function transform (code: string, id: string) {
+    const ext = exts.find(i => id.endsWith(i));
+    if (ext) {
+      if (ext === ".vue") {
+        const regex = /<script.*>/;
+        const match = regex.exec(code);
+        if (!match) { return `<script>\n${preprocess("")}</script>` + code; }
+        const start = regex.lastIndex + match[0].length;
+        return code.slice(0, start) + "\n" + preprocess(code.slice(start));
+      }
+      return preprocess(code);
+    }
+    return code;
+  }
+
+  return {
+    ...plugin,
+    transform,
+    api: {
+      sveltePreprocess,
+    },
+  } as VitePlugin;
+}
