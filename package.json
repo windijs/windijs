@@ -33,7 +33,8 @@
     "packages/utilities",
     "packages/variants",
     "packages/transformer",
-    "packages/windijs"
+    "packages/windijs",
+    "packages/plugin-utils"
   ],
   "license": "MIT",
   "devDependencies": {
