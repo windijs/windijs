@@ -82,7 +82,7 @@ importers:
 
   packages/core:
     specifiers:
-      '@windijs/helpers': 1.1.1
+      '@windijs/helpers': 1.1.2
       '@windijs/shared': 1.0.5
     dependencies:
       '@windijs/helpers': link:../helpers
@@ -96,11 +96,11 @@ importers:
 
   packages/plugin-utils:
     specifiers:
-      '@windijs/config': 1.0.5-beta.3
-      '@windijs/helpers': 1.1.0-beta.4
+      '@windijs/config': 1.0.7
+      '@windijs/helpers': 1.1.2
     dependencies:
-      '@windijs/config': 1.0.5-beta.3
-      '@windijs/helpers': 1.1.0-beta.4
+      '@windijs/config': link:../config
+      '@windijs/helpers': link:../helpers
 
   packages/shared:
     specifiers: {}
@@ -110,8 +110,8 @@ importers:
 
   packages/style:
     specifiers:
-      '@windijs/core': 1.1.1
-      '@windijs/helpers': 1.1.1
+      '@windijs/core': 1.1.2
+      '@windijs/helpers': 1.1.2
       '@windijs/shared': 1.0.5
     dependencies:
       '@windijs/core': link:../core
@@ -129,9 +129,9 @@ importers:
   packages/utilities:
     specifiers:
       '@windijs/colors': 1.0.3
-      '@windijs/config': 1.0.6
-      '@windijs/core': 1.1.1
-      '@windijs/helpers': 1.1.1
+      '@windijs/config': 1.0.7
+      '@windijs/core': 1.1.2
+      '@windijs/helpers': 1.1.2
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config
@@ -140,8 +140,8 @@ importers:
 
   packages/variants:
     specifiers:
-      '@windijs/core': 1.1.1
-      '@windijs/helpers': 1.1.1
+      '@windijs/core': 1.1.2
+      '@windijs/helpers': 1.1.2
       '@windijs/shared': 1.0.5
     dependencies:
       '@windijs/core': link:../core
@@ -171,9 +171,9 @@ importers:
   packages/windijs:
     specifiers:
       '@windijs/colors': 1.0.3
-      '@windijs/config': 1.0.6
-      '@windijs/core': 1.1.1
-      '@windijs/helpers': 1.1.1
+      '@windijs/config': 1.0.7
+      '@windijs/core': 1.1.2
+      '@windijs/helpers': 1.1.2
       '@windijs/shared': 1.0.5
     dependencies:
       '@windijs/colors': link:../colors
@@ -1429,12 +1429,6 @@ packages:
       '@windijs/shared': 1.0.0
     dev: false
 
-  /@windijs/config/1.0.5-beta.3:
-    resolution: {integrity: sha512-0AqgaGpRoA8QhO/3mvhHFu3v1ues0f9FEPS7M2GB5PP0TLmcWlxiDIWdtFYxtlbE+50VeSXlqzY9ltCFUHk28g==}
-    dependencies:
-      '@windijs/shared': 1.0.4-beta.1
-    dev: false
-
   /@windijs/core/1.0.0-beta.0:
     resolution: {integrity: sha512-Zh4xvQrfQuaeZh1V4szNn6zjb504wRXTRGgCv2IOQsgl3jnR+l5szttfEK4tf1FX6JjxGdKncoMlo+gSxespzw==}
     dependencies:
@@ -1448,22 +1442,12 @@ packages:
       '@windijs/shared': 1.0.0-beta.0
     dev: false
 
-  /@windijs/helpers/1.1.0-beta.4:
-    resolution: {integrity: sha512-1Rs1FcFH/n+qdJcw5Wu5bLaMqMT67Puiyy5Lb45GpyCJkxK0rTzAOTWZqRiVi0HeKoOvd82dZfC0P69r7pjBFg==}
-    dependencies:
-      '@windijs/shared': 1.0.4-beta.1
-    dev: false
-
   /@windijs/shared/1.0.0:
     resolution: {integrity: sha512-ywDhZ8BcZoxRBJQDnzFaUHpqGZSn0faOMCjwl3tumzvHIj6yCsYUHOPN1dBgp6aWpPPKF33rEwiW65MHr7qxQA==}
     dev: false
 
   /@windijs/shared/1.0.0-beta.0:
     resolution: {integrity: sha512-bGq+QIcKyrbcRl2xyyKBtAEfs6yX4FbupdIYOpSdrjhd84BX1v0g5TbuI/+RhkgmXNSPctM7h1KxEAYzYxb2Pw==}
-    dev: false
-
-  /@windijs/shared/1.0.4-beta.1:
-    resolution: {integrity: sha512-uC43GGZOQXw/4RpAKZkqMtX1bSg/jWMZwqUTejwmgWBErzWOrBlQziOoJXzZApUKngZbKZyg+ufa3+2hyIo5Lg==}
     dev: false
 
   /@windijs/style/1.0.0-beta.0:

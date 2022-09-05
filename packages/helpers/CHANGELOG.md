@@ -1,5 +1,11 @@
 # @windijs/helpers
 
+## 1.1.2
+
+### Patch Changes
+
+- [`39b28846`](https://github.com/windijs/windijs/commit/39b28846c780dc1c39ca30abfcd8e9c554aadb63) Thanks [@voorjaar](https://github.com/voorjaar)! - refactor: move dts generators to plugin-utils
+
 ## 1.1.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @windijs/variants
 
+## 1.0.8
+
+### Patch Changes
+
+- Updated dependencies [[`39b28846`](https://github.com/windijs/windijs/commit/39b28846c780dc1c39ca30abfcd8e9c554aadb63)]:
+  - @windijs/helpers@1.1.2
+  - @windijs/core@1.1.2
+
 ## 1.0.7
 
 ### Patch Changes

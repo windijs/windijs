@@ -1,5 +1,16 @@
 # @windijs/utilities
 
+## 1.0.8
+
+### Patch Changes
+
+- [`912d74ca`](https://github.com/windijs/windijs/commit/912d74ca44d1568ee43d024a475fee0841a80162) Thanks [@voorjaar](https://github.com/voorjaar)! - perf: break utilities and improve tree-shaking
+
+- Updated dependencies [[`39b28846`](https://github.com/windijs/windijs/commit/39b28846c780dc1c39ca30abfcd8e9c554aadb63), [`85d80563`](https://github.com/windijs/windijs/commit/85d805639d6d2cfb3f064d21c4cecfecb900cdd0)]:
+  - @windijs/helpers@1.1.2
+  - @windijs/config@1.0.7
+  - @windijs/core@1.1.2
+
 ## 1.0.7
 
 ### Patch Changes

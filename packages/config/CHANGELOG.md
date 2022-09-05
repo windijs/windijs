@@ -1,5 +1,11 @@
 # @windijs/config
 
+## 1.0.7
+
+### Patch Changes
+
+- [`85d80563`](https://github.com/windijs/windijs/commit/85d805639d6d2cfb3f064d21c4cecfecb900cdd0) Thanks [@voorjaar](https://github.com/voorjaar)! - perf: change config to normal object, for funcs not good for tree-shaking
+
 ## 1.0.6
 
 ### Patch Changes

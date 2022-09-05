@@ -1,6 +1,6 @@
 {
   "name": "@windijs/plugin-utils",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "@windijs/plugin-utils",
   "main": "dist/plugin-utils.js",
   "module": "dist/plugin-utils.mjs",
@@ -33,8 +33,8 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/config": "1.0.6",
-    "@windijs/helpers": "1.1.1"
+    "@windijs/config": "1.0.7",
+    "@windijs/helpers": "1.1.2"
   },
   "typedoc": {
     "entryPoint": "./src/plugin-utils.ts",

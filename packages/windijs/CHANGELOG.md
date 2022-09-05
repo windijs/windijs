@@ -1,5 +1,16 @@
 # windijs
 
+## 1.1.2
+
+### Patch Changes
+
+- [`5be04edf`](https://github.com/windijs/windijs/commit/5be04edf4e00704b0abd49f28a37e491bb471896) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: module exports
+
+- Updated dependencies [[`39b28846`](https://github.com/windijs/windijs/commit/39b28846c780dc1c39ca30abfcd8e9c554aadb63), [`85d80563`](https://github.com/windijs/windijs/commit/85d805639d6d2cfb3f064d21c4cecfecb900cdd0)]:
+  - @windijs/helpers@1.1.2
+  - @windijs/config@1.0.7
+  - @windijs/core@1.1.2
+
 ## 1.1.1
 
 ### Patch Changes
