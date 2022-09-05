@@ -8,7 +8,10 @@ const colors = {
 export default defineConfig({
   theme: {
     // test overwrite theme
-    colors
+    colors,
+    fontWeight: {
+      bold: 600,
+    }
   },
   utilities: {
     // test overwrite utility

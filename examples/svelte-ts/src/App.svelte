@@ -4,7 +4,7 @@
   import svelteLogo from './assets/svelte.svg'
   import Counter from './lib/Counter.svelte'
 
-  const logo = [bg.orange[300], lg(bg.green[400])];
+  const logo = [bg.orange[300], font.bold, lg(bg.green[400])];
 </script>
 
 <main>

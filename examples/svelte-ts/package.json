@@ -13,7 +13,7 @@
     "@sveltejs/vite-plugin-svelte": "^1.0.1",
     "@tsconfig/svelte": "^3.0.0",
     "@windijs/plugin-utils": "workspace:*",
-    "@windijs/utilities": "workspace:1.0.6-beta.7",
+    "@windijs/utilities": "workspace:*",
     "@windijs/variants": "workspace:*",
     "svelte": "^3.49.0",
     "svelte-check": "^2.8.0",
