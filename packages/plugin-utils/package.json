@@ -4,9 +4,10 @@
   "description": "@windijs/plugin-utils",
   "main": "dist/plugin-utils.js",
   "module": "dist/plugin-utils.mjs",
-  "types": "dist/plugin-utils.d.ts",
+  "types": "./dist/plugin-utils.d.ts",
   "files": [
     "dist",
+    "vite.d.ts",
     "CHANGELOG.md"
   ],
   "keywords": [
@@ -20,14 +21,20 @@
     "./package.json": "./package.json",
     ".": {
       "import": "./dist/plugin-utils.mjs",
-      "require": "./dist/plugin-utils.js"
+      "require": "./dist/plugin-utils.js",
+      "types": "./dist/plugin-utils.d.ts"
+    },
+    "./vite": {
+      "import": "./dist/vite.mjs",
+      "require": "./dist/vite.js",
+      "types": "./dist/vite.d.ts"
     }
   },
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/config": "1.0.5-beta.3",
-    "@windijs/helpers": "1.1.0-beta.4"
+    "@windijs/config": "1.0.6",
+    "@windijs/helpers": "1.1.1"
   },
   "typedoc": {
     "entryPoint": "./src/plugin-utils.ts",
