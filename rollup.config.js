@@ -79,6 +79,7 @@ function createConfig (format, output) {
   }
 
   output.exports = "named";
+  if (format === "mjs" && name === "utilities") output.generatedCode = { constBindings: true };
   output.sourcemap = !!process.env.SOURCE_MAP;
   output.externalLiveBindings = false;
 

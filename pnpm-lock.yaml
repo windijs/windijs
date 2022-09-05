@@ -78,10 +78,7 @@ importers:
     specifiers: {}
 
   packages/config:
-    specifiers:
-      '@windijs/shared': 1.0.5
-    dependencies:
-      '@windijs/shared': link:../shared
+    specifiers: {}
 
   packages/core:
     specifiers:
