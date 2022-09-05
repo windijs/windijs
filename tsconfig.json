@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "outDir": "dist",
     "target": "ES2017",
     "module": "ESNext",
@@ -14,7 +17,9 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "paths": {
-      "@windijs/*": ["packages/*/src"],
+      "@windijs/*": [
+        "packages/*/src"
+      ],
     }
   },
   "include": [
@@ -37,5 +42,61 @@
     "compilerOptions": {
       "skipLibCheck": true,
     },
+    "pluginPages": {
+      "pages": [
+        {
+          "title": "Getting Started",
+          "source": "getting-started.md",
+          "children": [
+            {
+              "title": "Installation",
+              "source": "installation.md"
+            },
+            {
+              "title": "Configuration",
+              "source": "configuration.md"
+            },
+          ]
+        },
+        {
+          "title": "Features",
+          "source": "features.md",
+        },
+        {
+          "title": "Integrations",
+          "source": "integrations.md",
+          "children": [
+            {
+              "title": "API",
+              "source": "api.md",
+            },
+            {
+              "title": "CLI",
+              "source": "cli.md",
+            },
+            {
+              "title": "Vite",
+              "source": "vite.md",
+            },
+            {
+              "title": "Rollup",
+              "source": "rollup.md",
+            },
+            {
+              "title": "Webpack",
+              "source": "webpack.md",
+            }
+          ]
+        },
+        {
+          "title": "Plugins",
+          "source": "plugins.md"
+        },
+        {
+          "title": "Posts",
+          "source": "posts.md"
+        }
+      ]
+    }
   }
 }
