@@ -1,19 +1,19 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
-import { vitePlugins } from "@windijs/plugin-utils"
 import windiConfig from "./windi.config"
+import windijs from "@windijs/plugin-utils/vite"
 
-const { plugins, windijs } = vitePlugins.svelte({
+const windi = windijs({
+  exts: [".svelte"],
   config: windiConfig
-});
+})
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    ...plugins,
+    windi,
     svelte({
       preprocess: [
-        windijs()
+        windi.api.sveltePreprocess()
       ]
     })
   ]
