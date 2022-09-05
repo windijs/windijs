@@ -1,7 +1,7 @@
 import { backgroundSizeConfig, borderRadiusConfig, touchActionConfig } from "@windijs/config";
-import { dtsConfig, dtsHandler, genUtilitiesDts, genUtilitiesJs } from "../src/gen";
+import { dtsConfig, dtsHandler, dtsUtilities } from "../src/gen";
 
-import { css } from "../src/css";
+import { css } from "@windijs/helpers";
 
 const get = (prop: string) => prop;
 
@@ -56,7 +56,7 @@ export declare const fill: Inject<{}, "$windi.color.colors.proxy">;
 export declare const colors: Inject<{}, "$windi.config.colorsConfig">;
 `;
 
-  expect(genUtilitiesDts(tmpl, {
+  expect(dtsUtilities(tmpl, {
     theme: {
       colors: {
         blue: {
@@ -76,44 +76,6 @@ export declare const colors: Inject<{}, "$windi.config.colorsConfig">;
       },
     },
   })).toMatchSnapshot();
-});
-
-test("generate js", () => {
-  const tmpl = `'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var core = require('@windijs/core');
-var config = require('@windijs/config');
-var helpers = require('@windijs/helpers');
-var colors$1 = require('@windijs/colors');
-
-const animate = core.createUtility("animate")
-    .use(core.animateHandler("none", "none"))
-    .use(core.animateHandler("spin", "spin 1s linear infinite", config.spinKeyframes))
-    .use(core.animateHandler("ping", "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite", config.pingKeyframes))
-    .use(core.animateHandler("pulse", "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite", config.pulseKeyframes))
-    .init();
-
-const colors = { ...colors$1.baseColors, ...colors$1.windiColors };
-
-const image = core.createUtility("image")
-    .case("render", core.configHandler(config.imageRenderingConfig, core.buildImageRendering))
-    .init();
-const list = core.createUtility("list")
-    .use(core.configHandler(config.listStyleTypeConfig, "listStyleType"))
-    .use(core.configHandler(config.listStylePositionConfig, "listStylePosition"))
-    .init();
-const overflow = core.createUtility("overflow")
-    .use(core.configHandler(config.overflowConfig, "overflow"))
-    .case("truncate", core.cssHandler({ overflow: "hidden", "-o-text-overflow": "ellipsis", textOverflow: "ellipsis", whiteSpace: "nowrap" }))
-    .case("ellipsis", core.cssHandler({ "-o-text-overflow": "ellipsis", textOverflow: "ellipsis" }))
-    .case("x", core.configHandler(config.overflowConfig, "overflowX"))
-    .case("y", core.configHandler(config.overflowConfig, "overflowY"))
-    .init();
-  `;
-
-  expect(genUtilitiesJs(tmpl, { theme: { listStyleType: { a: 1, b: 2 }, overflow: { c: 3, d: 4 }, colors: { red: "#ff0" } } })).toMatchSnapshot();
 });
 
 test("dtsHandler with configHandler", () => {
