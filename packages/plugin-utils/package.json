@@ -37,7 +37,7 @@
     "@windijs/helpers": "1.1.2"
   },
   "typedoc": {
-    "entryPoint": "./src/plugin-utils.ts",
+    "entryPoint": "./src/index.ts",
     "displayName": "@windijs/plugin-utils"
   }
 }
