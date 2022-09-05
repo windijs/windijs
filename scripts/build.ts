@@ -35,12 +35,26 @@ const dtsConfig: CompilerOptions = {
   stripInternal: true,
 };
 
+function buildDts (target: string) {
+  const pkgDir = `packages/${target}`;
+  if (target === "utilities") {
+    return bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig, {
+      afterDeclarations: [importTypesTransformer, omitTransformer, intersectionTransformer, injectTransformer, updateVariableType({
+        animate: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.animationConfig.proxy"))]),
+        colors: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.colorsConfig"))]),
+      })],
+    }, [utilityTransformer]);
+  }
+
+  return bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig);
+}
+
 async function build (target: string) {
   const pkgDir = `packages/${target}`;
   const pkg = require(`${path.resolve(pkgDir)}/package.json`);
 
   // build dts only
-  if (formats === "dts") return bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig);
+  if (formats === "dts") return buildDts(target);
 
   // if this is a full build (no specific targets), ignore private packages
   if ((isRelease && pkg.private) || pkg.buildOptions?.prod === false) return;
@@ -49,8 +63,6 @@ async function build (target: string) {
   if (!formats) removeDir(`${pkgDir}/dist`);
 
   const env = (pkg.buildOptions && pkg.buildOptions.env) || (isDev ? "development" : "production");
-
-  const isUtilities = target === "utilities";
 
   const rollup = await spawn("rollup", ["-c",
     "--environment",
@@ -73,16 +85,7 @@ async function build (target: string) {
     if (code !== 0) sys.exit(1);
     if ((buildTypes || formats?.includes("dts")) && pkg.types) {
       console.log();
-      if (isUtilities) {
-        bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig, {
-          afterDeclarations: [importTypesTransformer, omitTransformer, intersectionTransformer, injectTransformer, updateVariableType({
-            animate: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.animationConfig.proxy"))]),
-            colors: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.colorsConfig"))]),
-          })],
-        }, [utilityTransformer]);
-      } else {
-        bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig);
-      }
+      buildDts(target);
     }
     if (isCheckSize) {
       checkFileSize(path.join(pkgDir, `dist/${target}.${formats}.js`), minify);
