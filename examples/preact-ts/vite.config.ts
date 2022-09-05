@@ -1,17 +1,15 @@
 import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
-import { vitePlugins } from "@windijs/plugin-utils"
 import windiConfig from './windi.config'
-
-const { plugins, windijs } = vitePlugins.vanilla({
-  config: windiConfig
-});
+import windijs from "@windijs/plugin-utils/vite"
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    ...plugins,
-    windijs([".tsx"]),
+    windijs({
+      exts: [".tsx"],
+      config: windiConfig
+    }),
     preact()
   ]
 })

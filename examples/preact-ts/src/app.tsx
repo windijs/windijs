@@ -15,16 +15,16 @@ export function App() {
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" class={["logo", logo, bg.purple[400].opacity(20)]} alt="Vite logo" />
+          <img src="/vite.svg" class={["logo", logo, bg.purple[400].opacity(20)].toString()} alt="Vite logo" />
         </a>
         <a href="https://preactjs.com" target="_blank">
           {/* TODO: same problem with react, can we make class support Array? */}
-          <img src={preactLogo} class={["logo", "preact", logo, bg.blue[400].opacity(20)]} alt="Preact logo" />
+          <img src={preactLogo} class={["logo", "preact", logo, bg.blue[400].opacity(20)].toString()} alt="Preact logo" />
         </a>
       </div>
       <h1>Vite + Preact</h1>
       <div class="card">
-        <button class={button} onClick={() => {
+        <button class={button.toString()} onClick={() => {
           setButtonStyle([bg[colors[count % 8]][400]])
           setCount((count) => count + 1)
         }}>
