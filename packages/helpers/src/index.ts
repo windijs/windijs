@@ -15,4 +15,3 @@ export * from "./meta";
 export * from "./namer";
 export * from "./proxy";
 export * from "./unit";
-export * from "./gen";

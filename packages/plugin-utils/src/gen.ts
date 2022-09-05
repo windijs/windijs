@@ -1,7 +1,7 @@
 import { indent, isNumber, isVarName } from "@windijs/shared";
 
-import { Handler } from "./types";
-import { isStyleObject } from "./common";
+import type { Handler } from "@windijs/helpers";
+import { isStyleObject } from "@windijs/helpers";
 
 /**
  * Generate type interface for config object
@@ -50,7 +50,7 @@ export function dtsHandler<R> (handler: Handler<R>, ignores: string[] = ["DEFAUL
 /**
  * Generate utilities.d.ts with config
  */
-export function genUtilitiesDts<T extends object & { theme?: object }> (tmpl: string, config: T): string {
+export function dtsUtilities<T extends object & { theme?: object }> (tmpl: string, config: T): string {
   const theme = config.theme ?? {};
   let code = Object.entries(theme).reduce((prev, [k, v]) => prev.replace(new RegExp(`"\\$windi\\.config\\.${k}Config.proxy"`, "g"), dtsConfig(v, "StyleObject<{}>")), tmpl);
   if ("colors" in theme) {
@@ -61,18 +61,4 @@ export function genUtilitiesDts<T extends object & { theme?: object }> (tmpl: st
       .replace(/"\$windi\.color\.colors\.proxy"/g, dtsConfig(theme.colors, "StyleObject<{opacity: (op: number) => StyleObject<{readonly gradient: StyleObject<{}>}>; readonly gradient: StyleObject<{}>}>"));
   }
   return code;
-}
-
-/**
- * Generate utilities.js with config
- */
-export function genUtilitiesJs<T extends object & { theme?: object }> (tmpl: string, config: T): string {
-  const start = tmpl.match(/const\s+\S+\s*=/)?.index ?? 0;
-  const theme = config.theme ?? {};
-
-  let code = Object.keys(theme).reduce((prev, k) => prev.replace(new RegExp(`(?<=configHandler\\().*?${k}Config`, "g"), k + "WindiConfigInject"), tmpl.slice(start));
-  // @ts-ignore
-  if ("colors" in theme) code = code.replace(/const\s+colors\s*=[\s\S]+?;/, "const colors = colorsWindiConfigInject;");
-
-  return [tmpl.slice(0, start), ...Object.entries(theme).map(([k, v]) => `const ${k}WindiConfigInject = ${JSON.stringify(v)};`), code].join("\n");
 }
