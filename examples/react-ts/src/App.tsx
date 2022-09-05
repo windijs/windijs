@@ -16,12 +16,12 @@ function App() {
         </a>
         <a href="https://reactjs.org" target="_blank">
           {/* TODO: fix className with array has syntax error */}
-          <img src={reactLogo} className={["logo", "react", rounded.xl, bg.blue[400].opacity(20)]} alt="React logo" />
+          <img src={reactLogo} className={["logo", "react", rounded.xl, bg.blue[400].opacity(20)].toString()} alt="React logo" />
         </a>
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button className={button} onClick={() => {
+        <button className={button.toString()} onClick={() => {
           setButtonStyle([bg[colors[count % 8]][400]])
           setCount((count) => count + 1)
         }}>
