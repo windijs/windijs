@@ -7,16 +7,19 @@
  * so we have to create our own dts bundler.
  */
 
-import { CompilerOptions, CustomTransformers, ExportDeclaration, ImportDeclaration, Node, SourceFile, TransformerFactory, Visitor, createCompilerHost, createProgram, factory, isExportDeclaration, isImportDeclaration, isNamedImports, isNamespaceImport, isStringLiteral, visitEachChild, visitNode } from "typescript";
+import { CompilerOptions, CustomTransformers, ExportDeclaration, ImportDeclaration, Node, NodeFlags, SourceFile, SyntaxKind, TransformerFactory, Visitor, createCompilerHost, createProgram, factory, isExportAssignment, isExportDeclaration, isImportDeclaration, isNamedExports, isNamedImports, isNamespaceImport, isStringLiteral, visitEachChild, visitNode } from "typescript";
 /* eslint-disable no-console */
 import fs, { readFileSync } from "fs";
+import path, { basename } from "path";
 
 import chalk from "chalk";
 import { handleError } from "./utils";
-import path from "path";
 import { useTransformer } from "../packages/transformer/src";
 
 let EXPORTS: string[] = [];
+let CURRENT_NAME: string | undefined;
+const DEFAULT_IMPORTS: { [key: string]: string } = {};
+const DEFAULT_EXPORTS: { [key: string]: string } = {};
 
 /** Extract all exports of SourceFile and save to Array */
 const extractExports: TransformerFactory<SourceFile> = context => {
@@ -25,7 +28,21 @@ const extractExports: TransformerFactory<SourceFile> = context => {
     const visitor: Visitor = (node: Node) => {
       // extract all relative path from entry
       if (isExportDeclaration(node) && node.moduleSpecifier && isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith("./")) {
+        if (node.exportClause && isNamedExports(node.exportClause)) {
+          for (const el of node.exportClause.elements) {
+            if (el.propertyName?.escapedText === "default") {
+              DEFAULT_EXPORTS[node.moduleSpecifier.text] = el.name.escapedText.toString();
+            };
+          }
+        }
+
         EXPORTS.push(node.moduleSpecifier.text);
+        return undefined;
+      }
+      // remove import default declaration
+      if (isImportDeclaration(node) && node.moduleSpecifier && isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith("./") && node.importClause?.name) {
+        EXPORTS.push(node.moduleSpecifier.text);
+        DEFAULT_IMPORTS[node.moduleSpecifier.text] = node.importClause.name.escapedText.toString();
         return undefined;
       }
 
@@ -87,6 +104,25 @@ function dedupImports (decls: ImportDeclaration[]): ImportDeclaration[] {
 
   return output;
 }
+
+/** Transform export default ... to export const ...  */
+const transformExportDefault: TransformerFactory<SourceFile> = context => {
+  return sourceFile => {
+    const visitor: Visitor = (node) => {
+      const importName = CURRENT_NAME && DEFAULT_IMPORTS[CURRENT_NAME];
+      const exportName = CURRENT_NAME && DEFAULT_EXPORTS[CURRENT_NAME];
+
+      if ((importName || exportName) && isExportAssignment(node)) {
+        return factory.createVariableStatement(importName ? undefined : [factory.createModifier(SyntaxKind.ExportKeyword)], factory.createVariableDeclarationList([
+          factory.createVariableDeclaration(importName || exportName as string, undefined, undefined, node.expression),
+        ], NodeFlags.Const));
+      }
+
+      return visitEachChild(node, visitor, context);
+    };
+    return visitNode(sourceFile, visitor);
+  };
+};
 
 /** Dedup Import Declarations and move imports to top, exports to bottom */
 const organizeImportsExports: TransformerFactory<SourceFile> = context => {
@@ -150,7 +186,7 @@ export function bundleTS (entry: string, ...transformers: TransformerFactory<Sou
 
   const dest = [
     useTransformer(src, extractExports, ...transformers),
-    ...EXPORTS.map(i => path.join(base, i)).map(i => fs.existsSync(i) && fs.statSync(i).isDirectory() ? path.join(i, "index.ts") : (i.endsWith(".ts") ? i : (i + ".ts"))).map(i => useTransformer(readFileSync(i).toString(), ...transformers)),
+    ...EXPORTS.map(i => path.join(base, i)).map(i => fs.existsSync(i) && fs.statSync(i).isDirectory() ? path.join(i, "index.ts") : (i.endsWith(".ts") ? i : (i + ".ts"))).map(i => (CURRENT_NAME = "./" + basename(i, ".ts")) && useTransformer(readFileSync(i).toString(), transformExportDefault, ...transformers)),
   ].join("\n");
 
   return useTransformer(dest, organizeImportsExports);
