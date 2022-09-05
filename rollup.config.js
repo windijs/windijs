@@ -19,25 +19,6 @@ const inlineFormats = process.env.FORMATS && process.env.FORMATS.split(",");
 const packageFormats = inlineFormats || buildOptions.formats || defaultFormats;
 const resolve = (/** @type {string} */ p) => path.join(packageDir, p);
 
-const outputConfigs = {
-  cjs: {
-    file: resolve(`dist/${name}.js`),
-    format: "cjs",
-  },
-  mjs: {
-    file: resolve(`dist/${name}.mjs`),
-    format: "es",
-  },
-  esm: {
-    file: resolve(`dist/${name}.esm.js`),
-    format: "es",
-  },
-  iife: {
-    file: resolve(`dist/${name}.iife.js`),
-    format: "iife",
-  },
-};
-
 // ensure TS checks only once for each build
 let hasTSChecked = false;
 
@@ -68,10 +49,39 @@ function createTS (format) {
 /**
  *
  * @param {string} format
+ * @param {string} name
+ * @returns
+ */
+function createOutput (format, name) {
+  return {
+    cjs: {
+      file: resolve(`dist/${name}.js`),
+      format: "cjs",
+    },
+    mjs: {
+      file: resolve(`dist/${name}.mjs`),
+      format: "es",
+    },
+    esm: {
+      file: resolve(`dist/${name}.esm.js`),
+      format: "es",
+    },
+    iife: {
+      file: resolve(`dist/${name}.iife.js`),
+      format: "iife",
+    },
+  }[format];
+}
+
+/**
+ *
+ * @param {string} format
+ * @param {string} name
+ * @param {string} entry
  * @param {import("rollup").OutputOptions} output
  * @returns {import("rollup").RollupOptions}
  */
-function createConfig (format, output) {
+function createConfig (format, name, entry = "index.ts", output = createOutput(format, name)) {
   if (!output) {
     // eslint-disable-next-line no-console
     console.log(require("chalk").yellow(`invalid format: "${format}"`));
@@ -99,7 +109,7 @@ function createConfig (format, output) {
   }
 
   return defineConfig({
-    input: resolve("src/index.ts"),
+    input: resolve("src/" + entry),
     external: [
       "path",
       "fs",
@@ -114,15 +124,19 @@ function createConfig (format, output) {
   });
 }
 
-const options = packageFormats.map(format => createConfig(format, outputConfigs[format]));
+const options = packageFormats.map(format => createConfig(format, name));
 
 if (name === "utilities") {
   // build es modules, good for tree-shaking.
-  options.push(createConfig("es", {
+  options.push(createConfig("es", name, undefined, {
     dir: resolve("dist/es"),
     format: "esm",
     preserveModules: true,
   }));
+}
+
+if (name === "plugin-utils") {
+  options.push(...packageFormats.map(format => createConfig(format, "vite", "vite.ts")));
 }
 
 export default options;
