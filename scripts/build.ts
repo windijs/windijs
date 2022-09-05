@@ -37,16 +37,19 @@ const dtsConfig: CompilerOptions = {
 
 function buildDts (target: string) {
   const pkgDir = `packages/${target}`;
+  const entries = [{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }];
   if (target === "utilities") {
-    return bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig, {
+    return bundleDts(entries, dtsConfig, {
       afterDeclarations: [importTypesTransformer, omitTransformer, intersectionTransformer, injectTransformer, updateVariableType({
         animate: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.animationConfig.proxy"))]),
         colors: (node) => factory.createTypeReferenceNode("Inject", [node, factory.createLiteralTypeNode(factory.createStringLiteral("$windi.config.colorsConfig"))]),
       })],
     }, [utilityTransformer]);
   }
-
-  return bundleDts([{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }], dtsConfig);
+  if (target === "plugin-utils") {
+    entries.push({ input: path.join(pkgDir, "src/vite.ts"), output: path.join(pkgDir, "dist/vite.d.ts") });
+  }
+  return bundleDts(entries, dtsConfig);
 }
 
 async function build (target: string) {

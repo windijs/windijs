@@ -40,9 +40,11 @@ const extractExports: TransformerFactory<SourceFile> = context => {
         return undefined;
       }
       // remove import default declaration
-      if (isImportDeclaration(node) && node.moduleSpecifier && isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith("./") && node.importClause?.name) {
+      if (isImportDeclaration(node) && node.moduleSpecifier && isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith("./")) {
         EXPORTS.push(node.moduleSpecifier.text);
-        DEFAULT_IMPORTS[node.moduleSpecifier.text] = node.importClause.name.escapedText.toString();
+        if (node.importClause?.name) {
+          DEFAULT_IMPORTS[node.moduleSpecifier.text] = node.importClause.name.escapedText.toString();
+        }
         return undefined;
       }
 
