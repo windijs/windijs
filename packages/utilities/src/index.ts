@@ -1,161 +1,79 @@
-import animate from "./animate";
-import aspect from "./aspect";
-import auto from "./auto";
-import backdrop from "./backdrop";
-import bg from "./bg";
-import blend from "./blend";
-import blur from "./blur";
-import border from "./border";
-import brightness from "./brightness";
-import col from "./col";
-import colors from "./colors";
-import container from "./container";
-import contrast from "./contrast";
-import decoration from "./decoration";
-import delay from "./delay";
-import divide from "./divide";
-import dropShadow from "./dropShadow";
-import duration from "./duration";
-import ease from "./ease";
-import fill from "./fill";
-import filter from "./filter";
-import flex from "./flex";
-import font from "./font";
-import from from "./from";
-import gap from "./gap";
-import grayscale from "./grayscale";
-import grid from "./grid";
-import h from "./h";
-import hueRotate from "./hueRotate";
-import hyphens from "./hyphens";
-import image from "./image";
-import indent from "./indent";
-import invert from "./invert";
-import leading from "./leading";
-import list from "./list";
-import m from "./m";
-import mb from "./mb";
-import ml from "./ml";
-import mr from "./mr";
-import mt from "./mt";
-import mx from "./mx";
-import my from "./my";
-import opacity from "./opacity";
-import origin from "./origin";
-import outline from "./outline";
-import overflow from "./overflow";
-import overscroll from "./overscroll";
-import p from "./p";
-import pb from "./pb";
-import perspect from "./perspect";
-import pl from "./pl";
-import placeholder from "./placeholder";
-import pr from "./pr";
-import preserve from "./preserve";
-import pt from "./pt";
-import px from "./px";
-import py from "./py";
-import ring from "./ring";
-import rotate from "./rotate";
-import rounded from "./rounded";
-import row from "./row";
-import saturate from "./saturate";
-import scale from "./scale";
-import sepia from "./sepia";
-import shadow from "./shadow";
-import skew from "./skew";
-import space from "./space";
-import sr from "./sr";
-import stroke from "./stroke";
-import tab from "./tab";
-import text from "./text";
-import to from "./to";
-import tracking from "./tracking";
-import transform from "./transform";
-import transition from "./transition";
-import translate from "./translate";
-import via from "./via";
-import w from "./w";
-import write from "./write";
-
-export {
-  animate,
-  aspect,
-  auto,
-  backdrop,
-  bg,
-  blend,
-  blur,
-  border,
-  brightness,
-  col,
-  colors,
-  container,
-  contrast,
-  decoration,
-  delay,
-  divide,
-  dropShadow,
-  duration,
-  ease,
-  fill,
-  filter,
-  flex,
-  font,
-  from,
-  gap,
-  grayscale,
-  grid,
-  h,
-  hueRotate,
-  hyphens,
-  image,
-  indent,
-  invert,
-  leading,
-  list,
-  m,
-  mb,
-  ml,
-  mr,
-  mt,
-  mx,
-  my,
-  opacity,
-  origin,
-  outline,
-  overflow,
-  overscroll,
-  p,
-  pb,
-  perspect,
-  pl,
-  placeholder,
-  pr,
-  preserve,
-  pt,
-  px,
-  py,
-  ring,
-  rotate,
-  rounded,
-  row,
-  saturate,
-  scale,
-  sepia,
-  shadow,
-  skew,
-  space,
-  sr,
-  stroke,
-  tab,
-  text,
-  to,
-  tracking,
-  transform,
-  transition,
-  translate,
-  via,
-  w,
-  write,
-};
+export { default as animate } from "./animate";
+export { default as aspect } from "./aspect";
+export { default as auto } from "./auto";
+export { default as backdrop } from "./backdrop";
+export { default as bg } from "./bg";
+export { default as blend } from "./blend";
+export { default as blur } from "./blur";
+export { default as border } from "./border";
+export { default as brightness } from "./brightness";
+export { default as col } from "./col";
+export { default as colors } from "./colors";
+export { default as container } from "./container";
+export { default as contrast } from "./contrast";
+export { default as decoration } from "./decoration";
+export { default as delay } from "./delay";
+export { default as divide } from "./divide";
+export { default as dropShadow } from "./dropShadow";
+export { default as duration } from "./duration";
+export { default as ease } from "./ease";
+export { default as fill } from "./fill";
+export { default as filter } from "./filter";
+export { default as flex } from "./flex";
+export { default as font } from "./font";
+export { default as from } from "./from";
+export { default as gap } from "./gap";
+export { default as grayscale } from "./grayscale";
+export { default as grid } from "./grid";
+export { default as h } from "./h";
+export { default as hueRotate } from "./hueRotate";
+export { default as hyphens } from "./hyphens";
+export { default as image } from "./image";
+export { default as indent } from "./indent";
+export { default as invert } from "./invert";
+export { default as leading } from "./leading";
+export { default as list } from "./list";
+export { default as m } from "./m";
+export { default as mb } from "./mb";
+export { default as ml } from "./ml";
+export { default as mr } from "./mr";
+export { default as mt } from "./mt";
+export { default as mx } from "./mx";
+export { default as my } from "./my";
+export { default as opacity } from "./opacity";
+export { default as origin } from "./origin";
+export { default as outline } from "./outline";
+export { default as overflow } from "./overflow";
+export { default as overscroll } from "./overscroll";
+export { default as p } from "./p";
+export { default as pb } from "./pb";
+export { default as perspect } from "./perspect";
+export { default as pl } from "./pl";
+export { default as placeholder } from "./placeholder";
+export { default as pr } from "./pr";
+export { default as preserve } from "./preserve";
+export { default as pt } from "./pt";
+export { default as px } from "./px";
+export { default as py } from "./py";
+export { default as ring } from "./ring";
+export { default as rotate } from "./rotate";
+export { default as rounded } from "./rounded";
+export { default as row } from "./row";
+export { default as saturate } from "./saturate";
+export { default as scale } from "./scale";
+export { default as sepia } from "./sepia";
+export { default as shadow } from "./shadow";
+export { default as skew } from "./skew";
+export { default as space } from "./space";
+export { default as sr } from "./sr";
+export { default as stroke } from "./stroke";
+export { default as tab } from "./tab";
+export { default as text } from "./text";
+export { default as to } from "./to";
+export { default as tracking } from "./tracking";
+export { default as transform } from "./transform";
+export { default as transition } from "./transition";
+export { default as translate } from "./translate";
+export { default as via } from "./via";
+export { default as w } from "./w";
+export { default as write } from "./write";
