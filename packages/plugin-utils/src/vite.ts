@@ -230,6 +230,14 @@ export default function vitePlugin (options: PluginOptions = {}) {
   const plugin = virtualPlugin(utilities, variants);
   const exts = (options.exts ?? [".js", ".ts"]).filter(i => i !== ".svelte");
 
+  function vuePreprocess (code: string) {
+    const regex = /<script.*>/;
+    const match = regex.exec(code);
+    if (!match) { return `<script>\n${preprocess("")}</script>` + code; }
+    const start = regex.lastIndex + match[0].length;
+    return code.slice(0, start) + "\n" + preprocess(code.slice(start));
+  }
+
   function sveltePreprocess (ts?: { script: Function } & object) {
     return {
       script: async (options: object) => {
@@ -245,13 +253,7 @@ export default function vitePlugin (options: PluginOptions = {}) {
   function transform (code: string, id: string) {
     const ext = exts.find(i => id.endsWith(i));
     if (ext) {
-      if (ext === ".vue") {
-        const regex = /<script.*>/;
-        const match = regex.exec(code);
-        if (!match) { return `<script>\n${preprocess("")}</script>` + code; }
-        const start = regex.lastIndex + match[0].length;
-        return code.slice(0, start) + "\n" + preprocess(code.slice(start));
-      }
+      if (ext === ".vue") return vuePreprocess(code);
       return preprocess(code);
     }
     return code;
@@ -261,6 +263,7 @@ export default function vitePlugin (options: PluginOptions = {}) {
     ...plugin,
     transform,
     api: {
+      vuePreprocess,
       sveltePreprocess,
     },
   } as VitePlugin;
