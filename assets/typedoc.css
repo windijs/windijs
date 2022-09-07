@@ -1,0 +1,259 @@
+:root {
+  --color-brand: #8C82EF;
+  --dark-color-background: #1a1a1a;
+  --dark-color-background-secondary: #1c1c1e;
+  --color-menu-background: #f9f9f9;
+  --color-content-background: #ffffff;
+  --color-nav-link: rgba(60, 60, 60, 0.7);
+  --color-nav-link-hover: rgba(60, 60, 60, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='os'] {
+    --color-brand: #91A0F2;
+    --color-accent: #323232;
+    --color-menu-background: #1a1a1a;
+    --color-content-background: #242424;
+    --color-nav-link: rgba(235, 235, 235, 0.6);
+    --color-nav-link-hover: rgba(255, 255, 255, 0.87);
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-brand: #91A0F2;
+  --color-accent: #323232;
+  --color-menu-background: #1a1a1a;
+  --color-content-background: #242424;
+  --color-nav-link: rgba(235, 235, 235, 0.6);
+  --color-nav-link-hover: rgba(255, 255, 255, 0.87);
+}
+
+body {
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 0.8rem;
+}
+
+h5 {
+  font-size: 0.7rem;
+}
+
+h6 {
+  font-size: 0.6rem;
+}
+
+.tsd-breadcrumb {
+  margin-bottom: 2rem;
+}
+
+.tsd-navigation h3 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.col-menu h3 svg {
+  display: none;
+}
+
+.tsd-sources {
+  padding-bottom: 1.5rem;
+}
+
+.tsd-filter-visibility {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.tsd-filter-visibility h4, .tsd-theme-toggle h4 {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.tsd-page-toolbar {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.tsd-navigation.primary, .menu-sticky {
+  border-top: solid 1px;
+  border-color: var(--color-accent);
+  padding-top: 1rem;
+}
+
+.tsd-page-toolbar .container {
+  margin-left: auto;
+  margin-right: 0px;
+}
+
+.container-main {
+  flex-direction: row-reverse;
+  padding: 0 !important;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.tsd-accordion-details > ul > li li {
+  margin-left: -2rem;
+}
+
+.tsd-accordion-details > ul > li > a {
+  display: none;
+}
+
+.tsd-kind-module ul {
+  display: none;
+}
+
+.container {
+  max-width: 1775px;
+  padding: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.col-content {
+  padding: 1rem;
+  padding-top: 4.5rem !important;
+  background-color: var(--color-content-background);
+}
+
+.col-content > * {
+  max-width: 1100px;
+  margin: 0 auto !important;
+}
+
+.col-menu {
+  background-color: var(--color-menu-background);
+  max-width: 350px;
+  padding-top: 2.5rem;
+}
+
+.table-cell {
+  border-radius: 8px;
+}
+
+#tsd-search .field label {
+  right: -50px;
+  top: 2px;
+}
+
+.tsd-filter-visibility h4 {
+  display: none;
+}
+
+.tsd-filter-visibility {
+  padding-top: 1rem;
+}
+
+.tsd-navigation.primary a {
+  line-height: 35px !important;
+}
+
+.tsd-navigation a {
+  font-size: 14px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  font-weight: 400 !important;
+  border-left: none;
+  color: var(--color-nav-link);
+}
+
+li.current > a {
+  border-left: none !important;
+  color: var(--color-brand) !important;
+}
+
+.tsd-navigation.primary li.selected > a {
+  font-weight: 500 !important;
+  border-left: none;
+}
+
+.tsd-navigation.primary ul li a:hover {
+  border-left: none;
+}
+
+.tsd-navigation a:hover {
+  text-decoration: none;
+  color: var(--color-nav-link-hover);
+}
+
+.tsd-index-accordion {
+  padding-bottom: 1rem;
+}
+
+a > h1 {
+  border-top: solid 1px var(--color-accent);
+  padding-top: 2rem;
+  margin-top: -0.001px;
+}
+
+.tsd-index-group {
+  border-top: solid 1px var(--color-accent);
+  padding-top: 0.6rem;
+}
+
+.tsd-index-heading.uppercase {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .col-content {
+    padding: 2rem;
+    padding-top: 5rem !important;
+    margin: 0;
+  }
+  .col-menu {
+    border-left: none;
+  }
+  .menu-sticky-wrap {
+    position: sticky;
+    top: 0px;
+    right: 0px;
+    margin-top: 2.5rem;
+  }
+  .col-menu .tsd-navigation:not(:last-child) {
+    padding-bottom: 0rem;
+  }
+}
+
+@media (min-width: 1860px) {
+  .table-cell {
+    padding-left: 3.5rem;
+    padding-right: 6vw;
+  }
+}
+
+*::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 0px;
+}
