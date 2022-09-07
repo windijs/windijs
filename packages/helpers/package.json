@@ -26,6 +26,7 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
+    "@windijs/config": "1.0.7",
     "@windijs/shared": "1.0.5"
   },
   "typedoc": {
