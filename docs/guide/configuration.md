@@ -95,7 +95,7 @@ export default defineConfig({
 })
 ```
 
-Learn more about the default theme and how to customize it in the [theme configuration guide]().
+Learn more about the default theme and how to customize it in the [theme configuration guide](/reusability/custom-theme).
 
 ### Utilities
 
@@ -166,7 +166,7 @@ export default defineConfig({
 
 ```
 
-Learn more about the default utilities and how to create new utility in the [utility configuration guide]().
+Learn more about the default utilities and how to create new utility in the [utility configuration guide](/reusability/custom-utility).
 
 ### Variants
 
@@ -188,7 +188,7 @@ export default defineConfig({
 })
 ```
 
-Learn more about the default variants and how to create new variant in the [variant configuration guide]().
+Learn more about the default variants and how to create new variant in the [variant configuration guide](/reusability/custom-variant).
 
 ### DarkMode
 
