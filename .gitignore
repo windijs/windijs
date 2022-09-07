@@ -1,6 +1,6 @@
+api/
 dist/
 node_modules/
-docs/
 coverage/
 .DS_Store
 .pnpm-store/
