@@ -21,7 +21,7 @@ export type PluginOptions = {
 export type VitePlugin = {
   name: string;
   api: {
-    vuePreprocess: (code: string) => string;
+    vuePreprocess: (code: string, setup?: boolean) => string;
     sveltePreprocess: (ts?: { script: Function } & object) => ({
       script: (options: object) => Promise<{ code: string }>;
     })

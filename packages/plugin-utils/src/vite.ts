@@ -211,10 +211,10 @@ export default function vitePlugin (options: PluginOptions = {}) {
   const plugin = virtualPlugin(utilities, variants);
   const exts = (options.exts ?? [".js", ".ts"]).filter(i => i !== ".svelte");
 
-  function vuePreprocess (code: string) {
+  function vuePreprocess (code: string, setup = true) {
     const regex = /<script.*>/;
     const match = regex.exec(code);
-    if (!match) { return `<script>\n${preprocess("")}</script>` + code; }
+    if (!match) { return `${"<script" + (setup ? " setup" : "") + ">"}\n${preprocess("")}</script>\n` + code; }
     const start = regex.lastIndex + match[0].length;
     return code.slice(0, start) + "\n" + preprocess(code.slice(start));
   }
