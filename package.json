@@ -16,7 +16,11 @@
     "build": "node -r sucrase/register ./scripts/build.ts",
     "build:dts": "pnpm build -f dts",
     "build:prod": "pnpm build -t",
-    "gen:docs": "typedoc --entryPointStrategy packages . --readme ./README.md",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
+    "docs:prod": "pnpm gen:api && pnpm docs:build && node -r sucrase/register ./scripts/combineDocs",
+    "gen:api": "typedoc --entryPointStrategy packages . --readme ./README.md --customCss ./assets/typedoc.css",
     "gen:style": "node -r sucrase/register ./scripts/genDataTypes.ts",
     "size": "pnpm size:mod && pnpm size:units",
     "size:mod": "pnpm build windijs core utilities variants config colors helpers shared -dcmf iife",
@@ -38,10 +42,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@algolia/client-search": "^4.9.1",
     "@changesets/changelog-github": "^0.4.6",
     "@changesets/cli": "^2.24.3",
     "@jest/types": "^28.1.3",
-    "@knodes/typedoc-plugin-pages": "^0.23.1",
     "@rollup/plugin-sucrase": "^4.0.4",
     "@sucrase/jest-plugin": "^2.2.1",
     "@types/brotli": "^1.3.1",
@@ -73,6 +77,8 @@
     "tsconfig-paths": "^4.0.0",
     "typedoc": "^0.23.10",
     "typedoc-monorepo-link-types": "^0.0.4",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vite": "^3.1.0",
+    "vitepress": "1.0.0-alpha.13"
   }
 }
