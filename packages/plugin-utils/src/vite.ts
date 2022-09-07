@@ -1,17 +1,17 @@
 import { PluginOptions, VitePlugin } from "./types";
-import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, loadOptions, readModule, refreshDir, replaceEntry, writeFile } from "./utils";
+import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, loadOptions, readModule, refreshDir, replaceEntry, requireConfig, requireHelper, writeFile } from "./utils";
 import { dirname, resolve } from "path";
 import { dtsSetup, dtsUtilities } from "./gen";
 import { readFileSync, readdirSync, writeFileSync } from "fs";
 
 import type { Config } from "@windijs/helpers";
 
-export function injectTheme (code: string, config: Config) {
+export function injectTheme (code: string, config: Config, require = false) {
   const theme = config.theme ?? {};
 
   if (config.styleLoader) code = injectStyleLoader(code);
 
-  if (theme.colors) code = code.replace(/(const|let|var)\s+colors\s*=[\s\S]+?;/, "const colors = windiUserConfig.theme.colors;"); // replace colors
+  if (theme.colors) code = code.replace(/(const|let|var)\s+colors\s*=[\s\S]+?;/, (require ? "var" : "const") + " colors = windiUserConfig.theme.colors;"); // replace colors
 
   for (const k in theme) {
     const regex = new RegExp(`(?<=configHandler\\().*?${k}Config`, "g");
@@ -53,7 +53,7 @@ export function genRequire (path: string, config: Config) {
 
   const defaults = ["colors", ...(code.match(/(?<=createUtility\(")[\w_$-]+/g) ?? [])];
 
-  code = injectTheme(injectHelper(injectConfig(code), "setupUtility", "@windijs/core"), config);
+  code = injectTheme(requireHelper(requireConfig(code), "setupUtility", "@windijs/core"), config, true);
 
   for (const k in config.utilities ?? {}) {
     const u = `var ${k} = setupUtility('${k}', windiUserConfig.utilities.${k})`;

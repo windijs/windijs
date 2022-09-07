@@ -38,6 +38,12 @@ export const injectConfig = (code: string) => `import windiUserConfig from '${co
 
 export const injectHelper = (code: string, helper: string, pkg: string) => code.includes(helper) ? code : injectImports(code, { [isProduction ? pkg : "windijs"]: [helper] });
 
+export const requireImports = (code: string, imports: Record<string, string[]>) => code.replace("var ", Object.entries(imports).map(([k, v]) => `var { ${v.join(", ")} } = require('${k}');\n`).join("") + "var ");
+
+export const requireConfig = (code: string) => code.replace("var ", `var windiUserConfig = require('${configPath}');\nvar `);
+
+export const requireHelper = (code: string, helper: string, pkg: string) => code.includes(helper) ? code : requireImports(code, { [isProduction ? pkg : "windijs"]: [helper] });
+
 export function injectStyleLoader (code: string) {
   code = injectHelper(code, "useStyleLoader", "@windijs/helpers");
   const start = code.match(/(const|let|var|function|export)\s+/)?.index ?? 0;
