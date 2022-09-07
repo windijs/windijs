@@ -1,10 +1,10 @@
 import { PluginOptions, VitePlugin } from "./types";
-import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, isProduction, readModule, replaceEntry, writeFile } from "./utils";
+import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, readModule, replaceEntry, writeFile } from "./utils";
 import { dirname, resolve } from "path";
 import { dtsSetup, dtsUtilities } from "./gen";
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "fs";
 
-import { Config } from "@windijs/config";
+import type { Config } from "@windijs/helpers";
 
 export const DefaultOptions: PluginOptions = {
   configPath: resolve("./windi.config"),
@@ -30,7 +30,7 @@ export const DefaultOptions: PluginOptions = {
 export function genVariants (options: PluginOptions) {
   const userVariants = options.config?.variants ?? {};
   const { mjs, dts } = readModule(options.env?.variants?.lib ?? "@windijs/variants");
-  let code = injectHelper(injectConfig(replaceEntry(mjs)), "setupVariant");
+  let code = injectHelper(injectConfig(replaceEntry(mjs)), "setupVariant", "windijs");
 
   const defaults = dts.match(/[\w_$]+(?=:\s*VariantBuilder)/g) ?? [];
   const keys = Object.keys(userVariants);
@@ -53,6 +53,8 @@ export function genVariants (options: PluginOptions) {
 
 function injectTheme (code: string, config: Config) {
   const theme = config.theme ?? {};
+
+  if (config.styleLoader) code = injectStyleLoader(code);
 
   if (theme.colors) code = code.replace(/(const|let|var)\s+colors\s*=[\s\S]+?;/, "const colors = windiUserConfig.theme.colors;"); // replace colors
 
@@ -148,7 +150,7 @@ export function genRuntime (options: PluginOptions) {
   const env = options.env ?? {};
   const items = defaults;
 
-  let code = injectTheme(injectHelper(injectConfig(replaceEntry(mjs)), "setupUtility"), config);
+  let code = injectTheme(injectHelper(injectConfig(replaceEntry(mjs)), "setupUtility", "@windijs/core"), config);
   dts = replaceEntry(dtsUtilities(dts, config));
 
   for (const [k, v] of Object.entries(config.utilities ?? {})) {

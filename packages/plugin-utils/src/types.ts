@@ -1,4 +1,4 @@
-import { Config } from "@windijs/config";
+import type { Config } from "@windijs/helpers";
 
 export type Frameworks = "lit" | "preact" | "react" | "svelte" | "vanilla" | "vue";
 
@@ -23,7 +23,7 @@ export type VitePlugin = {
   api: {
     vuePreprocess: (code: string) => string;
     sveltePreprocess: (ts?: { script: Function } & object) => ({
-      script: (options: object) => Promise<any>;
+      script: (options: object) => Promise<{ code: string }>;
     })
   };
   resolveId(id: string): string | undefined;

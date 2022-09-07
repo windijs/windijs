@@ -14,7 +14,14 @@ export const injectImports = (code: string, imports: Record<string, string[]>) =
 
 export const injectConfig = (code: string) => `import windiUserConfig from '${configPath}';\n` + code;
 
-export const injectHelper = (code: string, helper: string) => code.includes(helper) ? code : injectImports(code, { windijs: [helper] });
+export const injectHelper = (code: string, helper: string, pkg: string) => code.includes(helper) ? code : injectImports(code, { [isProduction ? pkg : "windijs"]: [helper] });
+
+export function injectStyleLoader (code: string) {
+  code = injectHelper(code, "useStyleLoader", "@windijs/helpers");
+  const start = code.match(/(const|let|var|function|export)\s+/)?.index ?? 0;
+  code = code.slice(0, start) + "useStyleLoader(windiUserConfig.styleLoader);\n" + code.slice(start);
+  return code;
+}
 
 export const declModule = (name: string, contents: string | string[]) => `declare module '${name}' {\n` + (Array.isArray(contents) ? contents.map(i => "  " + i + ";\n").join("") : contents) + "}\n";
 
