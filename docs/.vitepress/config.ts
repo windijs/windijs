@@ -62,24 +62,24 @@ export default defineConfig({
         ]
       },
       {
-        text: "Reusability",
+        text: "Customization",
         collapsible: false,
         items: [
           {
             text: "Custom Theme",
-            link: "/reusability/custom-theme"
+            link: "/customization/custom-theme"
           },
           {
             text: "Custom Utility",
-            link: "/reusability/custom-utility"
+            link: "/customization/custom-utility"
           },
           {
             text: "Custom Variant",
-            link: "/reusability/custom-variant"
+            link: "/customization/custom-variant"
           },
           {
             text: "Plugins",
-            link: "/reusability/plugins"
+            link: "/customization/plugins"
           }
         ]
       },
