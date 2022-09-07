@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, rmSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
 
 import { PluginOptions } from "./types";
 import { resolve } from "path";
@@ -52,8 +52,12 @@ export const writeFile = (path: string, content: string | undefined) => {
   else if (existsSync(path)) rmSync(path);
 };
 
+export function readPackage (name: string) {
+  return JSON.parse(readFileSync(`./node_modules/${name}/package.json`).toString()) as { types?: string, module?: string, main?: string, exports?: Record<string, string | { require?: string, import?: string, types?: string }> };
+}
+
 export function readModule (name: string, module?: string) {
-  const pkg = JSON.parse(readFileSync(`./node_modules/${name}/package.json`).toString());
+  const pkg = readPackage(name);
   const dts = readFileSync(`./node_modules/${name}/${pkg.types}`).toString();
   const mjs = readFileSync(`./node_modules/${name}/${module ?? pkg.module}`).toString();
   return { pkg, dts, mjs };
@@ -63,4 +67,10 @@ export function loadOptions (options: PluginOptions): PluginOptions {
   const loadedOptions: PluginOptions = { ...DefaultOptions, ...options };
   if (options.env) loadedOptions.env = { ...DefaultOptions.env, ...options.env };
   return loadedOptions;
+}
+
+export function refreshDir (dir: string) {
+  if (existsSync(dir)) rmSync(dir, { recursive: true });
+  mkdirSync(dir);
+  return dir;
 }
