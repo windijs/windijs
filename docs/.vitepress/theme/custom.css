@@ -1,0 +1,9 @@
+:root {
+  --vp-c-brand: #8C82EF !important;
+  --vp-c-brand-dark: #91A0F2 !important;
+  --vp-sidebar-width: 280px !important;
+}
+
+.dark:root {
+  --vp-c-brand: #91A0F2 !important;
+}
