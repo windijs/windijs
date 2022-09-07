@@ -1,10 +1,28 @@
 import { PluginOptions, VitePlugin } from "./types";
-import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, loadOptions, readModule, replaceEntry, writeFile } from "./utils";
+import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, loadOptions, readModule, refreshDir, replaceEntry, writeFile } from "./utils";
 import { dirname, resolve } from "path";
 import { dtsSetup, dtsUtilities } from "./gen";
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "fs";
+import { readFileSync, readdirSync, writeFileSync } from "fs";
 
 import type { Config } from "@windijs/helpers";
+
+export function injectTheme (code: string, config: Config) {
+  const theme = config.theme ?? {};
+
+  if (config.styleLoader) code = injectStyleLoader(code);
+
+  if (theme.colors) code = code.replace(/(const|let|var)\s+colors\s*=[\s\S]+?;/, "const colors = windiUserConfig.theme.colors;"); // replace colors
+
+  for (const k in theme) {
+    const regex = new RegExp(`(?<=configHandler\\().*?${k}Config`, "g");
+    const matched = code.match(regex);
+    if (matched) {
+      code = code.replace(regex, "windiUserConfig.theme." + k);
+    }
+  }
+
+  return code;
+}
 
 export function genVariants (options: PluginOptions) {
   const userVariants = options.config?.variants ?? {};
@@ -30,18 +48,21 @@ export function genVariants (options: PluginOptions) {
   };
 }
 
-function injectTheme (code: string, config: Config) {
-  const theme = config.theme ?? {};
+export function genRequire (path: string, config: Config) {
+  let code = readFileSync(path).toString();
 
-  if (config.styleLoader) code = injectStyleLoader(code);
+  const defaults = ["colors", ...(code.match(/(?<=createUtility\(")[\w_$-]+/g) ?? [])];
 
-  if (theme.colors) code = code.replace(/(const|let|var)\s+colors\s*=[\s\S]+?;/, "const colors = windiUserConfig.theme.colors;"); // replace colors
+  code = injectTheme(injectHelper(injectConfig(code), "setupUtility", "@windijs/core"), config);
 
-  for (const k in theme) {
-    const regex = new RegExp(`(?<=configHandler\\().*?${k}Config`, "g");
-    const matched = code.match(regex);
-    if (matched) {
-      code = code.replace(regex, "windiUserConfig.theme." + k);
+  for (const k in config.utilities ?? {}) {
+    const u = `var ${k} = setupUtility('${k}', windiUserConfig.utilities.${k})`;
+    if (defaults.includes(k)) {
+      // replace old utility type
+      code = code.replace(new RegExp(`(const|let|var)\\s*${k}\\s*=[^;]*`), u);
+    } else {
+      // add new utility type
+      code = code.replace("exports.", `${u};\n\nexports.${k} = ${k};\nexports.`);
     }
   }
 
@@ -61,22 +82,23 @@ export function genProduction (options: PluginOptions) {
   const defaults = code.match(/(?<=\s+as\s+)\S+/g) ?? [];
 
   // copy es folder and replace changed config
-  pkg.exports["./__proxy__"] = {
-    import: "./__proxy__/index.js",
+  pkg.exports!["./proxy"] = {
+    import: "./dist/proxy/es/index.js",
+    require: "./dist/proxy/utilities.js",
+    types: "./dist/proxy/utilities.d.ts",
   };
   writeFileSync(resolve("./node_modules/@windijs/utilities/package.json"), JSON.stringify(pkg, undefined, 2) + "\n");
-  const esdir = resolve("./node_modules/@windijs/utilities", dirname(pkg.module));
-  const pdir = "./node_modules/@windijs/utilities/__proxy__";
-  if (existsSync(pdir)) rmSync(pdir, { recursive: true });
-  mkdirSync(pdir);
+  const esdir = resolve("./node_modules/@windijs/utilities", dirname(pkg.module!));
+  const pdir = refreshDir("./node_modules/@windijs/utilities/dist/proxy");
+  const pesdir = refreshDir("./node_modules/@windijs/utilities/dist/proxy/es");
   readdirSync(esdir).forEach(i => {
     const raw = readFileSync(resolve(esdir, i)).toString();
-    writeFileSync(resolve(pdir, i), injectConfig(injectTheme(raw, config)));
+    writeFileSync(resolve(pesdir, i), injectConfig(injectTheme(raw, config)));
   });
 
   const items = defaults;
 
-  dts = replaceEntry(dtsUtilities(dts, config));
+  dts = dtsUtilities(dts, config);
   let entry: string | undefined;
 
   for (const [k, v] of Object.entries(config.utilities ?? {})) {
@@ -94,10 +116,14 @@ export function genProduction (options: PluginOptions) {
     }
 
     if (!entry) code += `export { default as ${k} } from './${k}.js';\n`;
-    writeFileSync(resolve(pdir, entry ?? (k + ".js")), injectConfig(`import { setupUtility } from "@windijs/core";\n${u};\nexport { ${k} as default };\n`));
+    writeFileSync(resolve(pesdir, entry ?? (k + ".js")), injectConfig(`import { setupUtility } from "@windijs/core";\n${u};\nexport { ${k} as default };\n`));
   }
 
-  writeFileSync(resolve(pdir, "index.js"), code);
+  writeFileSync(resolve(pesdir, "index.js"), code);
+  writeFileSync(resolve(pdir, "utilities.d.ts"), dts);
+  writeFileSync(resolve(pdir, "utilities.js"), genRequire("./node_modules/@windijs/utilities/dist/utilities.js", config));
+
+  dts = replaceEntry(dts);
 
   const variantsGlobal = env.variants?.global ? (variants.items.map(i => `const ${i}: VariantBuilder;`).join("\n") + "\n") : undefined;
   let global = env.utilities?.global ? (dts.replace(/export\s+declare\s+/g, "").replace("type", "declare global {\n" + (variantsGlobal ?? "") + "type") + "}\n") : variantsGlobal ? ("declare global {\n" + variantsGlobal + "}\n") : undefined;
@@ -198,7 +224,7 @@ export function createRuntime (options: PluginOptions = {}) {
   function preprocess (code: string) {
   // TODO: fix: The $ prefix is reserved, and cannot be used for variable and import names
     return injectImports(code, {
-      [isProduction ? "@windijs/utilities/__proxy__" : "virtual:utilities"]: filterConflict(code, utilities.items),
+      [isProduction ? "@windijs/utilities/proxy" : "virtual:utilities"]: filterConflict(code, utilities.items),
       "virtual:variants": filterConflict(code, variants.items).filter(i => !i.startsWith("$")),
     });
   }
