@@ -1,31 +1,10 @@
 import { PluginOptions, VitePlugin } from "./types";
-import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, readModule, replaceEntry, writeFile } from "./utils";
+import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, loadOptions, readModule, replaceEntry, writeFile } from "./utils";
 import { dirname, resolve } from "path";
 import { dtsSetup, dtsUtilities } from "./gen";
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "fs";
 
 import type { Config } from "@windijs/helpers";
-
-export const DefaultOptions: PluginOptions = {
-  configPath: resolve("./windi.config"),
-  env: {
-    globalPath: "./src/windi-global.d.ts",
-    modulePath: "./src/windi-module.d.ts",
-    variants: {
-      lib: "@windijs/variants",
-      module: true,
-      global: true,
-    },
-    utilities: {
-      lib: "@windijs/utilities",
-      module: true,
-      global: true,
-    },
-    config: {
-      module: true,
-    },
-  },
-};
 
 export function genVariants (options: PluginOptions) {
   const userVariants = options.config?.variants ?? {};
@@ -210,7 +189,7 @@ export function virtualPlugin (utilities: string, variants: string) {
 }
 
 export function createRuntime (options: PluginOptions = {}) {
-  options = Object.assign(DefaultOptions, options);
+  options = loadOptions(options);
   const { global, module, utilities, variants } = isProduction ? genProduction(options) : genRuntime(options);
 
   writeFile(options.env?.globalPath ?? "./src/windi-global.d.ts", global);

@@ -1,6 +1,28 @@
 import { existsSync, readFileSync, rmSync, writeFileSync } from "fs";
 
+import { PluginOptions } from "./types";
 import { resolve } from "path";
+
+export const DefaultOptions: PluginOptions = {
+  configPath: resolve("./windi.config"),
+  env: {
+    globalPath: "./src/windi-global.d.ts",
+    modulePath: "./src/windi-module.d.ts",
+    variants: {
+      lib: "@windijs/variants",
+      module: true,
+      global: true,
+    },
+    utilities: {
+      lib: "@windijs/utilities",
+      module: true,
+      global: true,
+    },
+    config: {
+      module: true,
+    },
+  },
+};
 
 export const configPath = resolve("./windi.config");
 
@@ -35,4 +57,10 @@ export function readModule (name: string, module?: string) {
   const dts = readFileSync(`./node_modules/${name}/${pkg.types}`).toString();
   const mjs = readFileSync(`./node_modules/${name}/${module ?? pkg.module}`).toString();
   return { pkg, dts, mjs };
+}
+
+export function loadOptions (options: PluginOptions): PluginOptions {
+  const loadedOptions: PluginOptions = { ...DefaultOptions, ...options };
+  if (options.env) loadedOptions.env = { ...DefaultOptions.env, ...options.env };
+  return loadedOptions;
 }
