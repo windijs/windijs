@@ -3,6 +3,7 @@
 
 export * from "./types";
 export * from "./build";
+export * from "./config";
 export * from "./color";
 export * from "./common";
 export * from "./css";

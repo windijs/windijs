@@ -1,5 +1,3 @@
-export type DarkModeConfig = "class" | "media";
-
 export type ThemeType = Record<string, any> | undefined
 
 // TODO: document this
@@ -197,34 +195,3 @@ export interface BaseTheme {
 export type Theme = Partial<BaseTheme> | ({ [ key:string ]: ThemeType } & { extend?: Theme & { extend?: undefined } })
 
 // export type Shortcut = string | NestObject;
-
-export interface Config {
-  // presets?: Config[];
-  // prefixer?: boolean;
-  // attributify?: boolean | {
-  //   prefix?: string
-  //   separator?: string
-  //   disable?: string[]
-  // }
-  separator?: string;
-  important?: boolean | string;
-  darkMode?: DarkModeConfig;
-  theme?: Theme;
-  // variantOrder?: string[];
-  // plugins?: Plugin[];
-  // handlers?: Handlers;
-  // corePlugins?: (keyof BaseTheme)[] | string[] | { [ T in keyof BaseTheme ] : boolean } | { [ key:string ] : boolean };
-  // prefix?: string;
-  // exclude?: RegExp[];
-  // alias?: { [key:string]: string };
-  // shortcuts?: { [key:string]: Shortcut };
-  // purge?: unknown;
-  utilities?: { [key: string]: object };
-  variants?: { [key: string]: string | string[] };
-  [key:string]: any;
-}
-
-// TODO: define utilities type, we need use handler and style type, maybe move this to utilities or windijs ?
-export function defineConfig (config: Config) {
-  return config;
-}
