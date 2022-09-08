@@ -1,4 +1,4 @@
-import { mergeObject } from "../src/common";
+import { mergeObject } from "../src/merge";
 
 test("mergeObject", () => {
   expect(mergeObject({ a: 1, b: 2 }, { c: 3, d: 4 })).toEqual({ a: 1, b: 2, c: 3, d: 4 });

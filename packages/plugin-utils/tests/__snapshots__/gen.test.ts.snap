@@ -172,7 +172,8 @@ exports[`dtsHandler with setup 2`] = `
 `;
 
 exports[`generate dts 1`] = `
-"import { buildLinearGradient, buildTransition } from \\"@windijs/core\\";
+"import { MergeObject } from 'windijs';
+import { buildLinearGradient, buildTransition } from \\"@windijs/core\\";
 export declare const image: {
   render: Inject<{
       auto: StyleObject<{}>;
