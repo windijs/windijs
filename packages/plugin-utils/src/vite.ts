@@ -1,5 +1,5 @@
-import { PluginOptions, VitePlugin } from "./types";
-import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, loadOptions, readModule, refreshDir, replaceEntry, requireConfig, requireHelper, writeFile } from "./utils";
+import { PluginOptions, ResolvedPluginOptions, VitePlugin } from "./types";
+import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, readModule, refreshDir, replaceEntry, requireConfig, requireHelper, resolveOptions, writeFile } from "./utils";
 import { dirname, resolve } from "path";
 import { dtsSetup, dtsUtilities } from "./gen";
 import { readFileSync, readdirSync, writeFileSync } from "fs";
@@ -24,9 +24,9 @@ export function injectTheme (code: string, config: Config, require = false) {
   return code;
 }
 
-export function genVariants (options: PluginOptions) {
-  const userVariants = options.config?.variants ?? {};
-  const { mjs, dts } = readModule(options.env?.variants?.lib ?? "@windijs/variants");
+export function genVariants (options: ResolvedPluginOptions) {
+  const userVariants = options.config.variants ?? {};
+  const { mjs, dts } = readModule(options.env.variants?.lib ?? "@windijs/variants");
   let code = injectHelper(injectConfig(replaceEntry(mjs)), "setupVariant", "windijs");
 
   const defaults = dts.match(/[\w_$]+(?=:\s*VariantBuilder)/g) ?? [];
@@ -38,7 +38,7 @@ export function genVariants (options: PluginOptions) {
 
   code = loaded.reduce((prev, k) => prev.replace(new RegExp(`[^;]*const\\s*${k}\\s*=[^;]*;`), ""), code);
 
-  if (options.config?.variants) {
+  if (options.config.variants) {
     code = code.replace(/(?=export\s\{[\s\S]*};?\s*$)/, `const { ${keys.join(", ")} } = setupVariant(windiUserConfig.variants);\n` + (added.length > 0 ? `export { ${added.join(", ")} };\n` : ""));
   }
 
@@ -69,15 +69,14 @@ export function genRequire (path: string, config: Config) {
   return code;
 }
 
-export function genProduction (options: PluginOptions) {
-  const config = options.config ?? {};
+export function genProduction (options: ResolvedPluginOptions) {
+  const env = options.env;
+  const config = options.config;
   const variants = genVariants(options);
 
-  let { pkg, mjs, dts } = readModule(options.env?.utilities?.lib ?? "@windijs/utilities");
+  let { pkg, mjs, dts } = readModule(env.utilities?.lib ?? "@windijs/utilities");
 
   let code = mjs;
-
-  const env = options.env ?? {};
 
   const defaults = code.match(/(?<=\s+as\s+)\S+/g) ?? [];
 
@@ -145,14 +144,14 @@ export function genProduction (options: PluginOptions) {
   };
 }
 
-export function genRuntime (options: PluginOptions) {
-  const config = options.config ?? {};
+export function genRuntime (options: ResolvedPluginOptions) {
+  const env = options.env;
+  const config = options.config;
   const variants = genVariants(options);
 
-  let { mjs, dts } = readModule(options.env?.utilities?.lib ?? "@windijs/utilities", "dist/utilities.mjs"); // TODO: this entry is hard coded for now, maybe change to package exports later.
+  let { mjs, dts } = readModule(env.utilities?.lib ?? "@windijs/utilities", "dist/utilities.mjs"); // TODO: this entry is hard coded for now, maybe change to package exports later.
 
   const defaults = ["colors", ...(mjs.match(/(?<=createUtility\(")[\w_$-]+/g) ?? [])];
-  const env = options.env ?? {};
   const items = defaults;
 
   let code = injectTheme(injectHelper(injectConfig(replaceEntry(mjs)), "setupUtility", "@windijs/core"), config);
@@ -214,12 +213,11 @@ export function virtualPlugin (utilities: string, variants: string) {
   };
 }
 
-export function createRuntime (options: PluginOptions = {}) {
-  options = loadOptions(options);
+export function createRuntime (options: ResolvedPluginOptions) {
   const { global, module, utilities, variants } = isProduction ? genProduction(options) : genRuntime(options);
 
-  writeFile(options.env?.globalPath ?? "./src/windi-global.d.ts", global);
-  writeFile(options.env?.modulePath ?? "./src/windi-module.d.ts", module);
+  writeFile(options.env.globalPath ?? "./src/windi-global.d.ts", global);
+  writeFile(options.env.modulePath ?? "./src/windi-module.d.ts", module);
 
   function preprocess (code: string) {
   // TODO: fix: The $ prefix is reserved, and cannot be used for variable and import names
@@ -233,9 +231,10 @@ export function createRuntime (options: PluginOptions = {}) {
 }
 
 export default function vitePlugin (options: PluginOptions = {}) {
-  const { utilities, variants, preprocess } = createRuntime(options);
+  const resolvedOptions = resolveOptions(options);
+  const { utilities, variants, preprocess } = createRuntime(resolvedOptions);
   const plugin = virtualPlugin(utilities, variants);
-  const exts = (options.exts ?? [".js", ".ts"]).filter(i => i !== ".svelte");
+  const exts = resolvedOptions.exts.filter(i => i !== ".svelte");
 
   function vuePreprocess (code: string, setup = true) {
     const regex = /<script.*>/;

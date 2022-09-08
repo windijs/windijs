@@ -18,6 +18,8 @@ export type PluginOptions = {
   }
 };
 
+export type ResolvedPluginOptions = Required<PluginOptions>;
+
 export type VitePlugin = {
   name: string;
   api: {

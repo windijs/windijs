@@ -1,9 +1,11 @@
+import { PluginOptions, ResolvedPluginOptions } from "./types";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
 
-import { PluginOptions } from "./types";
 import { resolve } from "path";
 
-export const DefaultOptions: PluginOptions = {
+export const DefaultOptions: ResolvedPluginOptions = {
+  exts: [".js", ".ts"],
+  config: {},
   configPath: resolve("./windi.config"),
   env: {
     globalPath: "./src/windi-global.d.ts",
@@ -69,10 +71,10 @@ export function readModule (name: string, module?: string) {
   return { pkg, dts, mjs };
 }
 
-export function loadOptions (options: PluginOptions): PluginOptions {
-  const loadedOptions: PluginOptions = { ...DefaultOptions, ...options };
-  if (options.env) loadedOptions.env = { ...DefaultOptions.env, ...options.env };
-  return loadedOptions;
+export function resolveOptions (options: PluginOptions): ResolvedPluginOptions {
+  const resolvedOptions: ResolvedPluginOptions = { ...DefaultOptions, ...options };
+  if (options.env) resolvedOptions.env = { ...DefaultOptions.env, ...options.env };
+  return resolvedOptions;
 }
 
 export function refreshDir (dir: string) {
