@@ -9,9 +9,9 @@ export type EntryOptions = {
 }
 
 export type BaseEnv = {
-  nodeModulesPath?: string,
-  globalPath?: string,
-  modulePath?: string,
+  nodeModulesEntry?: string,
+  globalEntry?: string | false,
+  moduleEntry?: string | false,
 }
 
 export type PluginEnv = Partial<Record<"config" | "utilities" | "variants", EntryOptions>> & BaseEnv;
@@ -20,7 +20,7 @@ export type PluginOptions = {
   include?: string[],
   exclude?: string[],
   config?: Config,
-  configPath?: string,
+  configEntry?: string,
   env?: PluginEnv,
 };
 
