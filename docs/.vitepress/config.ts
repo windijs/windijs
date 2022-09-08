@@ -78,6 +78,14 @@ export default defineConfig({
             link: "/customization/custom-variant"
           },
           {
+            text: "Custom Loader",
+            link: "/customization/custom-loader",
+          },
+          {
+            text: "Custom Namer",
+            link: "/customization/custom-namer",
+          },
+          {
             text: "Plugins",
             link: "/customization/plugins"
           }
