@@ -10,7 +10,7 @@
 <main>
   <div>
     <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class={["logo", bg.indigo[300]].toString()} alt="Vite Logo" />
+      <img src="/vite.svg" class={["logo", bg.indigo[300], dark(bg.indigo[200], border.dot, font.x)].toString()} alt="Vite Logo" />
     </a>
     <a href="https://svelte.dev" target="_blank">
       <img src={svelteLogo} class={["logo", "svelte", logo].toString()} alt="Svelte Logo" />
