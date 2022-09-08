@@ -1,5 +1,21 @@
 import './custom.css'
 
-import DefaultTheme from 'vitepress/theme'
+import { cssInJsLoader, useStyleLoader } from 'windijs';
 
-export default DefaultTheme;
+import DefaultTheme from 'vitepress/theme'
+import { Theme } from 'vitepress'
+import { mountCSS } from './loader';
+import { onBeforeMount } from 'vue';
+
+export default {
+  ...DefaultTheme,
+  enhanceApp({ app, router, siteData }) {
+    // ctx.app.component('VueClickAwayExample', VueClickAwayExample)
+  },
+  setup() {
+    onBeforeMount(() => {
+      mountCSS();
+      useStyleLoader(cssInJsLoader);
+  })
+  },
+} as Theme;
