@@ -1,5 +1,18 @@
 # @windijs/plugin-utils
 
+## 1.1.2
+
+### Patch Changes
+
+- [`32219340`](https://github.com/windijs/windijs/commit/32219340cb3200b14827ff836936f721e725b9b8) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: support extend theme
+
+* [`7924721e`](https://github.com/windijs/windijs/commit/7924721ed81f7bd9a6cf1ad55ef568bef2e4c15a) Thanks [@voorjaar](https://github.com/voorjaar)! - style: remove ts-ignore
+
+- [`43a098f8`](https://github.com/windijs/windijs/commit/43a098f889bfe9d9f5c354ef037ef80c232b9005) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: support darkMode config
+
+- Updated dependencies [[`1ba88a99`](https://github.com/windijs/windijs/commit/1ba88a99c4a0b00edaff825551bf9a412468aead), [`3f41d56a`](https://github.com/windijs/windijs/commit/3f41d56a8ea8c4c56e95ebcf0e927c2d41783d53), [`43a098f8`](https://github.com/windijs/windijs/commit/43a098f889bfe9d9f5c354ef037ef80c232b9005)]:
+  - @windijs/helpers@1.1.4
+
 ## 1.1.1
 
 ### Patch Changes

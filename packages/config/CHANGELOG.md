@@ -1,5 +1,11 @@
 # @windijs/config
 
+## 1.0.9
+
+### Patch Changes
+
+- [`c2e1af1f`](https://github.com/windijs/windijs/commit/c2e1af1f4874ed3543396412e60b2f896bf3e0b5) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: theme type
+
 ## 1.0.8
 
 ### Patch Changes

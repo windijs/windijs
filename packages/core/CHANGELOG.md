@@ -1,5 +1,12 @@
 # @windijs/core
 
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`1ba88a99`](https://github.com/windijs/windijs/commit/1ba88a99c4a0b00edaff825551bf9a412468aead), [`3f41d56a`](https://github.com/windijs/windijs/commit/3f41d56a8ea8c4c56e95ebcf0e927c2d41783d53), [`43a098f8`](https://github.com/windijs/windijs/commit/43a098f889bfe9d9f5c354ef037ef80c232b9005)]:
+  - @windijs/helpers@1.1.4
+
 ## 1.1.3
 
 ### Patch Changes
