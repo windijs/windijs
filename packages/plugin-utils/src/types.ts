@@ -8,19 +8,25 @@ export type EntryOptions = {
   global?: boolean,
 }
 
+export type BaseEnv = {
+  nodeModulesPath?: string,
+  globalPath?: string,
+  modulePath?: string,
+}
+
+export type PluginEnv = Partial<Record<"config" | "utilities" | "variants", EntryOptions>> & BaseEnv;
+
 export type PluginOptions = {
   include?: string[],
   exclude?: string[],
   config?: Config,
   configPath?: string,
-  env?: Partial<Record<"config" | "utilities" | "variants", EntryOptions>> & {
-    nodeModulesPath?: string,
-    globalPath?: string,
-    modulePath?: string,
-  }
+  env?: PluginEnv,
 };
 
-export type ResolvedPluginOptions = Required<PluginOptions>;
+export type ResolvedPluginEnv = Record<"config" | "utilities" | "variants", Required<EntryOptions>> & Required<BaseEnv>
+
+export type ResolvedPluginOptions = Omit<Required<PluginOptions>, "env"> & { env: ResolvedPluginEnv };
 
 export type VitePlugin = {
   name: string;

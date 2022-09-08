@@ -1,6 +1,6 @@
 import { PluginOptions, ResolvedPluginOptions, VitePlugin } from "./types";
 import { configPath, declModule, filterConflict, injectConfig, injectHelper, injectImports, injectStyleLoader, isProduction, readModule, refreshDir, replaceEntry, requireConfig, requireHelper, resolveOptions, writeFile } from "./utils";
-import { dirname, resolve } from "path";
+import { dirname, join, resolve } from "path";
 import { dtsSetup, dtsUtilities } from "./gen";
 import { readFileSync, readdirSync, writeFileSync } from "fs";
 
@@ -27,7 +27,7 @@ export function injectTheme (code: string, config: Config, require = false) {
 
 export function genVariants (options: ResolvedPluginOptions) {
   const userVariants = options.config.variants ?? {};
-  const { mjs, dts } = readModule(options.env.variants?.lib ?? "@windijs/variants");
+  const { mjs, dts } = readModule(resolve(options.env.nodeModulesPath, options.env.variants.lib));
   let code = injectHelper(injectConfig(replaceEntry(mjs)), "setupVariant", "windijs");
 
   const defaults = dts.match(/[\w_$]+(?=:\s*VariantBuilder)/g) ?? [];
@@ -74,8 +74,9 @@ export function genProduction (options: ResolvedPluginOptions) {
   const env = options.env;
   const config = options.config;
   const variants = genVariants(options);
+  const utilitiesPath = resolve(env.nodeModulesPath, env.utilities.lib);
 
-  let { pkg, mjs, dts } = readModule(env.utilities?.lib ?? "@windijs/utilities");
+  let { pkg, mjs, dts } = readModule(utilitiesPath);
 
   let code = mjs;
 
@@ -87,10 +88,10 @@ export function genProduction (options: ResolvedPluginOptions) {
     require: "./dist/proxy/utilities.js",
     types: "./dist/proxy/utilities.d.ts",
   };
-  writeFileSync(resolve("./node_modules/@windijs/utilities/package.json"), JSON.stringify(pkg, undefined, 2) + "\n");
-  const esdir = resolve("./node_modules/@windijs/utilities", dirname(pkg.module!));
-  const pdir = refreshDir("./node_modules/@windijs/utilities/dist/proxy");
-  const pesdir = refreshDir("./node_modules/@windijs/utilities/dist/proxy/es");
+  writeFileSync(join(utilitiesPath, "package.json"), JSON.stringify(pkg, undefined, 2) + "\n");
+  const esdir = join(utilitiesPath, dirname(pkg.module!));
+  const pdir = refreshDir(join(utilitiesPath, "dist/proxy"));
+  const pesdir = refreshDir(join(utilitiesPath, "dist/proxy/es"));
   readdirSync(esdir).forEach(i => {
     const raw = readFileSync(resolve(esdir, i)).toString();
     writeFileSync(resolve(pesdir, i), injectConfig(injectTheme(raw, config)));
@@ -121,18 +122,18 @@ export function genProduction (options: ResolvedPluginOptions) {
 
   writeFileSync(resolve(pesdir, "index.js"), code);
   writeFileSync(resolve(pdir, "utilities.d.ts"), dts);
-  writeFileSync(resolve(pdir, "utilities.js"), genRequire("./node_modules/@windijs/utilities/dist/utilities.js", config));
+  writeFileSync(resolve(pdir, "utilities.js"), genRequire(join(utilitiesPath, "dist/utilities.js"), config));
 
   dts = replaceEntry(dts);
 
-  const variantsGlobal = env.variants?.global ? (variants.items.map(i => `const ${i}: VariantBuilder;`).join("\n") + "\n") : undefined;
-  let global = env.utilities?.global ? (dts.replace(/export\s+declare\s+/g, "").replace("type", "declare global {\n" + (variantsGlobal ?? "") + "type") + "}\n") : variantsGlobal ? ("declare global {\n" + variantsGlobal + "}\n") : undefined;
-  if (global && env.variants?.global) global = injectImports(global, { windijs: ["VariantBuilder"] });
+  const variantsGlobal = env.variants.global ? (variants.items.map(i => `const ${i}: VariantBuilder;`).join("\n") + "\n") : undefined;
+  let global = env.utilities.global ? (dts.replace(/export\s+declare\s+/g, "").replace("type", "declare global {\n" + (variantsGlobal ?? "") + "type") + "}\n") : variantsGlobal ? ("declare global {\n" + variantsGlobal + "}\n") : undefined;
+  if (global && env.variants.global) global = injectImports(global, { windijs: ["VariantBuilder"] });
 
   const modules: string[] = [];
-  if (env.config?.module) modules.push(declModule("virtual:config", ["export default (await import(\"../windi.config\")).default"]));
-  if (env.variants?.module) modules.push(declModule("virtual:variants", ["import { VariantBuilder } from \"windijs\"", ...variants.items.map(i => `export declare const ${i}: VariantBuilder`)]));
-  if (env.utilities?.module) modules.push(declModule("virtual:utilities", dts));
+  if (env.config.module) modules.push(declModule("virtual:config", ["export default (await import(\"../windi.config\")).default"]));
+  if (env.variants.module) modules.push(declModule("virtual:variants", ["import { VariantBuilder } from \"windijs\"", ...variants.items.map(i => `export declare const ${i}: VariantBuilder`)]));
+  if (env.utilities.module) modules.push(declModule("virtual:utilities", dts));
 
   return {
     global,
@@ -150,7 +151,7 @@ export function genRuntime (options: ResolvedPluginOptions) {
   const config = options.config;
   const variants = genVariants(options);
 
-  let { mjs, dts } = readModule(env.utilities?.lib ?? "@windijs/utilities", "dist/utilities.mjs"); // TODO: this entry is hard coded for now, maybe change to package exports later.
+  let { mjs, dts } = readModule(resolve(env.nodeModulesPath, env.utilities.lib), "dist/utilities.mjs"); // TODO: this entry is hard coded for now, maybe change to package exports later.
 
   const defaults = ["colors", ...(mjs.match(/(?<=createUtility\(")[\w_$-]+/g) ?? [])];
   const items = defaults;
@@ -173,14 +174,14 @@ export function genRuntime (options: ResolvedPluginOptions) {
     }
   }
 
-  const variantsGlobal = env.variants?.global ? (variants.items.map(i => `const ${i}: VariantBuilder;`).join("\n") + "\n") : undefined;
-  let global = env.utilities?.global ? (dts.replace(/export\s+declare\s+/g, "").replace("type", "declare global {\n" + (variantsGlobal ?? "") + "type") + "}\n") : variantsGlobal ? ("declare global {\n" + variantsGlobal + "}\n") : undefined;
-  if (global && env.variants?.global) global = injectImports(global, { windijs: ["VariantBuilder"] });
+  const variantsGlobal = env.variants.global ? (variants.items.map(i => `const ${i}: VariantBuilder;`).join("\n") + "\n") : undefined;
+  let global = env.utilities.global ? (dts.replace(/export\s+declare\s+/g, "").replace("type", "declare global {\n" + (variantsGlobal ?? "") + "type") + "}\n") : variantsGlobal ? ("declare global {\n" + variantsGlobal + "}\n") : undefined;
+  if (global && env.variants.global) global = injectImports(global, { windijs: ["VariantBuilder"] });
 
   const modules: string[] = [];
-  if (env.config?.module) modules.push(declModule("virtual:config", ["export default (await import(\"../windi.config\")).default"]));
-  if (env.variants?.module) modules.push(declModule("virtual:variants", ["import { VariantBuilder } from \"windijs\"", ...variants.items.map(i => `export declare const ${i}: VariantBuilder`)]));
-  if (env.utilities?.module) modules.push(declModule("virtual:utilities", dts));
+  if (env.config.module) modules.push(declModule("virtual:config", ["export default (await import(\"../windi.config\")).default"]));
+  if (env.variants.module) modules.push(declModule("virtual:variants", ["import { VariantBuilder } from \"windijs\"", ...variants.items.map(i => `export declare const ${i}: VariantBuilder`)]));
+  if (env.utilities.module) modules.push(declModule("virtual:utilities", dts));
 
   return {
     global,
@@ -217,8 +218,8 @@ export function virtualPlugin (utilities: string, variants: string) {
 export function createRuntime (options: ResolvedPluginOptions) {
   const { global, module, utilities, variants } = isProduction ? genProduction(options) : genRuntime(options);
 
-  writeFile(options.env.globalPath ?? "./src/windi-global.d.ts", global);
-  writeFile(options.env.modulePath ?? "./src/windi-module.d.ts", module);
+  writeFile(options.env.globalPath, global);
+  writeFile(options.env.modulePath, module);
 
   function preprocess (code: string) {
   // TODO: fix: The $ prefix is reserved, and cannot be used for variable and import names

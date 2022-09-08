@@ -1,7 +1,6 @@
-import { PluginOptions, ResolvedPluginOptions } from "./types";
+import { PluginEnv, PluginOptions, ResolvedPluginEnv, ResolvedPluginOptions } from "./types";
+import { basename, join, resolve } from "path";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
-
-import { resolve } from "path";
 
 export const DefaultOptions: ResolvedPluginOptions = {
   include: ["./src/**/*.{vue,jsx,tsx}"],
@@ -23,7 +22,9 @@ export const DefaultOptions: ResolvedPluginOptions = {
       global: true,
     },
     config: {
+      lib: "windijs",
       module: true,
+      global: false,
     },
   },
 };
@@ -62,23 +63,37 @@ export const writeFile = (path: string, content: string | undefined) => {
   else if (existsSync(path)) rmSync(path);
 };
 
-export function readPackage (name: string) {
-  return JSON.parse(readFileSync(`./node_modules/${name}/package.json`).toString()) as { types?: string, module?: string, main?: string, exports?: Record<string, string | { require?: string, import?: string, types?: string }> };
+export function readPackage (dir: string) {
+  return JSON.parse(readFileSync(join(dir, "package.json")).toString()) as { types?: string, module?: string, main?: string, exports?: Record<string, string | { require?: string, import?: string, types?: string }> };
 }
 
-export function readModule (name: string, module?: string) {
-  const pkg = readPackage(name);
-  const dts = readFileSync(`./node_modules/${name}/${pkg.types}`).toString();
-  const mjs = readFileSync(`./node_modules/${name}/${module ?? pkg.module}`).toString();
+export function readModule (dir: string, module?: string) {
+  const pkg = readPackage(dir);
+  const mod = module ?? pkg.module;
+  if (!mod) throw new Error(`Couldn't find module entry for '${basename(dir)}'`);
+  if (!pkg.types) throw new Error(`Counln't find types tentry for '${basename(dir)}'`);
+  const dts = readFileSync(join(dir, pkg.types)).toString();
+  const mjs = readFileSync(join(dir, mod)).toString();
   return { pkg, dts, mjs };
 }
 
+export function resolveEnv (env?: PluginEnv): ResolvedPluginEnv {
+  const resolvedEnv = DefaultOptions.env;
+  if (!env) return resolvedEnv;
+  if (env.globalPath) resolvedEnv.globalPath = env.globalPath;
+  if (env.modulePath) resolvedEnv.modulePath = env.modulePath;
+  if (env.nodeModulesPath) resolvedEnv.nodeModulesPath = env.nodeModulesPath;
+  for (const k of ["config", "utilities", "variants"] as ["config", "utilities", "variants"]) {
+    if (env[k]) resolvedEnv[k] = { ...env[k], ...resolvedEnv[k] };
+  }
+  return resolvedEnv;
+}
+
 export function resolveOptions (options: PluginOptions): ResolvedPluginOptions {
-  const resolvedOptions: ResolvedPluginOptions = { ...DefaultOptions, ...options };
+  const resolvedOptions: ResolvedPluginOptions = { ...DefaultOptions, ...options, env: resolveEnv(options.env) };
   // convert relative path to absolute path
   resolvedOptions.include = resolvedOptions.include.map(i => resolve(i));
   resolvedOptions.exclude = resolvedOptions.exclude.map(i => resolve(i));
-  if (options.env) resolvedOptions.env = { ...DefaultOptions.env, ...options.env };
   return resolvedOptions;
 }
 
