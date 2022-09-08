@@ -192,6 +192,6 @@ export interface BaseTheme {
   zIndex: ThemeType
 }
 
-export type Theme = Partial<BaseTheme> | ({ [ key:string ]: ThemeType } & { extend?: Theme & { extend?: undefined } })
+export type Theme = Partial<BaseTheme> & { extend?: Partial<BaseTheme> & Record<string, ThemeType> } & Record<string, ThemeType>
 
 // export type Shortcut = string | NestObject;
