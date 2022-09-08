@@ -1,4 +1,4 @@
-import { PluginEnv, PluginOptions, ResolvedPluginEnv, ResolvedPluginOptions } from "./types";
+import { EntryOptions, PluginEnv, PluginOptions, ResolvedPluginEnv, ResolvedPluginOptions } from "./types";
 import { basename, join, resolve } from "path";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
 
@@ -77,15 +77,24 @@ export function readModule (dir: string, module?: string) {
   return { pkg, dts, mjs };
 }
 
+export function resolveEntry (options: EntryOptions, defaultValue: Required<EntryOptions>): Required<EntryOptions> {
+  const resolvedEntry = defaultValue;
+  if (options.global != null) resolvedEntry.global = options.global;
+  if (options.lib != null) resolvedEntry.lib = options.lib;
+  if (options.module != null) resolvedEntry.module = options.module;
+  return resolvedEntry;
+}
+
 export function resolveEnv (env?: PluginEnv): ResolvedPluginEnv {
   const resolvedEnv = DefaultOptions.env;
   if (!env) return resolvedEnv;
   if (env.globalPath) resolvedEnv.globalPath = env.globalPath;
   if (env.modulePath) resolvedEnv.modulePath = env.modulePath;
   if (env.nodeModulesPath) resolvedEnv.nodeModulesPath = env.nodeModulesPath;
-  for (const k of ["config", "utilities", "variants"] as ["config", "utilities", "variants"]) {
-    if (env[k]) resolvedEnv[k] = { ...env[k], ...resolvedEnv[k] };
-  }
+  if (env.config) resolvedEnv.config = resolveEntry(env.config, resolvedEnv.config);
+  if (env.utilities) resolvedEnv.utilities = resolveEntry(env.utilities, resolvedEnv.utilities);
+  if (env.variants) resolvedEnv.variants = resolveEntry(env.variants, resolvedEnv.variants);
+
   return resolvedEnv;
 }
 
