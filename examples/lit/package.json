@@ -15,11 +15,11 @@
     "build": "vite build"
   },
   "dependencies": {
-    "lit": "^2.2.7",
-    "windijs": "workspace:^1.0.0"
+    "lit": "^2.2.7"
   },
   "devDependencies": {
-    "@windijs/style": "workspace:1.0.0",
+    "windijs": "workspace:*",
+    "@windijs/style": "workspace:*",
     "vite": "^3.0.0"
   }
 }
