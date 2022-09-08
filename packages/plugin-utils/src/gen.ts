@@ -63,9 +63,7 @@ export function dtsUtilities (tmpl: string, config: Config): string {
   if (theme.colors) {
     const colors = theme.extend?.colors ? mergeObject(theme.colors, theme.extend.colors) : theme.colors;
     code = code
-      // @ts-ignore
       .replace(/"\$windi\.config\.colorsConfig"/g, dtsConfig(colors))
-      // @ts-ignore
       .replace(/"\$windi\.color\.colors\.proxy"/g, dtsConfig(colors, colorStyle));
   } else if (theme.extend?.colors) {
     code = code
