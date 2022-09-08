@@ -4,7 +4,6 @@ import windiConfig from "./windi.config"
 import windijs from "@windijs/plugin-utils/vite"
 
 const windi = windijs({
-  exts: [".svelte"],
   config: windiConfig
 })
 

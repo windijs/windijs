@@ -8,7 +8,6 @@ import windijs from "@windijs/plugin-utils/vite"
 const ts = preprocess.typescript();
 const windi = windijs({
   config: windiConfig,
-  exts: [".svelte"]
 });
 
 export default defineConfig({

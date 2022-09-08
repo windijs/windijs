@@ -6,7 +6,6 @@ import windijs from "@windijs/plugin-utils/vite"
 export default defineConfig({
   plugins: [
     windijs({
-      exts: [".jsx"],
       config: windiConfig
     }),
     preact()
