@@ -5,6 +5,7 @@ import { dtsSetup, dtsUtilities } from "./gen";
 import { readFileSync, readdirSync, writeFileSync } from "fs";
 
 import type { Config } from "@windijs/helpers";
+import pm from "picomatch";
 
 export function injectTheme (code: string, config: Config, require = false) {
   const theme = config.theme ?? {};
@@ -232,9 +233,10 @@ export function createRuntime (options: ResolvedPluginOptions) {
 
 export default function vitePlugin (options: PluginOptions = {}) {
   const resolvedOptions = resolveOptions(options);
+  const isInclude = pm(resolvedOptions.include);
+  const isExclude = pm(resolvedOptions.exclude);
   const { utilities, variants, preprocess } = createRuntime(resolvedOptions);
   const plugin = virtualPlugin(utilities, variants);
-  const exts = resolvedOptions.exts.filter(i => i !== ".svelte");
 
   function vuePreprocess (code: string, setup = true) {
     const regex = /<script.*>/;
@@ -257,9 +259,8 @@ export default function vitePlugin (options: PluginOptions = {}) {
   }
 
   function transform (code: string, id: string) {
-    const ext = exts.find(i => id.endsWith(i));
-    if (ext) {
-      if (ext === ".vue") return vuePreprocess(code);
+    if (isInclude(id) && !isExclude(id)) {
+      if (id.endsWith(".vue")) return vuePreprocess(code);
       return preprocess(code);
     }
     return code;

@@ -4,10 +4,12 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
 import { resolve } from "path";
 
 export const DefaultOptions: ResolvedPluginOptions = {
-  exts: [".js", ".ts"],
+  include: ["src/**/*.{vue,jsx,tsx}"],
+  exclude: ["node_modules"],
   config: {},
   configPath: resolve("./windi.config"),
   env: {
+    nodeModulesPath: "./node_modules",
     globalPath: "./src/windi-global.d.ts",
     modulePath: "./src/windi-module.d.ts",
     variants: {

@@ -9,10 +9,12 @@ export type EntryOptions = {
 }
 
 export type PluginOptions = {
-  exts?: string[],
+  include?: string[],
+  exclude?: string[],
   config?: Config,
   configPath?: string,
   env?: Partial<Record<"config" | "utilities" | "variants", EntryOptions>> & {
+    nodeModulesPath?: string,
     globalPath?: string,
     modulePath?: string,
   }
