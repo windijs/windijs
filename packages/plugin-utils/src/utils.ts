@@ -40,7 +40,7 @@ export const injectImports = (code: string, imports: Record<string, string[]>) =
 
 export const injectConfig = (code: string, path: string) => `import windiUserConfig from '${path}';\n` + code;
 
-export const injectHelper = (code: string, helper: string, pkg: string) => code.includes(helper) ? code : injectImports(code, { [isProduction ? pkg : "windijs"]: [helper] });
+export const injectHelper = (code: string, helper: string, pkg: string) => injectImports(code, { [isProduction ? pkg : "windijs"]: [helper] });
 
 export const requireImports = (code: string, imports: Record<string, string[]>) => code.replace("var ", Object.entries(imports).map(([k, v]) => `var { ${v.join(", ")} } = require('${k}');\n`).join("") + "var ");
 

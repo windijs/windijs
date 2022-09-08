@@ -9,18 +9,23 @@ import pm from "picomatch";
 
 export function injectTheme (code: string, config: Config, require = false) {
   const theme = config.theme ?? {};
+  const keys = Object.keys(theme).filter(i => i !== "extend");
 
   if (config.styleLoader) code = injectStyleLoader(code);
 
-  if (theme.colors) code = code.replace(/(const|let|var)\s+colors\s*=[\s\S]+?;/, (require ? "var" : "const") + " colors = windiUserConfig.theme.colors;"); // replace colors
+  const colorDef = require ? "var" : "const";
+  const colorRegex = /(const|let|var)\s+colors\s*=\s*([\s\S]+?);/;
+  if (theme.colors) code = code.replace(colorRegex, colorDef + ` colors = ${theme.extend?.colors ? "mergeObject(windiUserConfig.theme.colors, windiUserConfig.theme.extend.colors)" : "windiUserConfig.theme.colors"};`);
+  else if (theme.extend?.colors) code = code.replace(colorRegex, colorDef + " colors = mergeObject($2, windiUserConfig.theme.extend.colors);");
 
-  for (const k in theme) {
+  const replaceConfig = (k: string, v: string) => {
     const regex = new RegExp(`(?<=configHandler\\().*?${k}Config`, "g");
     const matched = code.match(regex);
-    if (matched) {
-      code = code.replace(regex, "windiUserConfig.theme." + k);
-    }
-  }
+    if (matched) code = code.replace(regex, v);
+  };
+
+  keys.forEach(k => replaceConfig(k, theme.extend?.[k] ? `mergeObject(windiUserConfig.theme.${k}, windiUserConfig.theme.extend.${k})` : ("windiUserConfig.theme." + k)));
+  Object.keys(theme.extend ?? {}).filter(i => !(i in theme)).forEach(k => replaceConfig(k, `mergeObject($&, windiUserConfig.theme.extend.${k})`));
 
   return code;
 }
@@ -82,7 +87,7 @@ export function genRequire (path: string, config: Config, configPath: string) {
 
   const defaults = ["colors", ...(code.match(/(?<=createUtility\(")[\w_$-]+/g) ?? [])];
 
-  code = injectTheme(requireHelper(requireConfig(code, configPath), "setupUtility", "@windijs/core"), config, true);
+  code = injectTheme(requireHelper(requireHelper(requireConfig(code, configPath), "setupUtility", "@windijs/core"), "mergeObject", "@windijs/helpers"), config, true);
 
   for (const k in config.utilities ?? {}) {
     const u = `var ${k} = setupUtility('${k}', windiUserConfig.utilities.${k})`;
@@ -122,7 +127,7 @@ export function genProduction (options: ResolvedPluginOptions) {
   const pesdir = refreshDir(join(utilitiesPath, "dist/proxy/es"));
   readdirSync(esdir).forEach(i => {
     const raw = readFileSync(resolve(esdir, i)).toString();
-    writeFileSync(resolve(pesdir, i), injectConfig(injectTheme(raw, config), env.configEntry));
+    writeFileSync(resolve(pesdir, i), injectHelper(injectConfig(injectTheme(raw, config), env.configEntry), "mergeObject", "@windijs/helpers"));
   });
 
   const items = defaults;
@@ -174,7 +179,12 @@ export function genRuntime (options: ResolvedPluginOptions) {
   const defaults = ["colors", ...(mjs.match(/(?<=createUtility\(")[\w_$-]+/g) ?? [])];
   const items = defaults;
 
-  let code = injectTheme(injectHelper(injectConfig(replaceEntry(mjs), env.configEntry), "setupUtility", "@windijs/core"), config);
+  let code = injectTheme(
+    injectHelper(
+      injectHelper(
+        injectConfig(replaceEntry(mjs), env.configEntry), "setupUtility", "@windijs/core",
+      ), "mergeObject", "@windijs/helpers",
+    ), config);
   dts = replaceEntry(dtsUtilities(dts, config));
 
   for (const [k, v] of Object.entries(config.utilities ?? {})) {

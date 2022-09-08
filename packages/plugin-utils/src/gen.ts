@@ -1,7 +1,7 @@
+import { Config, Handler, isStyleObject, mergeObject } from "@windijs/helpers";
 import { indent, isNumber, isVarName } from "@windijs/shared";
 
-import type { Handler } from "@windijs/helpers";
-import { isStyleObject } from "@windijs/helpers";
+import { injectHelper } from "./utils";
 
 /**
  * Generate type interface for config object
@@ -50,15 +50,27 @@ export function dtsHandler<R> (handler: Handler<R>, ignores: string[] = ["DEFAUL
 /**
  * Generate utilities.d.ts with config
  */
-export function dtsUtilities<T extends object & { theme?: object }> (tmpl: string, config: T): string {
+export function dtsUtilities (tmpl: string, config: Config): string {
   const theme = config.theme ?? {};
-  let code = Object.entries(theme).reduce((prev, [k, v]) => prev.replace(new RegExp(`"\\$windi\\.config\\.${k}Config.proxy"`, "g"), dtsConfig(v, "StyleObject<{}>")), tmpl);
-  if ("colors" in theme) {
+  let code = injectHelper(
+    Object.entries(theme).reduce((prev, [k, v]) => v ? prev.replace(new RegExp(`"\\$windi\\.config\\.${k}Config.proxy"`, "g"), dtsConfig((theme.extend?.[k] ? mergeObject(v, theme.extend[k]!) : v), "StyleObject<{}>")) : prev, tmpl),
+    "MergeObject", "@windijs/helpers",
+  );
+
+  code = Object.entries(theme.extend ?? {}).filter(([k]) => !(k in theme)).reduce((prev, [k, v]) => v ? prev.replace(new RegExp(`Inject<(((?!Inject<)[\\s\\S])*),\\s*"\\$windi.config.${k}Config.proxy"`, "g"), `MergeObject<$1, ${dtsConfig(v, "StyleObject<{}>")}`) : prev, code);
+
+  const colorStyle = "StyleObject<{opacity: (op: number) => StyleObject<{readonly gradient: StyleObject<{}>}>; readonly gradient: StyleObject<{}>}>";
+  if (theme.colors) {
+    const colors = theme.extend?.colors ? mergeObject(theme.colors, theme.extend.colors) : theme.colors;
     code = code
       // @ts-ignore
-      .replace(/"\$windi\.config\.colorsConfig"/g, dtsConfig(theme.colors))
+      .replace(/"\$windi\.config\.colorsConfig"/g, dtsConfig(colors))
       // @ts-ignore
-      .replace(/"\$windi\.color\.colors\.proxy"/g, dtsConfig(theme.colors, "StyleObject<{opacity: (op: number) => StyleObject<{readonly gradient: StyleObject<{}>}>; readonly gradient: StyleObject<{}>}>"));
+      .replace(/"\$windi\.color\.colors\.proxy"/g, dtsConfig(colors, colorStyle));
+  } else if (theme.extend?.colors) {
+    code = code
+      .replace(/(const|var|let)(\s+colors:\s*)(Inject<[\s\S]*?);(?=\s*const)/, `$1$2MergeObject<$3, ${dtsConfig(theme.extend.colors)}>;`)
+      .replace(/Inject<(((?!Inject<)[\s\S])*),\s*"\$windi.color.colors.proxy"/g, `MergeObject<$1, ${dtsConfig(theme.extend.colors, colorStyle)}`);
   }
   return code;
 }
