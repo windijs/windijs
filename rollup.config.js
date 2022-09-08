@@ -1,6 +1,8 @@
 // @ts-check
 
+import commonjs from "@rollup/plugin-commonjs";
 import { defineConfig } from "rollup";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import path from "path";
 import sucrase from "@rollup/plugin-sucrase";
 import { terser } from "rollup-plugin-terser";
@@ -95,7 +97,7 @@ function createConfig (format, name, entry = "index.ts", output = createOutput(f
 
   if (format === "iife") output.name = buildOptions.name;
 
-  const plugins = [createTS(format)];
+  const plugins = [createTS(format), commonjs(), nodeResolve()];
 
   if (process.env.MINIFY) {
     plugins.push(terser({
@@ -111,8 +113,6 @@ function createConfig (format, name, entry = "index.ts", output = createOutput(f
   return defineConfig({
     input: resolve("src/" + entry),
     external: [
-      "path",
-      "fs",
       ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.peerDependencies || {}),
     ],
