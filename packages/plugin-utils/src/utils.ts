@@ -4,8 +4,8 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
 import { resolve } from "path";
 
 export const DefaultOptions: ResolvedPluginOptions = {
-  include: ["src/**/*.{vue,jsx,tsx}"],
-  exclude: ["node_modules"],
+  include: ["./src/**/*.{vue,jsx,tsx}"],
+  exclude: ["**/node_modules"],
   config: {},
   configPath: resolve("./windi.config"),
   env: {
@@ -75,6 +75,9 @@ export function readModule (name: string, module?: string) {
 
 export function resolveOptions (options: PluginOptions): ResolvedPluginOptions {
   const resolvedOptions: ResolvedPluginOptions = { ...DefaultOptions, ...options };
+  // convert relative path to absolute path
+  resolvedOptions.include = resolvedOptions.include.map(i => resolve(i));
+  resolvedOptions.exclude = resolvedOptions.exclude.map(i => resolve(i));
   if (options.env) resolvedOptions.env = { ...DefaultOptions.env, ...options.env };
   return resolvedOptions;
 }

@@ -38,5 +38,9 @@
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "displayName": "@windijs/plugin-utils"
+  },
+  "devDependencies": {
+    "@types/picomatch": "^2.3.0",
+    "picomatch": "^2.3.1"
   }
 }

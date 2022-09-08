@@ -233,8 +233,7 @@ export function createRuntime (options: ResolvedPluginOptions) {
 
 export default function vitePlugin (options: PluginOptions = {}) {
   const resolvedOptions = resolveOptions(options);
-  const isInclude = pm(resolvedOptions.include);
-  const isExclude = pm(resolvedOptions.exclude);
+  const isMatch = pm(resolvedOptions.include, { ignore: resolvedOptions.exclude });
   const { utilities, variants, preprocess } = createRuntime(resolvedOptions);
   const plugin = virtualPlugin(utilities, variants);
 
@@ -259,7 +258,7 @@ export default function vitePlugin (options: PluginOptions = {}) {
   }
 
   function transform (code: string, id: string) {
-    if (isInclude(id) && !isExclude(id)) {
+    if (isMatch(id)) {
       if (id.endsWith(".vue")) return vuePreprocess(code);
       return preprocess(code);
     }
