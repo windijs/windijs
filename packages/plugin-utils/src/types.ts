@@ -9,6 +9,7 @@ export type EntryOptions = {
 }
 
 export type BaseEnv = {
+  rootEntry?: string,
   nodeModulesEntry?: string,
   globalEntry?: string | false,
   moduleEntry?: string | false,

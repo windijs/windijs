@@ -7,6 +7,7 @@ export const DefaultOptions: ResolvedPluginOptions = {
   exclude: ["**/node_modules"],
   config: {},
   env: {
+    rootEntry: "./",
     configEntry: "./windi.config",
     nodeModulesEntry: "./node_modules",
     globalEntry: "./src/windi-global.d.ts",
@@ -84,16 +85,20 @@ export function resolveEntry (options: EntryOptions, defaultValue: Required<Entr
   return resolvedEntry;
 }
 
-export function resolveEnv (env?: PluginEnv): ResolvedPluginEnv {
+export function resolveEnv (env: PluginEnv = {}): ResolvedPluginEnv {
   const resolvedEnv = DefaultOptions.env;
-  if (!env) return resolvedEnv;
   for (const [k, v] of Object.entries(env)) {
     if (typeof v !== "object") {
       // @ts-ignore
       resolvedEnv[k] = v;
     }
   }
-  resolvedEnv.configEntry = resolve(resolvedEnv.configEntry);
+  resolvedEnv.configEntry = resolve(resolvedEnv.rootEntry, resolvedEnv.configEntry);
+  if (env.rootEntry) {
+    resolvedEnv.nodeModulesEntry = resolve(env.rootEntry, resolvedEnv.nodeModulesEntry);
+    if (resolvedEnv.globalEntry) resolvedEnv.globalEntry = resolve(env.rootEntry, resolvedEnv.globalEntry);
+    if (resolvedEnv.moduleEntry) resolvedEnv.moduleEntry = resolve(env.rootEntry, resolvedEnv.moduleEntry);
+  }
   if (env.config) resolvedEnv.config = resolveEntry(env.config, resolvedEnv.config);
   if (env.utilities) resolvedEnv.utilities = resolveEntry(env.utilities, resolvedEnv.utilities);
   if (env.variants) resolvedEnv.variants = resolveEntry(env.variants, resolvedEnv.variants);
@@ -104,8 +109,8 @@ export function resolveEnv (env?: PluginEnv): ResolvedPluginEnv {
 export function resolveOptions (options: PluginOptions): ResolvedPluginOptions {
   const resolvedOptions: ResolvedPluginOptions = { ...DefaultOptions, ...options, env: resolveEnv(options.env) };
   // convert relative path to absolute path
-  resolvedOptions.include = resolvedOptions.include.map(i => resolve(i));
-  resolvedOptions.exclude = resolvedOptions.exclude.map(i => resolve(i));
+  resolvedOptions.include = resolvedOptions.include.map(i => resolve(resolvedOptions.env.rootEntry, i));
+  resolvedOptions.exclude = resolvedOptions.exclude.map(i => resolve(resolvedOptions.env.rootEntry, i));
   return resolvedOptions;
 }
 
