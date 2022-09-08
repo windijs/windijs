@@ -32,12 +32,18 @@ export function genVariants (options: ResolvedPluginOptions) {
 
   const defaults = dts.match(/[\w_$]+(?=:\s*VariantBuilder)/g) ?? [];
   const keys = Object.keys(userVariants);
-  const items = defaults.concat(keys.filter(i => !defaults.includes(i)));
+  let items = defaults.concat(keys.filter(i => !defaults.includes(i)));
 
   const loaded = keys.filter(k => defaults.includes(k));
   const added = keys.filter(k => !defaults.includes(k));
 
   code = loaded.reduce((prev, k) => prev.replace(new RegExp(`[^;]*const\\s*${k}\\s*=[^;]*;`), ""), code);
+
+  if (options.config.darkMode === "class") {
+    code = code.replace(/(?<=const\s+dark\s*=\s*.*)createMedia([^;]+);/, "createVariant(\".dark &\")");
+  } else if (options.config.darkMode === false) {
+    items = items.filter(i => i !== "dark");
+  }
 
   if (options.config.variants) {
     code = code.replace(/(?=export\s\{[\s\S]*};?\s*$)/, `const { ${keys.join(", ")} } = setupVariant(windiUserConfig.variants);\n` + (added.length > 0 ? `export { ${added.join(", ")} };\n` : ""));

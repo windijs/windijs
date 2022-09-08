@@ -2,7 +2,7 @@ import { Handler, StyleLoader, StyleObject } from "./types";
 
 import { Theme } from "@windijs/config";
 
-export type DarkModeConfig = "class" | "media";
+export type DarkModeConfig = "class" | "media" | false;
 
 export type UtilitiesConfig = { [key: string]: Handler<unknown> | Array<Handler<unknown>> | StyleObject | UtilitiesConfig };
 
