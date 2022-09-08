@@ -73,15 +73,3 @@ export function bundle (utilities: (StyleObject | StyleObject[])[]): CSSMap {
 }
 
 export const prop = (strings: TemplateStringsArray, ...expr: string[]) => strings.map((string, i) => string + (expr[i] || "")).join("") as StyleProperties;
-
-/**
- * Merge two object and their nested children
- */
-export function mergeObject (a: Record<string, unknown>, b: object) {
-  return Object.entries(b).reduce((o, [k, v]) => {
-    o[k] = v && typeof v === "object"
-      ? mergeObject((o[k] = o[k] || (Array.isArray(v) ? [] : {})) as Record<string, unknown>, v)
-      : v;
-    return o;
-  }, a);
-}

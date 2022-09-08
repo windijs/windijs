@@ -2,6 +2,7 @@
 // https://sass-lang.com/documentation/modules
 
 export * from "./types";
+export * from "./merge";
 export * from "./build";
 export * from "./config";
 export * from "./color";
