@@ -6,7 +6,7 @@ export const DefaultOptions: ResolvedPluginOptions = {
   include: ["./src/**/*.{vue,jsx,tsx}"],
   exclude: ["**/node_modules"],
   config: {},
-  configEntry: resolve("./windi.config"),
+  configEntry: "./windi.config",
   env: {
     nodeModulesEntry: "./node_modules",
     globalEntry: "./src/windi-global.d.ts",
@@ -29,8 +29,6 @@ export const DefaultOptions: ResolvedPluginOptions = {
   },
 };
 
-export const configPath = resolve("./windi.config");
-
 export const isProduction = process.env.NODE_ENV === "production";
 
 export const replaceEntry = (input: string) => input.replace(/@windijs\/(core|colors|helpers|config|shared)/g, "windijs");
@@ -39,13 +37,13 @@ export const filterConflict = (src: string, entries: string[]) => entries.filter
 
 export const injectImports = (code: string, imports: Record<string, string[]>) => Object.entries(imports).map(([k, v]) => `import { ${v.join(", ")} } from '${k}';\n`).join("") + code;
 
-export const injectConfig = (code: string) => `import windiUserConfig from '${configPath}';\n` + code;
+export const injectConfig = (code: string, path: string) => `import windiUserConfig from '${path}';\n` + code;
 
 export const injectHelper = (code: string, helper: string, pkg: string) => code.includes(helper) ? code : injectImports(code, { [isProduction ? pkg : "windijs"]: [helper] });
 
 export const requireImports = (code: string, imports: Record<string, string[]>) => code.replace("var ", Object.entries(imports).map(([k, v]) => `var { ${v.join(", ")} } = require('${k}');\n`).join("") + "var ");
 
-export const requireConfig = (code: string) => code.replace("var ", `var windiUserConfig = require('${configPath}');\nvar `);
+export const requireConfig = (code: string, path: string) => code.replace("var ", `var windiUserConfig = require('${path}');\nvar `);
 
 export const requireHelper = (code: string, helper: string, pkg: string) => code.includes(helper) ? code : requireImports(code, { [isProduction ? pkg : "windijs"]: [helper] });
 
@@ -105,6 +103,7 @@ export function resolveEnv (env?: PluginEnv): ResolvedPluginEnv {
 export function resolveOptions (options: PluginOptions): ResolvedPluginOptions {
   const resolvedOptions: ResolvedPluginOptions = { ...DefaultOptions, ...options, env: resolveEnv(options.env) };
   // convert relative path to absolute path
+  resolvedOptions.configEntry = resolve(resolvedOptions.configEntry);
   resolvedOptions.include = resolvedOptions.include.map(i => resolve(i));
   resolvedOptions.exclude = resolvedOptions.exclude.map(i => resolve(i));
   return resolvedOptions;
