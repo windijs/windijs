@@ -1,5 +1,14 @@
 # @windijs/helpers
 
+## 1.1.3
+
+### Patch Changes
+
+- [`ff6dccde`](https://github.com/windijs/windijs/commit/ff6dccde4c16a808aeb3154969e2acbd3dfd3a4b) Thanks [@voorjaar](https://github.com/voorjaar)! - refactor: move defineConfig to helpers
+
+- Updated dependencies [[`ff6dccde`](https://github.com/windijs/windijs/commit/ff6dccde4c16a808aeb3154969e2acbd3dfd3a4b)]:
+  - @windijs/config@1.0.8
+
 ## 1.1.2
 
 ### Patch Changes

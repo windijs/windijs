@@ -1,5 +1,16 @@
 # @windijs/utilities
 
+## 1.0.9
+
+### Patch Changes
+
+- [`89d0d3b3`](https://github.com/windijs/windijs/commit/89d0d3b30fc9e536e4a194a0c3ede9f0f73a424f) Thanks [@voorjaar](https://github.com/voorjaar)! - chore: update exports entry
+
+- Updated dependencies [[`ff6dccde`](https://github.com/windijs/windijs/commit/ff6dccde4c16a808aeb3154969e2acbd3dfd3a4b)]:
+  - @windijs/config@1.0.8
+  - @windijs/helpers@1.1.3
+  - @windijs/core@1.1.3
+
 ## 1.0.8
 
 ### Patch Changes

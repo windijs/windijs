@@ -1,6 +1,6 @@
 {
   "name": "@windijs/helpers",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "@windijs/helpers",
   "main": "dist/helpers.js",
   "module": "dist/helpers.mjs",
@@ -26,7 +26,7 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/config": "1.0.7",
+    "@windijs/config": "1.0.8",
     "@windijs/shared": "1.0.5"
   },
   "typedoc": {
