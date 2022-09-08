@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import Switch from "../.vitepress/components/Switch.vue"
+    import Switch from "@/Switch.vue"
 </script>
 
 # Integration for Vite
