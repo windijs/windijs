@@ -14,12 +14,13 @@
     "isolatedModules": true,
     "types": ["vite/client", "node"],
     "paths": {
-      "@/*": ["./.vitepress/theme/*"],
+      "@/*": ["./.vitepress/components/*"],
     },
   },
   "include": [
     ".vitepress/**/*.ts",
     ".vitepress/**/*.d.ts",
     ".vitepress/**/*.vue",
+    "windi.config.ts"
   ]
 }

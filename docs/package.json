@@ -1,0 +1,24 @@
+{
+  "name": "@windijs/docs",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Windi JS Documents",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "serve": "vitepress serve"
+  },
+  "devDependencies": {
+    "@algolia/client-search": "^4.14.2",
+    "@windijs/plugin-utils": "workspace:*",
+    "@windijs/utilities": "workspace:*",
+    "@windijs/variants": "workspace:*",
+    "vite": "^3.1.0",
+    "vitepress": "1.0.0-alpha.13",
+    "vue": "^3.2.37",
+    "windijs": "workspace:*"
+  },
+  "keywords": ["doc", "docs", "windijs"],
+  "author": "Raven Satir",
+  "license": "MIT"
+}
