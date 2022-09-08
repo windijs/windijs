@@ -6,8 +6,8 @@ export const DefaultOptions: ResolvedPluginOptions = {
   include: ["./src/**/*.{vue,jsx,tsx}"],
   exclude: ["**/node_modules"],
   config: {},
-  configEntry: "./windi.config",
   env: {
+    configEntry: "./windi.config",
     nodeModulesEntry: "./node_modules",
     globalEntry: "./src/windi-global.d.ts",
     moduleEntry: "./src/windi-module.d.ts",
@@ -93,6 +93,7 @@ export function resolveEnv (env?: PluginEnv): ResolvedPluginEnv {
       resolvedEnv[k] = v;
     }
   }
+  resolvedEnv.configEntry = resolve(resolvedEnv.configEntry);
   if (env.config) resolvedEnv.config = resolveEntry(env.config, resolvedEnv.config);
   if (env.utilities) resolvedEnv.utilities = resolveEntry(env.utilities, resolvedEnv.utilities);
   if (env.variants) resolvedEnv.variants = resolveEntry(env.variants, resolvedEnv.variants);
@@ -103,7 +104,6 @@ export function resolveEnv (env?: PluginEnv): ResolvedPluginEnv {
 export function resolveOptions (options: PluginOptions): ResolvedPluginOptions {
   const resolvedOptions: ResolvedPluginOptions = { ...DefaultOptions, ...options, env: resolveEnv(options.env) };
   // convert relative path to absolute path
-  resolvedOptions.configEntry = resolve(resolvedOptions.configEntry);
   resolvedOptions.include = resolvedOptions.include.map(i => resolve(i));
   resolvedOptions.exclude = resolvedOptions.exclude.map(i => resolve(i));
   return resolvedOptions;

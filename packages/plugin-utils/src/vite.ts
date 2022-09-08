@@ -28,7 +28,7 @@ export function injectTheme (code: string, config: Config, require = false) {
 export function genVariants (options: ResolvedPluginOptions) {
   const userVariants = options.config.variants ?? {};
   const { mjs, dts } = readModule(resolve(options.env.nodeModulesEntry, options.env.variants.lib));
-  let code = injectHelper(injectConfig(replaceEntry(mjs), options.configEntry), "setupVariant", "windijs");
+  let code = injectHelper(injectConfig(replaceEntry(mjs), options.env.configEntry), "setupVariant", "windijs");
 
   const defaults = dts.match(/[\w_$]+(?=:\s*VariantBuilder)/g) ?? [];
   const keys = Object.keys(userVariants);
@@ -116,7 +116,7 @@ export function genProduction (options: ResolvedPluginOptions) {
   const pesdir = refreshDir(join(utilitiesPath, "dist/proxy/es"));
   readdirSync(esdir).forEach(i => {
     const raw = readFileSync(resolve(esdir, i)).toString();
-    writeFileSync(resolve(pesdir, i), injectConfig(injectTheme(raw, config), options.configEntry));
+    writeFileSync(resolve(pesdir, i), injectConfig(injectTheme(raw, config), env.configEntry));
   });
 
   const items = defaults;
@@ -139,12 +139,12 @@ export function genProduction (options: ResolvedPluginOptions) {
     }
 
     if (!entry) code += `export { default as ${k} } from './${k}.js';\n`;
-    writeFileSync(resolve(pesdir, entry ?? (k + ".js")), injectConfig(`import { setupUtility } from "@windijs/core";\n${u};\nexport { ${k} as default };\n`, options.configEntry));
+    writeFileSync(resolve(pesdir, entry ?? (k + ".js")), injectConfig(`import { setupUtility } from "@windijs/core";\n${u};\nexport { ${k} as default };\n`, env.configEntry));
   }
 
   writeFileSync(resolve(pesdir, "index.js"), code);
   writeFileSync(resolve(pdir, "utilities.d.ts"), dts);
-  writeFileSync(resolve(pdir, "utilities.js"), genRequire(join(utilitiesPath, "dist/utilities.js"), config, options.configEntry));
+  writeFileSync(resolve(pdir, "utilities.js"), genRequire(join(utilitiesPath, "dist/utilities.js"), config, env.configEntry));
 
   dts = replaceEntry(dts);
 
@@ -168,7 +168,7 @@ export function genRuntime (options: ResolvedPluginOptions) {
   const defaults = ["colors", ...(mjs.match(/(?<=createUtility\(")[\w_$-]+/g) ?? [])];
   const items = defaults;
 
-  let code = injectTheme(injectHelper(injectConfig(replaceEntry(mjs), options.configEntry), "setupUtility", "@windijs/core"), config);
+  let code = injectTheme(injectHelper(injectConfig(replaceEntry(mjs), env.configEntry), "setupUtility", "@windijs/core"), config);
   dts = replaceEntry(dtsUtilities(dts, config));
 
   for (const [k, v] of Object.entries(config.utilities ?? {})) {
@@ -238,7 +238,7 @@ export default function vitePlugin (options: PluginOptions = {}) {
   const resolvedOptions = resolveOptions(options);
   const isMatch = pm(resolvedOptions.include, { ignore: resolvedOptions.exclude });
   const { utilities, variants, preprocess } = createRuntime(resolvedOptions);
-  const plugin = virtualPlugin(utilities, variants, resolvedOptions.configEntry);
+  const plugin = virtualPlugin(utilities, variants, resolvedOptions.env.configEntry);
 
   function vuePreprocess (code: string, setup = true) {
     const regex = /<script.*>/;
