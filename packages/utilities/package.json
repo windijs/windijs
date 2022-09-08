@@ -12,8 +12,10 @@
       "require": "./dist/utilities.js",
       "types": "./dist/utilities.d.ts"
     },
-    "./__proxy__": {
-      "import": "./__proxy__/index.js"
+    "./proxy": {
+      "import": "./dist/proxy/es/index.js",
+      "require": "./dist/proxy/utilities.js",
+      "types": "./dist/proxy/utilities.d.ts"
     }
   },
   "sideEffects": false,
