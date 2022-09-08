@@ -4,10 +4,11 @@ importers:
 
   .:
     specifiers:
-      '@algolia/client-search': ^4.9.1
       '@changesets/changelog-github': ^0.4.6
       '@changesets/cli': ^2.24.3
       '@jest/types': ^28.1.3
+      '@rollup/plugin-commonjs': ^17.0.0
+      '@rollup/plugin-node-resolve': ^11.0.0
       '@rollup/plugin-sucrase': ^4.0.4
       '@sucrase/jest-plugin': ^2.2.1
       '@types/brotli': ^1.3.1
@@ -43,10 +44,11 @@ importers:
       vite: ^3.1.0
       vitepress: 1.0.0-alpha.13
     devDependencies:
-      '@algolia/client-search': 4.14.2
       '@changesets/changelog-github': 0.4.6
       '@changesets/cli': 2.24.3
       '@jest/types': 28.1.3
+      '@rollup/plugin-commonjs': 17.1.0_rollup@2.77.1
+      '@rollup/plugin-node-resolve': 11.2.1_rollup@2.77.1
       '@rollup/plugin-sucrase': 4.0.4_rollup@2.77.1
       '@sucrase/jest-plugin': 2.2.1
       '@types/brotli': 1.3.1
@@ -80,24 +82,26 @@ importers:
       typedoc-monorepo-link-types: 0.0.4_typedoc@0.23.14
       typescript: 4.7.4
       vite: 3.1.0
-      vitepress: 1.0.0-alpha.13_tbpndr44ulefs3hehwpi2mkf2y
+      vitepress: 1.0.0-alpha.13
 
   docs:
     specifiers:
       '@algolia/client-search': ^4.14.2
-      '@windijs/plugin-utils': workspace:^1.1.0
-      '@windijs/utilities': 1.0.0-beta.0
-      '@windijs/variants': 1.0.0-beta.0
+      '@windijs/plugin-utils': workspace:*
+      '@windijs/utilities': workspace:*
+      '@windijs/variants': workspace:*
       vite: ^3.1.0
       vitepress: 1.0.0-alpha.13
-      windijs: workspace:^1.1.2
+      vue: ^3.2.37
+      windijs: workspace:*
     devDependencies:
       '@algolia/client-search': 4.14.2
       '@windijs/plugin-utils': link:../packages/plugin-utils
-      '@windijs/utilities': 1.0.0-beta.0
-      '@windijs/variants': 1.0.0-beta.0
+      '@windijs/utilities': link:../packages/utilities
+      '@windijs/variants': link:../packages/variants
       vite: 3.1.0
       vitepress: 1.0.0-alpha.13_tbpndr44ulefs3hehwpi2mkf2y
+      vue: 3.2.38
       windijs: link:../packages/windijs
 
   examples/lit:
@@ -108,10 +112,10 @@ importers:
       windijs: workspace:*
     dependencies:
       lit: 2.3.1
-      windijs: link:../../packages/windijs
     devDependencies:
       '@windijs/style': link:../../packages/style
       vite: 3.1.0
+      windijs: link:../../packages/windijs
 
   examples/lit-ts:
     specifiers:
@@ -402,9 +406,14 @@ importers:
 
   packages/plugin-utils:
     specifiers:
+      '@types/picomatch': ^2.3.0
       '@windijs/helpers': 1.1.2
+      picomatch: ^2.3.1
     dependencies:
       '@windijs/helpers': link:../helpers
+    devDependencies:
+      '@types/picomatch': 2.3.0
+      picomatch: 2.3.1
 
   packages/shared:
     specifiers: {}
@@ -492,6 +501,16 @@ packages:
     resolution: {integrity: sha512-eiZw+fxMzNQn01S8dA/hcCpoWCOCwcIIEUtHHdzN5TGB3IpzLbuhqFeTfh2OUhhgkE8Uo17+wH+QJ/wYyQmmzg==}
     dependencies:
       '@algolia/autocomplete-shared': 1.7.1
+    dev: true
+
+  /@algolia/autocomplete-preset-algolia/1.7.1_algoliasearch@4.14.2:
+    resolution: {integrity: sha512-pJwmIxeJCymU1M6cGujnaIYcY3QPOVYZOXhFkWVM7IxKzy272BwCvMFMyc5NpG/QmiObBxjo7myd060OeTNJXg==}
+    peerDependencies:
+      '@algolia/client-search': ^4.9.1
+      algoliasearch: ^4.9.1
+    dependencies:
+      '@algolia/autocomplete-shared': 1.7.1
+      algoliasearch: 4.14.2
     dev: true
 
   /@algolia/autocomplete-preset-algolia/1.7.1_qs6lk5nhygj2o3hj4sf6xnr724:
@@ -867,6 +886,7 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.18.13
+    dev: true
 
   /@babel/parser/7.19.0:
     resolution: {integrity: sha512-74bEXKX2h+8rrfQUfsBfuZZHzsEs6Eql4pqy/T4Nn6Y9wNPggQOqD6z6pn5Bl8ZfysKouFZT/UXEH94ummEeQw==}
@@ -1125,6 +1145,7 @@ packages:
       '@babel/helper-string-parser': 7.18.10
       '@babel/helper-validator-identifier': 7.18.6
       to-fast-properties: 2.0.0
+    dev: true
 
   /@babel/types/7.18.8:
     resolution: {integrity: sha512-qwpdsmraq0aJ3osLJRApsc2ouSJCdnMeZwB0DhbtHAtRpZNZCdlbRnHIgcRKzdE1g0iOGg644fzjOBcdOz9cPw==}
@@ -1352,6 +1373,18 @@ packages:
     resolution: {integrity: sha512-gaP6TxxwQC+K8D6TRx5WULUWKrcbzECOPA2KCVMuI+6C7dNiGUk5yXXzVhc5sld79XKYLnO9DRTI4mjXDYkh+g==}
     dev: true
 
+  /@docsearch/js/3.2.1:
+    resolution: {integrity: sha512-H1PekEtSeS0msetR2YGGey2w7jQ2wAKfGODJvQTygSwMgUZ+2DHpzUgeDyEBIXRIfaBcoQneqrzsljM62pm6Xg==}
+    dependencies:
+      '@docsearch/react': 3.2.1
+      preact: 10.10.6
+    transitivePeerDependencies:
+      - '@algolia/client-search'
+      - '@types/react'
+      - react
+      - react-dom
+    dev: true
+
   /@docsearch/js/3.2.1_tbpndr44ulefs3hehwpi2mkf2y:
     resolution: {integrity: sha512-H1PekEtSeS0msetR2YGGey2w7jQ2wAKfGODJvQTygSwMgUZ+2DHpzUgeDyEBIXRIfaBcoQneqrzsljM62pm6Xg==}
     dependencies:
@@ -1362,6 +1395,28 @@ packages:
       - '@types/react'
       - react
       - react-dom
+    dev: true
+
+  /@docsearch/react/3.2.1:
+    resolution: {integrity: sha512-EzTQ/y82s14IQC5XVestiK/kFFMe2aagoYFuTAIfIb/e+4FU7kSMKonRtLwsCiLQHmjvNQq+HO+33giJ5YVtaQ==}
+    peerDependencies:
+      '@types/react': '>= 16.8.0 < 19.0.0'
+      react: '>= 16.8.0 < 19.0.0'
+      react-dom: '>= 16.8.0 < 19.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@algolia/autocomplete-core': 1.7.1
+      '@algolia/autocomplete-preset-algolia': 1.7.1_algoliasearch@4.14.2
+      '@docsearch/css': 3.2.1
+      algoliasearch: 4.14.2
+    transitivePeerDependencies:
+      - '@algolia/client-search'
     dev: true
 
   /@docsearch/react/3.2.1_tbpndr44ulefs3hehwpi2mkf2y:
@@ -1819,6 +1874,22 @@ packages:
       - supports-color
     dev: true
 
+  /@rollup/plugin-commonjs/17.1.0_rollup@2.77.1:
+    resolution: {integrity: sha512-PoMdXCw0ZyvjpCMT5aV4nkL0QywxP29sODQsSGeDpr/oI49Qq9tRtAsb/LbYbDzFlOydVEqHmmZWFtXJEAX9ew==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^2.30.0
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.77.1
+      commondir: 1.0.1
+      estree-walker: 2.0.2
+      glob: 7.2.3
+      is-reference: 1.2.1
+      magic-string: 0.25.9
+      resolve: 1.22.1
+      rollup: 2.77.1
+    dev: true
+
   /@rollup/plugin-commonjs/17.1.0_rollup@2.78.1:
     resolution: {integrity: sha512-PoMdXCw0ZyvjpCMT5aV4nkL0QywxP29sODQsSGeDpr/oI49Qq9tRtAsb/LbYbDzFlOydVEqHmmZWFtXJEAX9ew==}
     engines: {node: '>= 8.0.0'}
@@ -1833,6 +1904,21 @@ packages:
       magic-string: 0.25.9
       resolve: 1.22.1
       rollup: 2.78.1
+    dev: true
+
+  /@rollup/plugin-node-resolve/11.2.1_rollup@2.77.1:
+    resolution: {integrity: sha512-yc2n43jcqVyGE2sqV5/YCmocy9ArjVAP/BeXyTtADTBBX6V0e5UMqwO8CdQ0kzjb6zu5P1qMzsScCMRvE9OlVg==}
+    engines: {node: '>= 10.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.77.1
+      '@types/resolve': 1.17.1
+      builtin-modules: 3.3.0
+      deepmerge: 4.2.2
+      is-module: 1.0.0
+      resolve: 1.22.1
+      rollup: 2.77.1
     dev: true
 
   /@rollup/plugin-node-resolve/11.2.1_rollup@2.78.1:
@@ -1859,6 +1945,18 @@ packages:
       '@rollup/pluginutils': 4.2.1
       rollup: 2.77.1
       sucrase: 3.25.0
+    dev: true
+
+  /@rollup/pluginutils/3.1.0_rollup@2.77.1:
+    resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      '@types/estree': 0.0.39
+      estree-walker: 1.0.1
+      picomatch: 2.3.1
+      rollup: 2.77.1
     dev: true
 
   /@rollup/pluginutils/3.1.0_rollup@2.78.1:
@@ -2034,6 +2132,10 @@ packages:
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+    dev: true
+
+  /@types/picomatch/2.3.0:
+    resolution: {integrity: sha512-O397rnSS9iQI4OirieAtsDqvCj4+3eY1J+EPdNTKuHuRWIfUoGyzX294o8C4KJYaLqgSrd2o60c5EqCU8Zv02g==}
     dev: true
 
   /@types/prettier/2.6.3:
@@ -2337,7 +2439,7 @@ packages:
   /@vue/compiler-sfc/3.2.38:
     resolution: {integrity: sha512-KZjrW32KloMYtTcHAFuw3CqsyWc5X6seb8KbkANSWt3Cz9p2qA8c1GJpSkksFP9ABb6an0FLCFl46ZFXx3kKpg==}
     dependencies:
-      '@babel/parser': 7.18.8
+      '@babel/parser': 7.19.0
       '@vue/compiler-core': 3.2.38
       '@vue/compiler-dom': 3.2.38
       '@vue/compiler-ssr': 3.2.38
@@ -2361,7 +2463,7 @@ packages:
   /@vue/reactivity-transform/3.2.38:
     resolution: {integrity: sha512-3SD3Jmi1yXrDwiNJqQ6fs1x61WsDLqVk4NyKVz78mkaIRh6d3IqtRnptgRfXn+Fzf+m6B1KxBYWq1APj6h4qeA==}
     dependencies:
-      '@babel/parser': 7.18.8
+      '@babel/parser': 7.19.0
       '@vue/compiler-core': 3.2.38
       '@vue/shared': 3.2.38
       estree-walker: 2.0.2
@@ -2424,28 +2526,34 @@ packages:
 
   /@windijs/colors/1.0.0:
     resolution: {integrity: sha512-K3gWzFbXHLfh9u2qy+KgB+CFFSNRqipLZJwr65kFawCECFPmrTo7rO+OTfpbScN4coZ17UtjhJ+Vwzm/Lyf7QQ==}
+    dev: false
 
   /@windijs/config/1.0.0:
     resolution: {integrity: sha512-1L4w2CraGMjKMcD8fAJR1x4kaROtH3Pm7wSfdIdtcMm+ybL2SvhC1d2NUM7OiKJE3NESQKI9WAjb2JpTKvjKxg==}
     dependencies:
       '@windijs/shared': 1.0.0
+    dev: false
 
   /@windijs/core/1.0.0-beta.0:
     resolution: {integrity: sha512-Zh4xvQrfQuaeZh1V4szNn6zjb504wRXTRGgCv2IOQsgl3jnR+l5szttfEK4tf1FX6JjxGdKncoMlo+gSxespzw==}
     dependencies:
       '@windijs/helpers': 1.0.0-beta.0
       '@windijs/shared': 1.0.0-beta.0
+    dev: false
 
   /@windijs/helpers/1.0.0-beta.0:
     resolution: {integrity: sha512-mRrMpXmBeVy2QBJk7gAMYHPOn6u9lb9j2UGxj6aF5HzhJmgLIiDqZBRx4CruYCw5hpyyf4P8Ellq2CJd0m3nPg==}
     dependencies:
       '@windijs/shared': 1.0.0-beta.0
+    dev: false
 
   /@windijs/shared/1.0.0:
     resolution: {integrity: sha512-ywDhZ8BcZoxRBJQDnzFaUHpqGZSn0faOMCjwl3tumzvHIj6yCsYUHOPN1dBgp6aWpPPKF33rEwiW65MHr7qxQA==}
+    dev: false
 
   /@windijs/shared/1.0.0-beta.0:
     resolution: {integrity: sha512-bGq+QIcKyrbcRl2xyyKBtAEfs6yX4FbupdIYOpSdrjhd84BX1v0g5TbuI/+RhkgmXNSPctM7h1KxEAYzYxb2Pw==}
+    dev: false
 
   /@windijs/style/1.0.0-beta.0:
     resolution: {integrity: sha512-/rGPnuXEWUosi5sIdLSdNtuCwL6HqHWFgfWYCllUFL6YPXT/+LidcExug3AY4CvL4ppV3N9M0kAGvoHjfUbp2Q==}
@@ -2462,6 +2570,7 @@ packages:
       '@windijs/config': 1.0.0
       '@windijs/core': 1.0.0-beta.0
       '@windijs/helpers': 1.0.0-beta.0
+    dev: false
 
   /@windijs/variants/1.0.0-beta.0:
     resolution: {integrity: sha512-Ks1saqimPq1P8ne/cG/qnJtWJvTchpyLhFGUgxkqVA9hICYPUrgV2OlRvOuHTluqJT2u+wqRQj5dpGnvChWWMw==}
@@ -2469,6 +2578,7 @@ packages:
       '@windijs/core': 1.0.0-beta.0
       '@windijs/helpers': 1.0.0-beta.0
       '@windijs/shared': 1.0.0-beta.0
+    dev: false
 
   /acorn-jsx/5.3.2_acorn@8.7.1:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -6430,6 +6540,31 @@ packages:
       rollup: 2.78.1
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
+
+  /vitepress/1.0.0-alpha.13:
+    resolution: {integrity: sha512-gCbKb+6o0g5wHt2yyqBPk7FcvrB+MfwGtg1JMS5p99GTQR87l3b7symCl8o1ecv7MDXwJ2mPB8ZrYNLnQAJxLQ==}
+    hasBin: true
+    dependencies:
+      '@docsearch/css': 3.2.1
+      '@docsearch/js': 3.2.1
+      '@vitejs/plugin-vue': 3.1.0_vite@3.1.0+vue@3.2.38
+      '@vue/devtools-api': 6.2.1
+      '@vueuse/core': 9.2.0_vue@3.2.38
+      body-scroll-lock: 4.0.0-beta.0
+      shiki: 0.11.1
+      vite: 3.1.0
+      vue: 3.2.38
+    transitivePeerDependencies:
+      - '@algolia/client-search'
+      - '@types/react'
+      - '@vue/composition-api'
+      - less
+      - react
+      - react-dom
+      - sass
+      - stylus
+      - terser
     dev: true
 
   /vitepress/1.0.0-alpha.13_tbpndr44ulefs3hehwpi2mkf2y:
