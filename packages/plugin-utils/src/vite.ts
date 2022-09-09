@@ -82,7 +82,7 @@ function genModuleEnv (env: ResolvedPluginEnv, variants: string[], dts: string) 
   return modules.length > 0 ? modules.join("") : undefined;
 }
 
-export function genRequire (path: string, config: Config, configPath: string) {
+export function genRequire (path: string, config: Config, configPath: string | false) {
   let code = readFileSync(path).toString();
 
   const defaults = ["colors", ...(code.match(/(?<=createUtility\(")[\w_$-]+/g) ?? [])];
@@ -212,7 +212,7 @@ export function genRuntime (options: ResolvedPluginOptions) {
   };
 }
 
-export function virtualPlugin (utilities: string, variants: string, configPath: string) {
+export function virtualPlugin (utilities: string, variants: string, configPath: string | false) {
   const virtualConfigId = "virtual:config";
   const virtualUtilitiesId = "virtual:utilities";
   const resolvedVirtualUtilitiesId = "\0" + virtualUtilitiesId;
@@ -222,7 +222,7 @@ export function virtualPlugin (utilities: string, variants: string, configPath: 
   return {
     name: "virtual-plugin-windijs",
     resolveId (id: string) {
-      if (id === virtualConfigId) return configPath;
+      if (id === virtualConfigId && configPath) return configPath;
       if (id === virtualUtilitiesId) return resolvedVirtualUtilitiesId;
       if (id === virtualVariantsId) return resolvedVirtualVariantsId;
     },

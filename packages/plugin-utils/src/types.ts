@@ -13,7 +13,7 @@ export type BaseEnv = {
   nodeModulesEntry?: string,
   globalEntry?: string | false,
   moduleEntry?: string | false,
-  configEntry?: string,
+  configEntry?: string | false,
 }
 
 export type PluginEnv = Partial<Record<"config" | "utilities" | "variants", EntryOptions>> & BaseEnv;

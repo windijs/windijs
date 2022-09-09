@@ -38,13 +38,13 @@ export const filterConflict = (src: string, entries: string[]) => entries.filter
 
 export const injectImports = (code: string, imports: Record<string, string[]>) => Object.entries(imports).map(([k, v]) => `import { ${v.join(", ")} } from '${k}';\n`).join("") + code;
 
-export const injectConfig = (code: string, path: string) => `import windiUserConfig from '${path}';\n` + code;
+export const injectConfig = (code: string, path: string | false) => path ? `import windiUserConfig from '${path}';\n` + code : code;
 
 export const injectHelper = (code: string, helper: string, pkg: string) => injectImports(code, { [isProduction ? pkg : "windijs"]: [helper] });
 
 export const requireImports = (code: string, imports: Record<string, string[]>) => code.replace("var ", Object.entries(imports).map(([k, v]) => `var { ${v.join(", ")} } = require('${k}');\n`).join("") + "var ");
 
-export const requireConfig = (code: string, path: string) => code.replace("var ", `var windiUserConfig = require('${path}');\nvar `);
+export const requireConfig = (code: string, path: string | false) => path ? code.replace("var ", `var windiUserConfig = require('${path}');\nvar `) : code;
 
 export const requireHelper = (code: string, helper: string, pkg: string) => code.includes(helper) ? code : requireImports(code, { [isProduction ? pkg : "windijs"]: [helper] });
 
@@ -93,7 +93,7 @@ export function resolveEnv (env: PluginEnv = {}): ResolvedPluginEnv {
       resolvedEnv[k] = v;
     }
   }
-  resolvedEnv.configEntry = resolve(resolvedEnv.rootEntry, resolvedEnv.configEntry);
+  if (resolvedEnv.configEntry) resolvedEnv.configEntry = resolve(resolvedEnv.rootEntry, resolvedEnv.configEntry);
   if (env.rootEntry) {
     resolvedEnv.nodeModulesEntry = resolve(env.rootEntry, resolvedEnv.nodeModulesEntry);
     if (resolvedEnv.globalEntry) resolvedEnv.globalEntry = resolve(env.rootEntry, resolvedEnv.globalEntry);
@@ -106,8 +106,13 @@ export function resolveEnv (env: PluginEnv = {}): ResolvedPluginEnv {
   return resolvedEnv;
 }
 
+function testConfigEntry (entry: string | false) {
+  return entry ? (existsSync(entry) || existsSync(entry + ".ts") || existsSync(entry + ".js")) : false;
+}
+
 export function resolveOptions (options: PluginOptions): ResolvedPluginOptions {
   const resolvedOptions: ResolvedPluginOptions = { ...DefaultOptions, ...options, env: resolveEnv(options.env) };
+  if ((options.config == null || !testConfigEntry(resolvedOptions.env.configEntry))) resolvedOptions.env.configEntry = false; // didn't set config, disable config entry.
   // convert relative path to absolute path
   resolvedOptions.include = resolvedOptions.include.map(i => resolve(resolvedOptions.env.rootEntry, i));
   resolvedOptions.exclude = resolvedOptions.exclude.map(i => resolve(resolvedOptions.env.rootEntry, i));
