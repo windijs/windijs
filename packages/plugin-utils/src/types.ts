@@ -19,6 +19,7 @@ export type BaseEnv = {
 export type PluginEnv = Partial<Record<"config" | "utilities" | "variants", EntryOptions>> & BaseEnv;
 
 export type PluginOptions = {
+  alias?: {[k: string]: string},
   include?: string[],
   exclude?: string[],
   config?: Config,

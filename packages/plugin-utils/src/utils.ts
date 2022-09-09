@@ -5,6 +5,7 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
 export const DefaultOptions: ResolvedPluginOptions = {
   include: ["./src/**/*.{vue,jsx,tsx}"],
   exclude: ["**/node_modules"],
+  alias: {},
   config: {},
   env: {
     rootEntry: "./",
@@ -34,9 +35,9 @@ export const isProduction = process.env.NODE_ENV === "production";
 
 export const replaceEntry = (input: string) => input.replace(/@windijs\/(core|colors|helpers|config|shared)/g, "windijs");
 
-export const filterConflict = (src: string, entries: string[]) => entries.filter(i => !src.match(new RegExp(`(const|let|var)\\s+${i}\\s*=`)));
+export const filterConflict = (src: string, entries: (string | [string, string])[]) => entries.filter(i => !src.match(new RegExp(`(const|let|var)\\s+${Array.isArray(i) ? i[1] : i}\\s*=`)));
 
-export const injectImports = (code: string, imports: Record<string, string[]>) => Object.entries(imports).map(([k, v]) => `import { ${v.join(", ")} } from '${k}';\n`).join("") + code;
+export const injectImports = (code: string, imports: Record<string, (string | [string, string])[]>) => Object.entries(imports).map(([k, v]) => `import { ${v.map(i => Array.isArray(i) ? i.join(" as ") : i).join(", ")} } from '${k}';\n`).join("") + code;
 
 export const injectConfig = (code: string, path: string | false) => path ? `import windiUserConfig from '${path}';\n` + code : code;
 

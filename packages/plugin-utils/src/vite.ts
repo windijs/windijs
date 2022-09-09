@@ -236,14 +236,16 @@ export function virtualPlugin (utilities: string, variants: string, configPath: 
 export function createRuntime (options: ResolvedPluginOptions) {
   const { utilities, variants } = isProduction ? genProduction(options) : genRuntime(options);
 
+  utilities.dts = Object.entries(options.alias).reduce((prev, [k, v]) => prev.replace(new RegExp(`(const|let|var)\\s+${k}:`), `$1 ${v}:`), utilities.dts);
+
   updateEnv(options.env.globalEntry, genGlobalEnv(options.env, variants.items, utilities.dts));
   updateEnv(options.env.moduleEntry, genModuleEnv(options.env, variants.items, utilities.dts));
 
   function preprocess (code: string) {
   // TODO: fix: The $ prefix is reserved, and cannot be used for variable and import names
     return injectImports(code, {
-      [isProduction ? "@windijs/utilities/proxy" : "virtual:utilities"]: filterConflict(code, utilities.items),
-      "virtual:variants": filterConflict(code, variants.items).filter(i => !i.startsWith("$")),
+      [isProduction ? "@windijs/utilities/proxy" : "virtual:utilities"]: filterConflict(code, utilities.items.map(i => i in options.alias ? [i, options.alias[i]] : i)),
+      "virtual:variants": filterConflict(code, variants.items.filter(i => !i.startsWith("$")).map(i => i in options.alias ? [i, options.alias[i]] : i)),
     });
   }
 
