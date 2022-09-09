@@ -7,6 +7,9 @@ import windijs from "@windijs/plugin-utils/vite"
 // @ts-ignore
 const ts = preprocess.typescript();
 const windi = windijs({
+  alias: {
+    p: "_p"
+  },
   config: windiConfig,
 });
 

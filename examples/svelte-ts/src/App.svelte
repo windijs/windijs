@@ -16,7 +16,7 @@
       <img src={svelteLogo} class={["logo", "svelte", logo].toString()} alt="Svelte Logo" />
     </a>
   </div>
-  <h1 class={[bg.blue[300], hocus(myColor.red)].toString()}>Vite + Svelte</h1>
+  <h1 class={[bg.blue[300], hocus(myColor.red), _p[4], py[8], rounded.xl].toString()}>Vite + Svelte</h1>
 
   <div class="card">
     <Counter />
