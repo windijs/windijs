@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://pagecdn.io/lib/preact/10.10.0/preact.min.js"></script>
+  <script src="https://pagecdn.io/lib/preact/10.10.0/hooks.umd.min.js"></script>
+  <script src="/scripts/windijsColors.runtime.js"></script>
+  <script src="/scripts/windijsConfig.runtime.js"></script>
+  <script src="/scripts/windijsShared.runtime.js"></script>
+  <script src="/scripts/windijsHelpers.runtime.js"></script>
+  <script src="/scripts/windijsCore.runtime.js"></script>
+  <script src="/scripts/windijsStyle.runtime.js"></script>
+  <script src="/scripts/windijsUtilities.runtime.js"></script>
+  <script src="/scripts/windijsVariants.runtime.js"></script>
+  <script src="/scripts/windijs.runtime.js"></script>
+  <title>Preview</title>
+</head>
+<body>
+  <style>
+    /** scrollbar style **/
+    *::-webkit-scrollbar {
+      background: transparent;
+      width: 13px;
+      height: 6px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      transition: background .2s ease-in-out;
+      background: transparent;
+    }
+
+    *::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    *:hover::-webkit-scrollbar-thumb {
+      background-color: #e4e4e7;
+    }
+    .dark *:hover::-webkit-scrollbar-thumb {
+      background-color: #424242;
+    }
+
+    html, body {
+      font-family: Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      width: 100%;
+      height: 100%;
+      overflow: overlay;
+    }
+
+    .dark body {
+      color: #E2E2E2;
+      background: #1e1e1e;
+    }
+
+    body {
+      padding: 12px;
+    }
+
+    .alert {
+      position: fixed;
+      bottom: 10%;
+      left: 5%;
+      width: 90%;
+      background-color: rgba(241, 70, 104, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 6px;
+    }
+  </style>
+  <div id="app">
+    Preview
+  </div>
+  <div class="alert"></div>
+  <script>
+    let styleEl, fixedStyleEl, content = "";
+    const app = document.getElementById('app')
+    var { Component, Fragment, cloneElement, createContext, createElement, createRef, hydrate, isValidElement, options, render, toChildArray } = window.preact;
+    var { useCallback, useContext, useDebugValue, useEffect, useErrorBoundary, useImperativeHandle, useLayoutEffect, useMemo, useReducer, useRef, useState } = window.preactHooks;
+
+    /* injectWindijsRuntimeStart */
+    var { Utility, animateHandler, backgroundGenericHandler, bind, buildBackdropFilter, buildBoxShadowColor, buildBoxShadowSize, buildColor, buildContainer, buildDivideColor, buildDivideOpacity, buildDivideStyle, buildDivideX, buildDivideY, buildFilter, buildFlexDirection, buildFlexStretch, buildFontSize, buildGradientDirection, buildGradientFrom, buildGradientTo, buildGradientVia, buildImageRendering, buildKeyframes, buildLinearGradient, buildNotHidden, buildPlaceholder, buildProperty, buildReverse, buildRingWidth, buildSpaceBetweenX, buildSpaceBetweenY, buildStatic, buildTransform, buildTransition, buildWritingMode, callHandler, colorHandler, configHandler, createDarkModeVariants, createMedia, createMotionVariants, createOrientationVariants, createScreenVariants, createUtility, createVariant, cssHandler, degHandler, divideXReverseHandler, divideYReverseHandler, fontFamilyHandler, fontSizeHandler, fractionHandler, genericHandler, guard, handleConfig, handler, isHandler, joinFilters, joinTransforms, media, meld, msHandler, numberHandler, prefixAnimation, prefixImageRendering, prefixKeyframes, prefixNotHidden, prefixPlaceholder, prefixWritingMode, prefixer, pxHandler, remHandler, setup, setupHandler, setupUtility, setupVariant, spaceBetweenXReverseHandler, spaceBetweenYReverseHandler, spacingHandler, use, useMedia, useVariant, variant } = windijsCore;
+    var { alignContentConfig, alignItemsConfig, alignSelfConfig, animationConfig, animationDelayConfig, animationDurationConfig, animationIterationCount, animationTimingFunction, aspectRatioConfig, backInDownKeyframes, backInLeftKeyframes, backInRightKeyframes, backInUpKeyframes, backOutDownKeyframes, backOutLeftKeyframes, backOutRightKeyframes, backOutUpKeyframes, backgroundAttachmentConfig, backgroundClipConfig, backgroundImageConfig, backgroundOriginConfig, backgroundPositionConfig, backgroundRepeatConfig, backgroundSizeConfig, blendModeConfig, blurConfig, borderRadiusConfig, borderStyleConfig, borderWidthConfig, bounceInDownKeyframes, bounceInKeyframes, bounceInLeftKeyframes, bounceInRightKeyframes, bounceInUpKeyframes, bounceKeyframes, bounceOutDownKeyframes, bounceOutKeyframes, bounceOutLeftKeyframes, bounceOutRightKeyframes, bounceOutUpKeyframes, boxDecorationBreakConfig, boxShadowConfig, brightnessConfig, bubbleKeyframes, contrastConfig, degreeConfig, dropShadowConfig, fadeInBottomLeftKeyframes, fadeInBottomRightKeyframes, fadeInDownBigKeyframes, fadeInDownKeyframes, fadeInKeyframes, fadeInLeftBigKeyframes, fadeInLeftKeyframes, fadeInRightBigKeyframes, fadeInRightKeyframes, fadeInTopLeftKeyframes, fadeInTopRightKeyframes, fadeInUpBigKeyframes, fadeInUpKeyframes, fadeOutBottomLeftKeyframes, fadeOutBottomRightKeyframes, fadeOutDownBigKeyframes, fadeOutDownKeyframes, fadeOutKeyframes, fadeOutLeftBigKeyframes, fadeOutLeftKeyframes, fadeOutRightBigKeyframes, fadeOutRightKeyframes, fadeOutTopLeftKeyframes, fadeOutTopRightKeyframes, fadeOutUpBigKeyframes, fadeOutUpKeyframes, flashKeyframes, flexDirectionConfig, flexGrowConfig, flexShrinkConfig, flexStretchConfig, flexWrapConfig, flipInXKeyframes, flipInYKeyframes, flipKeyframes, flipOutXKeyframes, flipOutYKeyframes, fontFamilyConfig, fontSizeConfig, fontStyleConfig, fontVariantNumericConfig, fontWeightConfig, fractionConfig, gradientConfig, gradientDirectionConfig, grayscaleConfig, gridAutoColumnsConfig, gridAutoFlowConfig, gridAutoRowsConfig, gridColumnConfig, gridColumnEndConfig, gridColumnStartConfig, gridRowConfig, gridRowEndConfig, gridRowStartConfig, gridTemplateColumnsConfig, gridTemplateRowsConfig, headShakeKeyframes, heartBeatKeyframes, heightConfig, hingeKeyframes, hueRotateConfig, hyphensConfig, imageRenderingConfig, insetConfig, invertConfig, jackInTheBoxKeyframes, jelloKeyframes, justifyContentConfig, justifyItemsConfig, justifySelfConfig, letterSpacingConfig, lightSpeedInLeftKeyframes, lightSpeedInRightKeyframes, lightSpeedOutLeftKeyframes, lightSpeedOutRightKeyframes, lineHeightConfig, listStylePositionConfig, listStyleTypeConfig, marginConfig, motions, negativeSpacingConfig, objectFitConfig, objectPositionConfig, opacityConfig, orientations, outlineOffsetConfig, overflowConfig, overscrollConfig, paddingConfig, perspectiveConfig, perspectiveOriginConfig, pingKeyframes, placeContentConfig, placeItemsConfig, placeSelfConfig, positionConfig, pulseKeyframes, ringOffsetConfig, rollInKeyframes, rollOutKeyframes, rotateConfig, rotateInDownLeftKeyframes, rotateInDownRightKeyframes, rotateInKeyframes, rotateInUpLeftKeyframes, rotateInUpRightKeyframes, rotateOutDownLeftKeyframes, rotateOutDownRightKeyframes, rotateOutKeyframes, rotateOutUpLeftKeyframes, rotateOutUpRightKeyframes, rubberBandKeyframes, saturateConfig, scaleConfig, screens, sepiaConfig, shakeXKeyframes, shakeYKeyframes, shockKeyframes, skewConfig, slideInDownKeyframes, slideInLeftKeyframes, slideInRightKeyframes, slideInUpKeyframes, slideOutDownKeyframes, slideOutLeftKeyframes, slideOutRightKeyframes, slideOutUpKeyframes, spaceBetweenConfig, spacingConfig, spinKeyframes, strokeLineCapConfig, strokeLineJoinConfig, swingKeyframes, tShirtScale, tabSizeConfig, tableDisplayConfig, tadaKeyframes, textAlignConfig, textDecorationOffsetConfig, textDecorationStyleConfig, textDecorationThicknessConfig, textDecorationTypeConfig, textIndentConfig, textShadowConfig, textStrokeWidthConfig, textTransformConfig, touchActionConfig, transformOriginConfig, transformStyleConfig, transitionDelayConfig, transitionDurationConfig, transitionPropertyConfig, transitionTimingFunctionConfig, translateConfig, userSelectConfig, verticalAlignConfig, whiteSpaceConfig, widthConfig, wobbleKeyframes, writingModeConfig, writingOrientationConfig, zIndexConfig, zoomInDownKeyframes, zoomInKeyframes, zoomInLeftKeyframes, zoomInRightKeyframes, zoomInUpKeyframes, zoomOutDownKeyframes, zoomOutKeyframes, zoomOutLeftKeyframes, zoomOutRightKeyframes, zoomOutUpKeyframes } = windijsConfig;
+    var { baseColors, bootstrapBlue, bootstrapColors, bootstrapCyan, bootstrapDark, bootstrapGray, bootstrapGreen, bootstrapIndigo, bootstrapLight, bootstrapOrange, bootstrapPink, bootstrapPurple, bootstrapRed, bootstrapShade500Colors, bootstrapTeal, bootstrapThemeBaseColors, bootstrapThemeColors, bootstrapYellow, bulmaBlack, bulmaBlue, bulmaColors, bulmaCyan, bulmaDark, bulmaGreen, bulmaGrey, bulmaLight, bulmaOrange, bulmaPurple, bulmaRed, bulmaThemeColors, bulmaTurquoise, bulmaWhite, bulmaYellow, iOSAccessibleColors, iOSAccessibleDarkColors, iOSAccessibleLightColors, iOSColors, iOSDarkColors, iOSLightColors, macOSAccessibleColors, macOSAccessibleDarkColors, macOSAccessibleLightColors, macOSAccessibleVibrantColors, macOSAccessibleVibrantDarkColors, macOSAccessibleVibrantLightColors, macOSColors, macOSDarkColors, macOSLightColors, macOSVibrantColors, macOSVibrantDarkColors, macOSVibrantLightColors, materialAmber, materialBlue, materialBlueGray, materialBrown, materialColors, materialCyan, materialDeepOrange, materialDeepPurple, materialGray, materialGreen, materialIndigo, materialLightBlue, materialLightGreen, materialLime, materialOrange, materialPink, materialPurple, materialRed, materialTeal, materialYellow, tailwindAmber, tailwindBlue, tailwindColors, tailwindCyan, tailwindEmerald, tailwindFuchsia, tailwindGray, tailwindGreen, tailwindIndigo, tailwindLime, tailwindNeutral, tailwindOrange, tailwindPink, tailwindPurple, tailwindRed, tailwindRose, tailwindSky, tailwindSlate, tailwindStone, tailwindTeal, tailwindViolet, tailwindYellow, tailwindZinc, watchOSColors, webBlack, webBlue, webBrown, webColors, webCyan, webGreen, webOrange, webPink, webPurple, webRed, webWhite, webYellow, windiColors, windiDark, windiLight } = windijsColors;
+    var { isNumber, isFraction, isSize, isVarName, roundUp, fracToPercent, commaJoin, parenWrap, camelToDash, dashToCamel, hash, entries, negative, range, fractions, spacings, degrees, scales, omit } = window.windijsShared;
+    var { ssrLoader, mergeObject, inline, defineConfig, createRules, buildDecl, buildRule, buildAtRule, buildRules, dedupRules, atomic, unify, RGB, RGBA, HSL, HWB, HSLA, digitToHEX, rgbToHEX, hexToRGB, sliceColor, rgbToHSL, hueToRGB, hslToRGB, hwbToRGB, adjustHue, adjustSaturation, adjustLightness, adjustRed, adjustGreen, adjustBlue, adjustAlpha, mixColor, subMixColor, Color, colorLuminance, getLightColor, getDarkColor, SymbolCSS, SymbolMeta, SymbolData, SymbolProxy, isStyleObject, getStyleVariants, getStyleProps, getStyleIdent, getFirstVar, applyVariant, useArrayHelper, bundle, prop, baseStyleTarget, baseStyleHandler, useStyleLoader, css, injectCSS, cssInJsLoader, CSSDecls, CSSAtRules, CSSClasses, CSSElements, HTMLTags, HTMLAttrs, $, escapeCSS, quote, attr, url, $var, path, hwb, dropShadow, counters, circle, ellipse, inset, polygon, matrix, matrix3d, perspective, rotate, rotate3d, rotateX, rotateY, rotateZ, scale, scale3d, scaleX, scaleY, scaleZ, skew, skewX, skewY, translate, translate3d, translateX, translateY, translateZ, steps, calc, clamp, max, min, abs, sign, blur, brightness, contrast, grayscale, invert, opacity, saturate, sepia, rgb, rgba, hsl, hsla, counter, env, minmax, repeat, hueRotate, fitContent, cubicBezier, linearGradient, radialGradient, conicGradient, repeatingConicGradient, repeatingLinearGradient, repeatingRadialGradient, filters, transforms, sub, add, mul, div, prec, resetMeta, getMeta, getUid, pushMetaProp, updateMetaType, alphaCount, alphaNamer, atomicNamer, hashNamer, useNamer, nameStyle, useProxy, isProxy, setProxy, GeneralCSSData, CSSProps, GeneralHTMLAttrs, CSSBlockBody, CSSDecl, CSSRule, CSSAtRule, CSSRules, CSSStyleSheet, CSSSelector, CSSObject, CSSMap, CSSPrefixer, NumberDict, MetaType, UtilityMeta, StyleObjectBase, StyleObject, SafeEntry, StyleEntry, Handler, UnknownDict, TargetCreator, StyleLoader, StyleNamer, VariantBuilder, NestedProxy, StyleProxy, StyleProxyHandler, ColorStyleObject, ColorStyleProxy, PickValue, CamelCase, BuildFunc, initial, inherit, unset, none, CSSInteger, CSSDimensionObject, CSSLengthType, CSSAngleType, CSSResolutionType, CSSTimeType, CSSPercentageType, CSSFlexType, CSSFrequencyType, CSSSideOrCorner, CSSLength, CSSPercentage, CSSAngle, CSSTime, CSSFlex, CSSFrequency, CSSResolution, CSSDimension, CSSDimensionType, CSSLengthPercentage, CSSAnglePercentage, CSSTimePercentage, CSSFrequencyPercentage, CSSColorHint, CSSLinearColorStopOrHint, CSSAngularColorStopOrHint, CSSPosition, CSSBorderRadiusItem, CSSBorderRadius, CSSAlphaValue, StyleProperties, CSSColors, CSSFillRule, CSSAttributeType, ColorProperties, CSSFunctions, ColorEntry, TransitionTimingFunctions, ColorFunctions, LengthEntry, PercentEntry, AngleEntry, TimeEntry, WideEntry, ImageFunctions, Config, DarkModeConfig, UtilitiesConfig, VariantsConfig, PositionEntry, RepeatStyleEntry, LineStyleEntry, LineWidthEntry, AlphaEntry, IntegerEntry, URLEntry, StringEntry, BoxEntry, GeometryBoxEntry, BasicShapeFunctions, Html5Tags, ElementSelectors, color, percent, deg, grad, rad, turn, s, ms, fr, $in, dpi, dpcm, dppx, x, px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = window.windijsHelpers;
+    var { style } = windijsStyle;
+    var { animate, aspect, auto, backdrop, bg, blend, blur, border, brightness, col, colors, container, contrast, decoration, delay, divide, dropShadow, duration, ease, fill, filter, flex, font, from, gap, grayscale, grid, h, hueRotate, hyphens, image, indent, invert, leading, list, m, mb, ml, mr, mt, mx, my, opacity, origin, outline, overflow, overscroll, p, pb, perspect, pl, placeholder, pr, preserve, pt, px, py, ring, rotate, rounded, row, saturate, scale, sepia, shadow, skew, space, sr, stroke, tab, text, to, tracking, transform, transition, translate, via, w, write } = windijsUtilities;
+    var { $dark, $default, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, active, after, all, before, checked, children, dark, disabled, empty, enabled, even, evenOfType, first, firstLetter, firstLine, firstOfType, focus, focusVisible, focusWithin, groupActive, groupFocus, groupHover, groupVisited, hover, indeterminate, invalid, landscape, last, lastOfType, lg, light, link, ltr, marker, md, motionReduce, motionSafe, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, portrait, readOnly, readWrite, required, root, rtl, selection, sibling, siblings, sm, svg, target, valid, visited, xl, xxl } = windijsVariants;
+    /* injectWindijsRuntimeEnd */
+
+    useStyleLoader(cssInJsLoader);
+    useArrayHelper();
+
+    window.addEventListener('message', (e) => {
+      const {
+        css,
+        script,
+        fixedCss,
+        classes,
+        html,
+      } = JSON.parse(e.data)
+
+      // console.log({
+      //   css,
+      //   fixedCss,
+      //   classes,
+      // })
+
+      if (css != null) {
+        if (styleEl)
+          document.body.removeChild(styleEl)
+        styleEl = document.createElement('style')
+        styleEl.innerHTML = css
+        document.body.appendChild(styleEl)
+      }
+
+      if (fixedCss != null) {
+        if (fixedStyleEl)
+          document.body.removeChild(fixedStyleEl)
+        fixedStyleEl = document.createElement('style')
+        fixedStyleEl.innerHTML = fixedCss
+        document.body.appendChild(fixedStyleEl)
+      }
+
+      if (classes != null)
+        app.className = classes
+      if (html != null)
+        app.innerHTML = html
+      if (script != null)
+        app.innerHTML = "";
+        const alert = document.body.getElementsByClassName("alert")[0];
+        try {
+          eval(script);
+          content = app.innerHTML;
+          alert.innerHTML = "";
+        } catch(e) {
+          alert.innerHTML = `<p>&nbsp;&nbsp;&nbsp;${e}&nbsp;&nbsp;&nbsp;</p>`;
+        }
+    }, false)
+  </script>
+</body>
+</html>
