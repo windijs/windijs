@@ -19,6 +19,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@/": `${resolve(__dirname, ".vitepress/components")}/`,
+      "$/": `${resolve(__dirname, ".vitepress")}/`,
     },
   },
   plugins: [
@@ -26,7 +27,15 @@ export default defineConfig({
     {
       name: "windi-markdown-transform",
       transform (code, id) {
-        if (id.endsWith(".md")) return windi.api.vuePreprocess(code);
+        if (id.endsWith(".md")) {
+          if (!(/<script.*>/.test(code))) {
+            // frontmatter
+            const match = /^\s*---[\s\S]*---\n/.exec(code);
+            if (match) return match[0] + windi.api.vuePreprocess(code.slice(match[0].length));
+          }
+
+          return windi.api.vuePreprocess(code);
+        }
         return code;
       },
     },
