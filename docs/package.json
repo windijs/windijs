@@ -10,15 +10,30 @@
   },
   "devDependencies": {
     "@algolia/client-search": "^4.14.2",
+    "@types/markdown-it": "^12.2.3",
+    "@windijs/core": "workspace:*",
+    "@windijs/helpers": "workspace:*",
     "@windijs/plugin-utils": "workspace:*",
+    "@windijs/style": "workspace:*",
     "@windijs/utilities": "workspace:*",
     "@windijs/variants": "workspace:*",
+    "markdown-it": "^13.0.1",
+    "monaco-editor": "^0.34.0",
+    "monaco-textmate": "^3.0.1",
+    "monaco-editor-textmate": "^3.0.0",
+    "monaco-vscode-textmate-theme-converter": "^0.1.7",
+    "onigasm": "^2.2.5",
+    "split.js": "^1.6.5",
     "vite": "^3.1.0",
     "vitepress": "1.0.0-alpha.13",
     "vue": "^3.2.37",
     "windijs": "workspace:*"
   },
-  "keywords": ["doc", "docs", "windijs"],
+  "keywords": [
+    "doc",
+    "docs",
+    "windijs"
+  ],
   "author": "Raven Satir",
   "license": "MIT"
 }
