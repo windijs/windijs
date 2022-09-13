@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # Configuration
 
 A guide to configuring and customizing your Windi JS experience.
@@ -95,7 +99,7 @@ export default defineConfig({
 })
 ```
 
-Learn more about the default theme and how to customize it in the [theme configuration guide](/customization/custom-theme).
+Learn more about the default theme and how to customize it in the [theme configuration guide](/customization/theme).
 
 ### Utilities
 
@@ -166,7 +170,7 @@ export default defineConfig({
 
 ```
 
-Learn more about the default utilities and how to create new utility in the [utility configuration guide](/customization/custom-utility).
+Learn more about the default utilities and how to create new utility in the [utility configuration guide](/customization/utility).
 
 ### Variants
 
@@ -188,7 +192,7 @@ export default defineConfig({
 })
 ```
 
-Learn more about the default variants and how to create new variant in the [variant configuration guide](/customization/custom-variant).
+Learn more about the default variants and how to create new variant in the [variant configuration guide](/customization/variant).
 
 ### DarkMode
 
@@ -251,10 +255,13 @@ export default defineConfig({
 
 The `important` option lets you control whether or not Windi’s utilities should be marked with `!important`. This can be really useful when using Windi JS with existing CSS that has high specificity selectors.
 
+:::warning
+The `important` config is not supported yet.
+:::
+
 To generate utilities as `!important`, set the `important` key in your configuration options to `true`:
 
 ```js
-// TODO: this configuration is not supported yet
 export default defineConfig({
   important: true,
 })
