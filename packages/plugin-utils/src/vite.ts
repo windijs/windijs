@@ -118,8 +118,8 @@ export function genProduction (options: ResolvedPluginOptions) {
   // copy es folder and replace changed config
   pkg.exports!["./proxy"] = {
     import: "./dist/proxy/es/index.js",
-    require: "./dist/proxy/utilities.js",
-    types: "./dist/proxy/utilities.d.ts",
+    require: "./dist/proxy/windijsUtilities.js",
+    types: "./dist/proxy/windijsUtilities.d.ts",
   };
   writeFileSync(join(utilitiesPath, "package.json"), JSON.stringify(pkg, undefined, 2) + "\n");
   const esdir = join(utilitiesPath, dirname(pkg.module!));
@@ -154,8 +154,8 @@ export function genProduction (options: ResolvedPluginOptions) {
   }
 
   writeFileSync(resolve(pesdir, "index.js"), code);
-  writeFileSync(resolve(pdir, "utilities.d.ts"), dts);
-  writeFileSync(resolve(pdir, "utilities.js"), genRequire(join(utilitiesPath, "dist/utilities.js"), config, env.configEntry));
+  writeFileSync(resolve(pdir, "windijsUtilities.d.ts"), dts);
+  writeFileSync(resolve(pdir, "windijsUtilities.js"), genRequire(join(utilitiesPath, "dist/windijsUtilities.js"), config, env.configEntry));
 
   dts = replaceEntry(dts);
 
@@ -174,7 +174,7 @@ export function genRuntime (options: ResolvedPluginOptions) {
   const config = options.config;
   const variants = genVariants(options);
 
-  let { mjs, dts } = readModule(resolve(env.nodeModulesEntry, env.utilities.lib), "dist/utilities.mjs"); // TODO: this entry is hard coded for now, maybe change to package exports later.
+  let { mjs, dts } = readModule(resolve(env.nodeModulesEntry, env.utilities.lib), "dist/windijsUtilities.mjs"); // TODO: this entry is hard coded for now, maybe change to package exports later.
 
   const defaults = ["colors", ...(mjs.match(/(?<=createUtility\(")[\w_$-]+/g) ?? [])];
   const items = defaults;
@@ -262,7 +262,7 @@ export default function vitePlugin (options: PluginOptions = {}) {
     const regex = /<script.*>/;
     const match = regex.exec(code);
     if (!match) { return `${"<script" + (setup ? " setup" : "") + ">"}\n${preprocess("")}</script>\n` + code; }
-    const start = regex.lastIndex + match[0].length;
+    const start = match.index + match[0].length;
     return code.slice(0, start) + "\n" + preprocess(code.slice(start));
   }
 

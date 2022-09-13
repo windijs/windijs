@@ -19,6 +19,8 @@ export type BaseEnv = {
 export type PluginEnv = Partial<Record<"config" | "utilities" | "variants", EntryOptions>> & BaseEnv;
 
 export type PluginOptions = {
+  // TODO: support function as alias
+  // TODO: new config skip for skiping entries
   alias?: {[k: string]: string},
   include?: string[],
   exclude?: string[],
