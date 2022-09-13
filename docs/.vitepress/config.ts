@@ -1,9 +1,16 @@
 import { defineConfig } from "vitepress";
+import { mdRenderFilename } from "./markdown";
 
 export default defineConfig({
-  title: 'Windi JS',
   lang: "en-US",
+  title: 'Windi JS',
+  cleanUrls: 'without-subfolders',
   description: 'The Utility-first CSS-In-JS Framework Powered by ES6 Proxy API and TypeScript.',
+  markdown: {
+    config(md) {
+      md.use(mdRenderFilename)
+    }
+  },
   themeConfig: {
     logo: "/logo.png",
     nav: [
@@ -66,24 +73,28 @@ export default defineConfig({
         collapsible: false,
         items: [
           {
-            text: "Custom Theme",
-            link: "/customization/custom-theme"
+            text: "Theme",
+            link: "/customization/theme"
           },
           {
-            text: "Custom Utility",
-            link: "/customization/custom-utility"
+            text: "Utility",
+            link: "/customization/utility"
           },
           {
-            text: "Custom Variant",
-            link: "/customization/custom-variant"
+            text: "Variant",
+            link: "/customization/variant"
           },
           {
-            text: "Custom Loader",
-            link: "/customization/custom-loader",
+            text: "Handler",
+            link: "/customization/handler"
           },
           {
-            text: "Custom Namer",
-            link: "/customization/custom-namer",
+            text: "Loader",
+            link: "/customization/loader",
+          },
+          {
+            text: "Namer",
+            link: "/customization/namer",
           },
           {
             text: "Plugins",
@@ -98,10 +109,6 @@ export default defineConfig({
           {
             text: "How Windi JS Works",
             link: "/posts/how-windijs-works"
-          },
-          {
-            text: "How Configuration Works",
-            link: "/posts/how-config-works"
           },
           {
             text: "Ways of Using Windi JS",
