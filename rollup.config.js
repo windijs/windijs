@@ -17,6 +17,7 @@ const buildOptions = pkg.buildOptions || {};
 const name = buildOptions.name || path.basename(packageDir);
 const sourceMap = !!process.env.SOURCE_MAP;
 const defaultFormats = ["cjs", "mjs"];
+const isProduction = process.env.NODE_ENV === "production";
 const inlineFormats = process.env.FORMATS && process.env.FORMATS.split(",");
 const packageFormats = inlineFormats || buildOptions.formats || defaultFormats;
 const resolve = (/** @type {string} */ p) => path.join(packageDir, p);
@@ -25,7 +26,7 @@ const resolve = (/** @type {string} */ p) => path.join(packageDir, p);
 let hasTSChecked = false;
 
 function createTS (format) {
-  const plugin = process.env.NODE_ENV === "production"
+  const plugin = isProduction
     ? ts({
       check: !hasTSChecked,
       tsconfig: "tsconfig.json",
@@ -72,6 +73,20 @@ function createOutput (format, name) {
       file: resolve(`dist/${name}.iife.js`),
       format: "iife",
     },
+    runtime: {
+      file: resolve(`dist/${name}.runtime.js`),
+      format: "iife",
+      globals: {
+        "@windijs/core": "windijsCore",
+        "@windijs/config": "windijsConfig",
+        "@windijs/colors": "windijsColors",
+        "@windijs/shared": "windijsShared",
+        "@windijs/style": "windijsStyle",
+        "@windijs/utilities": "windijsUtilities",
+        "@windijs/variants": "windijsVariants",
+        "@windijs/helpers": "windijsHelpers",
+      },
+    },
   }[format];
 }
 
@@ -95,11 +110,11 @@ function createConfig (format, name, entry = "index.ts", output = createOutput(f
   output.sourcemap = !!process.env.SOURCE_MAP;
   output.externalLiveBindings = false;
 
-  if (format === "iife") output.name = buildOptions.name;
+  if (format === "iife" || format === "runtime") output.name = buildOptions.name;
 
   const plugins = [createTS(format), commonjs(), nodeResolve()];
 
-  if (process.env.MINIFY) {
+  if (process.env.MINIFY || (format === "runtime" && isProduction)) {
     plugins.push(terser({
       module: format === "esm",
       compress: {
