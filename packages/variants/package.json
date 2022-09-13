@@ -2,9 +2,9 @@
   "name": "@windijs/variants",
   "version": "1.0.10",
   "description": "@windijs/variants",
-  "main": "dist/variants.js",
-  "module": "dist/variants.mjs",
-  "types": "dist/variants.d.ts",
+  "main": "dist/windijsVariants.js",
+  "module": "dist/windijsVariants.mjs",
+  "types": "dist/windijsVariants.d.ts",
   "files": [
     "dist",
     "CHANGELOG.md"
@@ -21,9 +21,17 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/variants.mjs",
-      "require": "./dist/variants.js"
+      "import": "./dist/windijsVariants.mjs",
+      "require": "./dist/windijsVariants.js"
     }
+  },
+  "buildOptions": {
+    "name": "windijsVariants",
+    "formats": [
+      "cjs",
+      "mjs",
+      "runtime"
+    ]
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

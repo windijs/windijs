@@ -2,9 +2,9 @@
   "name": "@windijs/style",
   "version": "1.1.4",
   "description": "@windijs/style",
-  "main": "dist/style.js",
-  "module": "dist/style.mjs",
-  "types": "dist/style.d.ts",
+  "main": "dist/windijsStyle.js",
+  "module": "dist/windijsStyle.mjs",
+  "types": "dist/windijsStyle.d.ts",
   "files": [
     "dist",
     "CHANGELOG.md"
@@ -19,14 +19,22 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/style.mjs",
-      "require": "./dist/style.js"
+      "import": "./dist/windijsStyle.mjs",
+      "require": "./dist/windijsStyle.js"
     }
   },
   "dependencies": {
     "@windijs/core": "1.1.4",
     "@windijs/helpers": "1.1.4",
     "@windijs/shared": "1.0.5"
+  },
+  "buildOptions": {
+    "name": "windijsStyle",
+    "formats": [
+      "cjs",
+      "mjs",
+      "runtime"
+    ]
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

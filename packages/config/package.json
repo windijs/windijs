@@ -2,9 +2,9 @@
   "name": "@windijs/config",
   "version": "1.0.9",
   "description": "@windijs/config",
-  "main": "dist/config.js",
-  "module": "dist/config.mjs",
-  "types": "dist/config.d.ts",
+  "main": "dist/windijsConfig.js",
+  "module": "dist/windijsConfig.mjs",
+  "types": "dist/windijsConfig.d.ts",
   "files": [
     "dist",
     "CHANGELOG.md"
@@ -19,9 +19,17 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/config.mjs",
-      "require": "./dist/config.js"
+      "import": "./dist/windijsConfig.mjs",
+      "require": "./dist/windijsConfig.js"
     }
+  },
+  "buildOptions": {
+    "name": "windijsConfig",
+    "formats": [
+      "cjs",
+      "mjs",
+      "runtime"
+    ]
   },
   "author": "Raven Satir",
   "license": "MIT",

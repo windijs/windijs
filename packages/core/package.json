@@ -2,9 +2,9 @@
   "name": "@windijs/core",
   "version": "1.1.4",
   "description": "@windijs/core",
-  "main": "dist/core.js",
-  "module": "dist/core.mjs",
-  "types": "dist/core.d.ts",
+  "main": "dist/windijsCore.js",
+  "module": "dist/windijsCore.mjs",
+  "types": "dist/windijsCore.d.ts",
   "files": [
     "dist",
     "CHANGELOG.md"
@@ -19,8 +19,8 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/core.mjs",
-      "require": "./dist/core.js"
+      "import": "./dist/windijsCore.mjs",
+      "require": "./dist/windijsCore.js"
     }
   },
   "author": "Raven Satir",
@@ -28,6 +28,14 @@
   "dependencies": {
     "@windijs/shared": "1.0.5",
     "@windijs/helpers": "1.1.4"
+  },
+  "buildOptions": {
+    "name": "windijsCore",
+    "formats": [
+      "cjs",
+      "mjs",
+      "runtime"
+    ]
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

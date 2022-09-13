@@ -2,9 +2,9 @@
   "name": "@windijs/helpers",
   "version": "1.1.4",
   "description": "@windijs/helpers",
-  "main": "dist/helpers.js",
-  "module": "dist/helpers.mjs",
-  "types": "dist/helpers.d.ts",
+  "main": "dist/windijsHelpers.js",
+  "module": "dist/windijsHelpers.mjs",
+  "types": "dist/windijsHelpers.d.ts",
   "files": [
     "dist",
     "CHANGELOG.md"
@@ -19,8 +19,8 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/helpers.mjs",
-      "require": "./dist/helpers.js"
+      "import": "./dist/windijsHelpers.mjs",
+      "require": "./dist/windijsHelpers.js"
     }
   },
   "author": "Raven Satir",
@@ -28,6 +28,14 @@
   "dependencies": {
     "@windijs/config": "1.0.9",
     "@windijs/shared": "1.0.5"
+  },
+  "buildOptions": {
+    "name": "windijsHelpers",
+    "formats": [
+      "cjs",
+      "mjs",
+      "runtime"
+    ]
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",

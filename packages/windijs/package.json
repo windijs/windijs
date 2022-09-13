@@ -25,6 +25,14 @@
       "require": "./dist/windijs.js"
     }
   },
+  "buildOptions": {
+    "name": "windijs",
+    "formats": [
+      "cjs",
+      "mjs",
+      "runtime"
+    ]
+  },
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "displayName": "windijs",

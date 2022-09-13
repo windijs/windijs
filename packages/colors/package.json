@@ -2,9 +2,9 @@
   "name": "@windijs/colors",
   "version": "1.0.3",
   "description": "@windijs/colors",
-  "main": "dist/colors.js",
-  "module": "dist/colors.mjs",
-  "types": "dist/colors.d.ts",
+  "main": "dist/windijsColors.js",
+  "module": "dist/windijsColors.mjs",
+  "types": "dist/windijsColors.d.ts",
   "files": [
     "dist",
     "CHANGELOG.md"
@@ -19,13 +19,21 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/colors.mjs",
-      "require": "./dist/colors.js"
+      "import": "./dist/windijsColors.mjs",
+      "require": "./dist/windijsColors.js"
     }
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "displayName": "@windijs/colors"
+  },
+  "buildOptions": {
+    "name": "windijsColors",
+    "formats": [
+      "cjs",
+      "mjs",
+      "runtime"
+    ]
   },
   "author": "Raven Satir",
   "license": "MIT"

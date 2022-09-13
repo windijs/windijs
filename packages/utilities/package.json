@@ -2,20 +2,20 @@
   "name": "@windijs/utilities",
   "version": "1.0.10",
   "description": "@windijs/utilities",
-  "main": "dist/utilities.js",
+  "main": "dist/windijsUtilities.js",
   "module": "dist/es/index.js",
-  "types": "dist/utilities.d.ts",
+  "types": "dist/windijsUtilities.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "import": "./dist/es/index.js",
-      "require": "./dist/utilities.js",
-      "types": "./dist/utilities.d.ts"
+      "require": "./dist/windijsUtilities.js",
+      "types": "./dist/windijsUtilities.d.ts"
     },
     "./proxy": {
       "import": "./dist/proxy/es/index.js",
-      "require": "./dist/proxy/utilities.js",
-      "types": "./dist/proxy/utilities.d.ts"
+      "require": "./dist/proxy/windijsUtilities.js",
+      "types": "./dist/proxy/windijsUtilities.d.ts"
     }
   },
   "sideEffects": false,
@@ -33,6 +33,14 @@
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "displayName": "@windijs/utilities"
+  },
+  "buildOptions": {
+    "name": "windijsUtilities",
+    "formats": [
+      "cjs",
+      "mjs",
+      "runtime"
+    ]
   },
   "author": "Raven Satir",
   "license": "MIT",
