@@ -15,6 +15,7 @@
     "types": ["vite/client", "node"],
     "paths": {
       "@/*": ["./.vitepress/components/*"],
+      "$/*": ["./.vitepress/*"],
     },
   },
   "include": [
