@@ -1,4 +1,7 @@
 {
+  "vueCompilerOptions": {
+    "experimentalDisableTemplateSupport": true
+  },
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
@@ -12,6 +15,7 @@
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "isolatedModules": true,
+    "jsx": "preserve",
     "types": ["vite/client", "node"],
     "paths": {
       "@/*": ["./.vitepress/components/*"],
@@ -22,6 +26,6 @@
     ".vitepress/**/*.ts",
     ".vitepress/**/*.d.ts",
     ".vitepress/**/*.vue",
-    "windi.config.ts"
+    "windi.config.ts",
   ]
 }
