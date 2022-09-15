@@ -7,8 +7,7 @@ import { FractionObject, Negative } from "./types";
  * @returns Boolean
  */
 export function isNumber(value: string) {
-  // @ts-ignore
-  return !isNaN(value);
+  return !isNaN(value as unknown as number);
 }
 
 export function isFraction(amount: string): boolean {
@@ -36,7 +35,7 @@ export function fracToPercent(amount: string): string | undefined {
   return roundUp((a / b) * 100, 6) + "%";
 }
 
-export const hasKey = <T extends object>(obj: T, k: keyof any): k is keyof T => k in obj;
+export const hasKey = <T extends Record<string, unknown>>(obj: T, k: string | number | symbol): k is keyof T => k in obj;
 
 export function commaJoin(...items: (string | number | undefined)[]) {
   return items.filter(i => i).join(", ");
@@ -67,7 +66,7 @@ export function indent(value: string, count = 2) {
   return " ".repeat(count) + value;
 }
 
-export const entries = <T extends object | Map<string, any>>(t: T) => (t instanceof Map ? t.entries() : Object.entries(t));
+export const entries = <T extends object | Map<string, unknown>>(t: T) => (t instanceof Map ? t.entries() : Object.entries(t));
 
 export function negative<T extends Record<string | number, string>>(t: T): Negative<T> {
   return Object.fromEntries(
@@ -93,7 +92,7 @@ export function fractions<S extends number, E extends number>(start: S, end: E) 
   ) as FractionObject<S, E>;
 }
 
-export function spacings<T extends Array<any>>(numbers: T) {
+export function spacings<T extends Array<number>>(numbers: T) {
   return Object.fromEntries(numbers.map(i => [i, i / 4 + (i === 0 ? "px" : "rem")])) as Record<T[number], string>;
 }
 

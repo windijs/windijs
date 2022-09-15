@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { range } from "@windijs/shared";
 
 import { prec } from "./math";

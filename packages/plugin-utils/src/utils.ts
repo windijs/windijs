@@ -111,10 +111,7 @@ export function resolveEntry(options: EntryOptions, defaultValue: Required<Entry
 
 export function resolveEnv(env: PluginEnv = {}): ResolvedPluginEnv {
   const resolvedEnv = DefaultOptions.env;
-  for (const [k, v] of Object.entries(env))
-    if (typeof v !== "object")
-      // @ts-ignore
-      resolvedEnv[k] = v;
+  for (const [k, v] of Object.entries(env)) if (typeof v !== "object") (resolvedEnv as Record<string, unknown>)[k] = v;
 
   if (resolvedEnv.configEntry) resolvedEnv.configEntry = resolve(resolvedEnv.rootEntry, resolvedEnv.configEntry);
 

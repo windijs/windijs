@@ -88,7 +88,7 @@ export function dtsUtilities(tmpl: string, config: Config): string {
         v
           ? prev.replace(
               new RegExp(`"\\$windi\\.config\\.${k}Config.proxy"`, "g"),
-              dtsConfig(theme.extend?.[k] ? mergeObject(v, theme.extend[k]!) : v, "StyleObject<{}>")
+              dtsConfig(theme.extend?.[k] ? mergeObject(v, theme.extend?.[k] ?? {}) : v, "StyleObject<{}>")
             )
           : prev,
       tmpl

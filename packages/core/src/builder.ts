@@ -250,7 +250,7 @@ export function buildLinearGradient(direction: CSSSideOrCorner | CSSAngle | stri
   return buildGradientDirection(
     typeof direction === "string" && direction.startsWith("to ") ? direction.slice(3) : direction.toString(),
     colorStops
-  )!;
+  ) as StyleObject;
 }
 
 export function buildGradientFrom(v: unknown) {

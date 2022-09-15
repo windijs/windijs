@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /** A monorepo manger, It's not used for now, leave for future reference */
 
 import chalk from "chalk";
@@ -5,7 +6,7 @@ import { spawn } from "child_process";
 import { prompt } from "enquirer";
 import fs from "fs";
 import path from "path";
-import semver from "semver";
+import semver, { ReleaseType } from "semver";
 
 /* eslint-disable no-console */
 import type { Pkg } from "./types";
@@ -196,14 +197,16 @@ function logChanges(added: string[], changed: string[], removed: string[]) {
 async function selectVersion(target: string) {
   const config = getConfig(target);
   const currentVersion = config.version;
-  const preId = (semver.prerelease(currentVersion) && semver.prerelease(currentVersion)[0]) || "beta";
+  const preId = (semver.prerelease(currentVersion) && semver.prerelease(currentVersion)?.[0]) || "beta";
   let targetVersion: string;
 
   const { release } = (await prompt({
     type: "select",
     name: "release",
     message: `Select new version for ${config.name}, current version ${chalk.green(config.version)}`,
-    choices: versionIncrements.map(i => `${i} (${semver.inc(currentVersion, i, preId)})`).concat([`leave as-is (${currentVersion})`, "custom..."]),
+    choices: versionIncrements
+      .map(i => `${i} (${semver.inc(currentVersion, i as ReleaseType, preId)})`)
+      .concat([`leave as-is (${currentVersion})`, "custom..."]),
   })) as { release: string };
 
   if (release === "custom...")
@@ -215,7 +218,7 @@ async function selectVersion(target: string) {
         initial: currentVersion,
       })) as { version: string }
     ).version;
-  else targetVersion = release.match(/\((.*)\)/)![1];
+  else targetVersion = release.match(/\((.*)\)/)?.[1] ?? "1.0.0";
 
   if (!semver.valid(targetVersion)) throw new Error(`invalid target version: ${targetVersion}`);
 
@@ -238,9 +241,8 @@ async function selectPackages(choices = [...targets], message = "Please select p
     type: "MultiSelect",
     name: "packages",
     message,
-    // @ts-ignore
     choices,
-  })) as { packages: string[] };
+  } as Parameters<typeof prompt>[0])) as { packages: string[] };
 
   return packages;
 }

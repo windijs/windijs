@@ -1,3 +1,5 @@
 // TODO: maybe using unocss matcher?
 
-export function match() {}
+export function match() {
+  return true;
+}

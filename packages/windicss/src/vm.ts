@@ -4,7 +4,7 @@ import { StyleObject } from "@windijs/helpers";
 
 type WindiExpression = Expression & { eval(ctx?: Value | undefined): StyleObject[] };
 
-export class Vm<T extends object = {}> extends Parser {
+export class Vm<T extends object = Record<string, unknown>> extends Parser {
   ctx: T;
 
   constructor(options?: ParserOptions, ctx?: T) {

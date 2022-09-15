@@ -1,4 +1,4 @@
-export type ThemeType = Record<string, any> | undefined;
+export type ThemeType = Record<string, unknown> | undefined;
 
 // TODO: document this
 export interface BaseTheme {

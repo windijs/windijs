@@ -59,16 +59,16 @@ function dimension<T>(type: string, suffix = type) {
 
 export const percent = dimension<CSSPercentage>("percent", "%");
 
-export const { deg, grad, rad, turn } = useProxy<object, Object>(k => dimension<CSSAngle>(k)) as CSSAngleProxy;
+export const { deg, grad, rad, turn } = useProxy<object, Record<string, unknown>>(k => dimension<CSSAngle>(k)) as CSSAngleProxy;
 
-export const { s, ms } = useProxy<object, Object>(k => dimension<CSSTime>(k)) as CSSTimeProxy;
+export const { s, ms } = useProxy<object, Record<string, unknown>>(k => dimension<CSSTime>(k)) as CSSTimeProxy;
 
 export const fr = dimension<CSSFlex>("fr");
 
 export const $in = dimension<CSSLength>("in");
 
-export const { dpi, dpcm, dppx, x } = useProxy<object, Object>(k => dimension<CSSResolution>(k)) as CSSResolutionProxy;
+export const { dpi, dpcm, dppx, x } = useProxy<object, Record<string, unknown>>(k => dimension<CSSResolution>(k)) as CSSResolutionProxy;
 
-export const { px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = useProxy<object, Object>(k =>
+export const { px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = useProxy<object, Record<string, unknown>>(k =>
   dimension<CSSLength>(k)
 ) as CSSLengthProxy;

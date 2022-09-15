@@ -34,7 +34,7 @@ export interface Config<T extends object = Theme> {
   utilities?: UtilitiesConfig;
   variants?: VariantsConfig;
   styleLoader?: StyleLoader;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function defineConfig(config: Config) {

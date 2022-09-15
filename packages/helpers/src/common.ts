@@ -21,7 +21,7 @@ export function getStyleVariants(style: StyleObject): string[] {
 
 export function getStyleProps(style: StyleObject): string[] {
   const { uid, children, props } = style[SymbolMeta];
-  if (Array.isArray(children)) style = children[0]!;
+  if (Array.isArray(children)) style = children[0];
   return [uid, ...(props ?? [])].filter(i => i != null) as string[];
 }
 
@@ -67,7 +67,7 @@ export function bundle(utilities: (StyleObject | StyleObject[])[]): CSSMap {
   const css: CSSMap = new Map();
   for (const utility of utilities.flat()) {
     vcss = applyVariant(utility);
-    for (const [k, v] of entries(vcss)) if (v != null) css.set(k, css.has(k) && typeof v === "object" ? Object.assign(css.get(k) as any, v) : v);
+    for (const [k, v] of entries(vcss)) if (v != null) css.set(k, css.has(k) && typeof v === "object" ? Object.assign(css.get(k) as object, v) : v);
   }
   return css;
 }

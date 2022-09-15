@@ -90,7 +90,7 @@ export type UtilityMeta = {
   props: string[];
   variants: string[];
 } & {
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export interface StyleObjectBase {

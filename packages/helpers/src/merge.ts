@@ -29,7 +29,10 @@ export type MergeObject<T, U> =
  */
 export function mergeObject<A extends object, B extends object>(a: A, b: B): MergeObject<A, B> {
   return Object.entries(b).reduce((o, [k, v]) => {
-    o[k as keyof A] = v && typeof v === "object" ? mergeObject((o[k as keyof A] = o[k as keyof A] || ((Array.isArray(v) ? [] : {}) as any)), v) : v;
+    o[k as keyof A] =
+      v && typeof v === "object"
+        ? mergeObject((o[k as keyof A] = o[k as keyof A] || ((Array.isArray(v) ? [] : {}) as never)) as unknown as object, v)
+        : v;
     return o;
   }, a) as MergeObject<A, B>;
 }

@@ -6,7 +6,7 @@ import type { Handler } from "@windijs/helpers";
 
 export class Utility<T extends object = {}> implements ProxyHandler<T> {
   uid: string;
-  plugins: ((p: string) => any)[];
+  plugins: ((p: string) => unknown)[];
 
   constructor(uid: string) {
     this.uid = uid;
@@ -23,7 +23,7 @@ export class Utility<T extends object = {}> implements ProxyHandler<T> {
     }
   }
 
-  set(target: T, prop: string | symbol, value: any) {
+  set(target: T, prop: string | symbol, value: unknown) {
     return Reflect.defineProperty(target, prop, { value, writable: true });
   }
 
@@ -41,7 +41,10 @@ export class Utility<T extends object = {}> implements ProxyHandler<T> {
   public init<F extends Function | object>(target: F): F & T;
   public init<F extends Function | object>(target: F, handler: ProxyHandler<F>): F & T;
   public init<F extends Function | object>(target?: F | T, handler?: ProxyHandler<F>) {
-    if (!target) target = function () {} as T;
+    if (!target)
+      target = function () {
+        return;
+      } as T;
     Object.defineProperty(target, SymbolProxy, { value: true });
     return new Proxy(target, handler || this);
   }

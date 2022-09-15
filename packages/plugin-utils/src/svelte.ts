@@ -11,6 +11,8 @@ export function w(node: HTMLElement, utilities: (StyleObject | StyleObject[])[])
       node.classList.add(...classes);
     },
 
-    destroy() {},
+    destroy() {
+      return;
+    },
   };
 }
