@@ -69,6 +69,7 @@ export default defineComponent({
         sandbox?.contentWindow?.postMessage(
           JSON.stringify({
             [key]: propRefs[key].value,
+            ...(key === "dark" ? { "script": propRefs.script.value } : {}) // force update when toggle darkMode
           }),
           location.origin,
         )
