@@ -89,7 +89,9 @@ test("color", () => {
   expect(color.unset).toEqual("unset");
   expect(color.var("bg-color")).toEqual("var(--bg-color)");
   expect(color.var("bg-color", "blue")).toEqual("var(--bg-color, blue)");
-  expect(color.calc("var(--colorPrimary-h) + 120), var(--colorPrimary-s), var(--colorPrimary-l))")).toEqual("calc(var(--colorPrimary-h) + 120), var(--colorPrimary-s), var(--colorPrimary-l)))");
+  expect(color.calc("var(--colorPrimary-h) + 120), var(--colorPrimary-s), var(--colorPrimary-l))")).toEqual(
+    "calc(var(--colorPrimary-h) + 120), var(--colorPrimary-s), var(--colorPrimary-l)))"
+  );
   expect(color.rgb(22, 22, 22)).toEqual("rgb(22, 22, 22)");
   expect(color.rgba(22, 22, 22, 0.1)).toEqual("rgba(22, 22, 22, 0.1)");
   expect(color.rgba(22, 22, 22, 0.1)).toEqual("rgba(22, 22, 22, 0.1)");

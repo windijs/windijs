@@ -1,4 +1,19 @@
-import { alignContentConfig, alignItemsConfig, alignSelfConfig, insetConfig, justifyContentConfig, justifyItemsConfig, justifySelfConfig, objectFitConfig, objectPositionConfig, placeContentConfig, placeItemsConfig, placeSelfConfig, tableDisplayConfig, zIndexConfig } from "@windijs/config";
+import {
+  alignContentConfig,
+  alignItemsConfig,
+  alignSelfConfig,
+  insetConfig,
+  justifyContentConfig,
+  justifyItemsConfig,
+  justifySelfConfig,
+  objectFitConfig,
+  objectPositionConfig,
+  placeContentConfig,
+  placeItemsConfig,
+  placeSelfConfig,
+  tableDisplayConfig,
+  zIndexConfig,
+} from "@windijs/config";
 import { bind, configHandler, createUtility } from "@windijs/core";
 import { css, prop } from "@windijs/helpers";
 

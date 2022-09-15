@@ -136,8 +136,12 @@ test("var", () => {
 });
 
 test("path", () => {
-  expect(path("M  20  240 L  20  80 L 160  80 L 160  20 L 280 100 L 160 180 L 160 120 L  60 120 L  60 240 Z")).toEqual('path("M  20  240 L  20  80 L 160  80 L 160  20 L 280 100 L 160 180 L 160 120 L  60 120 L  60 240 Z")');
-  expect(path("M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80", "evenodd")).toEqual('path(evenodd, "M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80")');
+  expect(path("M  20  240 L  20  80 L 160  80 L 160  20 L 280 100 L 160 180 L 160 120 L  60 120 L  60 240 Z")).toEqual(
+    'path("M  20  240 L  20  80 L 160  80 L 160  20 L 280 100 L 160 180 L 160 120 L  60 120 L  60 240 Z")'
+  );
+  expect(path("M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80", "evenodd")).toEqual(
+    'path(evenodd, "M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80")'
+  );
 });
 
 test("hwb", () => {
@@ -152,7 +156,9 @@ test("matrix", () => {
 });
 
 test("matrix3d", () => {
-  expect(matrix3d(-0.6, 1.34788, 0, 0, -2.34788, -0.6, 0, 0, 0, 0, 1, 0, 0, 0, 10, 1)).toEqual("matrix3d(-0.6, 1.34788, 0, 0, -2.34788, -0.6, 0, 0, 0, 0, 1, 0, 0, 0, 10, 1)");
+  expect(matrix3d(-0.6, 1.34788, 0, 0, -2.34788, -0.6, 0, 0, 0, 0, 1, 0, 0, 0, 10, 1)).toEqual(
+    "matrix3d(-0.6, 1.34788, 0, 0, -2.34788, -0.6, 0, 0, 0, 0, 1, 0, 0, 0, 10, 1)"
+  );
 });
 
 test("perspective", () => {
@@ -399,46 +405,82 @@ test("linearGradient", () => {
   expect(linearGradient(deg[0], color.blue, [color.green, percent[40]].join(" "), color.red)).toEqual("linear-gradient(0deg, blue, green 40%, red)");
   expect(linearGradient(deg[0], color.blue, [color.green, percent[40]], color.red)).toEqual("linear-gradient(0deg, blue, green 40%, red)");
   expect(linearGradient(turn[0.25], color.red, percent[10], color.blue)).toEqual("linear-gradient(0.25turn, red, 10%, blue)");
-  expect(linearGradient(deg[45], [color.red, 0, percent[50]], [color.blue, percent[50], percent[100]])).toEqual("linear-gradient(45deg, red 0 50%, blue 50% 100%)");
+  expect(linearGradient(deg[45], [color.red, 0, percent[50]], [color.blue, percent[50], percent[100]])).toEqual(
+    "linear-gradient(45deg, red 0 50%, blue 50% 100%)"
+  );
 });
 
 test("radialGradient", () => {
   expect(radialGradient("#e66465", "#9198e5")).toEqual("radial-gradient(#e66465, #9198e5)");
   expect(radialGradient("closest-side", "#3f87a6", "#ebf8e1", "#f69d3c")).toEqual("radial-gradient(closest-side, #3f87a6, #ebf8e1, #f69d3c)");
-  expect(radialGradient("circle at 100%", "#333", ["#333", percent[50]], ["#eee", percent[75]], ["#333", percent[75]])).toEqual("radial-gradient(circle at 100%, #333, #333 50%, #eee 75%, #333 75%)");
+  expect(radialGradient("circle at 100%", "#333", ["#333", percent[50]], ["#eee", percent[75]], ["#333", percent[75]])).toEqual(
+    "radial-gradient(circle at 100%, #333, #333 50%, #eee 75%, #333 75%)"
+  );
   expect(radialGradient("ellipse at top", "#e66465", "transparent")).toEqual("radial-gradient(ellipse at top, #e66465, transparent)");
 });
 
 test("conicGradient", () => {
   expect(conicGradient(color.red, color.orange, color.yellow, color.green, color.blue)).toEqual("conic-gradient(red, orange, yellow, green, blue)");
-  expect(conicGradient("from 0.25turn at 50% 30%", "#f69d3c", deg[10], "#3f87a6", deg[350], "#ebf8e1")).toEqual("conic-gradient(from 0.25turn at 50% 30%, #f69d3c, 10deg, #3f87a6, 350deg, #ebf8e1)");
-  expect(conicGradient([color.red, deg[6]], [color.orange, deg[6], deg[18]], [color.yellow, deg[18], deg[45]], [color.green, deg[45], deg[110]], [color.blue, deg[110], deg[200]], [color.purple, deg[200]])).toEqual(
-    "conic-gradient(red 6deg, orange 6deg 18deg, yellow 18deg 45deg, green 45deg 110deg, blue 110deg 200deg, purple 200deg)"
+  expect(conicGradient("from 0.25turn at 50% 30%", "#f69d3c", deg[10], "#3f87a6", deg[350], "#ebf8e1")).toEqual(
+    "conic-gradient(from 0.25turn at 50% 30%, #f69d3c, 10deg, #3f87a6, 350deg, #ebf8e1)"
   );
+  expect(
+    conicGradient(
+      [color.red, deg[6]],
+      [color.orange, deg[6], deg[18]],
+      [color.yellow, deg[18], deg[45]],
+      [color.green, deg[45], deg[110]],
+      [color.blue, deg[110], deg[200]],
+      [color.purple, deg[200]]
+    )
+  ).toEqual("conic-gradient(red 6deg, orange 6deg 18deg, yellow 18deg 45deg, green 45deg 110deg, blue 110deg 200deg, purple 200deg)");
 });
 
 test("repeatingLinearGradient", () => {
   expect(repeatingLinearGradient(deg[45], color.blue, color.red)).toEqual("repeating-linear-gradient(45deg, blue, red)");
   expect(repeatingLinearGradient("to left top", color.blue, color.red)).toEqual("repeating-linear-gradient(to left top, blue, red)");
-  expect(repeatingLinearGradient(deg[0], color.blue, [color.green, percent[40]].join(" "), color.red)).toEqual("repeating-linear-gradient(0deg, blue, green 40%, red)");
-  expect(repeatingLinearGradient(deg[0], color.blue, [color.green, percent[40]], color.red)).toEqual("repeating-linear-gradient(0deg, blue, green 40%, red)");
+  expect(repeatingLinearGradient(deg[0], color.blue, [color.green, percent[40]].join(" "), color.red)).toEqual(
+    "repeating-linear-gradient(0deg, blue, green 40%, red)"
+  );
+  expect(repeatingLinearGradient(deg[0], color.blue, [color.green, percent[40]], color.red)).toEqual(
+    "repeating-linear-gradient(0deg, blue, green 40%, red)"
+  );
   expect(repeatingLinearGradient(turn[0.25], color.red, percent[10], color.blue)).toEqual("repeating-linear-gradient(0.25turn, red, 10%, blue)");
-  expect(repeatingLinearGradient(deg[45], [color.red, 0, percent[50]], [color.blue, percent[50], percent[100]])).toEqual("repeating-linear-gradient(45deg, red 0 50%, blue 50% 100%)");
+  expect(repeatingLinearGradient(deg[45], [color.red, 0, percent[50]], [color.blue, percent[50], percent[100]])).toEqual(
+    "repeating-linear-gradient(45deg, red 0 50%, blue 50% 100%)"
+  );
 });
 
 test("repeatingRadialGradient", () => {
   expect(repeatingRadialGradient("#e66465", "#9198e5")).toEqual("repeating-radial-gradient(#e66465, #9198e5)");
-  expect(repeatingRadialGradient("closest-side", "#3f87a6", "#ebf8e1", "#f69d3c")).toEqual("repeating-radial-gradient(closest-side, #3f87a6, #ebf8e1, #f69d3c)");
-  expect(repeatingRadialGradient("circle at 100%", "#333", ["#333", percent[50]], ["#eee", percent[75]], ["#333", percent[75]])).toEqual("repeating-radial-gradient(circle at 100%, #333, #333 50%, #eee 75%, #333 75%)");
-  expect(repeatingRadialGradient("ellipse at top", "#e66465", "transparent")).toEqual("repeating-radial-gradient(ellipse at top, #e66465, transparent)");
+  expect(repeatingRadialGradient("closest-side", "#3f87a6", "#ebf8e1", "#f69d3c")).toEqual(
+    "repeating-radial-gradient(closest-side, #3f87a6, #ebf8e1, #f69d3c)"
+  );
+  expect(repeatingRadialGradient("circle at 100%", "#333", ["#333", percent[50]], ["#eee", percent[75]], ["#333", percent[75]])).toEqual(
+    "repeating-radial-gradient(circle at 100%, #333, #333 50%, #eee 75%, #333 75%)"
+  );
+  expect(repeatingRadialGradient("ellipse at top", "#e66465", "transparent")).toEqual(
+    "repeating-radial-gradient(ellipse at top, #e66465, transparent)"
+  );
 });
 
 test("repeatingConicGradient", () => {
-  expect(repeatingConicGradient(color.red, color.orange, color.yellow, color.green, color.blue)).toEqual("repeating-conic-gradient(red, orange, yellow, green, blue)");
-  expect(repeatingConicGradient("from 0.25turn at 50% 30%", "#f69d3c", deg[10], "#3f87a6", deg[350], "#ebf8e1")).toEqual("repeating-conic-gradient(from 0.25turn at 50% 30%, #f69d3c, 10deg, #3f87a6, 350deg, #ebf8e1)");
-  expect(repeatingConicGradient([color.red, deg[6]], [color.orange, deg[6], deg[18]], [color.yellow, deg[18], deg[45]], [color.green, deg[45], deg[110]], [color.blue, deg[110], deg[200]], [color.purple, deg[200]])).toEqual(
-    "repeating-conic-gradient(red 6deg, orange 6deg 18deg, yellow 18deg 45deg, green 45deg 110deg, blue 110deg 200deg, purple 200deg)"
+  expect(repeatingConicGradient(color.red, color.orange, color.yellow, color.green, color.blue)).toEqual(
+    "repeating-conic-gradient(red, orange, yellow, green, blue)"
   );
+  expect(repeatingConicGradient("from 0.25turn at 50% 30%", "#f69d3c", deg[10], "#3f87a6", deg[350], "#ebf8e1")).toEqual(
+    "repeating-conic-gradient(from 0.25turn at 50% 30%, #f69d3c, 10deg, #3f87a6, 350deg, #ebf8e1)"
+  );
+  expect(
+    repeatingConicGradient(
+      [color.red, deg[6]],
+      [color.orange, deg[6], deg[18]],
+      [color.yellow, deg[18], deg[45]],
+      [color.green, deg[45], deg[110]],
+      [color.blue, deg[110], deg[200]],
+      [color.purple, deg[200]]
+    )
+  ).toEqual("repeating-conic-gradient(red 6deg, orange 6deg 18deg, yellow 18deg 45deg, green 45deg 110deg, blue 110deg 200deg, purple 200deg)");
 });
 
 test("fitContent", () => {
@@ -489,8 +531,25 @@ test("inset", () => {
 });
 
 test("polygon", () => {
-  expect(polygon("evenodd", [percent[50], percent[2.4]], [percent[34.5], percent[33.8]], [percent[0], percent[38.8]], [percent[25], percent[63.1]], [percent[19.1], percent[97.6]])).toEqual("polygon(evenodd, 50% 2.4%, 34.5% 33.8%, 0% 38.8%, 25% 63.1%, 19.1% 97.6%)");
-  expect(polygon([percent[50], percent[2.4]], [percent[34.5], percent[33.8]], [percent[0], percent[38.8]], [percent[25], percent[63.1]], [percent[19.1], percent[97.6]])).toEqual("polygon(50% 2.4%, 34.5% 33.8%, 0% 38.8%, 25% 63.1%, 19.1% 97.6%)");
+  expect(
+    polygon(
+      "evenodd",
+      [percent[50], percent[2.4]],
+      [percent[34.5], percent[33.8]],
+      [percent[0], percent[38.8]],
+      [percent[25], percent[63.1]],
+      [percent[19.1], percent[97.6]]
+    )
+  ).toEqual("polygon(evenodd, 50% 2.4%, 34.5% 33.8%, 0% 38.8%, 25% 63.1%, 19.1% 97.6%)");
+  expect(
+    polygon(
+      [percent[50], percent[2.4]],
+      [percent[34.5], percent[33.8]],
+      [percent[0], percent[38.8]],
+      [percent[25], percent[63.1]],
+      [percent[19.1], percent[97.6]]
+    )
+  ).toEqual("polygon(50% 2.4%, 34.5% 33.8%, 0% 38.8%, 25% 63.1%, 19.1% 97.6%)");
 });
 
 test("env", () => {

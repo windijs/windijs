@@ -1,14 +1,13 @@
+import { LitElement } from "lit";
+import type { StyleObject } from "windijs";
 import { atomic, nameStyle } from "windijs";
 
-import { LitElement } from 'lit'
-import type { StyleObject } from "windijs";
-
 export default class WindiElement extends LitElement {
-  private $buildedClasses: string[]
+  private $buildedClasses: string[];
 
   constructor() {
-    super()
-    this.$buildedClasses = []
+    super();
+    this.$buildedClasses = [];
   }
 
   /**
@@ -19,7 +18,7 @@ export default class WindiElement extends LitElement {
   apply(utilities: (string | StyleObject | StyleObject[])[]): string;
   apply(...utilities: (string | StyleObject | StyleObject[])[]): string;
   apply(...args: (string | StyleObject | (string | StyleObject | StyleObject[])[])[]): string {
-    if (!this.shadowRoot) throw new Error("ShadowRoot not Found, maybe its not a LitElement?")
+    if (!this.shadowRoot) throw new Error("ShadowRoot not Found, maybe its not a LitElement?");
 
     let name;
 
@@ -28,14 +27,14 @@ export default class WindiElement extends LitElement {
 
     for (const utility of args.flat(2)) {
       if (typeof utility === "string") {
-        names.push(utility)
+        names.push(utility);
       } else {
         name = nameStyle(utility);
         names.push(name);
 
         if (!this.$buildedClasses.includes(name)) {
-          this.$buildedClasses.push(name)
-          notBuilded.push(utility)
+          this.$buildedClasses.push(name);
+          notBuilded.push(utility);
         }
       }
     }
@@ -44,7 +43,7 @@ export default class WindiElement extends LitElement {
       let el = this.shadowRoot.getElementById("windijs");
       const css = atomic(notBuilded);
       if (el) {
-        el.textContent += "\n" + css
+        el.textContent += "\n" + css;
       } else {
         el = document.createElement("style");
         el.id = "windijs";
@@ -53,6 +52,6 @@ export default class WindiElement extends LitElement {
       }
     }
 
-    return names.join(" ")
+    return names.join(" ");
   }
 }

@@ -46,7 +46,9 @@ test("atomic", () => {
 });
 
 test("atomic with nested variant", () => {
-  expect(atomic(bg.blue[500], text.lg, hover(bg.yellow[300]), sm(border, rounded, bg.blue[300], hover(bg.blue[600]), dark(hover(bg.blue[800]))))).toMatchSnapshot();
+  expect(
+    atomic(bg.blue[500], text.lg, hover(bg.yellow[300]), sm(border, rounded, bg.blue[300], hover(bg.blue[600]), dark(hover(bg.blue[800]))))
+  ).toMatchSnapshot();
 });
 
 test("atomic with atomicNamer", () => {
@@ -58,7 +60,9 @@ test("atomic with atomicNamer", () => {
 test("atomic with nested variant and atomicNamer", () => {
   useNamer(atomicNamer);
 
-  expect(atomic(bg.blue[500], text.lg, hover(bg.yellow[300]), sm(border, rounded, bg.blue[300], hover(bg.blue[600]), dark(hover(bg.blue[800]))))).toMatchSnapshot();
+  expect(
+    atomic(bg.blue[500], text.lg, hover(bg.yellow[300]), sm(border, rounded, bg.blue[300], hover(bg.blue[600]), dark(hover(bg.blue[800]))))
+  ).toMatchSnapshot();
 });
 
 test("atomic with hashNamer", () => {
