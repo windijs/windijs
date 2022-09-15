@@ -6,24 +6,20 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: [
-    "standard",
-  ],
+  extends: ["eslint:recommended", "prettier"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: [
-    "@typescript-eslint",
-  ],
+  plugins: ["@typescript-eslint"],
   rules: {
     "arrow-spacing": 2,
     camelcase: 1,
-    "comma-dangle": [2, "always-multiline"],
+    "comma-dangle": [2, "only-multiline"],
     "comma-spacing": 2,
     eqeqeq: [2, "allow-null"],
-    indent: [2, 2],
+    curly: [2, "multi"],
     "no-console": 1,
     "no-constant-condition": 1,
     "no-template-curly-in-string": 0,
@@ -37,7 +33,7 @@ module.exports = {
     "no-use-before-define": 0,
     "@typescript-eslint/no-use-before-define": 1,
     "object-curly-spacing": [2, "always"],
-    quotes: [2, "double"],
+    quotes: [2, "double", { avoidEscape: true }],
     semi: [2, "always"],
   },
 };

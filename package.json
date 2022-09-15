@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write --parser typescript \"packages/**/*.ts?(x)\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:update": "jest --updateSnapshot",
@@ -62,6 +63,7 @@
     "chokidar": "^3.5.3",
     "enquirer": "^2.3.6",
     "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
@@ -70,6 +72,7 @@
     "jest": "^28.1.2",
     "lunr": "^2.3.9",
     "minimist": "^1.2.6",
+    "prettier": "^2.7.1",
     "rollup": "^2.77.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.33.0",
