@@ -37,7 +37,8 @@ const dtsConfig: CompilerOptions = {
 
 function buildDts (target: string) {
   const pkgDir = `packages/${target}`;
-  const entries = [{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${target}.d.ts`) }];
+  const pkg = require(`${path.resolve(pkgDir)}/package.json`);
+  const entries = [{ input: path.join(pkgDir, "src/index.ts"), output: path.join(pkgDir, `dist/${pkg.buildOptions?.name ?? target}.d.ts`) }];
   if (target === "utilities") {
     return bundleDts(entries, dtsConfig, {
       afterDeclarations: [importTypesTransformer, omitTransformer, intersectionTransformer, injectTransformer, updateVariableType({
