@@ -1,10 +1,21 @@
-import { Bundle, Node, SourceFile, TransformerFactory, TypeNode, factory, isIdentifier, isVariableDeclaration, visitEachChild, visitNode } from "typescript";
+import {
+  Bundle,
+  Node,
+  SourceFile,
+  TransformerFactory,
+  TypeNode,
+  factory,
+  isIdentifier,
+  isVariableDeclaration,
+  visitEachChild,
+  visitNode,
+} from "typescript";
 
 /**
  * Typescript Transform Plugin.
  * Transform variable type to another type
  */
-export function updateVariableType (dict: Record<string, (node: TypeNode) => TypeNode>) {
+export function updateVariableType(dict: Record<string, (node: TypeNode) => TypeNode>) {
   const constsTransformer: TransformerFactory<Bundle | SourceFile> = context => {
     return sourceFile => {
       const visitor = (node: Node): Node => {
