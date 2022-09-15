@@ -1,6 +1,8 @@
 // Users who only use Preact for SSR might not specify "dom" in their lib in tsconfig.json
 /// <reference lib="dom" />
 
+import type { StyleObject } from "@windijs/helpers";
+
 export as namespace preact;
 
 export import JSX = JSXInternal;
@@ -934,6 +936,8 @@ export namespace JSXInternal {
 		onTransitionEndCapture?: TransitionEventHandler<Target>;
 	}
 
+	type StyleArray = (string | StyleObject | StyleArray)[];
+
 	export interface HTMLAttributes<RefType extends EventTarget = EventTarget>
 		extends ClassAttributes<RefType>,
 			DOMAttributes<RefType> {
@@ -962,7 +966,7 @@ export namespace JSXInternal {
 		challenge?: string;
 		checked?: boolean;
 		cite?: string;
-		class?: string | unknown[];
+		class?: string | StyleObject | StyleArray;
 		className?: string;
 		cols?: number;
 		colSpan?: number;
