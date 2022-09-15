@@ -1,35 +1,40 @@
-import * as funcs from "../packages/helpers/src/funcs";
+import { writeFileSync } from "fs";
 
 /* eslint-disable no-console */
-import { EntryStatus, IAtDirectiveData, IPropertyData, IPseudoClassData, IPseudoElementData, IReference, IValueData, cssData } from "../data/cssData";
-import { IAttributeData, ITagData, htmlData } from "../data/htmlData";
-
-import { writeFileSync } from "fs";
+import { cssData, EntryStatus, IAtDirectiveData, IPropertyData, IPseudoClassData, IPseudoElementData, IReference, IValueData } from "../data/cssData";
+import { htmlData, IAttributeData, ITagData } from "../data/htmlData";
+import * as funcs from "../packages/helpers/src/funcs";
 
 const codes: string[] = [];
 const funcDepends: string[] = [];
 
-function dashToCamel (str: string) {
+function dashToCamel(str: string) {
   if (/^-(webkit|ms|moz|o)-/.test(str) || str === "scrollbar-3dlight-color") return JSON.stringify(str);
-  return str.replace(/(-[a-z])/g, function ($1) { return $1.toUpperCase().replace("-", ""); });
+  return str.replace(/(-[a-z])/g, function ($1) {
+    return $1.toUpperCase().replace("-", "");
+  });
 }
 
-function indent (str: string, count = 2) {
+function indent(str: string, count = 2) {
   return " ".repeat(count) + str;
 }
 
-function escape (str: string) {
+function escape(str: string) {
   return str.replace(/</g, "\\<").replace(/@/g, "\\@").replace(/\{/g, "\\{").replace(/\}/g, "\\}");
 }
 
-function doc (str: string[], indentCount = 0): string | undefined {
+function doc(str: string[], indentCount = 0): string | undefined {
   if (str.length === 0) return undefined;
   str = str.map(i => i.split("\n")).flat();
   if (str.length === 1) return indent("/** " + escape(str[0]) + " */", indentCount);
-  return [indent("/**", indentCount), ...str.map(i => i === "" ? indent(" *", indentCount) : indent(" * " + escape(i).trim(), indentCount)), indent(" */", indentCount)].join("\n");
+  return [
+    indent("/**", indentCount),
+    ...str.map(i => (i === "" ? indent(" *", indentCount) : indent(" * " + escape(i).trim(), indentCount))),
+    indent(" */", indentCount),
+  ].join("\n");
 }
 
-function genBrower (browser: string): string | undefined {
+function genBrower(browser: string): string | undefined {
   const replace = (from: string, to: string) => browser.replace(from, browser === from ? to : to + " ");
   if (browser[0] === "I") return replace("IE", "IE");
   if (browser[0] === "E") return replace("E", "Edge");
@@ -39,35 +44,35 @@ function genBrower (browser: string): string | undefined {
   if (browser[0] === "O") return replace("O", "Opera");
 }
 
-function genBrowers (browsers: string[] | undefined): string | undefined {
+function genBrowers(browsers: string[] | undefined): string | undefined {
   if (!browsers) return undefined;
   browsers = browsers.map(i => genBrower(i)).filter(i => i != null) as string[];
   if (browsers.length === 0) return undefined;
   return "(" + browsers.join(", ") + ")";
 }
 
-function genSyntax (syntax: string | undefined) {
+function genSyntax(syntax: string | undefined) {
   if (!syntax) return undefined;
   return "Syntax: " + syntax;
 }
 
-function genReference (ref: IReference) {
+function genReference(ref: IReference) {
   return `[${ref.name}](${ref.url})`;
 }
 
-function genReferences (refs: IReference[] | undefined): string[] | undefined {
+function genReferences(refs: IReference[] | undefined): string[] | undefined {
   if (!refs) return undefined;
   return refs.map(i => genReference(i));
 }
 
-function genStatus (status: EntryStatus | undefined): string | undefined {
+function genStatus(status: EntryStatus | undefined): string | undefined {
   if (status === "nonstandard") return "🚨️ Property is nonstandard. Avoid using it.";
   if (status === "experimental") return "⚠️ Property is experimental. Be cautious when using it.️";
   if (status === "obsolete") return "🚨️️️ Property is obsolete. Avoid using it.";
   return undefined;
 }
 
-function genPropertyDoc (prop: IPropertyData, indent = 0): string | undefined {
+function genPropertyDoc(prop: IPropertyData, indent = 0): string | undefined {
   const docs: (string | undefined)[] = [
     genStatus(prop.status),
     prop.description,
@@ -76,10 +81,17 @@ function genPropertyDoc (prop: IPropertyData, indent = 0): string | undefined {
     ...(genReferences(prop.references) ?? []),
   ];
 
-  return doc(docs.filter(i => i != null).map(i => [i, ""]).flat().slice(0, -1) as string[], indent);
+  return doc(
+    docs
+      .filter(i => i != null)
+      .map(i => [i, ""])
+      .flat()
+      .slice(0, -1) as string[],
+    indent
+  );
 }
 
-function genCSSDoc (value: IValueData | IAtDirectiveData | IPseudoClassData | IPseudoElementData, indent = 0): string | undefined {
+function genCSSDoc(value: IValueData | IAtDirectiveData | IPseudoClassData | IPseudoElementData, indent = 0): string | undefined {
   const docs: (string | undefined)[] = [
     genStatus(value.status),
     value.description,
@@ -87,19 +99,33 @@ function genCSSDoc (value: IValueData | IAtDirectiveData | IPseudoClassData | IP
     ...(genReferences(value.references) ?? []),
   ];
 
-  return doc(docs.filter(i => i != null).map(i => [i, ""]).flat().slice(0, -1) as string[], indent);
+  return doc(
+    docs
+      .filter(i => i != null)
+      .map(i => [i, ""])
+      .flat()
+      .slice(0, -1) as string[],
+    indent
+  );
 }
 
-function genHTMLDoc (value: ITagData | IAttributeData, indent = 0): string | undefined {
+function genHTMLDoc(value: ITagData | IAttributeData, indent = 0): string | undefined {
   const docs: (string | undefined)[] = [
     typeof value.description === "string" ? value.description : value.description?.value,
     ...(genReferences(value.references) ?? []),
   ];
 
-  return doc(docs.filter(i => i != null).map(i => [i, ""]).flat().slice(0, -1) as string[], indent);
+  return doc(
+    docs
+      .filter(i => i != null)
+      .map(i => [i, ""])
+      .flat()
+      .slice(0, -1) as string[],
+    indent
+  );
 }
 
-function genEndTypes (prop: IPropertyData, header?: string): string {
+function genEndTypes(prop: IPropertyData, header?: string): string {
   const ends = header ? [] : ["}"];
 
   const testRestrict = (name: string, syntax = "<" + name + ">") => {
@@ -138,8 +164,30 @@ function genEndTypes (prop: IPropertyData, header?: string): string {
   return ends.join(" & ");
 }
 
-function genCSSDecls () {
-  const depends = ["StyleObject", "ColorEntry", "LengthEntry", "PercentEntry", "AlphaEntry", "IntegerEntry", "URLEntry", "StringEntry", "AngleEntry", "TimeEntry", "WideEntry", "PositionEntry", "RepeatStyleEntry", "LineStyleEntry", "LineWidthEntry", "BoxEntry", "GeometryBoxEntry", "ColorFunctions", "ImageFunctions", "BasicShapeFunctions", "TransitionTimingFunctions"];
+function genCSSDecls() {
+  const depends = [
+    "StyleObject",
+    "ColorEntry",
+    "LengthEntry",
+    "PercentEntry",
+    "AlphaEntry",
+    "IntegerEntry",
+    "URLEntry",
+    "StringEntry",
+    "AngleEntry",
+    "TimeEntry",
+    "WideEntry",
+    "PositionEntry",
+    "RepeatStyleEntry",
+    "LineStyleEntry",
+    "LineWidthEntry",
+    "BoxEntry",
+    "GeometryBoxEntry",
+    "ColorFunctions",
+    "ImageFunctions",
+    "BasicShapeFunctions",
+    "TransitionTimingFunctions",
+  ];
   codes.push(`import { ${depends.sort().join(", ")} } from "./types";`);
   codes.push("");
   codes.push("export interface CSSDecls {");
@@ -151,9 +199,8 @@ function genCSSDecls () {
     values = p.values ?? [];
     d = genPropertyDoc(p, 2);
     if (d) codes.push(d);
-    if (values.length === 0) {
-      header = indent(dashToCamel(p.name) + ": ", 0);
-    } else {
+    if (values.length === 0) header = indent(dashToCamel(p.name) + ": ", 0);
+    else {
       codes.push(indent(dashToCamel(p.name) + ": {"));
       for (const v of values) {
         isFunc = false;
@@ -188,7 +235,7 @@ function genCSSDecls () {
   codes.push("");
 }
 
-function genCSSAtRules () {
+function genCSSAtRules() {
   let doc;
 
   codes.push("export interface CSSAtRules<T> {");
@@ -203,7 +250,7 @@ function genCSSAtRules () {
   codes.push("");
 }
 
-function genCSSClasses () {
+function genCSSClasses() {
   let doc;
 
   codes.push("export interface CSSClasses<T> {");
@@ -218,7 +265,7 @@ function genCSSClasses () {
   codes.push("");
 }
 
-function genCSSElements () {
+function genCSSElements() {
   let doc;
 
   codes.push("export interface CSSElements<T> {");
@@ -233,7 +280,7 @@ function genCSSElements () {
   codes.push("");
 }
 
-function genHTMLTags () {
+function genHTMLTags() {
   let doc;
 
   codes.push("export interface HTMLTags<T> {");
@@ -248,23 +295,22 @@ function genHTMLTags () {
   codes.push("");
 }
 
-function genHTMLAttrs () {
+function genHTMLAttrs() {
   let doc;
 
   codes.push("export interface HTMLAttrs<T> {");
 
-  for (const tag of htmlData.tags!) {
+  for (const tag of htmlData.tags!)
     for (const attr of tag.attributes) {
       doc = genHTMLDoc(attr, 2);
       doc && codes.push(doc);
-      codes.push(indent((JSON.stringify(tag.name + "[" + attr.name + "]")) + ": T", 2));
+      codes.push(indent(JSON.stringify(tag.name + "[" + attr.name + "]") + ": T", 2));
     }
-  }
 
   for (const attr of htmlData.globalAttributes!) {
     doc = genHTMLDoc(attr, 2);
     doc && codes.push(doc);
-    codes.push(indent((JSON.stringify("[" + attr.name + "]")) + ": T", 2));
+    codes.push(indent(JSON.stringify("[" + attr.name + "]") + ": T", 2));
   }
 
   codes.push("}");

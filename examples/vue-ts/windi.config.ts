@@ -2,31 +2,31 @@ import { baseColors, bootstrapColors, colorHandler, configHandler, css, defineCo
 
 const colors = {
   ...baseColors,
-  ...bootstrapColors
-}
+  ...bootstrapColors,
+};
 
 export default defineConfig({
   theme: {
     // test overwrite theme
-    colors
+    colors,
   },
   utilities: {
     // test overwrite utility
     bg: {
-      DEFAULT: colorHandler(colors, "backgroundColor")
+      DEFAULT: colorHandler(colors, "backgroundColor"),
     },
     // test create new utility
     myColor: {
       red: css({
-        backgroundColor: "#FF2F41"
-      })
+        backgroundColor: "#FF2F41",
+      }),
     },
     gradient: {
-      DEFAULT: configHandler(gradientConfig, "backgroundImage")
-    }
+      DEFAULT: configHandler(gradientConfig, "backgroundImage"),
+    },
   },
   variants: {
     // test create new variant
-    hocus: "&:hover, &:focus"
-  }
-})
+    hocus: "&:hover, &:focus",
+  },
+});

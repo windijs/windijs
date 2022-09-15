@@ -1,10 +1,12 @@
-import { Handler, StyleLoader, StyleObject } from "./types";
-
 import { Theme } from "@windijs/config";
+
+import { Handler, StyleLoader, StyleObject } from "./types";
 
 export type DarkModeConfig = "class" | "media" | false;
 
-export type UtilitiesConfig = { [key: string]: Handler<unknown> | Array<Handler<unknown>> | StyleObject | UtilitiesConfig };
+export type UtilitiesConfig = {
+  [key: string]: Handler<unknown> | Array<Handler<unknown>> | StyleObject | UtilitiesConfig;
+};
 
 export type VariantsConfig = { [key: string]: string | string[] };
 
@@ -32,9 +34,9 @@ export interface Config<T extends object = Theme> {
   utilities?: UtilitiesConfig;
   variants?: VariantsConfig;
   styleLoader?: StyleLoader;
-  [key:string]: any;
+  [key: string]: any;
 }
 
-export function defineConfig (config: Config) {
+export function defineConfig(config: Config) {
   return config;
 }

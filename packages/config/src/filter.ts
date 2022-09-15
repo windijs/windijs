@@ -1,6 +1,5 @@
-import { rotateConfig, scaleConfig } from "./transform";
-
 import { opacityConfig } from "./opacity";
+import { rotateConfig, scaleConfig } from "./transform";
 
 export const blurConfig = {
   DEFAULT: "8px",

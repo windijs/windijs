@@ -1,13 +1,12 @@
-import './style.css'
+import "./style.css";
 
-import { bg, lg } from "./windi"
+import { setupCounter } from "./counter";
+import typescriptLogo from "./typescript.svg";
+import { bg, lg } from "./windi";
 
-import { setupCounter } from './counter'
-import typescriptLogo from './typescript.svg'
+const logo = [bg.blue[400].opacity(30), lg(bg.green[400].opacity(40))];
 
-const logo = [ bg.blue[400].opacity(30), lg(bg.green[400].opacity(40)) ]
-
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo ${bg.indigo[500].opacity(50)}" alt="Vite logo" />
@@ -23,6 +22,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       Click on the Vite and TypeScript logos to learn more
     </p>
   </div>
-`
+`;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);

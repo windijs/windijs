@@ -170,7 +170,6 @@ export const macOSAccessibleLightColors = {
   pink: "#d30f45",
   brown: "#7f6545",
   gray: "#69696e",
-
 };
 
 export const macOSAccessibleDarkColors = {

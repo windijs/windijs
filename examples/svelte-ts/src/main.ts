@@ -1,14 +1,14 @@
-import './app.css'
+import "./app.css";
 
-import { cssInJsLoader, useArrayHelper, useStyleLoader } from 'windijs'
+import { cssInJsLoader, useArrayHelper, useStyleLoader } from "windijs";
 
-import App from './App.svelte'
+import App from "./App.svelte";
 
 useArrayHelper();
 useStyleLoader(cssInJsLoader);
 
 const app = new App({
-  target: document.getElementById('app')
-})
+  target: document.getElementById("app"),
+});
 
-export default app
+export default app;

@@ -1,10 +1,11 @@
-import './style.css'
+import "./style.css";
 
-import { cssInJsLoader, useStyleLoader } from 'windijs'
+import { createApp } from "vue";
 
-import App from './App.vue'
-import { createApp } from 'vue'
+import { cssInJsLoader, useStyleLoader } from "windijs";
 
-useStyleLoader(cssInJsLoader)
+import App from "./App.vue";
 
-createApp(App).mount('#app')
+useStyleLoader(cssInJsLoader);
+
+createApp(App).mount("#app");

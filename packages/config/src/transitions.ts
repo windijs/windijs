@@ -1,5 +1,6 @@
 export const transitionPropertyConfig = {
-  DEFAULT: "background-color, border-color, color, fill, stroke, opacity, box-shadow, -webkit-box-shadow, transform, -webkit-transform, filter, backdrop-filter",
+  DEFAULT:
+    "background-color, border-color, color, fill, stroke, opacity, box-shadow, -webkit-box-shadow, transform, -webkit-transform, filter, backdrop-filter",
   all: "all",
   colors: "background-color, border-color, color, fill, stroke",
   opacity: "opacity",

@@ -1,9 +1,32 @@
-import { backgroundClipConfig, backgroundRepeatConfig, backgroundSizeConfig, borderStyleConfig, borderWidthConfig, fontStyleConfig, justifyItemsConfig, overflowConfig } from "@windijs/config";
+import {
+  backgroundClipConfig,
+  backgroundRepeatConfig,
+  backgroundSizeConfig,
+  borderStyleConfig,
+  borderWidthConfig,
+  fontStyleConfig,
+  justifyItemsConfig,
+  overflowConfig,
+} from "@windijs/config";
 import { css, rgb, StyleObject, unify } from "@windijs/helpers";
 import { isNumber, parenWrap } from "@windijs/shared";
 import { bg, colors } from "@windijs/utilities";
 
-import { backgroundGenericHandler, callHandler, colorHandler, configHandler, createUtility, genericHandler, guard, meld, setup, setupHandler, setupUtility, setupVariant, use } from "../src";
+import {
+  backgroundGenericHandler,
+  callHandler,
+  colorHandler,
+  configHandler,
+  createUtility,
+  genericHandler,
+  guard,
+  meld,
+  setup,
+  setupHandler,
+  setupUtility,
+  setupVariant,
+  use,
+} from "../src";
 
 test("useGeneric With Trigger", () => {
   const backgroundGeneric = genericHandler("backgroundColor", prop => {
@@ -18,7 +41,8 @@ test("useGeneric With Trigger", () => {
 });
 
 test("Call Handler", () => {
-  const rgbCSS: (red: number, green: number, blue: number) => StyleObject = (red: number, green: number, blue: number) => css({ backgroundColor: rgb(red, green, blue) });
+  const rgbCSS: (red: number, green: number, blue: number) => StyleObject = (red: number, green: number, blue: number) =>
+    css({ backgroundColor: rgb(red, green, blue) });
   Object.defineProperty(rgbCSS, "abc", { value: rgbCSS });
 
   const bg = createUtility("bg")
@@ -71,7 +95,14 @@ test("use single plugin", () => {
 
 test("use multi plugin with meld and use", () => {
   const border = use("border", meld(configHandler(borderWidthConfig, "borderWidth"), colorHandler(colors, "borderColor", "--w-border-opacity")));
-  const border2 = use("border", meld(configHandler(borderWidthConfig, "borderWidth"), colorHandler(colors, "borderColor", "--w-border-opacity"), configHandler(borderStyleConfig, "borderStyle")));
+  const border2 = use(
+    "border",
+    meld(
+      configHandler(borderWidthConfig, "borderWidth"),
+      colorHandler(colors, "borderColor", "--w-border-opacity"),
+      configHandler(borderStyleConfig, "borderStyle")
+    )
+  );
 
   expect(border[0].css).toMatchSnapshot();
   expect(border.emerald[500].css).toMatchSnapshot();

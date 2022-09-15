@@ -1,6 +1,6 @@
 // https://drafts.csswg.org/cssom/#serialize-an-identifier
 
-export function escapeCSS (str: string): string {
+export function escapeCSS(str: string): string {
   const length = str.length;
   let index = -1;
   let codeUnit;
@@ -34,10 +34,7 @@ export function escapeCSS (str: string): string {
       (index === 0 && codeUnit >= 0x0030 && codeUnit <= 0x0039) ||
       // If the character is the second character and is in the range [0-9]
       // (U+0030 to U+0039) and the first character is a `-` (U+002D), […]
-      (index === 1 &&
-        codeUnit >= 0x0030 &&
-        codeUnit <= 0x0039 &&
-        firstCodeUnit === 0x002d)
+      (index === 1 && codeUnit >= 0x0030 && codeUnit <= 0x0039 && firstCodeUnit === 0x002d)
     ) {
       // https://drafts.csswg.org/cssom/#escape-a-character-as-code-point
       result += "\\" + codeUnit.toString(16) + " ";

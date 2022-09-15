@@ -7,14 +7,37 @@
  * so we have to create our own dts bundler.
  */
 
-import { CompilerOptions, CustomTransformers, ExportDeclaration, ImportDeclaration, Node, NodeFlags, SourceFile, SyntaxKind, TransformerFactory, Visitor, createCompilerHost, createProgram, factory, isExportAssignment, isExportDeclaration, isImportDeclaration, isNamedExports, isNamedImports, isNamespaceImport, isStringLiteral, visitEachChild, visitNode } from "typescript";
+import chalk from "chalk";
 /* eslint-disable no-console */
 import fs, { readFileSync } from "fs";
 import path, { basename } from "path";
+import {
+  CompilerOptions,
+  createCompilerHost,
+  createProgram,
+  CustomTransformers,
+  ExportDeclaration,
+  factory,
+  ImportDeclaration,
+  isExportAssignment,
+  isExportDeclaration,
+  isImportDeclaration,
+  isNamedExports,
+  isNamedImports,
+  isNamespaceImport,
+  isStringLiteral,
+  Node,
+  NodeFlags,
+  SourceFile,
+  SyntaxKind,
+  TransformerFactory,
+  visitEachChild,
+  visitNode,
+  Visitor,
+} from "typescript";
 
-import chalk from "chalk";
-import { handleError } from "./utils";
 import { useTransformer } from "../packages/transformer/src";
+import { handleError } from "./utils";
 
 let EXPORTS: string[] = [];
 let CURRENT_NAME: string | undefined;
@@ -28,13 +51,9 @@ const extractExports: TransformerFactory<SourceFile> = context => {
     const visitor: Visitor = (node: Node) => {
       // extract all relative path from entry
       if (isExportDeclaration(node) && node.moduleSpecifier && isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith("./")) {
-        if (node.exportClause && isNamedExports(node.exportClause)) {
-          for (const el of node.exportClause.elements) {
-            if (el.propertyName?.escapedText === "default") {
-              DEFAULT_EXPORTS[node.moduleSpecifier.text] = el.name.escapedText.toString();
-            };
-          }
-        }
+        if (node.exportClause && isNamedExports(node.exportClause))
+          for (const el of node.exportClause.elements)
+            if (el.propertyName?.escapedText === "default") DEFAULT_EXPORTS[node.moduleSpecifier.text] = el.name.escapedText.toString();
 
         EXPORTS.push(node.moduleSpecifier.text);
         return undefined;
@@ -42,9 +61,8 @@ const extractExports: TransformerFactory<SourceFile> = context => {
       // remove import default declaration
       if (isImportDeclaration(node) && node.moduleSpecifier && isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith("./")) {
         EXPORTS.push(node.moduleSpecifier.text);
-        if (node.importClause?.name) {
-          DEFAULT_IMPORTS[node.moduleSpecifier.text] = node.importClause.name.escapedText.toString();
-        }
+        if (node.importClause?.name) DEFAULT_IMPORTS[node.moduleSpecifier.text] = node.importClause.name.escapedText.toString();
+
         return undefined;
       }
 
@@ -55,12 +73,12 @@ const extractExports: TransformerFactory<SourceFile> = context => {
 };
 
 /** Dudup import declarations */
-function dedupImports (decls: ImportDeclaration[]): ImportDeclaration[] {
+function dedupImports(decls: ImportDeclaration[]): ImportDeclaration[] {
   type Imports = {
-    module: boolean, // import "..."
-    defaults: string[], // import abc
-    bindings: [string | undefined, string][], // import {}
-    spaces: string[], // import * as name ...
+    module: boolean; // import "..."
+    defaults: string[]; // import abc
+    bindings: [string | undefined, string][]; // import {}
+    spaces: string[]; // import * as name ...
   };
 
   const imports: Record<string, Imports> = {};
@@ -69,39 +87,80 @@ function dedupImports (decls: ImportDeclaration[]): ImportDeclaration[] {
 
   let key: string, binding: [string | undefined, string];
 
-  for (const node of decls) {
+  for (const node of decls)
     if (isStringLiteral(node.moduleSpecifier)) {
       key = node.moduleSpecifier.text;
-      if (!(key in imports)) imports[key] = { module: false, defaults: [], bindings: [], spaces: [] };
+      if (!(key in imports))
+        imports[key] = {
+          module: false,
+          defaults: [],
+          bindings: [],
+          spaces: [],
+        };
 
       if (node.importClause) {
         if (node.importClause.name) smartPush(imports[key].defaults, node.importClause.name.escapedText.toString());
 
-        if (node.importClause.namedBindings) {
-          if (isNamedImports(node.importClause.namedBindings)) {
+        if (node.importClause.namedBindings)
+          if (isNamedImports(node.importClause.namedBindings))
             for (const el of node.importClause.namedBindings.elements) {
               binding = [el.propertyName?.escapedText.toString(), el.name.escapedText.toString()];
-              if (imports[key].bindings.find(([a, b]) => (a === binding[0]) && (b === binding[1])) == null) imports[key].bindings.push(binding);
+              if (imports[key].bindings.find(([a, b]) => a === binding[0] && b === binding[1]) == null) imports[key].bindings.push(binding);
             }
-          } else if (isNamespaceImport(node.importClause.namedBindings)) {
+          else if (isNamespaceImport(node.importClause.namedBindings))
             smartPush(imports[key].spaces, node.importClause.namedBindings.name.escapedText.toString());
-          }
-        }
-      } else {
-        // import "module-name";
-        imports[key].module = true;
       }
+      // import "module-name";
+      else imports[key].module = true;
     }
-  }
 
   const output: ImportDeclaration[] = [];
   const entries = Object.entries(imports);
 
   for (const [k, v] of entries) {
     if (v.module) output.push(factory.createImportDeclaration(undefined, undefined, undefined, factory.createStringLiteral(k)));
-    if (v.defaults[0]) output.push(...v.defaults.map(i => factory.createImportDeclaration(undefined, undefined, factory.createImportClause(false, factory.createIdentifier(i), undefined), factory.createStringLiteral(k))));
-    if (v.spaces[0]) output.push(...v.spaces.map(i => factory.createImportDeclaration(undefined, undefined, factory.createImportClause(false, undefined, factory.createNamespaceImport(factory.createIdentifier(i))), factory.createStringLiteral(k))));
-    if (v.bindings[0]) output.push(factory.createImportDeclaration(undefined, undefined, factory.createImportClause(false, undefined, factory.createNamedImports(v.bindings.map(([a, b]) => factory.createImportSpecifier(false, a ? factory.createIdentifier(a) : undefined, factory.createIdentifier(b))))), factory.createStringLiteral(k)));
+
+    if (v.defaults[0])
+      output.push(
+        ...v.defaults.map(i =>
+          factory.createImportDeclaration(
+            undefined,
+            undefined,
+            factory.createImportClause(false, factory.createIdentifier(i), undefined),
+            factory.createStringLiteral(k)
+          )
+        )
+      );
+
+    if (v.spaces[0])
+      output.push(
+        ...v.spaces.map(i =>
+          factory.createImportDeclaration(
+            undefined,
+            undefined,
+            factory.createImportClause(false, undefined, factory.createNamespaceImport(factory.createIdentifier(i))),
+            factory.createStringLiteral(k)
+          )
+        )
+      );
+
+    if (v.bindings[0])
+      output.push(
+        factory.createImportDeclaration(
+          undefined,
+          undefined,
+          factory.createImportClause(
+            false,
+            undefined,
+            factory.createNamedImports(
+              v.bindings.map(([a, b]) =>
+                factory.createImportSpecifier(false, a ? factory.createIdentifier(a) : undefined, factory.createIdentifier(b))
+              )
+            )
+          ),
+          factory.createStringLiteral(k)
+        )
+      );
   }
 
   return output;
@@ -110,15 +169,18 @@ function dedupImports (decls: ImportDeclaration[]): ImportDeclaration[] {
 /** Transform export default ... to export const ...  */
 const transformExportDefault: TransformerFactory<SourceFile> = context => {
   return sourceFile => {
-    const visitor: Visitor = (node) => {
+    const visitor: Visitor = node => {
       const importName = CURRENT_NAME && DEFAULT_IMPORTS[CURRENT_NAME];
       const exportName = CURRENT_NAME && DEFAULT_EXPORTS[CURRENT_NAME];
 
-      if ((importName || exportName) && isExportAssignment(node)) {
-        return factory.createVariableStatement(importName ? undefined : [factory.createModifier(SyntaxKind.ExportKeyword)], factory.createVariableDeclarationList([
-          factory.createVariableDeclaration(importName || exportName as string, undefined, undefined, node.expression),
-        ], NodeFlags.Const));
-      }
+      if ((importName || exportName) && isExportAssignment(node))
+        return factory.createVariableStatement(
+          importName ? undefined : [factory.createModifier(SyntaxKind.ExportKeyword)],
+          factory.createVariableDeclarationList(
+            [factory.createVariableDeclaration(importName || (exportName as string), undefined, undefined, node.expression)],
+            NodeFlags.Const
+          )
+        );
 
       return visitEachChild(node, visitor, context);
     };
@@ -153,16 +215,17 @@ const organizeImportsExports: TransformerFactory<SourceFile> = context => {
 
     const transformed = visitNode(sourceFile, visitor);
 
-    return factory.updateSourceFile(transformed, [
-      ...dedupImports(imports),
-      ...transformed.statements,
-      ...exports,
-    ]);
+    return factory.updateSourceFile(transformed, [...dedupImports(imports), ...transformed.statements, ...exports]);
   };
 };
 
 /** Emit typescript declarations */
-export function emitDecl (fileNames: string[], options: CompilerOptions, transformers?: CustomTransformers, beforeWriteFile = (output: string, contents: string) => ({ output, contents })) {
+export function emitDecl(
+  fileNames: string[],
+  options: CompilerOptions,
+  transformers?: CustomTransformers,
+  beforeWriteFile = (output: string, contents: string) => ({ output, contents })
+) {
   const host = createCompilerHost(options);
   const outputs = fileNames.map(i => i.replace(".ts", ".d.ts"));
   host.writeFile = (output: string, contents: string) => {
@@ -182,20 +245,27 @@ export function emitDecl (fileNames: string[], options: CompilerOptions, transfo
 }
 
 /** Bundle .ts files, organize imports and exports */
-export function bundleTS (entry: string, ...transformers: TransformerFactory<SourceFile>[]): string {
+export function bundleTS(entry: string, ...transformers: TransformerFactory<SourceFile>[]): string {
   const base = path.dirname(entry);
   const src = readFileSync(entry).toString();
 
   const dest = [
     useTransformer(src, extractExports, ...transformers),
-    ...EXPORTS.map(i => path.join(base, i)).map(i => fs.existsSync(i) && fs.statSync(i).isDirectory() ? path.join(i, "index.ts") : (i.endsWith(".ts") ? i : (i + ".ts"))).map(i => (CURRENT_NAME = "./" + basename(i, ".ts")) && useTransformer(readFileSync(i).toString(), transformExportDefault, ...transformers)),
+    ...EXPORTS.map(i => path.join(base, i))
+      .map(i => (fs.existsSync(i) && fs.statSync(i).isDirectory() ? path.join(i, "index.ts") : i.endsWith(".ts") ? i : i + ".ts"))
+      .map(i => (CURRENT_NAME = "./" + basename(i, ".ts")) && useTransformer(readFileSync(i).toString(), transformExportDefault, ...transformers)),
   ].join("\n");
 
   return useTransformer(dest, organizeImportsExports);
 }
 
 /** Bundle .ts first, then generate dts for bundled file, then remove bundled .ts file, only keep generated .dts */
-export function bundleDts (entries: { input: string, output: string }[], options: CompilerOptions, transformers?: CustomTransformers, sourceTransformers: TransformerFactory<SourceFile>[] = []) {
+export function bundleDts(
+  entries: { input: string; output: string }[],
+  options: CompilerOptions,
+  transformers?: CustomTransformers,
+  sourceTransformers: TransformerFactory<SourceFile>[] = []
+) {
   options = Object.assign(options, {
     lib: undefined, // If we set only ESNext and Dom, types like 'HTMLElement'/'CSSStyleDeclaration' will throw 'using private name' error.
     declaration: true,
@@ -218,7 +288,12 @@ export function bundleDts (entries: { input: string, output: string }[], options
   let start = Date.now();
 
   emitDecl(temps, options, transformers, (output, contents) => {
-    console.log(chalk.green("created ") + chalk.bold(chalk.green(output)) + chalk.green(" in ") + chalk.bold(chalk.green(`${((Date.now() - start) / 1000).toFixed(1) + "s"}\n`)));
+    console.log(
+      chalk.green("created ") +
+        chalk.bold(chalk.green(output)) +
+        chalk.green(" in ") +
+        chalk.bold(chalk.green(`${((Date.now() - start) / 1000).toFixed(1) + "s"}\n`))
+    );
 
     start = Date.now();
 
@@ -229,4 +304,4 @@ export function bundleDts (entries: { input: string, output: string }[], options
   });
 
   temps.map(i => fs.rm(i, handleError));
-};
+}

@@ -1,7 +1,6 @@
-import { fractionConfig, negativeSpacingConfig, spacingConfig } from "./spacing";
-
 import { positionConfig } from "./positioning";
 import { tShirtScale } from "./sizing";
+import { fractionConfig, negativeSpacingConfig, spacingConfig } from "./spacing";
 
 export const degreeConfig = {
   0: "0deg",

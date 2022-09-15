@@ -1,5 +1,5 @@
-import { degreeConfig } from "./transform";
 import { positionConfig } from "./positioning";
+import { degreeConfig } from "./transform";
 
 export const backgroundAttachmentConfig = {
   fixed: "fixed",
