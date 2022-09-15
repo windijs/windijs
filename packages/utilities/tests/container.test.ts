@@ -1,5 +1,5 @@
-import { buildContainer } from "@windijs/core";
 import { screens } from "@windijs/config";
+import { buildContainer } from "@windijs/core";
 import { unify } from "@windijs/helpers";
 
 test("Container", () => {

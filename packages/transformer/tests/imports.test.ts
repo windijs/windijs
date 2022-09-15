@@ -1,4 +1,4 @@
-import { importTypesTransformer, importsTransformer, useTransformer } from "../src";
+import { importsTransformer, importTypesTransformer, useTransformer } from "../src";
 
 test("Transform imports", () => {
   const code = `

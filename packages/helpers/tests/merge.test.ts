@@ -7,5 +7,7 @@ test("mergeObject", () => {
 
   expect(mergeObject({ a: [1, 2, 3] }, { a: [4, 5, 6] })).toEqual({ a: [4, 5, 6] });
 
-  expect(mergeObject({ a: { b: 1, c: 2 } }, { a: { d: 3, c: 4 } })).toEqual({ a: { b: 1, c: 4, d: 3 } });
+  expect(mergeObject({ a: { b: 1, c: 2 } }, { a: { d: 3, c: 4 } })).toEqual({
+    a: { b: 1, c: 4, d: 3 },
+  });
 });

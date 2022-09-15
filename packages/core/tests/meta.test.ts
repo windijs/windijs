@@ -1,13 +1,11 @@
-import { backgroundGenericHandler, colorHandler, configHandler, createUtility, guard, meld } from "../src";
 import { borderWidthConfig, opacityConfig } from "@windijs/config";
-
-import { colors } from "@windijs/utilities";
 import { prop } from "@windijs/helpers";
+import { colors } from "@windijs/utilities";
+
+import { backgroundGenericHandler, colorHandler, configHandler, createUtility, guard, meld } from "../src";
 
 test("Color Meta", () => {
-  const bg = createUtility("bg")
-    .use(colorHandler(colors, "backgroundColor", "-w-bg-opacity"))
-    .init();
+  const bg = createUtility("bg").use(colorHandler(colors, "backgroundColor", "-w-bg-opacity")).init();
   expect(bg.current.meta.uid).toEqual("bg");
   expect(bg.blue[700].meta.uid).toEqual("bg");
   expect(bg.blue[300].opacity(30).meta.uid).toEqual("bg");
@@ -33,11 +31,9 @@ test("Static Meta", () => {
 });
 
 test("Generic Meta", () => {
-  const bg = createUtility("bg")
-    .use(backgroundGenericHandler())
-    .init();
+  const bg = createUtility("bg").use(backgroundGenericHandler()).init();
 
-  expect(bg[0x1c1c1e].meta.props).toEqual([0x1c1c1e.toString()]);
+  expect(bg[0x1c1c1e].meta.props).toEqual([(0x1c1c1e).toString()]);
 
   expect(bg["rgba(22, 22, 22, 0.3)"].meta.props).toEqual(["rgba(22, 22, 22, 0.3)"]);
 });

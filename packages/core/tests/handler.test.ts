@@ -1,20 +1,18 @@
-import { StyleObject, css, rgb, unify } from "@windijs/helpers";
 import { backgroundClipConfig, backgroundRepeatConfig, backgroundSizeConfig, borderStyleConfig, borderWidthConfig, fontStyleConfig, justifyItemsConfig, overflowConfig } from "@windijs/config";
-import { backgroundGenericHandler, callHandler, colorHandler, configHandler, createUtility, genericHandler, guard, meld, setup, setupHandler, setupUtility, setupVariant, use } from "../src";
-import { bg, colors } from "@windijs/utilities";
+import { css, rgb, StyleObject, unify } from "@windijs/helpers";
 import { isNumber, parenWrap } from "@windijs/shared";
+import { bg, colors } from "@windijs/utilities";
+
+import { backgroundGenericHandler, callHandler, colorHandler, configHandler, createUtility, genericHandler, guard, meld, setup, setupHandler, setupUtility, setupVariant, use } from "../src";
 
 test("useGeneric With Trigger", () => {
   const backgroundGeneric = genericHandler("backgroundColor", prop => {
-    if (isNumber(prop)) {
-      return "#" + (+prop).toString(16);
-    }
+    if (isNumber(prop)) return "#" + (+prop).toString(16);
+
     return prop;
   });
 
-  const bg = createUtility("bg")
-    .case("trigger", backgroundGeneric)
-    .init();
+  const bg = createUtility("bg").case("trigger", backgroundGeneric).init();
 
   expect(bg.trigger["rgb(22, 22, 22)"].css).toMatchSnapshot();
 });
@@ -25,11 +23,14 @@ test("Call Handler", () => {
 
   const bg = createUtility("bg")
     .use(colorHandler(colors, "backgroundColor"))
-    .case("rgb", callHandler(
-      rgbCSS as typeof rgbCSS & { abc: typeof rgbCSS },
-      genericHandler("backgroundColor", v => parenWrap("rgb", v)),
-    ),
-    ).init();
+    .case(
+      "rgb",
+      callHandler(
+        rgbCSS as typeof rgbCSS & { abc: typeof rgbCSS },
+        genericHandler("backgroundColor", v => parenWrap("rgb", v))
+      )
+    )
+    .init();
   expect(bg.red[500].css).toMatchSnapshot();
   expect(bg.rgb(22, 22, 22).css).toMatchSnapshot();
   expect(bg.rgb(22, 22, 22).meta).toMatchSnapshot();
@@ -84,10 +85,7 @@ test("setup", () => {
     red: css({ backgroundColor: "red" }),
     size: configHandler(backgroundSizeConfig, "backgroundSize"),
     repeat: configHandler(backgroundRepeatConfig.repeat, "backgroundRepeat"),
-    multi: meld(
-      configHandler(justifyItemsConfig, "justifyItems"),
-      configHandler(fontStyleConfig, "fontStyle"),
-    ),
+    multi: meld(configHandler(justifyItemsConfig, "justifyItems"), configHandler(fontStyleConfig, "fontStyle")),
     nested: {
       blue: css({ backgroundColor: "blue" }),
       opacity: {
@@ -109,10 +107,12 @@ test("setup", () => {
 
 test("setupHandler", () => {
   const bg = createUtility("bg")
-    .use(setupHandler({
-      red: css({ backgroundColor: "red" }),
-      size: configHandler(backgroundSizeConfig, "backgroundSize"),
-    }))
+    .use(
+      setupHandler({
+        red: css({ backgroundColor: "red" }),
+        size: configHandler(backgroundSizeConfig, "backgroundSize"),
+      })
+    )
     .use(configHandler(backgroundRepeatConfig, "backgroundRepeat"))
     .init();
 
@@ -143,16 +143,10 @@ test("setupUtility with handler", () => {
 
 test("setupUtility with config", () => {
   const overflow = setupUtility("overflow", {
-    DEFAULT: meld(
-      configHandler(overflowConfig, "overflow"),
-      configHandler(backgroundClipConfig, "overflow"),
-    ),
+    DEFAULT: meld(configHandler(overflowConfig, "overflow"), configHandler(backgroundClipConfig, "overflow")),
     ellpsis: css({ "-o-text-overflow": "ellipsis", textOverflow: "ellipsis" }),
     x: configHandler(overflowConfig, "overflowX"),
-    multi: meld(
-      configHandler(justifyItemsConfig, "justifyItems"),
-      configHandler(fontStyleConfig, "fontStyle"),
-    ),
+    multi: meld(configHandler(justifyItemsConfig, "justifyItems"), configHandler(fontStyleConfig, "fontStyle")),
     nested: {
       blue: css({ backgroundColor: "blue" }),
       opacity: {

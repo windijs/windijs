@@ -159,61 +159,27 @@ test("Color transparentize", () => {
 
 test("Color lighten set", () => {
   const red = new Color("#ff0000");
-  expect(red.lightenSet(5).map(i => i.hex)).toEqual([
-    "#f00",
-    "#f33",
-    "#f66",
-    "#f99",
-    "#fcc",
-  ]);
+  expect(red.lightenSet(5).map(i => i.hex)).toEqual(["#f00", "#f33", "#f66", "#f99", "#fcc"]);
 });
 
 test("Color darken set", () => {
   const red = new Color("#ff0000");
-  expect(red.darkenSet(5).map(i => i.hex)).toEqual([
-    "#f00",
-    "#c00",
-    "#900",
-    "#600",
-    "#300",
-  ]);
+  expect(red.darkenSet(5).map(i => i.hex)).toEqual(["#f00", "#c00", "#900", "#600", "#300"]);
 });
 
 test("Color complement set", () => {
-  expect(new Color("#ff0000").complementSet(1).map(i => i.hex)).toEqual([
-    "#f00",
-  ]);
-  expect(new Color("#44A178").complementSet(5).map(i => i.hex)).toEqual([
-    "#44A178",
-    "#5b8975",
-    "#727272",
-    "#895b6f",
-    "#a1446d",
-  ]);
+  expect(new Color("#ff0000").complementSet(1).map(i => i.hex)).toEqual(["#f00"]);
+  expect(new Color("#44A178").complementSet(5).map(i => i.hex)).toEqual(["#44A178", "#5b8975", "#727272", "#895b6f", "#a1446d"]);
 });
 
 test("Color invert set", () => {
-  expect(new Color("#ff0000").invertSet(1).map(i => i.hex)).toEqual([
-    "#f00",
-  ]);
-  expect(new Color("#44A178").invertSet(5).map(i => i.hex)).toEqual([
-    "#44A178",
-    "#61907b",
-    "#7f7f7f",
-    "#9d6e83",
-    "#bb5e87",
-  ]);
+  expect(new Color("#ff0000").invertSet(1).map(i => i.hex)).toEqual(["#f00"]);
+  expect(new Color("#44A178").invertSet(5).map(i => i.hex)).toEqual(["#44A178", "#61907b", "#7f7f7f", "#9d6e83", "#bb5e87"]);
 });
 
 test("Color desaturate set", () => {
   const red = new Color("#ff0000");
-  expect(red.desaturateSet(5).map(i => i.hex)).toEqual([
-    "#f00",
-    "#e61919",
-    "#c33",
-    "#b34d4d",
-    "#966",
-  ]);
+  expect(red.desaturateSet(5).map(i => i.hex)).toEqual(["#f00", "#e61919", "#c33", "#b34d4d", "#966"]);
 });
 
 test("colorLuminance", () => {

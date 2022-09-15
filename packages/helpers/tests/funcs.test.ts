@@ -1,7 +1,73 @@
-import { $in, ch, color, deg, em, ex, fr, mm, percent, px, rad, rem, turn, vw } from "../src/unit";
-import { $var, abs, attr, blur, brightness, calc, circle, clamp, conicGradient, contrast, counter, counters, cubicBezier, dropShadow, ellipse, env, fitContent, grayscale, hsl, hsla, hueRotate, hwb, inset, invert, linearGradient, matrix, matrix3d, max, min, minmax, opacity, path, perspective, polygon, quote, radialGradient, repeat, repeatingConicGradient, repeatingLinearGradient, repeatingRadialGradient, rgb, rgba, rotate, rotate3d, rotateX, rotateY, rotateZ, saturate, scale, scale3d, scaleX, scaleY, scaleZ, sepia, sign, skew, skewX, skewY, steps, translate, translate3d, translateX, translateY, translateZ, url } from "../src/funcs";
+import {
+  $var,
+  abs,
+  attr,
+  blur,
+  brightness,
+  calc,
+  circle,
+  clamp,
+  conicGradient,
+  contrast,
+  counter,
+  counters,
+  cubicBezier,
+  dropShadow,
+  ellipse,
+  env,
+  fitContent,
+  grayscale,
+  hsl,
+  hsla,
+  hueRotate,
+  hwb,
+  inset,
+  invert,
+  linearGradient,
+  matrix,
+  matrix3d,
+  max,
+  min,
+  minmax,
+  opacity,
+  path,
+  perspective,
+  polygon,
+  quote,
+  radialGradient,
+  repeat,
+  repeatingConicGradient,
+  repeatingLinearGradient,
+  repeatingRadialGradient,
+  rgb,
+  rgba,
+  rotate,
+  rotate3d,
+  rotateX,
+  rotateY,
+  rotateZ,
+  saturate,
+  scale,
+  scale3d,
+  scaleX,
+  scaleY,
+  scaleZ,
+  sepia,
+  sign,
+  skew,
+  skewX,
+  skewY,
+  steps,
+  translate,
+  translate3d,
+  translateX,
+  translateY,
+  translateZ,
+  url,
+} from "../src/funcs";
 import { add, div, mul, sub } from "../src/math";
 import { inherit, none } from "../src/types";
+import { $in, ch, color, deg, em, ex, fr, mm, percent, px, rad, rem, turn, vw } from "../src/unit";
 
 test("sub", () => {
   expect(sub(rem[3], rem[1])).toEqual("2rem");
@@ -34,7 +100,7 @@ test("div", () => {
 });
 
 test("quote", () => {
-  expect(quote("Hello World")).toEqual("\"Hello World\"");
+  expect(quote("Hello World")).toEqual('"Hello World"');
 });
 
 test("attr", () => {
@@ -49,14 +115,14 @@ test("attr", () => {
 
   /* With fallback */
   expect(attr("data-count", "number", 0)).toEqual("attr(data-count number, 0)");
-  expect(attr("src", "url", quote(""))).toEqual("attr(src url, \"\")");
+  expect(attr("src", "url", quote(""))).toEqual('attr(src url, "")');
   expect(attr("data-width", "px", inherit)).toEqual("attr(data-width px, inherit)");
-  expect(attr("data-something", undefined, quote("default"))).toEqual("attr(data-something, \"default\")");
+  expect(attr("data-something", undefined, quote("default"))).toEqual('attr(data-something, "default")');
 });
 
 test("url", () => {
   expect(url("fantasticfont.woff")).toEqual("url(fantasticfont.woff)");
-  expect(url(quote("fantasticfont.woff"))).toEqual("url(\"fantasticfont.woff\")");
+  expect(url(quote("fantasticfont.woff"))).toEqual('url("fantasticfont.woff")');
   expect(url("../images/bullet.jpg")).toEqual("url(../images/bullet.jpg)");
 
   /* Base 64 */
@@ -70,8 +136,8 @@ test("var", () => {
 });
 
 test("path", () => {
-  expect(path("M  20  240 L  20  80 L 160  80 L 160  20 L 280 100 L 160 180 L 160 120 L  60 120 L  60 240 Z")).toEqual("path(\"M  20  240 L  20  80 L 160  80 L 160  20 L 280 100 L 160 180 L 160 120 L  60 120 L  60 240 Z\")");
-  expect(path("M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80", "evenodd")).toEqual("path(evenodd, \"M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80\")");
+  expect(path("M  20  240 L  20  80 L 160  80 L 160  20 L 280 100 L 160 180 L 160 120 L  60 120 L  60 240 Z")).toEqual('path("M  20  240 L  20  80 L 160  80 L 160  20 L 280 100 L 160 180 L 160 120 L  60 120 L  60 240 Z")');
+  expect(path("M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80", "evenodd")).toEqual('path(evenodd, "M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80")');
 });
 
 test("hwb", () => {
@@ -86,11 +152,7 @@ test("matrix", () => {
 });
 
 test("matrix3d", () => {
-  expect(matrix3d(
-    -0.6, 1.34788, 0, 0,
-    -2.34788, -0.6, 0, 0,
-    0, 0, 1, 0,
-    0, 0, 10, 1)).toEqual("matrix3d(-0.6, 1.34788, 0, 0, -2.34788, -0.6, 0, 0, 0, 0, 1, 0, 0, 0, 10, 1)");
+  expect(matrix3d(-0.6, 1.34788, 0, 0, -2.34788, -0.6, 0, 0, 0, 0, 1, 0, 0, 0, 10, 1)).toEqual("matrix3d(-0.6, 1.34788, 0, 0, -2.34788, -0.6, 0, 0, 0, 0, 1, 0, 0, 0, 10, 1)");
 });
 
 test("perspective", () => {
@@ -350,7 +412,9 @@ test("radialGradient", () => {
 test("conicGradient", () => {
   expect(conicGradient(color.red, color.orange, color.yellow, color.green, color.blue)).toEqual("conic-gradient(red, orange, yellow, green, blue)");
   expect(conicGradient("from 0.25turn at 50% 30%", "#f69d3c", deg[10], "#3f87a6", deg[350], "#ebf8e1")).toEqual("conic-gradient(from 0.25turn at 50% 30%, #f69d3c, 10deg, #3f87a6, 350deg, #ebf8e1)");
-  expect(conicGradient([color.red, deg[6]], [color.orange, deg[6], deg[18]], [color.yellow, deg[18], deg[45]], [color.green, deg[45], deg[110]], [color.blue, deg[110], deg[200]], [color.purple, deg[200]])).toEqual("conic-gradient(red 6deg, orange 6deg 18deg, yellow 18deg 45deg, green 45deg 110deg, blue 110deg 200deg, purple 200deg)");
+  expect(conicGradient([color.red, deg[6]], [color.orange, deg[6], deg[18]], [color.yellow, deg[18], deg[45]], [color.green, deg[45], deg[110]], [color.blue, deg[110], deg[200]], [color.purple, deg[200]])).toEqual(
+    "conic-gradient(red 6deg, orange 6deg 18deg, yellow 18deg 45deg, green 45deg 110deg, blue 110deg 200deg, purple 200deg)"
+  );
 });
 
 test("repeatingLinearGradient", () => {
@@ -372,7 +436,9 @@ test("repeatingRadialGradient", () => {
 test("repeatingConicGradient", () => {
   expect(repeatingConicGradient(color.red, color.orange, color.yellow, color.green, color.blue)).toEqual("repeating-conic-gradient(red, orange, yellow, green, blue)");
   expect(repeatingConicGradient("from 0.25turn at 50% 30%", "#f69d3c", deg[10], "#3f87a6", deg[350], "#ebf8e1")).toEqual("repeating-conic-gradient(from 0.25turn at 50% 30%, #f69d3c, 10deg, #3f87a6, 350deg, #ebf8e1)");
-  expect(repeatingConicGradient([color.red, deg[6]], [color.orange, deg[6], deg[18]], [color.yellow, deg[18], deg[45]], [color.green, deg[45], deg[110]], [color.blue, deg[110], deg[200]], [color.purple, deg[200]])).toEqual("repeating-conic-gradient(red 6deg, orange 6deg 18deg, yellow 18deg 45deg, green 45deg 110deg, blue 110deg 200deg, purple 200deg)");
+  expect(repeatingConicGradient([color.red, deg[6]], [color.orange, deg[6], deg[18]], [color.yellow, deg[18], deg[45]], [color.green, deg[45], deg[110]], [color.blue, deg[110], deg[200]], [color.purple, deg[200]])).toEqual(
+    "repeating-conic-gradient(red 6deg, orange 6deg 18deg, yellow 18deg 45deg, green 45deg 110deg, blue 110deg 200deg, purple 200deg)"
+  );
 });
 
 test("fitContent", () => {
@@ -394,8 +460,8 @@ test("counter", () => {
 });
 
 test("counters", () => {
-  expect(counters("countername", "-")).toEqual("counters(countername, \"-\")");
-  expect(counters("countername", ".", "upper-roman")).toEqual("counters(countername, \".\", upper-roman)");
+  expect(counters("countername", "-")).toEqual('counters(countername, "-")');
+  expect(counters("countername", ".", "upper-roman")).toEqual('counters(countername, ".", upper-roman)');
 });
 
 test("circle", () => {

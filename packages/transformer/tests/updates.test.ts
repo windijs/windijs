@@ -1,6 +1,6 @@
-import { updateVariableType, useTransformer } from "../src";
-
 import { factory } from "typescript";
+
+import { updateVariableType, useTransformer } from "../src";
 
 test("Transform omit", () => {
   const code = `
@@ -11,5 +11,13 @@ test("Transform omit", () => {
   export declare const stroke: 3;
   `;
 
-  expect(useTransformer(code, updateVariableType({ fill: () => factory.createLiteralTypeNode(factory.createStringLiteral("hello")), stroke: (node) => factory.createTypeReferenceNode("Pick", [factory.createTypeLiteralNode([]), node]) }))).toMatchSnapshot();
+  expect(
+    useTransformer(
+      code,
+      updateVariableType({
+        fill: () => factory.createLiteralTypeNode(factory.createStringLiteral("hello")),
+        stroke: node => factory.createTypeReferenceNode("Pick", [factory.createTypeLiteralNode([]), node]),
+      })
+    )
+  ).toMatchSnapshot();
 });

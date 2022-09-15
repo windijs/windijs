@@ -1,7 +1,8 @@
 import { backgroundClipConfig, gradientDirectionConfig } from "@windijs/config";
 import { backgroundGenericHandler, colorHandler, configHandler, createUtility } from "@windijs/core";
-import { bg, colors, from, to, via } from "../src";
 import { percent, prop } from "@windijs/helpers";
+
+import { bg, colors, from, to, via } from "../src";
 
 test("Background Color", () => {
   expect(bg.current.css).toMatchSnapshot();
@@ -23,17 +24,13 @@ test("Background Color With Gradient", () => {
 });
 
 test("Background Color With Different Opacity Name", () => {
-  const bg = createUtility("bg")
-    .use(colorHandler(colors, "backgroundColor", "--my-opacity"))
-    .init();
+  const bg = createUtility("bg").use(colorHandler(colors, "backgroundColor", "--my-opacity")).init();
   expect(bg.black.opacity(50).css).toMatchSnapshot();
   expect(bg.amber[100].opacity(50).css).toMatchSnapshot();
 });
 
 test("Background Color Without Opacity", () => {
-  const bg = createUtility("bg")
-    .use(colorHandler(colors, "backgroundColor"))
-    .init();
+  const bg = createUtility("bg").use(colorHandler(colors, "backgroundColor")).init();
   expect(bg.black.css).toMatchSnapshot();
   expect(bg.amber[100].css).toMatchSnapshot();
 });
@@ -52,9 +49,7 @@ test("Background Color With Different Color Value Type", () => {
     hwb: "hwb(194 0% 0%)",
     hwba: "hwb(194 0% 0% / .5)",
   };
-  const bg = createUtility("bg")
-    .use(colorHandler(customColors, "backgroundColor", "--w-bg-opacity"))
-    .init();
+  const bg = createUtility("bg").use(colorHandler(customColors, "backgroundColor", "--w-bg-opacity")).init();
 
   expect(bg.inherit.css).toMatchSnapshot("inherit");
   expect(bg.current.css).toMatchSnapshot("current");
@@ -91,9 +86,7 @@ test("Background Color Without Opacity With Different Color Value Type", () => {
     hwb: "hwb(194 0% 0%)",
     hwba: "hwb(194 0% 0% / .5)",
   };
-  const bg = createUtility("bg")
-    .use(colorHandler(customColors, "backgroundColor"))
-    .init();
+  const bg = createUtility("bg").use(colorHandler(customColors, "backgroundColor")).init();
 
   expect(bg.inherit.css).toMatchSnapshot("inherit");
   expect(bg.current.css).toMatchSnapshot("current");
@@ -172,9 +165,7 @@ test("Background Blend Mode", () => {
 });
 
 test("Background Generic", () => {
-  const bg = createUtility("bg")
-    .use(backgroundGenericHandler())
-    .init();
+  const bg = createUtility("bg").use(backgroundGenericHandler()).init();
   expect(bg["rgb(22, 22, 22)"].css).toMatchSnapshot();
   expect(bg.red.css).toMatchSnapshot();
   expect(bg.aliceBlue.css).toMatchSnapshot();
@@ -198,9 +189,7 @@ test("Background With Deep Nested Color", () => {
     },
   };
 
-  const bg = createUtility("bg")
-    .use(colorHandler(nestedColors, "backgroundColor", "--w-bg-opacity"))
-    .init();
+  const bg = createUtility("bg").use(colorHandler(nestedColors, "backgroundColor", "--w-bg-opacity")).init();
 
   expect(bg.white.css).toMatchSnapshot();
   expect(bg.rose[50].css).toMatchSnapshot();

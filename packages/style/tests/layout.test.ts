@@ -4,24 +4,35 @@ import { css, prop } from "@windijs/helpers";
 
 import { stylePropertyHandler } from "../src/handler";
 
-const style = createUtility("style").use(stylePropertyHandler({
-  inset: insetConfig,
-  top: insetConfig,
-  left: insetConfig,
-  right: insetConfig,
-  bottom: insetConfig,
-  breakAfter: { all: "all" },
-  breakBefore: { all: "all" },
-  backfaceVisibility: (v: string) => css({ "-webkit-backface-visibility": v, backfaceVisibility: v }),
-  order: bind({ first: "-9999", last: "9999", none: "0" }, v => css({ "-webkit-box-ordinal-group": (+v + 1).toString(), "-webkit-order": v, "-ms-flex-order": v, order: v })),
-  zIndex: zIndexConfig,
-  boxSizing: {
-    border: "border-box",
-    content: "content-box",
-    "border-box": null,
-    "content-box": null,
-  },
-})).init();
+const style = createUtility("style")
+  .use(
+    stylePropertyHandler({
+      inset: insetConfig,
+      top: insetConfig,
+      left: insetConfig,
+      right: insetConfig,
+      bottom: insetConfig,
+      breakAfter: { all: "all" },
+      breakBefore: { all: "all" },
+      backfaceVisibility: (v: string) => css({ "-webkit-backface-visibility": v, backfaceVisibility: v }),
+      order: bind({ first: "-9999", last: "9999", none: "0" }, v =>
+        css({
+          "-webkit-box-ordinal-group": (+v + 1).toString(),
+          "-webkit-order": v,
+          "-ms-flex-order": v,
+          order: v,
+        })
+      ),
+      zIndex: zIndexConfig,
+      boxSizing: {
+        border: "border-box",
+        content: "content-box",
+        "border-box": null,
+        "content-box": null,
+      },
+    })
+  )
+  .init();
 
 test("Columns", () => {
   const columns = style.columns;
@@ -222,7 +233,8 @@ test("Isolation", () => {
 test("Object", () => {
   const object = createUtility("object")
     .use(configHandler(objectFitConfig, ["objectFit", prop`-o-object-fit`]))
-    .use(configHandler(objectPositionConfig, ["objectPosition", prop`-o-object-position`])).init();
+    .use(configHandler(objectPositionConfig, ["objectPosition", prop`-o-object-position`]))
+    .init();
   expect(object.contain.css).toMatchSnapshot();
   expect(object.cover.css).toMatchSnapshot();
   expect(object.fill.css).toMatchSnapshot();

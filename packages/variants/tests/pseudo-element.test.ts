@@ -1,7 +1,7 @@
-import { after, before, firstLetter, firstLine, marker, selection } from "../src/pseudoElement";
-
-import { bg } from "@windijs/utilities";
 import { bundle } from "@windijs/helpers";
+import { bg } from "@windijs/utilities";
+
+import { after, before, firstLetter, firstLine, marker, selection } from "../src/pseudoElement";
 
 const utilities = [bg.blue[500], bg.clip.content];
 

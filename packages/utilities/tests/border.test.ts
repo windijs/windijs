@@ -1,9 +1,10 @@
-import { border, divide, outline, ring, rounded } from "../src";
+import { opacityConfig } from "@windijs/config";
 import { configHandler, createUtility } from "@windijs/core";
+import { prop } from "@windijs/helpers";
+
+import { border, divide, outline, ring, rounded } from "../src";
 
 import type { PickValue } from "@windijs/helpers";
-import { opacityConfig } from "@windijs/config";
-import { prop } from "@windijs/helpers";
 
 test("Border Radius", () => {
   expect(rounded.css).toMatchSnapshot();
@@ -27,20 +28,21 @@ test("Border Style", () => {
 });
 
 test("Border With Nested Config", () => {
-  const borderStyleHandler = configHandler({
-    solid: "solid",
-    nested: {
-      DEFAULT: "nested",
-      dashed: "dashed",
+  const borderStyleHandler = configHandler(
+    {
+      solid: "solid",
       nested: {
-        double: "double",
+        DEFAULT: "nested",
+        dashed: "dashed",
+        nested: {
+          double: "double",
+        },
       },
     },
-  }, "borderStyle");
+    "borderStyle"
+  );
 
-  const border = createUtility("border")
-    .use(borderStyleHandler)
-    .init();
+  const border = createUtility("border").use(borderStyleHandler).init();
   expect(border.nested.css).toMatchSnapshot();
   expect(border.solid.css).toMatchSnapshot();
   expect(border.nested.dashed.css).toMatchSnapshot();
@@ -55,14 +57,15 @@ test("Border Opacity", () => {
 });
 
 test("Border Opacity With Proxy Config", () => {
-  const opacityConfigProxy = <T extends object> (cfg: T = {} as T) => new Proxy(cfg, {
-    get (target, p: string) {
-      return p in target ? Reflect.get(target, p) : (+p / 100).toString();
-    },
-  }) as PickValue<T & Omit<Record<0 | 5 | 10 | 20 | 25 | 30 | 40 | 50 | 60 | 70 | 75 | 80 | 90 | 95 | 100, string>, keyof T>, string | number>;
+  const opacityConfigProxy = <T extends object>(cfg: T = {} as T) =>
+    new Proxy(cfg, {
+      get(target, p: string) {
+        return p in target ? Reflect.get(target, p) : (+p / 100).toString();
+      },
+    }) as PickValue<T & Omit<Record<0 | 5 | 10 | 20 | 25 | 30 | 40 | 50 | 60 | 70 | 75 | 80 | 90 | 95 | 100, string>, keyof T>, string | number>;
 
   const border = createUtility("border")
-    .case("opacity", configHandler(opacityConfigProxy<{12: string, 70: null}>(), prop`--w-border-opacity`))
+    .case("opacity", configHandler(opacityConfigProxy<{ 12: string; 70: null }>(), prop`--w-border-opacity`))
     .init();
   expect(border.opacity[0].css).toMatchSnapshot();
   expect(border.opacity[50].css).toMatchSnapshot();

@@ -8,7 +8,9 @@ test("Flex", () => {
 });
 
 test("Inline Flex", () => {
-  const inlineFlexHandler = cssHandler({ display: ["-webkit-inline-box", "-ms-inline-flexbox", "-webkit-inline-flex", "inline-flex"] });
+  const inlineFlexHandler = cssHandler({
+    display: ["-webkit-inline-box", "-ms-inline-flexbox", "-webkit-inline-flex", "inline-flex"],
+  });
 
   const inlineFlex = createUtility("inlineFlex").use(inlineFlexHandler).init();
   expect(inlineFlex.css).toMatchSnapshot();

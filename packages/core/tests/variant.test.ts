@@ -1,7 +1,7 @@
-import { media, useMedia, useVariant, variant } from "../src";
-
-import { bg } from "@windijs/utilities";
 import { bundle } from "@windijs/helpers";
+import { bg } from "@windijs/utilities";
+
+import { media, useMedia, useVariant, variant } from "../src";
 
 const utilities = [bg.blue[500], bg.clip.content];
 

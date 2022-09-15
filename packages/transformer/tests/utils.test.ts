@@ -1,4 +1,4 @@
-import { Node, SourceFile, TransformerFactory, factory, isStringLiteral, visitEachChild, visitNode } from "typescript";
+import { factory, isStringLiteral, Node, SourceFile, TransformerFactory, visitEachChild, visitNode } from "typescript";
 
 import { useTransformer } from "../src";
 
@@ -13,5 +13,5 @@ const testTransformer: TransformerFactory<SourceFile> = context => {
 };
 
 test("useTransformer", () => {
-  expect(useTransformer("const hello = 'hello'", testTransformer)).toEqual("const hello = \"world\";\n");
+  expect(useTransformer("const hello = 'hello'", testTransformer)).toEqual('const hello = "world";\n');
 });

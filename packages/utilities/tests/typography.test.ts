@@ -1,4 +1,5 @@
 import { createUtility, fontSizeHandler } from "@windijs/core";
+
 import { decoration, font, hyphens, indent, leading, tab, text, tracking, write } from "../src";
 
 test("Font Family", () => {
@@ -16,11 +17,13 @@ test("Font Size", () => {
 
 test("Font Size With Different Config", () => {
   const text = createUtility("text")
-    .use(fontSizeHandler({
-      xs: ["0.75rem", "1rem"],
-      sm: ["0.875rem"],
-      md: ["1rem", { lineHeight: "1.25rem", letterSpacing: "1px" }],
-    }))
+    .use(
+      fontSizeHandler({
+        xs: ["0.75rem", "1rem"],
+        sm: ["0.875rem"],
+        md: ["1rem", { lineHeight: "1.25rem", letterSpacing: "1px" }],
+      })
+    )
     .init();
   expect(text.xs.css).toMatchSnapshot();
   expect(text.sm.css).toMatchSnapshot();

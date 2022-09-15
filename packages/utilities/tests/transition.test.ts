@@ -1,9 +1,10 @@
+import { transitionPropertyConfig as property } from "@windijs/config";
 import { createUtility, msHandler } from "@windijs/core";
+import { prop } from "@windijs/helpers";
+
 import { delay, duration, ease, transition } from "../src";
 
 import type { StyleObject } from "@windijs/helpers";
-import { prop } from "@windijs/helpers";
-import { transitionPropertyConfig as property } from "@windijs/config";
 
 test("Transition", () => {
   expect(transition.css).toMatchSnapshot();
@@ -22,7 +23,9 @@ test("Transition Duration", () => {
 });
 
 test("Transition Duration without config", () => {
-  const duration = createUtility("duration").use(msHandler<Record<0 | 50 | 75 | 100 | 150 | 200, StyleObject> & Record<string | number, StyleObject>>([prop`-webkit-transition-duration`, prop`-o-transition-duration`, "transitionDuration"])).init();
+  const duration = createUtility("duration")
+    .use(msHandler<Record<0 | 50 | 75 | 100 | 150 | 200, StyleObject> & Record<string | number, StyleObject>>([prop`-webkit-transition-duration`, prop`-o-transition-duration`, "transitionDuration"]))
+    .init();
 
   expect(duration[50].css).toMatchSnapshot();
   expect(duration[350].css).toMatchSnapshot();
@@ -41,7 +44,9 @@ test("Transition Delay", () => {
 });
 
 test("Transition Delay without config", () => {
-  const delay = createUtility("delay").use(msHandler<Record<0 | 50 | 75 | 100 | 150 | 200, StyleObject> & Record<string | number, StyleObject>>([prop`-webkit-transition-delay`, prop`-o-transition-delay`, "transitionDelay"])).init();
+  const delay = createUtility("delay")
+    .use(msHandler<Record<0 | 50 | 75 | 100 | 150 | 200, StyleObject> & Record<string | number, StyleObject>>([prop`-webkit-transition-delay`, prop`-o-transition-delay`, "transitionDelay"]))
+    .init();
 
   expect(delay[50].css).toMatchSnapshot();
   expect(delay[350].css).toMatchSnapshot();

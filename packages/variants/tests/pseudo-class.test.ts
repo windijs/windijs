@@ -1,7 +1,47 @@
-import { $default, active, checked, empty, enabled, even, evenOfType, first, firstOfType, focus, focusVisible, focusWithin, hover, indeterminate, invalid, last, lastOfType, link, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, readOnly, readWrite, required, root, target, valid, visited } from "../src/pseudoClass";
-
-import { bg } from "@windijs/utilities";
 import { bundle } from "@windijs/helpers";
+import { bg } from "@windijs/utilities";
+
+import {
+  $default,
+  active,
+  checked,
+  empty,
+  enabled,
+  even,
+  evenOfType,
+  first,
+  firstOfType,
+  focus,
+  focusVisible,
+  focusWithin,
+  hover,
+  indeterminate,
+  invalid,
+  last,
+  lastOfType,
+  link,
+  notChecked,
+  notDisabled,
+  notFirst,
+  notFirstOfType,
+  notLast,
+  notLastOfType,
+  notOnlyChild,
+  notOnlyOfType,
+  odd,
+  oddOfType,
+  onlyChild,
+  onlyOfType,
+  optional,
+  placeholderShown,
+  readOnly,
+  readWrite,
+  required,
+  root,
+  target,
+  valid,
+  visited,
+} from "../src/pseudoClass";
 
 const utilities = [bg.blue[500], bg.clip.content];
 

@@ -9,24 +9,36 @@ test("unify with utilities", () => {
 });
 
 test("unify with utility object", () => {
-  expect(unify({
-    ".test": [bg.blue[500], text.lg],
-    ".button": [bg.rose[500], rounded, border],
-  })).toMatchSnapshot();
+  expect(
+    unify({
+      ".test": [bg.blue[500], text.lg],
+      ".button": [bg.rose[500], rounded, border],
+    })
+  ).toMatchSnapshot();
 
-  expect(unify({
-    ".test": [bg.blue[500], text.lg],
-    ".button": [bg.rose[500], rounded, border],
-  }, {
-    p: [text.lg],
-  })).toMatchSnapshot("a");
+  expect(
+    unify(
+      {
+        ".test": [bg.blue[500], text.lg],
+        ".button": [bg.rose[500], rounded, border],
+      },
+      {
+        p: [text.lg],
+      }
+    )
+  ).toMatchSnapshot("a");
 
-  expect(unify({
-    ".test": [bg.blue[500], text.lg],
-    ".button": [bg.rose[500], rounded, border],
-  }, {
-    p: text.lg,
-  })).toMatchSnapshot("a");
+  expect(
+    unify(
+      {
+        ".test": [bg.blue[500], text.lg],
+        ".button": [bg.rose[500], rounded, border],
+      },
+      {
+        p: text.lg,
+      }
+    )
+  ).toMatchSnapshot("a");
 });
 
 test("atomic", () => {

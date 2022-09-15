@@ -1,8 +1,8 @@
 import { atomic, atomicNamer, useNamer } from "@windijs/helpers";
 import { bg, font, text } from "@windijs/utilities";
+import { sm } from "@windijs/variants";
 
 import { Vm } from "../src";
-import { sm } from "@windijs/variants";
 
 useNamer(atomicNamer);
 const vm = new Vm(undefined, { bg, text, font, sm });
@@ -18,7 +18,6 @@ test("vm with number calc", () => {
 });
 
 test("vm with variants", () => {
-  const expr = vm.parse("sm(bg.red[500])");
-
+  // const expr = vm.parse("sm(bg.red[500])");
   // TODO: a bug here
 });

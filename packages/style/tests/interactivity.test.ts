@@ -1,14 +1,21 @@
+import { touchActionConfig } from "@windijs/config";
 import { createUtility } from "@windijs/core";
 import { css } from "@windijs/helpers";
-import { stylePropertyHandler } from "../src/handler";
-import { touchActionConfig } from "@windijs/config";
 
-const style = createUtility("style").use(stylePropertyHandler({
-  touchAction: touchActionConfig,
-  willChange: { scroll: "scroll-position", transform: "transform" },
-  resize: { DEFAULT: "both", y: "vertical", x: "horizontal" },
-  appearance: { none: css({ "-webkit-appearance": "none", "-moz-appearance": "none", appearance: "none" }) },
-})).init();
+import { stylePropertyHandler } from "../src/handler";
+
+const style = createUtility("style")
+  .use(
+    stylePropertyHandler({
+      touchAction: touchActionConfig,
+      willChange: { scroll: "scroll-position", transform: "transform" },
+      resize: { DEFAULT: "both", y: "vertical", x: "horizontal" },
+      appearance: {
+        none: css({ "-webkit-appearance": "none", "-moz-appearance": "none", appearance: "none" }),
+      },
+    })
+  )
+  .init();
 
 test("Accent Color", () => {
   const accent = style.accentColor;

@@ -1,4 +1,5 @@
 import { deg, rem } from "@windijs/helpers";
+
 import { origin, perspect, preserve, rotate, scale, skew, transform, translate } from "../src";
 
 test("Rotate", () => {

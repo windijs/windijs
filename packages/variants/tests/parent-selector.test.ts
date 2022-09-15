@@ -1,7 +1,7 @@
-import { groupActive, groupFocus, groupHover, groupVisited } from "../src/parentSelector";
-
-import { bg } from "@windijs/utilities";
 import { bundle } from "@windijs/helpers";
+import { bg } from "@windijs/utilities";
+
+import { groupActive, groupFocus, groupHover, groupVisited } from "../src/parentSelector";
 
 const utilities = [bg.blue[500], bg.clip.content];
 
