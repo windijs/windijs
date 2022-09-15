@@ -1,8 +1,8 @@
 import { borderStyleConfig, borderWidthConfig, opacityConfig, outlineOffsetConfig } from "@windijs/config";
 import { colorHandler, configHandler, createUtility } from "@windijs/core";
+import { prop } from "@windijs/helpers";
 
 import colors from "./colors";
-import { prop } from "@windijs/helpers";
 
 export default createUtility("outline")
   .case("offset", configHandler(outlineOffsetConfig, "outlineOffset"))

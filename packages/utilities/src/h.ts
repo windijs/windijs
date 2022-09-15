@@ -1,6 +1,5 @@
-import { configHandler, createUtility } from "@windijs/core";
-
 import { heightConfig } from "@windijs/config";
+import { configHandler, createUtility } from "@windijs/core";
 
 export default createUtility("h")
   .case("min", configHandler(heightConfig, "minHeight"))

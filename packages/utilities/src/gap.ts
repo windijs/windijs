@@ -1,7 +1,6 @@
-import { configHandler, createUtility } from "@windijs/core";
-
-import { prop } from "@windijs/helpers";
 import { spacingConfig } from "@windijs/config";
+import { configHandler, createUtility } from "@windijs/core";
+import { prop } from "@windijs/helpers";
 
 export default createUtility("gap")
   .use(configHandler(spacingConfig, ["gridGap", "gap"]))

@@ -1,7 +1,6 @@
+import { scaleConfig } from "@windijs/config";
 import { configHandler, createUtility } from "@windijs/core";
 import { prop, transforms } from "@windijs/helpers";
-
-import { scaleConfig } from "@windijs/config";
 
 export default createUtility("scale")
   .use(configHandler(scaleConfig, [prop`--w-scale-x`, prop`--w-scale-y`, prop`--w-scale-z`]))

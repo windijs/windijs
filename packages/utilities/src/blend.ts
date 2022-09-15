@@ -1,7 +1,4 @@
+import { blendModeConfig } from "@windijs/config";
 import { configHandler, createUtility } from "@windijs/core";
 
-import { blendModeConfig } from "@windijs/config";
-
-export default createUtility("blend")
-  .use(configHandler(blendModeConfig, "mixBlendMode"))
-  .init();
+export default createUtility("blend").use(configHandler(blendModeConfig, "mixBlendMode")).init();

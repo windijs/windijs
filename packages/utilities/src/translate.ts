@@ -1,7 +1,6 @@
+import { translateConfig } from "@windijs/config";
 import { configHandler, createUtility } from "@windijs/core";
 import { prop, transforms } from "@windijs/helpers";
-
-import { translateConfig } from "@windijs/config";
 
 export default createUtility("translate")
   .use(configHandler(translateConfig, [prop`--w-translate-x`, prop`--w-translate-y`, prop`--w-translate-z`]))

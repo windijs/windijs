@@ -1,7 +1,4 @@
+import { textIndentConfig } from "@windijs/config";
 import { configHandler, createUtility } from "@windijs/core";
 
-import { textIndentConfig } from "@windijs/config";
-
-export default createUtility("indent")
-  .use(configHandler(textIndentConfig, "textIndent"))
-  .init();
+export default createUtility("indent").use(configHandler(textIndentConfig, "textIndent")).init();

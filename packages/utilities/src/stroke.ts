@@ -1,7 +1,7 @@
-import { colorHandler, configHandler, createUtility, numberHandler } from "@windijs/core";
 import { strokeLineCapConfig, strokeLineJoinConfig } from "@windijs/config";
-
+import { colorHandler, configHandler, createUtility, numberHandler } from "@windijs/core";
 import { StyleObject } from "@windijs/helpers";
+
 import colors from "./colors";
 
 export default createUtility("stroke")

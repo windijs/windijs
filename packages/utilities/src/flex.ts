@@ -1,6 +1,5 @@
-import { buildFlexDirection, buildFlexStretch, configHandler, createUtility, cssHandler } from "@windijs/core";
 import { flexDirectionConfig, flexGrowConfig, flexShrinkConfig, flexStretchConfig, flexWrapConfig } from "@windijs/config";
-
+import { buildFlexDirection, buildFlexStretch, configHandler, createUtility, cssHandler } from "@windijs/core";
 import { prop } from "@windijs/helpers";
 
 export default createUtility("flex")

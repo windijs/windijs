@@ -1,7 +1,6 @@
+import { skewConfig } from "@windijs/config";
 import { configHandler, createUtility } from "@windijs/core";
 import { prop, transforms } from "@windijs/helpers";
-
-import { skewConfig } from "@windijs/config";
 
 export default createUtility("skew")
   .use(configHandler(skewConfig, [prop`--w-skew-x`, prop`--w-skew-y`]))

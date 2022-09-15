@@ -1,8 +1,8 @@
+import { opacityConfig } from "@windijs/config";
 import { buildPlaceholder, colorHandler, configHandler, createUtility } from "@windijs/core";
+import { prop } from "@windijs/helpers";
 
 import colors from "./colors";
-import { opacityConfig } from "@windijs/config";
-import { prop } from "@windijs/helpers";
 
 export default createUtility("placeholder")
   .use(colorHandler(colors, buildPlaceholder))

@@ -1,5 +1,5 @@
-import { configHandler, createUtility, cssHandler } from "@windijs/core";
 import { gridAutoFlowConfig, gridTemplateColumnsConfig, gridTemplateRowsConfig } from "@windijs/config";
+import { configHandler, createUtility, cssHandler } from "@windijs/core";
 
 export default createUtility("grid")
   .case("cols", configHandler(gridTemplateColumnsConfig, "gridTemplateColumns"))

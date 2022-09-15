@@ -1,8 +1,8 @@
 import { boxDecorationBreakConfig, opacityConfig, textDecorationOffsetConfig, textDecorationStyleConfig, textDecorationThicknessConfig, textDecorationTypeConfig } from "@windijs/config";
 import { colorHandler, configHandler, createUtility } from "@windijs/core";
+import { prop } from "@windijs/helpers";
 
 import colors from "./colors";
-import { prop } from "@windijs/helpers";
 
 export default createUtility("decoration")
   .use(configHandler(textDecorationTypeConfig, [prop`-webkit-text-decoration-line`, "textDecorationLine"]))
