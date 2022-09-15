@@ -12,8 +12,10 @@ export default createUtility("filter")
       "--w-saturate": "var(--w-empty,/*!*/ /*!*/)",
       "--w-sepia": "var(--w-empty,/*!*/ /*!*/)",
       "--w-drop-shadow": "var(--w-empty,/*!*/ /*!*/)",
-      "-webkit-filter": "var(--w-blur) var(--w-brightness) var(--w-contrast) var(--w-grayscale) var(--w-hue-rotate) var(--w-invert) var(--w-saturate) var(--w-sepia) var(--w-drop-shadow)",
-      filter: "var(--w-blur) var(--w-brightness) var(--w-contrast) var(--w-grayscale) var(--w-hue-rotate) var(--w-invert) var(--w-saturate) var(--w-sepia) var(--w-drop-shadow)",
+      "-webkit-filter":
+        "var(--w-blur) var(--w-brightness) var(--w-contrast) var(--w-grayscale) var(--w-hue-rotate) var(--w-invert) var(--w-saturate) var(--w-sepia) var(--w-drop-shadow)",
+      filter:
+        "var(--w-blur) var(--w-brightness) var(--w-contrast) var(--w-grayscale) var(--w-hue-rotate) var(--w-invert) var(--w-saturate) var(--w-sepia) var(--w-drop-shadow)",
     })
   )
   .init(buildFilter);

@@ -1,4 +1,11 @@
-import { boxDecorationBreakConfig, opacityConfig, textDecorationOffsetConfig, textDecorationStyleConfig, textDecorationThicknessConfig, textDecorationTypeConfig } from "@windijs/config";
+import {
+  boxDecorationBreakConfig,
+  opacityConfig,
+  textDecorationOffsetConfig,
+  textDecorationStyleConfig,
+  textDecorationThicknessConfig,
+  textDecorationTypeConfig,
+} from "@windijs/config";
 import { colorHandler, configHandler, createUtility } from "@windijs/core";
 import { prop } from "@windijs/helpers";
 

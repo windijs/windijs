@@ -24,7 +24,13 @@ test("Transition Duration", () => {
 
 test("Transition Duration without config", () => {
   const duration = createUtility("duration")
-    .use(msHandler<Record<0 | 50 | 75 | 100 | 150 | 200, StyleObject> & Record<string | number, StyleObject>>([prop`-webkit-transition-duration`, prop`-o-transition-duration`, "transitionDuration"]))
+    .use(
+      msHandler<Record<0 | 50 | 75 | 100 | 150 | 200, StyleObject> & Record<string | number, StyleObject>>([
+        prop`-webkit-transition-duration`,
+        prop`-o-transition-duration`,
+        "transitionDuration",
+      ])
+    )
     .init();
 
   expect(duration[50].css).toMatchSnapshot();
@@ -45,7 +51,13 @@ test("Transition Delay", () => {
 
 test("Transition Delay without config", () => {
   const delay = createUtility("delay")
-    .use(msHandler<Record<0 | 50 | 75 | 100 | 150 | 200, StyleObject> & Record<string | number, StyleObject>>([prop`-webkit-transition-delay`, prop`-o-transition-delay`, "transitionDelay"]))
+    .use(
+      msHandler<Record<0 | 50 | 75 | 100 | 150 | 200, StyleObject> & Record<string | number, StyleObject>>([
+        prop`-webkit-transition-delay`,
+        prop`-o-transition-delay`,
+        "transitionDelay",
+      ])
+    )
     .init();
 
   expect(delay[50].css).toMatchSnapshot();

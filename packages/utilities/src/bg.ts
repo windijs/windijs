@@ -27,5 +27,11 @@ export default createUtility("bg")
   .case("blend", configHandler(blendModeConfig, "backgroundBlendMode"))
   .case("origin", configHandler(backgroundOriginConfig, "backgroundOrigin"))
   .case("opacity", configHandler(opacityConfig, prop`--w-bg-opacity`))
-  .case("gradient", callHandler(buildLinearGradient, meld(configHandler(gradientDirectionConfig, buildGradientDirection), configHandler(gradientConfig, "backgroundImage"))))
+  .case(
+    "gradient",
+    callHandler(
+      buildLinearGradient,
+      meld(configHandler(gradientDirectionConfig, buildGradientDirection), configHandler(gradientConfig, "backgroundImage"))
+    )
+  )
   .init();

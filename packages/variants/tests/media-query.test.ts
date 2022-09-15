@@ -1,7 +1,33 @@
 import { bundle } from "@windijs/helpers";
 import { bg } from "@windijs/utilities";
 
-import { $dark, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, dark, landscape, lg, light, ltr, md, motionReduce, motionSafe, portrait, rtl, sm, xl, xxl } from "../src/mediaQuery";
+import {
+  $dark,
+  $lg,
+  $light,
+  $md,
+  $sm,
+  $xl,
+  $xxl,
+  _lg,
+  _md,
+  _sm,
+  _xl,
+  _xxl,
+  dark,
+  landscape,
+  lg,
+  light,
+  ltr,
+  md,
+  motionReduce,
+  motionSafe,
+  portrait,
+  rtl,
+  sm,
+  xl,
+  xxl,
+} from "../src/mediaQuery";
 
 const utilities = [bg.blue[500], bg.clip.content];
 

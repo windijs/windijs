@@ -1,4 +1,14 @@
-import { blurConfig, brightnessConfig, contrastConfig, grayscaleConfig, hueRotateConfig, invertConfig, opacityConfig, saturateConfig, sepiaConfig } from "@windijs/config";
+import {
+  blurConfig,
+  brightnessConfig,
+  contrastConfig,
+  grayscaleConfig,
+  hueRotateConfig,
+  invertConfig,
+  opacityConfig,
+  saturateConfig,
+  sepiaConfig,
+} from "@windijs/config";
 import { buildBackdropFilter, configHandler, createUtility, cssHandler } from "@windijs/core";
 import { css } from "@windijs/helpers";
 

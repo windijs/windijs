@@ -1,4 +1,13 @@
-import { fontSizeConfig, opacityConfig, textAlignConfig, textShadowConfig, textStrokeWidthConfig, textTransformConfig, verticalAlignConfig, whiteSpaceConfig } from "@windijs/config";
+import {
+  fontSizeConfig,
+  opacityConfig,
+  textAlignConfig,
+  textShadowConfig,
+  textStrokeWidthConfig,
+  textTransformConfig,
+  verticalAlignConfig,
+  whiteSpaceConfig,
+} from "@windijs/config";
 import { colorHandler, configHandler, createUtility, cssHandler, fontSizeHandler, guard, meld, pxHandler } from "@windijs/core";
 import { prop, StyleObject } from "@windijs/helpers";
 
@@ -24,6 +33,10 @@ export default createUtility("text")
   .case("space", configHandler(whiteSpaceConfig, "whiteSpace"))
   .case(
     "break",
-    meld(guard("normal", cssHandler({ wordBreak: "normal", overflowWrap: "normal" })), guard("words", cssHandler({ overflowWrap: "break-word" })), guard("all", cssHandler({ wordBreak: "break-all" })))
+    meld(
+      guard("normal", cssHandler({ wordBreak: "normal", overflowWrap: "normal" })),
+      guard("words", cssHandler({ overflowWrap: "break-word" })),
+      guard("all", cssHandler({ wordBreak: "break-all" }))
+    )
   )
   .init();
