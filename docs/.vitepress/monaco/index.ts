@@ -1,16 +1,18 @@
 import * as monaco from "monaco-editor";
-
-import { Registry } from 'monaco-textmate' // peer dependency
-import cssWorker from "monaco-editor/esm/vs/language/css/css.worker?worker";
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
+import cssWorker from "monaco-editor/esm/vs/language/css/css.worker?worker";
 import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker";
 import jsonWorker from "monaco-editor/esm/vs/language/json/json.worker?worker";
-import { loadWASM } from 'onigasm' // peer dependency of 'monaco-textmate'
 import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
+
+import { wireTmGrammars } from "monaco-editor-textmate";
+import { Registry } from "monaco-textmate"; // peer dependency
+import { loadWASM } from "onigasm"; // peer dependency of 'monaco-textmate'
+
 import vsDarkPlus from "./themes/dark_plus.json";
 import vsLightPlus from "./themes/light_plus.json";
-import { wireTmGrammars } from 'monaco-editor-textmate'
 import preactDts from "./types/preact.d.ts?raw";
+import windijsDts from "./types/windijs.d.ts?raw";
 import windiColorsDts from "./types/windijsColors.d.ts?raw";
 import windiConfigDts from "./types/windijsConfig.d.ts?raw";
 import windiCoreDts from "./types/windijsCore.d.ts?raw";
@@ -19,8 +21,6 @@ import windiSharedDts from "./types/windijsShared.d.ts?raw";
 import windiStyleDts from "./types/windijsStyle.d.ts?raw";
 import windiUtilitiesDts from "./types/windijsUtilities.d.ts?raw";
 import windiVariantsDts from "./types/windijsVariants.d.ts?raw";
-import windijsDts from "./types/windijs.d.ts?raw";
-
 
 // @ts-ignore
 self.MonacoEnvironment = {
@@ -58,26 +58,681 @@ monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
   allowJs: true,
 });
 
-monaco.languages.typescript.typescriptDefaults.addExtraLib(windiColorsDts, 'file:///node_modules/@windijs/colors/index.d.ts');
-monaco.languages.typescript.typescriptDefaults.addExtraLib(windiConfigDts, 'file:///node_modules/@windijs/config/index.d.ts');
-monaco.languages.typescript.typescriptDefaults.addExtraLib(windiCoreDts, 'file:///node_modules/@windijs/core/index.d.ts');
-monaco.languages.typescript.typescriptDefaults.addExtraLib(windiHelpersDts, 'file:///node_modules/@windijs/helpers/index.d.ts');
-monaco.languages.typescript.typescriptDefaults.addExtraLib(windiSharedDts, 'file:///node_modules/@windijs/shared/index.d.ts');
-monaco.languages.typescript.typescriptDefaults.addExtraLib(windiStyleDts, 'file:///node_modules/@windijs/style/index.d.ts');
-monaco.languages.typescript.typescriptDefaults.addExtraLib(windiUtilitiesDts, 'file:///node_modules/@windijs/utilities/index.d.ts');
-monaco.languages.typescript.typescriptDefaults.addExtraLib(windiVariantsDts, 'file:///node_modules/@windijs/variants/index.d.ts');
-monaco.languages.typescript.typescriptDefaults.addExtraLib(windijsDts, 'file:///node_modules/windijs/index.d.ts');
+monaco.languages.typescript.typescriptDefaults.addExtraLib(windiColorsDts, "file:///node_modules/@windijs/colors/index.d.ts");
+monaco.languages.typescript.typescriptDefaults.addExtraLib(windiConfigDts, "file:///node_modules/@windijs/config/index.d.ts");
+monaco.languages.typescript.typescriptDefaults.addExtraLib(windiCoreDts, "file:///node_modules/@windijs/core/index.d.ts");
+monaco.languages.typescript.typescriptDefaults.addExtraLib(windiHelpersDts, "file:///node_modules/@windijs/helpers/index.d.ts");
+monaco.languages.typescript.typescriptDefaults.addExtraLib(windiSharedDts, "file:///node_modules/@windijs/shared/index.d.ts");
+monaco.languages.typescript.typescriptDefaults.addExtraLib(windiStyleDts, "file:///node_modules/@windijs/style/index.d.ts");
+monaco.languages.typescript.typescriptDefaults.addExtraLib(windiUtilitiesDts, "file:///node_modules/@windijs/utilities/index.d.ts");
+monaco.languages.typescript.typescriptDefaults.addExtraLib(windiVariantsDts, "file:///node_modules/@windijs/variants/index.d.ts");
+monaco.languages.typescript.typescriptDefaults.addExtraLib(windijsDts, "file:///node_modules/windijs/index.d.ts");
 
-const preactLibUri = 'file:///node_modules/preact/index.d.ts';
+const preactLibUri = "file:///node_modules/preact/index.d.ts";
 monaco.languages.typescript.typescriptDefaults.addExtraLib(preactDts, preactLibUri);
-monaco.editor.createModel(preactDts, 'typescript', monaco.Uri.parse(preactLibUri));
+monaco.editor.createModel(preactDts, "typescript", monaco.Uri.parse(preactLibUri));
 
+const utilities = [
+  "animate",
+  "aspect",
+  "auto",
+  "backdrop",
+  "bg",
+  "blend" /*"blur"*/,
+  ,
+  "border",
+  "brightness",
+  "col",
+  "colors",
+  "container",
+  "contrast",
+  "decoration",
+  "delay",
+  "divide",
+  "dropShadow",
+  "duration",
+  "ease",
+  "fill",
+  "filter",
+  "flex",
+  "font",
+  "from",
+  "gap",
+  "grayscale",
+  "grid",
+  "hueRotate",
+  "hyphens",
+  "image",
+  "indent",
+  "invert",
+  "leading",
+  "list",
+  "m",
+  "mb",
+  "ml",
+  "mr",
+  "mt",
+  "mx",
+  "my",
+  "opacity" /*"origin"*/,
+  ,
+  "outline",
+  "overflow",
+  "overscroll",
+  "p",
+  "pb",
+  "perspect",
+  "pl",
+  "placeholder",
+  "pr",
+  "preserve",
+  "pt",
+  "px",
+  "py",
+  "ring",
+  "rotate",
+  "rounded",
+  "row",
+  "saturate",
+  "scale",
+  "sepia",
+  "shadow",
+  "skew",
+  "space",
+  "sr",
+  "stroke",
+  "tab",
+  "text",
+  "to",
+  "tracking",
+  "transform",
+  "transition",
+  "translate",
+  "via",
+  "w",
+  "write",
+];
+const variants = [
+  "$dark",
+  "$default",
+  "$lg",
+  "$light",
+  "$md",
+  "$sm",
+  "$xl",
+  "$xxl",
+  "_lg",
+  "_md",
+  "_sm",
+  "_xl",
+  "_xxl",
+  "active",
+  "after",
+  "all",
+  "before",
+  "checked",
+  "children",
+  "dark",
+  "disabled",
+  "empty",
+  "enabled",
+  "even",
+  "evenOfType",
+  "first",
+  "firstLetter",
+  "firstLine",
+  "firstOfType" /*"focus"*/,
+  ,
+  "focusVisible",
+  "focusWithin",
+  "groupActive",
+  "groupFocus",
+  "groupHover",
+  "groupVisited",
+  "hover",
+  "indeterminate",
+  "invalid",
+  "landscape",
+  "last",
+  "lastOfType",
+  "lg",
+  "light",
+  "link",
+  "ltr",
+  "marker",
+  "md",
+  "motionReduce",
+  "motionSafe",
+  "notChecked",
+  "notDisabled",
+  "notFirst",
+  "notFirstOfType",
+  "notLast",
+  "notLastOfType",
+  "notOnlyChild",
+  "notOnlyOfType",
+  "odd",
+  "oddOfType",
+  "onlyChild",
+  "onlyOfType",
+  "optional",
+  "placeholderShown",
+  "portrait",
+  "readOnly",
+  "readWrite",
+  "required",
+  "root",
+  "rtl",
+  "selection",
+  "sibling",
+  "siblings",
+  "sm",
+  "svg",
+  "target",
+  "valid",
+  "visited",
+  "xl",
+  "xxl",
+];
+const styles = [
+  "accentColor",
+  "additiveSymbols",
+  "alignContent",
+  "alignItems",
+  "alignSelf",
+  "alignTracks" /*"all"*/,
+  ,
+  "alt",
+  "animation",
+  "animationDelay",
+  "animationDirection",
+  "animationDuration",
+  "animationFillMode",
+  "animationIterationCount",
+  "animationName",
+  "animationPlayState",
+  "animationTimeline",
+  "animationTimingFunction",
+  "appearance",
+  "ascentOverride",
+  "aspectRatio",
+  "azimuth",
+  "backdropFilter",
+  "backfaceVisibility",
+  "background",
+  "backgroundAttachment",
+  "backgroundBlendMode",
+  "backgroundClip",
+  "backgroundColor",
+  "backgroundImage",
+  "backgroundOrigin",
+  "backgroundPosition",
+  "backgroundPositionX",
+  "backgroundPositionY",
+  "backgroundRepeat",
+  "backgroundSize",
+  "behavior",
+  "bleed",
+  "blockSize" /*"border"*/,
+  ,
+  "borderBlock",
+  "borderBlockColor",
+  "borderBlockEnd",
+  "borderBlockEndColor",
+  "borderBlockEndStyle",
+  "borderBlockEndWidth",
+  "borderBlockStart",
+  "borderBlockStartColor",
+  "borderBlockStartStyle",
+  "borderBlockStartWidth",
+  "borderBlockStyle",
+  "borderBlockWidth",
+  "borderBottom",
+  "borderBottomColor",
+  "borderBottomLeftRadius",
+  "borderBottomRightRadius",
+  "borderBottomStyle",
+  "borderBottomWidth",
+  "borderCollapse",
+  "borderColor",
+  "borderEndEndRadius",
+  "borderEndStartRadius",
+  "borderImage",
+  "borderImageOutset",
+  "borderImageRepeat",
+  "borderImageSlice",
+  "borderImageSource",
+  "borderImageWidth",
+  "borderInline",
+  "borderInlineColor",
+  "borderInlineEnd",
+  "borderInlineEndColor",
+  "borderInlineEndStyle",
+  "borderInlineEndWidth",
+  "borderInlineStart",
+  "borderInlineStartColor",
+  "borderInlineStartStyle",
+  "borderInlineStartWidth",
+  "borderInlineStyle",
+  "borderInlineWidth",
+  "borderLeft",
+  "borderLeftColor",
+  "borderLeftStyle",
+  "borderLeftWidth",
+  "borderRadius",
+  "borderRight",
+  "borderRightColor",
+  "borderRightStyle",
+  "borderRightWidth",
+  "borderSpacing",
+  "borderStartEndRadius",
+  "borderStartStartRadius",
+  "borderStyle",
+  "borderTop",
+  "borderTopColor",
+  "borderTopLeftRadius",
+  "borderTopRightRadius",
+  "borderTopStyle",
+  "borderTopWidth",
+  "borderWidth",
+  "bottom",
+  "boxAlign",
+  "boxDecorationBreak",
+  "boxDirection",
+  "boxFlex",
+  "boxFlexGroup",
+  "boxLines",
+  "boxOrdinalGroup",
+  "boxOrient",
+  "boxPack",
+  "boxShadow",
+  "boxSizing",
+  "breakAfter",
+  "breakBefore",
+  "breakInside",
+  "captionSide",
+  "caretColor",
+  "clear",
+  "clip",
+  "clipPath",
+  "clipRule",
+  "color",
+  "colorInterpolationFilters",
+  "colorScheme",
+  "columnCount",
+  "columnFill",
+  "columnGap",
+  "columnRule",
+  "columnRuleColor",
+  "columnRuleStyle",
+  "columnRuleWidth",
+  "columnSpan",
+  "columnWidth",
+  "columns",
+  "contain",
+  "content",
+  "contentVisibility",
+  "counterIncrement",
+  "counterReset",
+  "counterSet",
+  "cursor",
+  "descentOverride",
+  "direction",
+  "display",
+  "emptyCells",
+  "enableBackground",
+  "fallback" /*"fill"*/,
+  ,
+  "fillOpacity",
+  "fillRule" /*"filter"*/ /*"flex"*/,
+  ,
+  ,
+  "flexBasis",
+  "flexDirection",
+  "flexFlow",
+  "flexGrow",
+  "flexShrink",
+  "flexWrap",
+  "float",
+  "floodColor",
+  "floodOpacity" /*"font"*/,
+  ,
+  "fontDisplay",
+  "fontFamily",
+  "fontFeatureSettings",
+  "fontKerning",
+  "fontLanguageOverride",
+  "fontOpticalSizing",
+  "fontSize",
+  "fontSizeAdjust",
+  "fontSmooth",
+  "fontStretch",
+  "fontStyle",
+  "fontSynthesis",
+  "fontVariant",
+  "fontVariantAlternates",
+  "fontVariantCaps",
+  "fontVariantEastAsian",
+  "fontVariantLigatures",
+  "fontVariantNumeric",
+  "fontVariantPosition",
+  "fontVariationSettings",
+  "fontWeight",
+  "forcedColorAdjust" /*"gap"*/,
+  ,
+  "glyphOrientationHorizontal",
+  "glyphOrientationVertical" /*"grid"*/,
+  ,
+  "gridArea",
+  "gridAutoColumns",
+  "gridAutoFlow",
+  "gridAutoRows",
+  "gridColumn",
+  "gridColumnEnd",
+  "gridColumnGap",
+  "gridColumnStart",
+  "gridGap",
+  "gridRow",
+  "gridRowEnd",
+  "gridRowGap",
+  "gridRowStart",
+  "gridTemplate",
+  "gridTemplateAreas",
+  "gridTemplateColumns",
+  "gridTemplateRows",
+  "hangingPunctuation",
+  "height",
+  "hyphenateCharacter" /*"hyphens"*/,
+  ,
+  "imageOrientation",
+  "imageRendering",
+  "imageResolution",
+  "imeMode",
+  "inherits",
+  "initialLetter",
+  "initialLetterAlign",
+  "initialValue",
+  "inlineSize",
+  "inputSecurity",
+  "inset",
+  "insetBlock",
+  "insetBlockEnd",
+  "insetBlockStart",
+  "insetInline",
+  "insetInlineEnd",
+  "insetInlineStart",
+  "isolation",
+  "justifyContent",
+  "justifyItems",
+  "justifySelf",
+  "justifyTracks",
+  "kerning",
+  "left",
+  "letterSpacing",
+  "lightingColor",
+  "lineBreak",
+  "lineClamp",
+  "lineGapOverride",
+  "lineHeight",
+  "lineHeightStep",
+  "listStyle",
+  "listStyleImage",
+  "listStylePosition",
+  "listStyleType",
+  "margin",
+  "marginBlock",
+  "marginBlockEnd",
+  "marginBlockStart",
+  "marginBottom",
+  "marginInline",
+  "marginInlineEnd",
+  "marginInlineStart",
+  "marginLeft",
+  "marginRight",
+  "marginTop",
+  "marginTrim" /*"marker"*/,
+  ,
+  "markerEnd",
+  "markerMid",
+  "markerStart",
+  "marks",
+  "mask",
+  "maskBorder",
+  "maskBorderMode",
+  "maskBorderOutset",
+  "maskBorderRepeat",
+  "maskBorderSlice",
+  "maskBorderSource",
+  "maskBorderWidth",
+  "maskClip",
+  "maskComposite",
+  "maskImage",
+  "maskMode",
+  "maskOrigin",
+  "maskPosition",
+  "maskRepeat",
+  "maskSize",
+  "maskType",
+  "masonryAutoFlow",
+  "mathStyle",
+  "maxBlockSize",
+  "maxHeight",
+  "maxInlineSize",
+  "maxLines",
+  "maxWidth",
+  "maxZoom",
+  "minBlockSize",
+  "minHeight",
+  "minInlineSize",
+  "minWidth",
+  "minZoom",
+  "mixBlendMode",
+  "motion",
+  "motionOffset",
+  "motionPath",
+  "motionRotation",
+  "navDown",
+  "navIndex",
+  "navLeft",
+  "navRight",
+  "navUp",
+  "negative",
+  "objectFit",
+  "objectPosition",
+  "offset",
+  "offsetAnchor",
+  "offsetBlockEnd",
+  "offsetBlockStart",
+  "offsetDistance",
+  "offsetInlineEnd",
+  "offsetInlineStart",
+  "offsetPath",
+  "offsetPosition",
+  "offsetRotate" /*"opacity"*/,
+  ,
+  "order" /*"orientation"*/,
+  ,
+  "orphans" /*"outline"*/,
+  ,
+  "outlineColor",
+  "outlineOffset",
+  "outlineStyle",
+  "outlineWidth" /*"overflow"*/,
+  ,
+  "overflowAnchor",
+  "overflowBlock",
+  "overflowClipBox",
+  "overflowClipMargin",
+  "overflowInline",
+  "overflowWrap",
+  "overflowX",
+  "overflowY",
+  "overscrollBehavior",
+  "overscrollBehaviorBlock",
+  "overscrollBehaviorInline",
+  "overscrollBehaviorX",
+  "overscrollBehaviorY",
+  "pad",
+  "padding",
+  "paddingBlock",
+  "paddingBlockEnd",
+  "paddingBlockStart",
+  "paddingBottom",
+  "paddingInline",
+  "paddingInlineEnd",
+  "paddingInlineStart",
+  "paddingLeft",
+  "paddingRight",
+  "paddingTop",
+  "pageBreakAfter",
+  "pageBreakBefore",
+  "pageBreakInside",
+  "paintOrder",
+  "perspective",
+  "perspectiveOrigin",
+  "placeContent",
+  "placeItems",
+  "placeSelf",
+  "pointerEvents",
+  "position",
+  "prefix",
+  "printColorAdjust",
+  "quotes",
+  "range",
+  "resize",
+  "right" /*"rotate"*/,
+  ,
+  "rowGap",
+  "rubyAlign",
+  "rubyMerge",
+  "rubyOverhang",
+  "rubyPosition",
+  "rubySpan" /*"scale"*/,
+  ,
+  "scrollBehavior",
+  "scrollMargin",
+  "scrollMarginBlock",
+  "scrollMarginBlockEnd",
+  "scrollMarginBlockStart",
+  "scrollMarginBottom",
+  "scrollMarginInline",
+  "scrollMarginInlineEnd",
+  "scrollMarginInlineStart",
+  "scrollMarginLeft",
+  "scrollMarginRight",
+  "scrollMarginTop",
+  "scrollPadding",
+  "scrollPaddingBlock",
+  "scrollPaddingBlockEnd",
+  "scrollPaddingBlockStart",
+  "scrollPaddingBottom",
+  "scrollPaddingInline",
+  "scrollPaddingInlineEnd",
+  "scrollPaddingInlineStart",
+  "scrollPaddingLeft",
+  "scrollPaddingRight",
+  "scrollPaddingTop",
+  "scrollSnapAlign",
+  "scrollSnapCoordinate",
+  "scrollSnapDestination",
+  "scrollSnapPointsX",
+  "scrollSnapPointsY",
+  "scrollSnapStop",
+  "scrollSnapType",
+  "scrollSnapTypeX",
+  "scrollSnapTypeY" /*"scrollbar-3dlight-color"*/,
+  ,
+  "scrollbarArrowColor",
+  "scrollbarBaseColor",
+  "scrollbarColor",
+  "scrollbarDarkshadowColor",
+  "scrollbarFaceColor",
+  "scrollbarGutter",
+  "scrollbarHighlightColor",
+  "scrollbarShadowColor",
+  "scrollbarTrackColor",
+  "scrollbarWidth",
+  "shapeImageThreshold",
+  "shapeMargin",
+  "shapeOutside",
+  "shapeRendering",
+  "size",
+  "sizeAdjust",
+  "speakAs",
+  "src",
+  "stopColor",
+  "stopOpacity" /*"stroke"*/,
+  ,
+  "strokeDasharray",
+  "strokeDashoffset",
+  "strokeLinecap",
+  "strokeLinejoin",
+  "strokeMiterlimit",
+  "strokeOpacity",
+  "strokeWidth",
+  "suffix",
+  "symbols",
+  "syntax",
+  "system",
+  "tabSize",
+  "tableLayout",
+  "textAlign",
+  "textAlignLast",
+  "textAnchor",
+  "textCombineUpright",
+  "textDecoration",
+  "textDecorationColor",
+  "textDecorationLine",
+  "textDecorationSkip",
+  "textDecorationSkipInk",
+  "textDecorationStyle",
+  "textDecorationThickness",
+  "textEmphasis",
+  "textEmphasisColor",
+  "textEmphasisPosition",
+  "textEmphasisStyle",
+  "textIndent",
+  "textJustify",
+  "textOrientation",
+  "textOverflow",
+  "textRendering",
+  "textShadow",
+  "textSizeAdjust",
+  "textTransform",
+  "textUnderlineOffset",
+  "textUnderlinePosition" /*"top"*/,
+  ,
+  "touchAction" /*"transform"*/,
+  ,
+  "transformBox",
+  "transformOrigin",
+  "transformStyle" /*"transition"*/,
+  ,
+  "transitionDelay",
+  "transitionDuration",
+  "transitionProperty",
+  "transitionTimingFunction" /*"translate"*/,
+  ,
+  "unicodeBidi",
+  "unicodeRange",
+  "userSelect",
+  "userZoom",
+  "verticalAlign",
+  "viewportFit",
+  "visibility",
+  "whiteSpace",
+  "widows",
+  "width",
+  "willChange",
+  "wordBreak",
+  "wordSpacing",
+  "wordWrap",
+  "writingMode",
+  "zIndex",
+  "zoom",
+];
 
-const utilities = ["animate", "aspect", "auto", "backdrop", "bg", "blend", /*"blur"*/, "border", "brightness", "col", "colors", "container", "contrast", "decoration", "delay", "divide", "dropShadow", "duration", "ease", "fill", "filter", "flex", "font", "from", "gap", "grayscale", "grid", "hueRotate", "hyphens", "image", "indent", "invert", "leading", "list", "m", "mb", "ml", "mr", "mt", "mx", "my", "opacity", /*"origin"*/, "outline", "overflow", "overscroll", "p", "pb", "perspect", "pl", "placeholder", "pr", "preserve", "pt", "px", "py", "ring", "rotate", "rounded", "row", "saturate", "scale", "sepia", "shadow", "skew", "space", "sr", "stroke", "tab", "text", "to", "tracking", "transform", "transition", "translate", "via", "w", "write"];
-const variants = ["$dark", "$default", "$lg", "$light", "$md", "$sm", "$xl", "$xxl", "_lg", "_md", "_sm", "_xl", "_xxl", "active", "after", "all", "before", "checked", "children", "dark", "disabled", "empty", "enabled", "even", "evenOfType", "first", "firstLetter", "firstLine", "firstOfType", /*"focus"*/, "focusVisible", "focusWithin", "groupActive", "groupFocus", "groupHover", "groupVisited", "hover", "indeterminate", "invalid", "landscape", "last", "lastOfType", "lg", "light", "link", "ltr", "marker", "md", "motionReduce", "motionSafe", "notChecked", "notDisabled", "notFirst", "notFirstOfType", "notLast", "notLastOfType", "notOnlyChild", "notOnlyOfType", "odd", "oddOfType", "onlyChild", "onlyOfType", "optional", "placeholderShown", "portrait", "readOnly", "readWrite", "required", "root", "rtl", "selection", "sibling", "siblings", "sm", "svg", "target", "valid", "visited", "xl", "xxl"];
-const styles = ["accentColor", "additiveSymbols", "alignContent", "alignItems", "alignSelf", "alignTracks", /*"all"*/, "alt", "animation", "animationDelay", "animationDirection", "animationDuration", "animationFillMode", "animationIterationCount", "animationName", "animationPlayState", "animationTimeline", "animationTimingFunction", "appearance", "ascentOverride", "aspectRatio", "azimuth", "backdropFilter", "backfaceVisibility", "background", "backgroundAttachment", "backgroundBlendMode", "backgroundClip", "backgroundColor", "backgroundImage", "backgroundOrigin", "backgroundPosition", "backgroundPositionX", "backgroundPositionY", "backgroundRepeat", "backgroundSize", "behavior", "bleed", "blockSize", /*"border"*/, "borderBlock", "borderBlockColor", "borderBlockEnd", "borderBlockEndColor", "borderBlockEndStyle", "borderBlockEndWidth", "borderBlockStart", "borderBlockStartColor", "borderBlockStartStyle", "borderBlockStartWidth", "borderBlockStyle", "borderBlockWidth", "borderBottom", "borderBottomColor", "borderBottomLeftRadius", "borderBottomRightRadius", "borderBottomStyle", "borderBottomWidth", "borderCollapse", "borderColor", "borderEndEndRadius", "borderEndStartRadius", "borderImage", "borderImageOutset", "borderImageRepeat", "borderImageSlice", "borderImageSource", "borderImageWidth", "borderInline", "borderInlineColor", "borderInlineEnd", "borderInlineEndColor", "borderInlineEndStyle", "borderInlineEndWidth", "borderInlineStart", "borderInlineStartColor", "borderInlineStartStyle", "borderInlineStartWidth", "borderInlineStyle", "borderInlineWidth", "borderLeft", "borderLeftColor", "borderLeftStyle", "borderLeftWidth", "borderRadius", "borderRight", "borderRightColor", "borderRightStyle", "borderRightWidth", "borderSpacing", "borderStartEndRadius", "borderStartStartRadius", "borderStyle", "borderTop", "borderTopColor", "borderTopLeftRadius", "borderTopRightRadius", "borderTopStyle", "borderTopWidth", "borderWidth", "bottom", "boxAlign", "boxDecorationBreak", "boxDirection", "boxFlex", "boxFlexGroup", "boxLines", "boxOrdinalGroup", "boxOrient", "boxPack", "boxShadow", "boxSizing", "breakAfter", "breakBefore", "breakInside", "captionSide", "caretColor", "clear", "clip", "clipPath", "clipRule", "color", "colorInterpolationFilters", "colorScheme", "columnCount", "columnFill", "columnGap", "columnRule", "columnRuleColor", "columnRuleStyle", "columnRuleWidth", "columnSpan", "columnWidth", "columns", "contain", "content", "contentVisibility", "counterIncrement", "counterReset", "counterSet", "cursor", "descentOverride", "direction", "display", "emptyCells", "enableBackground", "fallback", /*"fill"*/, "fillOpacity", "fillRule", /*"filter"*/, /*"flex"*/, "flexBasis", "flexDirection", "flexFlow", "flexGrow", "flexShrink", "flexWrap", "float", "floodColor", "floodOpacity", /*"font"*/, "fontDisplay", "fontFamily", "fontFeatureSettings", "fontKerning", "fontLanguageOverride", "fontOpticalSizing", "fontSize", "fontSizeAdjust", "fontSmooth", "fontStretch", "fontStyle", "fontSynthesis", "fontVariant", "fontVariantAlternates", "fontVariantCaps", "fontVariantEastAsian", "fontVariantLigatures", "fontVariantNumeric", "fontVariantPosition", "fontVariationSettings", "fontWeight", "forcedColorAdjust", /*"gap"*/, "glyphOrientationHorizontal", "glyphOrientationVertical", /*"grid"*/, "gridArea", "gridAutoColumns", "gridAutoFlow", "gridAutoRows", "gridColumn", "gridColumnEnd", "gridColumnGap", "gridColumnStart", "gridGap", "gridRow", "gridRowEnd", "gridRowGap", "gridRowStart", "gridTemplate", "gridTemplateAreas", "gridTemplateColumns", "gridTemplateRows", "hangingPunctuation", "height", "hyphenateCharacter", /*"hyphens"*/, "imageOrientation", "imageRendering", "imageResolution", "imeMode", "inherits", "initialLetter", "initialLetterAlign", "initialValue", "inlineSize", "inputSecurity", "inset", "insetBlock", "insetBlockEnd", "insetBlockStart", "insetInline", "insetInlineEnd", "insetInlineStart", "isolation", "justifyContent", "justifyItems", "justifySelf", "justifyTracks", "kerning", "left", "letterSpacing", "lightingColor", "lineBreak", "lineClamp", "lineGapOverride", "lineHeight", "lineHeightStep", "listStyle", "listStyleImage", "listStylePosition", "listStyleType", "margin", "marginBlock", "marginBlockEnd", "marginBlockStart", "marginBottom", "marginInline", "marginInlineEnd", "marginInlineStart", "marginLeft", "marginRight", "marginTop", "marginTrim", /*"marker"*/, "markerEnd", "markerMid", "markerStart", "marks", "mask", "maskBorder", "maskBorderMode", "maskBorderOutset", "maskBorderRepeat", "maskBorderSlice", "maskBorderSource", "maskBorderWidth", "maskClip", "maskComposite", "maskImage", "maskMode", "maskOrigin", "maskPosition", "maskRepeat", "maskSize", "maskType", "masonryAutoFlow", "mathStyle", "maxBlockSize", "maxHeight", "maxInlineSize", "maxLines", "maxWidth", "maxZoom", "minBlockSize", "minHeight", "minInlineSize", "minWidth", "minZoom", "mixBlendMode", "motion", "motionOffset", "motionPath", "motionRotation", "navDown", "navIndex", "navLeft", "navRight", "navUp", "negative", "objectFit", "objectPosition", "offset", "offsetAnchor", "offsetBlockEnd", "offsetBlockStart", "offsetDistance", "offsetInlineEnd", "offsetInlineStart", "offsetPath", "offsetPosition", "offsetRotate", /*"opacity"*/, "order", /*"orientation"*/, "orphans", /*"outline"*/, "outlineColor", "outlineOffset", "outlineStyle", "outlineWidth", /*"overflow"*/, "overflowAnchor", "overflowBlock", "overflowClipBox", "overflowClipMargin", "overflowInline", "overflowWrap", "overflowX", "overflowY", "overscrollBehavior", "overscrollBehaviorBlock", "overscrollBehaviorInline", "overscrollBehaviorX", "overscrollBehaviorY", "pad", "padding", "paddingBlock", "paddingBlockEnd", "paddingBlockStart", "paddingBottom", "paddingInline", "paddingInlineEnd", "paddingInlineStart", "paddingLeft", "paddingRight", "paddingTop", "pageBreakAfter", "pageBreakBefore", "pageBreakInside", "paintOrder", "perspective", "perspectiveOrigin", "placeContent", "placeItems", "placeSelf", "pointerEvents", "position", "prefix", "printColorAdjust", "quotes", "range", "resize", "right", /*"rotate"*/, "rowGap", "rubyAlign", "rubyMerge", "rubyOverhang", "rubyPosition", "rubySpan", /*"scale"*/, "scrollBehavior", "scrollMargin", "scrollMarginBlock", "scrollMarginBlockEnd", "scrollMarginBlockStart", "scrollMarginBottom", "scrollMarginInline", "scrollMarginInlineEnd", "scrollMarginInlineStart", "scrollMarginLeft", "scrollMarginRight", "scrollMarginTop", "scrollPadding", "scrollPaddingBlock", "scrollPaddingBlockEnd", "scrollPaddingBlockStart", "scrollPaddingBottom", "scrollPaddingInline", "scrollPaddingInlineEnd", "scrollPaddingInlineStart", "scrollPaddingLeft", "scrollPaddingRight", "scrollPaddingTop", "scrollSnapAlign", "scrollSnapCoordinate", "scrollSnapDestination", "scrollSnapPointsX", "scrollSnapPointsY", "scrollSnapStop", "scrollSnapType", "scrollSnapTypeX", "scrollSnapTypeY", /*"scrollbar-3dlight-color"*/, "scrollbarArrowColor", "scrollbarBaseColor", "scrollbarColor", "scrollbarDarkshadowColor", "scrollbarFaceColor", "scrollbarGutter", "scrollbarHighlightColor", "scrollbarShadowColor", "scrollbarTrackColor", "scrollbarWidth", "shapeImageThreshold", "shapeMargin", "shapeOutside", "shapeRendering", "size", "sizeAdjust", "speakAs", "src", "stopColor", "stopOpacity", /*"stroke"*/, "strokeDasharray", "strokeDashoffset", "strokeLinecap", "strokeLinejoin", "strokeMiterlimit", "strokeOpacity", "strokeWidth", "suffix", "symbols", "syntax", "system", "tabSize", "tableLayout", "textAlign", "textAlignLast", "textAnchor", "textCombineUpright", "textDecoration", "textDecorationColor", "textDecorationLine", "textDecorationSkip", "textDecorationSkipInk", "textDecorationStyle", "textDecorationThickness", "textEmphasis", "textEmphasisColor", "textEmphasisPosition", "textEmphasisStyle", "textIndent", "textJustify", "textOrientation", "textOverflow", "textRendering", "textShadow", "textSizeAdjust", "textTransform", "textUnderlineOffset", "textUnderlinePosition", /*"top"*/, "touchAction", /*"transform"*/, "transformBox", "transformOrigin", "transformStyle", /*"transition"*/, "transitionDelay", "transitionDuration", "transitionProperty", "transitionTimingFunction", /*"translate"*/, "unicodeBidi", "unicodeRange", "userSelect", "userZoom", "verticalAlign", "viewportFit", "visibility", "whiteSpace", "widows", "width", "willChange", "wordBreak", "wordSpacing", "wordWrap", "writingMode", "zIndex", "zoom"];
-
-const globalUri = 'file:///global.d.ts';
+const globalUri = "file:///global.d.ts";
 const globalSource = `
 import * as helpers from "@windijs/helpers";
 import * as utilities from "@windijs/utilities";
@@ -88,7 +743,10 @@ import { style as $style } from "@windijs/style";
 declare global {
 ${utilities.map(i => `  const ${i}: typeof utilities.${i};`).join("\n")}
 ${variants.map(i => `  const ${i}: typeof variants.${i};`).join("\n")}
-${styles.filter(String).map(i => `  const ${i}: typeof $style["${i}"];`).join("\n")}
+${styles
+  .filter(String)
+  .map(i => `  const ${i}: typeof $style["${i}"];`)
+  .join("\n")}
   const h: typeof utilities.h & typeof preact.h;
   const style: typeof $style;
   const css: typeof helpers.css;
@@ -96,10 +754,10 @@ ${styles.filter(String).map(i => `  const ${i}: typeof $style["${i}"];`).join("\
 export {};
 `;
 monaco.languages.typescript.typescriptDefaults.addExtraLib(globalSource, globalUri);
-monaco.editor.createModel(globalSource, 'typescript', monaco.Uri.parse(globalUri));
+monaco.editor.createModel(globalSource, "typescript", monaco.Uri.parse(globalUri));
 
-
-monaco.languages.typescript.typescriptDefaults.addExtraLib(`
+monaco.languages.typescript.typescriptDefaults.addExtraLib(
+  `
 import JSX = preact.JSXInternal;
 declare const Component: typeof preact.Component;
 declare const Fragment: typeof preact.Fragment;
@@ -124,9 +782,11 @@ declare const useMemo: typeof preact.useMemo;
 declare const useReducer: typeof preact.useReducer;
 declare const useRef: typeof preact.useRef;
 declare const useState: typeof preact.useState;
-`, 'file:///preact.d.ts')
+`,
+  "file:///preact.d.ts"
+);
 
-const modelUri = monaco.Uri.file("main.tsx")
+const modelUri = monaco.Uri.file("main.tsx");
 export const codeModel = monaco.editor.createModel(
   `import type { WindiColors } from "windijs";
 
@@ -152,11 +812,15 @@ render(<Counter />, document.getElementById("app"));
   modelUri // Pass the file name to the model here.
 );
 
-const configModel = monaco.editor.createModel(`import { defineConfig } from "windijs";
+const configModel = monaco.editor.createModel(
+  `import { defineConfig } from "windijs";
 
 export default defineConfig({
   darkMode: "class",
-})`, "typescript", monaco.Uri.file("windi.config.ts"));
+})`,
+  "typescript",
+  monaco.Uri.file("windi.config.ts")
+);
 
 let loaded = false;
 
@@ -169,28 +833,28 @@ const scopeMap = {
   "source.css": "css",
   "source.ts": "TypeScriptReact",
   "source.js": "JavaScriptReact",
-}
+};
 
 export async function useMonaco() {
-  !loaded && await loadWASM("/onigasm/onigasm.wasm");
+  !loaded && (await loadWASM("/onigasm/onigasm.wasm"));
 
   loaded = true;
 
   const registry = new Registry({
-    getGrammarDefinition: async (scopeName) => {
+    getGrammarDefinition: async scopeName => {
       return {
-        format: 'json',
-        content: await (await fetch(`/grammars/${scopeMap[scopeName as keyof typeof scopeMap] ?? ""}.tmLanguage.json`)).text()
-      }
-    }
-  })
+        format: "json",
+        content: await (await fetch(`/grammars/${scopeMap[scopeName as keyof typeof scopeMap] ?? ""}.tmLanguage.json`)).text(),
+      };
+    },
+  });
 
   // map of monaco "language id's" to TextMate scopeNames
-  const grammars = new Map()
-  grammars.set('css', 'source.css')
-  grammars.set('html', 'text.html.basic')
-  grammars.set("javascript", "source.js")
-  grammars.set('typescript', 'source.ts')
+  const grammars = new Map();
+  grammars.set("css", "source.css");
+  grammars.set("html", "text.html.basic");
+  grammars.set("javascript", "source.js");
+  grammars.set("typescript", "source.ts");
 
   // fix jsx completion
   monaco.languages.registerCompletionItemProvider("typescript", {
@@ -231,8 +895,8 @@ export async function useMonaco() {
     },
   });
 
-  monaco.editor.defineTheme('vs-dark-plus', vsDarkPlus as monaco.editor.IStandaloneThemeData);
-  monaco.editor.defineTheme('vs-light-plus', vsLightPlus as monaco.editor.IStandaloneThemeData);
+  monaco.editor.defineTheme("vs-dark-plus", vsDarkPlus as monaco.editor.IStandaloneThemeData);
+  monaco.editor.defineTheme("vs-light-plus", vsLightPlus as monaco.editor.IStandaloneThemeData);
 
   const vsDarkPlusTransParent = { ...vsDarkPlus } as monaco.editor.IStandaloneThemeData;
   vsDarkPlusTransParent.colors["editorCursor.foreground"] = "#74C0FC";
@@ -246,12 +910,12 @@ export async function useMonaco() {
   vsLightPlusTransParent.rules.push({ background: "#F3F3F300" } as monaco.editor.ITokenThemeRule);
   vsLightPlusTransParent.rules.push({ token: "meta.tag", foreground: "#000000" });
 
-  monaco.editor.defineTheme('vs-dark-plus-transparent', vsDarkPlusTransParent);
-  monaco.editor.defineTheme('vs-light-plus-transparent', vsLightPlusTransParent);
+  monaco.editor.defineTheme("vs-dark-plus-transparent", vsDarkPlusTransParent);
+  monaco.editor.defineTheme("vs-light-plus-transparent", vsLightPlusTransParent);
   // "editor.lineHighlightBackground": "#2F3239D9",
 
-  const editor = monaco.editor.create(document.getElementById('editor')!, {
-    theme: document.querySelector("html.dark") ? 'vs-dark-plus' : 'vs-light-plus',
+  const editor = monaco.editor.create(document.getElementById("editor")!, {
+    theme: document.querySelector("html.dark") ? "vs-dark-plus" : "vs-light-plus",
     // value: jsCode,
     language: "typescript",
     automaticLayout: true,
@@ -265,16 +929,16 @@ export async function useMonaco() {
     quickSuggestions: {
       other: "on",
       strings: "on",
-      comments: "on"
-    }
+      comments: "on",
+    },
     // bracketPairColorization: {
     //   enabled: true
     // },
     // matchBrackets: "always"
   });
 
-  const configEditor = monaco.editor.create(document.getElementById('config')!, {
-    theme: document.querySelector("html.dark") ? 'vs-dark-plus-transparent' : 'vs-light-plus-transparent',
+  const configEditor = monaco.editor.create(document.getElementById("config")!, {
+    theme: document.querySelector("html.dark") ? "vs-dark-plus-transparent" : "vs-light-plus-transparent",
     minimap: {
       enabled: false,
     },
@@ -305,14 +969,14 @@ export async function useMonaco() {
 
   configEditor.setModel(configModel);
 
-  editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyP, (args) => {
+  editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyP, args => {
     editor.trigger(null, "editor.action.quickCommand", args);
   });
 
   editor.setModel(codeModel);
 
-  const renderEditor = monaco.editor.create(document.getElementById('render-editor')!, {
-    theme: document.querySelector("html.dark") ? 'vs-dark-plus-transparent' : 'vs-light-plus-transparent',
+  const renderEditor = monaco.editor.create(document.getElementById("render-editor")!, {
+    theme: document.querySelector("html.dark") ? "vs-dark-plus-transparent" : "vs-light-plus-transparent",
     automaticLayout: true,
     padding: {
       top: 12,
@@ -325,9 +989,9 @@ export async function useMonaco() {
       preview: true,
       previewMode: "subwordSmart",
     },
-  })
+  });
 
   await wireTmGrammars(monaco, registry, grammars, editor);
 
-  return { monaco, editor, renderEditor, configEditor }
+  return { monaco, editor, renderEditor, configEditor };
 }

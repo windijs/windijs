@@ -1,6 +1,6 @@
-import { defineComponent, h, onMounted, ref, toRefs, watchEffect } from 'vue'
+import { defineComponent, h, onMounted, ref, toRefs, watchEffect } from "vue";
 
-import srcdoc from './srcdoc.html?raw'
+import srcdoc from "./srcdoc.html?raw";
 
 export default defineComponent({
   props: {
@@ -10,81 +10,82 @@ export default defineComponent({
     },
     script: {
       type: String,
-      default: '',
+      default: "",
     },
     css: {
       type: String,
-      default: '',
+      default: "",
     },
     fixedCss: {
       type: String,
-      default: '',
+      default: "",
     },
     classes: {
       type: String,
-      default: '',
+      default: "",
     },
     html: {
       type: String,
-      default: 'Preview',
+      default: "Preview",
     },
   },
   setup(props) {
-    onMounted(createSandBox)
+    onMounted(createSandBox);
 
-    const container = ref<HTMLElement | null>(null)
-    const isReady = ref(false)
-    const propRefs = toRefs(props)
+    const container = ref<HTMLElement | null>(null);
+    const isReady = ref(false);
+    const propRefs = toRefs(props);
 
-    let sandbox: HTMLIFrameElement
+    let sandbox: HTMLIFrameElement;
 
     function createSandBox() {
-      if (sandbox)
-        container.value?.removeChild(sandbox)
+      if (sandbox) container.value?.removeChild(sandbox);
 
-      sandbox = document.createElement('iframe')
-      sandbox.setAttribute('sandbox', [
-        'allow-forms',
-        'allow-modals',
-        'allow-pointer-lock',
-        'allow-popups',
-        'allow-same-origin',
-        'allow-scripts',
-        'allow-top-navigation-by-user-activation',
-      ].join(' '))
-      sandbox.srcdoc = srcdoc
-      sandbox.style.width = "100%"
-      sandbox.style.height = "100%"
-      sandbox.style.background = 'transparent'
-      container.value?.appendChild(sandbox)
-      sandbox.addEventListener('load', () => {
-        isReady.value = true
-      })
+      sandbox = document.createElement("iframe");
+      sandbox.setAttribute(
+        "sandbox",
+        [
+          "allow-forms",
+          "allow-modals",
+          "allow-pointer-lock",
+          "allow-popups",
+          "allow-same-origin",
+          "allow-scripts",
+          "allow-top-navigation-by-user-activation",
+        ].join(" ")
+      );
+      sandbox.srcdoc = srcdoc;
+      sandbox.style.width = "100%";
+      sandbox.style.height = "100%";
+      sandbox.style.background = "transparent";
+      container.value?.appendChild(sandbox);
+      sandbox.addEventListener("load", () => {
+        isReady.value = true;
+      });
     }
 
     for (const key of Object.keys(propRefs) as (keyof typeof propRefs)[]) {
       watchEffect(() => {
-        if (!isReady.value)
-          return
+        if (!isReady.value) return;
         sandbox?.contentWindow?.postMessage(
           JSON.stringify({
             [key]: propRefs[key].value,
-            ...(key === "dark" ? { "script": propRefs.script.value } : {}) // force update when toggle darkMode
+            ...(key === "dark" ? { script: propRefs.script.value } : {}), // force update when toggle darkMode
           }),
-          location.origin,
-        )
-      })
+          location.origin
+        );
+      });
     }
 
     watchEffect(() => {
-      if (!isReady.value)
-        return
-      sandbox.contentWindow?.document?.querySelector('html')?.classList?.toggle('dark', props.dark)
-    })
+      if (!isReady.value) return;
+      sandbox.contentWindow?.document?.querySelector("html")?.classList?.toggle("dark", props.dark);
+    });
 
-    return () => h('div', {
-      ref: container,
-      class: 'preview-container',
-    })
+    return () =>
+      h("div", {
+        ref: container,
+        class: "preview-container",
+      });
   },
-})
+});

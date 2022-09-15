@@ -1,12 +1,12 @@
-import { defineConfig } from "vite";
 import { resolve } from "path";
-import windiConfig from "./windi.config";
+import { defineConfig } from "vite";
+
 import windijs from "@windijs/plugin-utils/vite";
 
+import windiConfig from "./windi.config";
+
 const windi = windijs({
-  include: [
-    "./.vitepress/**/*.vue",
-  ],
+  include: ["./.vitepress/**/*.vue"],
   env: {
     rootEntry: __dirname,
     moduleEntry: false,
@@ -26,9 +26,9 @@ export default defineConfig({
     windi,
     {
       name: "windi-markdown-transform",
-      transform (code, id) {
+      transform(code, id) {
         if (id.endsWith(".md")) {
-          if (!(/<script.*>/.test(code))) {
+          if (!/<script.*>/.test(code)) {
             // frontmatter
             const match = /^\s*---[\s\S]*---\n/.exec(code);
             if (match) return match[0] + windi.api.vuePreprocess(code.slice(match[0].length));
