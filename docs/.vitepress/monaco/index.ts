@@ -754,7 +754,7 @@ ${styles
 export {};
 `;
 monaco.languages.typescript.typescriptDefaults.addExtraLib(globalSource, globalUri);
-monaco.editor.createModel(globalSource, "typescript", monaco.Uri.parse(globalUri));
+export const globalModel = monaco.editor.createModel(globalSource, "typescript", monaco.Uri.parse(globalUri));
 
 monaco.languages.typescript.typescriptDefaults.addExtraLib(
   `
@@ -797,7 +797,7 @@ function Counter() {
 
   return (
     <div class={[marginTop.vh[35]]}>
-      <div class={[bg[colors[Math.abs(value % 8)]][500].gradient, w.content.max, mx.auto, p[4], text.white, rounded.lg, userSelect.none]}>Counter: {value}</div>
+      <div class={[bg[colors[Math.abs(value % 8)]][500].gradient, hocus(bg.opacity[90]), w.content.max, mx.auto, p[4], text.white, rounded.lg, userSelect.none]}>Counter: {value}</div>
       <div class={[display.flex, justifyContent.center, mt[4], space.x[4]]}>
         <button class={btnStyle} onClick={() => setValue(value + 1)}>Increment</button>
         <button class={btnStyle} onClick={() => setValue(value - 1)}>Decrement</button>
@@ -813,10 +813,19 @@ render(<Counter />, document.getElementById("app"));
 );
 
 const configModel = monaco.editor.createModel(
-  `import { defineConfig } from "windijs";
+  `import { baseColors, materialColors, defineConfig } from "windijs";
 
 export default defineConfig({
   darkMode: "class",
+  theme: {
+    colors: {
+      ...baseColors,
+      ...materialColors
+    }
+  },
+  variants: {
+    hocus: "&:hover, &:focus"
+  }
 })`,
   "typescript",
   monaco.Uri.file("windi.config.ts")

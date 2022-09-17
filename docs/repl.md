@@ -3,7 +3,7 @@ layout: home
 ---
 
 <script setup lang="ts">
-import { useMonaco, htmlModel, styleModel, scriptModel } from "$/monaco";
+import { useMonaco, htmlModel, styleModel, scriptModel, globalModel } from "$/monaco";
 import { ref, onMounted, onUnmounted, onBeforeMount, getCurrentInstance } from "vue";
 import Split from "split.js";
 import Iframe from "$/iframe";
@@ -13,6 +13,7 @@ import Iframe from "$/iframe";
 let split;
 let listener;
 let tsProxy;
+let mainEditor;
 let renderEditor;
 let currentTab: -1 | 0 | 1 | 2 = -1;
 const script = ref("");
@@ -30,7 +31,8 @@ function processCode (text: string) {
 
 onMounted(() => {
   useMonaco().then(({monaco, editor, renderEditor: _renderEditor, configEditor}) => {
-    renderEditor = _renderEditor
+    renderEditor = _renderEditor;
+    mainEditor = editor;
     const updateScript = (proxy) => {
       tsProxy = proxy;
       proxy?.getEmitOutput(editor.getModel().uri.toString()).then((r) => {
@@ -123,6 +125,23 @@ function hideRenderEditor (tab) {
   }
   return false;
 }
+
+let prevConfig = "{}";
+
+function updateConfig (config) {
+  if (config.variants) {
+    const value = globalModel.getValue();
+    const addedVariants = Object.keys(config.variants).map(k => `  const ${k}: VariantBuilder;\n`);
+    globalModel.setValue(value.replace(/(import\s+)/, "import { VariantBuilder } from \"@windijs/helpers\";\n$1").replace(/(declare\s+global\s*{)/, "$1\n" + addedVariants));   
+  }
+
+  const json = JSON.stringify({ theme: config.theme, variants: Object.keys(config.variants), utilities: config.utilities });
+  if (json !== prevConfig) {
+    prevConfig = json;
+    const model = mainEditor.getModel();
+    model.setValue(model.getValue());
+  }
+}
 </script>
 
 <div id="repl">
@@ -131,7 +150,7 @@ function hideRenderEditor (tab) {
       <div v-show="showConfig" id="config" class="modal"></div>
     </div>
     <div id="render">
-      <Iframe style="width: 100%; height: 100%;" :script="script" :dark="isDark" :config="config"></Iframe>
+      <Iframe style="width: 100%; height: 100%;" :script="script" :dark="isDark" :config="config" @updateConfig="updateConfig"></Iframe>
       <div v-show="showRenderEditor" id="render-editor"></div>
       <div class="render-btns" :class="[space.x[2]]">
         <button class="btn-html" :class="btnStyle" @click="hideRenderEditor(0) || updateRender(0)">

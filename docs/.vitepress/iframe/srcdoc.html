@@ -218,6 +218,14 @@
       }
 
       function loadConfig(config) {
+        const event = new CustomEvent('updateConfig', {
+          detail: {
+            value: config
+          }
+        });
+
+        window.dispatchEvent(event);
+
         loadDarkMode(config.darkMode);
         loadTheme(config.theme || {});
         loadVariants(config.variants || {});

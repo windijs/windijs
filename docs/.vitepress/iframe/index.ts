@@ -33,7 +33,10 @@ export default defineComponent({
       default: "Preview",
     },
   },
-  setup(props) {
+  emits: {
+    updateConfig: (value: object) => true,
+  },
+  setup(props, { emit }) {
     onMounted(createSandBox);
 
     const container = ref<HTMLElement | null>(null);
@@ -65,6 +68,11 @@ export default defineComponent({
       container.value?.appendChild(sandbox);
       sandbox.addEventListener("load", () => {
         isReady.value = true;
+      });
+
+      sandbox?.contentWindow?.addEventListener("updateConfig", e => {
+        const v = (e as CustomEvent<{ value: object }>).detail.value;
+        emit("updateConfig", v);
       });
     }
 
