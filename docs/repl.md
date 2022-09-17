@@ -16,24 +16,44 @@ let tsProxy;
 let renderEditor;
 let currentTab: -1 | 0 | 1 | 2 = -1;
 const script = ref("");
+const config = ref("");
 const isDark = ref(localStorage.getItem("vitepress-theme-appearance") !== "light");
 const showConfig = ref(false);
 const showRenderEditor = ref(false);
 const btnStyle = [rounded.full, bg.gray[100], text.gray[400], hover(text.gray[500]), dark(bg.dark[400], text.stone[600], hover(text.stone[500]))];
 
+function processCode (text: string) {
+  return text
+    .replace(/export\s+{};?/, "")
+    .replace(/import\s*(({[^}]+})|([\w_$]+))\s*from\s*(("[^"]*")|('[^']*'))/g, "var $1 = require($4)");
+}
+
 onMounted(() => {
-  useMonaco().then(({monaco, editor, renderEditor: _renderEditor}) => {
+  useMonaco().then(({monaco, editor, renderEditor: _renderEditor, configEditor}) => {
     renderEditor = _renderEditor
     const updateScript = (proxy) => {
-        tsProxy = proxy;
-        proxy.getEmitOutput(editor.getModel().uri.toString()).then((r) => {
-          script.value = r.outputFiles[0].text.replace(/export\s+{};?/, "");
-          setTimeout(() => updateRender(currentTab), 10);
-        })
+      tsProxy = proxy;
+      proxy?.getEmitOutput(editor.getModel().uri.toString()).then((r) => {
+        script.value = processCode(r.outputFiles[0].text);
+        setTimeout(() => updateRender(currentTab), 10);
+      })
     }
 
-    monaco.languages.typescript.getTypeScriptWorker().then(worker => worker(editor.getModel().uri).then(updateScript));
-    editor.onDidChangeModelContent(e => updateScript(tsProxy))
+    const updateConfig = (proxy) => {
+      proxy?.getEmitOutput(configEditor.getModel().uri.toString()).then((r) => {
+        config.value = processCode(r.outputFiles[0].text);
+        setTimeout(() => updateRender(currentTab), 10);
+      })
+    }
+
+    monaco.languages.typescript.getTypeScriptWorker().then(worker => {
+      worker(editor.getModel().uri).then(updateScript);
+      worker(configEditor.getModel().uri).then(updateConfig);
+    });
+
+    editor.onDidChangeModelContent(e => updateScript(tsProxy));
+    configEditor.onDidChangeModelContent(e => updateConfig(tsProxy));
+
     document.querySelector("button.VPSwitchAppearance")?.addEventListener("click", () => {
       isDark.value = document.querySelector("html.dark") != null;
       editor.updateOptions({
@@ -111,7 +131,7 @@ function hideRenderEditor (tab) {
       <div v-show="showConfig" id="config" class="modal"></div>
     </div>
     <div id="render">
-      <Iframe style="width: 100%; height: 100%;" :script="script" :dark="isDark"></Iframe>
+      <Iframe style="width: 100%; height: 100%;" :script="script" :dark="isDark" :config="config"></Iframe>
       <div v-show="showRenderEditor" id="render-editor"></div>
       <div class="render-btns" :class="[space.x[2]]">
         <button class="btn-html" :class="btnStyle" @click="hideRenderEditor(0) || updateRender(0)">
@@ -129,7 +149,7 @@ function hideRenderEditor (tab) {
 </div>
 
 <button class="btn-settings" :class="btnStyle" @click="showConfig = !showConfig">
-  <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94c0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6s3.6 1.62 3.6 3.6s-1.62 3.6-3.6 3.6z"/></svg>
+<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94c0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6s3.6 1.62 3.6 3.6s-1.62 3.6-3.6 3.6z"/></svg>
 </button>
 
 <style>

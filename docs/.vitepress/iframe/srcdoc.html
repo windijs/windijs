@@ -83,7 +83,7 @@
     var { Component, Fragment, cloneElement, createContext, createElement, createRef, h: preactH, hydrate, isValidElement, options, render, toChildArray } = window.preact;
     var { useCallback, useContext, useDebugValue, useEffect, useErrorBoundary, useImperativeHandle, useLayoutEffect, useMemo, useReducer, useRef, useState } = window.preactHooks;
 
-    var { defineConfig, animateHandler, backgroundGenericHandler, bind, callHandler, colorHandler, configHandler, createDarkModeVariants, createMedia, createMotionVariants, createOrientationVariants, createScreenVariants, createUtility, createVariant, cssHandler, degHandler, divideXReverseHandler, divideYReverseHandler, fontFamilyHandler, fontSizeHandler, fractionHandler, genericHandler, guard, handleConfig, handler, isHandler, joinFilters, joinTransforms, media, meld, msHandler, numberHandler, prefixer, pxHandler, remHandler, setup, setupHandler, setupUtility, setupVariant, spaceBetweenXReverseHandler, spaceBetweenYReverseHandler, spacingHandler, use, useMedia, useVariant, variant } = windijsCore;
+    var { defineConfig, animateHandler, backgroundGenericHandler, bind, callHandler, colorHandler, configHandler, createDarkModeVariants, createMotionVariants, createOrientationVariants, createScreenVariants, createUtility, cssHandler, degHandler, divideXReverseHandler, divideYReverseHandler, fontFamilyHandler, fontSizeHandler, fractionHandler, genericHandler, guard, handleConfig, handler, isHandler, joinFilters, joinTransforms, media, meld, msHandler, numberHandler, prefixer, pxHandler, remHandler, setup, setupHandler, setupUtility, setupVariant, spaceBetweenXReverseHandler, spaceBetweenYReverseHandler, spacingHandler, use, useMedia, useVariant, variant } = windijsCore;
     var { css, useStyleLoader, cssInJsLoader, isStyleObject, SymbolMeta, injectCSS, getStyleProps, buildRules, createRules, applyVariant, createStyleLoader, atomicLoader, useArrayHelper, color, percent, deg, grad, rad, turn, s, ms, fr, $in, dpi, dpcm, dppx, x, px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = window.windijsHelpers;
     var { style } = windijsStyle;
 
@@ -125,11 +125,41 @@
       return style;
     }
 
-    var { $dark: dark, $default, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, active, after, all, before, checked, children, disabled, empty, enabled, even, evenOfType, first, firstLetter, firstLine, firstOfType, focus, focusVisible, focusWithin, groupActive, groupFocus, groupHover, groupVisited, hover, indeterminate, invalid, landscape, last, lastOfType, lg, light, link, ltr, marker, md, motionReduce, motionSafe, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, portrait, readOnly, readWrite, required, root, rtl, selection, sibling, siblings, sm, svg, target, valid, visited, xl, xxl } = new Proxy(windijsVariants, {
+    var { $default, $lg, $light, $md, $sm, $xl, $xxl, _lg, _md, _sm, _xl, _xxl, active, after, all, before, checked, children, disabled, empty, enabled, even, evenOfType, first, firstLetter, firstLine, firstOfType, focus, focusVisible, focusWithin, groupActive, groupFocus, groupHover, groupVisited, hover, indeterminate, invalid, landscape, last, lastOfType, lg, light, link, ltr, marker, md, motionReduce, motionSafe, notChecked, notDisabled, notFirst, notFirstOfType, notLast, notLastOfType, notOnlyChild, notOnlyOfType, odd, oddOfType, onlyChild, onlyOfType, optional, placeholderShown, portrait, readOnly, readWrite, required, root, rtl, selection, sibling, siblings, sm, svg, target, valid, visited, xl, xxl } = new Proxy(windijsVariants, {
       get(target, p) {
         return (...utilities) => windijsVariants[p](...utilities.map(i => applyVariantName(i, p)))
       }
     })
+
+    var { createVariant, createMedia } = new Proxy({ createVariant: windijsCore.createVariant, createMedia: windijsCore.createMedia }, {
+      get (target, p) {
+        return (variant, name = variant) => ((...utilities) => target[p](variant)(...utilities.map(i => applyVariantName(i, name))))
+      }
+    })
+
+    windijsCore.createVariant = createVariant;
+    windijsCore.createMedia = createMedia;
+
+    const globalPackages = {
+      "preact": window.preact,
+      "preact/hooks": window.preactHooks,
+      "windijs": window.windijs,
+      "@windijs/colors": window.windijsColors,
+      "@windijs/config": window.windijsConfig,
+      "@windijs/shared": window.windijsShared,
+      "@windijs/helpers": window.windijsHelpers,
+      "@windijs/core": window.windijsCore,
+      "@windijs/style": window.windijsStyle,
+      "@windijs/utilities": window.windijsUtilities,
+      "@windijs/variants": window.windijsVariants,
+    }
+
+    function require (package) {
+      if (package in globalPackages) return globalPackages[package];
+      throw new Error(`The package "${package}"" is undefined.`);
+    }
+
+    var dark, light;
 
     window.addEventListener('message', (e) => {
       const {
@@ -138,41 +168,84 @@
         fixedCss,
         classes,
         html,
+        config,
         dark: isDark,
       } = JSON.parse(e.data)
 
       if (cssData != null) {
-        if (styleEl)
-          document.body.removeChild(styleEl)
+        if (styleEl) document.body.removeChild(styleEl)
         styleEl = document.createElement('style')
         styleEl.innerHTML = cssData
         document.body.appendChild(styleEl)
       }
 
       if (fixedCss != null) {
-        if (fixedStyleEl)
-          document.body.removeChild(fixedStyleEl)
+        if (fixedStyleEl) document.body.removeChild(fixedStyleEl)
         fixedStyleEl = document.createElement('style')
         fixedStyleEl.innerHTML = fixedCss
         document.body.appendChild(fixedStyleEl)
+      }
+
+      const alert = document.body.getElementsByClassName("alert")[0];
+      const dismissError = () => (alert.innerHTML = "");
+      const showError = (e) => (alert.innerHTML = `<p>&nbsp;&nbsp;&nbsp;${e}&nbsp;&nbsp;&nbsp;</p>`);
+
+      function loadDarkMode(darkMode) {
+        if (darkMode === "class") {
+          dark = createVariant(".dark &", "dark");
+          light = createVariant(".light &", "light");
+        } else if (darkMode === false) {
+          dark = undefined;
+          light = undefined;
+        } else {
+          dark = createMedia("(prefers-color-scheme: dark)", "dark");
+          light = createMedia("(prefers-color-scheme: light)", "light");
+        }
+        windijsUtilities.dark = dark;
+        windijsUtilities.light = light;
+      }
+
+      function loadTheme(theme) {
+        if (theme.colors) {
+          
+        }
+      }
+
+      function loadVariants(variants) {
+        for (const [k, v] of Object.entries(variants)) {
+          if (typeof v === "string") window[k] = createVariant(v, k);
+        }
+      }
+
+      function loadConfig(config) {
+        loadDarkMode(config.darkMode);
+        loadTheme(config.theme || {});
+        loadVariants(config.variants || {});
       }
 
       if (classes != null)
         app.className = classes
       if (html != null)
         app.innerHTML = html
+      if (config != null)
+        try {
+          const currentConfig = eval(`(() => {\n${config.replace(/export\s+default\s+/, "return ")}\n})();`);
+          if (currentConfig) loadConfig(currentConfig);
+          dismissError();
+        } catch (e) {
+          showError(e);
+        }
       if (script != null)
         app.innerHTML = "";
-        const alert = document.body.getElementsByClassName("alert")[0];
         try {
           const windiStyle = document.getElementById("windijs");
           if (windiStyle) windiStyle.innerText = "";
           BUILDED_CLASSES = [];
           eval(script);
           htmlContent = app.innerHTML;
-          alert.innerHTML = "";
+          dismissError();
         } catch(e) {
-          alert.innerHTML = `<p>&nbsp;&nbsp;&nbsp;${e}&nbsp;&nbsp;&nbsp;</p>`;
+          showError(e);
         }
     }, false)
   </script>

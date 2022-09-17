@@ -12,6 +12,10 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    config: {
+      type: String,
+      default: "",
+    },
     css: {
       type: String,
       default: "",
@@ -71,6 +75,7 @@ export default defineComponent({
           JSON.stringify({
             [key]: propRefs[key].value,
             ...(key === "dark" ? { script: propRefs.script.value } : {}), // force update when toggle darkMode
+            ...(key === "config" ? { script: propRefs.script.value } : {}), // force update when config changes
           }),
           location.origin
         );
