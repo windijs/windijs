@@ -793,12 +793,12 @@ export const codeModel = monaco.editor.createModel(
 function Counter() {
   const [value, setValue] = useState(0);
   const colors: WindiColors[] = ["blue", "purple", "pink", "red", "orange", "yellow", "green", "teal"];
-  const btnStyle = [bg.gray[400].opacity(60), hover(bg.gray[500].opacity(50)), dark(bg.stone[700], hover(bg.stone[500])), border.none, cursor.pointer, userSelect.none, rounded.full, text.white, p[2]];
+  const btnStyle = [myBtn, bg.gray[400].opacity(60), hover(bg.gray[500].opacity(50)), dark(bg.stone[700], hover(bg.stone[500])), text.white];
 
   return (
     <div class={[marginTop.vh[35]]}>
       <div class={[bg[colors[Math.abs(value % 8)]][500].gradient, hocus(bg.opacity[90]), w.content.max, mx.auto, p[4], text.white, rounded.lg, userSelect.none]}>Counter: {value}</div>
-      <div class={[display.flex, justifyContent.center, mt[4], space.x[4]]}>
+      <div class={[layout.hstack, mt[4], space.x[4]]}>
         <button class={btnStyle} onClick={() => setValue(value + 1)}>Increment</button>
         <button class={btnStyle} onClick={() => setValue(value - 1)}>Decrement</button>
       </div>
@@ -813,7 +813,7 @@ render(<Counter />, document.getElementById("app"));
 );
 
 const configModel = monaco.editor.createModel(
-  `import { baseColors, materialColors, defineConfig } from "windijs";
+  `import { css, baseColors, materialColors, defineConfig } from "windijs";
 
 export default defineConfig({
   darkMode: "class",
@@ -822,6 +822,29 @@ export default defineConfig({
       ...baseColors,
       ...materialColors
     }
+  },
+  utilities: {
+    layout: {
+      hstack: css({
+        display: "flex",
+        justifyContent: "center",    
+      }),
+      vstack: css({
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }),
+    },
+    myBtn: css({
+      borderStyle: "none",
+      cursor: "pointer",
+      userSelect: "none",
+      borderRadius: "9999px",
+      padding: "0.5rem",
+      "&:focus": {
+        outline: "none",
+      }
+    })
   },
   variants: {
     hocus: "&:hover, &:focus"

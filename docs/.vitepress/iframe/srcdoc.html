@@ -213,7 +213,15 @@
 
       function loadVariants(variants) {
         for (const [k, v] of Object.entries(variants)) {
-          if (typeof v === "string") window[k] = createVariant(v, k);
+          if (typeof v === "string") {
+            window[k] = createVariant(v, k);
+          }
+        }
+      }
+
+      function loadUtilities(utilities) {
+        for (const [k, v] of Object.entries(utilities)) {
+          window[k] = setupUtility(k, v);
         }
       }
 
@@ -229,6 +237,7 @@
         loadDarkMode(config.darkMode);
         loadTheme(config.theme || {});
         loadVariants(config.variants || {});
+        loadUtilities(config.utilities || {});
       }
 
       if (classes != null)

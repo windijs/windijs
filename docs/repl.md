@@ -5,6 +5,7 @@ layout: home
 <script setup lang="ts">
 import { useMonaco, htmlModel, styleModel, scriptModel, globalModel } from "$/monaco";
 import { ref, onMounted, onUnmounted, onBeforeMount, getCurrentInstance } from "vue";
+import { dtsSetup } from "../packages/plugin-utils/src/gen.ts";
 import Split from "split.js";
 import Iframe from "$/iframe";
 
@@ -16,12 +17,15 @@ let tsProxy;
 let mainEditor;
 let renderEditor;
 let currentTab: -1 | 0 | 1 | 2 = -1;
+let keydown = false;
 const script = ref("");
 const config = ref("");
 const isDark = ref(localStorage.getItem("vitepress-theme-appearance") !== "light");
 const showConfig = ref(false);
 const showRenderEditor = ref(false);
 const btnStyle = [rounded.full, bg.gray[100], text.gray[400], hover(text.gray[500]), dark(bg.dark[400], text.stone[600], hover(text.stone[500]))];
+let viewChanged = false;
+let configChanged = false;
 
 function processCode (text: string) {
   return text
@@ -37,14 +41,14 @@ onMounted(() => {
       tsProxy = proxy;
       proxy?.getEmitOutput(editor.getModel().uri.toString()).then((r) => {
         script.value = processCode(r.outputFiles[0].text);
-        setTimeout(() => updateRender(currentTab), 10);
+        setTimeout(() => updateRender(currentTab), 1);
       })
     }
 
     const updateConfig = (proxy) => {
       proxy?.getEmitOutput(configEditor.getModel().uri.toString()).then((r) => {
         config.value = processCode(r.outputFiles[0].text);
-        setTimeout(() => updateRender(currentTab), 10);
+        setTimeout(() => updateRender(currentTab), 1);
       })
     }
 
@@ -53,8 +57,9 @@ onMounted(() => {
       worker(configEditor.getModel().uri).then(updateConfig);
     });
 
-    editor.onDidChangeModelContent(e => updateScript(tsProxy));
-    configEditor.onDidChangeModelContent(e => updateConfig(tsProxy));
+    editor.onDidChangeModelContent(e => (viewChanged = true));
+       
+    configEditor.onDidChangeModelContent(e => (configChanged = true));
 
     document.querySelector("button.VPSwitchAppearance")?.addEventListener("click", () => {
       isDark.value = document.querySelector("html.dark") != null;
@@ -62,8 +67,15 @@ onMounted(() => {
         theme: isDark.value ? "vs-dark-plus" : "vs-light-plus"
       });
     })
-  });
 
+    setInterval(() => {
+      if (viewChanged) updateScript(tsProxy);
+      if (configChanged) updateConfig(tsProxy);
+
+      viewChanged = false;
+      configChanged = false;
+    }, 300);
+  });
 
   document.querySelector("body").style.overflow = "hidden";
   document.querySelector(".VPNav .container").style.maxWidth = "100%";
@@ -129,15 +141,26 @@ function hideRenderEditor (tab) {
 let prevConfig = "{}";
 
 function updateConfig (config) {
-  if (config.variants) {
-    const value = globalModel.getValue();
-    const addedVariants = Object.keys(config.variants).map(k => `  const ${k}: VariantBuilder;\n`);
-    globalModel.setValue(value.replace(/(import\s+)/, "import { VariantBuilder } from \"@windijs/helpers\";\n$1").replace(/(declare\s+global\s*{)/, "$1\n" + addedVariants));   
-  }
+  const added: string[] = [];
+  const utilities: string[] = Object.entries(config.utilities).map(([k, v]) => `const ${k}: ` + dtsSetup(v));
 
-  const json = JSON.stringify({ theme: config.theme, variants: Object.keys(config.variants), utilities: config.utilities });
+  const json = JSON.stringify({ theme: config.theme, variants: Object.keys(config.variants), utilities });
   if (json !== prevConfig) {
     prevConfig = json;
+
+    if (config.variants) {
+      added.push(...Object.keys(config.variants).map(k => `const ${k}: VariantBuilder`));
+    }
+
+    if (config.utilities) {
+      added.push(...utilities);
+    }
+
+    if (added.length > 0) {
+      const value = globalModel.getValue();
+      globalModel.setValue(value.replace(/(import\s+)/, "import { StyleObject, VariantBuilder } from \"@windijs/helpers\";\n$1").replace(/(declare\s+global\s*{)/, "$1\n" + added.map(i => "  " + i + ";\n").join("")));   
+    }
+
     const model = mainEditor.getModel();
     model.setValue(model.getValue());
   }
