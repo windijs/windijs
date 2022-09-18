@@ -87,15 +87,27 @@
     var { css, useStyleLoader, cssInJsLoader, isStyleObject, SymbolMeta, injectCSS, getStyleProps, buildRules, createRules, applyVariant, createStyleLoader, atomicLoader, useArrayHelper, color, percent, deg, grad, rad, turn, s, ms, fr, $in, dpi, dpcm, dppx, x, px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = window.windijsHelpers;
     var { style } = windijsStyle;
 
+    const globalPackages = {
+      "preact": window.preact,
+      "preact/hooks": window.preactHooks,
+      "windijs": window.windijs,
+      "@windijs/colors": window.windijsColors,
+      "@windijs/config": window.windijsConfig,
+      "@windijs/shared": window.windijsShared,
+      "@windijs/helpers": window.windijsHelpers,
+      "@windijs/core": window.windijsCore,
+      "@windijs/style": window.windijsStyle,
+      "@windijs/utilities": window.windijsUtilities,
+      "@windijs/variants": window.windijsVariants,
+    }
+
+    function require (package) {
+      if (package in globalPackages) return globalPackages[package];
+      throw new Error(`The package "${package}"" is undefined.`);
+    }
+
     let BUILDED_CLASSES = [];
     const BUILDED_CSS = [];
-
-    var h = new Proxy(preactH, {
-      get(target, p) {
-        if (Reflect.has(target, p)) return Reflect.get(target, p);
-        return Reflect.get(windiH, p);
-      }
-    })
 
     function getStyleIdent(style) {
       return (style[SymbolMeta].variantNames || []).map(i => i + ":").join("") + getStyleProps(style).join(".").replace(/\.(\d+)(\.|$)/g, "[$1]$2");
@@ -112,8 +124,26 @@
     useArrayHelper();
 
     var { accentColor, additiveSymbols, alignContent, alignItems, alignSelf, alignTracks, /*all,*/ alt, animation, animationDelay, animationDirection, animationDuration, animationFillMode, animationIterationCount, animationName, animationPlayState, animationTimeline, animationTimingFunction, appearance, ascentOverride, aspectRatio, azimuth, backdropFilter, backfaceVisibility, background, backgroundAttachment, backgroundBlendMode, backgroundClip, backgroundColor, backgroundImage, backgroundOrigin, backgroundPosition, backgroundPositionX, backgroundPositionY, backgroundRepeat, backgroundSize, behavior, bleed, blockSize, /*border,*/ borderBlock, borderBlockColor, borderBlockEnd, borderBlockEndColor, borderBlockEndStyle, borderBlockEndWidth, borderBlockStart, borderBlockStartColor, borderBlockStartStyle, borderBlockStartWidth, borderBlockStyle, borderBlockWidth, borderBottom, borderBottomColor, borderBottomLeftRadius, borderBottomRightRadius, borderBottomStyle, borderBottomWidth, borderCollapse, borderColor, borderEndEndRadius, borderEndStartRadius, borderImage, borderImageOutset, borderImageRepeat, borderImageSlice, borderImageSource, borderImageWidth, borderInline, borderInlineColor, borderInlineEnd, borderInlineEndColor, borderInlineEndStyle, borderInlineEndWidth, borderInlineStart, borderInlineStartColor, borderInlineStartStyle, borderInlineStartWidth, borderInlineStyle, borderInlineWidth, borderLeft, borderLeftColor, borderLeftStyle, borderLeftWidth, borderRadius, borderRight, borderRightColor, borderRightStyle, borderRightWidth, borderSpacing, borderStartEndRadius, borderStartStartRadius, borderStyle, borderTop, borderTopColor, borderTopLeftRadius, borderTopRightRadius, borderTopStyle, borderTopWidth, borderWidth, bottom, boxAlign, boxDecorationBreak, boxDirection, boxFlex, boxFlexGroup, boxLines, boxOrdinalGroup, boxOrient, boxPack, boxShadow, boxSizing, breakAfter, breakBefore, breakInside, captionSide, caretColor, clear, clip, clipPath, clipRule, color, colorInterpolationFilters, colorScheme, columnCount, columnFill, columnGap, columnRule, columnRuleColor, columnRuleStyle, columnRuleWidth, columnSpan, columnWidth, columns, contain, content, contentVisibility, counterIncrement, counterReset, counterSet, cursor, descentOverride, direction, display, emptyCells, enableBackground, fallback, /*fill,*/ fillOpacity, fillRule, /*filter,*/ /*flex,*/ flexBasis, flexDirection, flexFlow, flexGrow, flexShrink, flexWrap, float, floodColor, floodOpacity, /*font,*/ fontDisplay, fontFamily, fontFeatureSettings, fontKerning, fontLanguageOverride, fontOpticalSizing, fontSize, fontSizeAdjust, fontSmooth, fontStretch, fontStyle, fontSynthesis, fontVariant, fontVariantAlternates, fontVariantCaps, fontVariantEastAsian, fontVariantLigatures, fontVariantNumeric, fontVariantPosition, fontVariationSettings, fontWeight, forcedColorAdjust, /*gap,*/ glyphOrientationHorizontal, glyphOrientationVertical, /*grid,*/ gridArea, gridAutoColumns, gridAutoFlow, gridAutoRows, gridColumn, gridColumnEnd, gridColumnGap, gridColumnStart, gridGap, gridRow, gridRowEnd, gridRowGap, gridRowStart, gridTemplate, gridTemplateAreas, gridTemplateColumns, gridTemplateRows, hangingPunctuation, height, hyphenateCharacter, /*hyphens,*/ imageOrientation, imageRendering, imageResolution, imeMode, inherits, initialLetter, initialLetterAlign, initialValue, inlineSize, inputSecurity, inset, insetBlock, insetBlockEnd, insetBlockStart, insetInline, insetInlineEnd, insetInlineStart, isolation, justifyContent, justifyItems, justifySelf, justifyTracks, kerning, left, letterSpacing, lightingColor, lineBreak, lineClamp, lineGapOverride, lineHeight, lineHeightStep, listStyle, listStyleImage, listStylePosition, listStyleType, margin, marginBlock, marginBlockEnd, marginBlockStart, marginBottom, marginInline, marginInlineEnd, marginInlineStart, marginLeft, marginRight, marginTop, marginTrim, /*marker,*/ markerEnd, markerMid, markerStart, marks, mask, maskBorder, maskBorderMode, maskBorderOutset, maskBorderRepeat, maskBorderSlice, maskBorderSource, maskBorderWidth, maskClip, maskComposite, maskImage, maskMode, maskOrigin, maskPosition, maskRepeat, maskSize, maskType, masonryAutoFlow, mathStyle, maxBlockSize, maxHeight, maxInlineSize, maxLines, maxWidth, maxZoom, minBlockSize, minHeight, minInlineSize, minWidth, minZoom, mixBlendMode, motion, motionOffset, motionPath, motionRotation, navDown, navIndex, navLeft, navRight, navUp, negative, objectFit, objectPosition, offset, offsetAnchor, offsetBlockEnd, offsetBlockStart, offsetDistance, offsetInlineEnd, offsetInlineStart, offsetPath, offsetPosition, offsetRotate, /*opacity,*/ order, /*orientation,*/ orphans, /*outline,*/ outlineColor, outlineOffset, outlineStyle, outlineWidth, /*overflow,*/ overflowAnchor, overflowBlock, overflowClipBox, overflowClipMargin, overflowInline, overflowWrap, overflowX, overflowY, overscrollBehavior, overscrollBehaviorBlock, overscrollBehaviorInline, overscrollBehaviorX, overscrollBehaviorY, pad, padding, paddingBlock, paddingBlockEnd, paddingBlockStart, paddingBottom, paddingInline, paddingInlineEnd, paddingInlineStart, paddingLeft, paddingRight, paddingTop, pageBreakAfter, pageBreakBefore, pageBreakInside, paintOrder, perspective, perspectiveOrigin, placeContent, placeItems, placeSelf, pointerEvents, position, prefix, printColorAdjust, quotes, range, resize, right, /*rotate,*/ rowGap, rubyAlign, rubyMerge, rubyOverhang, rubyPosition, rubySpan, /*scale,*/ scrollBehavior, scrollMargin, scrollMarginBlock, scrollMarginBlockEnd, scrollMarginBlockStart, scrollMarginBottom, scrollMarginInline, scrollMarginInlineEnd, scrollMarginInlineStart, scrollMarginLeft, scrollMarginRight, scrollMarginTop, scrollPadding, scrollPaddingBlock, scrollPaddingBlockEnd, scrollPaddingBlockStart, scrollPaddingBottom, scrollPaddingInline, scrollPaddingInlineEnd, scrollPaddingInlineStart, scrollPaddingLeft, scrollPaddingRight, scrollPaddingTop, scrollSnapAlign, scrollSnapCoordinate, scrollSnapDestination, scrollSnapPointsX, scrollSnapPointsY, scrollSnapStop, scrollSnapType, scrollSnapTypeX, scrollSnapTypeY, /*scrollbar-3dlight-color,*/ scrollbarArrowColor, scrollbarBaseColor, scrollbarColor, scrollbarDarkshadowColor, scrollbarFaceColor, scrollbarGutter, scrollbarHighlightColor, scrollbarShadowColor, scrollbarTrackColor, scrollbarWidth, shapeImageThreshold, shapeMargin, shapeOutside, shapeRendering, size, sizeAdjust, speakAs, src, stopColor, stopOpacity, /*stroke,*/ strokeDasharray, strokeDashoffset, strokeLinecap, strokeLinejoin, strokeMiterlimit, strokeOpacity, strokeWidth, suffix, symbols, syntax, system, tabSize, tableLayout, textAlign, textAlignLast, textAnchor, textCombineUpright, textDecoration, textDecorationColor, textDecorationLine, textDecorationSkip, textDecorationSkipInk, textDecorationStyle, textDecorationThickness, textEmphasis, textEmphasisColor, textEmphasisPosition, textEmphasisStyle, textIndent, textJustify, textOrientation, textOverflow, textRendering, textShadow, textSizeAdjust, textTransform, textUnderlineOffset, textUnderlinePosition, /*top,*/ touchAction, /*transform,*/ transformBox, transformOrigin, transformStyle, /*transition,*/ transitionDelay, transitionDuration, transitionProperty, transitionTimingFunction, /*translate,*/ unicodeBidi, unicodeRange, userSelect, userZoom, verticalAlign, viewportFit, visibility, whiteSpace, widows, width, willChange, wordBreak, wordSpacing, wordWrap, writingMode, zIndex, zoom } = style;
-    var { animate, aspect, auto, backdrop, bg, blend, blur, border, brightness, col, colors, contrast, decoration, delay, divide, dropShadow, duration, ease, fill, filter, flex, font, from, gap, grayscale, grid, h: windiH, hueRotate, hyphens, image, indent, invert, leading, list, m, mb, ml, mr, mt, mx, my, opacity, origin, outline, overflow, overscroll, p, pb, perspect, pl, placeholder, pr, preserve, pt, px, py, ring, rotate, rounded, row, saturate, scale, sepia, shadow, skew, space, sr, stroke, tab, text, to, tracking, transform, transition, translate, via, w, write } = windijsUtilities;
-    var container = windijsCore.buildContainer(windijsConfig.screens);
+    var h, container;
+    var utilitiesRuntime = ""; // entry for inject utilities runtime
+    var runtimeImports = utilitiesRuntime.match(/var[\s\S]*require[^;]+;/)[0];
+    var increRuntime = utilitiesRuntime.replace(/var\s+(\w+\s*=)/g, "$1").replace(/var[\s\S]*require[^;]+;/, ""); // for incremental runtime
+    
+    function updateRuntime(runtime, theme = {}) {
+      eval(runtime);
+
+      // handle conflict `h` in preact and windi
+      h = new Proxy(preactH, {
+        get(target, p) {
+          if (Reflect.has(target, p)) return Reflect.get(target, p);
+          return Reflect.get(windiH, p);
+        }
+      })
+
+      container = windijsCore.buildContainer(theme.screens || windijsConfig.screens);
+    }
+    
+    updateRuntime(utilitiesRuntime);
 
     function applyVariantName (style, variant) {
       if (isStyleObject(style)) {
@@ -139,25 +169,6 @@
 
     windijsCore.createVariant = createVariant;
     windijsCore.createMedia = createMedia;
-
-    const globalPackages = {
-      "preact": window.preact,
-      "preact/hooks": window.preactHooks,
-      "windijs": window.windijs,
-      "@windijs/colors": window.windijsColors,
-      "@windijs/config": window.windijsConfig,
-      "@windijs/shared": window.windijsShared,
-      "@windijs/helpers": window.windijsHelpers,
-      "@windijs/core": window.windijsCore,
-      "@windijs/style": window.windijsStyle,
-      "@windijs/utilities": window.windijsUtilities,
-      "@windijs/variants": window.windijsVariants,
-    }
-
-    function require (package) {
-      if (package in globalPackages) return globalPackages[package];
-      throw new Error(`The package "${package}"" is undefined.`);
-    }
 
     var dark, light;
 
@@ -206,8 +217,17 @@
       }
 
       function loadTheme(theme) {
+        let currentRuntime = increRuntime;
         if (theme.colors) {
-          
+          colors = theme.colors; // update global colors
+          currentRuntime = currentRuntime.replace(/\s*colors\s*=[^;]+;/, "");
+        }
+        for (const k of Object.keys(theme)) {
+          if (k === "colors") continue;
+          currentRuntime = currentRuntime.replace(new RegExp(`\\b${k}Config`, "g"), "theme." + k);
+        }
+        if (currentRuntime !== increRuntime) {
+          updateRuntime(runtimeImports + currentRuntime, theme);
         }
       }
 

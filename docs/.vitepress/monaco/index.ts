@@ -813,15 +813,19 @@ render(<Counter />, document.getElementById("app"));
 );
 
 const configModel = monaco.editor.createModel(
-  `import { css, baseColors, materialColors, defineConfig } from "windijs";
+  `import { css, baseColors, materialColors, tailwindStone, defineConfig } from "windijs";
 
 export default defineConfig({
   darkMode: "class",
   theme: {
     colors: {
+      stone: tailwindStone,
       ...baseColors,
       ...materialColors
-    }
+    },
+    borderRadius: {
+      lg: "8px",
+    },
   },
   utilities: {
     layout: {

@@ -1,6 +1,8 @@
 import { defineComponent, h, onMounted, ref, toRefs, watchEffect } from "vue";
 
 import srcdoc from "./srcdoc.html?raw";
+import utilities from "./windijsUtilities.mjs?raw";
+import { processCode } from "../shared";
 
 export default defineComponent({
   props: {
@@ -61,7 +63,10 @@ export default defineComponent({
           "allow-top-navigation-by-user-activation",
         ].join(" ")
       );
-      sandbox.srcdoc = srcdoc;
+      sandbox.srcdoc = srcdoc.replace(
+        /(var\s+utilitiesRuntime\s*=\s*)[^;]+/,
+        "$1" + JSON.stringify(processCode(utilities).replace(/var\s+(h)\s*=\s*/, "var windiH = "))
+      );
       sandbox.style.width = "100%";
       sandbox.style.height = "100%";
       sandbox.style.background = "transparent";

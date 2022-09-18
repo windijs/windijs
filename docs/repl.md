@@ -6,6 +6,7 @@ layout: home
 import { useMonaco, htmlModel, styleModel, scriptModel, globalModel } from "$/monaco";
 import { ref, onMounted, onUnmounted, onBeforeMount, getCurrentInstance } from "vue";
 import { dtsSetup } from "../packages/plugin-utils/src/gen.ts";
+import { processCode } from "$/shared";
 import Split from "split.js";
 import Iframe from "$/iframe";
 
@@ -26,12 +27,6 @@ const showRenderEditor = ref(false);
 const btnStyle = [rounded.full, bg.gray[100], text.gray[400], hover(text.gray[500]), dark(bg.dark[400], text.stone[600], hover(text.stone[500]))];
 let viewChanged = false;
 let configChanged = false;
-
-function processCode (text: string) {
-  return text
-    .replace(/export\s+{};?/, "")
-    .replace(/import\s*(({[^}]+})|([\w_$]+))\s*from\s*(("[^"]*")|('[^']*'))/g, "var $1 = require($4)");
-}
 
 onMounted(() => {
   useMonaco().then(({monaco, editor, renderEditor: _renderEditor, configEditor}) => {
