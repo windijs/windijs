@@ -7,6 +7,7 @@ import { useMonaco, htmlModel, styleModel, scriptModel, globalModel } from "$/mo
 import { ref, onMounted, onUnmounted, onBeforeMount, getCurrentInstance } from "vue";
 import { dtsSetup } from "../packages/plugin-utils/src/gen.ts";
 import { processCode } from "$/shared";
+import { style } from "@windijs/style";
 import Split from "split.js";
 import Iframe from "$/iframe";
 
@@ -170,7 +171,7 @@ function updateConfig (config) {
     <div id="render">
       <Iframe style="width: 100%; height: 100%;" :script="script" :dark="isDark" :config="config" @updateConfig="updateConfig"></Iframe>
       <div v-show="showRenderEditor" id="render-editor"></div>
-      <div class="render-btns" :class="[space.x[2]]">
+      <div class="render-btn-group" :class="[space.x[2]]">
         <button class="btn-html" :class="btnStyle" @click="hideRenderEditor(0) || updateRender(0)">
           <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,17.56L16.07,16.43L16.62,10.33H9.38L9.2,8.3H16.8L17,6.31H7L7.56,12.32H14.45L14.22,14.9L12,15.5L9.78,14.9L9.64,13.24H7.64L7.93,16.43L12,17.56M4.07,3H19.93L18.5,19.2L12,21L5.5,19.2L4.07,3Z" /></svg>
         </button>
@@ -185,9 +186,21 @@ function updateConfig (config) {
   </div>
 </div>
 
-<button class="btn-settings" :class="btnStyle" @click="showConfig = !showConfig">
-<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94c0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6s3.6 1.62 3.6 3.6s-1.62 3.6-3.6 3.6z"/></svg>
-</button>
+<div class="editor-btn-group" :class="[space.x[4]]">
+  <button :class="btnStyle" @click="showConfig = !showConfig">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94c0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6s3.6 1.62 3.6 3.6s-1.62 3.6-3.6 3.6z"/></svg>
+  </button>
+  <span class="divider"></span>
+  <div class="select-container">
+    <select id="examples" name="examples">
+      <option value="default" disabled selected>Select Example</option>
+      <option value="counter">Simple Counter</option>
+      <option value="todos">Todo List</option>
+      <option value="repos">Github Repo List</option>
+      <option value="animations">Animations</option>
+    </select>
+  </div>
+</div>
 
 <style>
 #repl {
@@ -250,15 +263,93 @@ function updateConfig (config) {
   cursor: col-resize;
 }
 
-.btn-settings {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+.select-container select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border-radius: 6px;
+  background: rgba(232, 232, 232, 0.5);
+  color: var(--vp-c-text-2);
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 4px;
+  margin-left: 0.4rem;
+  font-size: 12px;
 }
 
-.render-btns {
+.select-container select option {
+  padding: 0 10px;
+}
+
+.select-container:after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 12px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  backdrop-filter: blur(10px);
+  color: var(--vp-c-text-3);
+  background: rgba(220, 220, 220, 0.4);
+  padding: 3px 11px;
+  pointer-events: none;
+  margin-right: -0.4rem;
+}
+
+.select-container select:hover {
+  color: var(--vp-c-text-1);
+}
+
+.select-container:hover select {
+  background: rgba(210, 210, 210, 0.3);
+}
+
+.select-container:hover::after {
+  background: rgba(215, 215, 215, 0.4);
+}
+
+.dark .select-container select {
+  background: rgba(60, 60, 60, 0.3);
+}
+
+.dark .select-container:after {
+  background: rgba(64, 64, 64, 0.4);
+}
+
+.dark .select-container:hover select {
+  background: rgba(68, 68, 68, 0.3);
+}
+
+.dark .select-container:hover::after {
+  background: rgba(70, 70, 70, 0.4);
+}
+
+.select-container {
+  position: relative;
+  width: 170px;
+}
+
+.divider {
+  width:1px;
+  background: var(--vp-c-divider-light);
+  height: 1.5rem;
+}
+
+.editor-btn-group {
+  position: fixed;
+  bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.render-btn-group {
   position: absolute;
   top: calc(100vh - 6rem);
   left: 0.3rem;
@@ -266,7 +357,7 @@ function updateConfig (config) {
 }
 
 @media (min-width: 960px) {
-  .render-btns {
+  .render-btn-group {
     top: calc(100vh - 7rem);
   }
 }
