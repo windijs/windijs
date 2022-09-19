@@ -46,10 +46,10 @@ export const examples: Examples = {
     main: load(gradientsMain),
     config: gradientsConfig,
   },
-  animation: {
-    id: "animation",
-    label: "Animations",
-    main: "// TODO: Animations",
-    config: "export default {}",
-  },
+  // animation: {
+  //   id: "animation",
+  //   label: "Animations",
+  //   main: "// TODO: Animations",
+  //   config: "export default {}",
+  // },
 };
