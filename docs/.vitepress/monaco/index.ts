@@ -8,6 +8,7 @@ import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker"
 import { wireTmGrammars } from "monaco-editor-textmate";
 import { Registry } from "monaco-textmate"; // peer dependency
 import { loadWASM } from "onigasm"; // peer dependency of 'monaco-textmate'
+import { counterExample } from "./examples";
 
 import vsDarkPlus from "./themes/dark_plus.json";
 import vsLightPlus from "./themes/light_plus.json";
@@ -755,7 +756,6 @@ export {};
 `;
 monaco.languages.typescript.typescriptDefaults.addExtraLib(globalSource, globalUri);
 export const globalModel = monaco.editor.createModel(globalSource, "typescript", monaco.Uri.parse(globalUri));
-
 monaco.languages.typescript.typescriptDefaults.addExtraLib(
   `
 import JSX = preact.JSXInternal;
@@ -787,76 +787,9 @@ declare const useState: typeof preact.useState;
 );
 
 const modelUri = monaco.Uri.file("main.tsx");
-export const codeModel = monaco.editor.createModel(
-  `import type { WindiColors } from "windijs";
+export const codeModel = monaco.editor.createModel(counterExample.main, "typescript", modelUri);
 
-function Counter() {
-  const [value, setValue] = useState(0);
-  const colors: WindiColors[] = ["blue", "purple", "pink", "red", "orange", "yellow", "green", "teal"];
-  const btnStyle = [myBtn, bg.gray[400].opacity(60), hover(bg.gray[500].opacity(50)), dark(bg.stone[700], hover(bg.stone[500])), text.white];
-
-  return (
-    <div class={[marginTop.vh[35]]}>
-      <div class={[bg[colors[Math.abs(value % 8)]][500].gradient, hocus(bg.opacity[90]), w.content.max, mx.auto, p[4], text.white, rounded.lg, userSelect.none]}>Counter: {value}</div>
-      <div class={[layout.hstack, mt[4], space.x[4]]}>
-        <button class={btnStyle} onClick={() => setValue(value + 1)}>Increment</button>
-        <button class={btnStyle} onClick={() => setValue(value - 1)}>Decrement</button>
-      </div>
-    </div>
-  );
-}
-
-render(<Counter />, document.getElementById("app"));
-`,
-  "typescript",
-  modelUri // Pass the file name to the model here.
-);
-
-const configModel = monaco.editor.createModel(
-  `import { css, baseColors, materialColors, tailwindStone, defineConfig } from "windijs";
-
-export default defineConfig({
-  darkMode: "class",
-  theme: {
-    colors: {
-      stone: tailwindStone,
-      ...baseColors,
-      ...materialColors
-    },
-    borderRadius: {
-      lg: "8px",
-    },
-  },
-  utilities: {
-    layout: {
-      hstack: css({
-        display: "flex",
-        justifyContent: "center",    
-      }),
-      vstack: css({
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }),
-    },
-    myBtn: css({
-      borderStyle: "none",
-      cursor: "pointer",
-      userSelect: "none",
-      borderRadius: "9999px",
-      padding: "0.5rem",
-      "&:focus": {
-        outline: "none",
-      }
-    })
-  },
-  variants: {
-    hocus: "&:hover, &:focus"
-  }
-})`,
-  "typescript",
-  monaco.Uri.file("windi.config.ts")
-);
+const configModel = monaco.editor.createModel(counterExample.config, "typescript", monaco.Uri.file("windi.config.ts"));
 
 let loaded = false;
 
