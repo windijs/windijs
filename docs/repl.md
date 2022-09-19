@@ -3,36 +3,42 @@ layout: home
 ---
 
 <script setup lang="ts">
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { useMonaco, htmlModel, styleModel, scriptModel, globalModel } from "$/monaco";
 import { ref, onMounted, onUnmounted, onBeforeMount, getCurrentInstance } from "vue";
 import { dtsSetup } from "../packages/plugin-utils/src/gen.ts";
 import { processCode } from "$/shared";
 import { style } from "@windijs/style";
+import { examples } from "$/monaco/examples";
 import Split from "split.js";
 import Iframe from "$/iframe";
 
-// TODO: support windi.config
+// TODO: fix theme extend types
 
 let split;
 let listener;
 let tsProxy;
 let mainEditor;
 let renderEditor;
+let configEditor;
 let currentTab: -1 | 0 | 1 | 2 = -1;
-let keydown = false;
+
 const script = ref("");
 const config = ref("");
 const isDark = ref(localStorage.getItem("vitepress-theme-appearance") !== "light");
 const showConfig = ref(false);
 const showRenderEditor = ref(false);
-const btnStyle = [rounded.full, bg.gray[100], text.gray[400], hover(text.gray[500]), dark(bg.dark[400], text.stone[600], hover(text.stone[500]))];
+const btnStyle = [p[1], rounded.lg, style.backdropFilter["blur(10px)"], style["-webkit-backdrop-filter"]["blur(10px)"], bg.gray[100].opacity(50), text.gray[400], hover(text.gray[500]), dark(bg.dark[400].opacity(30), text.stone[600], hover(text.stone[500]))];
 let viewChanged = false;
 let configChanged = false;
 
+const select = ref(null);
+
 onMounted(() => {
-  useMonaco().then(({monaco, editor, renderEditor: _renderEditor, configEditor}) => {
+  useMonaco().then(({monaco, editor, renderEditor: _renderEditor, configEditor: _configEditor}) => {
     renderEditor = _renderEditor;
     mainEditor = editor;
+    configEditor = _configEditor;
     const updateScript = (proxy) => {
       tsProxy = proxy;
       proxy?.getEmitOutput(editor.getModel().uri.toString()).then((r) => {
@@ -160,6 +166,13 @@ function updateConfig (config) {
     const model = mainEditor.getModel();
     model.setValue(model.getValue());
   }
+
+  select.value.addEventListener("change", function() {
+    const example = examples[this.value];
+
+    mainEditor.getModel().setValue(example.main);
+    configEditor.getModel().setValue(example.config);
+  });
 }
 </script>
 
@@ -192,12 +205,9 @@ function updateConfig (config) {
   </button>
   <span class="divider"></span>
   <div class="select-container">
-    <select id="examples" name="examples">
+    <select id="examples" name="examples" ref="select">
       <option value="default" disabled selected>Select Example</option>
-      <option value="counter">Simple Counter</option>
-      <option value="todos">Todo List</option>
-      <option value="repos">Github Repo List</option>
-      <option value="animations">Animations</option>
+      <option :value="item.id" :key="item.id" v-for="item in examples">{{item.label}}</option>
     </select>
   </div>
 </div>
@@ -269,6 +279,7 @@ function updateConfig (config) {
   appearance: none;
   cursor: pointer;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 6px;
   background: rgba(232, 232, 232, 0.5);
   color: var(--vp-c-text-2);
@@ -295,6 +306,7 @@ function updateConfig (config) {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--vp-c-text-3);
   background: rgba(220, 220, 220, 0.4);
   padding: 3px 11px;
