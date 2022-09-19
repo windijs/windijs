@@ -41,32 +41,6 @@ export default defineConfig({
             text: "Optimization",
             link: "/guide/optimization",
           },
-          {
-            text: "Browser Support",
-            link: "/guide/browser-support",
-          },
-        ],
-      },
-      {
-        text: "Integrations",
-        collapsible: false,
-        items: [
-          {
-            text: "CLI",
-            link: "/integrations/cli",
-          },
-          {
-            text: "Vite",
-            link: "/integrations/vite",
-          },
-          {
-            text: "Rollup",
-            link: "/integrations/rollup",
-          },
-          {
-            text: "Webpack",
-            link: "/integrations/webpack",
-          },
         ],
       },
       {
@@ -104,6 +78,32 @@ export default defineConfig({
         ],
       },
       {
+        text: "Integrations",
+        collapsible: false,
+        items: [
+          {
+            text: "API",
+            link: "/integrations/api",
+          },
+          // {
+          //   text: "CLI",
+          //   link: "/integrations/cli",
+          // },
+          {
+            text: "Vite",
+            link: "/integrations/vite",
+          },
+          // {
+          //   text: "Rollup",
+          //   link: "/integrations/rollup",
+          // },
+          // {
+          //   text: "Webpack",
+          //   link: "/integrations/webpack",
+          // },
+        ],
+      },
+      {
         text: "Posts",
         collapsible: false,
         items: [
@@ -114,10 +114,6 @@ export default defineConfig({
           {
             text: "Ways of Using Windi JS",
             link: "/posts/ways-of-using-windijs",
-          },
-          {
-            text: "Windi JS and Web Components",
-            link: "/posts/windijs-and-web-components",
           },
         ],
       },
