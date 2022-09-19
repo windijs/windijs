@@ -127,11 +127,13 @@
     var h, container;
     var utilitiesRuntime = ""; // entry for inject utilities runtime
     var runtimeImports = utilitiesRuntime.match(/var[\s\S]*require[^;]+;/)[0];
-    var increRuntime = utilitiesRuntime.replace(/var\s+(\w+\s*=)/g, "$1").replace(/var[\s\S]*require[^;]+;/, ""); // for incremental runtime
+    var increRuntime = utilitiesRuntime
+      .replace(/var\s+(\w+\s*=)/g, "$1")
+      .replace(/var[\s\S]*require[^;]+;/, "")
+      .replace(/\s*colors\s*=[^;]+;/, "");
+      // for incremental runtime
     
-    function updateRuntime(runtime, theme = {}) {
-      eval(runtime);
-
+    function updateSpecials(theme = {}) {
       // handle conflict `h` in preact and windi
       h = new Proxy(preactH, {
         get(target, p) {
@@ -143,7 +145,8 @@
       container = windijsCore.buildContainer(theme.screens || windijsConfig.screens);
     }
     
-    updateRuntime(utilitiesRuntime);
+    eval(utilitiesRuntime);
+    updateSpecials();
 
     function applyVariantName (style, variant) {
       if (isStyleObject(style)) {
@@ -219,16 +222,17 @@
       function loadTheme(theme) {
         let currentRuntime = increRuntime;
         if (theme.colors) {
-          colors = theme.colors; // update global colors
-          currentRuntime = currentRuntime.replace(/\s*colors\s*=[^;]+;/, "");
+          currentRuntime = "colors = theme.colors;\n" + currentRuntime;
+        } else {
+          currentRuntime = "colors = { ...baseColors, ...windiColors };\n" + currentRuntime;
         }
         for (const k of Object.keys(theme)) {
           if (k === "colors") continue;
           currentRuntime = currentRuntime.replace(new RegExp(`\\b${k}Config`, "g"), "theme." + k);
         }
-        if (currentRuntime !== increRuntime) {
-          updateRuntime(runtimeImports + currentRuntime, theme);
-        }
+
+        eval(runtimeImports + currentRuntime);
+        updateSpecials(theme);
       }
 
       function loadVariants(variants) {
