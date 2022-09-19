@@ -14,6 +14,7 @@
     "dev": "pnpm build -d",
     "watch": "pnpm build -dw",
     "watch:dts": "pnpm build -wdf dts",
+    "check:dts": "npx tsc --noEmit",
     "build": "node -r sucrase/register ./scripts/build.ts",
     "build:dts": "pnpm build -f dts",
     "build:prod": "pnpm build -t",
