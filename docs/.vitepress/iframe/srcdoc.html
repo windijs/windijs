@@ -212,8 +212,8 @@
           dark = createMedia("(prefers-color-scheme: dark)", "dark");
           light = createMedia("(prefers-color-scheme: light)", "light");
         }
-        windijsUtilities.dark = dark;
-        windijsUtilities.light = light;
+        windijsVariants.dark = dark;
+        windijsVariants.light = light;
       }
 
       function loadTheme(theme) {
@@ -246,13 +246,7 @@
       }
 
       function loadConfig(config) {
-        const event = new CustomEvent('updateConfig', {
-          detail: {
-            value: config
-          }
-        });
-
-        window.dispatchEvent(event);
+        window.$$vueEmit("updateConfig", config);
 
         loadDarkMode(config.darkMode);
         loadTheme(config.theme || {});

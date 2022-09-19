@@ -72,12 +72,8 @@ export default defineComponent({
       sandbox.style.background = "transparent";
       container.value?.appendChild(sandbox);
       sandbox.addEventListener("load", () => {
+        Object.defineProperty(sandbox.contentWindow, "$$vueEmit", { value: emit });
         isReady.value = true;
-      });
-
-      sandbox?.contentWindow?.addEventListener("updateConfig", e => {
-        const v = (e as CustomEvent<{ value: object }>).detail.value;
-        emit("updateConfig", v);
       });
     }
 
