@@ -125,7 +125,10 @@ export default defineConfig({
       pattern: "https://github.com/windijs/windijs/edit/main/docs/:path",
       text: "Edit this page on GitHub",
     },
-    socialLinks: [{ icon: "github", link: "https://github.com/windijs/windijs" }],
+    socialLinks: [
+      { icon: "discord", link: "https://discord.gg/nJux6Gb52m" },
+      { icon: "github", link: "https://github.com/windijs/windijs" },
+    ],
     footer: {
       message: "Released under the MIT License.",
       copyright: "Copyright © 2022-present Raven Satir",
