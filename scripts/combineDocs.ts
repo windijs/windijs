@@ -7,7 +7,7 @@ import { basename, resolve } from "path";
 function transformIndex(entry = "docs/.vitepress/dist/index.html") {
   console.log(chalk.cyan("\nTransforming '" + entry + "'..."));
   let src = readFileSync(entry).toString();
-  src = src.replace('href="/api.html"', 'href="/api.html" target="_blank" rel="noreferrer"');
+  src = src.replace(new RegExp('href="/api(\\.html)?"'), 'href="/api.html" target="_blank" rel="noreferrer"');
   // "style=\"cursor:pointer;\" onclick=\"document.location.href='/api.html'\"");
   writeFileSync(entry, src);
 }
