@@ -42,6 +42,8 @@ self.MonacoEnvironment = {
   },
 };
 
+export type TypeScriptWorker = Awaited<ReturnType<Awaited<ReturnType<typeof monaco.languages.typescript.getTypeScriptWorker>>>>;
+
 monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
 
 // monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
