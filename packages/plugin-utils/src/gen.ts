@@ -1,7 +1,5 @@
-import { Config, Handler, isStyleObject, mergeObject } from "@windijs/helpers";
+import { Config, Handler, isStyleArray, isStyleObject, mergeObject } from "@windijs/helpers";
 import { indent, isNumber, isVarName } from "@windijs/shared";
-
-import { injectHelper } from "./utils";
 
 /**
  * Generate type interface for config object
@@ -40,7 +38,7 @@ export function dtsSetup<T extends { DEFAULT?: unknown } & object>(
   indentation = 4
 ): string {
   const handleValue = (v: unknown) =>
-    isStyleObject(v)
+    isStyleObject(v) || isStyleArray(v)
       ? "StyleObject"
       : v != null && typeof v === "object"
       ? "get" in v && "type" in v
@@ -48,6 +46,7 @@ export function dtsSetup<T extends { DEFAULT?: unknown } & object>(
           dtsHandler(v as Handler<unknown>, ignores, indentLevel + 1, indentation)
         : dtsSetup(v, ignores, indentLevel + 1, indentation)
       : "undefined";
+  if (isStyleObject(obj) || isStyleArray(obj)) return "StyleObject";
   return dtsConfig(obj, handleValue, ignores, indentLevel, indentation);
 }
 
@@ -82,7 +81,8 @@ export function dtsHandler<R>(handler: Handler<R>, ignores: string[] = ["DEFAULT
  */
 export function dtsUtilities(tmpl: string, config: Config): string {
   const theme = config.theme ?? {};
-  let code = injectHelper(
+  let code =
+    `import { MergeObject } from ${process.env.NODE_ENV === "production" ? '"@windijs/helpers"' : '"windijs"'};\n` +
     Object.entries(theme).reduce(
       (prev, [k, v]) =>
         v
@@ -92,10 +92,7 @@ export function dtsUtilities(tmpl: string, config: Config): string {
             )
           : prev,
       tmpl
-    ),
-    "MergeObject",
-    "@windijs/helpers"
-  );
+    );
 
   code = Object.entries(theme.extend ?? {})
     .filter(([k]) => !(k in theme))
