@@ -1,13 +1,26 @@
-import { StyleLoader, StyleObject, applyVariant, baseStyleHandler, baseStyleTarget, buildRules, createRules, hashNamer, injectCSS, nameStyle, useNamer, useStyleLoader } from "windijs";
+import {
+  applyVariant,
+  baseStyleHandler,
+  baseStyleTarget,
+  buildRules,
+  createRules,
+  hashNamer,
+  injectCSS,
+  nameStyle,
+  useNamer,
+  useStyleLoader,
+} from "windijs";
+
+import type { StyleLoader, StyleObject } from "windijs";
 
 const CSS_LIST: string[] = [];
 const CLASS_LIST: string[] = [];
 
-export function mountCSS () {
+export function mountCSS() {
   return injectCSS(CSS_LIST.join("\n"));
 }
 
-export const ssrLoader: StyleLoader = ((css, meta, data) => {
+export const ssrLoader: StyleLoader = (css, meta, data) => {
   const baseStyle = baseStyleTarget(css, meta, data) as StyleObject;
   const className = nameStyle(baseStyle);
   const inject = (v: unknown) => {
@@ -18,19 +31,22 @@ export const ssrLoader: StyleLoader = ((css, meta, data) => {
     return v;
   };
 
-  return new Proxy({
-    [className]: true,
-    ...baseStyle,
-  }, {
-    get (target, prop, receiver) {
-    // for react, svelte...
-      if (prop === "toString") return () => inject(Object.keys(target).join(" "));
-      // for vue
-      if (prop in target) return inject(Reflect.get(target, prop, receiver));
-      return baseStyleHandler(target, prop, receiver);
+  return new Proxy(
+    {
+      [className]: true,
+      ...baseStyle,
     },
-  });
-});
+    {
+      get(target, prop, receiver) {
+        // for react, svelte...
+        if (prop === "toString") return () => inject(Object.keys(target).join(" "));
+        // for vue
+        if (prop in target) return inject(Reflect.get(target, prop, receiver));
+        return baseStyleHandler(target, prop, receiver);
+      },
+    }
+  );
+};
 
 useNamer(hashNamer);
 useStyleLoader(ssrLoader);
