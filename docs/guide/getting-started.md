@@ -118,14 +118,14 @@ To solve the above two problems, you need to install [@windijs/plugin-utils](htt
 npm install --save-dev @windijs/plugin-utils
 ```
 
-This package provides plugins for bundlers ([vite](https://vitejs.dev/), [rollup](https://rollupjs.org/guide/en/), [webpack](https://webpack.js.org/), ...), it will automatically inject utilities and variants for you at packaging time, and it supports loading the config file [windi.config.js](http://localhost:5173/guide/configuration).
+This package provides plugins for bundlers ([vite](https://vitejs.dev/), [rollup](https://rollupjs.org/guide/en/), [webpack](https://webpack.js.org/), ...), it will automatically inject utilities and variants for you at packaging time, and it supports loading the config file [windi.config.js](/guide/configuration).
 
 It will define new utilities for you whenever you change the config, and it also generates dts files if you are using TypeScript.
 
 Don't worry, all this happens in the background, it's fully automated, and you'll get a clean and tidy development experience.
 
 :::tip
-To learn about the configuration for different JavaScript Frameworks, please refer to [here](http://localhost:5173/integrations/vite).
+To learn about the configuration for different JavaScript Frameworks, please refer to [here](/integrations/vite).
 :::
 
 ## What's next?

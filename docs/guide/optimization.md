@@ -105,7 +105,7 @@ After this, this css will be
 
 ## Type Checking
 
-Although Windi JS actually implements the ability to [put arrays into JSX](http://localhost:5173/posts/how-windijs-works#style-applying), this would conflict with the framework's type checking. The main reason is that TypeScript only check whether target is a `string`, but not whether target implements the `toString` method.
+Although Windi JS actually implements the ability to [put arrays into JSX](/posts/how-windijs-works#style-applying), this would conflict with the framework's type checking. The main reason is that TypeScript only check whether target is a `string`, but not whether target implements the `toString` method.
 
 For example, in preact-ts/react-ts, If you use the inline syntax, such as `<img className={[bg.blue[400], rounded.xl]}>`, the following error will be prompted.
 
