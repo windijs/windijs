@@ -35,7 +35,7 @@ function copyApi(entry = "api", target = "docs/.vitepress/dist") {
 
 async function publishDocs(target = "./docs/.vitepress/dist") {
   console.log(chalk.cyan("\nPublishing Docs to GitHub Pages ..."));
-  await publish(target, function (err) {
+  await publish(target, { dotfiles: true }, function (err) {
     if (err) console.error(err);
     else console.log(chalk.green("\nSuccess Published!"));
   });
