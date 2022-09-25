@@ -2,12 +2,15 @@
 layout: home
 
 title: Windi JS
-titleTemplate: The Utility-first CSS-In-JS Framework.
+titleTemplate: The Utility-first CSS-in-JS Framework.
 
 hero:
   name: Windi JS
-  text: The Utility-first CSS-In-JS Framework.
-  tagline: Simple, powerful, and performant. Meet the modern CSS-In-JS framework you've always wanted.
+  text: The Utility-first CSS-in-JS Framework.
+  tagline: Simple, powerful, and performant. Meet the modern CSS-in-JS framework you've always wanted.
+  image:
+    src: /logo-with-shadow.png
+    alt: Windi JS
   actions:
     - theme: brand
       text: Get Started
@@ -17,12 +20,22 @@ hero:
       link: https://github.com/windijs/windijs
 
 features:
-  - title: Atomic In Mind
-    details: Unlike the traditional css-in-js framework, windijs is friendly to bundlers, only the utilities you have used will be bundled. easy to extract. Its core is only 1kb.
-  - title: Power by TypeScript
-    details: Written entirely by TypeScript, each utilities or variants you use will have a perfect intelligent completion. You don't even need any extra plugin to work properly.
-  - title: Fully Customizable
-    details: All themes and configurations are customizable. Use simple objects and api to define utilities and variants, create your css framework only overnight.
-  - title: Deploy Anywhere
-    details: Not only can it be used for CSS-In-Js, but also for any scenario related to CSS that you can think of, SSR, SSG, CSS-In-JS, you can use windijs. All you need to do is to use different Loader.
+  - icon: 🧬
+    title: Pure JavaScript
+    details: The world's first true CSS-in-JS framework with native JavaScript-level operations.
+  - icon: 🧪
+    title: Fully Customizable
+    details: Use simple objects to define utilities, creating your own framework, not a dream.
+  - icon: 🔑
+    title: Powerful APIs
+    details: Flexible programmatic APIs with full TypeScript typing and powerful intelligent completions.
+  - icon: ⛵
+    title: Optimized Build
+    details: Optimized for bundlers, atomic in mind, only ship what you need.
+  - icon: 🎎
+    title: Framework Support
+    details: Out-of-the-box support for Vanilla, Preact, React, Vue, Svelte, and more.
+  - icon: 🏖️
+    title: Platform Adaptability
+    details: Available for any scenario related to CSS, SSR, SSG, Preprocessor, etc.
 ---
