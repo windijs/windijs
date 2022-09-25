@@ -23,6 +23,7 @@ function copy(item: string, target: string) {
 
 function copyApi(entry = "api", target = "docs/.vitepress/dist") {
   console.log(chalk.cyan("\nCopying API from '" + entry + "' to '" + target + "'..."));
+  copy(resolve(entry, ".nojekyll"), resolve(target, ".nojekyll"));
   copy(resolve(entry, "modules.html"), resolve(target, "api.html"));
   copy(resolve(entry, "assets"), resolve(target, "assets"));
   readdirSync(entry)

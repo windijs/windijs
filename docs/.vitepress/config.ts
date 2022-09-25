@@ -12,6 +12,7 @@ export default defineConfig({
       md.use(mdRenderFilename);
     },
   },
+  base: "/windijs/",
   themeConfig: {
     logo: "/logo.png",
     nav: [
