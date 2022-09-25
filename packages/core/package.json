@@ -1,6 +1,6 @@
 {
   "name": "@windijs/core",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "@windijs/core",
   "main": "dist/windijsCore.js",
   "module": "dist/windijsCore.mjs",

@@ -1,5 +1,16 @@
 # windijs
 
+## 1.1.6
+
+### Patch Changes
+
+- [`a7814163`](https://github.com/windijs/windijs/commit/a78141634cba889e400b7368c2b6730de6e7731f) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: README image link
+
+* [`19f8b65d`](https://github.com/windijs/windijs/commit/19f8b65d08560c9a5416c7259f21aca94655f82f) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: document page link
+
+* Updated dependencies []:
+  - @windijs/core@1.1.6
+
 ## 1.1.5
 
 ### Patch Changes

@@ -453,7 +453,7 @@ importers:
 
   packages/style:
     specifiers:
-      '@windijs/core': 1.1.5
+      '@windijs/core': 1.1.6
       '@windijs/helpers': 1.1.5
       '@windijs/shared': 1.0.6
     dependencies:
@@ -473,7 +473,7 @@ importers:
     specifiers:
       '@windijs/colors': 1.0.4
       '@windijs/config': 1.0.10
-      '@windijs/core': 1.1.5
+      '@windijs/core': 1.1.6
       '@windijs/helpers': 1.1.5
     dependencies:
       '@windijs/colors': link:../colors
@@ -483,7 +483,7 @@ importers:
 
   packages/variants:
     specifiers:
-      '@windijs/core': 1.1.5
+      '@windijs/core': 1.1.6
       '@windijs/helpers': 1.1.5
       '@windijs/shared': 1.0.6
     dependencies:
@@ -515,7 +515,7 @@ importers:
     specifiers:
       '@windijs/colors': 1.0.4
       '@windijs/config': 1.0.10
-      '@windijs/core': 1.1.5
+      '@windijs/core': 1.1.6
       '@windijs/helpers': 1.1.5
       '@windijs/shared': 1.0.6
     dependencies:

@@ -1,5 +1,12 @@
 # @windijs/style
 
+## 1.1.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @windijs/core@1.1.6
+
 ## 1.1.5
 
 ### Patch Changes
