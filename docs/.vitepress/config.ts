@@ -6,7 +6,7 @@ export default defineConfig({
   lang: "en-US",
   title: "Windi JS",
   cleanUrls: "without-subfolders",
-  description: "The Utility-first CSS-In-JS Framework Powered by ES6 Proxy API and TypeScript.",
+  description: "The Utility-first CSS-in-JS Framework Powered by ES6 Proxy API and TypeScript.",
   markdown: {
     config(md) {
       md.use(mdRenderFilename);
