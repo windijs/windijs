@@ -3,7 +3,6 @@ layout: home
 ---
 
 <script setup lang="ts">
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { useMonaco, htmlModel, styleModel, scriptModel, globalModel } from "$/monaco";
 import { ref, onMounted, onUnmounted, onBeforeMount, getCurrentInstance } from "vue";
 import { dtsSetup } from "../packages/plugin-utils/src/gen.ts";
@@ -26,6 +25,7 @@ let currentTab: -1 | 0 | 1 | 2 = -1;
 const script = ref("");
 const config = ref("");
 const isDark = ref(localStorage.getItem("vitepress-theme-appearance") !== "light");
+const selectedExample = ref(localStorage.getItem("repl-selected-example") || "default");
 const showConfig = ref(false);
 const showRenderEditor = ref(false);
 const btnStyle = [p[1], rounded.lg, style.backdropFilter["blur(10px)"], style["-webkit-backdrop-filter"]["blur(10px)"], bg.gray[100].opacity(50), text.gray[400], hover(text.gray[500]), dark(bg.dark[400].opacity(30), text.stone[600], hover(text.stone[500]))];
@@ -39,6 +39,14 @@ onMounted(() => {
     renderEditor = _renderEditor;
     mainEditor = editor;
     configEditor = _configEditor;
+
+    if (selectedExample.value !== "default") {
+      const example = examples[selectedExample.value] || examples["counter"];
+
+      mainEditor.setValue(example.main);
+      configEditor.setValue(example.config);
+    }
+
     const updateScript = (proxy) => {
       tsProxy = proxy;
       proxy?.getEmitOutput(editor.getModel().uri.toString()).then((r) => {
@@ -170,8 +178,9 @@ function updateConfig (config) {
   select.value.addEventListener("change", function() {
     const example = examples[this.value];
 
-    mainEditor.getModel().setValue(example.main);
-    configEditor.getModel().setValue(example.config);
+    mainEditor.setValue(example.main);
+    configEditor.setValue(example.config);
+    localStorage.setItem("repl-selected-example", this.value);
   });
 }
 </script>
@@ -205,7 +214,7 @@ function updateConfig (config) {
   </button>
   <span class="divider"></span>
   <div class="select-container">
-    <select id="examples" name="examples" ref="select">
+    <select id="examples" name="examples" v-model="selectedExample" ref="select">
       <option value="default" disabled selected>Select Example</option>
       <option :value="item.id" :key="item.id" v-for="item in examples">{{item.label}}</option>
     </select>
