@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import { publish } from "gh-pages";
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "fs";
 /* eslint-disable no-console */
 import { basename, resolve } from "path";
@@ -30,6 +31,16 @@ function copyApi(entry = "api", target = "docs/.vitepress/dist") {
     .map(i => copy(i, resolve(target, basename(i))));
 }
 
+function publishDocs(target = "./docs/.vitepress/dist") {
+  console.log(chalk.cyan("\nPublishing Docs to GitHub Pages ..."));
+  publish(target, function (err) {
+    if (err) console.error(err);
+    else console.log(chalk.green("\nSuccess Published!"));
+  });
+}
+
 transformIndex();
 copyApi();
+publishDocs();
+
 console.log(chalk.green("\nDone!"));
