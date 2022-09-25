@@ -4,3 +4,4 @@ data/
 examples/
 packages/helpers/src/data.ts
 __proxy__/
+rollup.config.js
