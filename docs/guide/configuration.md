@@ -6,55 +6,55 @@ outline: deep
 
 A guide to configuring and customizing your Windi JS experience.
 
-**Note**: If you've ever used [Windi CSS](https://windicss.org/), the configuration of [Windi JS](https://github.com/windijs/windijs) is not exactly the same as that of [Windi CSS v3.x](https://windicss.org/). There are some differences and some are the same. Full compatibility will not be avaiable until the release of [Windi CSS v4.0](https://windicss.org/).
+**Note**: If you've ever used [Windi CSS](https://windicss.org/), the configuration of [Windi JS](https://github.com/windijs/windijs) is not exactly the same as that of [Windi CSS v3.x](https://windicss.org/). There are some differences and some are the same. Full compatibility will not be available until the release of [Windi CSS v4.0](https://windicss.org/).
 
 ## Config File
 
-The Windi JS configuration file is named `windi.config.js` or `windi.config.ts`, it should be placed in the root directory of your project and export a configuration object. Here’s an example:
+The Windi JS configuration file named `windi.config.js` or `windi.config.ts`, it should place in the root directory of your project and export a configuration object. Here’s an example:
 
 ```js
 import { baseColors, bootstrapColors, colorHandler, configHandler, css, defineConfig, gradientConfig } from "windijs";
 
 const colors = {
   ...baseColors,
-  ...bootstrapColors
-}
+  ...bootstrapColors,
+};
 
 export default defineConfig({
   theme: {
     // overwrite theme
     colors,
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
+      sans: ["Graphik", "sans-serif"],
+      serif: ["Merriweather", "serif"],
     },
     // extend theme
     extend: {
       borderRadius: {
-        xxl: '2rem',
+        xxl: "2rem",
       },
-    }
+    },
   },
   utilities: {
     // overwrite utility
     bg: {
-      DEFAULT: colorHandler(colors, "backgroundColor", "--w-bg-opacity")
+      DEFAULT: colorHandler(colors, "backgroundColor", "--w-bg-opacity"),
     },
     // create new utilities
     myColor: {
       red: css({
-        backgroundColor: "#FF2F41"
-      })
+        backgroundColor: "#FF2F41",
+      }),
     },
     gradient: {
-      DEFAULT: configHandler(gradientConfig, "backgroundImage")
-    }
+      DEFAULT: configHandler(gradientConfig, "backgroundImage"),
+    },
   },
   variants: {
-    // create new variant
-    hocus: "&:hover, &:focus"
-  }
-})
+    // create new variants
+    hocus: "&:hover, &:focus",
+  },
+});
 ```
 
 Although you can also use object directly, like below.
@@ -63,7 +63,7 @@ Although you can also use object directly, like below.
 /** @type {import("windijs").Config} */
 export default {
   /* configurations...  */
-}
+};
 ```
 
 ## Configuration Options
@@ -76,34 +76,34 @@ The theme section is where you define your color palette, fonts, type scale, bor
 export default defineConfig({
   theme: {
     colors: {
-      blue: '#1fb6ff',
-      purple: '#7e5bef',
-      pink: '#ff49db',
-      orange: '#ff7849',
-      green: '#13ce66',
-      yellow: '#ffc82c',
-      grayDark: '#273444',
-      gray: '#8492a6',
-      grayLight: '#d3dce6',
+      blue: "#1fb6ff",
+      purple: "#7e5bef",
+      pink: "#ff49db",
+      orange: "#ff7849",
+      green: "#13ce66",
+      yellow: "#ffc82c",
+      grayDark: "#273444",
+      gray: "#8492a6",
+      grayLight: "#d3dce6",
     },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
+      sans: ["Graphik", "sans-serif"],
+      serif: ["Merriweather", "serif"],
     },
     extend: {
       borderRadius: {
-        xxl: '2rem',
+        xxl: "2rem",
       },
-    }
-  }
-})
+    },
+  },
+});
 ```
 
 Learn more about the default theme and how to customize it in the [theme configuration guide](/customization/theme).
 
 ### Utilities
 
-The utlities of Windi JS are very easy to add and customize. Let's take official `border` as an example, which support [`border`, `border.solid`, `border.dashed`, ..., `border[0]`, `border[2]`, ..., `border.red[500]`, ..., `border.opacity[10]` ].
+The utilities of Windi JS are very easy to add and customize. Let's take official `border` as an example, which support [`border`, `border.solid`, `border.dashed`, ..., `border[0]`, `border[2]`, ..., `border.red[500]`, ..., `border.opacity[10]` ].
 
 ```js
 import { borderStyleConfig, borderWidthConfig, opacityConfig, colorHandler, configHandler, meld, prop } from "windijs";
@@ -115,17 +115,17 @@ export default defineConfig({
       DEFAULT: meld(
         configHandler(borderStyleConfig, "borderStyle"),
         configHandler(borderWidthConfig, "borderWidth"),
-        colorHandler(colors, "borderColor", "--w-border-opacity"),
+        colorHandler(colors, "borderColor", "--w-border-opacity")
       ),
-      opacity: configHandler(opacityConfig, prop`--w-border-opacity`)
-    }
-  }
-})
+      opacity: configHandler(opacityConfig, prop`--w-border-opacity`),
+    },
+  },
+});
 ```
 
 [`borderStyleConfig`, `borderWidthConfig`, `opacityConfig`, `colors`] are normal JavaScript Objects, you can define them by yourself.
 
-[`configHandler`, `colorHandler`] are interfaces provided by Windi JS to facilitate the use of config. Of course, you can also define it directly with `css` api, or mix them.
+[`configHandler`, `colorHandler`] are interfaces provided by Windi JS to ease the use of config. Of course, you can also define it directly with `css` API, or mix them.
 
 ```js
 import { css, prop } from "windijs";
@@ -135,19 +135,19 @@ export default defineConfig({
     border: {
       DEFAULT: css({
         borderStyle: "solid",
-        borderWidth: "1px"
+        borderWidth: "1px",
       }),
       solid: css({
-        borderStyle: "solid"
+        borderStyle: "solid",
       }),
       dashed: css({
-        borderStyle: "dashed"
+        borderStyle: "dashed",
       }),
       0: css({
-        borderWidth: "0px"
+        borderWidth: "0px",
       }),
       2: css({
-        borderWidth: "2px"
+        borderWidth: "2px",
       }),
       red: css({
         "--w-border-opacity": "1",
@@ -161,16 +161,15 @@ export default defineConfig({
           "--w-border-opacity": ".1",
         }),
         25: css({
-          "--w-border-opacity": ".25"
-        })
-      }
-    }
-  }
-})
-
+          "--w-border-opacity": ".25",
+        }),
+      },
+    },
+  },
+});
 ```
 
-Learn more about the default utilities and how to create new utility in the [utility configuration guide](/customization/utility).
+Learn more about the default utilities and how to create a new utility in the [utility configuration guide](/customization/utility).
 
 ### Variants
 
@@ -188,23 +187,23 @@ export default defineConfig({
     // TODO: support array variants
     smDark: ["@media (min-width: 640px)", "@media (prefers-color-scheme: dark)"],
     smDarkHover: ["@media (min-width: 640px)", "@media (prefers-color-scheme: dark)", "&:hover"],
-  }
-})
+  },
+});
 ```
 
-Learn more about the default variants and how to create new variant in the [variant configuration guide](/customization/variant).
+Learn more about the default variants and how to create a new variant in the [variant configuration guide](/customization/variant).
 
 ### DarkMode
 
-By default, darkMode option value is `media`, which relying on the operating system perference.
+By default, darkMode option value is `media`, which relying on the operating system preference.
 
 ```js
 export default defineConfig({
   darkMode: "media",
-})
+});
 ```
 
-generated css example:
+Generated css example:
 
 ```css
 @media (perfer-color-scheme: dark) {
@@ -222,10 +221,10 @@ If you want to support toggling dark mode manually, you can use the `class` stra
 ```js
 export default defineConfig({
   darkMode: "class",
-})
+});
 ```
 
-generated css example:
+Generated css example:
 
 ```css
 .dark .leading-none {
@@ -246,14 +245,14 @@ You can overwrite the dark mode variant in variants options.
 export default defineConfig({
   darkMode: false, // whatever
   variants: {
-    dark: '[data-mode="dark"] &' // customize variants will overwrite the darkMode option
-  }
-})
+    dark: '[data-mode="dark"] &', // customize variants will overwrite the darkMode option
+  },
+});
 ```
 
 ### Important
 
-The `important` option lets you control whether or not Windi’s utilities should be marked with `!important`. This can be really useful when using Windi JS with existing CSS that has high specificity selectors.
+The `important` option lets you control whether Windi’s utilities should marked with `!important`. This can be useful when using Windi JS with existing CSS that has high specificity selectors.
 
 :::warning
 The `important` config is not supported yet.
@@ -264,10 +263,10 @@ To generate utilities as `!important`, set the `important` key in your configura
 ```js
 export default defineConfig({
   important: true,
-})
+});
 ```
 
-Now all of Windi’s utility classes will be generated as !important:
+Now all Windi’s utility classes will generated as !important:
 
 ```css
 .leading-none {
@@ -287,10 +286,10 @@ To get around this, you can set `important` to an ID selector like `#app` instea
 ```js
 export default defineConfig({
   important: "#app",
-})
+});
 ```
 
-This configuration will prefix all of your utilities with the given selector, effectively increasing their specificity without actually making them `!important`.
+This configuration will prefix all your utilities with the given selector, effectively increasing their specificity without actually making them `!important`.
 
 ```css
 #app.leading-none {
