@@ -96,6 +96,11 @@ export function dedupRules(rules: CSSRules): CSSRules {
   return [...styles, ...Object.values(atRules)];
 }
 
+/** build a single StyleObject to css */
+export function buildStyle(className: string, style: StyleObject): string {
+  return buildRules(createRules(applyVariant(style), "." + className));
+}
+
 export function atomic(...utilities: (StyleObject | StyleObject[])[]): string {
   const rules: CSSRules = [];
 
