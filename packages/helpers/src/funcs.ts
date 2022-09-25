@@ -101,8 +101,7 @@ class Inset {
 
   constructor(values: (CSSLengthPercentage | undefined)[]) {
     this.values = values;
-    // @ts-ignore
-    this.round = (...args) => parenWrap("inset", this.values.filter(i => i != null).join(" ") + " round " + round(...args));
+    this.round = ((a, b, c, d) => parenWrap("inset", this.values.filter(i => i != null).join(" ") + " round " + round(a, b, c, d))) as typeof round;
   }
 
   toString() {
@@ -190,7 +189,7 @@ export const {
   repeat,
 } = useProxy<CSSFunctions, Function>(
   prop =>
-    (...args: any[]) =>
+    (...args: unknown[]) =>
       prop + "(" + args.filter(i => i != null).join(", ") + ")"
 );
 
@@ -206,7 +205,7 @@ export const {
   repeatingRadialGradient,
 } = useProxy<CSSFunctions, Function>(
   prop =>
-    (...args: any[]) =>
+    (...args: unknown[]) =>
       camelToDash(prop) +
       "(" +
       args
