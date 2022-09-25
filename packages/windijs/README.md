@@ -1,5 +1,5 @@
 <h1 align="center">
-<a href="https://github.com/windicss/windicss/wiki">
+<a href="https://windijs.github.io/windijs/">
   <img src="https://github.com/windijs/windijs/raw/main/assets/logo.png" alt="Windi Logo" height="120" width="120"/><br>
 </a>
   Windi JS
@@ -15,7 +15,7 @@
 
 ## Getting Started
 
-Please follow the documentation at [windijs.github.io](https://windijs.github.io/)!
+Please follow the documentation at [windijs.github.io](https://windijs.github.io/windijs/)!
 
 ## Discussions
 
