@@ -1,19 +1,16 @@
 import * as monaco from "monaco-editor";
-import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
+
+import { Registry } from "monaco-textmate"; // peer dependency
+import { counterExample } from "./examples";
 import cssWorker from "monaco-editor/esm/vs/language/css/css.worker?worker";
+import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker";
 import jsonWorker from "monaco-editor/esm/vs/language/json/json.worker?worker";
-import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
-
-import { wireTmGrammars } from "monaco-editor-textmate";
-import { Registry } from "monaco-textmate"; // peer dependency
 import { loadWASM } from "onigasm"; // peer dependency of 'monaco-textmate'
-import { counterExample } from "./examples";
-
+import preactDts from "./types/preact.d.ts?raw";
+import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
 import vsDarkPlus from "./themes/dark_plus.json";
 import vsLightPlus from "./themes/light_plus.json";
-import preactDts from "./types/preact.d.ts?raw";
-import windijsDts from "./types/windijs.d.ts?raw";
 import windiColorsDts from "./types/windijsColors.d.ts?raw";
 import windiConfigDts from "./types/windijsConfig.d.ts?raw";
 import windiCoreDts from "./types/windijsCore.d.ts?raw";
@@ -22,6 +19,8 @@ import windiSharedDts from "./types/windijsShared.d.ts?raw";
 import windiStyleDts from "./types/windijsStyle.d.ts?raw";
 import windiUtilitiesDts from "./types/windijsUtilities.d.ts?raw";
 import windiVariantsDts from "./types/windijsVariants.d.ts?raw";
+import windijsDts from "./types/windijs.d.ts?raw";
+import { wireTmGrammars } from "monaco-editor-textmate";
 
 // @ts-ignore
 self.MonacoEnvironment = {
@@ -807,7 +806,7 @@ const scopeMap = {
 };
 
 export async function useMonaco() {
-  !loaded && (await loadWASM("/onigasm/onigasm.wasm"));
+  !loaded && (await loadWASM("/windijs/onigasm/onigasm.wasm"));
 
   loaded = true;
 
@@ -815,7 +814,7 @@ export async function useMonaco() {
     getGrammarDefinition: async scopeName => {
       return {
         format: "json",
-        content: await (await fetch(`/grammars/${scopeMap[scopeName as keyof typeof scopeMap] ?? ""}.tmLanguage.json`)).text(),
+        content: await (await fetch(`/windijs/grammars/${scopeMap[scopeName as keyof typeof scopeMap] ?? ""}.tmLanguage.json`)).text(),
       };
     },
   });

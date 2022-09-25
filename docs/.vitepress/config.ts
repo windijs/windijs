@@ -1,5 +1,4 @@
 import { defineConfig } from "vitepress";
-
 import { mdRenderFilename } from "./markdown";
 
 export default defineConfig({
@@ -12,6 +11,9 @@ export default defineConfig({
       md.use(mdRenderFilename);
     },
   },
+  head: [
+    ['link', { rel: "shortcut icon", type: "image/x-icon", href: "/windijs/favicon.ico" }]
+  ],
   base: "/windijs/",
   themeConfig: {
     logo: "/logo.png",

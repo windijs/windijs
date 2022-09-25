@@ -1,14 +1,15 @@
-import chalk from "chalk";
-import { publish } from "gh-pages";
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "fs";
 /* eslint-disable no-console */
 import { basename, resolve } from "path";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "fs";
+
+import chalk from "chalk";
+import { publish } from "gh-pages";
 
 /* Api pages is build with typedoc, this is a hack to redirect api link */
 function transformIndex(entry = "docs/.vitepress/dist/index.html") {
   console.log(chalk.cyan("\nTransforming '" + entry + "'..."));
   let src = readFileSync(entry).toString();
-  src = src.replace(new RegExp('href="/api(\\.html)?"'), 'href="/api.html" target="_blank" rel="noreferrer"');
+  src = src.replace(new RegExp('href="/windijs/api(\\.html)?"'), 'href="/windijs/api.html" target="_blank" rel="noreferrer"');
   // "style=\"cursor:pointer;\" onclick=\"document.location.href='/api.html'\"");
   writeFileSync(entry, src);
 }

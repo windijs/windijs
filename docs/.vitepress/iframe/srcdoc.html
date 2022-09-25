@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="/scripts/preact.min.js"></script>
-  <script src="/scripts/hooks.min.js"></script>
-  <script src="/scripts/windijsColors.runtime.js"></script>
-  <script src="/scripts/windijsConfig.runtime.js"></script>
-  <script src="/scripts/windijsShared.runtime.js"></script>
-  <script src="/scripts/windijsHelpers.runtime.js"></script>
-  <script src="/scripts/windijsCore.runtime.js"></script>
-  <script src="/scripts/windijsStyle.runtime.js"></script>
-  <script src="/scripts/windijsUtilities.runtime.js"></script>
-  <script src="/scripts/windijsVariants.runtime.js"></script>
-  <script src="/scripts/windijs.runtime.js"></script>
+  <script src="/windijs/scripts/preact.min.js"></script>
+  <script src="/windijs/scripts/hooks.min.js"></script>
+  <script src="/windijs/scripts/windijsColors.runtime.js"></script>
+  <script src="/windijs/scripts/windijsConfig.runtime.js"></script>
+  <script src="/windijs/scripts/windijsShared.runtime.js"></script>
+  <script src="/windijs/scripts/windijsHelpers.runtime.js"></script>
+  <script src="/windijs/scripts/windijsCore.runtime.js"></script>
+  <script src="/windijs/scripts/windijsStyle.runtime.js"></script>
+  <script src="/windijs/scripts/windijsUtilities.runtime.js"></script>
+  <script src="/windijs/scripts/windijsVariants.runtime.js"></script>
+  <script src="/windijs/scripts/windijs.runtime.js"></script>
   <title>Preview</title>
 </head>
 <body>
@@ -132,7 +132,7 @@
       .replace(/var[\s\S]*require[^;]+;/, "")
       .replace(/\s*colors\s*=[^;]+;/, "");
       // for incremental runtime
-    
+
     function updateSpecials(theme = {}) {
       // handle conflict `h` in preact and windi
       h = new Proxy(preactH, {
@@ -144,7 +144,7 @@
 
       container = windijsCore.buildContainer(theme.screens || windijsConfig.screens);
     }
-    
+
     eval(utilitiesRuntime);
     updateSpecials();
 
