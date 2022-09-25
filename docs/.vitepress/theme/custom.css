@@ -1,15 +1,21 @@
 :root {
-  --vp-c-brand: #8C82EF !important;
-  --vp-c-brand-dark: #91A0F2 !important;
+  --vp-c-brand: #8f94f2 !important;
+  --vp-c-brand-dark: #8c82ef !important;
   --vp-button-brand-border: #818cf8 !important;
-  --vp-button-brand-hover-bg: #91A0F2 !important;
+  --vp-button-brand-hover-bg: #8e84f0 !important;
   --vp-button-brand-hover-border: transparent !important;
   --vp-sidebar-width: 280px !important;
+  --vp-home-hero-name-color: transparent !important;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #8b71ef 10%, #93b3f3) !important;
+  --vp-home-hero-image-background-image: -webkit-linear-gradient(-45deg, rgba(147, 179, 243, 0.2) 50%, rgba(139, 113, 239, 0.23) 50%) !important;
+  --vp-home-hero-image-filter: blur(40px) !important;
 }
 
 .dark:root {
-  --vp-c-brand: #91A0F2 !important;
-  --vp-button-brand-hover-bg: #818cf8 !important;
+  --vp-c-brand: #8c82ef !important;
+  --vp-button-brand-hover-bg: #8b71ef !important;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #8b71ef 30%, #93b3f3) !important;
+  --vp-home-hero-image-background-image: -webkit-linear-gradient(-45deg, rgba(147, 179, 243, 0.33) 50%, rgba(139, 113, 239, 0.35) 50%) !important;
 }
 
 /* TODO: support @apply */
@@ -22,12 +28,12 @@ div[class*='language-'] .code-block-filename {
   @apply absolute top-0 left-0 py-1 px-2 text-xs text-gray-500  rounded-br;
 } */
 
-div[class*='language-'][class*='with-filename'] {
+div[class*="language-"][class*="with-filename"] {
   position: relative;
   padding-top: 1.5rem;
 }
 
-div[class*='language-'] .code-block-filename {
+div[class*="language-"] .code-block-filename {
   position: absolute;
   top: 0;
   left: 0;
@@ -35,18 +41,18 @@ div[class*='language-'] .code-block-filename {
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  background-color: #E5E7EB;
-  color: #6B7280;
+  background-color: #e5e7eb;
+  color: #6b7280;
   font-size: 0.75rem;
   line-height: 1rem;
   border-bottom-right-radius: 0.25rem;
 }
 
-.dark div[class*='language-'] .code-block-filename {
+.dark div[class*="language-"] .code-block-filename {
   color: rgba(156, 163, 175, 1);
   background-color: #282828;
 }
 
-div[class*='language-'] .lang {
+div[class*="language-"] .lang {
   display: none;
 }
