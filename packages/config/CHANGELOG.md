@@ -1,5 +1,11 @@
 # @windijs/config
 
+## 1.0.10
+
+### Patch Changes
+
+- [`b6aec06f`](https://github.com/windijs/windijs/commit/b6aec06fd97e312e4c3de9a990561e90c5013a19) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: publish runtime format bundle
+
 ## 1.0.9
 
 ### Patch Changes

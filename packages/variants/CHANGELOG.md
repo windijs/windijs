@@ -1,5 +1,16 @@
 # @windijs/variants
 
+## 1.0.11
+
+### Patch Changes
+
+- [`b6aec06f`](https://github.com/windijs/windijs/commit/b6aec06fd97e312e4c3de9a990561e90c5013a19) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: publish runtime format bundle
+
+- Updated dependencies [[`45cdc404`](https://github.com/windijs/windijs/commit/45cdc404f1a4e9b9e8d3f8fa63ef13d6ae1025cf), [`37c323cd`](https://github.com/windijs/windijs/commit/37c323cd73f55a2305cf9a429e5c5fc07dfe6c94), [`b6aec06f`](https://github.com/windijs/windijs/commit/b6aec06fd97e312e4c3de9a990561e90c5013a19), [`901663a2`](https://github.com/windijs/windijs/commit/901663a2af3d8b5bbc82cbbfe2661f99cd9b99f5)]:
+  - @windijs/helpers@1.1.5
+  - @windijs/core@1.1.5
+  - @windijs/shared@1.0.6
+
 ## 1.0.10
 
 ### Patch Changes

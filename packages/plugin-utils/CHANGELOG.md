@@ -1,5 +1,18 @@
 # @windijs/plugin-utils
 
+## 1.1.3
+
+### Patch Changes
+
+- [`334ef02d`](https://github.com/windijs/windijs/commit/334ef02d376e71ecbe1f26221d4f05d988ae4762) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: support alias option
+
+* [`b6aec06f`](https://github.com/windijs/windijs/commit/b6aec06fd97e312e4c3de9a990561e90c5013a19) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: publish runtime format bundle
+
+- [`cdbf64bc`](https://github.com/windijs/windijs/commit/cdbf64bc323b4605cf57930f097d05d477d51379) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: support disable configEntry
+
+- Updated dependencies [[`45cdc404`](https://github.com/windijs/windijs/commit/45cdc404f1a4e9b9e8d3f8fa63ef13d6ae1025cf), [`37c323cd`](https://github.com/windijs/windijs/commit/37c323cd73f55a2305cf9a429e5c5fc07dfe6c94), [`b6aec06f`](https://github.com/windijs/windijs/commit/b6aec06fd97e312e4c3de9a990561e90c5013a19), [`901663a2`](https://github.com/windijs/windijs/commit/901663a2af3d8b5bbc82cbbfe2661f99cd9b99f5)]:
+  - @windijs/helpers@1.1.5
+
 ## 1.1.2
 
 ### Patch Changes

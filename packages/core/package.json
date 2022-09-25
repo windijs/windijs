@@ -1,6 +1,6 @@
 {
   "name": "@windijs/core",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "@windijs/core",
   "main": "dist/windijsCore.js",
   "module": "dist/windijsCore.mjs",
@@ -26,8 +26,8 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/shared": "1.0.5",
-    "@windijs/helpers": "1.1.4"
+    "@windijs/shared": "1.0.6",
+    "@windijs/helpers": "1.1.5"
   },
   "buildOptions": {
     "name": "windijsCore",
