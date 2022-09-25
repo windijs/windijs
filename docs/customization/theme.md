@@ -12,38 +12,38 @@ The theme section of your `windi.config.js` or `windi.config.ts` file is where y
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    screens: {
-        sm: "480px",
-        md: "768px",
-        lg: "976px",
-        xl: "1440px",
+  screens: {
+    sm: "480px",
+    md: "768px",
+    lg: "976px",
+    xl: "1440px",
+  },
+  colors: {
+    blue: "#1fb6ff",
+    purple: "#7e5bef",
+    pink: "#ff49db",
+    orange: "#ff7849",
+    green: "#13ce66",
+    yellow: "#ffc82c",
+    grayDark: "#273444",
+    gray: "#8492a6",
+    grayLight: "#d3dce6",
+  },
+  fontFamily: {
+    sans: ["Graphik", "sans-serif"],
+    serif: ["Merriweather", "serif"],
+  },
+  extend: {
+    spacing: {
+      128: "32rem",
+      144: "36rem",
     },
-    colors: {
-        blue: "#1fb6ff",
-        purple: "#7e5bef",
-        pink: "#ff49db",
-        orange: "#ff7849",
-        green: "#13ce66",
-        yellow: "#ffc82c",
-        grayDark: "#273444",
-        gray: "#8492a6",
-        grayLight: "#d3dce6",
+    borderRadius: {
+      xl: {
+        4: "2rem",
+      },
     },
-    fontFamily: {
-        sans: ["Graphik", "sans-serif"],
-        serif: ["Merriweather", "serif"],
-    },
-    extend: {
-        spacing: {
-            128: "32rem",
-            144: "36rem",
-        },
-        borderRadius: {
-            xl: {
-                4: "2rem",
-            },
-        },
-    },
+  },
 });
 ```
 
@@ -54,7 +54,7 @@ The theme object contains keys for screens, colors, and spacing, as well as a ke
 See the [theme configuration reference](#config-reference) or the [default theme config](https://github.com/windijs/windijs/tree/main/packages/config) for a complete list of theme options.
 
 ::: tip
-If you have experience with windicss/tailwindcss, we suggest you pay attention to the differences, the way how configuration works in windijs is completely different, for more info please refer to [this post](/posts/how-windijs-works#config-and-plugin).
+If you have experience with windicss/tailwindcss, you should pay attention to the differences, the way how configuration works in windijs is completely different, for more info please refer to [this post](/posts/how-windijs-works#config-and-plugin).
 :::
 
 ### Screens
@@ -65,15 +65,15 @@ The `screens` key allows you to customize the responsive breakpoints in your pro
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        screens: {
-            sm: "640px", // => @media (min-width: 640px) { ... }
-            md: "768px", // => @media (min-width: 768px) { ... }
-            lg: "1024px", // => @media (min-width: 1024px) { ... }
-            xl: "1280px", // => @media (min-width: 1280px) { ... }
-            xxl: "1536px", // => @media (min-width: 1536px) { ... }
-        },
+  theme: {
+    screens: {
+      sm: "640px", // => @media (min-width: 640px) { ... }
+      md: "768px", // => @media (min-width: 768px) { ... }
+      lg: "1024px", // => @media (min-width: 1024px) { ... }
+      xl: "1280px", // => @media (min-width: 1280px) { ... }
+      xxl: "1536px", // => @media (min-width: 1536px) { ... }
     },
+  },
 });
 ```
 
@@ -85,13 +85,13 @@ To override a single screen size (like `lg`), add your custom `screens` value un
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        extend: {
-            screens: {
-                lg: "992px", // => @media (min-width: 992px) { ... }
-            },
-        },
+  theme: {
+    extend: {
+      screens: {
+        lg: "992px", // => @media (min-width: 992px) { ... }
+      },
     },
+  },
 });
 ```
 
@@ -103,14 +103,14 @@ You can also use the `extend` key to add new breakpoints.
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        extend: {
-            screens: {
-                tiny: "345px", // => @media (min-width: 345px) { ... }
-                big: "1600px", // => @media (min-width: 1600px) { ... }
-            },
-        },
+  theme: {
+    extend: {
+      screens: {
+        tiny: "345px", // => @media (min-width: 345px) { ... }
+        big: "1600px", // => @media (min-width: 1600px) { ... }
+      },
     },
+  },
 });
 ```
 
@@ -124,13 +124,13 @@ If you want to use a custom media query, such as desktop first mode, it's very e
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    variants: {
-        xxl: "@media (max-width: 1535px)",
-        xl: "@media (max-width: 1279px)",
-        lg: "@media (max-width: 1023px)",
-        md: "@media (max-width: 767px)",
-        sm: "@media (max-width: 639px)",
-    },
+  variants: {
+    xxl: "@media (max-width: 1535px)",
+    xl: "@media (max-width: 1279px)",
+    lg: "@media (max-width: 1023px)",
+    md: "@media (max-width: 767px)",
+    sm: "@media (max-width: 639px)",
+  },
 });
 ```
 
@@ -143,15 +143,15 @@ import { defineConfig } from "windijs";
 const desktopVariants = screens => Object.fromEntries(Object.entries(screens).map(([k, v]) => [k, `@media (max-width: ${v})`]));
 
 export default defineConfig({
-    variants: {
-        ...desktopVariants({
-            xxl: "1535px",
-            xl: "1279px",
-            lg: "1023px",
-            md: "767px",
-            sm: "639px",
-        }),
-    },
+  variants: {
+    ...desktopVariants({
+      xxl: "1535px",
+      xl: "1279px",
+      lg: "1023px",
+      md: "767px",
+      sm: "639px",
+    }),
+  },
 });
 ```
 
@@ -163,13 +163,13 @@ Or if you want your breakpoints to specify both a `min-width` and a `max-width`.
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    variants: {
-        sm: "@media (min-width: 640px and max-width: 767px)",
-        md: "@media (min-width: 768px and max-width: 1023px)",
-        lg: "@media (min-width: 1024px and max-width: 1279px)",
-        xl: "@media (min-width: 1280px and max-width: 1535px)",
-        xxl: "@media (min-width: 1536px)",
-    },
+  variants: {
+    sm: "@media (min-width: 640px and max-width: 767px)",
+    md: "@media (min-width: 768px and max-width: 1023px)",
+    lg: "@media (min-width: 1024px and max-width: 1279px)",
+    xl: "@media (min-width: 1280px and max-width: 1535px)",
+    xxl: "@media (min-width: 1536px)",
+  },
 });
 ```
 
@@ -183,23 +183,23 @@ The `colors` key allows you to customize the global color palette for your proje
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        colors: {
-            transparent: "transparent",
-            black: "#000",
-            white: "#fff",
-            gray: {
-                100: "#f7fafc",
-                // ...
-                900: "#1a202c",
-            },
-            // ...
-        },
+  theme: {
+    colors: {
+      transparent: "transparent",
+      black: "#000",
+      white: "#fff",
+      gray: {
+        100: "#f7fafc",
+        // ...
+        900: "#1a202c",
+      },
+      // ...
     },
+  },
 });
 ```
 
-By default, these colors are used by all color-related utilities, like `bg`, `border`, `text`, and others.
+By default, these colors used by all color-related utilities, like `bg`, `border`, `text`, and others.
 
 #### Using custom colors
 
@@ -209,36 +209,36 @@ If you’d like to completely replace the default color palette with your own cu
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        colors: {
-            transparent: "transparent",
-            current: "currentColor",
-            white: "#ffffff",
-            purple: "#3f3cbb",
-            midnight: "#121063",
-            metal: "#565584",
-            silver: "#ecebff",
-            bubbleGum: "#ff77e9",
-            bermuda: "#78dcca",
-            tahiti: {
-                DEFAULT: "#06b6d4",
-                100: "#cffafe",
-                200: "#a5f3fc",
-                300: "#67e8f9",
-                400: "#22d3ee",
-                500: "#06b6d4",
-                600: "#0891b2",
-                700: "#0e7490",
-                800: "#155e75",
-                900: "#164e63",
-            },
-            rgbColor: "rgb(22, 22, 22)",
-            rgbaColor: "rgba(22, 22, 22, 0.5)",
-            hslColor: "hsl(10, 10%, 20%)",
-            hwbColor: "hwb(10 10% 20% / 0.2)",
-            withVariable: "rgb(var(--color-secondary))",
-        },
+  theme: {
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      white: "#ffffff",
+      purple: "#3f3cbb",
+      midnight: "#121063",
+      metal: "#565584",
+      silver: "#ecebff",
+      bubbleGum: "#ff77e9",
+      bermuda: "#78dcca",
+      tahiti: {
+        DEFAULT: "#06b6d4",
+        100: "#cffafe",
+        200: "#a5f3fc",
+        300: "#67e8f9",
+        400: "#22d3ee",
+        500: "#06b6d4",
+        600: "#0891b2",
+        700: "#0e7490",
+        800: "#155e75",
+        900: "#164e63",
+      },
+      rgbColor: "rgb(22, 22, 22)",
+      rgbaColor: "rgba(22, 22, 22, 0.5)",
+      hslColor: "hsl(10, 10%, 20%)",
+      hwbColor: "hwb(10 10% 20% / 0.2)",
+      withVariable: "rgb(var(--color-secondary))",
     },
+  },
 });
 ```
 
@@ -248,24 +248,24 @@ You can also extend the default colors.
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        extend: {
-            colors: {
-                brown: {
-                    50: "#fdf8f6",
-                    100: "#f2e8e5",
-                    200: "#eaddd7",
-                    300: "#e0cec7",
-                    400: "#d2bab0",
-                    500: "#bfa094",
-                    600: "#a18072",
-                    700: "#977669",
-                    800: "#846358",
-                    900: "#43302b",
-                },
-            },
+  theme: {
+    extend: {
+      colors: {
+        brown: {
+          50: "#fdf8f6",
+          100: "#f2e8e5",
+          200: "#eaddd7",
+          300: "#e0cec7",
+          400: "#d2bab0",
+          500: "#bfa094",
+          600: "#a18072",
+          700: "#977669",
+          800: "#846358",
+          900: "#43302b",
         },
+      },
     },
+  },
 });
 ```
 
@@ -279,12 +279,12 @@ For example, if you want to use material colors.
 import { baseColors, materialColors, defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        colors: {
-            ...baseColors, // including inherit, current, transparent, black, white
-            ...materialColors, // iOSColor, macOSColors, watchOSColors, bootstrapColors, bulmaColors, tailwindColors, webColors, windiColors
-        },
+  theme: {
+    colors: {
+      ...baseColors, // including inherit, current, transparent, black, white
+      ...materialColors, // iOSColor, macOSColors, watchOSColors, bootstrapColors, bulmaColors, tailwindColors, webColors, windiColors
     },
+  },
 });
 ```
 
@@ -294,22 +294,22 @@ You can also combine different colors from variant frameworks.
 import { baseColors, bootstrapPink, bulmaRed, materialOrange, tailwindCyan, windiDark, windiLight, defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        colors: {
-            ...baseColors,
-            pink: bootstrapPink,
-            red: bulmaRed,
-            orange: materialOrange,
-            green: webGreen,
-            cyan: tailwindCyan,
-            dark: windiDark,
-            light: windiLight,
-        },
+  theme: {
+    colors: {
+      ...baseColors,
+      pink: bootstrapPink,
+      red: bulmaRed,
+      orange: materialOrange,
+      green: webGreen,
+      cyan: tailwindCyan,
+      dark: windiDark,
+      light: windiLight,
     },
+  },
 });
 ```
 
-All built-in colors are defined in the package [@windijs/colors](https://github.com/windijs/windijs/tree/main/packages/colors) package. Please refer to the <a href="/modules/_windijs_colors.html" target="_blank">colors API documentation</a> for more details.
+All built-in colors defined in the package [@windijs/colors](https://github.com/windijs/windijs/tree/main/packages/colors) package. Please refer to the <a href="/modules/_windijs_colors.html" target="_blank">colors API documentation</a> for more details.
 
 #### Generating colors
 
@@ -331,7 +331,7 @@ Color.hex("#d2e1dd").scale({ lightness: -10, saturation: 10 }).hex; // "#b1d3ca"
 // more...
 ```
 
-All built-in helpers are defined in the package [@windijs/helpers](https://github.com/windijs/windijs/tree/main/packages/helpers) package. Please refer to the <a href="/modules/_windijs_helpers.html" target="_blank">helpers API documentation</a> for more details.
+All built-in helpers defined in the package [@windijs/helpers](https://github.com/windijs/windijs/tree/main/packages/helpers) package. Please refer to the <a href="/modules/_windijs_helpers.html" target="_blank">helpers API documentation</a> for more details.
 
 ### Spacing
 
@@ -356,33 +356,33 @@ export default defineConfig({
 })
 ```
 
-By default, these values are inherited by the `padding`, `margin`, `width`, `height`, `maxHeight`, `gap`, `inset`, `space`, `translate` utilities...
+By default, these values inherited by the `padding`, `margin`, `width`, `height`, `maxHeight`, `gap`, `inset`, `space`, `translate` utilities...
 
 ### Other Options
 
-The rest of the theme options is used to configure which values are available for each individual utility.
+The rest of the theme options used to configure which values are available for each individual utility.
 
-For example, the `borderRadius` key lets you customize which border radius utilities will be generated:
+For example, the `borderRadius` key lets you customize which border radius utilities will generated:
 
 ```js windi.config.js
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        borderRadius: {
-            none: "0",
-            sm: ".125rem",
-            DEFAULT: ".25rem",
-            lg: ".5rem",
-            full: "9999px",
-        },
+  theme: {
+    borderRadius: {
+      none: "0",
+      sm: ".125rem",
+      DEFAULT: ".25rem",
+      lg: ".5rem",
+      full: "9999px",
     },
+  },
 });
 ```
 
 The keys determine how you use these utilities, and the values determine the value of the actual CSS declaration.
 
-The example `borderRadius` configuration can be used like this,
+The example `borderRadius` configuration can used like this,
 
 ```js
 [rounded.none, rounded.sm, rounded, rounded.lg, rounded.full];
@@ -393,27 +393,27 @@ and they would generate the following CSS classes:
 ```css
 /* rounded.none */
 .a {
-    border-radius: 0;
+  border-radius: 0;
 }
 /* rounded.sm */
 .b {
-    border-radius: 0.125rem;
+  border-radius: 0.125rem;
 }
 /* rounded */
 .c {
-    border-radius: 0.25rem;
+  border-radius: 0.25rem;
 }
 /* rounded.lg */
 .d {
-    border-radius: 0.5rem;
+  border-radius: 0.5rem;
 }
 /* rounded.full */
 .e {
-    border-radius: 9999px;
+  border-radius: 9999px;
 }
 ```
 
-You’ll notice that using a key of `DEFAULT` in the theme configuration created the class `rounded` with no suffix. This is a common convention in Windi and is supported by all utilities.
+You’ll notice that using a key of `DEFAULT` in the theme configuration created the class `rounded` with no suffix. This is a common convention in Windi and supported by all utilities.
 
 To learn more about customizing a specific utility, visit the documentation for that utility.
 
@@ -434,13 +434,13 @@ For example, if you wanted to add an extra breakpoint but preserve the existing 
 import { defineConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        extend: {
-            screens: {
-                big: "1600px",
-            },
-        },
+  theme: {
+    extend: {
+      screens: {
+        big: "1600px",
+      },
     },
+  },
 });
 ```
 
@@ -465,9 +465,9 @@ export default defineConfig({
 };
 ```
 
-This will completely replace Windi's default configuration for that key, so in the example above none of the default opacity utilities would be generated.
+This will completely replace Windi's default configuration for that key, so in the example above none of the default opacity utilities would generated.
 
-Any keys you do not provide will be inherited from the default theme, so in the above example, the default theme configuration for things like `colors`, `spacing`, `borderRadius`, etc. would be preserved.
+Any keys you do not provide will inherited from the default theme, so in the above example, the default theme configuration for things like `colors`, `spacing`, `borderRadius`, etc. would preserved.
 
 You can of course both override some parts of the default theme and extend other parts of the default theme within the same configuration:
 
@@ -536,21 +536,21 @@ One example of where this is useful is if you’d like to add a font family to o
 import { defineConfig, fontFamilyConfig } from "windijs";
 
 export default defineConfig({
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ["Lato", ...fontFamilyConfig.sans],
-            },
-        },
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["Lato", ...fontFamilyConfig.sans],
+      },
     },
+  },
 });
 ```
 
 ### Config reference
 
-Except for `screens`, `colors`, and `spacing`, all of the keys in the theme object map to one of Windi's utilities. Since many utilities are responsible for CSS properties that only accept a static set of values (like float for example), note that not every plugin has a corresponding key in the theme object.
+Except for `screens`, `colors`, and `spacing`, all the keys in the theme object map to one of Windi's utilities. Since many utilities are responsible for CSS properties that only accept a static set of values (like float for example), note that not every plugin has a corresponding key in the theme object.
 
-All of these keys are also available under the `theme.extend` key to enable extending the default theme.
+All these keys are also available under the `theme.extend` key to enable extending the default theme.
 
 | Key                      | Description                                             |
 | :----------------------- | :------------------------------------------------------ |
@@ -665,4 +665,4 @@ All of these keys are also available under the `theme.extend` key to enable exte
 | willChange               | Values for the `will-change` property                   |
 | zIndex                   | Values for the `z-index` property                       |
 
-All built-in theme configs are defined in the package [@windijs/config](https://github.com/windijs/windijs/tree/main/packages/config) package. Please refer to the <a href="/modules/_windijs_config.html" target="_blank">config API documentation</a> for more details.
+All built-in theme configs defined in the package [@windijs/config](https://github.com/windijs/windijs/tree/main/packages/config) package. Please refer to the <a href="/modules/_windijs_config.html" target="_blank">config API documentation</a> for more details.
