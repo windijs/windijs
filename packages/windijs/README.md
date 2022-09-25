@@ -1,6 +1,6 @@
 <h1 align="center">
 <a href="https://github.com/windicss/windicss/wiki">
-  <img src="../../assets/logo.png" alt="Windi Logo" height="120" width="120"/><br>
+  <img src="https://github.com/windijs/windijs/raw/main/assets/logo.png" alt="Windi Logo" height="120" width="120"/><br>
 </a>
   Windi JS
 </h1>
