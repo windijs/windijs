@@ -1,6 +1,6 @@
 {
   "name": "@windijs/utilities",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "@windijs/utilities",
   "main": "dist/windijsUtilities.js",
   "module": "dist/es/index.js",
@@ -45,7 +45,7 @@
   "author": "Raven Satir",
   "license": "MIT",
   "dependencies": {
-    "@windijs/core": "1.1.6",
+    "@windijs/core": "1.1.7",
     "@windijs/colors": "1.0.4",
     "@windijs/config": "1.0.10",
     "@windijs/helpers": "1.1.5"

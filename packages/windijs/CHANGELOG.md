@@ -1,5 +1,15 @@
 # windijs
 
+## 1.1.7
+
+### Patch Changes
+
+- [`eb779518`](https://github.com/windijs/windijs/commit/eb779518722dd4ab760541c9a9f99b93239e562f) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: style exports
+
+- Updated dependencies []:
+  - @windijs/core@1.1.7
+  - @windijs/style@1.1.7
+
 ## 1.1.6
 
 ### Patch Changes
