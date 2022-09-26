@@ -1,6 +1,7 @@
 export * from "@windijs/core";
 export * from "@windijs/config";
 export * from "@windijs/colors";
+export * from "@windijs/style";
 export {
   camelToDash,
   commaJoin,

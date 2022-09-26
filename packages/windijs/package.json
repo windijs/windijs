@@ -39,6 +39,7 @@
     "readmeFile": "./README.md"
   },
   "dependencies": {
+    "@windijs/style": "1.1.6",
     "@windijs/colors": "1.0.4",
     "@windijs/config": "1.0.10",
     "@windijs/core": "1.1.6",
