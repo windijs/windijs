@@ -18,6 +18,22 @@ export function isSize(amount: string): boolean {
   return /^-?(\d+(\.\d+)?)+(rem|em|px|rpx|vh|vw|ch|ex|cm|mm|in|pt|pc)$/.test(amount);
 }
 
+export function isColor(amount: string): boolean {
+  return /^(#|rgb|hsl|hwb)/.test(amount);
+}
+
+export function isUrl(amount: string): boolean {
+  return amount.startsWith("url(");
+}
+
+export function isPosition(amount: string): boolean {
+  return /^top|left|bottom|right|center/.test(amount);
+}
+
+export function isGradient(amount: string): boolean {
+  return /^(-webkit-)?(linear|radial)-gradient/.test(amount);
+}
+
 export function isVarName(value: string): boolean {
   return /^[a-zA-Z_$]+[a-zA-Z_$\d]*$/.test(value);
 }
