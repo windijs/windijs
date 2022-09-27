@@ -28,7 +28,7 @@ export type UtilityData = { $className: string };
 
 export type Extractor = [RegExp, (config: ExtractorConfig) => Generator];
 
-export const BaseRule = /(^|\s)(?<important>!)?(?<variants>(\w+:)*)/gm;
+export const BaseRule = /(^|[\s'"`])(?<important>!)?(?<variants>(\w+:)*)/gm;
 
 export function getNestedObject<T extends object>(root: T, paths: string[]): unknown {
   return paths.reduce((obj: object, key) => {
@@ -114,7 +114,7 @@ export class Processor {
         result = regexp.exec(src);
         if (result) {
           const style = extractor(result, result.groups);
-          const name = escapeCSS(result[0].trim());
+          const name = escapeCSS(result[0].replace(/^['"`]/, "").trim());
           if (Array.isArray(style)) styles.push(...style.map(i => setUtilityName(i, name)));
           else if (style) styles.push(setUtilityName(style, name));
         }

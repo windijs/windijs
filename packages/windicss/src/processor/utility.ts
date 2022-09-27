@@ -12,6 +12,6 @@ export function utilityGenerator<T extends Record<string, object>>(config: Extra
   return generate;
 }
 
-export const UtilityRule = extendRegex(BaseRule, /(?<ident>\w+)(?<props>(-\w+)*)(?=\s|$)/);
+export const UtilityRule = extendRegex(BaseRule, /(?<ident>\w+)(?<props>(-\w+)*)(?=[\s'"`]|$)/);
 
 export const UtilityExtractor: Extractor = [UtilityRule, utilityGenerator];

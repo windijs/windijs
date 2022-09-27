@@ -337,9 +337,9 @@ export function styleArbitraryGenerator<T extends Record<string, object>>(config
   return generate;
 }
 
-export const UtilityArbitraryRule = extendRegex(BaseRule, /(?<ident>\w+)(?<props>(-\w+)*)-\[(?<arbitrary>[^\s]+)\](?=\s|$)/);
+export const UtilityArbitraryRule = extendRegex(BaseRule, /(?<ident>\w+)(?<props>(-\w+)*)-\[(?<arbitrary>[^\]\s]+)\](?=[\s'"`]|$)/);
 
-export const StyleArbitraryRule = extendRegex(BaseRule, /\[(?<property>[\w-]+):(?<arbitrary>[^\s]+)\](?=\s|$)/);
+export const StyleArbitraryRule = extendRegex(BaseRule, /\[(?<property>[\w-]+):(?<arbitrary>[^\]\s]+)\](?=[\s'"`]|$)/);
 
 export const UtilityArbitraryExtractor: Extractor = [UtilityArbitraryRule, utilityArbitraryGenerator];
 
