@@ -15,6 +15,7 @@
   <script src="/windijs/scripts/windijsUtilities.runtime.js"></script>
   <script src="/windijs/scripts/windijsVariants.runtime.js"></script>
   <script src="/windijs/scripts/windijs.runtime.js"></script>
+  <script src="/windijs/scripts/windicss.runtime.js"></script>
   <title>Preview</title>
 </head>
 <body>
@@ -91,6 +92,7 @@
       "preact": window.preact,
       "preact/hooks": window.preactHooks,
       "windijs": window.windijs,
+      "windicss": window.windicss,
       "@windijs/colors": window.windijsColors,
       "@windijs/config": window.windijsConfig,
       "@windijs/shared": window.windijsShared,
@@ -100,6 +102,17 @@
       "@windijs/utilities": window.windijsUtilities,
       "@windijs/variants": window.windijsVariants,
     }
+
+    const processor = new windicss.Processor({
+      separator: "-",
+      variantSeparator: ":",
+      utilities: {
+        ...windijsUtilities,
+        style: windijsStyle.style,
+      },
+      variants: windijsVariants,
+      extractors: [windicss.UtilityExtractor, windicss.UtilityArbitraryExtractor, windicss.StyleArbitraryExtractor],
+    });
 
     function require (package) {
       if (package in globalPackages) return globalPackages[package];
@@ -175,6 +188,14 @@
 
     var dark, light;
 
+    function injectWindiCSS (css) {
+      if (styleEl) document.body.removeChild(styleEl)
+      styleEl = document.createElement('style')
+      styleEl.id = "windicss";
+      styleEl.innerHTML = css;
+      document.body.appendChild(styleEl)
+    }
+
     window.addEventListener('message', (e) => {
       const {
         css: cssData,
@@ -186,12 +207,7 @@
         dark: isDark,
       } = JSON.parse(e.data)
 
-      if (cssData != null) {
-        if (styleEl) document.body.removeChild(styleEl)
-        styleEl = document.createElement('style')
-        styleEl.innerHTML = cssData
-        document.body.appendChild(styleEl)
-      }
+      if (cssData != null) injectWindiCSS(cssData);
 
       if (fixedCss != null) {
         if (fixedStyleEl) document.body.removeChild(fixedStyleEl)
@@ -273,11 +289,17 @@
       if (script != null)
         app.innerHTML = "";
         try {
+          // windijs
           const windiStyle = document.getElementById("windijs");
           if (windiStyle) windiStyle.innerText = "";
           BUILDED_CLASSES = [];
           eval(script);
           htmlContent = app.innerHTML;
+
+          // windicss
+          const cssData = processor.interpret(script);
+          injectWindiCSS(cssData);
+
           dismissError();
         } catch(e) {
           showError(e);
