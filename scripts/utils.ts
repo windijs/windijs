@@ -26,7 +26,9 @@ export function getTargets() {
   return readdirSync("./packages").filter(f => {
     if (!statSync(`packages/${f}`).isDirectory() || !existsSync(`packages/${f}/package.json`)) return false;
     const pkg = require(`../packages/${f}/package.json`);
-    return !pkg.private;
+    return f === "windicss" || !pkg.private;
+    // keep private, build windicss for test
+    // TODO: when windicss go public, remove this
   });
 }
 

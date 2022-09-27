@@ -16,6 +16,14 @@
     "displayName": "windicss",
     "readmeFile": "./README.md"
   },
+  "buildOptions": {
+    "name": "windicss",
+    "formats": [
+      "cjs",
+      "mjs",
+      "runtime"
+    ]
+  },
   "dependencies": {
     "@windijs/colors": "1.0.0",
     "@windijs/config": "1.0.0",
