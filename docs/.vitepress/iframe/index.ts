@@ -3,6 +3,7 @@ import { defineComponent, h, onMounted, ref, toRefs, watchEffect } from "vue";
 import srcdoc from "./srcdoc.html?raw";
 import utilities from "./windijsUtilities.mjs?raw";
 import { processCode } from "../shared";
+import type { Config } from "windijs";
 
 export default defineComponent({
   props: {
@@ -36,7 +37,7 @@ export default defineComponent({
     },
   },
   emits: {
-    updateConfig: (value: object) => true,
+    updateConfig: (config: Config) => true,
   },
   setup(props, { emit }) {
     onMounted(createSandBox);
