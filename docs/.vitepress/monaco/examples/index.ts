@@ -8,6 +8,8 @@ import gradientsConfig from "./gradients/config.ts?raw";
 import gradientsMain from "./gradients/main.md?raw";
 import reposConfig from "./repos/config.ts?raw";
 import reposMain from "./repos/main.md?raw";
+import windicssConfig from "./windicss/config.ts?raw";
+import windicssMain from "./windicss/main.md?raw";
 
 type Examples = Record<string, { id: string; label: string; main: string; config: string }>;
 
@@ -45,6 +47,12 @@ export const examples: Examples = {
     label: "Gradients Reference",
     main: load(gradientsMain),
     config: gradientsConfig,
+  },
+  windicss: {
+    id: "windicss",
+    label: "Windi CSS (Experiment)",
+    main: load(windicssMain),
+    config: windicssConfig,
   },
   // animation: {
   //   id: "animation",
