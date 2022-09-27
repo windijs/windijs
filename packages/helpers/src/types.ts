@@ -678,6 +678,29 @@ export type CSSColors =
 
 export type CSSFillRule = "nonzero" | "evenodd";
 
+export type CSSDataTypes =
+  | "string"
+  | "url"
+  | "integer"
+  | "number"
+  | "dimension"
+  | "percentage"
+  | "ratio"
+  | "flex"
+  | "length"
+  | "angle"
+  | "time"
+  | "frequency"
+  | "resolution"
+  | "length-percentage"
+  | "frequency-percentage"
+  | "angle-percentage"
+  | "time-percentage"
+  | "color"
+  | "alpha-value"
+  | "image"
+  | "position";
+
 export type CSSAttributeType =
   | "string"
   | "color"
