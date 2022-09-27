@@ -8,7 +8,7 @@ export const SymbolData = Symbol.for("data");
 export const SymbolProxy = Symbol.for("proxy");
 
 export function isStyleObject(i: unknown): i is StyleObject {
-  return i != null && typeof i === "object" && SymbolCSS in i;
+  return i != null && (typeof i === "object" || typeof i === "function") && (i as StyleObject)[SymbolCSS] != null;
 }
 
 export function isStyleArray(i: unknown): boolean {
