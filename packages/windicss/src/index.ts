@@ -1,2 +1,2 @@
 export * from "./vm";
-export * from "./matcher";
+export * from "./processor";
