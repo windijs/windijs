@@ -300,10 +300,6 @@
           // windicss
           const wcss = processor.interpret(rawScript);
           injectWindiCSS(wcss);
-
-          // console.log(rawScript);
-          // console.log(processor.interpret(`bg="red-500"`))
-
           dismissError();
         } catch(e) {
           // console.log(e.stack)

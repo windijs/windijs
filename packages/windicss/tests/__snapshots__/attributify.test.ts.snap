@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`attributify with inner variants 1`] = `
+"[bg~=\\"red-500\\"] {
+  background-color: rgba(239, 68, 68, var(--w-bg-opacity));
+  --w-bg-opacity: 1;
+}
+
+[bg~=\\"hover:red-400\\"]:hover {
+  background-color: rgba(248, 113, 113, var(--w-bg-opacity));
+  --w-bg-opacity: 1;
+}
+
+@media (min-width: 640px) {
+  @media (prefers-color-scheme: dark) {
+    [bg~=\\"sm:dark:red-600\\"] {
+      background-color: rgba(220, 38, 38, var(--w-bg-opacity));
+      --w-bg-opacity: 1;
+    }
+  }
+}"
+`;
