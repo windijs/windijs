@@ -26,11 +26,15 @@ export interface ExtractorConfig<T extends Record<string, object> = {}> {
   variantSeparator: string;
 }
 
+export type ResolvedExtractorConfig<T extends Record<string, object> = {}> = Required<ExtractorConfig<T>> & {};
+
 export type Generator = (result: RegExpExecArray, groups?: Record<string, string | undefined>) => StyleObject | StyleObject[] | undefined;
 
 export type UtilityData = { $selector: string };
 
-export type Extractor = (config: ExtractorConfig) => { rule: RegExp; build: Generator };
+export type Extractor =
+  | ((config: ExtractorConfig) => { rule: RegExp; build: Generator })
+  | ((config: ResolvedExtractorConfig) => { rule: RegExp; build: Generator });
 
 export const BaseRule = /(^|[\s'"`])(?<important>!)?(?<variants>([\w-]+:)*)/gm;
 
@@ -107,9 +111,16 @@ export function extractGroup(groups: Record<string, string | undefined>, config:
 }
 
 export class Processor {
-  config: ExtractorConfig;
+  config: ResolvedExtractorConfig;
   constructor(config: ExtractorConfig) {
-    this.config = config;
+    this.config = this.resolveConfig(config);
+  }
+
+  resolveConfig(config: ExtractorConfig): ResolvedExtractorConfig {
+    return {
+      ...config,
+      attributify: config.attributify ?? {},
+    };
   }
 
   extract(src: string) {
