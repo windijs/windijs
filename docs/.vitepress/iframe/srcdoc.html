@@ -109,6 +109,12 @@
       utilities: {
         ...windijsUtilities,
         style: windijsStyle.style,
+        hue: {
+          rotate: windijsUtilities.hueRotate,
+        },
+        drop: {
+          shadow: windijsUtilities.dropShadow,
+        },
       },
       variants: windijsVariants,
       extractors: [windicss.utilityExtractor, windicss.utilityArbitraryExtractor, windicss.styleArbitraryExtractor, windicss.attributifyExtractor],
