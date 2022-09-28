@@ -1,5 +1,4 @@
 import { $var, calc, hsl, hsla, hwb, rgb, rgba } from "./funcs";
-import { useProxy } from "./proxy";
 
 import type {
   CSSAlphaValue,
@@ -41,34 +40,37 @@ type CSSTimeProxy = { [k in CSSTimeType]: { [value: number]: CSSTime } };
 type CSSResolutionProxy = { [k in CSSResolutionType]: { [value: number]: CSSResolution } };
 
 // Color
-export const color = useProxy<object, string | Function>(v => {
-  const map: ColorFunc = { var: $var, calc, rgb, rgba, hsl, hsla, hwb };
-  return v in map ? map[v as keyof ColorFunc] : v;
-}) as ColorValue;
+export const color = new Proxy({} as ColorValue, {
+  get: (_, v) => {
+    const map: ColorFunc = { var: $var, calc, rgb, rgba, hsl, hsla, hwb };
+    return v in map ? map[v as keyof ColorFunc] : v;
+  },
+});
 
 function dimension<T>(type: string, suffix = type) {
-  return useProxy<object, T>(value =>
-    Object.create({
-      value: +value,
-      type,
-      valueOf: () => value + suffix,
-      toString: () => value + suffix,
-    })
-  ) as { [value: number]: T };
+  return new Proxy({} as { [value: number]: T }, {
+    get: (_, value: string) =>
+      Object.create({
+        value: +value,
+        type,
+        valueOf: () => value + suffix,
+        toString: () => value + suffix,
+      }),
+  });
 }
 
 export const percent = dimension<CSSPercentage>("percent", "%");
 
-export const { deg, grad, rad, turn } = useProxy<object, Record<string, unknown>>(k => dimension<CSSAngle>(k)) as CSSAngleProxy;
+export const { deg, grad, rad, turn } = new Proxy({} as CSSAngleProxy, { get: (_, k: string) => dimension<CSSAngle>(k) });
 
-export const { s, ms } = useProxy<object, Record<string, unknown>>(k => dimension<CSSTime>(k)) as CSSTimeProxy;
+export const { s, ms } = new Proxy({} as CSSTimeProxy, { get: (_, k: string) => dimension<CSSTime>(k) });
 
 export const fr = dimension<CSSFlex>("fr");
 
 export const $in = dimension<CSSLength>("in");
 
-export const { dpi, dpcm, dppx, x } = useProxy<object, Record<string, unknown>>(k => dimension<CSSResolution>(k)) as CSSResolutionProxy;
+export const { dpi, dpcm, dppx, x } = new Proxy({} as CSSResolutionProxy, { get: (_, k: string) => dimension<CSSResolution>(k) });
 
-export const { px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = useProxy<object, Record<string, unknown>>(k =>
-  dimension<CSSLength>(k)
-) as CSSLengthProxy;
+export const { px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = new Proxy({} as CSSLengthProxy, {
+  get: (_, k: string) => dimension<CSSLength>(k),
+});

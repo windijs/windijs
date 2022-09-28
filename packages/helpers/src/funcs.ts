@@ -1,6 +1,5 @@
 import { camelToDash, parenWrap } from "@windijs/shared";
 
-import { useProxy } from "./proxy";
 import type {
   CSSAlphaValue,
   CSSAngle,
@@ -187,11 +186,11 @@ export const {
   env,
   minmax,
   repeat,
-} = useProxy<CSSFunctions, Function>(
-  prop =>
-    (...args: unknown[]) =>
-      prop + "(" + args.filter(i => i != null).join(", ") + ")"
-);
+} = new Proxy({} as CSSFunctions, {
+  get(_, p: string) {
+    return (...args: unknown[]) => p + "(" + args.filter(i => i != null).join(", ") + ")";
+  },
+});
 
 export const {
   hueRotate,
@@ -203,17 +202,18 @@ export const {
   repeatingConicGradient,
   repeatingLinearGradient,
   repeatingRadialGradient,
-} = useProxy<CSSFunctions, Function>(
-  prop =>
-    (...args: unknown[]) =>
-      camelToDash(prop) +
+} = new Proxy({} as CSSFunctions, {
+  get(_, p: string) {
+    return (...args: unknown[]) =>
+      camelToDash(p) +
       "(" +
       args
         .map(i => (Array.isArray(i) ? i.join(" ") : i))
         .filter(i => i != null)
         .join(", ") +
-      ")"
-);
+      ")";
+  },
+});
 
 export const filters = {
   blur,
