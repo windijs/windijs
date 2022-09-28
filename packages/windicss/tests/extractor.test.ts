@@ -1,4 +1,4 @@
-import { UtilityExtractor, UtilityArbitraryExtractor, StyleArbitraryExtractor, Processor } from "../src";
+import { utilityExtractor, utilityArbitraryExtractor, styleArbitraryExtractor, Processor, attributifyExtractor } from "../src";
 
 import * as utilities from "@windijs/utilities";
 import * as variants from "@windijs/variants";
@@ -12,7 +12,7 @@ const processor = new Processor({
     style,
   },
   variants,
-  extractors: [UtilityExtractor, UtilityArbitraryExtractor, StyleArbitraryExtractor],
+  extractors: [utilityExtractor, utilityArbitraryExtractor, styleArbitraryExtractor, attributifyExtractor],
 });
 
 test("arbitrary values", () => {

@@ -1,17 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`attributify 1`] = `
+"[bg~=\\"red-500\\"] {
+  background-color: rgba(239, 68, 68, var(--w-bg-opacity));
+  --w-bg-opacity: 1;
+}
+
+[bg~=\\"fixed\\"] {
+  background-attachment: fixed;
+}
+
+[text=\\"lg\\"] {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}"
+`;
+
 exports[`compile 1`] = `
-".windi-yghcn7 {
+".windi-mh2io3 {
   background-color: rgba(28, 28, 30, var(--w-bg-opacity));
   --w-bg-opacity: 0.25;
 }
 
-.windi-yghcn7:hover:focus {
+.windi-mh2io3:hover:focus {
   background-color: rgba(96, 165, 250, var(--w-bg-opacity));
   --w-bg-opacity: 1;
 }
 
-.windi-yghcn7 {
+.windi-mh2io3 {
   border-radius: 0.25rem;
   padding: 1rem;
   font-size: 14em;
