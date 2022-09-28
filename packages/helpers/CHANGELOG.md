@@ -1,5 +1,11 @@
 # @windijs/helpers
 
+## 1.1.7
+
+### Patch Changes
+
+- [`6953ca8d`](https://github.com/windijs/windijs/commit/6953ca8ddc51afae8ad3409c04a79e264d79046c) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: unchanged packages
+
 ## 1.1.6
 
 ### Patch Changes

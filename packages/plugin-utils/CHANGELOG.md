@@ -1,5 +1,12 @@
 # @windijs/plugin-utils
 
+## 1.1.5
+
+### Patch Changes
+
+- Updated dependencies [[`6953ca8d`](https://github.com/windijs/windijs/commit/6953ca8ddc51afae8ad3409c04a79e264d79046c)]:
+  - @windijs/helpers@1.1.7
+
 ## 1.1.4
 
 ### Patch Changes

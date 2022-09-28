@@ -420,7 +420,7 @@ importers:
 
   packages/core:
     specifiers:
-      '@windijs/helpers': 1.1.6
+      '@windijs/helpers': 1.1.7
       '@windijs/shared': 1.0.7
     dependencies:
       '@windijs/helpers': link:../helpers
@@ -437,7 +437,7 @@ importers:
   packages/plugin-utils:
     specifiers:
       '@types/picomatch': ^2.3.0
-      '@windijs/helpers': 1.1.6
+      '@windijs/helpers': 1.1.7
       picomatch: ^2.3.1
     dependencies:
       '@windijs/helpers': link:../helpers
@@ -453,8 +453,8 @@ importers:
 
   packages/style:
     specifiers:
-      '@windijs/core': 1.1.8
-      '@windijs/helpers': 1.1.6
+      '@windijs/core': 1.1.9
+      '@windijs/helpers': 1.1.7
       '@windijs/shared': 1.0.7
     dependencies:
       '@windijs/core': link:../core
@@ -473,8 +473,8 @@ importers:
     specifiers:
       '@windijs/colors': 1.0.4
       '@windijs/config': 1.0.10
-      '@windijs/core': 1.1.8
-      '@windijs/helpers': 1.1.6
+      '@windijs/core': 1.1.9
+      '@windijs/helpers': 1.1.7
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config
@@ -483,8 +483,8 @@ importers:
 
   packages/variants:
     specifiers:
-      '@windijs/core': 1.1.8
-      '@windijs/helpers': 1.1.6
+      '@windijs/core': 1.1.9
+      '@windijs/helpers': 1.1.7
       '@windijs/shared': 1.0.7
     dependencies:
       '@windijs/core': link:../core
@@ -515,10 +515,10 @@ importers:
     specifiers:
       '@windijs/colors': 1.0.4
       '@windijs/config': 1.0.10
-      '@windijs/core': 1.1.8
-      '@windijs/helpers': 1.1.6
+      '@windijs/core': 1.1.9
+      '@windijs/helpers': 1.1.7
       '@windijs/shared': 1.0.7
-      '@windijs/style': 1.1.8
+      '@windijs/style': 1.1.9
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config

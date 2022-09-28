@@ -1,6 +1,6 @@
 {
   "name": "@windijs/variants",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "@windijs/variants",
   "main": "dist/windijsVariants.js",
   "module": "dist/windijsVariants.mjs",
@@ -38,8 +38,8 @@
     "displayName": "@windijs/variants"
   },
   "dependencies": {
-    "@windijs/core": "1.1.8",
-    "@windijs/helpers": "1.1.6",
+    "@windijs/core": "1.1.9",
+    "@windijs/helpers": "1.1.7",
     "@windijs/shared": "1.0.7"
   }
 }

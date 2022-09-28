@@ -1,5 +1,13 @@
 # @windijs/utilities
 
+## 1.0.15
+
+### Patch Changes
+
+- Updated dependencies [[`6953ca8d`](https://github.com/windijs/windijs/commit/6953ca8ddc51afae8ad3409c04a79e264d79046c)]:
+  - @windijs/core@1.1.9
+  - @windijs/helpers@1.1.7
+
 ## 1.0.14
 
 ### Patch Changes
