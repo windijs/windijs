@@ -88,6 +88,7 @@ import {
   steps,
   StyleHandler,
   StyleProxy,
+  SymbolProxy,
   translate,
   translate3d,
   translateX,
@@ -95,7 +96,6 @@ import {
   translateZ,
   turn,
   url,
-  useProxy,
   vh,
   vmax,
   vmin,
@@ -202,30 +202,34 @@ const units = {
 };
 
 export function stylePropertyHandler<T extends Partial<Record<keyof CSSDecls, unknown | BuildFunc<string>>> = {}>(cfg: T = {} as T) {
+  const target = { [SymbolProxy]: true } as unknown as GeneralCSSData;
+
   const build = (prop: string, value: string) => {
     const meta = getMeta();
     if (meta.props.length === 1) meta.props.push(value);
     return css({ [prop]: value }, undefined, meta);
   };
+
   return {
     type: "style",
     get: prop =>
-      useProxy(value => {
-        const meta = getMeta();
-        resetMeta("style", meta.type, [prop], meta.variants);
-        if (hasKey(cfg, prop)) {
-          const cv = cfg[prop];
-          const result = typeof cv === "function" ? cv(value) : handleConfig(v => build(prop, v as string), cv as unknown as object, "css", value);
-          if (result) return result;
-        }
-        if (value === "var") return (name: string, defaultValue?: string | undefined) => build(prop, funcs.$var(name, defaultValue));
+      new Proxy(target, {
+        get(_, value: string) {
+          const meta = getMeta();
+          resetMeta("style", meta.type, [prop], meta.variants);
+          if (hasKey(cfg, prop)) {
+            const cv = cfg[prop];
+            const result = typeof cv === "function" ? cv(value) : handleConfig(v => build(prop, v as string), cv as unknown as object, "css", value);
+            if (result) return result;
+          }
+          if (value === "var") return (name: string, defaultValue?: string | undefined) => build(prop, funcs.$var(name, defaultValue));
+          if (value === "in") return new Proxy(units.$in, { get: (_, v: string) => build(prop, units.$in[+v].toString()) });
+          if (value in funcs) return (...args: unknown[]) => build(prop, (funcs as unknown as { [key: string]: Function })[value](...args));
+          if (hasKey(units, value))
+            return new Proxy(units[value], { get: (_, v: string) => build(prop, (units[value] as Record<string, number>)[v].toString()) });
 
-        if (value in funcs) return (...args: unknown[]) => build(prop, (funcs as unknown as { [key: string]: Function })[value](...args));
-
-        if (value === "in") return useProxy(v => build(prop, units.$in[+v].toString()));
-        if (hasKey(units, value)) return useProxy(v => build(prop, (units[value] as Record<string, number>)[v].toString()));
-
-        return build(prop, value);
+          return build(prop, value);
+        },
       }),
   } as StyleHandler<GeneralCSSData & StyleProxy<T>>;
 }

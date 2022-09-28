@@ -1,6 +1,6 @@
 import { windiColors } from "@windijs/colors";
 import { createUtility } from "@windijs/core";
-import { percent } from "@windijs/helpers";
+import { css, percent } from "@windijs/helpers";
 
 import { stylePropertyHandler } from "../src/handler";
 
@@ -141,4 +141,10 @@ test("style with config", () => {
   expect(style.width.calc("100% - 1rem").meta).toMatchSnapshot();
   expect(style.clipPath.ellipse("closest-side", "closest-side", percent[10]).meta).toMatchSnapshot();
   expect(style.fontSize.em[2].meta).toMatchSnapshot();
+});
+
+test("set new property in style", () => {
+  const style = createUtility("style").use(stylePropertyHandler()).init();
+  style.abc = css({ fontSize: "1rem", fontWeight: "400" });
+  expect(style.abc.css).toEqual({ fontSize: "1rem", fontWeight: "400" });
 });
