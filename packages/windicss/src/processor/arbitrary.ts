@@ -1,4 +1,4 @@
-import { extendRegex, Extractor, ExtractorConfig, generateVariants, extractGroup, getNestedObject, BaseRule } from "./common";
+import { extendRegex, ExtractorConfig, generateVariants, extractGroup, getNestedObject, BaseRule, Generator } from "./common";
 import { hasKey, isColor, isGradient, isNumber, isPosition, isSize, isUrl } from "@windijs/shared";
 import { css, CSSDataTypes, StyleObject, StyleProperties } from "@windijs/helpers";
 import {
@@ -292,8 +292,8 @@ function buildArbitrary(prop: ArbitaryObject[string], value: string, type: CSSDa
 }
 
 // bg-[#1c1c1e] ...
-export function utilityArbitraryGenerator<T extends Record<string, object>>(config: ExtractorConfig<T>) {
-  function generate(result: RegExpExecArray, groups: Record<string, string | undefined> = {}) {
+export function utilityArbitraryExtractor<T extends Record<string, object>>(config: ExtractorConfig<T>) {
+  const build: Generator = (result: RegExpExecArray, groups: Record<string, string | undefined> = {}) => {
     const { ident, props, variants, important, arbitrary } = extractGroup(groups, config, true);
     // TODO: support important
 
@@ -310,14 +310,14 @@ export function utilityArbitraryGenerator<T extends Record<string, object>>(conf
     }
 
     return variants ? generateVariants(config, styles, variants) : styles;
-  }
+  };
 
-  return generate;
+  return { rule: extendRegex(BaseRule, /(?<ident>\w+)(?<props>(-\w+)*)-\[(?<arbitrary>[^\]\s]+)\](?=[\s'"`]|$)/), build };
 }
 
 // [mask-type:luminance] ...
-export function styleArbitraryGenerator<T extends Record<string, object>>(config: ExtractorConfig<T>) {
-  function generate(result: RegExpExecArray, groups: Record<string, string | undefined> = {}) {
+export function styleArbitraryExtractor<T extends Record<string, object>>(config: ExtractorConfig<T>) {
+  function build(result: RegExpExecArray, groups: Record<string, string | undefined> = {}) {
     // const { ident, props, variants, important, arbitrary } = extractGroup(groups, true);
     // TODO: support important
 
@@ -334,13 +334,5 @@ export function styleArbitraryGenerator<T extends Record<string, object>>(config
     return variants ? generateVariants(config, styles, variants) : styles;
   }
 
-  return generate;
+  return { rule: extendRegex(BaseRule, /\[(?<property>[\w-]+):(?<arbitrary>[^\]\s]+)\](?=[\s'"`]|$)/), build };
 }
-
-export const UtilityArbitraryRule = extendRegex(BaseRule, /(?<ident>\w+)(?<props>(-\w+)*)-\[(?<arbitrary>[^\]\s]+)\](?=[\s'"`]|$)/);
-
-export const StyleArbitraryRule = extendRegex(BaseRule, /\[(?<property>[\w-]+):(?<arbitrary>[^\]\s]+)\](?=[\s'"`]|$)/);
-
-export const UtilityArbitraryExtractor: Extractor = [UtilityArbitraryRule, utilityArbitraryGenerator];
-
-export const StyleArbitraryExtractor: Extractor = [StyleArbitraryRule, styleArbitraryGenerator];

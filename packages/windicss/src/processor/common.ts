@@ -19,16 +19,20 @@ export interface ExtractorConfig<T extends Record<string, object> = {}> {
   variants: Record<string, VariantBuilder>;
   extractors: Extractor[];
   separator: string;
+  attributify?: {
+    prefix?: string;
+    separator?: string;
+  };
   variantSeparator: string;
 }
 
 export type Generator = (result: RegExpExecArray, groups?: Record<string, string | undefined>) => StyleObject | StyleObject[] | undefined;
 
-export type UtilityData = { $className: string };
+export type UtilityData = { $selector: string };
 
-export type Extractor = [RegExp, (config: ExtractorConfig) => Generator];
+export type Extractor = (config: ExtractorConfig) => { rule: RegExp; build: Generator };
 
-export const BaseRule = /(^|[\s'"`])(?<important>!)?(?<variants>(\w+:)*)/gm;
+export const BaseRule = /(^|[\s'"`])(?<important>!)?(?<variants>([\w-]+:)*)/gm;
 
 export function getNestedObject<T extends object>(root: T, paths: string[]): unknown {
   return paths.reduce((obj: object, key) => {
@@ -38,17 +42,21 @@ export function getNestedObject<T extends object>(root: T, paths: string[]): unk
   }, root);
 }
 
-export function setUtilityName(utility: StyleObject, className: string) {
-  const data = utility[SymbolData];
-  if (data != null) (utility[SymbolData] as UtilityData).$className = className;
-  else utility[SymbolData] = { $className: className };
+export function setSelector(utility: StyleObject, selector: string) {
+  const data = utility[SymbolData] as UtilityData | undefined;
+  if (data == null) utility[SymbolData] = { $selector: selector };
+  else if (!data.$selector) (utility[SymbolData] as UtilityData).$selector = selector;
+
   return utility;
 }
 
 export function buildCSS(utilities: StyleObject[]) {
   const rules: CSSRules = [];
 
-  for (const utility of utilities) rules.push(...createRules(applyVariant(utility), "." + ((utility[SymbolData] as UtilityData) ?? {}).$className));
+  for (const utility of utilities) {
+    const data = (utility[SymbolData] ?? {}) as UtilityData;
+    rules.push(...createRules(applyVariant(utility), data.$selector));
+  }
 
   return buildRules(dedupRules(rules));
 }
@@ -107,16 +115,18 @@ export class Processor {
   extract(src: string) {
     let result: RegExpExecArray | null = null;
     const styles: StyleObject[] = [];
-    const extractors = this.config.extractors.map(([regex, fn]) => [regex, fn(this.config)] as [RegExp, Generator]);
+    const extractors = this.config.extractors.map(fn => fn(this.config));
 
-    for (const [regexp, extractor] of extractors)
+    for (const { rule, build } of extractors)
       do {
-        result = regexp.exec(src);
+        result = rule.exec(src);
         if (result) {
-          const style = extractor(result, result.groups);
-          const name = escapeCSS(result[0].replace(/^['"`]/, "").trim());
-          if (Array.isArray(style)) styles.push(...style.map(i => setUtilityName(i, name)));
-          else if (style) styles.push(setUtilityName(style, name));
+          const style = build(result, result.groups);
+          if (style) {
+            const selector = "." + escapeCSS(result[0].replace(/^['"`]/, "").trim());
+            if (Array.isArray(style)) styles.push(...style.map(i => setSelector(i, selector)));
+            else styles.push(setSelector(style, selector));
+          }
         }
       } while (result != null);
 
@@ -136,7 +146,7 @@ export class Processor {
           "windi-" +
             hash(
               styles
-                .map(i => ((i[SymbolData] as UtilityData) ?? {}).$className)
+                .map(i => ((i[SymbolData] as UtilityData) ?? {}).$selector)
                 .sort()
                 .join()
             )),

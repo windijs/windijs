@@ -1,7 +1,7 @@
-import { BaseRule, extendRegex, extractGroup, Extractor, ExtractorConfig, generateUtilities, generateVariants } from "./common";
+import { BaseRule, extendRegex, extractGroup, ExtractorConfig, generateUtilities, generateVariants } from "./common";
 
-export function utilityGenerator<T extends Record<string, object>>(config: ExtractorConfig<T>) {
-  function generate(result: RegExpExecArray, groups: Record<string, string | undefined> = {}) {
+export function utilityExtractor<T extends Record<string, object>>(config: ExtractorConfig<T>) {
+  function build(result: RegExpExecArray, groups: Record<string, string | undefined> = {}) {
     const { ident, props, variants } = extractGroup(groups, config, true);
     // TODO: support important
 
@@ -9,9 +9,5 @@ export function utilityGenerator<T extends Record<string, object>>(config: Extra
     return variants ? generateVariants(config, styles, variants) : styles;
   }
 
-  return generate;
+  return { rule: extendRegex(BaseRule, /(?<ident>\w+)(?<props>(-\w+)*)(?=[\s'"`]|$)/), build };
 }
-
-export const UtilityRule = extendRegex(BaseRule, /(?<ident>\w+)(?<props>(-\w+)*)(?=[\s'"`]|$)/);
-
-export const UtilityExtractor: Extractor = [UtilityRule, utilityGenerator];
