@@ -1,5 +1,12 @@
 # @windijs/plugin-utils
 
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`5baaffa5`](https://github.com/windijs/windijs/commit/5baaffa59d56f201dd74ec6172735e820f4b2165), [`d8f5e7ff`](https://github.com/windijs/windijs/commit/d8f5e7ffa1b3a64c0f3ac0e4b9eeffcef8b9b82f), [`0fa7bd29`](https://github.com/windijs/windijs/commit/0fa7bd295fdfb9117a4f017fbf41d8368f9b33ac), [`d1c7d304`](https://github.com/windijs/windijs/commit/d1c7d30487b04f2d85b558692ef0c2c8cede1c2e), [`2582877f`](https://github.com/windijs/windijs/commit/2582877f5e4b7ad991fe15747115d5cb9d6df73b)]:
+  - @windijs/helpers@1.1.6
+
 ## 1.1.3
 
 ### Patch Changes

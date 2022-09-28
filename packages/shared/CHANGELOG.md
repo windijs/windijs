@@ -1,5 +1,11 @@
 # @windijs/shared
 
+## 1.0.7
+
+### Patch Changes
+
+- [`e0152dad`](https://github.com/windijs/windijs/commit/e0152dadd61d11d63e70cac4b561768d46ecfba2) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new utils for checking css data types
+
 ## 1.0.6
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @windijs/variants
 
+## 1.0.14
+
+### Patch Changes
+
+- [`82ac8274`](https://github.com/windijs/windijs/commit/82ac8274c9ca38a6d7f0c093eda3f22c7d1a0d10) Thanks [@voorjaar](https://github.com/voorjaar)! - refactor: remove use of useProxy
+
+- Updated dependencies [[`c374e29a`](https://github.com/windijs/windijs/commit/c374e29a87d270e429e00f8da85c06577ad90ef7), [`e0152dad`](https://github.com/windijs/windijs/commit/e0152dadd61d11d63e70cac4b561768d46ecfba2), [`5baaffa5`](https://github.com/windijs/windijs/commit/5baaffa59d56f201dd74ec6172735e820f4b2165), [`d8f5e7ff`](https://github.com/windijs/windijs/commit/d8f5e7ffa1b3a64c0f3ac0e4b9eeffcef8b9b82f), [`0fa7bd29`](https://github.com/windijs/windijs/commit/0fa7bd295fdfb9117a4f017fbf41d8368f9b33ac), [`d1c7d304`](https://github.com/windijs/windijs/commit/d1c7d30487b04f2d85b558692ef0c2c8cede1c2e), [`2582877f`](https://github.com/windijs/windijs/commit/2582877f5e4b7ad991fe15747115d5cb9d6df73b)]:
+  - @windijs/core@1.1.8
+  - @windijs/shared@1.0.7
+  - @windijs/helpers@1.1.6
+
 ## 1.0.13
 
 ### Patch Changes
