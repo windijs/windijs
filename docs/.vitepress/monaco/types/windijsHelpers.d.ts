@@ -15830,9 +15830,7 @@ export declare function atomicNamer(style: StyleObject): string;
 export declare function hashNamer(style: StyleObject): string;
 export declare function useNamer(f: StyleNamer): void;
 export declare function nameStyle(style: StyleObject): string;
-export declare function useProxy<T extends object, S = StyleObject>(f: (prop: string) => S | undefined): T;
 export declare function isProxy<T extends object | Function>(i: T): boolean;
-export declare function setProxy<T extends object | Function>(t: T): T;
 declare type ColorFunc = {
     var(name: string, defaultValue?: string): string;
     calc(expr: string): string;
