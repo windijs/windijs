@@ -44,6 +44,7 @@ export function createRules(css: CSSObject | CSSMap, selector: string) {
   for (const [key, value] of entries(css))
     if (typeof value === "string" || value instanceof String) rootRule.children.push({ property: key, value: value as string });
     else if (typeof value === "number") rootRule.children.push({ property: key, value: value.toString() });
+    else if (Array.isArray(value)) value.map(i => rootRule.children.push({ property: key, value: i }));
     else if (value != null) {
       if (rootRule.children[0]) rules.push({ ...rootRule });
       rootRule.children = [];
