@@ -140,7 +140,7 @@ Learn how to use the built-in utilities and variants:
 Learn more about the API:
 
 - [API Overview](/integrations/api)
-- <a href="/api.html" target="_blank">API Documentation</a>
+- <a href="/windijs/api.html" target="_blank">API Documentation</a>
 
 For further customization:
 

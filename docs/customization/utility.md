@@ -14,7 +14,7 @@ All built-in utilities defined in [@windijs/utilities](https://github.com/windij
 More detailed utility introductions and examples will come soon. At present, you can try them in [Repl](/repl).
 :::
 
-To learn more about built-in utilities, read the utilities API documents <a href="/modules/_windijs_utilities.html" target="_blank">here</a>.
+To learn more about built-in utilities, read the utilities API documents <a href="/windijs/modules/_windijs_utilities.html" target="_blank">here</a>.
 
 ## Create Utility Via API
 

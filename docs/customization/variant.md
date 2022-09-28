@@ -125,7 +125,7 @@ All built-in variants defined in [@windijs/variants](https://github.com/windijs/
 | siblings | `.${utility} ~ * { ... }` | Targets siblings nodes .    |
 | sibling  | `.${utility} + * { ... }` | Targets first sibling node. |
 
-Learn more about built-in variants, read the variants api documents <a href="/modules/_windijs_variants.html" target="_blank">here</a>.
+Learn more about built-in variants, read the variants api documents <a href="/windijs/modules/_windijs_variants.html" target="_blank">here</a>.
 
 ## Create Variant Via API
 

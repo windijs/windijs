@@ -309,7 +309,7 @@ export default defineConfig({
 });
 ```
 
-All built-in colors defined in the package [@windijs/colors](https://github.com/windijs/windijs/tree/main/packages/colors) package. Please refer to the <a href="/modules/_windijs_colors.html" target="_blank">colors API documentation</a> for more details.
+All built-in colors defined in the package [@windijs/colors](https://github.com/windijs/windijs/tree/main/packages/colors) package. Please refer to the <a href="/windijs/modules/_windijs_colors.html" target="_blank">colors API documentation</a> for more details.
 
 #### Generating colors
 
@@ -331,7 +331,7 @@ Color.hex("#d2e1dd").scale({ lightness: -10, saturation: 10 }).hex; // "#b1d3ca"
 // more...
 ```
 
-All built-in helpers defined in the package [@windijs/helpers](https://github.com/windijs/windijs/tree/main/packages/helpers) package. Please refer to the <a href="/modules/_windijs_helpers.html" target="_blank">helpers API documentation</a> for more details.
+All built-in helpers defined in the package [@windijs/helpers](https://github.com/windijs/windijs/tree/main/packages/helpers) package. Please refer to the <a href="/windijs/modules/_windijs_helpers.html" target="_blank">helpers API documentation</a> for more details.
 
 ### Spacing
 
@@ -665,4 +665,4 @@ All these keys are also available under the `theme.extend` key to enable extendi
 | willChange               | Values for the `will-change` property                   |
 | zIndex                   | Values for the `z-index` property                       |
 
-All built-in theme configs defined in the package [@windijs/config](https://github.com/windijs/windijs/tree/main/packages/config) package. Please refer to the <a href="/modules/_windijs_config.html" target="_blank">config API documentation</a> for more details.
+All built-in theme configs defined in the package [@windijs/config](https://github.com/windijs/windijs/tree/main/packages/config) package. Please refer to the <a href="/windijs/modules/_windijs_config.html" target="_blank">config API documentation</a> for more details.
