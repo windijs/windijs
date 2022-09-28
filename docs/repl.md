@@ -2,20 +2,16 @@
 layout: home
 ---
 
-<script lang="ts">
-  export default {
-    data() {
-      return {
-        dynamicComponent: null
-      }
-    },
+<script setup>
+  import { shallowRef, onMounted } from "vue";
 
-    mounted() {
-      import('@/Repl.vue').then((module) => {
-        this.dynamicComponent = module.default
-      })
-    }
-  }
+  const dynamicComponent = shallowRef(null);
+
+  onMounted(() => {
+    import('@/Repl.vue').then((module) => {
+      dynamicComponent.value = module.default
+    })
+  })
 </script>
 
 <ClientOnly>
