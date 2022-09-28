@@ -114,7 +114,7 @@ onMounted(() => {
   });
 
   apply("body", "overflow", "hidden");
-  apply(".VPNav .container", "maxWidth", "100%");
+  apply(".VPNav .container", "max-width", "100%");
 
   listener = () => {
     apply("#render", "display", window.outerWidth < 640 ? "none" : null);
@@ -136,7 +136,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   apply("body", "overflow", null);
-  apply(".VPNav .container", "maxWidth", null);
+  apply(".VPNav .container", "max-width", null);
 
   split.destroy();
   window.removeEventListener("resize", listener);
