@@ -111,7 +111,7 @@
         style: windijsStyle.style,
       },
       variants: windijsVariants,
-      extractors: [windicss.UtilityExtractor, windicss.UtilityArbitraryExtractor, windicss.StyleArbitraryExtractor],
+      extractors: [windicss.utilityExtractor, windicss.utilityArbitraryExtractor, windicss.styleArbitraryExtractor, windicss.attributifyExtractor],
     });
 
     function require (package) {
@@ -297,11 +297,12 @@
           htmlContent = app.innerHTML;
 
           // windicss
-          const cssData = processor.interpret(script);
-          injectWindiCSS(cssData);
+          const wcss = processor.interpret(script);
+          injectWindiCSS(wcss);
 
           dismissError();
         } catch(e) {
+          // console.log(e.stack)
           showError(e);
         }
     }, false)
