@@ -7,6 +7,10 @@ export const SymbolMeta = Symbol.for("meta");
 export const SymbolData = Symbol.for("data");
 export const SymbolProxy = Symbol.for("proxy");
 
+export function isProxy<T extends object | Function>(i: T) {
+  return i != null && SymbolProxy in i;
+}
+
 export function isStyleObject(i: unknown): i is StyleObject {
   return i != null && (typeof i === "object" || typeof i === "function") && (i as StyleObject)[SymbolCSS] != null;
 }

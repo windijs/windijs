@@ -15,5 +15,4 @@ export * from "./funcs";
 export * from "./math";
 export * from "./meta";
 export * from "./namer";
-export * from "./proxy";
 export * from "./unit";
