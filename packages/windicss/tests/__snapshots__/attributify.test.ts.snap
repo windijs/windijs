@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`attributify with default value 1`] = `
+"[grid] {
+  display: -ms-grid;
+  display: grid;
+}
+
+[grid=\\"cols-2\\"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}"
+`;
+
 exports[`attributify with inner variants 1`] = `
 "[bg~=\\"red-500\\"] {
   background-color: rgba(239, 68, 68, var(--w-bg-opacity));
@@ -17,6 +28,20 @@ exports[`attributify with inner variants 1`] = `
       background-color: rgba(220, 38, 38, var(--w-bg-opacity));
       --w-bg-opacity: 1;
     }
+  }
+}"
+`;
+
+exports[`attributify with outer variants 1`] = `
+"[hover\\\\:bg~=\\"red-500\\"]:hover {
+  background-color: rgba(239, 68, 68, var(--w-bg-opacity));
+  --w-bg-opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  [hover\\\\:bg~=\\"dark:red-400\\"]:hover {
+    background-color: rgba(248, 113, 113, var(--w-bg-opacity));
+    --w-bg-opacity: 1;
   }
 }"
 `;
