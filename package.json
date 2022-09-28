@@ -26,7 +26,8 @@
     "gen:style": "node -r sucrase/register ./scripts/genDataTypes.ts",
     "size": "pnpm size:mod && pnpm size:units",
     "size:mod": "pnpm build windijs core utilities variants config colors helpers shared -dcmf iife",
-    "size:units": "cd packages/size-check && pnpm build && node -r sucrase/register index.ts"
+    "size:units": "cd packages/size-check && pnpm build && node -r sucrase/register index.ts",
+    "update:runtime": "pnpm build windijs windicss core utilities variants style config colors helpers shared  -f runtime && node -r sucrase/register ./scripts/updateRuntime"
   },
   "author": "Raven Satir",
   "workspaces": [
