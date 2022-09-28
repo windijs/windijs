@@ -8,10 +8,10 @@ function Counter() {
 
   return (
     <div class="mt-[35vh] style-userSelect-none">
-      <div class={[bg[btnColors[Math.abs(value % 8)]][500].gradient, "hover:bg-opacity-90 w-content-max mx-auto p-4 text-white rounded-lg"]}>
+      <div p="4" w="content-max" class={[bg[btnColors[Math.abs(value % 8)]][500].gradient, "hover:bg-opacity-90 mx-auto text-white rounded-lg"]}>
         Counter: {value}
       </div>
-      <div class="style-display-flex [justifyContent:center] mt-4 space-x-4">
+      <div space="x-4" class="style-display-flex [justifyContent:center] mt-4">
         <button class={btnStyle} onClick={() => setValue(value + 1)}>
           Increment
         </button>
