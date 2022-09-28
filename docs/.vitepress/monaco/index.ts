@@ -81,7 +81,6 @@ const utilities = [
   "backdrop",
   "bg",
   "blend" /*"blur"*/,
-  ,
   "border",
   "brightness",
   "col",
@@ -117,7 +116,6 @@ const utilities = [
   "mx",
   "my",
   "opacity" /*"origin"*/,
-  ,
   "outline",
   "overflow",
   "overscroll",
@@ -735,12 +733,22 @@ const styles = [
 ];
 
 const globalUri = "file:///global.d.ts";
+
+// TODO: support attributify prefix like w:
 const globalSource = `
 import * as helpers from "@windijs/helpers";
 import * as utilities from "@windijs/utilities";
 import * as variants from "@windijs/variants";
 import * as preact from "preact";
 import { style as $style } from "@windijs/style";
+
+declare module 'preact' {
+  module JSXInternal {
+    interface HTMLAttributes {
+${utilities.map(i => `      ${i === "translate" ? '"w:translate"' : i}?: string;`).join("\n")}
+    }
+  }
+}
 
 declare global {
 ${utilities.map(i => `  const ${i}: typeof utilities.${i};`).join("\n")}
