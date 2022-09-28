@@ -204,6 +204,7 @@
         classes,
         html,
         config,
+        rawScript,
         dark: isDark,
       } = JSON.parse(e.data)
 
@@ -297,8 +298,11 @@
           htmlContent = app.innerHTML;
 
           // windicss
-          const wcss = processor.interpret(script);
+          const wcss = processor.interpret(rawScript);
           injectWindiCSS(wcss);
+
+          // console.log(rawScript);
+          // console.log(processor.interpret(`bg="red-500"`))
 
           dismissError();
         } catch(e) {

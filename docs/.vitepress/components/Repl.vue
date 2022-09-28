@@ -26,6 +26,7 @@ let viewChanged = false;
 let configChanged = false;
 
 const script = ref("");
+const rawScript = ref("");
 const config = ref("");
 const isDark = ref(localStorage.getItem("vitepress-theme-appearance") !== "light");
 const selectedExample = ref(localStorage.getItem("repl-selected-example") || "default");
@@ -66,11 +67,13 @@ onMounted(() => {
     const updateScript = (proxy: TypeScriptWorker) => {
       tsProxy = proxy;
       const model = editor.getModel();
-      if (model)
+      if (model) {
+        rawScript.value = model.getValue();
         proxy.getEmitOutput(model.uri.toString()).then(r => {
           script.value = processCode(r.outputFiles[0].text);
           setTimeout(() => updateRender(currentTab), 1);
         });
+      }
     };
 
     const updateConfig = (proxy: TypeScriptWorker) => {
@@ -231,7 +234,13 @@ function updateConfig(config: Config) {
         <div v-show="showConfig" id="config" class="modal"></div>
       </div>
       <div id="render">
-        <Iframe style="width: 100%; height: 100%" :script="script" :dark="isDark" :config="config" @updateConfig="updateConfig"></Iframe>
+        <Iframe
+          style="width: 100%; height: 100%"
+          :script="script"
+          :rawScript="rawScript"
+          :dark="isDark"
+          :config="config"
+          @updateConfig="updateConfig"></Iframe>
         <div v-show="showRenderEditor" id="render-editor"></div>
         <div class="render-btn-group" :class="[space.x[2]]">
           <button class="btn-html" :class="btnStyle" @click="hideRenderEditor(0) || updateRender(0)">

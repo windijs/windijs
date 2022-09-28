@@ -15,6 +15,10 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    rawScript: {
+      type: String,
+      default: "",
+    },
     config: {
       type: String,
       default: "",
@@ -84,8 +88,8 @@ export default defineComponent({
         sandbox?.contentWindow?.postMessage(
           JSON.stringify({
             [key]: propRefs[key].value,
-            ...(key === "dark" ? { script: propRefs.script.value } : {}), // force update when toggle darkMode
-            ...(key === "config" ? { script: propRefs.script.value } : {}), // force update when config changes
+            ...(key === "dark" ? { script: propRefs.script.value, rawScript: propRefs.rawScript.value } : {}), // force update when toggle darkMode
+            ...(key === "config" ? { script: propRefs.script.value, rawScript: propRefs.rawScript.value } : {}), // force update when config changes
           }),
           location.origin
         );
