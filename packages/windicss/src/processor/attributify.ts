@@ -1,7 +1,13 @@
-import { escapeCSS, StyleObject } from "@windijs/helpers";
+import { css, escapeCSS, StyleObject } from "@windijs/helpers";
 import { ExtractorConfig, setSelector, generateUtilities, generateVariants } from "./common";
 
 export function attributifyExtractor<T extends Record<string, object>>(config: ExtractorConfig<T>) {
+  const utilitiesWithDefaults = Object.fromEntries(
+    Object.entries(config.utilities)
+      .map(([k, v]) => [k, (v as StyleObject).css])
+      .filter(i => i[1] != null)
+  );
+
   function build(result: RegExpExecArray, groups: Record<string, string | undefined> = {}) {
     const ident = groups.ident ?? "class";
     const variants = groups.variants?.split(config.variantSeparator).filter(Boolean) ?? [];
@@ -11,6 +17,11 @@ export function attributifyExtractor<T extends Record<string, object>>(config: E
     const styles: StyleObject[] = [];
     const equal = attrs.length === 1 ? "=" : "~=";
     const variantRegex = new RegExp(`^([\\w-]+${config.variantSeparator})+`);
+
+    if (ident in utilitiesWithDefaults) {
+      const defaultCSS = setSelector(css(utilitiesWithDefaults[ident]), `[${ident}]`);
+      styles.push(defaultCSS);
+    }
 
     for (const attr of attrs) {
       props = attr.split(config.separator).filter(Boolean) ?? [];
