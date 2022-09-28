@@ -1,5 +1,4 @@
 import { createVariant } from "@windijs/core";
-import { useProxy } from "@windijs/helpers";
 import { camelToDash } from "@windijs/shared";
 
 import type { VariantBuilder } from "@windijs/helpers";
@@ -302,8 +301,10 @@ export const {
   notOnlyOfType,
   root,
   empty,
-} = useProxy<PseudoClassVariants, Function>(prop => {
-  prop = camelToDash(prop);
-  if (prop.startsWith("not-")) prop = `not(:${prop.slice(4)})`;
-  return createVariant("&:" + prop);
+} = new Proxy({} as PseudoClassVariants, {
+  get(_, p: string) {
+    p = camelToDash(p);
+    if (p.startsWith("not-")) p = `not(:${p.slice(4)})`;
+    return createVariant("&:" + p);
+  },
 });
