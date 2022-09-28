@@ -217,3 +217,28 @@ test("setupVariant", () => {
 
   expect(unify(".test", sm(hover(dark(bg.red[500]))))).toMatchSnapshot();
 });
+
+test("handler should keep variables", () => {
+  const backdrop = createUtility("backdrop")
+    .case(
+      "blur",
+      configHandler({ DEFAULT: "8px", sm: "4px" }, v => css({ "--w-backdrop-blur": `blur(${v})` }))
+    )
+    .init();
+
+  backdrop.blur.abc = 3;
+
+  expect(backdrop.blur.abc).toEqual(3);
+
+  const blur = createUtility("blur")
+    .use(configHandler({ DEFAULT: "3px", nested: { DEFAULT: "4px" } as unknown as { abc: number; def: number } }, "transform"))
+    .init();
+
+  (blur as unknown as { abc: StyleObject }).abc = css({});
+  expect((blur as unknown as { abc: StyleObject }).abc).toBeDefined();
+
+  blur.nested.abc = css({});
+  blur.nested.def = css({});
+  expect(blur.nested.abc).toBeDefined();
+  expect(blur.nested.def).toBeDefined();
+});

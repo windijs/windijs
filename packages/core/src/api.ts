@@ -24,7 +24,7 @@ import {
   resetMeta,
   resetStyleMeta,
   updateMetaType,
-  useProxy,
+  SymbolData,
 } from "@windijs/helpers";
 import { fracToPercent, isFraction, isNumber, parenWrap } from "@windijs/shared";
 
@@ -51,7 +51,16 @@ export function handleConfig<T extends object & { DEFAULT?: unknown }>(
         (value as StyleObject)[SymbolMeta] = getMeta();
         return value as StyleObject;
       }
-      return useProxy(p2 => handleConfig(build, value, type, p2)) as StyleObject;
+
+      (statics as Record<string, StyleObject>)[p][SymbolProxy] = true;
+      return new Proxy(value as StyleObject<{ [SymbolData]: Record<string | symbol, unknown> }>, {
+        get: (target, p2: string) => target[SymbolData]?.[p2] || handleConfig(build, value, type, p2),
+        set(target, p, newValue) {
+          if (!target[SymbolData]) target[SymbolData] = {};
+          target[SymbolData][p] = newValue;
+          return true;
+        },
+      });
     }
     return build(value);
   }
@@ -274,10 +283,18 @@ export function bind<T extends Record<string, string>>(cfg: T, f: (v: string) =>
 }
 
 export function guard<K extends string, R>(key: K, handler: Handler<R>): Handler<{ [P in K]: R }> {
+  const target: Record<string | symbol, unknown> = { [SymbolProxy]: true };
   return {
     type: "guard",
     meta: { key, handler },
-    get: p => (p === key ? (handler.type === "call" ? handler.get(p) : pushMetaProp(p) && useProxy(handler.get)) : undefined),
+    get(p) {
+      if (p !== key) return;
+      if (handler.type === "call") return handler.get(p);
+      pushMetaProp(p) && Reflect.set(target, SymbolProxy, true);
+      return new Proxy(target as { [P in K]: R }, {
+        get: (t, p) => t[p as K] || handler.get(p as string),
+      });
+    },
   } as Handler<{ [P in K]: R }>;
 }
 
@@ -310,9 +327,9 @@ export function setup<T extends object & { DEFAULT?: unknown }>(t: T, root = tru
       if (p in target) {
         v = Reflect.get(target, p);
         if (v == null) return;
-        return (
-          pushMetaProp(p) && (isHandler(v) ? useProxy(v.get) : isStyleObject(v) ? css(v[SymbolCSS]) : typeof v === "object" ? setup(v, false) : v)
-        );
+        pushMetaProp(p);
+        if (isHandler(v)) return Reflect.set(v, SymbolProxy, true) && new Proxy(v, { get: (_, p) => (v as Handler<unknown>).get(p as string) });
+        return isStyleObject(v) ? css(v[SymbolCSS]) : typeof v === "object" ? setup(v, false) : v;
       }
       v = target.DEFAULT;
       return isHandler(v) ? v.get(p) : v;
