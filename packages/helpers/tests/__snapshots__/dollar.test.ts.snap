@@ -104,6 +104,21 @@ exports[`dollar select HTML elements 3`] = `
 }"
 `;
 
+exports[`dollar styles and exports 1`] = `
+".circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.rounded {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  font-size: large;
+}"
+`;
+
 exports[`dollar wiith all/root/host 1`] = `
 "* {
   background: blue;
@@ -237,5 +252,22 @@ exports[`dollar with id 3`] = `
   background: blue;
   padding: 4rem;
   border-radius: 4px;
+}"
+`;
+
+exports[`extend last style 1`] = `
+".circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.circle {
+  background-color: red;
+}
+
+.rounded {
+  background-color: red;
+  font-size: large;
 }"
 `;
