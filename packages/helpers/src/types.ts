@@ -43,7 +43,7 @@ export type CSSProps = {
           : value;
       }[keyof CSSDecls[prop]]
     | string
-    | string[]; // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
+    | String[]; // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
 };
 
 type ExtractAttrName<S extends string> = S extends `${string}[${infer A}]` ? A : S;
@@ -69,7 +69,7 @@ export type CSSObject = CSSProps &
   Partial<CSSClasses<CSSObject>> &
   Partial<CSSElements<CSSObject>> &
   Partial<HTMLTags<CSSObject>> &
-  Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | string | string[] | number };
+  Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | CSSMap | string | string[] | number };
 
 export type CSSMap = Map<keyof CSSProps, string> &
   Map<keyof CSSAtRules<CSSObject>, CSSObject | CSSMap> &
@@ -197,7 +197,9 @@ export type StyleLoader = (css: CSSObject | CSSMap, meta: UtilityMeta, data?: Un
 
 export type StyleNamer = (style: StyleObject) => string;
 
-export type VariantBuilder = (...utilities: (StyleObject | StyleObject[])[]) => StyleObject[];
+export type Utilities = StyleObject | null | undefined | Utilities[];
+
+export type VariantBuilder = (...utilities: Utilities[]) => StyleObject[];
 
 export type NestedProxy<T, O> = SafeEntry<{
   [key in keyof T]: T[key] extends object ? (T[key] extends Array<unknown> ? O : NestedProxy<T[key], O>) : O;
