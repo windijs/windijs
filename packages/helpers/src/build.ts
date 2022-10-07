@@ -1,9 +1,9 @@
 import { camelToDash, entries, indent } from "@windijs/shared";
 
-import { applyVariant, bundle, isStyleObject } from "./common";
+import { applyVariant, bundle, isStyleObject, SymbolMeta } from "./common";
 import { nameStyle } from "./namer";
 
-import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSMap, CSSObject, CSSRule, CSSRules, StyleObject } from "./types";
+import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSMap, CSSObject, CSSRule, CSSRules, StyleObject, Utilities } from "./types";
 
 /**
  * Build style value string or style target `HTMLElement`.
@@ -45,11 +45,12 @@ export function createRules(css: CSSObject | CSSMap, selector: string) {
     if (typeof value === "string" || value instanceof String) rootRule.children.push({ property: key, value: value as string });
     else if (typeof value === "number") rootRule.children.push({ property: key, value: value.toString() });
     else if (Array.isArray(value)) value.map(i => rootRule.children.push({ property: key, value: i }));
-    else if (value != null) {
+    else if (typeof value === "object" && value != null) {
       if (rootRule.children[0]) rules.push({ ...rootRule });
       rootRule.children = [];
-      if (key.startsWith("@")) rules.push({ rule: key, children: createRules(value, selector) });
-      else rules.push(...createRules(value, key.replace(/&/g, selector)));
+      const children = selector.charCodeAt(0) === 64 /* @ */ ? { [selector]: value } : value;
+      if (key.charCodeAt(0) === 64 /* @ */) rules.push({ rule: key, children: createRules(children, selector) });
+      else rules.push(...createRules(children, key.replace(/&/g, selector)));
     }
 
   rootRule.children[0] && rules.push(rootRule);
@@ -102,22 +103,34 @@ export function buildStyle(className: string, style: StyleObject): string {
   return buildRules(createRules(applyVariant(style), "." + className));
 }
 
-export function atomic(...utilities: (StyleObject | StyleObject[])[]): string {
+export function atomic(...utilities: Utilities[]): string {
   const rules: CSSRules = [];
 
-  for (const utility of utilities.flat()) rules.push(...createRules(applyVariant(utility), "." + nameStyle(utility)));
+  for (const utility of utilities.flat().filter(i => i != null) as StyleObject[])
+    rules.push(...createRules(applyVariant(utility), "." + nameStyle(utility)));
 
   return buildRules(dedupRules(rules));
 }
 
-const _unify = (selector: string, utilities: (StyleObject | StyleObject[])[]) => buildRules(createRules(bundle(utilities), selector));
+const _unify = (selector: string, utilities: Utilities[]) => buildRules(createRules(bundle(utilities), selector));
 
-export function unify(selector: string, ...utilities: (StyleObject | StyleObject[])[]): string;
-export function unify(...utilities: { [key: string]: StyleObject | (StyleObject | StyleObject[])[] }[]): string;
+export function unify(selector: string, ...utilities: Utilities[]): string;
+export function unify(...utilities: { [key: string]: StyleObject | Utilities[] }[]): string;
 export function unify(...params: unknown[]): string {
-  if (typeof params[0] === "string") return _unify(params[0], params.slice(1) as (StyleObject | StyleObject[])[]);
-  const map = Object.assign({}, ...params) as { [key: string]: StyleObject | StyleObject[] };
+  if (typeof params[0] === "string") return _unify(params[0], params.slice(1) as Utilities[]);
+  const map = Object.assign({}, ...params) as { [key: string]: Utilities };
   return Object.entries(map)
     .map(([k, v]) => (Array.isArray(v) ? _unify(k, v) : _unify(k, [v])))
     .join("\n\n");
+}
+
+export function build(...utilities: Utilities[]): string {
+  const rules: CSSRules = [];
+
+  for (const utility of utilities.flat().filter(i => i != null) as StyleObject[]) {
+    const selector = utility[SymbolMeta].selector;
+    if (typeof selector === "string") rules.push(...createRules(applyVariant(utility), selector));
+  }
+
+  return buildRules(dedupRules(rules));
 }
