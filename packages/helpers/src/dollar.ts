@@ -1,12 +1,12 @@
-import { hasKey } from "@windijs/shared";
+import { apply } from "./css";
 
-import { unify } from "./build";
-
-import type { ElementSelectors, GeneralHTMLAttrs, StyleObject } from "./types";
+import type { ElementSelectors, GeneralHTMLAttrs, StyleObject, Utilities } from "./types";
 
 // TODO: support variant group
 
-type DollarFunc = (...utilities: (StyleObject | StyleObject[])[]) => string;
+type DollarFunc = (...utilities: Utilities[]) => StyleObject;
+
+type StyleExport = { selector: string; children: StyleObject[]; style: StyleObject };
 
 type DollarAttr = ((attribute: string) => DollarCall) &
   GeneralHTMLAttrs<
@@ -39,6 +39,8 @@ type DollarCall = DollarFunc & {
   _$_: DollarType;
   /** CSS attribute Selector, select `element[attribute]` */
   ATTR: DollarAttr;
+  /** CSS styles */
+  styles: StyleObject[];
 } & {
   /** CSS sub class Selector, select `element.class` */
   [key: string]: DollarCall;
@@ -46,7 +48,7 @@ type DollarCall = DollarFunc & {
   [key in keyof ElementSelectors<unknown>]: DollarCall;
 };
 
-type DollarType = typeof unify &
+type DollarType = typeof apply &
   ElementSelectors<DollarCall> & {
     /** CSS class Selector */
     [key: string]: DollarCall;
@@ -61,10 +63,13 @@ type DollarType = typeof unify &
     ID: ((id: string) => DollarCall) & { [key: string]: DollarCall };
     /** CSS attribute Selector, select `[attribute]` */
     ATTR: DollarAttr;
+    /** CSS styles */
+    styles: StyleObject[] & { [key: string]: StyleObject[] | undefined };
+    /** CSS exports */
+    exports: StyleExport[];
+    /** Initial $ func, clear all styles */
+    init: () => void;
   };
-
-let CURRENT_SELECTOR = "";
-let CURRENT_ATTRIBUTE = "";
 
 function funcProxy<T>(f: (prop: string) => T) {
   return new Proxy(f, {
@@ -77,90 +82,108 @@ function funcProxy<T>(f: (prop: string) => T) {
   });
 }
 
-const dollarCall = new Proxy(unify, {
-  get(target, p: string) {
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    if (p === "ATTR") return attrProxy;
-    if (p === "$") CURRENT_SELECTOR += ", ";
-    else if (p === "$$") CURRENT_SELECTOR += " > ";
-    else if (p === "_") CURRENT_SELECTOR += " ";
-    else if (p === "__") CURRENT_SELECTOR += " + ";
-    else if (p === "_$_") CURRENT_SELECTOR += " ~ ";
-    else if (p.charCodeAt(0) < 91) CURRENT_SELECTOR += p.toLowerCase(); // HTML Elements
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    else CURRENT_SELECTOR += "." + p;
+let GLOBAL_STYLES: StyleExport[] = [];
 
-    return dollarCall;
-  },
-  apply(target, thisArg, argArray) {
-    return Reflect.apply(target, thisArg, [CURRENT_SELECTOR, ...argArray]);
-  },
-}) as unknown as DollarCall;
+export function queryStyles(selector: string): StyleObject[] | undefined {
+  for (let i = GLOBAL_STYLES.length - 1; i >= 0; i--) if (GLOBAL_STYLES[i].selector === selector) return GLOBAL_STYLES[i].children;
+}
 
-const attrFuncs = {
-  match: funcProxy(function (v) {
-    CURRENT_SELECTOR += `[${CURRENT_ATTRIBUTE}=${JSON.stringify(v)}]`;
-    return dollarCall;
-  }),
-  hyphenMatch: funcProxy(function (v) {
-    CURRENT_SELECTOR += `[${CURRENT_ATTRIBUTE}|=${JSON.stringify(v)}]`;
-    return dollarCall;
-  }),
-  contains: funcProxy(function (v) {
-    CURRENT_SELECTOR += `[${CURRENT_ATTRIBUTE}~=${JSON.stringify(v)}]`;
-    return dollarCall;
-  }),
-  includes: funcProxy(function (v) {
-    CURRENT_SELECTOR += `[${CURRENT_ATTRIBUTE}*=${JSON.stringify(v)}]`;
-    return dollarCall;
-  }),
-  startsWith: funcProxy(function (v) {
-    CURRENT_SELECTOR += `[${CURRENT_ATTRIBUTE}^=${JSON.stringify(v)}]`;
-    return dollarCall;
-  }),
-  endsWith: funcProxy(function (v) {
-    CURRENT_SELECTOR += `[${CURRENT_ATTRIBUTE}$=${JSON.stringify(v)}]`;
-    return dollarCall;
-  }),
-};
+function globalApply(selector: string, ...utilities: Utilities[]): StyleObject {
+  const style = apply(selector, ...utilities);
 
-const attrProxy = funcProxy(function (attribute) {
-  CURRENT_ATTRIBUTE = attribute;
+  GLOBAL_STYLES.push({
+    selector,
+    children: utilities.flat().filter(i => i != null) as StyleObject[],
+    style,
+  });
 
-  return new Proxy(unify, {
-    get(target, p) {
-      if (hasKey(attrFuncs, p)) return attrFuncs[p];
-      return Reflect.get(dollarCall, p);
+  return style;
+}
+
+function createDollarCall(selector: string): DollarCall {
+  return new Proxy(globalApply, {
+    get(target, p: string) {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      if (p === "ATTR") return createAttrProxy(selector);
+      if (p === "styles") return queryStyles(selector) ?? [];
+
+      if (p === "$") selector += ", ";
+      else if (p === "$$") selector += " > ";
+      else if (p === "_") selector += " ";
+      else if (p === "__") selector += " + ";
+      else if (p === "_$_") selector += " ~ ";
+      else if (p.charCodeAt(0) < 91) selector += p.toLowerCase(); // HTML Elements
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      else selector += "." + p;
+
+      return createDollarCall(selector);
     },
     apply(target, thisArg, argArray) {
-      CURRENT_SELECTOR += `[${CURRENT_ATTRIBUTE}]`;
-      return Reflect.apply(target, thisArg, [CURRENT_SELECTOR, ...argArray]);
+      return Reflect.apply(target, thisArg, [selector, ...argArray]);
     },
+  }) as unknown as DollarCall;
+}
+
+const attrMatches: Record<string, string> = {
+  match: "=",
+  hyphenMatch: "|=",
+  contains: "~=",
+  includes: "*=",
+  startsWith: "^=",
+  endsWith: "$=",
+};
+
+const createAttrProxy = (selector: string) =>
+  funcProxy(function (attribute) {
+    return new Proxy(globalApply, {
+      get(target, p: string) {
+        if (p in attrMatches)
+          return funcProxy(function (v) {
+            selector += `[${attribute}${attrMatches[p]}${JSON.stringify(v)}]`;
+            return createDollarCall(selector);
+          });
+
+        return Reflect.get(createDollarCall(selector), p);
+      },
+      apply(target, thisArg, argArray) {
+        selector += `[${attribute}]`;
+        return Reflect.apply(target, thisArg, [selector, ...argArray]);
+      },
+    });
   });
-});
 
-export const $ = new Proxy(unify, {
+export const $ = new Proxy(globalApply, {
   get(target, p: string) {
-    CURRENT_SELECTOR = "";
-
     if (p === "call") return (thisArg: unknown, ...args: unknown[]) => Reflect.apply(target, thisArg, args);
+
+    if (p === "init") return () => (GLOBAL_STYLES = []);
+    if (p === "exports") return GLOBAL_STYLES;
+    if (p === "styles")
+      return new Proxy(GLOBAL_STYLES.map(i => i.children).flat(), {
+        get(target, p: string) {
+          if (Reflect.has(target, p)) return Reflect.get(target, p);
+          return queryStyles(p);
+        },
+      });
+
+    let selector = "";
 
     if (p === "ID")
       return funcProxy(function (id) {
-        CURRENT_SELECTOR += "#" + id;
-        return dollarCall;
+        selector += "#" + id;
+        return createDollarCall(selector);
       });
 
-    if (p === "ATTR") return attrProxy;
+    if (p === "ATTR") return createAttrProxy(selector);
 
-    if (p === "All") CURRENT_SELECTOR += "*";
-    else if (p === "Root") CURRENT_SELECTOR += ":root";
+    if (p === "All") selector += "*";
+    else if (p === "Root") selector += ":root";
     // TODO: support :host(.selector)
-    else if (p === "Host") CURRENT_SELECTOR += ":host";
-    else if (p.charCodeAt(0) < 91) CURRENT_SELECTOR += p.toLowerCase(); // HTML Elements
+    else if (p === "Host") selector += ":host";
+    else if (p.charCodeAt(0) < 91) selector += p.toLowerCase(); // HTML Elements
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    else CURRENT_SELECTOR += "." + p;
+    else selector += "." + p;
 
-    return dollarCall;
+    return createDollarCall(selector);
   },
 }) as DollarType;
