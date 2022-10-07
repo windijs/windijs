@@ -1,5 +1,16 @@
 # windijs
 
+## 1.1.10
+
+### Patch Changes
+
+- [`5670e0758`](https://github.com/windijs/windijs/commit/5670e075868299416433051b649f8b16bd0bcacd) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: use new utilities type
+
+- Updated dependencies [[`1f050eb83`](https://github.com/windijs/windijs/commit/1f050eb838c87593ffb40345b362d42c677b248c), [`c0889a0f6`](https://github.com/windijs/windijs/commit/c0889a0f680830b8ef00cf1a82020008ee3e2f66), [`49dcd69eb`](https://github.com/windijs/windijs/commit/49dcd69eb90cea29ca777a0e4d4b3bf75c230eca), [`5670e0758`](https://github.com/windijs/windijs/commit/5670e075868299416433051b649f8b16bd0bcacd), [`2cd36b760`](https://github.com/windijs/windijs/commit/2cd36b760f9b6da350feb8e171293555b809a528), [`5b0f5c9fe`](https://github.com/windijs/windijs/commit/5b0f5c9febf9078a6178c31b7ff9153da60d24ed)]:
+  - @windijs/helpers@1.1.8
+  - @windijs/core@1.1.10
+  - @windijs/style@1.1.10
+
 ## 1.1.9
 
 ### Patch Changes

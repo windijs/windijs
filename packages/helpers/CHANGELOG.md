@@ -1,5 +1,21 @@
 # @windijs/helpers
 
+## 1.1.8
+
+### Patch Changes
+
+- [`1f050eb83`](https://github.com/windijs/windijs/commit/1f050eb838c87593ffb40345b362d42c677b248c) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: should use String type
+
+* [`c0889a0f6`](https://github.com/windijs/windijs/commit/c0889a0f680830b8ef00cf1a82020008ee3e2f66) Thanks [@voorjaar](https://github.com/voorjaar)! - refactor: dollar func implement
+
+- [`49dcd69eb`](https://github.com/windijs/windijs/commit/49dcd69eb90cea29ca777a0e4d4b3bf75c230eca) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: allow utilities to be null or undefined
+
+* [`5670e0758`](https://github.com/windijs/windijs/commit/5670e075868299416433051b649f8b16bd0bcacd) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: use new utilities type
+
+- [`2cd36b760`](https://github.com/windijs/windijs/commit/2cd36b760f9b6da350feb8e171293555b809a528) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new build api
+
+* [`5b0f5c9fe`](https://github.com/windijs/windijs/commit/5b0f5c9febf9078a6178c31b7ff9153da60d24ed) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new apply api
+
 ## 1.1.7
 
 ### Patch Changes

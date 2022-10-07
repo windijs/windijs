@@ -1,6 +1,6 @@
 {
   "name": "@windijs/core",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "@windijs/core",
   "main": "dist/windijsCore.js",
   "module": "dist/windijsCore.mjs",
@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@windijs/shared": "1.0.7",
-    "@windijs/helpers": "1.1.7"
+    "@windijs/helpers": "1.1.8"
   },
   "buildOptions": {
     "name": "windijsCore",
