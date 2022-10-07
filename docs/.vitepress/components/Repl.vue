@@ -4,7 +4,7 @@ import { ref, onMounted, onUnmounted, Ref } from "vue";
 import { dtsSetup } from "../../../packages/plugin-utils/src/gen";
 import { processCode } from "$/shared";
 import { style } from "@windijs/style";
-import { examples } from "$/monaco/examples";
+import { examples, ReplExample } from "$/monaco/examples";
 import Split from "split.js";
 import Iframe from "$/iframe";
 
@@ -32,6 +32,8 @@ const isDark = ref(localStorage.getItem("vitepress-theme-appearance") !== "light
 const selectedExample = ref(localStorage.getItem("repl-selected-example") || "default");
 const showConfig = ref(false);
 const showRenderEditor = ref(false);
+const showRenderButtons = ref(true);
+const cssOnly = ref(false);
 const btnStyle = [
   p[1],
   rounded.lg,
@@ -58,10 +60,7 @@ onMounted(() => {
     configEditor = _configEditor;
 
     if (selectedExample.value !== "default") {
-      const example = examples[selectedExample.value] || examples["counter"];
-
-      mainEditor.setValue(example.main);
-      configEditor.setValue(example.config);
+      updateExample(examples[selectedExample.value] || examples["counter"]);
     }
 
     const updateScript = (proxy: TypeScriptWorker) => {
@@ -146,6 +145,21 @@ function decorate(src: string, desc: string) {
   return `/* ${"=".repeat(desc.length)} */\n/* ${desc} */\n/* ${"=".repeat(desc.length)} */\n\n` + src;
 }
 
+function updateExample(example: ReplExample) {
+  mainEditor.setValue(example.main);
+  configEditor.setValue(example.config);
+
+  if (example.cssOnly) {
+    updateRender(1);
+    cssOnly.value = true;
+    showRenderButtons.value = false;
+  } else {
+    updateRender(-1);
+    cssOnly.value = false;
+    showRenderButtons.value = true;
+  }
+}
+
 function updateRender(tab: TabIndex = -1) {
   currentTab = tab;
   if (tab === 0) {
@@ -174,6 +188,8 @@ function updateRender(tab: TabIndex = -1) {
     scriptModel.setValue(script.value);
     if (renderEditor) renderEditor.setModel(scriptModel);
     showRenderEditor.value = true;
+  } else {
+    showRenderEditor.value = false;
   }
 }
 
@@ -218,10 +234,7 @@ function updateConfig(config: Config) {
   }
 
   select.value?.addEventListener("change", function () {
-    const example = examples[this.value];
-
-    mainEditor.setValue(example.main);
-    configEditor.setValue(example.config);
+    updateExample(examples[this.value]);
     localStorage.setItem("repl-selected-example", this.value);
   });
 }
@@ -240,9 +253,10 @@ function updateConfig(config: Config) {
           :rawScript="rawScript"
           :dark="isDark"
           :config="config"
+          :cssOnly="cssOnly"
           @updateConfig="updateConfig"></Iframe>
         <div v-show="showRenderEditor" id="render-editor"></div>
-        <div class="render-btn-group" :class="[space.x[2]]">
+        <div class="render-btn-group" v-show="showRenderButtons" :class="[space.x[2]]">
           <button class="btn-html" :class="btnStyle" @click="hideRenderEditor(0) || updateRender(0)">
             <svg width="24" height="24" viewBox="0 0 24 24">
               <path

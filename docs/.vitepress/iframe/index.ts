@@ -39,6 +39,10 @@ export default defineComponent({
       type: String,
       default: "Preview",
     },
+    cssOnly: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: {
     updateConfig: (config: Config) => true,

@@ -85,7 +85,7 @@
     var { useCallback, useContext, useDebugValue, useEffect, useErrorBoundary, useImperativeHandle, useLayoutEffect, useMemo, useReducer, useRef, useState } = window.preactHooks;
 
     var { defineConfig, animateHandler, backgroundGenericHandler, bind, callHandler, colorHandler, configHandler, createDarkModeVariants, createMotionVariants, createOrientationVariants, createScreenVariants, createUtility, cssHandler, degHandler, divideXReverseHandler, divideYReverseHandler, fontFamilyHandler, fontSizeHandler, fractionHandler, genericHandler, guard, handleConfig, handler, isHandler, joinFilters, joinTransforms, media, meld, msHandler, numberHandler, prefixer, pxHandler, remHandler, setup, setupHandler, setupUtility, setupVariant, spaceBetweenXReverseHandler, spaceBetweenYReverseHandler, spacingHandler, use, useMedia, useVariant, variant } = windijsCore;
-    var { css, useStyleLoader, cssInJsLoader, isStyleObject, SymbolMeta, injectCSS, getStyleProps, buildRules, createRules, applyVariant, createStyleLoader, atomicLoader, useArrayHelper, color, percent, deg, grad, rad, turn, s, ms, fr, $in, dpi, dpcm, dppx, x, px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = window.windijsHelpers;
+    var { $, css, useStyleLoader, cssInJsLoader, isStyleObject, SymbolMeta, injectCSS, getStyleProps, buildRules, createRules, applyVariant, createStyleLoader, atomicLoader, useArrayHelper, color, percent, deg, grad, rad, turn, s, ms, fr, $in, dpi, dpcm, dppx, x, px, pc, pt, cm, mm, Q, ch, ex, em, rem, vw, vh, vmax, vmin } = window.windijsHelpers;
     var { style } = windijsStyle;
 
     const globalPackages = {
@@ -297,18 +297,31 @@
         app.innerHTML = "";
         try {
           // windijs
+          $.init();
+
           const windiStyle = document.getElementById("windijs");
           if (windiStyle) windiStyle.innerText = "";
           BUILDED_CLASSES = [];
           eval(script);
           htmlContent = app.innerHTML;
 
+          // cssOnly
+
+          if ($.exports.length > 0) {
+            injectCSS(windijsHelpers.build($.exports.map(i => i.style)));
+          }
+
           // windicss
-          const wcss = processor.interpret(rawScript);
-          injectWindiCSS(wcss);
-          dismissError();
+          try {
+            const wcss = processor.interpret(rawScript);
+            injectWindiCSS(wcss);
+          } catch(e) {
+            if ($.exports.length === 0) showError(e)
+          }
+          
+          dismissError();          
         } catch(e) {
-          // console.log(e.stack)
+          console.log(e.stack)
           showError(e);
         }
     }, false)
