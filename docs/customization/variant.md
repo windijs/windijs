@@ -307,7 +307,7 @@ Create a variant and apply it to utilities.
 #### Type
 
 ```ts
-function useVariant(rule: string, utilities: (StyleObject | StyleObject[])[]): StyleObject[];
+function useVariant(rule: string, utilities: Utilities[]): StyleObject[];
 ```
 
 #### Example
@@ -326,7 +326,7 @@ Create a media variant and apply it to utilities.
 #### Type
 
 ```ts
-function useMedia(rule: string, utilities: (StyleObject | StyleObject[])[]): StyleObject[];
+function useMedia(rule: string, utilities: Utilities[]): StyleObject[];
 ```
 
 #### Example
@@ -345,7 +345,7 @@ Shorthand for [useVariant](#usevariant).
 #### Type
 
 ```ts
-function variant(rule: string, ...utilities: (StyleObject | StyleObject[])[]): StyleObject[];
+function variant(rule: string, ...utilities: Utilities[]): StyleObject[];
 ```
 
 #### Example
@@ -364,7 +364,7 @@ Shorthand for [useMedia](#usemedia).
 #### Type
 
 ```ts
-function media(rule: string, ...utilities: (StyleObject | StyleObject[])[]): StyleObject[];
+function media(rule: string, ...utilities: Utilities[]): StyleObject[];
 ```
 
 #### Example
