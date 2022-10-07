@@ -42,8 +42,8 @@ export type CSSProps = {
           ? "0fr"
           : value;
       }[keyof CSSDecls[prop]]
-    | string
-    | String[]; // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
+    | String // use camel cased String here is desired behavior, for we want trigger union suggestions and also allow other strings.
+    | string[];
 };
 
 type ExtractAttrName<S extends string> = S extends `${string}[${infer A}]` ? A : S;
@@ -62,21 +62,21 @@ export type CSSAtRule = { rule: string; children: CSSRules };
 export type CSSRules = (CSSRule | CSSAtRule)[];
 export type CSSStyleSheet = { rules: CSSRules };
 
-export type CSSSelector = string | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
+export type CSSSelector = String | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
 
 export type CSSObject = CSSProps &
   Partial<CSSAtRules<CSSObject>> &
   Partial<CSSClasses<CSSObject>> &
   Partial<CSSElements<CSSObject>> &
   Partial<HTMLTags<CSSObject>> &
-  Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | CSSMap | string | string[] | number };
+  Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | CSSMap | String | string[] | number };
 
 export type CSSMap = Map<keyof CSSProps, string> &
   Map<keyof CSSAtRules<CSSObject>, CSSObject | CSSMap> &
   Map<keyof CSSClasses<CSSObject>, CSSObject | CSSMap> &
   Map<keyof CSSElements<CSSObject>, CSSObject | CSSMap> &
   Map<keyof HTMLTags<CSSObject>, CSSObject | CSSMap> &
-  Map<string, CSSObject | CSSMap | string | string[] | number>;
+  Map<string, CSSObject | CSSMap | String | string[] | number>;
 
 export type CSSPrefixer = (css: CSSObject) => CSSObject;
 
