@@ -4,20 +4,20 @@ import { readdirSync, copyFileSync } from "fs";
 import { basename, relative, resolve } from "path";
 import { getTargets } from "./utils";
 
-const targets = getTargets();
+const targets = getTargets().filter(i => i !== "windicss");
 
-const runtimes: string[] = [];
+const types: string[] = [];
 
 for (const target of targets) {
   const p = resolve("packages", target, "dist");
   const r = readdirSync(p)
-    .filter(i => /^windi.*\.runtime\.js/.test(i))
+    .filter(i => /^windi.*\.d\.ts/.test(i))
     .map(i => resolve(p, i));
-  runtimes.push(...r);
+  types.push(...r);
 }
 
-for (const r of runtimes) {
-  const target = resolve("docs/public/scripts", basename(r));
+for (const r of types) {
+  const target = resolve("docs/.vitepress/monaco/types", basename(r));
   copyFileSync(r, target);
   console.log(chalk.cyan(`Copying ${relative(".", r)} to ${relative(".", target)}`));
 }
