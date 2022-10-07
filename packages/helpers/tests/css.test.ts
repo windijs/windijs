@@ -1,5 +1,6 @@
-import type { StyleObject, UtilityMeta } from "../src";
-import { baseStyleHandler, baseStyleTarget, css, useStyleLoader } from "../src/css";
+import { variant } from "@windijs/core";
+import { build, StyleObject, UtilityMeta } from "../src";
+import { apply, baseStyleHandler, baseStyleTarget, css, useStyleLoader } from "../src/css";
 
 test("css", () => {
   const props = {
@@ -69,4 +70,21 @@ test("style loader", () => {
   );
 
   expect(css({}).toString()).toEqual("bg.red.500 text.lg");
+});
+
+test("apply with atrules", () => {
+  expect(
+    build(apply("@keyframes inline", variant("from", css({ backgroundColor: "yellow" })), variant("to", css({ backgroundColor: "red" }))))
+  ).toMatchSnapshot();
+
+  expect(
+    build(apply("@keyframes inline", css({
+      from: {
+        backgroundColor: "yellow"
+      },
+      to: {
+        backgroundColor: "red"
+      }
+    })))
+  ).toMatchSnapshot();
 });

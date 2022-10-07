@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apply with atrules 1`] = `
+"@keyframes inline {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: red;
+  }
+}"
+`;
+
+exports[`apply with atrules 2`] = `
+"@keyframes inline {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: red;
+  }
+}"
+`;
