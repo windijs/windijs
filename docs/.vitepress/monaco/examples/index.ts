@@ -10,8 +10,12 @@ import reposConfig from "./repos/config.ts?raw";
 import reposMain from "./repos/main.md?raw";
 import windicssConfig from "./windicss/config.ts?raw";
 import windicssMain from "./windicss/main.md?raw";
+import preprocessorConfig from "./preprocessor/config.ts?raw";
+import preprocessorMain from "./preprocessor/main.md?raw";
 
-type Examples = Record<string, { id: string; label: string; main: string; config: string }>;
+export type ReplExample = { id: string; label: string; main: string; config: string; cssOnly?: boolean };
+
+type Examples = Record<string, ReplExample>;
 
 const load = (md: string) => md.replace(/```jsx\s*/, "").replace("```", "");
 
@@ -47,6 +51,13 @@ export const examples: Examples = {
     label: "Gradients Reference",
     main: load(gradientsMain),
     config: gradientsConfig,
+  },
+  preprocessor: {
+    id: "preprocessor",
+    label: "Preprocessor",
+    main: load(preprocessorMain),
+    config: preprocessorConfig,
+    cssOnly: true,
   },
   windicss: {
     id: "windicss",
