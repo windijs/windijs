@@ -1,10 +1,10 @@
-import { Handler, BuildFunc, CSSDimensionType, CSSMap, CSSObject, ColorStyleProxy, MetaType, NestedProxy, StyleObject, StyleProperties, StyleProxyHandler, UtilityMeta, VariantBuilder, CSSPrefixer, CSSAngle, CSSLinearColorStopOrHint, CSSSideOrCorner, ColorStyleObject } from "@windijs/helpers";
+import { Handler, BuildFunc, CSSDimensionType, CSSMap, CSSObject, ColorStyleProxy, MetaType, NestedProxy, StyleObject, StyleProperties, StyleProxyHandler, UtilityMeta, VariantBuilder, Utilities, CSSPrefixer, ColorStyleObject, CSSAngle, CSSLinearColorStopOrHint, CSSSideOrCorner } from "@windijs/helpers";
 export declare class Utility<T extends object = {}> implements ProxyHandler<T> {
     uid: string;
-    plugins: ((p: string) => any)[];
+    plugins: ((p: string) => unknown)[];
     constructor(uid: string);
     get(target: T, prop: string | symbol): any;
-    set(target: T, prop: string | symbol, value: any): boolean;
+    set(target: T, prop: string | symbol, value: unknown): boolean;
     case<K extends string, U>(trigger: K, plugin: Handler<U>): Utility<T & {
         [P in K]: U;
     }>;
@@ -19,18 +19,20 @@ export declare class Utility<T extends object = {}> implements ProxyHandler<T> {
  * @returns Utility
  */
 export declare function createUtility(uid: string): Utility<{}>;
-export declare function handleConfig<T extends object>(build: BuildFunc, statics: T, type: MetaType, p: string): StyleObject | UtilityMeta | undefined;
-export declare function handler<R>(type: Handler<R>["type"] | String, get: (prop: string) => R, meta?: object): Handler<R>;
+export declare function handleConfig<T extends object & {
+    DEFAULT?: unknown;
+}>(build: BuildFunc, statics: T, type: MetaType, p: string | symbol): StyleObject | CSSObject | CSSMap | UtilityMeta | (() => string) | undefined;
+export declare function handler<R>(type: Handler<R>["type"] | string, get: (prop: string) => R, meta?: object): Handler<R>;
 export declare function isHandler<R>(i: unknown): i is Handler<R>;
 export declare function cssHandler(cssOrStyle: StyleObject | CSSObject | CSSMap): Handler<StyleObject<{}>>;
-export declare function callHandler<F extends Function, R extends object = {}>(call: F, plugin?: Handler<R>): Handler<F & R>;
+export declare function callHandler<F extends Function, R extends object = Record<string, unknown>>(call: F, plugin?: Handler<R>): Handler<F & R>;
 export declare function colorHandler<T extends object>(colors: T, colorProperty: StyleProperties | StyleProperties[]): StyleProxyHandler<T>;
-export declare function colorHandler<T extends object, O extends object = {}>(colors: T, build: (value: unknown) => StyleObject<O> | undefined): Handler<NestedProxy<T, StyleObject<O>>>;
+export declare function colorHandler<T extends object, O extends object = Record<string, unknown>>(colors: T, build: (value: unknown) => StyleObject<O> | undefined): Handler<NestedProxy<T, StyleObject<O>>>;
 export declare function colorHandler<T extends object>(colors: T, colorProperty: StyleProperties | StyleProperties[], colorOpacityProperty: string): Handler<ColorStyleProxy<T>>;
 export declare function configHandler<T extends object>(statics: T, property: StyleProperties | StyleProperties[]): StyleProxyHandler<T>;
-export declare function configHandler<T extends object, O extends object = {}>(statics: T, build: (value: unknown) => StyleObject<O> | undefined): Handler<NestedProxy<T, StyleObject<O>>>;
-declare type handleDynamic = ((prop: string) => CSSObject | StyleObject | undefined);
-declare type handleDynamicWithValue = ((prop: string) => string | undefined);
+export declare function configHandler<T extends object, O extends object = Record<string, unknown>>(statics: T, build: (value: unknown) => StyleObject<O> | undefined): Handler<NestedProxy<T, StyleObject<O>>>;
+declare type handleDynamic = (prop: string) => CSSObject | StyleObject | undefined;
+declare type handleDynamicWithValue = (prop: string) => string | undefined;
 export declare function genericHandler<R = {
     [key: string]: StyleObject;
 }>(property: StyleProperties | StyleProperties[], handler: handleDynamicWithValue): Handler<R>;
@@ -68,8 +70,8 @@ export declare function fractionHandler<T extends object = {
  * @returns
  */
 export declare function use<U>(uid: string, plugin: Handler<U>): U;
-export declare function useVariant(rule: string, utilities: (StyleObject | StyleObject[])[]): StyleObject[];
-export declare const useMedia: (rule: string, utilities: (StyleObject | StyleObject[])[]) => StyleObject<{}>[];
+export declare function useVariant(rule: string, utilities: Utilities[]): StyleObject[];
+export declare const useMedia: (rule: string, utilities: Utilities[]) => StyleObject<{}>[];
 export declare const createVariant: (rule: string) => VariantBuilder;
 export declare const createMedia: (rule: string) => VariantBuilder;
 export declare function createScreenVariants<T extends object>(screens: T, mobile?: boolean): Record<keyof T, VariantBuilder>;
@@ -79,12 +81,36 @@ export declare function createDarkModeVariants(media?: boolean): {
 };
 export declare function createOrientationVariants<T extends object>(orientations: T): Record<keyof T, VariantBuilder>;
 export declare function createMotionVariants<T extends object>(motions: T): Record<keyof T, VariantBuilder>;
-export declare const variant: (rule: string, ...utilities: (StyleObject | StyleObject[])[]) => StyleObject<{}>[];
-export declare const media: (rule: string, ...utilities: (StyleObject | StyleObject[])[]) => StyleObject<{}>[];
+export declare const variant: (rule: string, ...utilities: Utilities[]) => StyleObject<{}>[];
+export declare const media: (rule: string, ...utilities: Utilities[]) => StyleObject<{}>[];
 export declare function bind<T extends Record<string, string>>(cfg: T, f: (v: string) => StyleObject | undefined): T;
 export declare function guard<K extends string, R>(key: K, handler: Handler<R>): Handler<{
     [P in K]: R;
 }>;
+declare type HandleValue<V> = V extends Handler<unknown> ? ReturnType<V["get"]> : V extends StyleObject ? V : V extends object ? SetUp<V> : V;
+declare type ExposeDefault<T> = T extends {
+    DEFAULT: Handler<unknown>;
+} ? ReturnType<T["DEFAULT"]["get"]> : T extends {
+    DEFAULT: StyleObject;
+} ? T["DEFAULT"] : T;
+declare type HandleDefault<T extends {
+    DEFAULT?: unknown;
+} & object> = ExposeDefault<Pick<{
+    [k in Extract<keyof T, "DEFAULT">]: k extends "DEFAULT" ? T[k] : never;
+}, Extract<keyof T, "DEFAULT">>>;
+export declare type SetUp<T extends object> = {
+    [k in Exclude<keyof T, "DEFAULT">]: HandleValue<T[k]>;
+} & HandleDefault<T>;
+export declare function setup<T extends object & {
+    DEFAULT?: unknown;
+}>(t: T, root?: boolean): SetUp<T>;
+export declare function setupHandler<T extends object>(config: T): Handler<SetUp<T>>;
+export declare function setupUtility<T extends StyleObject>(uid: string, css: T): T;
+export declare function setupUtility<U>(uid: string, handler: Handler<U>): U;
+export declare function setupUtility<T extends object>(uid: string, config: T): SetUp<T>;
+export declare function setupVariant<T extends object>(config: T): {
+    [key in keyof T]: VariantBuilder;
+};
 export declare function meld<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z>(a: Handler<A>, b: Handler<B>, c: Handler<C>, d: Handler<D>, e: Handler<E>, f: Handler<F>, g: Handler<G>, h: Handler<H>, i: Handler<I>, j: Handler<J>, k: Handler<K>, l: Handler<L>, m: Handler<M>, n: Handler<N>, o: Handler<O>, p: Handler<P>, q: Handler<Q>, r: Handler<R>, s: Handler<S>, t: Handler<T>, u: Handler<U>, v: Handler<V>, w: Handler<W>, x: Handler<X>, y: Handler<Y>, z: Handler<Z>): Handler<A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z>;
 export declare function meld<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y>(a: Handler<A>, b: Handler<B>, c: Handler<C>, d: Handler<D>, e: Handler<E>, f: Handler<F>, g: Handler<G>, h: Handler<H>, i: Handler<I>, j: Handler<J>, k: Handler<K>, l: Handler<L>, m: Handler<M>, n: Handler<N>, o: Handler<O>, p: Handler<P>, q: Handler<Q>, r: Handler<R>, s: Handler<S>, t: Handler<T>, u: Handler<U>, v: Handler<V>, w: Handler<W>, x: Handler<X>, y: Handler<Y>): Handler<A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y>;
 export declare function meld<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X>(a: Handler<A>, b: Handler<B>, c: Handler<C>, d: Handler<D>, e: Handler<E>, f: Handler<F>, g: Handler<G>, h: Handler<H>, i: Handler<I>, j: Handler<J>, k: Handler<K>, l: Handler<L>, m: Handler<M>, n: Handler<N>, o: Handler<O>, p: Handler<P>, q: Handler<Q>, r: Handler<R>, s: Handler<S>, t: Handler<T>, u: Handler<U>, v: Handler<V>, w: Handler<W>, x: Handler<X>): Handler<A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X>;
@@ -112,28 +138,6 @@ export declare function meld<A, B, C>(a: Handler<A>, b: Handler<B>, c: Handler<C
 export declare function meld<A, B>(a: Handler<A>, b: Handler<B>): Handler<A & B>;
 export declare function meld<A>(a: Handler<A>): Handler<A>;
 export declare function meld(...handlers: Handler<unknown>[]): Handler<unknown>;
-declare type HandleValue<V> = V extends Handler<unknown> ? ReturnType<V["get"]> : V extends StyleObject ? V : V extends object ? SetUp<V> : V;
-declare type ExposeDefault<T> = T extends {
-    DEFAULT: Handler<unknown>;
-} ? ReturnType<T["DEFAULT"]["get"]> : T extends {
-    DEFAULT: StyleObject;
-} ? T["DEFAULT"] : T;
-declare type HandleDefault<T extends {
-    DEFAULT?: unknown;
-} & object> = ExposeDefault<Pick<{
-    [k in Extract<keyof T, "DEFAULT">]: k extends "DEFAULT" ? T[k] : never;
-}, Extract<keyof T, "DEFAULT">>>;
-export declare type SetUp<T extends object> = {
-    [k in Exclude<keyof T, "DEFAULT">]: HandleValue<T[k]>;
-} & HandleDefault<T>;
-export declare function setup<T extends object>(t: T, root?: boolean): SetUp<T>;
-export declare function setupHandler<T extends object>(config: T): Handler<SetUp<T>>;
-export declare function setupUtility<T extends StyleObject>(uid: string, css: T): T;
-export declare function setupUtility<U>(uid: string, handler: Handler<U>): U;
-export declare function setupUtility<T extends object>(uid: string, config: T): SetUp<T>;
-export declare function setupVariant<T extends object>(config: T): {
-    [key in keyof T]: VariantBuilder;
-};
 export declare const animateHandler: <T extends string>(name: T, value: string | CSSObject, keyframes?: Record<string, CSSObject>) => Handler<{ [P in T]: StyleObject<{}>; }>;
 export declare function backgroundGenericHandler(): Handler<{
     [key: string]: StyleObject<{}>;
@@ -162,36 +166,52 @@ export declare function buildColor(colorProperty: StyleProperties | StylePropert
 export declare function buildContainer<T extends Record<string, string | [
     string,
     CSSObject
-]>>(screens: T, center?: boolean): StyleObject<{}>;
-export declare function buildNotHidden(property: StyleProperties | StyleProperties[]): (v: unknown) => StyleObject<{}>;
+]>>(screens: T, center?: boolean): StyleObject<Record<string, unknown>>;
+export declare function buildNotHidden(property: StyleProperties | StyleProperties[]): (v: unknown) => StyleObject<Record<string, unknown>>;
 export declare function buildFontSize(fontSize: string, lineHeight?: string, others?: {
     [key in StyleProperties]: string;
 }): StyleObject;
-export declare function buildFlexDirection(v: unknown): StyleObject<{}>;
-export declare function buildFlexStretch(v: unknown): StyleObject<{}>;
+export declare function buildFlexDirection(v: unknown): StyleObject<Record<string, unknown>>;
+export declare function buildFlexStretch(v: unknown): StyleObject<Record<string, unknown>>;
 export declare function buildReverse(v: unknown, first: StyleProperties, second: StyleProperties, rev: string): CSSObject;
-export declare function buildDivideY(v: unknown): StyleObject<{}>;
-export declare function buildDivideX(v: unknown): StyleObject<{}>;
-export declare function buildSpaceBetweenY(v: unknown): StyleObject<{}>;
-export declare function buildSpaceBetweenX(v: unknown): StyleObject<{}>;
+export declare function buildDivideY(v: unknown): StyleObject<Record<string, unknown>>;
+export declare function buildDivideX(v: unknown): StyleObject<Record<string, unknown>>;
+export declare function buildSpaceBetweenY(v: unknown): StyleObject<Record<string, unknown>>;
+export declare function buildSpaceBetweenX(v: unknown): StyleObject<Record<string, unknown>>;
 export declare const joinFilters: (filters: (string | StyleObject)[]) => string;
-export declare const buildFilter: (...filters: (string | StyleObject)[]) => StyleObject<{}>;
-export declare const buildBackdropFilter: (...filters: (string | StyleObject)[]) => StyleObject<{}>;
+export declare const buildFilter: (...filters: (string | StyleObject)[]) => StyleObject<Record<string, unknown>>;
+export declare const buildBackdropFilter: (...filters: (string | StyleObject)[]) => StyleObject<Record<string, unknown>>;
 export declare const joinTransforms: (transformations: (string | StyleObject)[]) => string;
-export declare const buildTransform: (...transformations: (string | StyleObject)[]) => StyleObject<{}>;
+export declare const buildTransform: (...transformations: (string | StyleObject)[]) => StyleObject<Record<string, unknown>>;
 export declare function buildTransition(property: string, ...styles: StyleObject[]): StyleObject;
 export declare function buildKeyframes(name: string, keyframes: Record<string, CSSObject>): CSSObject;
-export declare function buildGradientDirection(v: unknown, colorStops?: CSSLinearColorStopOrHint[]): StyleObject<{}>;
+export declare function buildGradientDirection(v: unknown, colorStops?: CSSLinearColorStopOrHint[]): StyleObject<Record<string, unknown>>;
 export declare function buildLinearGradient(direction: CSSSideOrCorner | CSSAngle | string, ...colorStops: CSSLinearColorStopOrHint[]): StyleObject<{}>;
-export declare function buildGradientFrom(v: unknown): ColorStyleObject;
+export declare function buildGradientFrom(v: unknown): import("@windijs/helpers").StyleObjectBase & {
+    readonly css: CSSObject | CSSMap;
+    readonly meta: UtilityMeta;
+} & {
+    opacity: (op: number) => StyleObject<{
+        readonly gradient: StyleObject<{}>;
+    }>;
+    readonly gradient: StyleObject<{}>;
+};
 export declare function buildGradientVia(v: unknown): ColorStyleObject;
 export declare function buildGradientTo(v: unknown): ColorStyleObject;
 export declare function buildDivideColor(v: unknown): ColorStyleObject;
-export declare function buildDivideOpacity(v: unknown): StyleObject<{}>;
-export declare function buildDivideStyle(v: unknown): StyleObject<{}>;
-export declare function buildRingWidth(v: unknown): StyleObject<{}>;
-export declare function buildBoxShadowSize(v: unknown): StyleObject<{}>;
-export declare function buildBoxShadowColor(v: unknown): ColorStyleObject;
-export declare function buildImageRendering(v: unknown): StyleObject<{}>;
+export declare function buildDivideOpacity(v: unknown): StyleObject<Record<string, unknown>>;
+export declare function buildDivideStyle(v: unknown): StyleObject<Record<string, unknown>>;
+export declare function buildRingWidth(v: unknown): StyleObject<Record<string, unknown>>;
+export declare function buildBoxShadowSize(v: unknown): StyleObject<Record<string, unknown>>;
+export declare function buildBoxShadowColor(v: unknown): import("@windijs/helpers").StyleObjectBase & {
+    readonly css: CSSObject | CSSMap;
+    readonly meta: UtilityMeta;
+} & {
+    opacity: (op: number) => StyleObject<{
+        readonly gradient: StyleObject<{}>;
+    }>;
+    readonly gradient: StyleObject<{}>;
+};
+export declare function buildImageRendering(v: unknown): StyleObject<Record<string, unknown>>;
 export declare function buildPlaceholder(v: unknown): ColorStyleObject;
-export declare function buildWritingMode(v: unknown): StyleObject<{}>;
+export declare function buildWritingMode(v: unknown): StyleObject<Record<string, unknown>>;

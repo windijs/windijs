@@ -3295,7 +3295,7 @@ export declare const backOutRightKeyframes: {
         transform: string;
     };
 };
-export declare type ThemeType = Record<string, any> | undefined;
+export declare type ThemeType = Record<string, unknown> | undefined;
 export interface BaseTheme {
     /** The accent-color utilities like accent-green-700 */
     /** The sr-only and not-sr-only utilities */

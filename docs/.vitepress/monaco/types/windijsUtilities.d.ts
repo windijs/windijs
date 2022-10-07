@@ -302,7 +302,7 @@ export declare const backdrop: {
         readonly css: CSSObject | CSSMap;
         readonly meta: UtilityMeta;
     }, "$windi.config.sepiaConfig.proxy">;
-} & ((...filters: (string | StyleObject<{}>)[]) => StyleObject<{}>) & StyleObjectBase;
+} & ((...filters: (string | StyleObject<{}>)[]) => StyleObject<Record<string, unknown>>) & StyleObjectBase;
 export declare const bg: {
     clip: Inject<{
         text: StyleObject<{}>;
@@ -1516,7 +1516,7 @@ export declare const colors: Inject<{
     black: string;
     white: string;
 }, "$windi.config.colorsConfig">;
-export declare const container: StyleObject<{}>;
+export declare const container: StyleObject<Record<string, unknown>>;
 export declare const contrast: ((amount: number | (CSSDimensionObject & {
     type: "percent";
 })) => string) & Inject<{
@@ -2272,7 +2272,7 @@ export declare const fill: {
 export declare const filter: {
     readonly css: CSSObject | CSSMap;
     readonly meta: UtilityMeta;
-} & ((...filters: (string | StyleObject<{}>)[]) => StyleObject<{}>) & StyleObjectBase;
+} & ((...filters: (string | StyleObject<{}>)[]) => StyleObject<Record<string, unknown>>) & StyleObjectBase;
 export declare const flex: {
     readonly css: CSSObject | CSSMap;
     readonly meta: UtilityMeta;
@@ -7325,7 +7325,7 @@ export declare const tracking: Inject<{
 export declare const transform: {
     readonly css: CSSObject | CSSMap;
     readonly meta: UtilityMeta;
-} & ((...transformations: (string | StyleObject<{}>)[]) => StyleObject<{}>) & StyleObjectBase;
+} & ((...transformations: (string | StyleObject<{}>)[]) => StyleObject<Record<string, unknown>>) & StyleObjectBase;
 export declare const transition: typeof buildTransition & Inject<{
     DEFAULT: StyleObject<{}>;
     all: StyleObject<{}>;
@@ -8251,5 +8251,3 @@ export declare const write: Inject<{
     upright: StyleObject<{}>;
     sideways: StyleObject<{}>;
 }, "$windi.config.writingOrientationConfig.proxy">;
-
-export {};

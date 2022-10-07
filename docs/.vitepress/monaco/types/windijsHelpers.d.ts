@@ -11,7 +11,7 @@ export declare type GeneralCSSData = CSSDecls & {
 export declare type CSSProps = {
     [prop in keyof CSSDecls]?: {
         [value in keyof CSSDecls[prop]]?: CSSDecls[prop][value] extends Function ? value extends string ? `${value}()` : value : value extends CSSLengthType | CSSAngleType | CSSTimeType | CSSResolutionType | CSSFrequencyType ? `0${value}` : value extends "percent" ? "0%" : value extends "fr" ? "0fr" : value;
-    }[keyof CSSDecls[prop]] | String | string[];
+    }[keyof CSSDecls[prop]] | string | String[];
 };
 declare type ExtractAttrName<S extends string> = S extends `${string}[${infer A}]` ? A : S;
 export declare type GeneralHTMLAttrs<T> = {
@@ -39,11 +39,11 @@ export declare type CSSRules = (CSSRule | CSSAtRule)[];
 export declare type CSSStyleSheet = {
     rules: CSSRules;
 };
-export declare type CSSSelector = String | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
+export declare type CSSSelector = string | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
 export declare type CSSObject = CSSProps & Partial<CSSAtRules<CSSObject>> & Partial<CSSClasses<CSSObject>> & Partial<CSSElements<CSSObject>> & Partial<HTMLTags<CSSObject>> & Partial<HTMLAttrs<CSSObject>> & {
-    [key: string]: CSSObject | String | string[] | number;
+    [key: string]: CSSObject | CSSMap | string | string[] | number;
 };
-export declare type CSSMap = Map<keyof CSSProps, string> & Map<keyof CSSAtRules<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSClasses<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSElements<CSSObject>, CSSObject | CSSMap> & Map<keyof HTMLTags<CSSObject>, CSSObject | CSSMap> & Map<string, CSSObject | CSSMap | String | string[] | number>;
+export declare type CSSMap = Map<keyof CSSProps, string> & Map<keyof CSSAtRules<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSClasses<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSElements<CSSObject>, CSSObject | CSSMap> & Map<keyof HTMLTags<CSSObject>, CSSObject | CSSMap> & Map<string, CSSObject | CSSMap | string | string[] | number>;
 export declare type CSSPrefixer = (css: CSSObject) => CSSObject;
 export declare type NumberDict = {
     [key: number]: string;
@@ -55,7 +55,7 @@ export declare type UtilityMeta = {
     props: string[];
     variants: string[];
 } & {
-    [key: string]: any;
+    [key: string]: unknown;
 };
 export interface StyleObjectBase {
 }
@@ -65,12 +65,12 @@ export declare type StyleObject<T = {}> = StyleObjectBase & {
 } & T;
 export declare type SafeEntry<T extends {
     DEFAULT?: unknown;
-}> = T["DEFAULT"] extends undefined | null | never ? Omit<T, "DEFAULT"> : (Omit<T, "DEFAULT"> & T["DEFAULT"]);
+}> = T["DEFAULT"] extends undefined | null | never ? Omit<T, "DEFAULT"> : Omit<T, "DEFAULT"> & T["DEFAULT"];
 export declare type StyleEntry<T> = SafeEntry<{
     [key in keyof T]: StyleObject;
 }>;
 export interface BaseHandler<R> {
-    type: string | String;
+    type: string | string;
     meta?: object;
     get: (prop: string) => R;
 }
@@ -137,9 +137,10 @@ export declare type UnknownDict = {
 export declare type TargetCreator = (css: CSSObject | CSSMap, meta: UtilityMeta, data?: UnknownDict) => StyleObjectBase;
 export declare type StyleLoader = (css: CSSObject | CSSMap, meta: UtilityMeta, data?: UnknownDict) => StyleObject;
 export declare type StyleNamer = (style: StyleObject) => string;
-export declare type VariantBuilder = (...utilities: (StyleObject | StyleObject[])[]) => StyleObject[];
+export declare type Utilities = StyleObject | null | undefined | Utilities[];
+export declare type VariantBuilder = (...utilities: Utilities[]) => StyleObject[];
 export declare type NestedProxy<T, O> = SafeEntry<{
-    [key in keyof T]: (T[key] extends object ? T[key] extends Array<unknown> ? O : NestedProxy<T[key], O> : O);
+    [key in keyof T]: T[key] extends object ? (T[key] extends Array<unknown> ? O : NestedProxy<T[key], O>) : O;
 }>;
 export declare type StyleProxy<T, O = {}> = NestedProxy<T, StyleObject<O>>;
 export declare type StyleProxyHandler<T> = Handler<StyleProxy<T>>;
@@ -205,7 +206,7 @@ export declare type CSSColorHint = CSSLengthPercentage;
 export declare type CSSLinearColorStopOrHint = string | CSSColorHint | [
     string,
     CSSLengthPercentage,
-    (CSSLengthPercentage)?
+    CSSLengthPercentage?
 ];
 export declare type CSSAngularColorStopOrHint = string | CSSAngle | [
     string,
@@ -242,6 +243,7 @@ export declare type CSSAlphaValue = CSSPercentage | 0 | 0.005 | 0.01 | 0.015 | 0
 export declare type StyleProperties = keyof Omit<CSSStyleDeclaration, "getPropertyPriority" | "getPropertyValue" | "item" | "removeProperty" | "setProperty" | "length">;
 export declare type CSSColors = "currentColor" | "aqua" | "black" | "blue" | "fuchsia" | "gray" | "green" | "lime" | "maroon" | "navy" | "olive" | "orange" | "purple" | "red" | "silver" | "teal" | "white" | "yellow" | "aliceblue" | "antiquewhite" | "aquamarine" | "azure" | "beige" | "bisque" | "blanchedalmond" | "blueviolet" | "brown" | "burlywood" | "cadetblue" | "chartreuse" | "chocolate" | "coral" | "cornflowerblue" | "cornsilk" | "crimson" | "cyan" | "darkblue" | "darkcyan" | "darkgoldenrod" | "darkgray" | "darkgreen" | "darkgrey" | "darkkhaki" | "darkmagenta" | "darkolivegreen" | "darkorange" | "darkorchid" | "darkred" | "darksalmon" | "darkseagreen" | "darkslateblue" | "darkslategray" | "darkslategrey" | "darkturquoise" | "darkviolet" | "deeppink" | "deepskyblue" | "dimgray" | "dimgrey" | "dodgerblue" | "firebrick" | "floralwhite" | "forestgreen" | "gainsboro" | "ghostwhite" | "gold" | "goldenrod" | "greenyellow" | "grey" | "honeydew" | "hotpink" | "indianred" | "indigo" | "ivory" | "khaki" | "lavender" | "lavenderblush" | "lawngreen" | "lemonchiffon" | "lightblue" | "lightcoral" | "lightcyan" | "lightgoldenrodyellow" | "lightgray" | "lightgreen" | "lightgrey" | "lightpink" | "lightsalmon" | "lightseagreen" | "lightskyblue" | "lightslategray" | "lightslategrey" | "lightsteelblue" | "lightyellow" | "limegreen" | "linen" | "magenta" | "mediumaquamarine" | "mediumblue" | "mediumorchid" | "mediumpurple" | "mediumseagreen" | "mediumslateblue" | "mediumspringgreen" | "mediumturquoise" | "mediumvioletred" | "midnightblue" | "mintcream" | "mistyrose" | "moccasin" | "navajowhite" | "oldlace" | "olivedrab" | "orangered" | "orchid" | "palegoldenrod" | "palegreen" | "paleturquoise" | "palevioletred" | "papayawhip" | "peachpuff" | "peru" | "pink" | "plum" | "powderblue" | "rebeccapurple" | "rosybrown" | "royalblue" | "saddlebrown" | "salmon" | "sandybrown" | "seagreen" | "seashell" | "sienna" | "skyblue" | "slateblue" | "slategray" | "slategrey" | "snow" | "springgreen" | "steelblue" | "tan" | "thistle" | "tomato" | "transparent" | "turquoise" | "violet" | "wheat" | "whitesmoke" | "yellowgreen";
 export declare type CSSFillRule = "nonzero" | "evenodd";
+export declare type CSSDataTypes = "string" | "url" | "integer" | "number" | "dimension" | "percentage" | "ratio" | "flex" | "length" | "angle" | "time" | "frequency" | "resolution" | "length-percentage" | "frequency-percentage" | "angle-percentage" | "time-percentage" | "color" | "alpha-value" | "image" | "position";
 export declare type CSSAttributeType = "string" | "color" | "url" | "integer" | "number" | "length" | "em" | "ex" | "px" | "rem" | "vw" | "vh" | "vmin" | "vmax" | "mm" | "cm" | "in" | "pt" | "pc" | "angle" | "deg" | "grad" | "rad" | "time" | "s" | "ms" | "frequency" | "Hz" | "kHz";
 export declare type ColorProperties = "accentColor" | "backgroundColor" | "webkitBackgroundColor" | "webkitBorderAfterColor" | "webkitBorderBeforeColor" | "borderBlockColor" | "borderBlockEndColor" | "borderBlockStartColor" | "borderBottomColor" | "borderColor" | "webkitBorderEndColor" | "borderInlineColor" | "borderInlineEndColor" | "borderInlineStartColor" | "borderLeftColor" | "borderRightColor" | "webkitBorderStartColor" | "borderTopColor" | "caretColor" | "color" | "columnRuleColor" | "webkitColumnRuleColor" | "webkitCompositionFillColor" | "webkitCompositionFrameColor" | "fillColor" | "floodColor" | "lightingColor" | "webkitMatchNearestMailBlockquoteColor" | "outlineColor" | "scrollbarArrowColor" | "scrollbarBaseColor" | "scrollbarColor" | "scrollbarDarkShadowColor" | "scrollbarDarkshadowColor" | "scrollbarFaceColor" | "scrollbarHighlightColor" | "scrollbarShadowColor" | "scrollbarTrackColor" | "scrollbar3dLightColor" | "scrollbar3dlightColor" | "solidColor" | "stopColor" | "strokeColor" | "webkitTapHighlightColor" | "textDecorationColor" | "webkitTextDecorationColor" | "textEmphasisColor" | "webkitTextEmphasisColor" | "webkitTextFillColor" | "textLineThroughColor" | "textOverlineColor" | "webkitTextStrokeColor" | "textUnderlineColor";
 declare type EnvInsetValue = "safe-area-inset-top" | "safe-area-inset-right" | "safe-area-inset-bottom" | "safe-area-inset-left titlebar-area-x" | "titlebar-area-y" | "titlebar-area-width" | "titlebar-area-height";
@@ -617,7 +619,7 @@ export interface TransitionTimingFunctions {
     /** Specifies a cubic-bezier curve. The four values specify points P1 and P2  of the curve as (x1, y1, x2, y2). */
     cubicBezier(x1: number, y1: number, x2: number, y2: number): StyleObject;
     /** Equivalent to cubic-bezier(0.25, 0.1, 0.25, 1.0). */
-    "ease": StyleObject;
+    ease: StyleObject;
     /** Equivalent to cubic-bezier(0.42, 0, 1.0, 1.0). */
     "ease-in": StyleObject;
     /** Equivalent to cubic-bezier(0.42, 0, 0.58, 1.0). */
@@ -625,7 +627,7 @@ export interface TransitionTimingFunctions {
     /** Equivalent to cubic-bezier(0, 0, 0.58, 1.0). */
     "ease-out": StyleObject;
     /** Equivalent to cubic-bezier(0.0, 0.0, 1.0, 1.0). */
-    "linear": StyleObject;
+    linear: StyleObject;
     /** Equivalent to steps(1, end). */
     "step-end": StyleObject;
     /** Equivalent to steps(1, start). */
@@ -771,51 +773,51 @@ export interface ImageFunctions {
 }
 export interface PositionEntry {
     /** Computes to ‘100%’ for the vertical position if one or two values are given, otherwise specifies the bottom edge as the origin for the next offset. */
-    "bottom": StyleObject;
+    bottom: StyleObject;
     /** Computes to ‘50%’ (‘left 50%’) for the horizontal position if the horizontal position is not otherwise specified, or ‘50%’ (‘top 50%’) for the vertical position if it is. */
-    "center": StyleObject;
+    center: StyleObject;
     /** Computes to ‘0%’ for the horizontal position if one or two values are given, otherwise specifies the left edge as the origin for the next offset. */
-    "left": StyleObject;
+    left: StyleObject;
     /** Computes to ‘100%’ for the horizontal position if one or two values are given, otherwise specifies the right edge as the origin for the next offset. */
-    "right": StyleObject;
+    right: StyleObject;
     /** Computes to ‘0%’ for the vertical position if one or two values are given, otherwise specifies the top edge as the origin for the next offset. */
-    "top": StyleObject;
+    top: StyleObject;
 }
 export interface RepeatStyleEntry {
     /** Placed once and not repeated in this direction. */
     "no-repeat": StyleObject;
     /** Repeated in this direction as often as needed to cover the background painting area. */
-    "repeat": StyleObject;
+    repeat: StyleObject;
     /** Computes to ‘repeat no-repeat’. */
     "repeat-x": StyleObject;
     /** Computes to ‘no-repeat repeat’. */
     "repeat-y": StyleObject;
     /** Repeated as often as will fit within the background positioning area. If it doesn’t fit a whole number of times, it is rescaled so that it does. */
-    "round": StyleObject;
+    round: StyleObject;
     /** Repeated as often as will fit within the background positioning area without being clipped and then the images are spaced out to fill the area. */
-    "space": StyleObject;
+    space: StyleObject;
 }
 export interface LineStyleEntry {
     /** A series of square-ended dashes. */
-    "dashed": StyleObject;
+    dashed: StyleObject;
     /** A series of round dots. */
-    "dotted": StyleObject;
+    dotted: StyleObject;
     /** Two parallel solid lines with some space between them. */
-    "double": StyleObject;
+    double: StyleObject;
     /** Looks as if it were carved in the canvas. */
-    "groove": StyleObject;
+    groove: StyleObject;
     /** Same as ‘none’, but has different behavior in the border conflict resolution rules for border-collapsed tables. */
-    "hidden": StyleObject;
+    hidden: StyleObject;
     /** Looks as if the content on the inside of the border is sunken into the canvas. */
-    "inset": StyleObject;
+    inset: StyleObject;
     /** No border. Color and width are ignored. */
-    "none": StyleObject;
+    none: StyleObject;
     /** Looks as if the content on the inside of the border is coming out of the canvas. */
-    "outset": StyleObject;
+    outset: StyleObject;
     /** Looks as if it were coming out of the canvas. */
-    "ridge": StyleObject;
+    ridge: StyleObject;
     /** A single line segment. */
-    "solid": StyleObject;
+    solid: StyleObject;
 }
 export declare type LineWidthEntry = {
     [key in "medium" | "thick" | "thin"]: StyleObject;
@@ -1146,11 +1148,14 @@ export declare function buildRule({ selector, children }: CSSRule, indent?: numb
 export declare function buildAtRule({ rule, children }: CSSAtRule, indent?: number): string;
 export declare function buildRules(rules: CSSRules): string;
 export declare function dedupRules(rules: CSSRules): CSSRules;
-export declare function atomic(...utilities: (StyleObject | StyleObject[])[]): string;
-export declare function unify(selector: string, ...utilities: (StyleObject | StyleObject[])[]): string;
+/** build a single StyleObject to css */
+export declare function buildStyle(className: string, style: StyleObject): string;
+export declare function atomic(...utilities: Utilities[]): string;
+export declare function unify(selector: string, ...utilities: Utilities[]): string;
 export declare function unify(...utilities: {
-    [key: string]: StyleObject | (StyleObject | StyleObject[])[];
+    [key: string]: StyleObject | Utilities[];
 }[]): string;
+export declare function build(...utilities: Utilities[]): string;
 export declare type DarkModeConfig = "class" | "media" | false;
 export declare type UtilitiesConfig = {
     [key: string]: Handler<unknown> | Array<Handler<unknown>> | StyleObject | UtilitiesConfig;
@@ -1166,7 +1171,7 @@ export interface Config<T extends object = Theme> {
     utilities?: UtilitiesConfig;
     variants?: VariantsConfig;
     styleLoader?: StyleLoader;
-    [key: string]: any;
+    [key: string]: unknown;
 }
 export declare function defineConfig(config: Config): Config<Theme>;
 export declare type RGB = [
@@ -1286,6 +1291,7 @@ export declare const SymbolCSS: unique symbol;
 export declare const SymbolMeta: unique symbol;
 export declare const SymbolData: unique symbol;
 export declare const SymbolProxy: unique symbol;
+export declare function isProxy<T extends object | Function>(i: T): boolean;
 export declare function isStyleObject(i: unknown): i is StyleObject;
 export declare function isStyleArray(i: unknown): boolean;
 export declare function getStyleVariants(style: StyleObject): string[];
@@ -1302,26 +1308,22 @@ export declare function useArrayHelper(): void;
  * @param utilities - Utilities and Variants
  * @returns CSSObject
  */
-export declare function bundle(utilities: (StyleObject | StyleObject[])[]): CSSMap;
+export declare function bundle(utilities: Utilities[]): CSSMap;
 export declare const prop: (strings: TemplateStringsArray, ...expr: string[]) => number | typeof Symbol.iterator | "filter" | "fill" | "clear" | "contain" | "bottom" | "left" | "right" | "top" | "color" | "clip" | "all" | "opacity" | "alignContent" | "alignItems" | "justifyItems" | "justifySelf" | "alignSelf" | "animation" | "animationDelay" | "animationDirection" | "animationDuration" | "animationFillMode" | "animationIterationCount" | "animationName" | "animationPlayState" | "animationTimingFunction" | "backfaceVisibility" | "background" | "backgroundAttachment" | "backgroundBlendMode" | "backgroundClip" | "backgroundColor" | "backgroundImage" | "backgroundOrigin" | "backgroundPosition" | "backgroundPositionX" | "backgroundPositionY" | "backgroundRepeat" | "backgroundSize" | "blockSize" | "border" | "borderBlockEnd" | "borderBlockStart" | "borderBlockEndColor" | "borderBlockStartColor" | "borderBlockEndStyle" | "borderBlockStartStyle" | "borderBlockEndWidth" | "borderBlockStartWidth" | "borderBottom" | "borderBottomColor" | "borderBottomLeftRadius" | "borderBottomRightRadius" | "borderBottomStyle" | "borderBottomWidth" | "borderCollapse" | "borderColor" | "borderImage" | "borderImageOutset" | "borderImageRepeat" | "borderImageSlice" | "borderImageSource" | "borderImageWidth" | "borderInlineEnd" | "borderInlineStart" | "borderInlineEndColor" | "borderInlineStartColor" | "borderInlineEndStyle" | "borderInlineStartStyle" | "borderInlineEndWidth" | "borderInlineStartWidth" | "borderLeft" | "borderLeftColor" | "borderLeftStyle" | "borderLeftWidth" | "borderRadius" | "borderRight" | "borderRightColor" | "borderRightStyle" | "borderRightWidth" | "borderSpacing" | "borderStyle" | "borderTop" | "borderTopColor" | "borderTopLeftRadius" | "borderTopRightRadius" | "borderTopStyle" | "borderTopWidth" | "borderWidth" | "boxShadow" | "boxSizing" | "breakAfter" | "breakBefore" | "breakInside" | "captionSide" | "caretColor" | "clipPath" | "clipRule" | "colorInterpolationFilters" | "columnCount" | "columnFill" | "columnGap" | "columnRule" | "columnRuleColor" | "columnRuleStyle" | "columnRuleWidth" | "columns" | "columnSpan" | "columnWidth" | "content" | "counterIncrement" | "counterReset" | "cursor" | "direction" | "display" | "emptyCells" | "fillOpacity" | "fillRule" | "flex" | "flexBasis" | "flexDirection" | "flexFlow" | "flexGrow" | "flexShrink" | "flexWrap" | "float" | "floodColor" | "floodOpacity" | "font" | "fontFamily" | "fontFeatureSettings" | "fontKerning" | "fontSize" | "fontSizeAdjust" | "fontStretch" | "fontStyle" | "fontSynthesis" | "fontVariant" | "fontVariantAlternates" | "fontVariantCaps" | "fontVariantEastAsian" | "fontVariantLigatures" | "fontVariantNumeric" | "fontVariantPosition" | "fontWeight" | "gridArea" | "grid" | "gridAutoColumns" | "gridAutoFlow" | "gridAutoRows" | "gridColumn" | "gridColumnEnd" | "gridColumnGap" | "gridColumnStart" | "gridGap" | "gridRow" | "gridRowEnd" | "gridRowGap" | "gridRowStart" | "gridTemplate" | "gridTemplateAreas" | "gridTemplateColumns" | "gridTemplateRows" | "height" | "hyphens" | "imageOrientation" | "imageRendering" | "inlineSize" | "isolation" | "justifyContent" | "letterSpacing" | "lightingColor" | "lineBreak" | "lineHeight" | "listStyle" | "listStyleImage" | "listStylePosition" | "listStyleType" | "margin" | "marginBlockEnd" | "marginBlockStart" | "marginBottom" | "marginInlineEnd" | "marginInlineStart" | "marginLeft" | "marginRight" | "marginTop" | "marker" | "markerEnd" | "markerMid" | "markerStart" | "maskImage" | "maskMode" | "maskOrigin" | "maskPosition" | "maskRepeat" | "maskSize" | "maskType" | "maxBlockSize" | "maxHeight" | "maxInlineSize" | "maxWidth" | "minBlockSize" | "minHeight" | "minInlineSize" | "minWidth" | "mixBlendMode" | "objectFit" | "objectPosition" | "order" | "orphans" | "outline" | "outlineColor" | "outlineOffset" | "outlineStyle" | "outlineWidth" | "overflow" | "overflowWrap" | "overflowX" | "overflowY" | "padding" | "paddingBottom" | "paddingBlockEnd" | "paddingBlockStart" | "paddingInlineEnd" | "paddingInlineStart" | "paddingLeft" | "paddingRight" | "paddingTop" | "pageBreakAfter" | "pageBreakBefore" | "pageBreakInside" | "paintOrder" | "perspective" | "perspectiveOrigin" | "pointerEvents" | "position" | "quotes" | "resize" | "rubyPosition" | "scrollBehavior" | "scrollSnapType" | "shapeImageThreshold" | "shapeMargin" | "shapeOutside" | "shapeRendering" | "stopColor" | "stopOpacity" | "stroke" | "strokeDasharray" | "strokeDashoffset" | "strokeLinecap" | "strokeLinejoin" | "strokeMiterlimit" | "strokeOpacity" | "strokeWidth" | "tableLayout" | "tabSize" | "textAlign" | "textAlignLast" | "textAnchor" | "textDecoration" | "textDecorationColor" | "textDecorationLine" | "textDecorationStyle" | "textIndent" | "textOrientation" | "textOverflow" | "textRendering" | "textShadow" | "textTransform" | "textUnderlinePosition" | "touchAction" | "transform" | "transformOrigin" | "transformStyle" | "transition" | "transitionDelay" | "transitionDuration" | "transitionProperty" | "transitionTimingFunction" | "unicodeBidi" | "userSelect" | "verticalAlign" | "visibility" | "widows" | "width" | "willChange" | "wordBreak" | "wordSpacing" | "wordWrap" | "writingMode" | "zIndex" | "accentColor" | "appearance" | "aspectRatio" | "borderBlock" | "borderBlockColor" | "borderBlockStyle" | "borderBlockWidth" | "borderEndEndRadius" | "borderEndStartRadius" | "borderInline" | "borderInlineColor" | "borderInlineStyle" | "borderInlineWidth" | "borderStartEndRadius" | "borderStartStartRadius" | "printColorAdjust" | "colorScheme" | "contentVisibility" | "counterSet" | "fontOpticalSizing" | "fontVariationSettings" | "gap" | "inset" | "insetBlock" | "insetBlockEnd" | "insetBlockStart" | "insetInline" | "insetInlineEnd" | "insetInlineStart" | "marginBlock" | "marginInline" | "mask" | "maskClip" | "maskComposite" | "offset" | "offsetDistance" | "offsetPath" | "offsetRotate" | "overflowAnchor" | "overscrollBehavior" | "overscrollBehaviorBlock" | "overscrollBehaviorInline" | "overscrollBehaviorX" | "overscrollBehaviorY" | "paddingBlock" | "paddingInline" | "placeContent" | "placeItems" | "placeSelf" | "rotate" | "rowGap" | "scale" | "scrollbarGutter" | "scrollMargin" | "scrollMarginBlock" | "scrollMarginBlockStart" | "scrollMarginBlockEnd" | "scrollMarginBottom" | "scrollMarginInline" | "scrollMarginInlineStart" | "scrollMarginInlineEnd" | "scrollMarginLeft" | "scrollMarginRight" | "scrollMarginTop" | "scrollPadding" | "scrollPaddingBlock" | "scrollPaddingBlockStart" | "scrollPaddingBlockEnd" | "scrollPaddingBottom" | "scrollPaddingInline" | "scrollPaddingInlineStart" | "scrollPaddingInlineEnd" | "scrollPaddingLeft" | "scrollPaddingRight" | "scrollPaddingTop" | "scrollSnapAlign" | "scrollSnapStop" | "textCombineUpright" | "textDecorationSkipInk" | "textDecorationThickness" | "textEmphasis" | "textEmphasisColor" | "textEmphasisPosition" | "textEmphasisStyle" | "textUnderlineOffset" | "transformBox" | "translate" | "whiteSpace" | "alignmentBaseline" | "baselineShift" | "colorInterpolation" | "cssFloat" | "cssText" | "dominantBaseline" | "parentRule" | "webkitAlignContent" | "webkitAlignItems" | "webkitAlignSelf" | "webkitAnimation" | "webkitAnimationDelay" | "webkitAnimationDirection" | "webkitAnimationDuration" | "webkitAnimationFillMode" | "webkitAnimationIterationCount" | "webkitAnimationName" | "webkitAnimationPlayState" | "webkitAnimationTimingFunction" | "webkitAppearance" | "webkitBackfaceVisibility" | "webkitBackgroundClip" | "webkitBackgroundOrigin" | "webkitBackgroundSize" | "webkitBorderBottomLeftRadius" | "webkitBorderBottomRightRadius" | "webkitBorderRadius" | "webkitBorderTopLeftRadius" | "webkitBorderTopRightRadius" | "webkitBoxAlign" | "webkitBoxFlex" | "webkitBoxOrdinalGroup" | "webkitBoxOrient" | "webkitBoxPack" | "webkitBoxShadow" | "webkitBoxSizing" | "webkitFilter" | "webkitFlex" | "webkitFlexBasis" | "webkitFlexDirection" | "webkitFlexFlow" | "webkitFlexGrow" | "webkitFlexShrink" | "webkitFlexWrap" | "webkitJustifyContent" | "webkitLineClamp" | "webkitMask" | "webkitMaskBoxImage" | "webkitMaskBoxImageOutset" | "webkitMaskBoxImageRepeat" | "webkitMaskBoxImageSlice" | "webkitMaskBoxImageSource" | "webkitMaskBoxImageWidth" | "webkitMaskClip" | "webkitMaskComposite" | "webkitMaskImage" | "webkitMaskOrigin" | "webkitMaskPosition" | "webkitMaskRepeat" | "webkitMaskSize" | "webkitOrder" | "webkitPerspective" | "webkitPerspectiveOrigin" | "webkitTextFillColor" | "webkitTextStroke" | "webkitTextStrokeColor" | "webkitTextStrokeWidth" | "webkitTransform" | "webkitTransformOrigin" | "webkitTransformStyle" | "webkitTransition" | "webkitTransitionDelay" | "webkitTransitionDuration" | "webkitTransitionProperty" | "webkitTransitionTimingFunction" | "webkitUserSelect";
 export declare const baseStyleTarget: TargetCreator;
-export declare const baseStyleHandler: (target: StyleObject<{}>, prop: string | symbol, receiver: any) => any;
+export declare const baseStyleHandler: (target: StyleObject<{}>, prop: string | symbol, receiver: unknown) => any;
 export declare function useStyleLoader(loader: StyleLoader): void;
-export declare function css(css: CSSObject | CSSMap, data?: {
-    [key: string]: unknown;
-}, meta?: UtilityMeta): StyleObject;
+export declare function css<D extends Record<string, unknown>>(css: CSSObject | CSSMap, data?: D, meta?: UtilityMeta): StyleObject<D>;
 export declare function injectCSS(css: string): void;
 /** Create a styleLoader */
 export declare function createStyleLoader(inject: (className: string, style: StyleObject) => void): StyleLoader;
 /** CSS-In-JS Loader */
 export declare const cssInJsLoader: StyleLoader;
-export declare class SSRLoader {
-    classList: string[];
-    cssList: string[];
-    use(): void;
-    inject(): void;
-}
-export declare function ssrLoader(): SSRLoader;
+/** SSR Loader */
+export declare const ssrLoader: StyleLoader;
+/** Mount server side generated css */
+export declare function mountCSS(): string;
+export declare function apply(selector: string, ...utilities: Utilities[]): StyleObject;
 export interface CSSDecls {
     /**
      * \@counter-style descriptor. Specifies the symbols used by the marker-construction algorithm specified by the system descriptor. Needs to be specified if the counter system is 'additive'.
@@ -1338,7 +1340,7 @@ export interface CSSDecls {
      */
     alignContent: {
         /** Lines are packed toward the center of the flex container. */
-        "center": StyleObject;
+        center: StyleObject;
         /** Lines are packed toward the end of the flex container. */
         "flex-end": StyleObject;
         /** Lines are packed toward the start of the flex container. */
@@ -1348,7 +1350,7 @@ export interface CSSDecls {
         /** Lines are evenly distributed in the flex container. */
         "space-between": StyleObject;
         /** Lines stretch to take up the remaining space. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * Aligns flex items along the cross axis of the current line of the flex container.
@@ -1357,15 +1359,15 @@ export interface CSSDecls {
      */
     alignItems: {
         /** If the flex item’s inline axis is the same as the cross axis, this value is identical to 'flex-start'. Otherwise, it participates in baseline alignment. */
-        "baseline": StyleObject;
+        baseline: StyleObject;
         /** The flex item’s margin box is centered in the cross axis within the line. */
-        "center": StyleObject;
+        center: StyleObject;
         /** The cross-end margin edge of the flex item is placed flush with the cross-end edge of the line. */
         "flex-end": StyleObject;
         /** The cross-start margin edge of the flex item is placed flush with the cross-start edge of the line. */
         "flex-start": StyleObject;
         /** If the cross size property of the flex item computes to auto, and neither of the cross-axis margins are auto, the flex item is stretched. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * Defines the default justify-self for all items of the box, giving them the default way of justifying each box along the appropriate axis
@@ -1373,10 +1375,10 @@ export interface CSSDecls {
      * Syntax: normal | stretch | \<baseline-position> | \<overflow-position>? [ \<self-position> | left | right ] | legacy | legacy && [ left | right | center ]
      */
     justifyItems: {
-        "auto": StyleObject;
-        "normal": StyleObject;
-        "end": StyleObject;
-        "start": StyleObject;
+        auto: StyleObject;
+        normal: StyleObject;
+        end: StyleObject;
+        start: StyleObject;
         /** "Flex items are packed toward the end of the line." */
         "flex-end": StyleObject;
         /** "Flex items are packed toward the start of the line." */
@@ -1386,17 +1388,17 @@ export interface CSSDecls {
         /** The item is packed flush to the edge of the alignment container of the start side of the item, in the appropriate axis.. */
         "self-start": StyleObject;
         /** The items are packed flush to each other toward the center of the of the alignment container. */
-        "center": StyleObject;
-        "left": StyleObject;
-        "right": StyleObject;
-        "baseline": StyleObject;
+        center: StyleObject;
+        left: StyleObject;
+        right: StyleObject;
+        baseline: StyleObject;
         "first baseline": StyleObject;
         "last baseline": StyleObject;
         /** If the cross size property of the flex item computes to auto, and neither of the cross-axis margins are auto, the flex item is stretched. */
-        "stretch": StyleObject;
-        "save": StyleObject;
-        "unsave": StyleObject;
-        "legacy": StyleObject;
+        stretch: StyleObject;
+        save: StyleObject;
+        unsave: StyleObject;
+        legacy: StyleObject;
     } & WideEntry;
     /**
      * Defines the way of justifying a box inside its container along the appropriate axis.
@@ -1404,10 +1406,10 @@ export interface CSSDecls {
      * Syntax: auto | normal | stretch | \<baseline-position> | \<overflow-position>? [ \<self-position> | left | right ]
      */
     justifySelf: {
-        "auto": StyleObject;
-        "normal": StyleObject;
-        "end": StyleObject;
-        "start": StyleObject;
+        auto: StyleObject;
+        normal: StyleObject;
+        end: StyleObject;
+        start: StyleObject;
         /** "Flex items are packed toward the end of the line." */
         "flex-end": StyleObject;
         /** "Flex items are packed toward the start of the line." */
@@ -1417,16 +1419,16 @@ export interface CSSDecls {
         /** The item is packed flush to the edge of the alignment container of the start side of the item, in the appropriate axis.. */
         "self-start": StyleObject;
         /** The items are packed flush to each other toward the center of the of the alignment container. */
-        "center": StyleObject;
-        "left": StyleObject;
-        "right": StyleObject;
-        "baseline": StyleObject;
+        center: StyleObject;
+        left: StyleObject;
+        right: StyleObject;
+        baseline: StyleObject;
         "first baseline": StyleObject;
         "last baseline": StyleObject;
         /** If the cross size property of the flex item computes to auto, and neither of the cross-axis margins are auto, the flex item is stretched. */
-        "stretch": StyleObject;
-        "save": StyleObject;
-        "unsave": StyleObject;
+        stretch: StyleObject;
+        save: StyleObject;
+        unsave: StyleObject;
     } & WideEntry;
     /**
      * Allows the default alignment along the cross axis to be overridden for individual flex items.
@@ -1435,17 +1437,17 @@ export interface CSSDecls {
      */
     alignSelf: {
         /** Computes to the value of 'align-items' on the element’s parent, or 'stretch' if the element has no parent. On absolutely positioned elements, it computes to itself. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** If the flex item’s inline axis is the same as the cross axis, this value is identical to 'flex-start'. Otherwise, it participates in baseline alignment. */
-        "baseline": StyleObject;
+        baseline: StyleObject;
         /** The flex item’s margin box is centered in the cross axis within the line. */
-        "center": StyleObject;
+        center: StyleObject;
         /** The cross-end margin edge of the flex item is placed flush with the cross-end edge of the line. */
         "flex-end": StyleObject;
         /** The cross-start margin edge of the flex item is placed flush with the cross-start edge of the line. */
         "flex-start": StyleObject;
         /** If the cross size property of the flex item computes to auto, and neither of the cross-axis margins are auto, the flex item is stretched. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * Shorthand that resets all properties except 'direction' and 'unicode-bidi'.
@@ -1474,23 +1476,23 @@ export interface CSSDecls {
      */
     animation: {
         /** The animation cycle iterations that are odd counts are played in the normal direction, and the animation cycle iterations that are even counts are played in a reverse direction. */
-        "alternate": StyleObject;
+        alternate: StyleObject;
         /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
         "alternate-reverse": StyleObject;
         /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
-        "backwards": StyleObject;
+        backwards: StyleObject;
         /** Both forwards and backwards fill modes are applied. */
-        "both": StyleObject;
+        both: StyleObject;
         /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
-        "forwards": StyleObject;
+        forwards: StyleObject;
         /** Causes the animation to repeat forever. */
-        "infinite": StyleObject;
+        infinite: StyleObject;
         /** No animation is performed */
-        "none": StyleObject;
+        none: StyleObject;
         /** Normal playback. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** All iterations of the animation are played in the reverse direction from the way they were specified. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & TimeEntry & TransitionTimingFunctions & WideEntry;
@@ -1511,13 +1513,13 @@ export interface CSSDecls {
      */
     animationDirection: {
         /** The animation cycle iterations that are odd counts are played in the normal direction, and the animation cycle iterations that are even counts are played in a reverse direction. */
-        "alternate": StyleObject;
+        alternate: StyleObject;
         /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
         "alternate-reverse": StyleObject;
         /** Normal playback. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** All iterations of the animation are played in the reverse direction from the way they were specified. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & WideEntry;
     /**
      * Defines the length of time that an animation takes to complete one cycle.
@@ -1536,13 +1538,13 @@ export interface CSSDecls {
      */
     animationFillMode: {
         /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
-        "backwards": StyleObject;
+        backwards: StyleObject;
         /** Both forwards and backwards fill modes are applied. */
-        "both": StyleObject;
+        both: StyleObject;
         /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
-        "forwards": StyleObject;
+        forwards: StyleObject;
         /** There is no change to the property value between the time the animation is applied and the time the animation begins playing or after the animation completes. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Defines the number of times an animation cycle is played. The default value is one, meaning the animation will play from beginning to end once.
@@ -1553,7 +1555,7 @@ export interface CSSDecls {
      */
     animationIterationCount: {
         /** Causes the animation to repeat forever. */
-        "infinite": StyleObject;
+        infinite: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -1566,7 +1568,7 @@ export interface CSSDecls {
      */
     animationName: {
         /** No animation is performed */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Defines whether the animation is running or paused.
@@ -1577,9 +1579,9 @@ export interface CSSDecls {
      */
     animationPlayState: {
         /** A running animation will be paused. */
-        "paused": StyleObject;
+        paused: StyleObject;
         /** Resume playback of a paused animation. */
-        "running": StyleObject;
+        running: StyleObject;
     } & WideEntry;
     /**
      * Describes how the animation will progress over one cycle of its duration.
@@ -1598,9 +1600,9 @@ export interface CSSDecls {
      */
     backfaceVisibility: {
         /** Back side is hidden. */
-        "hidden": StyleObject;
+        hidden: StyleObject;
         /** Back side is visible. */
-        "visible": StyleObject;
+        visible: StyleObject;
     } & WideEntry;
     /**
      * Shorthand property for setting most background properties at the same place in the style sheet.
@@ -1611,13 +1613,13 @@ export interface CSSDecls {
      */
     background: {
         /** The background is fixed with regard to the viewport. In paged media where there is no viewport, a 'fixed' background is fixed with respect to the page box and therefore replicated on every page. */
-        "fixed": StyleObject;
+        fixed: StyleObject;
         /** The background is fixed with regard to the element's contents: if the element has a scrolling mechanism, the background scrolls with the element's contents. */
-        "local": StyleObject;
+        local: StyleObject;
         /** A value of 'none' counts as an image layer but draws nothing. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The background is fixed with regard to the element itself and does not scroll with its contents. (It is effectively attached to the element's border.) */
-        "scroll": StyleObject;
+        scroll: StyleObject;
     } & ColorEntry & ColorFunctions & LengthEntry & PercentEntry & ImageFunctions & PositionEntry & RepeatStyleEntry & BoxEntry & WideEntry;
     /**
      * Specifies whether the background images are fixed with regard to the viewport ('fixed') or scroll along with the element ('scroll') or its contents ('local').
@@ -1628,11 +1630,11 @@ export interface CSSDecls {
      */
     backgroundAttachment: {
         /** The background is fixed with regard to the viewport. In paged media where there is no viewport, a 'fixed' background is fixed with respect to the page box and therefore replicated on every page. */
-        "fixed": StyleObject;
+        fixed: StyleObject;
         /** The background is fixed with regard to the element’s contents: if the element has a scrolling mechanism, the background scrolls with the element’s contents. */
-        "local": StyleObject;
+        local: StyleObject;
         /** The background is fixed with regard to the element itself and does not scroll with its contents. (It is effectively attached to the element’s border.) */
-        "scroll": StyleObject;
+        scroll: StyleObject;
     } & WideEntry;
     /**
      * Defines the blending mode of each background layer.
@@ -1645,17 +1647,17 @@ export interface CSSDecls {
      */
     backgroundBlendMode: {
         /** Default attribute which specifies no blending */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** The source color is multiplied by the destination color and replaces the destination. */
-        "multiply": StyleObject;
+        multiply: StyleObject;
         /** Multiplies the complements of the backdrop and source color values, then complements the result. */
-        "screen": StyleObject;
+        screen: StyleObject;
         /** Multiplies or screens the colors, depending on the backdrop color value. */
-        "overlay": StyleObject;
+        overlay: StyleObject;
         /** Selects the darker of the backdrop and source colors. */
-        "darken": StyleObject;
+        darken: StyleObject;
         /** Selects the lighter of the backdrop and source colors. */
-        "lighten": StyleObject;
+        lighten: StyleObject;
         /** Brightens the backdrop color to reflect the source color. */
         "color-dodge": StyleObject;
         /** Darkens the backdrop color to reflect the source color. */
@@ -1665,33 +1667,33 @@ export interface CSSDecls {
         /** Darkens or lightens the colors, depending on the source color value. */
         "soft-light": StyleObject;
         /** Subtracts the darker of the two constituent colors from the lighter color.. */
-        "difference": StyleObject;
+        difference: StyleObject;
         /** Produces an effect similar to that of the Difference mode but lower in contrast. */
-        "exclusion": StyleObject;
+        exclusion: StyleObject;
         /**
          * Creates a color with the hue of the source color and the saturation and luminosity of the backdrop color.
          *
          * (Edge 79, Firefox 30, Safari 8, Chrome 35, Opera 22)
          */
-        "hue": StyleObject;
+        hue: StyleObject;
         /**
          * Creates a color with the saturation of the source color and the hue and luminosity of the backdrop color.
          *
          * (Edge 79, Firefox 30, Safari 8, Chrome 35, Opera 22)
          */
-        "saturation": StyleObject;
+        saturation: StyleObject;
         /**
          * Creates a color with the hue and saturation of the source color and the luminosity of the backdrop color.
          *
          * (Edge 79, Firefox 30, Safari 8, Chrome 35, Opera 22)
          */
-        "color": StyleObject;
+        color: StyleObject;
         /**
          * Creates a color with the luminosity of the source color and the hue and saturation of the backdrop color.
          *
          * (Edge 79, Firefox 30, Safari 8, Chrome 35, Opera 22)
          */
-        "luminosity": StyleObject;
+        luminosity: StyleObject;
     } & WideEntry;
     /**
      * Determines the background painting area.
@@ -1718,7 +1720,7 @@ export interface CSSDecls {
      */
     backgroundImage: {
         /** Counts as an image layer but draws nothing. */
-        "none": StyleObject;
+        none: StyleObject;
     } & ImageFunctions & WideEntry;
     /**
      * For elements rendered as a single box, specifies the background positioning area. For elements rendered as multiple boxes (e.g., inline boxes on several lines, boxes on several pages) specifies which boxes 'box-decoration-break' operates on to determine the background positioning area(s).
@@ -1747,11 +1749,11 @@ export interface CSSDecls {
      */
     backgroundPositionX: {
         /** Equivalent to '50%' ('left 50%') for the horizontal position if the horizontal position is not otherwise specified, or '50%' ('top 50%') for the vertical position if it is. */
-        "center": StyleObject;
+        center: StyleObject;
         /** Equivalent to '0%' for the horizontal position if one or two values are given, otherwise specifies the left edge as the origin for the next offset. */
-        "left": StyleObject;
+        left: StyleObject;
         /** Equivalent to '100%' for the horizontal position if one or two values are given, otherwise specifies the right edge as the origin for the next offset. */
-        "right": StyleObject;
+        right: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * ⚠️ Property is experimental. Be cautious when using it.️
@@ -1764,11 +1766,11 @@ export interface CSSDecls {
      */
     backgroundPositionY: {
         /** Equivalent to '100%' for the vertical position if one or two values are given, otherwise specifies the bottom edge as the origin for the next offset. */
-        "bottom": StyleObject;
+        bottom: StyleObject;
         /** Equivalent to '50%' ('left 50%') for the horizontal position if the horizontal position is not otherwise specified, or '50%' ('top 50%') for the vertical position if it is. */
-        "center": StyleObject;
+        center: StyleObject;
         /** Equivalent to '0%' for the vertical position if one or two values are given, otherwise specifies the top edge as the origin for the next offset. */
-        "top": StyleObject;
+        top: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Specifies how background images are tiled after they have been sized and positioned.
@@ -1787,11 +1789,11 @@ export interface CSSDecls {
      */
     backgroundSize: {
         /** Resolved by using the image’s intrinsic ratio and the size of the other dimension, or failing that, using the image’s intrinsic size, or failing that, treating it as 100%. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Scale the image, while preserving its intrinsic aspect ratio (if any), to the largest size such that both its width and its height can fit inside the background positioning area. */
-        "contain": StyleObject;
+        contain: StyleObject;
         /** Scale the image, while preserving its intrinsic aspect ratio (if any), to the smallest size such that both its width and its height can completely cover the background positioning area. */
-        "cover": StyleObject;
+        cover: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * IE only. Used to extend behaviors of the browser.
@@ -1810,7 +1812,7 @@ export interface CSSDecls {
      */
     blockSize: {
         /** Depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Shorthand property for setting border width, style, and color.
@@ -1957,9 +1959,9 @@ export interface CSSDecls {
      */
     borderCollapse: {
         /** Selects the collapsing borders model. */
-        "collapse": StyleObject;
+        collapse: StyleObject;
         /** Selects the separated borders border model. */
-        "separate": StyleObject;
+        separate: StyleObject;
     } & WideEntry;
     /**
      * The color of the border around all four edges of an element.
@@ -1978,19 +1980,19 @@ export interface CSSDecls {
      */
     borderImage: {
         /** If 'auto' is specified then the border image width is the intrinsic width or height (whichever is applicable) of the corresponding image slice. If the image does not have the required intrinsic dimension then the corresponding border-width is used instead. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Causes the middle part of the border-image to be preserved. */
-        "fill": StyleObject;
+        fill: StyleObject;
         /** Use the border styles. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The image is tiled (repeated) to fill the area. */
-        "repeat": StyleObject;
+        repeat: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the image is rescaled so that it does. */
-        "round": StyleObject;
+        round: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the extra space is distributed around the tiles. */
-        "space": StyleObject;
+        space: StyleObject;
         /** The image is stretched to fill the area. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
@@ -2014,13 +2016,13 @@ export interface CSSDecls {
      */
     borderImageRepeat: {
         /** The image is tiled (repeated) to fill the area. */
-        "repeat": StyleObject;
+        repeat: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the image is rescaled so that it does. */
-        "round": StyleObject;
+        round: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the extra space is distributed around the tiles. */
-        "space": StyleObject;
+        space: StyleObject;
         /** The image is stretched to fill the area. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * Specifies inward offsets from the top, right, bottom, and left edges of the image, dividing it into nine regions: four corners, four edges and a middle.
@@ -2031,7 +2033,7 @@ export interface CSSDecls {
      */
     borderImageSlice: {
         /** Causes the middle part of the border-image to be preserved. */
-        "fill": StyleObject;
+        fill: StyleObject;
     } & PercentEntry & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -2044,7 +2046,7 @@ export interface CSSDecls {
      */
     borderImageSource: {
         /** Use the border styles. */
-        "none": StyleObject;
+        none: StyleObject;
     } & ImageFunctions & WideEntry;
     /**
      * The four values of 'border-image-width' specify offsets that are used to divide the border image area into nine parts. They represent inward distances from the top, right, bottom, and left sides of the area, respectively.
@@ -2055,7 +2057,7 @@ export interface CSSDecls {
      */
     borderImageWidth: {
         /** The border image width is the intrinsic width or height (whichever is applicable) of the corresponding image slice. If the image does not have the required intrinsic dimension then the corresponding border-width is used instead. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -2292,7 +2294,7 @@ export interface CSSDecls {
      */
     bottom: {
         /** For non-replaced elements, the effect of this value depends on which of related properties have the value 'auto' as well */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Specifies whether individual boxes are treated as broken pieces of one continuous box, or whether each box is individually wrapped with the border and padding.
@@ -2305,9 +2307,9 @@ export interface CSSDecls {
      */
     boxDecorationBreak: {
         /** Each box is independently wrapped with the border and padding. */
-        "clone": StyleObject;
+        clone: StyleObject;
         /** The effect is as though the element were rendered with no breaks present, and then sliced by the breaks afterward. */
-        "slice": StyleObject;
+        slice: StyleObject;
     } & WideEntry;
     /**
      * Attaches one or more drop-shadows to the box. The property is a comma-separated list of shadows, each specified by 2-4 length values, an optional color, and an optional 'inset' keyword. Omitted lengths are 0; omitted colors are a user agent chosen color.
@@ -2318,9 +2320,9 @@ export interface CSSDecls {
      */
     boxShadow: {
         /** Changes the drop shadow from an outer shadow (one that shadows the box onto the canvas, as if it were lifted above the canvas) to an inner shadow (one that shadows the canvas onto the box, as if the box were cut out of the canvas and shifted behind it). */
-        "inset": StyleObject;
+        inset: StyleObject;
         /** No shadow. */
-        "none": StyleObject;
+        none: StyleObject;
     } & ColorEntry & ColorFunctions & LengthEntry & WideEntry;
     /**
      * Specifies the behavior of the 'width' and 'height' properties.
@@ -2342,23 +2344,23 @@ export interface CSSDecls {
      */
     breakAfter: {
         /** Always force a page break before/after the generated box. */
-        "always": StyleObject;
+        always: StyleObject;
         /** Neither force nor forbid a page/column break before/after the principal box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a break before/after the principal box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Avoid a column break before/after the principal box. */
         "avoid-column": StyleObject;
         /** Avoid a page break before/after the principal box. */
         "avoid-page": StyleObject;
         /** Always force a column break before/after the principal box. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a left page. */
-        "left": StyleObject;
+        left: StyleObject;
         /** Always force a page break before/after the principal box. */
-        "page": StyleObject;
+        page: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a right page. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Describes the page/column/region break behavior before the generated box.
@@ -2367,23 +2369,23 @@ export interface CSSDecls {
      */
     breakBefore: {
         /** Always force a page break before/after the generated box. */
-        "always": StyleObject;
+        always: StyleObject;
         /** Neither force nor forbid a page/column break before/after the principal box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a break before/after the principal box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Avoid a column break before/after the principal box. */
         "avoid-column": StyleObject;
         /** Avoid a page break before/after the principal box. */
         "avoid-page": StyleObject;
         /** Always force a column break before/after the principal box. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a left page. */
-        "left": StyleObject;
+        left: StyleObject;
         /** Always force a page break before/after the principal box. */
-        "page": StyleObject;
+        page: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a right page. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Describes the page/column/region break behavior inside the principal box.
@@ -2392,9 +2394,9 @@ export interface CSSDecls {
      */
     breakInside: {
         /** Impose no additional breaking constraints within the box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid breaks within the box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Avoid a column break within the box. */
         "avoid-column": StyleObject;
         /** Avoid a page break within the box. */
@@ -2409,9 +2411,9 @@ export interface CSSDecls {
      */
     captionSide: {
         /** Positions the caption box below the table box. */
-        "bottom": StyleObject;
+        bottom: StyleObject;
         /** Positions the caption box above the table box. */
-        "top": StyleObject;
+        top: StyleObject;
     } & WideEntry;
     /**
      * Controls the color of the text insertion indicator.
@@ -2424,7 +2426,7 @@ export interface CSSDecls {
      */
     caretColor: {
         /** The user agent selects an appropriate color for the caret. This is generally currentcolor, but the user agent may choose a different color to ensure good visibility and contrast with the surrounding content, taking into account the value of currentcolor, the background, shadows, and other factors. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & ColorEntry & ColorFunctions & WideEntry;
     /**
      * Indicates which sides of an element's box(es) may not be adjacent to an earlier floating box. The 'clear' property does not consider floats inside the element itself or in other block formatting contexts.
@@ -2435,13 +2437,13 @@ export interface CSSDecls {
      */
     clear: {
         /** The clearance of the generated box is set to the amount necessary to place the top border edge below the bottom outer edge of any right-floating and left-floating boxes that resulted from elements earlier in the source document. */
-        "both": StyleObject;
+        both: StyleObject;
         /** The clearance of the generated box is set to the amount necessary to place the top border edge below the bottom outer edge of any left-floating boxes that resulted from elements earlier in the source document. */
-        "left": StyleObject;
+        left: StyleObject;
         /** No constraint on the box's position with respect to floats. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The clearance of the generated box is set to the amount necessary to place the top border edge below the bottom outer edge of any right-floating boxes that resulted from elements earlier in the source document. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Deprecated. Use the 'clip-path' property when support allows. Defines the visible portion of an element’s box.
@@ -2452,7 +2454,7 @@ export interface CSSDecls {
      */
     clip: {
         /** The element does not clip. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Specifies offsets from the edges of the border box. */
         "rect()": StyleObject;
     } & BasicShapeFunctions & WideEntry;
@@ -2465,7 +2467,7 @@ export interface CSSDecls {
      */
     clipPath: {
         /** No clipping path gets created. */
-        "none": StyleObject;
+        none: StyleObject;
         /** References a \<clipPath> element to create a clipping path. */
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & BasicShapeFunctions & GeometryBoxEntry & WideEntry;
@@ -2476,9 +2478,9 @@ export interface CSSDecls {
      */
     clipRule: {
         /** Determines the ‘insideness’ of a point on the canvas by drawing a ray from that point to infinity in any direction and counting the number of path segments from the given shape that the ray crosses. */
-        "evenodd": StyleObject;
+        evenodd: StyleObject;
         /** Determines the ‘insideness’ of a point on the canvas by drawing a ray from that point to infinity in any direction and then examining the places where a segment of the shape crosses the ray. */
-        "nonzero": StyleObject;
+        nonzero: StyleObject;
     } & WideEntry;
     /**
      * Sets the color of an element's text
@@ -2495,11 +2497,11 @@ export interface CSSDecls {
      */
     colorInterpolationFilters: {
         /** Color operations are not required to occur in a particular color space. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Color operations should occur in the linearized RGB color space. */
-        "linearRGB": StyleObject;
+        linearRGB: StyleObject;
         /** Color operations should occur in the sRGB color space. */
-        "sRGB": StyleObject;
+        sRGB: StyleObject;
     } & WideEntry;
     /**
      * Describes the optimal number of columns into which the content of the element will be flowed.
@@ -2510,7 +2512,7 @@ export interface CSSDecls {
      */
     columnCount: {
         /** Determines the number of columns by the 'column-width' property and the element width. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * In continuous media, this property will only be consulted if the length of columns has been constrained. Otherwise, columns will automatically be balanced.
@@ -2521,9 +2523,9 @@ export interface CSSDecls {
      */
     columnFill: {
         /** Fills columns sequentially. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Balance content equally between columns, if possible. */
-        "balance": StyleObject;
+        balance: StyleObject;
     } & WideEntry;
     /**
      * Sets the gap between columns. If there is a column rule between columns, it will appear in the middle of the gap.
@@ -2532,7 +2534,7 @@ export interface CSSDecls {
      */
     columnGap: {
         /** User agent specific and typically equivalent to 1em. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Shorthand for setting 'column-rule-width', 'column-rule-style', and 'column-rule-color' at the same place in the style sheet. Omitted values are set to their initial values.
@@ -2575,7 +2577,7 @@ export interface CSSDecls {
      */
     columns: {
         /** The width depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & IntegerEntry & WideEntry;
     /**
      * Describes the page/column break behavior after the generated box.
@@ -2586,9 +2588,9 @@ export interface CSSDecls {
      */
     columnSpan: {
         /** The element spans across all columns. Content in the normal flow that appears before the element is automatically balanced across all columns before the element appear. */
-        "all": StyleObject;
+        all: StyleObject;
         /** The element does not span multiple columns. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Describes the width of columns in multicol elements.
@@ -2599,7 +2601,7 @@ export interface CSSDecls {
      */
     columnWidth: {
         /** The width depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Indicates that an element and its contents are, as much as possible, independent of the rest of the document tree.
@@ -2612,19 +2614,19 @@ export interface CSSDecls {
      */
     contain: {
         /** Indicates that the property has no effect. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Turns on all forms of containment for the element. */
-        "strict": StyleObject;
+        strict: StyleObject;
         /** All containment rules except size are applied to the element. */
-        "content": StyleObject;
+        content: StyleObject;
         /** For properties that can have effects on more than just an element and its descendants, those effects don't escape the containing element. */
-        "size": StyleObject;
+        size: StyleObject;
         /** Turns on layout containment for the element. */
-        "layout": StyleObject;
+        layout: StyleObject;
         /** Turns on style containment for the element. */
-        "style": StyleObject;
+        style: StyleObject;
         /** Turns on paint containment for the element. */
-        "paint": StyleObject;
+        paint: StyleObject;
     } & WideEntry;
     /**
      * Determines which page-based occurrence of a given element is applied to a counter or string value.
@@ -2639,11 +2641,11 @@ export interface CSSDecls {
         /** Counters are denoted by identifiers (see the 'counter-increment' and 'counter-reset' properties). */
         counter: (...params: Parameters<typeof counter>) => StyleObject;
         /** The (pseudo-)element is replaced in its entirety by the resource referenced by its 'icon' property, and treated as a replaced element. */
-        "icon": StyleObject;
+        icon: StyleObject;
         /** On elements, this inhibits the children of the element from being rendered as children of this element, as if the element was empty. On pseudo-elements it causes the pseudo-element to have no content. */
-        "none": StyleObject;
+        none: StyleObject;
         /** See http://www.w3.org/TR/css3-content/#content for computation rules. */
-        "normal": StyleObject;
+        normal: StyleObject;
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & StringEntry & URLEntry & WideEntry;
     /**
@@ -2655,7 +2657,7 @@ export interface CSSDecls {
      */
     counterIncrement: {
         /** This element does not alter the value of any counters. */
-        "none": StyleObject;
+        none: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Property accepts one or more names of counters (identifiers), each one optionally followed by an integer. The integer gives the value that the counter is set to on each occurrence of the element.
@@ -2666,7 +2668,7 @@ export interface CSSDecls {
      */
     counterReset: {
         /** The counter is not modified. */
-        "none": StyleObject;
+        none: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Allows control over cursor appearance in an element
@@ -2677,35 +2679,35 @@ export interface CSSDecls {
      */
     cursor: {
         /** Indicates an alias of/shortcut to something is to be created. Often rendered as an arrow with a small curved arrow next to it. */
-        "alias": StyleObject;
+        alias: StyleObject;
         /** Indicates that the something can be scrolled in any direction. Often rendered as arrows pointing up, down, left, and right with a dot in the middle. */
         "all-scroll": StyleObject;
         /** The UA determines the cursor to display based on the current context. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that a cell or set of cells may be selected. Often rendered as a thick plus-sign with a dot in the middle. */
-        "cell": StyleObject;
+        cell: StyleObject;
         /** Indicates that the item/column can be resized horizontally. Often rendered as arrows pointing left and right with a vertical bar separating them. */
         "col-resize": StyleObject;
         /** A context menu is available for the object under the cursor. Often rendered as an arrow with a small menu-like graphic next to it. */
         "context-menu": StyleObject;
         /** Indicates something is to be copied. Often rendered as an arrow with a small plus sign next to it. */
-        "copy": StyleObject;
+        copy: StyleObject;
         /** A simple crosshair (e.g., short line segments resembling a '+' sign). Often used to indicate a two dimensional bitmap selection mode. */
-        "crosshair": StyleObject;
+        crosshair: StyleObject;
         /** The platform-dependent default cursor. Often rendered as an arrow. */
-        "default": StyleObject;
+        default: StyleObject;
         /** Indicates that east edge is to be moved. */
         "e-resize": StyleObject;
         /** Indicates a bidirectional east-west resize cursor. */
         "ew-resize": StyleObject;
         /** Indicates that something can be grabbed. */
-        "grab": StyleObject;
+        grab: StyleObject;
         /** Indicates that something is being grabbed. */
-        "grabbing": StyleObject;
+        grabbing: StyleObject;
         /** Help is available for the object under the cursor. Often rendered as a question mark or a balloon. */
-        "help": StyleObject;
+        help: StyleObject;
         /** Indicates something is to be moved. */
-        "move": StyleObject;
+        move: StyleObject;
         /** Indicates that something can be grabbed. */
         "-moz-grab": StyleObject;
         /** Indicates that something is being grabbed. */
@@ -2721,7 +2723,7 @@ export interface CSSDecls {
         /** Indicates that the dragged item cannot be dropped at the current cursor location. Often rendered as a hand or pointer with a small circle with a line through it. */
         "no-drop": StyleObject;
         /** No cursor is rendered for the element. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Indicates that the requested action will not be carried out. Often rendered as a circle with a line through it. */
         "not-allowed": StyleObject;
         /** Indicates that north edge is to be moved. */
@@ -2733,9 +2735,9 @@ export interface CSSDecls {
         /** Indicates a bidirectional north-west/south-east cursor. */
         "nwse-resize": StyleObject;
         /** The cursor is a pointer that indicates a link. */
-        "pointer": StyleObject;
+        pointer: StyleObject;
         /** A progress indicator. The program is performing some processing, but is different from 'wait' in that the user may still interact with the program. Often rendered as a spinning beach ball, or an arrow with a watch or hourglass. */
-        "progress": StyleObject;
+        progress: StyleObject;
         /** Indicates that the item/row can be resized vertically. Often rendered as arrows pointing up and down with a horizontal bar separating them. */
         "row-resize": StyleObject;
         /** Indicates that movement starts from south-east corner. */
@@ -2745,11 +2747,11 @@ export interface CSSDecls {
         /** Indicates that movement starts from south-west corner. */
         "sw-resize": StyleObject;
         /** Indicates text that may be selected. Often rendered as a vertical I-beam. */
-        "text": StyleObject;
+        text: StyleObject;
         /** Indicates vertical-text that may be selected. Often rendered as a horizontal I-beam. */
         "vertical-text": StyleObject;
         /** Indicates that the program is busy and the user should wait. Often rendered as a watch or hourglass. */
-        "wait": StyleObject;
+        wait: StyleObject;
         /** Indicates that something can be grabbed. */
         "-webkit-grab": StyleObject;
         /** Indicates that something is being grabbed. */
@@ -2776,9 +2778,9 @@ export interface CSSDecls {
      */
     direction: {
         /** Left-to-right direction. */
-        "ltr": StyleObject;
+        ltr: StyleObject;
         /** Right-to-left direction. */
-        "rtl": StyleObject;
+        rtl: StyleObject;
     } & WideEntry;
     /**
      * In combination with 'float' and 'position', determines the type of box or boxes that are generated for an element.
@@ -2789,19 +2791,19 @@ export interface CSSDecls {
      */
     display: {
         /** The element generates a block-level box */
-        "block": StyleObject;
+        block: StyleObject;
         /** The element itself does not generate any boxes, but its children and pseudo-elements still generate boxes as normal. */
-        "contents": StyleObject;
+        contents: StyleObject;
         /** The element generates a principal flex container box and establishes a flex formatting context. */
-        "flex": StyleObject;
+        flex: StyleObject;
         /** The element lays out its contents using flow layout (block-and-inline layout). Standardized as 'flex'. */
-        "flexbox": StyleObject;
+        flexbox: StyleObject;
         /** The element generates a block container box, and lays out its contents using flow layout. */
         "flow-root": StyleObject;
         /** The element generates a principal grid container box, and establishes a grid formatting context. */
-        "grid": StyleObject;
+        grid: StyleObject;
         /** The element generates an inline-level box. */
-        "inline": StyleObject;
+        inline: StyleObject;
         /** A block box, which itself is flowed as a single inline box, similar to a replaced element. The inside of an inline-block is formatted as a block box, and the box itself is formatted as an inline box. */
         "inline-block": StyleObject;
         /** Inline-level flex container. */
@@ -2835,9 +2837,9 @@ export interface CSSDecls {
         /** Inline-level grid container. */
         "-ms-inline-grid": StyleObject;
         /** The element and its descendants generates no boxes. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The element generates a principal ruby container box, and establishes a ruby formatting context. */
-        "ruby": StyleObject;
+        ruby: StyleObject;
         "ruby-base": StyleObject;
         "ruby-base-container": StyleObject;
         "ruby-text": StyleObject;
@@ -2845,7 +2847,7 @@ export interface CSSDecls {
         /** The element generates a run-in box. Run-in elements act like inlines or blocks, depending on the surrounding elements. */
         "run-in": StyleObject;
         /** The element generates a principal table wrapper box containing an additionally-generated table box, and establishes a table formatting context. */
-        "table": StyleObject;
+        table: StyleObject;
         "table-caption": StyleObject;
         "table-cell": StyleObject;
         "table-column": StyleObject;
@@ -2872,17 +2874,17 @@ export interface CSSDecls {
      */
     emptyCells: {
         /** No borders or backgrounds are drawn around/behind empty cells. */
-        "hide": StyleObject;
+        hide: StyleObject;
         "-moz-show-background": StyleObject;
         /** Borders and backgrounds are drawn around/behind empty cells (like normal cells). */
-        "show": StyleObject;
+        show: StyleObject;
     } & WideEntry;
     /** Deprecated. Use 'isolation' property instead when support allows. Specifies how the accumulation of the background image is managed. */
     enableBackground: {
         /** If the ancestor container element has a property of new, then all graphics elements within the current container are rendered both on the parent's background image and onto the target. */
-        "accumulate": StyleObject;
+        accumulate: StyleObject;
         /** Create a new background image canvas. All children of the current container element can access the background, and they will be rendered onto both the parent's background image canvas in addition to the target device. */
-        "new": StyleObject;
+        new: StyleObject;
     } & LengthEntry & PercentEntry & IntegerEntry & WideEntry;
     /**
      * \@counter-style descriptor. Specifies a fallback counter style to be used when the current counter style can’t create a representation for a given counter value.
@@ -2897,16 +2899,16 @@ export interface CSSDecls {
         /** A URL reference to a paint server element, which is an element that defines a paint server: ‘hatch’, ‘linearGradient’, ‘mesh’, ‘pattern’, ‘radialGradient’ and ‘solidcolor’. */
         url: (...params: Parameters<typeof url>) => StyleObject;
         /** No paint is applied in this layer. */
-        "none": StyleObject;
+        none: StyleObject;
     } & ColorEntry & ColorFunctions & URLEntry & WideEntry;
     /** Specifies the opacity of the painting operation used to paint the interior the current object. */
     fillOpacity: AlphaEntry & WideEntry;
     /** Indicates the algorithm (or winding rule) which is to be used to determine what parts of the canvas are included inside the shape. */
     fillRule: {
         /** Determines the ‘insideness’ of a point on the canvas by drawing a ray from that point to infinity in any direction and counting the number of path segments from the given shape that the ray crosses. */
-        "evenodd": StyleObject;
+        evenodd: StyleObject;
         /** Determines the ‘insideness’ of a point on the canvas by drawing a ray from that point to infinity in any direction and then examining the places where a segment of the shape crosses the ray. */
-        "nonzero": StyleObject;
+        nonzero: StyleObject;
     } & WideEntry;
     /**
      * Processes an element’s rendering before it is displayed in the document, by applying one or more filter effects.
@@ -2919,7 +2921,7 @@ export interface CSSDecls {
      */
     filter: {
         /** No filter effects are applied. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Applies a Gaussian blur to the input image. */
         blur: (...params: Parameters<typeof blur>) => StyleObject;
         /** Applies a linear multiplier to input image, making it appear more or less bright. */
@@ -2956,11 +2958,11 @@ export interface CSSDecls {
      */
     flex: {
         /** Retrieves the value of the main size property as the used 'flex-basis'. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates automatic sizing, based on the flex item’s content. */
-        "content": StyleObject;
+        content: StyleObject;
         /** Expands to '0 0 auto'. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -2973,9 +2975,9 @@ export interface CSSDecls {
      */
     flexBasis: {
         /** Retrieves the value of the main size property as the used 'flex-basis'. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates automatic sizing, based on the flex item’s content. */
-        "content": StyleObject;
+        content: StyleObject;
     } & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -2988,11 +2990,11 @@ export interface CSSDecls {
      */
     flexDirection: {
         /** The flex container’s main axis has the same orientation as the block axis of the current writing mode. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Same as 'column', except the main-start and main-end directions are swapped. */
         "column-reverse": StyleObject;
         /** The flex container’s main axis has the same orientation as the inline axis of the current writing mode. */
-        "row": StyleObject;
+        row: StyleObject;
         /** Same as 'row', except the main-start and main-end directions are swapped. */
         "row-reverse": StyleObject;
     } & WideEntry;
@@ -3005,17 +3007,17 @@ export interface CSSDecls {
      */
     flexFlow: {
         /** The flex container’s main axis has the same orientation as the block axis of the current writing mode. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Same as 'column', except the main-start and main-end directions are swapped. */
         "column-reverse": StyleObject;
         /** The flex container is single-line. */
-        "nowrap": StyleObject;
+        nowrap: StyleObject;
         /** The flex container’s main axis has the same orientation as the inline axis of the current writing mode. */
-        "row": StyleObject;
+        row: StyleObject;
         /** Same as 'row', except the main-start and main-end directions are swapped. */
         "row-reverse": StyleObject;
         /** The flexbox is multi-line. */
-        "wrap": StyleObject;
+        wrap: StyleObject;
         /** Same as 'wrap', except the cross-start and cross-end directions are swapped. */
         "wrap-reverse": StyleObject;
     } & WideEntry;
@@ -3048,9 +3050,9 @@ export interface CSSDecls {
      */
     flexWrap: {
         /** The flex container is single-line. */
-        "nowrap": StyleObject;
+        nowrap: StyleObject;
         /** The flexbox is multi-line. */
-        "wrap": StyleObject;
+        wrap: StyleObject;
         /** Same as 'wrap', except the cross-start and cross-end directions are swapped. */
         "wrap-reverse": StyleObject;
     } & WideEntry;
@@ -3067,11 +3069,11 @@ export interface CSSDecls {
         /** A keyword indicating that the element must float on the start side of its containing block. That is the left side with ltr scripts, and the right side with rtl scripts. */
         "inline-start": StyleObject;
         /** The element generates a block box that is floated to the left. Content flows on the right side of the box, starting at the top (subject to the 'clear' property). */
-        "left": StyleObject;
+        left: StyleObject;
         /** The box is not floated. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Similar to 'left', except the box is floated to the right, and content flows on the left side of the box, starting at the top. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Indicates what color to use to flood the current filter primitive subregion.
@@ -3112,34 +3114,34 @@ export interface CSSDecls {
         /** Black (Heavy) */
         "900": StyleObject;
         /** Same as 700 */
-        "bold": StyleObject;
+        bold: StyleObject;
         /** Specifies the weight of the face bolder than the inherited value. */
-        "bolder": StyleObject;
+        bolder: StyleObject;
         /** The font used for captioned controls (e.g., buttons, drop-downs, etc.). */
-        "caption": StyleObject;
+        caption: StyleObject;
         /** The font used to label icons. */
-        "icon": StyleObject;
+        icon: StyleObject;
         /** Selects a font that is labeled 'italic', or, if that is not available, one labeled 'oblique'. */
-        "italic": StyleObject;
-        "large": StyleObject;
-        "larger": StyleObject;
+        italic: StyleObject;
+        large: StyleObject;
+        larger: StyleObject;
         /** Specifies the weight of the face lighter than the inherited value. */
-        "lighter": StyleObject;
-        "medium": StyleObject;
+        lighter: StyleObject;
+        medium: StyleObject;
         /** The font used in menus (e.g., dropdown menus and menu lists). */
-        "menu": StyleObject;
+        menu: StyleObject;
         /** The font used in dialog boxes. */
         "message-box": StyleObject;
         /** Specifies a face that is not labeled as a small-caps font. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Selects a font that is labeled 'oblique'. */
-        "oblique": StyleObject;
-        "small": StyleObject;
+        oblique: StyleObject;
+        small: StyleObject;
         /** Specifies a font that is labeled as a small-caps font. If a genuine small-caps font is not available, user agents should simulate a small-caps font. */
         "small-caps": StyleObject;
         /** The font used for labeling small controls. */
         "small-caption": StyleObject;
-        "smaller": StyleObject;
+        smaller: StyleObject;
         /** The font used in window status bars. */
         "status-bar": StyleObject;
         "x-large": StyleObject;
@@ -3159,17 +3161,17 @@ export interface CSSDecls {
         "Arial, Helvetica, sans-serif": StyleObject;
         "Cambria, Cochin, Georgia, Times, 'Times New Roman', serif": StyleObject;
         "'Courier New', Courier, monospace": StyleObject;
-        "cursive": StyleObject;
-        "fantasy": StyleObject;
+        cursive: StyleObject;
+        fantasy: StyleObject;
         "'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif": StyleObject;
         "Georgia, 'Times New Roman', Times, serif": StyleObject;
         "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif": StyleObject;
         "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif": StyleObject;
         "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif": StyleObject;
-        "monospace": StyleObject;
+        monospace: StyleObject;
         "sans-serif": StyleObject;
         "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif": StyleObject;
-        "serif": StyleObject;
+        serif: StyleObject;
         "'Times New Roman', Times, serif": StyleObject;
         "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif": StyleObject;
         "Verdana, Geneva, Tahoma, sans-serif": StyleObject;
@@ -3183,245 +3185,245 @@ export interface CSSDecls {
      */
     fontFeatureSettings: {
         /** Access All Alternates. */
-        "\"aalt\"": StyleObject;
+        '"aalt"': StyleObject;
         /** Above-base Forms. Required in Khmer script. */
-        "\"abvf\"": StyleObject;
+        '"abvf"': StyleObject;
         /** Above-base Mark Positioning. Required in Indic scripts. */
-        "\"abvm\"": StyleObject;
+        '"abvm"': StyleObject;
         /** Above-base Substitutions. Required in Indic scripts. */
-        "\"abvs\"": StyleObject;
+        '"abvs"': StyleObject;
         /** Alternative Fractions. */
-        "\"afrc\"": StyleObject;
+        '"afrc"': StyleObject;
         /** Akhand. Required in most Indic scripts. */
-        "\"akhn\"": StyleObject;
+        '"akhn"': StyleObject;
         /** Below-base Form. Required in a number of Indic scripts. */
-        "\"blwf\"": StyleObject;
+        '"blwf"': StyleObject;
         /** Below-base Mark Positioning. Required in Indic scripts. */
-        "\"blwm\"": StyleObject;
+        '"blwm"': StyleObject;
         /** Below-base Substitutions. Required in Indic scripts. */
-        "\"blws\"": StyleObject;
+        '"blws"': StyleObject;
         /** Contextual Alternates. */
-        "\"calt\"": StyleObject;
+        '"calt"': StyleObject;
         /** Case-Sensitive Forms. Applies only to European scripts; particularly prominent in Spanish-language setting. */
-        "\"case\"": StyleObject;
+        '"case"': StyleObject;
         /** Glyph Composition/Decomposition. */
-        "\"ccmp\"": StyleObject;
+        '"ccmp"': StyleObject;
         /** Conjunct Form After Ro. Required in Khmer scripts. */
-        "\"cfar\"": StyleObject;
+        '"cfar"': StyleObject;
         /** Conjunct Forms. Required in Indic scripts that show similarity to Devanagari. */
-        "\"cjct\"": StyleObject;
+        '"cjct"': StyleObject;
         /** Contextual Ligatures. */
-        "\"clig\"": StyleObject;
+        '"clig"': StyleObject;
         /** Centered CJK Punctuation. Used primarily in Chinese fonts. */
-        "\"cpct\"": StyleObject;
+        '"cpct"': StyleObject;
         /** Capital Spacing. Should not be used in connecting scripts (e.g. most Arabic). */
-        "\"cpsp\"": StyleObject;
+        '"cpsp"': StyleObject;
         /** Contextual Swash. */
-        "\"cswh\"": StyleObject;
+        '"cswh"': StyleObject;
         /** Cursive Positioning. Can be used in any cursive script. */
-        "\"curs\"": StyleObject;
+        '"curs"': StyleObject;
         /** Petite Capitals From Capitals. Applies only to bicameral scripts. */
-        "\"c2pc\"": StyleObject;
+        '"c2pc"': StyleObject;
         /** Small Capitals From Capitals. Applies only to bicameral scripts. */
-        "\"c2sc\"": StyleObject;
+        '"c2sc"': StyleObject;
         /** Distances. Required in Indic scripts. */
-        "\"dist\"": StyleObject;
+        '"dist"': StyleObject;
         /** Discretionary ligatures. */
-        "\"dlig\"": StyleObject;
+        '"dlig"': StyleObject;
         /** Denominators. */
-        "\"dnom\"": StyleObject;
+        '"dnom"': StyleObject;
         /** Dotless Forms. Applied to math formula layout. */
-        "\"dtls\"": StyleObject;
+        '"dtls"': StyleObject;
         /** Expert Forms. Applies only to Japanese. */
-        "\"expt\"": StyleObject;
+        '"expt"': StyleObject;
         /** Final Glyph on Line Alternates. Can be used in any cursive script. */
-        "\"falt\"": StyleObject;
+        '"falt"': StyleObject;
         /** Terminal Form #2. Used only with the Syriac script. */
-        "\"fin2\"": StyleObject;
+        '"fin2"': StyleObject;
         /** Terminal Form #3. Used only with the Syriac script. */
-        "\"fin3\"": StyleObject;
+        '"fin3"': StyleObject;
         /** Terminal Forms. Can be used in any alphabetic script. */
-        "\"fina\"": StyleObject;
+        '"fina"': StyleObject;
         /** Flattened ascent forms. Applied to math formula layout. */
-        "\"flac\"": StyleObject;
+        '"flac"': StyleObject;
         /** Fractions. */
-        "\"frac\"": StyleObject;
+        '"frac"': StyleObject;
         /** Full Widths. Applies to any script which can use monospaced forms. */
-        "\"fwid\"": StyleObject;
+        '"fwid"': StyleObject;
         /** Half Forms. Required in Indic scripts that show similarity to Devanagari. */
-        "\"half\"": StyleObject;
+        '"half"': StyleObject;
         /** Halant Forms. Required in Indic scripts. */
-        "\"haln\"": StyleObject;
+        '"haln"': StyleObject;
         /** Alternate Half Widths. Used only in CJKV fonts. */
-        "\"halt\"": StyleObject;
+        '"halt"': StyleObject;
         /** Historical Forms. */
-        "\"hist\"": StyleObject;
+        '"hist"': StyleObject;
         /** Horizontal Kana Alternates. Applies only to fonts that support kana (hiragana and katakana). */
-        "\"hkna\"": StyleObject;
+        '"hkna"': StyleObject;
         /** Historical Ligatures. */
-        "\"hlig\"": StyleObject;
+        '"hlig"': StyleObject;
         /** Hangul. Korean only. */
-        "\"hngl\"": StyleObject;
+        '"hngl"': StyleObject;
         /** Hojo Kanji Forms (JIS X 0212-1990 Kanji Forms). Used only with Kanji script. */
-        "\"hojo\"": StyleObject;
+        '"hojo"': StyleObject;
         /** Half Widths. Generally used only in CJKV fonts. */
-        "\"hwid\"": StyleObject;
+        '"hwid"': StyleObject;
         /** Initial Forms. Can be used in any alphabetic script. */
-        "\"init\"": StyleObject;
+        '"init"': StyleObject;
         /** Isolated Forms. Can be used in any cursive script. */
-        "\"isol\"": StyleObject;
+        '"isol"': StyleObject;
         /** Italics. Applies mostly to Latin; note that many non-Latin fonts contain Latin as well. */
-        "\"ital\"": StyleObject;
+        '"ital"': StyleObject;
         /** Justification Alternates. Can be used in any cursive script. */
-        "\"jalt\"": StyleObject;
+        '"jalt"': StyleObject;
         /** JIS78 Forms. Applies only to Japanese. */
-        "\"jp78\"": StyleObject;
+        '"jp78"': StyleObject;
         /** JIS83 Forms. Applies only to Japanese. */
-        "\"jp83\"": StyleObject;
+        '"jp83"': StyleObject;
         /** JIS90 Forms. Applies only to Japanese. */
-        "\"jp90\"": StyleObject;
+        '"jp90"': StyleObject;
         /** JIS2004 Forms. Applies only to Japanese. */
-        "\"jp04\"": StyleObject;
+        '"jp04"': StyleObject;
         /** Kerning. */
-        "\"kern\"": StyleObject;
+        '"kern"': StyleObject;
         /** Left Bounds. */
-        "\"lfbd\"": StyleObject;
+        '"lfbd"': StyleObject;
         /** Standard Ligatures. */
-        "\"liga\"": StyleObject;
+        '"liga"': StyleObject;
         /** Leading Jamo Forms. Required for Hangul script when Ancient Hangul writing system is supported. */
-        "\"ljmo\"": StyleObject;
+        '"ljmo"': StyleObject;
         /** Lining Figures. */
-        "\"lnum\"": StyleObject;
+        '"lnum"': StyleObject;
         /** Localized Forms. */
-        "\"locl\"": StyleObject;
+        '"locl"': StyleObject;
         /** Left-to-right glyph alternates. */
-        "\"ltra\"": StyleObject;
+        '"ltra"': StyleObject;
         /** Left-to-right mirrored forms. */
-        "\"ltrm\"": StyleObject;
+        '"ltrm"': StyleObject;
         /** Mark Positioning. */
-        "\"mark\"": StyleObject;
+        '"mark"': StyleObject;
         /** Medial Form #2. Used only with the Syriac script. */
-        "\"med2\"": StyleObject;
+        '"med2"': StyleObject;
         /** Medial Forms. */
-        "\"medi\"": StyleObject;
+        '"medi"': StyleObject;
         /** Mathematical Greek. */
-        "\"mgrk\"": StyleObject;
+        '"mgrk"': StyleObject;
         /** Mark to Mark Positioning. */
-        "\"mkmk\"": StyleObject;
+        '"mkmk"': StyleObject;
         /** Alternate Annotation Forms. */
-        "\"nalt\"": StyleObject;
+        '"nalt"': StyleObject;
         /** NLC Kanji Forms. Used only with Kanji script. */
-        "\"nlck\"": StyleObject;
+        '"nlck"': StyleObject;
         /** Nukta Forms. Required in Indic scripts.. */
-        "\"nukt\"": StyleObject;
+        '"nukt"': StyleObject;
         /** Numerators. */
-        "\"numr\"": StyleObject;
+        '"numr"': StyleObject;
         /** Oldstyle Figures. */
-        "\"onum\"": StyleObject;
+        '"onum"': StyleObject;
         /** Optical Bounds. */
-        "\"opbd\"": StyleObject;
+        '"opbd"': StyleObject;
         /** Ordinals. Applies mostly to Latin script. */
-        "\"ordn\"": StyleObject;
+        '"ordn"': StyleObject;
         /** Ornaments. */
-        "\"ornm\"": StyleObject;
+        '"ornm"': StyleObject;
         /** Proportional Alternate Widths. Used mostly in CJKV fonts. */
-        "\"palt\"": StyleObject;
+        '"palt"': StyleObject;
         /** Petite Capitals. */
-        "\"pcap\"": StyleObject;
+        '"pcap"': StyleObject;
         /** Proportional Kana. Generally used only in Japanese fonts. */
-        "\"pkna\"": StyleObject;
+        '"pkna"': StyleObject;
         /** Proportional Figures. */
-        "\"pnum\"": StyleObject;
+        '"pnum"': StyleObject;
         /** Pre-base Forms. Required in Khmer and Myanmar (Burmese) scripts and southern Indic scripts that may display a pre-base form of Ra. */
-        "\"pref\"": StyleObject;
+        '"pref"': StyleObject;
         /** Pre-base Substitutions. Required in Indic scripts. */
-        "\"pres\"": StyleObject;
+        '"pres"': StyleObject;
         /** Post-base Forms. Required in scripts of south and southeast Asia that have post-base forms for consonants eg: Gurmukhi, Malayalam, Khmer. */
-        "\"pstf\"": StyleObject;
+        '"pstf"': StyleObject;
         /** Post-base Substitutions. */
-        "\"psts\"": StyleObject;
+        '"psts"': StyleObject;
         /** Proportional Widths. */
-        "\"pwid\"": StyleObject;
+        '"pwid"': StyleObject;
         /** Quarter Widths. Generally used only in CJKV fonts. */
-        "\"qwid\"": StyleObject;
+        '"qwid"': StyleObject;
         /** Randomize. */
-        "\"rand\"": StyleObject;
+        '"rand"': StyleObject;
         /** Required Contextual Alternates. May apply to any script, but is especially important for many styles of Arabic. */
-        "\"rclt\"": StyleObject;
+        '"rclt"': StyleObject;
         /** Required Ligatures. Applies to Arabic and Syriac. May apply to some other scripts. */
-        "\"rlig\"": StyleObject;
+        '"rlig"': StyleObject;
         /** Rakar Forms. Required in Devanagari and Gujarati scripts. */
-        "\"rkrf\"": StyleObject;
+        '"rkrf"': StyleObject;
         /** Reph Form. Required in Indic scripts. E.g. Devanagari, Kannada. */
-        "\"rphf\"": StyleObject;
+        '"rphf"': StyleObject;
         /** Right Bounds. */
-        "\"rtbd\"": StyleObject;
+        '"rtbd"': StyleObject;
         /** Right-to-left alternates. */
-        "\"rtla\"": StyleObject;
+        '"rtla"': StyleObject;
         /** Right-to-left mirrored forms. */
-        "\"rtlm\"": StyleObject;
+        '"rtlm"': StyleObject;
         /** Ruby Notation Forms. Applies only to Japanese. */
-        "\"ruby\"": StyleObject;
+        '"ruby"': StyleObject;
         /** Stylistic Alternates. */
-        "\"salt\"": StyleObject;
+        '"salt"': StyleObject;
         /** Scientific Inferiors. */
-        "\"sinf\"": StyleObject;
+        '"sinf"': StyleObject;
         /** Optical size. */
-        "\"size\"": StyleObject;
+        '"size"': StyleObject;
         /** Small Capitals. Applies only to bicameral scripts. */
-        "\"smcp\"": StyleObject;
+        '"smcp"': StyleObject;
         /** Simplified Forms. Applies only to Chinese and Japanese. */
-        "\"smpl\"": StyleObject;
+        '"smpl"': StyleObject;
         /** Math script style alternates. */
-        "\"ssty\"": StyleObject;
+        '"ssty"': StyleObject;
         /** Stretching Glyph Decomposition. */
-        "\"stch\"": StyleObject;
+        '"stch"': StyleObject;
         /** Subscript. */
-        "\"subs\"": StyleObject;
+        '"subs"': StyleObject;
         /** Superscript. */
-        "\"sups\"": StyleObject;
+        '"sups"': StyleObject;
         /** Swash. Does not apply to ideographic scripts. */
-        "\"swsh\"": StyleObject;
+        '"swsh"': StyleObject;
         /** Titling. */
-        "\"titl\"": StyleObject;
+        '"titl"': StyleObject;
         /** Trailing Jamo Forms. Required for Hangul script when Ancient Hangul writing system is supported. */
-        "\"tjmo\"": StyleObject;
+        '"tjmo"': StyleObject;
         /** Traditional Name Forms. Applies only to Japanese. */
-        "\"tnam\"": StyleObject;
+        '"tnam"': StyleObject;
         /** Tabular Figures. */
-        "\"tnum\"": StyleObject;
+        '"tnum"': StyleObject;
         /** Traditional Forms. Applies only to Chinese and Japanese. */
-        "\"trad\"": StyleObject;
+        '"trad"': StyleObject;
         /** Third Widths. Generally used only in CJKV fonts. */
-        "\"twid\"": StyleObject;
+        '"twid"': StyleObject;
         /** Unicase. */
-        "\"unic\"": StyleObject;
+        '"unic"': StyleObject;
         /** Alternate Vertical Metrics. Applies only to scripts with vertical writing modes. */
-        "\"valt\"": StyleObject;
+        '"valt"': StyleObject;
         /** Vattu Variants. Used for Indic scripts. E.g. Devanagari. */
-        "\"vatu\"": StyleObject;
+        '"vatu"': StyleObject;
         /** Vertical Alternates. Applies only to scripts with vertical writing modes. */
-        "\"vert\"": StyleObject;
+        '"vert"': StyleObject;
         /** Alternate Vertical Half Metrics. Used only in CJKV fonts. */
-        "\"vhal\"": StyleObject;
+        '"vhal"': StyleObject;
         /** Vowel Jamo Forms. Required for Hangul script when Ancient Hangul writing system is supported. */
-        "\"vjmo\"": StyleObject;
+        '"vjmo"': StyleObject;
         /** Vertical Kana Alternates. Applies only to fonts that support kana (hiragana and katakana). */
-        "\"vkna\"": StyleObject;
+        '"vkna"': StyleObject;
         /** Vertical Kerning. */
-        "\"vkrn\"": StyleObject;
+        '"vkrn"': StyleObject;
         /** Proportional Alternate Vertical Metrics. Used mostly in CJKV fonts. */
-        "\"vpal\"": StyleObject;
+        '"vpal"': StyleObject;
         /** Vertical Alternates and Rotation. Applies only to scripts with vertical writing modes. */
-        "\"vrt2\"": StyleObject;
+        '"vrt2"': StyleObject;
         /** Slashed Zero. */
-        "\"zero\"": StyleObject;
+        '"zero"': StyleObject;
         /** No change in glyph substitution or positioning occurs. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Disable feature. */
-        "off": StyleObject;
+        off: StyleObject;
         /** Enable feature. */
-        "on": StyleObject;
+        on: StyleObject;
     } & StringEntry & IntegerEntry & WideEntry;
     /**
      * Kerning is the contextual adjustment of inter-glyph spacing. This property controls metric kerning, kerning that utilizes adjustment data contained in the font.
@@ -3434,11 +3436,11 @@ export interface CSSDecls {
      */
     fontKerning: {
         /** Specifies that kerning is applied at the discretion of the user agent. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Specifies that kerning is not applied. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Specifies that kerning is applied. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * The value of 'normal' implies that when rendering with OpenType fonts the language of the document is used to infer the OpenType language system, used to select language specific features when rendering.
@@ -3451,7 +3453,7 @@ export interface CSSDecls {
      */
     fontLanguageOverride: {
         /** Implies that when rendering with OpenType fonts the language of the document is used to infer the OpenType language system, used to select language specific features when rendering. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & StringEntry & WideEntry;
     /**
      * Indicates the desired height of glyphs from the font. For scalable fonts, the font-size is a scale factor applied to the EM unit of the font. (Note that certain glyphs may bleed outside their EM box.) For non-scalable fonts, the font-size is converted into absolute units and matched against the declared font-size of the font, using the same absolute coordinate space for both of the matched values.
@@ -3461,11 +3463,11 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-size)
      */
     fontSize: {
-        "large": StyleObject;
-        "larger": StyleObject;
-        "medium": StyleObject;
-        "small": StyleObject;
-        "smaller": StyleObject;
+        large: StyleObject;
+        larger: StyleObject;
+        medium: StyleObject;
+        small: StyleObject;
+        smaller: StyleObject;
         "x-large": StyleObject;
         "x-small": StyleObject;
         "xx-large": StyleObject;
@@ -3482,7 +3484,7 @@ export interface CSSDecls {
      */
     fontSizeAdjust: {
         /** Do not preserve the font’s x-height. */
-        "none": StyleObject;
+        none: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -3494,19 +3496,19 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-stretch)
      */
     fontStretch: {
-        "condensed": StyleObject;
-        "expanded": StyleObject;
+        condensed: StyleObject;
+        expanded: StyleObject;
         "extra-condensed": StyleObject;
         "extra-expanded": StyleObject;
         /** Indicates a narrower value relative to the width of the parent element. */
-        "narrower": StyleObject;
-        "normal": StyleObject;
+        narrower: StyleObject;
+        normal: StyleObject;
         "semi-condensed": StyleObject;
         "semi-expanded": StyleObject;
         "ultra-condensed": StyleObject;
         "ultra-expanded": StyleObject;
         /** Indicates a wider value relative to the width of the parent element. */
-        "wider": StyleObject;
+        wider: StyleObject;
     } & WideEntry;
     /**
      * Allows italic or oblique faces to be selected. Italic forms are generally cursive in nature while oblique faces are typically sloped versions of the regular face.
@@ -3517,11 +3519,11 @@ export interface CSSDecls {
      */
     fontStyle: {
         /** Selects a font that is labeled as an 'italic' face, or an 'oblique' face if one is not */
-        "italic": StyleObject;
+        italic: StyleObject;
         /** Selects a face that is classified as 'normal'. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Selects a font that is labeled as an 'oblique' face, or an 'italic' face if one is not. */
-        "oblique": StyleObject;
+        oblique: StyleObject;
     } & AngleEntry & WideEntry;
     /**
      * Controls whether user agents are allowed to synthesize bold or oblique font faces when a font family lacks bold or italic faces.
@@ -3534,11 +3536,11 @@ export interface CSSDecls {
      */
     fontSynthesis: {
         /** Disallow all synthetic faces. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Allow synthetic italic faces. */
-        "style": StyleObject;
+        style: StyleObject;
         /** Allow synthetic bold faces. */
-        "weight": StyleObject;
+        weight: StyleObject;
     } & WideEntry;
     /**
      * Specifies variant representations of the font
@@ -3549,7 +3551,7 @@ export interface CSSDecls {
      */
     fontVariant: {
         /** Specifies a face that is not labeled as a small-caps font. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Specifies a font that is labeled as a small-caps font. If a genuine small-caps font is not available, user agents should simulate a small-caps font. */
         "small-caps": StyleObject;
     } & WideEntry;
@@ -3570,7 +3572,7 @@ export interface CSSDecls {
         /** Enables display of historical forms. */
         "historical-forms": StyleObject;
         /** None of the features are enabled. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Enables replacement of default glyphs with ornaments, if provided in the font. */
         "ornaments()": StyleObject;
         /** Enables display with stylistic sets. */
@@ -3595,7 +3597,7 @@ export interface CSSDecls {
         /** Enables display of small capitals for both upper and lowercase letters. */
         "all-small-caps": StyleObject;
         /** None of the features are enabled. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Enables display of petite capitals. */
         "petite-caps": StyleObject;
         /** Enables display of small capitals. Small-caps glyphs typically use the form of uppercase letters but are reduced to the size of lowercase letters. */
@@ -3603,7 +3605,7 @@ export interface CSSDecls {
         /** Enables display of titling capitals. */
         "titling-caps": StyleObject;
         /** Enables display of mixture of small capitals for uppercase letters with normal lowercase letters. */
-        "unicase": StyleObject;
+        unicase: StyleObject;
     } & WideEntry;
     /**
      * Allows control of glyph substitute and positioning in East Asian text.
@@ -3618,23 +3620,23 @@ export interface CSSDecls {
         /** Enables rendering of full-width variants. */
         "full-width": StyleObject;
         /** Enables rendering of JIS04 forms. */
-        "jis04": StyleObject;
+        jis04: StyleObject;
         /** Enables rendering of JIS78 forms. */
-        "jis78": StyleObject;
+        jis78: StyleObject;
         /** Enables rendering of JIS83 forms. */
-        "jis83": StyleObject;
+        jis83: StyleObject;
         /** Enables rendering of JIS90 forms. */
-        "jis90": StyleObject;
+        jis90: StyleObject;
         /** None of the features are enabled. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Enables rendering of proportionally-spaced variants. */
         "proportional-width": StyleObject;
         /** Enables display of ruby variant glyphs. */
-        "ruby": StyleObject;
+        ruby: StyleObject;
         /** Enables rendering of simplified forms. */
-        "simplified": StyleObject;
+        simplified: StyleObject;
         /** Enables rendering of traditional forms. */
-        "traditional": StyleObject;
+        traditional: StyleObject;
     } & WideEntry;
     /**
      * Specifies control over which ligatures are enabled or disabled. A value of ‘normal’ implies that the defaults set by the font are used.
@@ -3655,7 +3657,7 @@ export interface CSSDecls {
          *
          * (Edge 79, Firefox 34, Safari 9.1, Chrome 34, Opera 21)
          */
-        "contextual": StyleObject;
+        contextual: StyleObject;
         /** Enables display of discretionary ligatures. */
         "discretionary-ligatures": StyleObject;
         /** Enables display of historical ligatures. */
@@ -3679,9 +3681,9 @@ export interface CSSDecls {
          *
          * (Edge 79, Firefox 34, Safari 9.1, Chrome 34, Opera 21)
          */
-        "none": StyleObject;
+        none: StyleObject;
         /** Implies that the defaults set by the font are used. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * Specifies control over numerical forms.
@@ -3698,11 +3700,11 @@ export interface CSSDecls {
         /** Enables display of lining numerals. */
         "lining-nums": StyleObject;
         /** None of the features are enabled. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Enables display of old-style numerals. */
         "oldstyle-nums": StyleObject;
         /** Enables display of letter forms used with ordinal numbers. */
-        "ordinal": StyleObject;
+        ordinal: StyleObject;
         /** Enables display of proportional numerals. */
         "proportional-nums": StyleObject;
         /** Enables display of slashed zeros. */
@@ -3723,11 +3725,11 @@ export interface CSSDecls {
      */
     fontVariantPosition: {
         /** None of the features are enabled. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Enables display of subscript variants (OpenType feature: subs). */
-        "sub": StyleObject;
+        sub: StyleObject;
         /** Enables display of superscript variants (OpenType feature: sups). */
-        "super": StyleObject;
+        super: StyleObject;
     } & WideEntry;
     /**
      * Specifies weight of glyphs in the font, their degree of blackness or stroke thickness.
@@ -3756,13 +3758,13 @@ export interface CSSDecls {
         /** Black (Heavy) */
         "900": StyleObject;
         /** Same as 700 */
-        "bold": StyleObject;
+        bold: StyleObject;
         /** Specifies the weight of the face bolder than the inherited value. */
-        "bolder": StyleObject;
+        bolder: StyleObject;
         /** Specifies the weight of the face lighter than the inherited value. */
-        "lighter": StyleObject;
+        lighter: StyleObject;
         /** Same as 400 */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /** Controls glyph orientation when the inline-progression-direction is horizontal. */
     glyphOrientationHorizontal: AngleEntry & {
@@ -3771,7 +3773,7 @@ export interface CSSDecls {
     /** Controls glyph orientation when the inline-progression-direction is vertical. */
     glyphOrientationVertical: {
         /** Sets the orientation based on the fullwidth or non-fullwidth characters and the most common orientation. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & AngleEntry & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -3786,9 +3788,9 @@ export interface CSSDecls {
      */
     gridArea: {
         /** The property contributes nothing to the grid item’s placement, indicating auto-placement, an automatic span, or a default span of one. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Contributes a grid span to the grid item’s placement such that the corresponding edge of the grid item’s grid area is N lines from its opposite edge. */
-        "span": StyleObject;
+        span: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * The grid CSS property is a shorthand property that sets all of the explicit grid properties ('grid-template-rows', 'grid-template-columns', and 'grid-template-areas'), and all the implicit grid properties ('grid-auto-rows', 'grid-auto-columns', and 'grid-auto-flow'), in a single declaration.
@@ -3813,7 +3815,7 @@ export interface CSSDecls {
         /** Represents the largest max-content contribution of the grid items occupying the grid track. */
         "max-content": StyleObject;
         /** As a maximum, identical to 'max-content'. As a minimum, represents the largest minimum size (as specified by min-width/min-height) of the grid items occupying the grid track. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Defines a size range greater than or equal to min and less than or equal to max. */
         minmax: (...params: Parameters<typeof minmax>) => StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
@@ -3828,11 +3830,11 @@ export interface CSSDecls {
      */
     gridAutoFlow: {
         /** The auto-placement algorithm places items by filling each row in turn, adding new rows as necessary. */
-        "row": StyleObject;
+        row: StyleObject;
         /** The auto-placement algorithm places items by filling each column in turn, adding new columns as necessary. */
-        "column": StyleObject;
+        column: StyleObject;
         /** If specified, the auto-placement algorithm uses a “dense” packing algorithm, which attempts to fill in holes earlier in the grid if smaller items come up later. */
-        "dense": StyleObject;
+        dense: StyleObject;
     } & WideEntry;
     /**
      * Specifies the size of implicitly created rows.
@@ -3847,7 +3849,7 @@ export interface CSSDecls {
         /** Represents the largest max-content contribution of the grid items occupying the grid track. */
         "max-content": StyleObject;
         /** As a maximum, identical to 'max-content'. As a minimum, represents the largest minimum size (as specified by min-width/min-height) of the grid items occupying the grid track. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Defines a size range greater than or equal to min and less than or equal to max. */
         minmax: (...params: Parameters<typeof minmax>) => StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
@@ -3862,9 +3864,9 @@ export interface CSSDecls {
      */
     gridColumn: {
         /** The property contributes nothing to the grid item’s placement, indicating auto-placement, an automatic span, or a default span of one. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Contributes a grid span to the grid item’s placement such that the corresponding edge of the grid item’s grid area is N lines from its opposite edge. */
-        "span": StyleObject;
+        span: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Determine a grid item’s size and location within the grid by contributing a line, a span, or nothing (automatic) to its grid placement.
@@ -3877,9 +3879,9 @@ export interface CSSDecls {
      */
     gridColumnEnd: {
         /** The property contributes nothing to the grid item’s placement, indicating auto-placement, an automatic span, or a default span of one. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Contributes a grid span to the grid item’s placement such that the corresponding edge of the grid item’s grid area is N lines from its opposite edge. */
-        "span": StyleObject;
+        span: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * 🚨️️️ Property is obsolete. Avoid using it.
@@ -3902,9 +3904,9 @@ export interface CSSDecls {
      */
     gridColumnStart: {
         /** The property contributes nothing to the grid item’s placement, indicating auto-placement, an automatic span, or a default span of one. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Contributes a grid span to the grid item’s placement such that the corresponding edge of the grid item’s grid area is N lines from its opposite edge. */
-        "span": StyleObject;
+        span: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * 🚨️️️ Property is obsolete. Avoid using it.
@@ -3927,9 +3929,9 @@ export interface CSSDecls {
      */
     gridRow: {
         /** The property contributes nothing to the grid item’s placement, indicating auto-placement, an automatic span, or a default span of one. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Contributes a grid span to the grid item’s placement such that the corresponding edge of the grid item’s grid area is N lines from its opposite edge. */
-        "span": StyleObject;
+        span: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Determine a grid item’s size and location within the grid by contributing a line, a span, or nothing (automatic) to its grid placement.
@@ -3942,9 +3944,9 @@ export interface CSSDecls {
      */
     gridRowEnd: {
         /** The property contributes nothing to the grid item’s placement, indicating auto-placement, an automatic span, or a default span of one. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Contributes a grid span to the grid item’s placement such that the corresponding edge of the grid item’s grid area is N lines from its opposite edge. */
-        "span": StyleObject;
+        span: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * 🚨️️️ Property is obsolete. Avoid using it.
@@ -3967,9 +3969,9 @@ export interface CSSDecls {
      */
     gridRowStart: {
         /** The property contributes nothing to the grid item’s placement, indicating auto-placement, an automatic span, or a default span of one. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Contributes a grid span to the grid item’s placement such that the corresponding edge of the grid item’s grid area is N lines from its opposite edge. */
-        "span": StyleObject;
+        span: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Shorthand for setting grid-template-columns, grid-template-rows, and grid-template-areas in a single declaration.
@@ -3982,15 +3984,15 @@ export interface CSSDecls {
      */
     gridTemplate: {
         /** Sets all three properties to their initial values. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Represents the largest min-content contribution of the grid items occupying the grid track. */
         "min-content": StyleObject;
         /** Represents the largest max-content contribution of the grid items occupying the grid track. */
         "max-content": StyleObject;
         /** As a maximum, identical to 'max-content'. As a minimum, represents the largest minimum size (as specified by min-width/min-height) of the grid items occupying the grid track. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Sets 'grid-template-rows' and 'grid-template-columns' to 'subgrid', and 'grid-template-areas' to its initial value. */
-        "subgrid": StyleObject;
+        subgrid: StyleObject;
         /** Defines a size range greater than or equal to min and less than or equal to max. */
         minmax: (...params: Parameters<typeof minmax>) => StyleObject;
         /** Represents a repeated fragment of the track list, allowing a large number of columns or rows that exhibit a recurring pattern to be written in a more compact form. */
@@ -4007,7 +4009,7 @@ export interface CSSDecls {
      */
     gridTemplateAreas: {
         /** The grid container doesn’t define any named grid areas. */
-        "none": StyleObject;
+        none: StyleObject;
     } & StringEntry & WideEntry;
     /**
      * specifies, as a space-separated track list, the line names and track sizing functions of the grid.
@@ -4018,15 +4020,15 @@ export interface CSSDecls {
      */
     gridTemplateColumns: {
         /** There is no explicit grid; any rows/columns will be implicitly generated. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Represents the largest min-content contribution of the grid items occupying the grid track. */
         "min-content": StyleObject;
         /** Represents the largest max-content contribution of the grid items occupying the grid track. */
         "max-content": StyleObject;
         /** As a maximum, identical to 'max-content'. As a minimum, represents the largest minimum size (as specified by min-width/min-height) of the grid items occupying the grid track. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the grid will align to its parent grid in that axis. */
-        "subgrid": StyleObject;
+        subgrid: StyleObject;
         /** Defines a size range greater than or equal to min and less than or equal to max. */
         minmax: (...params: Parameters<typeof minmax>) => StyleObject;
         /** Represents a repeated fragment of the track list, allowing a large number of columns or rows that exhibit a recurring pattern to be written in a more compact form. */
@@ -4041,15 +4043,15 @@ export interface CSSDecls {
      */
     gridTemplateRows: {
         /** There is no explicit grid; any rows/columns will be implicitly generated. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Represents the largest min-content contribution of the grid items occupying the grid track. */
         "min-content": StyleObject;
         /** Represents the largest max-content contribution of the grid items occupying the grid track. */
         "max-content": StyleObject;
         /** As a maximum, identical to 'max-content'. As a minimum, represents the largest minimum size (as specified by min-width/min-height) of the grid items occupying the grid track. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the grid will align to its parent grid in that axis. */
-        "subgrid": StyleObject;
+        subgrid: StyleObject;
         /** Defines a size range greater than or equal to min and less than or equal to max. */
         minmax: (...params: Parameters<typeof minmax>) => StyleObject;
         /** Represents a repeated fragment of the track list, allowing a large number of columns or rows that exhibit a recurring pattern to be written in a more compact form. */
@@ -4064,7 +4066,7 @@ export interface CSSDecls {
      */
     height: {
         /** The height depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Use the fit-content inline size or fit-content block size, as appropriate to the writing mode. */
         "fit-content": StyleObject;
         /** Use the max-content inline size or max-content block size, as appropriate to the writing mode. */
@@ -4081,11 +4083,11 @@ export interface CSSDecls {
      */
     hyphens: {
         /** Conditional hyphenation characters inside a word, if present, take priority over automatic resources when determining hyphenation points within the word. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Words are only broken at line breaks where there are characters inside the word that suggest line break opportunities */
-        "manual": StyleObject;
+        manual: StyleObject;
         /** Words are not broken at line breaks, even if characters inside the word suggest line break points. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Specifies an orthogonal rotation to be applied to an image before it is laid out.
@@ -4098,7 +4100,7 @@ export interface CSSDecls {
      */
     imageOrientation: {
         /** After rotating by the precededing angle, the image is flipped horizontally. Defaults to 0deg if the angle is ommitted. */
-        "flip": StyleObject;
+        flip: StyleObject;
         /** If the image has an orientation specified in its metadata, such as EXIF, this value computes to the angle that the metadata specifies is necessary to correctly orient the image. */
         "from-image": StyleObject;
     } & AngleEntry & WideEntry;
@@ -4113,17 +4115,17 @@ export interface CSSDecls {
      */
     imageRendering: {
         /** The image should be scaled with an algorithm that maximizes the appearance of the image. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The image must be scaled with an algorithm that preserves contrast and edges in the image, and which does not smooth colors or introduce blur to the image in the process. */
         "crisp-edges": StyleObject;
         /** (Edge 79, Firefox 3.6, Safari 6, Chrome 13, Opera 15) */
         "-moz-crisp-edges": StyleObject;
         /** Deprecated. */
-        "optimizeQuality": StyleObject;
+        optimizeQuality: StyleObject;
         /** Deprecated. */
-        "optimizeSpeed": StyleObject;
+        optimizeSpeed: StyleObject;
         /** When scaling the image up, the 'nearest neighbor' or similar algorithm must be used, so that the image appears to be simply composed of very large pixels. */
-        "pixelated": StyleObject;
+        pixelated: StyleObject;
     } & WideEntry;
     /**
      * 🚨️️️ Property is obsolete. Avoid using it.
@@ -4138,15 +4140,15 @@ export interface CSSDecls {
      */
     imeMode: {
         /** The input method editor is initially active; text entry is performed using it unless the user specifically dismisses it. */
-        "active": StyleObject;
+        active: StyleObject;
         /** No change is made to the current input method editor state. This is the default. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The input method editor is disabled and may not be activated by the user. */
-        "disabled": StyleObject;
+        disabled: StyleObject;
         /** The input method editor is initially inactive, but the user may activate it if they wish. */
-        "inactive": StyleObject;
+        inactive: StyleObject;
         /** The IME state should be normal; this value can be used in a user style sheet to override the page setting. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * Size of an element in the direction specified by 'writing-mode'.
@@ -4159,7 +4161,7 @@ export interface CSSDecls {
      */
     inlineSize: {
         /** Depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * In CSS setting to 'isolate' will turn the element into a stacking context. In SVG, it defines whether an element is isolated or not.
@@ -4172,9 +4174,9 @@ export interface CSSDecls {
      */
     isolation: {
         /** Elements are not isolated unless an operation is applied that causes the creation of a stacking context. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** In CSS will turn the element into a stacking context. */
-        "isolate": StyleObject;
+        isolate: StyleObject;
     } & WideEntry;
     /**
      * Aligns flex items along the main axis of the current line of the flex container.
@@ -4183,21 +4185,21 @@ export interface CSSDecls {
      */
     justifyContent: {
         /** Flex items are packed toward the center of the line. */
-        "center": StyleObject;
+        center: StyleObject;
         /** The items are packed flush to each other toward the start edge of the alignment container in the main axis. */
-        "start": StyleObject;
+        start: StyleObject;
         /** The items are packed flush to each other toward the end edge of the alignment container in the main axis. */
-        "end": StyleObject;
+        end: StyleObject;
         /** The items are packed flush to each other toward the left edge of the alignment container in the main axis. */
-        "left": StyleObject;
+        left: StyleObject;
         /** The items are packed flush to each other toward the right edge of the alignment container in the main axis. */
-        "right": StyleObject;
+        right: StyleObject;
         /** If the size of the item overflows the alignment container, the item is instead aligned as if the alignment mode were start. */
-        "safe": StyleObject;
+        safe: StyleObject;
         /** Regardless of the relative sizes of the item and alignment container, the given alignment value is honored. */
-        "unsafe": StyleObject;
+        unsafe: StyleObject;
         /** If the combined size of the alignment subjects is less than the size of the alignment container, any auto-sized alignment subjects have their size increased equally (not proportionally), while still respecting the constraints imposed by max-height/max-width (or equivalent functionality), so that the combined size exactly fills the alignment container. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
         /** The items are evenly distributed within the alignment container along the main axis. */
         "space-evenly": StyleObject;
         /** Flex items are packed toward the end of the line. */
@@ -4209,7 +4211,7 @@ export interface CSSDecls {
         /** Flex items are evenly distributed in the line. */
         "space-between": StyleObject;
         /** Specifies participation in first-baseline alignment. */
-        "baseline": StyleObject;
+        baseline: StyleObject;
         /** Specifies participation in first-baseline alignment. */
         "first baseline": StyleObject;
         /** Specifies participation in last-baseline alignment. */
@@ -4218,7 +4220,7 @@ export interface CSSDecls {
     /** Indicates whether the user agent should adjust inter-glyph spacing based on kerning tables that are included in the relevant font or instead disable auto-kerning and set inter-character spacing to a specific length. */
     kerning: {
         /** Indicates that the user agent should adjust inter-glyph spacing based on kerning tables that are included in the font that will be used. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Specifies how far an absolutely positioned box's left margin edge is offset to the right of the left edge of the box's 'containing block'.
@@ -4229,7 +4231,7 @@ export interface CSSDecls {
      */
     left: {
         /** For non-replaced elements, the effect of this value depends on which of related properties have the value 'auto' as well */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Specifies the minimum, maximum, and optimal spacing between grapheme clusters.
@@ -4240,7 +4242,7 @@ export interface CSSDecls {
      */
     letterSpacing: {
         /** The spacing is the normal spacing for the current font. It is typically zero-length. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Defines the color of the light source for filter primitives 'feDiffuseLighting' and 'feSpecularLighting'.
@@ -4257,15 +4259,15 @@ export interface CSSDecls {
      */
     lineBreak: {
         /** The UA determines the set of line-breaking restrictions to use for CJK scripts, and it may vary the restrictions based on the length of the line; e.g., use a less restrictive set of line-break rules for short lines. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Breaks text using the least restrictive set of line-breaking rules. Typically used for short lines, such as in newspapers. */
-        "loose": StyleObject;
+        loose: StyleObject;
         /** Breaks text using the most common set of line-breaking rules. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Breaks CJK scripts using a more restrictive set of line-breaking rules than 'normal'. */
-        "strict": StyleObject;
+        strict: StyleObject;
         /** There is a soft wrap opportunity around every typographic character unit, including around any punctuation character or preserved white spaces, or in the middle of words, disregarding any prohibition against line breaks, even those introduced by characters with the GL, WJ, or ZWJ line breaking classes or mandated by the word-break property. */
-        "anywhere": StyleObject;
+        anywhere: StyleObject;
     } & WideEntry;
     /**
      * Determines the block-progression dimension of the text content area of an inline box.
@@ -4276,7 +4278,7 @@ export interface CSSDecls {
      */
     lineHeight: {
         /** Tells user agents to set the computed value to a 'reasonable' value based on the font size of the element. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -4288,25 +4290,25 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/list-style)
      */
     listStyle: {
-        "armenian": StyleObject;
+        armenian: StyleObject;
         /** A hollow circle. */
-        "circle": StyleObject;
-        "decimal": StyleObject;
+        circle: StyleObject;
+        decimal: StyleObject;
         "decimal-leading-zero": StyleObject;
         /** A filled circle. */
-        "disc": StyleObject;
-        "georgian": StyleObject;
+        disc: StyleObject;
+        georgian: StyleObject;
         /** The marker box is outside the principal block box, as described in the section on the ::marker pseudo-element below. */
-        "inside": StyleObject;
+        inside: StyleObject;
         "lower-alpha": StyleObject;
         "lower-greek": StyleObject;
         "lower-latin": StyleObject;
         "lower-roman": StyleObject;
-        "none": StyleObject;
+        none: StyleObject;
         /** The ::marker pseudo-element is an inline element placed immediately before all ::before pseudo-elements in the principal block box, after which the element's content flows. */
-        "outside": StyleObject;
+        outside: StyleObject;
         /** A filled square. */
-        "square": StyleObject;
+        square: StyleObject;
         /** Allows a counter style to be defined inline. */
         "symbols()": StyleObject;
         "upper-alpha": StyleObject;
@@ -4323,7 +4325,7 @@ export interface CSSDecls {
      */
     listStyleImage: {
         /** The default contents of the of the list item’s marker are given by 'list-style-type' instead. */
-        "none": StyleObject;
+        none: StyleObject;
     } & ImageFunctions & WideEntry;
     /**
      * Specifies the position of the '::marker' pseudo-element's box in the list item.
@@ -4334,9 +4336,9 @@ export interface CSSDecls {
      */
     listStylePosition: {
         /** The marker box is outside the principal block box, as described in the section on the ::marker pseudo-element below. */
-        "inside": StyleObject;
+        inside: StyleObject;
         /** The ::marker pseudo-element is an inline element placed immediately before all ::before pseudo-elements in the principal block box, after which the element's content flows. */
-        "outside": StyleObject;
+        outside: StyleObject;
     } & WideEntry;
     /**
      * Used to construct the default contents of a list item’s marker
@@ -4347,17 +4349,17 @@ export interface CSSDecls {
      */
     listStyleType: {
         /** Traditional uppercase Armenian numbering. */
-        "armenian": StyleObject;
+        armenian: StyleObject;
         /** A hollow circle. */
-        "circle": StyleObject;
+        circle: StyleObject;
         /** Western decimal numbers. */
-        "decimal": StyleObject;
+        decimal: StyleObject;
         /** Decimal numbers padded by initial zeros. */
         "decimal-leading-zero": StyleObject;
         /** A filled circle. */
-        "disc": StyleObject;
+        disc: StyleObject;
         /** Traditional Georgian numbering. */
-        "georgian": StyleObject;
+        georgian: StyleObject;
         /** Lowercase ASCII letters. */
         "lower-alpha": StyleObject;
         /** Lowercase classical Greek. */
@@ -4367,9 +4369,9 @@ export interface CSSDecls {
         /** Lowercase ASCII Roman numerals. */
         "lower-roman": StyleObject;
         /** No marker */
-        "none": StyleObject;
+        none: StyleObject;
         /** A filled square. */
-        "square": StyleObject;
+        square: StyleObject;
         /** Allows a counter style to be defined inline. */
         "symbols()": StyleObject;
         /** Uppercase ASCII letters. */
@@ -4387,7 +4389,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin)
      */
     margin: {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Logical 'margin-bottom'. Mapping depends on the parent element’s 'writing-mode', 'direction', and 'text-orientation'.
@@ -4399,7 +4401,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-block-end)
      */
     marginBlockEnd: {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Logical 'margin-top'. Mapping depends on the parent element’s 'writing-mode', 'direction', and 'text-orientation'.
@@ -4411,7 +4413,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-block-start)
      */
     marginBlockStart: {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Shorthand property to set values for the thickness of the margin area. If left is omitted, it is the same as right. If bottom is omitted it is the same as top, if right is omitted it is the same as top. Negative values for margin properties are allowed, but there may be implementation-specific limits..
@@ -4421,7 +4423,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-bottom)
      */
     marginBottom: {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Logical 'margin-right'. Mapping depends on the parent element’s 'writing-mode', 'direction', and 'text-orientation'.
@@ -4433,7 +4435,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-end)
      */
     marginInlineEnd: {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Logical 'margin-left'. Mapping depends on the parent element’s 'writing-mode', 'direction', and 'text-orientation'.
@@ -4445,7 +4447,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-start)
      */
     marginInlineStart: {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Shorthand property to set values for the thickness of the margin area. If left is omitted, it is the same as right. If bottom is omitted it is the same as top, if right is omitted it is the same as top. Negative values for margin properties are allowed, but there may be implementation-specific limits..
@@ -4455,7 +4457,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-left)
      */
     marginLeft: {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Shorthand property to set values for the thickness of the margin area. If left is omitted, it is the same as right. If bottom is omitted it is the same as top, if right is omitted it is the same as top. Negative values for margin properties are allowed, but there may be implementation-specific limits..
@@ -4465,7 +4467,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-right)
      */
     marginRight: {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Shorthand property to set values for the thickness of the margin area. If left is omitted, it is the same as right. If bottom is omitted it is the same as top, if right is omitted it is the same as top. Negative values for margin properties are allowed, but there may be implementation-specific limits..
@@ -4475,33 +4477,33 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-top)
      */
     marginTop: {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /** Specifies the marker symbol that shall be used for all points on the sets the value for all vertices on the given ‘path’ element or basic shape. */
     marker: {
         /** Indicates that no marker symbol will be drawn at the given vertex or vertices. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Indicates that the \<marker> element referenced will be used. */
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & WideEntry;
     /** Specifies the marker that will be drawn at the last vertices of the given markable element. */
     markerEnd: {
         /** Indicates that no marker symbol will be drawn at the given vertex or vertices. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Indicates that the \<marker> element referenced will be used. */
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & WideEntry;
     /** Specifies the marker that will be drawn at all vertices except the first and last. */
     markerMid: {
         /** Indicates that no marker symbol will be drawn at the given vertex or vertices. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Indicates that the \<marker> element referenced will be used. */
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & WideEntry;
     /** Specifies the marker that will be drawn at the first vertices of the given markable element. */
     markerStart: {
         /** Indicates that no marker symbol will be drawn at the given vertex or vertices. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Indicates that the \<marker> element referenced will be used. */
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & WideEntry;
@@ -4516,7 +4518,7 @@ export interface CSSDecls {
      */
     maskImage: {
         /** Counts as a transparent black image layer. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Reference to a \<mask element or to a CSS image. */
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & ImageFunctions & WideEntry;
@@ -4531,11 +4533,11 @@ export interface CSSDecls {
      */
     maskMode: {
         /** Alpha values of the mask layer image should be used as the mask values. */
-        "alpha": StyleObject;
+        alpha: StyleObject;
         /** Use alpha values if 'mask-image' is an image, luminance if a \<mask> element or a CSS image. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Luminance values of the mask layer image should be used as the mask values. */
-        "luminance": StyleObject;
+        luminance: StyleObject;
     } & URLEntry & ImageFunctions & WideEntry;
     /**
      * Specifies the mask positioning area.
@@ -4578,11 +4580,11 @@ export interface CSSDecls {
      */
     maskSize: {
         /** Resolved by using the image’s intrinsic ratio and the size of the other dimension, or failing that, using the image’s intrinsic size, or failing that, treating it as 100%. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Scale the image, while preserving its intrinsic aspect ratio (if any), to the largest size such that both its width and its height can fit inside the background positioning area. */
-        "contain": StyleObject;
+        contain: StyleObject;
         /** Scale the image, while preserving its intrinsic aspect ratio (if any), to the smallest size such that both its width and its height can completely cover the background positioning area. */
-        "cover": StyleObject;
+        cover: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Defines whether the content of the \<mask> element is treated as as luminance mask or alpha mask.
@@ -4595,9 +4597,9 @@ export interface CSSDecls {
      */
     maskType: {
         /** Indicates that the alpha values of the mask should be used. */
-        "alpha": StyleObject;
+        alpha: StyleObject;
         /** Indicates that the luminance values of the mask should be used. */
-        "luminance": StyleObject;
+        luminance: StyleObject;
     } & WideEntry;
     /**
      * Maximum size of an element in the direction opposite that of the direction specified by 'writing-mode'.
@@ -4610,7 +4612,7 @@ export interface CSSDecls {
      */
     maxBlockSize: {
         /** No limit on the width of the box. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Allows authors to constrain content height to a certain range.
@@ -4621,7 +4623,7 @@ export interface CSSDecls {
      */
     maxHeight: {
         /** No limit on the height of the box. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Use the fit-content inline size or fit-content block size, as appropriate to the writing mode. */
         "fit-content": StyleObject;
         /** Use the max-content inline size or max-content block size, as appropriate to the writing mode. */
@@ -4640,7 +4642,7 @@ export interface CSSDecls {
      */
     maxInlineSize: {
         /** No limit on the height of the box. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Allows authors to constrain content width to a certain range.
@@ -4651,7 +4653,7 @@ export interface CSSDecls {
      */
     maxWidth: {
         /** No limit on the width of the box. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Use the fit-content inline size or fit-content block size, as appropriate to the writing mode. */
         "fit-content": StyleObject;
         /** Use the max-content inline size or max-content block size, as appropriate to the writing mode. */
@@ -4677,7 +4679,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-height)
      */
     minHeight: {
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Use the fit-content inline size or fit-content block size, as appropriate to the writing mode. */
         "fit-content": StyleObject;
         /** Use the max-content inline size or max-content block size, as appropriate to the writing mode. */
@@ -4703,7 +4705,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-width)
      */
     minWidth: {
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Use the fit-content inline size or fit-content block size, as appropriate to the writing mode. */
         "fit-content": StyleObject;
         /** Use the max-content inline size or max-content block size, as appropriate to the writing mode. */
@@ -4722,17 +4724,17 @@ export interface CSSDecls {
      */
     mixBlendMode: {
         /** Default attribute which specifies no blending */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** The source color is multiplied by the destination color and replaces the destination. */
-        "multiply": StyleObject;
+        multiply: StyleObject;
         /** Multiplies the complements of the backdrop and source color values, then complements the result. */
-        "screen": StyleObject;
+        screen: StyleObject;
         /** Multiplies or screens the colors, depending on the backdrop color value. */
-        "overlay": StyleObject;
+        overlay: StyleObject;
         /** Selects the darker of the backdrop and source colors. */
-        "darken": StyleObject;
+        darken: StyleObject;
         /** Selects the lighter of the backdrop and source colors. */
-        "lighten": StyleObject;
+        lighten: StyleObject;
         /** Brightens the backdrop color to reflect the source color. */
         "color-dodge": StyleObject;
         /** Darkens the backdrop color to reflect the source color. */
@@ -4742,33 +4744,33 @@ export interface CSSDecls {
         /** Darkens or lightens the colors, depending on the source color value. */
         "soft-light": StyleObject;
         /** Subtracts the darker of the two constituent colors from the lighter color.. */
-        "difference": StyleObject;
+        difference: StyleObject;
         /** Produces an effect similar to that of the Difference mode but lower in contrast. */
-        "exclusion": StyleObject;
+        exclusion: StyleObject;
         /**
          * Creates a color with the hue of the source color and the saturation and luminosity of the backdrop color.
          *
          * (Edge 79, Firefox 32, Safari 8, Chrome 41, Opera 28)
          */
-        "hue": StyleObject;
+        hue: StyleObject;
         /**
          * Creates a color with the saturation of the source color and the hue and luminosity of the backdrop color.
          *
          * (Edge 79, Firefox 32, Safari 8, Chrome 41, Opera 28)
          */
-        "saturation": StyleObject;
+        saturation: StyleObject;
         /**
          * Creates a color with the hue and saturation of the source color and the luminosity of the backdrop color.
          *
          * (Edge 79, Firefox 32, Safari 8, Chrome 41, Opera 28)
          */
-        "color": StyleObject;
+        color: StyleObject;
         /**
          * Creates a color with the luminosity of the source color and the hue and saturation of the backdrop color.
          *
          * (Edge 79, Firefox 32, Safari 8, Chrome 41, Opera 28)
          */
-        "luminosity": StyleObject;
+        luminosity: StyleObject;
     } & WideEntry;
     /**
      * Shorthand property for setting 'motion-path', 'motion-offset' and 'motion-rotation'.
@@ -4777,13 +4779,13 @@ export interface CSSDecls {
      */
     motion: {
         /** No motion path gets created. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Defines an SVG path as a string, with optional 'fill-rule' as the first argument. */
         path: (...params: Parameters<typeof path>) => StyleObject;
         /** Indicates that the object is rotated by the angle of the direction of the motion path. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the object is rotated by the angle of the direction of the motion path plus 180 degrees. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & URLEntry & LengthEntry & PercentEntry & AngleEntry & BasicShapeFunctions & GeometryBoxEntry & WideEntry;
     /**
      * A distance that describes the position along the specified motion path.
@@ -4798,7 +4800,7 @@ export interface CSSDecls {
      */
     motionPath: {
         /** No motion path gets created. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Defines an SVG path as a string, with optional 'fill-rule' as the first argument. */
         path: (...params: Parameters<typeof path>) => StyleObject;
     } & URLEntry & BasicShapeFunctions & GeometryBoxEntry & WideEntry;
@@ -4809,9 +4811,9 @@ export interface CSSDecls {
      */
     motionRotation: {
         /** Indicates that the object is rotated by the angle of the direction of the motion path. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the object is rotated by the angle of the direction of the motion path plus 180 degrees. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & AngleEntry & WideEntry;
     /**
      * Shorthand property combines six of the animation properties into a single property.
@@ -4820,23 +4822,23 @@ export interface CSSDecls {
      */
     "-moz-animation": {
         /** The animation cycle iterations that are odd counts are played in the normal direction, and the animation cycle iterations that are even counts are played in a reverse direction. */
-        "alternate": StyleObject;
+        alternate: StyleObject;
         /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
         "alternate-reverse": StyleObject;
         /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
-        "backwards": StyleObject;
+        backwards: StyleObject;
         /** Both forwards and backwards fill modes are applied. */
-        "both": StyleObject;
+        both: StyleObject;
         /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
-        "forwards": StyleObject;
+        forwards: StyleObject;
         /** Causes the animation to repeat forever. */
-        "infinite": StyleObject;
+        infinite: StyleObject;
         /** No animation is performed */
-        "none": StyleObject;
+        none: StyleObject;
         /** Normal playback. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** All iterations of the animation are played in the reverse direction from the way they were specified. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & TimeEntry & TransitionTimingFunctions & WideEntry;
@@ -4853,13 +4855,13 @@ export interface CSSDecls {
      */
     "-moz-animation-direction": {
         /** The animation cycle iterations that are odd counts are played in the normal direction, and the animation cycle iterations that are even counts are played in a reverse direction. */
-        "alternate": StyleObject;
+        alternate: StyleObject;
         /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
         "alternate-reverse": StyleObject;
         /** Normal playback. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** All iterations of the animation are played in the reverse direction from the way they were specified. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & WideEntry;
     /**
      * Defines the length of time that an animation takes to complete one cycle.
@@ -4874,7 +4876,7 @@ export interface CSSDecls {
      */
     "-moz-animation-iteration-count": {
         /** Causes the animation to repeat forever. */
-        "infinite": StyleObject;
+        infinite: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -4885,7 +4887,7 @@ export interface CSSDecls {
      */
     "-moz-animation-name": {
         /** No animation is performed */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Defines whether the animation is running or paused.
@@ -4894,9 +4896,9 @@ export interface CSSDecls {
      */
     "-moz-animation-play-state": {
         /** A running animation will be paused. */
-        "paused": StyleObject;
+        paused: StyleObject;
         /** Resume playback of a paused animation. */
-        "running": StyleObject;
+        running: StyleObject;
     } & WideEntry;
     /**
      * Describes how the animation will progress over one cycle of its duration. See the 'transition-timing-function'.
@@ -4914,44 +4916,44 @@ export interface CSSDecls {
      * Syntax: none | button | button-arrow-down | button-arrow-next | button-arrow-previous | button-arrow-up | button-bevel | button-focus | caret | checkbox | checkbox-container | checkbox-label | checkmenuitem | dualbutton | groupbox | listbox | listitem | menuarrow | menubar | menucheckbox | menuimage | menuitem | menuitemtext | menulist | menulist-button | menulist-text | menulist-textfield | menupopup | menuradio | menuseparator | meterbar | meterchunk | progressbar | progressbar-vertical | progresschunk | progresschunk-vertical | radio | radio-container | radio-label | radiomenuitem | range | range-thumb | resizer | resizerpanel | scale-horizontal | scalethumbend | scalethumb-horizontal | scalethumbstart | scalethumbtick | scalethumb-vertical | scale-vertical | scrollbarbutton-down | scrollbarbutton-left | scrollbarbutton-right | scrollbarbutton-up | scrollbarthumb-horizontal | scrollbarthumb-vertical | scrollbartrack-horizontal | scrollbartrack-vertical | searchfield | separator | sheet | spinner | spinner-downbutton | spinner-textfield | spinner-upbutton | splitter | statusbar | statusbarpanel | tab | tabpanel | tabpanels | tab-scroll-arrow-back | tab-scroll-arrow-forward | textfield | textfield-multiline | toolbar | toolbarbutton | toolbarbutton-dropdown | toolbargripper | toolbox | tooltip | treeheader | treeheadercell | treeheadersortarrow | treeitem | treeline | treetwisty | treetwistyopen | treeview | -moz-mac-unified-toolbar | -moz-win-borderless-glass | -moz-win-browsertabbar-toolbox | -moz-win-communicationstext | -moz-win-communications-toolbox | -moz-win-exclude-glass | -moz-win-glass | -moz-win-mediatext | -moz-win-media-toolbox | -moz-window-button-box | -moz-window-button-box-maximized | -moz-window-button-close | -moz-window-button-maximize | -moz-window-button-minimize | -moz-window-button-restore | -moz-window-frame-bottom | -moz-window-frame-left | -moz-window-frame-right | -moz-window-titlebar | -moz-window-titlebar-maximized
      */
     "-moz-appearance": {
-        "button": StyleObject;
+        button: StyleObject;
         "button-arrow-down": StyleObject;
         "button-arrow-next": StyleObject;
         "button-arrow-previous": StyleObject;
         "button-arrow-up": StyleObject;
         "button-bevel": StyleObject;
-        "checkbox": StyleObject;
+        checkbox: StyleObject;
         "checkbox-container": StyleObject;
         "checkbox-label": StyleObject;
-        "dialog": StyleObject;
-        "groupbox": StyleObject;
-        "listbox": StyleObject;
-        "menuarrow": StyleObject;
-        "menuimage": StyleObject;
-        "menuitem": StyleObject;
-        "menuitemtext": StyleObject;
-        "menulist": StyleObject;
+        dialog: StyleObject;
+        groupbox: StyleObject;
+        listbox: StyleObject;
+        menuarrow: StyleObject;
+        menuimage: StyleObject;
+        menuitem: StyleObject;
+        menuitemtext: StyleObject;
+        menulist: StyleObject;
         "menulist-button": StyleObject;
         "menulist-text": StyleObject;
         "menulist-textfield": StyleObject;
-        "menupopup": StyleObject;
-        "menuradio": StyleObject;
-        "menuseparator": StyleObject;
+        menupopup: StyleObject;
+        menuradio: StyleObject;
+        menuseparator: StyleObject;
         "-moz-mac-unified-toolbar": StyleObject;
         "-moz-win-borderless-glass": StyleObject;
         "-moz-win-browsertabbar-toolbox": StyleObject;
         "-moz-win-communications-toolbox": StyleObject;
         "-moz-win-glass": StyleObject;
         "-moz-win-media-toolbox": StyleObject;
-        "none": StyleObject;
-        "progressbar": StyleObject;
-        "progresschunk": StyleObject;
-        "radio": StyleObject;
+        none: StyleObject;
+        progressbar: StyleObject;
+        progresschunk: StyleObject;
+        radio: StyleObject;
         "radio-container": StyleObject;
         "radio-label": StyleObject;
-        "radiomenuitem": StyleObject;
-        "resizer": StyleObject;
-        "resizerpanel": StyleObject;
+        radiomenuitem: StyleObject;
+        resizer: StyleObject;
+        resizerpanel: StyleObject;
         "scrollbarbutton-down": StyleObject;
         "scrollbarbutton-left": StyleObject;
         "scrollbarbutton-right": StyleObject;
@@ -4959,29 +4961,29 @@ export interface CSSDecls {
         "scrollbar-small": StyleObject;
         "scrollbartrack-horizontal": StyleObject;
         "scrollbartrack-vertical": StyleObject;
-        "separator": StyleObject;
-        "spinner": StyleObject;
+        separator: StyleObject;
+        spinner: StyleObject;
         "spinner-downbutton": StyleObject;
         "spinner-textfield": StyleObject;
         "spinner-upbutton": StyleObject;
-        "statusbar": StyleObject;
-        "statusbarpanel": StyleObject;
-        "tab": StyleObject;
-        "tabpanels": StyleObject;
+        statusbar: StyleObject;
+        statusbarpanel: StyleObject;
+        tab: StyleObject;
+        tabpanels: StyleObject;
         "tab-scroll-arrow-back": StyleObject;
         "tab-scroll-arrow-forward": StyleObject;
-        "textfield": StyleObject;
+        textfield: StyleObject;
         "textfield-multiline": StyleObject;
-        "toolbar": StyleObject;
-        "toolbox": StyleObject;
-        "tooltip": StyleObject;
-        "treeheadercell": StyleObject;
-        "treeheadersortarrow": StyleObject;
-        "treeitem": StyleObject;
-        "treetwistyopen": StyleObject;
-        "treeview": StyleObject;
-        "treewisty": StyleObject;
-        "window": StyleObject;
+        toolbar: StyleObject;
+        toolbox: StyleObject;
+        tooltip: StyleObject;
+        treeheadercell: StyleObject;
+        treeheadersortarrow: StyleObject;
+        treeitem: StyleObject;
+        treetwistyopen: StyleObject;
+        treeview: StyleObject;
+        treewisty: StyleObject;
+        window: StyleObject;
     } & WideEntry;
     /**
      * Determines whether or not the 'back' side of a transformed element is visible when facing the viewer. With an identity transform, the front side of an element faces the viewer.
@@ -4989,8 +4991,8 @@ export interface CSSDecls {
      * (Firefox 10)
      */
     "-moz-backface-visibility": {
-        "hidden": StyleObject;
-        "visible": StyleObject;
+        hidden: StyleObject;
+        visible: StyleObject;
     } & WideEntry;
     /**
      * Determines the background painting area.
@@ -4998,7 +5000,7 @@ export interface CSSDecls {
      * (Firefox 1-3.6)
      */
     "-moz-background-clip": {
-        "padding": StyleObject;
+        padding: StyleObject;
     } & BoxEntry & WideEntry;
     /**
      * In Gecko-based applications like Firefox, the -moz-background-inline-policy CSS property specifies how the background image of an inline element is determined when the content of the inline element wraps onto multiple lines. The choice of position has significant effects on repetition.
@@ -5007,7 +5009,7 @@ export interface CSSDecls {
      */
     "-moz-background-inline-policy": {
         "bounding-box": StyleObject;
-        "continuous": StyleObject;
+        continuous: StyleObject;
         "each-box": StyleObject;
     } & WideEntry;
     /**
@@ -5033,18 +5035,18 @@ export interface CSSDecls {
      */
     "-moz-border-image": {
         /** If 'auto' is specified then the border image width is the intrinsic width or height (whichever is applicable) of the corresponding image slice. If the image does not have the required intrinsic dimension then the corresponding border-width is used instead. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Causes the middle part of the border-image to be preserved. */
-        "fill": StyleObject;
-        "none": StyleObject;
+        fill: StyleObject;
+        none: StyleObject;
         /** The image is tiled (repeated) to fill the area. */
-        "repeat": StyleObject;
+        repeat: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the image is rescaled so that it does. */
-        "round": StyleObject;
+        round: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the extra space is distributed around the tiles. */
-        "space": StyleObject;
+        space: StyleObject;
         /** The image is stretched to fill the area. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
@@ -5086,15 +5088,15 @@ export interface CSSDecls {
      */
     "-moz-box-align": {
         /** If this box orientation is inline-axis or horizontal, all children are placed with their baselines aligned, and extra space placed before or after as necessary. For block flows, the baseline of the first non-empty line box located within the element is used. For tables, the baseline of the first cell is used. */
-        "baseline": StyleObject;
+        baseline: StyleObject;
         /** Any extra space is divided evenly, with half placed above the child and the other half placed after the child. */
-        "center": StyleObject;
+        center: StyleObject;
         /** For normal direction boxes, the bottom edge of each child is placed along the bottom of the box. Extra space is placed above the element. For reverse direction boxes, the top edge of each child is placed along the top of the box. Extra space is placed below the element. */
-        "end": StyleObject;
+        end: StyleObject;
         /** For normal direction boxes, the top edge of each child is placed along the top of the box. Extra space is placed below the element. For reverse direction boxes, the bottom edge of each child is placed along the bottom of the box. Extra space is placed above the element. */
-        "start": StyleObject;
+        start: StyleObject;
         /** The height of each child is adjusted to that of the containing block. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * Specifies whether a box lays out its contents normally (from the top or left edge), or in reverse (from the bottom or right edge).
@@ -5103,9 +5105,9 @@ export interface CSSDecls {
      */
     "-moz-box-direction": {
         /** A box with a computed value of horizontal for box-orient displays its children from left to right. A box with a computed value of vertical displays its children from top to bottom. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** A box with a computed value of horizontal for box-orient displays its children from right to left. A box with a computed value of vertical displays its children from bottom to top. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & WideEntry;
     /**
      * Specifies how a box grows to fill the box that contains it, in the direction of the containing box's layout.
@@ -5136,11 +5138,11 @@ export interface CSSDecls {
         /** Elements are oriented along the box's axis. */
         "block-axis": StyleObject;
         /** The box displays its children from left to right in a horizontal line. */
-        "horizontal": StyleObject;
+        horizontal: StyleObject;
         /** Elements are oriented vertically. */
         "inline-axis": StyleObject;
         /** The box displays its children from stacked from top to bottom vertically. */
-        "vertical": StyleObject;
+        vertical: StyleObject;
     } & WideEntry;
     /**
      * Specifies how a box packs its contents in the direction of its layout. The effect of this is only visible if there is extra space in the box.
@@ -5149,13 +5151,13 @@ export interface CSSDecls {
      */
     "-moz-box-pack": {
         /** The extra space is divided evenly, with half placed before the first child and the other half placed after the last child. */
-        "center": StyleObject;
+        center: StyleObject;
         /** For normal direction boxes, the right edge of the last child is placed at the right side, with all extra space placed before the first child. For reverse direction boxes, the left edge of the first child is placed at the left side, with all extra space placed after the last child. */
-        "end": StyleObject;
+        end: StyleObject;
         /** The space is divided evenly in-between each child, with none of the extra space placed before the first child or after the last child. If there is only one child, treat the pack value as if it were start. */
-        "justify": StyleObject;
+        justify: StyleObject;
         /** For normal direction boxes, the left edge of the first child is placed at the left side, with all extra space placed after the last child. For reverse direction boxes, the right edge of the last child is placed at the right side, with all extra space placed before the first child. */
-        "start": StyleObject;
+        start: StyleObject;
     } & WideEntry;
     /**
      * Box Model addition in CSS3.
@@ -5177,7 +5179,7 @@ export interface CSSDecls {
      */
     "-moz-column-count": {
         /** Determines the number of columns by the 'column-width' property and the element width. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Sets the gap between columns. If there is a column rule between columns, it will appear in the middle of the gap.
@@ -5186,7 +5188,7 @@ export interface CSSDecls {
      */
     "-moz-column-gap": {
         /** User agent specific and typically equivalent to 1em. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Shorthand for setting 'column-rule-width', 'column-rule-style', and 'column-rule-color' at the same place in the style sheet. Omitted values are set to their initial values.
@@ -5219,7 +5221,7 @@ export interface CSSDecls {
      */
     "-moz-columns": {
         /** The width depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & IntegerEntry & WideEntry;
     /**
      * This property describes the width of columns in multicol elements.
@@ -5228,7 +5230,7 @@ export interface CSSDecls {
      */
     "-moz-column-width": {
         /** The width depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Provides low-level control over OpenType font features. It is intended as a way of providing access to font features that are not widely used but are needed for a particular use case.
@@ -5236,21 +5238,21 @@ export interface CSSDecls {
      * (Firefox 4)
      */
     "-moz-font-feature-settings": {
-        "\"c2cs\"": StyleObject;
-        "\"dlig\"": StyleObject;
-        "\"kern\"": StyleObject;
-        "\"liga\"": StyleObject;
-        "\"lnum\"": StyleObject;
-        "\"onum\"": StyleObject;
-        "\"smcp\"": StyleObject;
-        "\"swsh\"": StyleObject;
-        "\"tnum\"": StyleObject;
+        '"c2cs"': StyleObject;
+        '"dlig"': StyleObject;
+        '"kern"': StyleObject;
+        '"liga"': StyleObject;
+        '"lnum"': StyleObject;
+        '"onum"': StyleObject;
+        '"smcp"': StyleObject;
+        '"swsh"': StyleObject;
+        '"tnum"': StyleObject;
         /** No change in glyph substitution or positioning occurs. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** (Firefox 4) */
-        "off": StyleObject;
+        off: StyleObject;
         /** (Firefox 4) */
-        "on": StyleObject;
+        on: StyleObject;
     } & StringEntry & IntegerEntry & WideEntry;
     /**
      * Controls whether hyphenation is allowed to create more break opportunities within a line of text.
@@ -5259,11 +5261,11 @@ export interface CSSDecls {
      */
     "-moz-hyphens": {
         /** Conditional hyphenation characters inside a word, if present, take priority over automatic resources when determining hyphenation points within the word. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Words are only broken at line breaks where there are characters inside the word that suggest line break opportunities */
-        "manual": StyleObject;
+        manual: StyleObject;
         /** Words are not broken at line breaks, even if characters inside the word suggest line break points. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Applies the same transform as the perspective(\<number>) transform function, except that it applies only to the positioned or transformed children of the element, not to the transform on the element itself.
@@ -5272,7 +5274,7 @@ export interface CSSDecls {
      */
     "-moz-perspective": {
         /** No perspective transform is applied. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Establishes the origin for the perspective property. It effectively sets the X and Y position at which the viewer appears to be looking at the children of the element.
@@ -5286,15 +5288,15 @@ export interface CSSDecls {
      * (Firefox 12)
      */
     "-moz-text-align-last": {
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The inline contents are centered within the line box. */
-        "center": StyleObject;
+        center: StyleObject;
         /** The text is justified according to the method specified by the 'text-justify' property. */
-        "justify": StyleObject;
+        justify: StyleObject;
         /** The inline contents are aligned to the left edge of the line box. In vertical text, 'left' aligns to the edge of the line box that would be the start edge for left-to-right text. */
-        "left": StyleObject;
+        left: StyleObject;
         /** The inline contents are aligned to the right edge of the line box. In vertical text, 'right' aligns to the edge of the line box that would be the end edge for left-to-right text. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Specifies the color of text decoration (underlines overlines, and line-throughs) set on the element with text-decoration-line.
@@ -5311,11 +5313,11 @@ export interface CSSDecls {
         /** Each line of text has a line through the middle. */
         "line-through": StyleObject;
         /** Neither produces nor inhibits text decoration. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Each line of text has a line above it. */
-        "overline": StyleObject;
+        overline: StyleObject;
         /** Each line of text is underlined. */
-        "underline": StyleObject;
+        underline: StyleObject;
     } & WideEntry;
     /**
      * Specifies the line style for underline, line-through and overline text decoration.
@@ -5324,17 +5326,17 @@ export interface CSSDecls {
      */
     "-moz-text-decoration-style": {
         /** Produces a dashed line style. */
-        "dashed": StyleObject;
+        dashed: StyleObject;
         /** Produces a dotted line. */
-        "dotted": StyleObject;
+        dotted: StyleObject;
         /** Produces a double line. */
-        "double": StyleObject;
+        double: StyleObject;
         /** Produces no line. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Produces a solid line. */
-        "solid": StyleObject;
+        solid: StyleObject;
         /** Produces a wavy line. */
-        "wavy": StyleObject;
+        wavy: StyleObject;
     } & WideEntry;
     /**
      * Specifies a size adjustment for displaying text content in mobile browsers.
@@ -5343,9 +5345,9 @@ export interface CSSDecls {
      */
     "-moz-text-size-adjust": {
         /** Renderers must use the default size adjustment when displaying on a small device. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Renderers must not do size adjustment when displaying on a small device. */
-        "none": StyleObject;
+        none: StyleObject;
     } & PercentEntry & WideEntry;
     /**
      * A two-dimensional transformation is applied to an element through the 'transform' property. This property contains a list of transform functions similar to those allowed by SVG.
@@ -5357,9 +5359,9 @@ export interface CSSDecls {
         matrix: (...params: Parameters<typeof matrix>) => StyleObject;
         /** Specifies a 3D transformation as a 4x4 homogeneous matrix of 16 values in column-major order. */
         matrix3d: (...params: Parameters<typeof matrix3d>) => StyleObject;
-        "none": StyleObject;
+        none: StyleObject;
         /** Specifies a perspective projection matrix. */
-        "perspective": StyleObject;
+        perspective: StyleObject;
         /** Specifies a 2D rotation by the angle specified in the parameter about the origin of the element, as defined by the transform-origin property. */
         rotate: (...params: Parameters<typeof rotate>) => StyleObject;
         /** Specifies a clockwise 3D rotation by the angle specified in last parameter about the [x,y,z] direction vector described by the first 3 parameters. */
@@ -5410,9 +5412,9 @@ export interface CSSDecls {
      */
     "-moz-transition": {
         /** Every property that is able to undergo a transition will do so. */
-        "all": StyleObject;
+        all: StyleObject;
         /** No property will transition. */
-        "none": StyleObject;
+        none: StyleObject;
     } & TimeEntry & TransitionTimingFunctions & WideEntry;
     /**
      * Defines when the transition will start. It allows a transition to begin execution some period of time from when it is applied.
@@ -5433,9 +5435,9 @@ export interface CSSDecls {
      */
     "-moz-transition-property": {
         /** Every property that is able to undergo a transition will do so. */
-        "all": StyleObject;
+        all: StyleObject;
         /** No property will transition. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Describes how the intermediate values used during a transition will be calculated.
@@ -5455,8 +5457,8 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-moz-user-focus)
      */
     "-moz-user-focus": {
-        "ignore": StyleObject;
-        "normal": StyleObject;
+        ignore: StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * Controls the appearance of selection.
@@ -5464,14 +5466,14 @@ export interface CSSDecls {
      * (Firefox 1.5)
      */
     "-moz-user-select": {
-        "all": StyleObject;
-        "element": StyleObject;
-        "elements": StyleObject;
+        all: StyleObject;
+        element: StyleObject;
+        elements: StyleObject;
         "-moz-all": StyleObject;
         "-moz-none": StyleObject;
-        "none": StyleObject;
-        "text": StyleObject;
-        "toggle": StyleObject;
+        none: StyleObject;
+        text: StyleObject;
+        toggle: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5484,9 +5486,9 @@ export interface CSSDecls {
      */
     "-ms-accelerator": {
         /** The element does not contain an accelerator key sequence. */
-        "false": StyleObject;
+        false: StyleObject;
         /** The element contains an accelerator key sequence. */
-        "true": StyleObject;
+        true: StyleObject;
     } & WideEntry;
     /**
      * IE only. Used to extend behaviors of the browser
@@ -5505,13 +5507,13 @@ export interface CSSDecls {
      */
     "-ms-block-progression": {
         /** Bottom-to-top block flow. Layout is horizontal. */
-        "bt": StyleObject;
+        bt: StyleObject;
         /** Left-to-right direction. The flow orientation is vertical. */
-        "lr": StyleObject;
+        lr: StyleObject;
         /** Right-to-left direction. The flow orientation is vertical. */
-        "rl": StyleObject;
+        rl: StyleObject;
         /** Top-to-bottom direction. The flow orientation is horizontal. */
-        "tb": StyleObject;
+        tb: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5524,9 +5526,9 @@ export interface CSSDecls {
      */
     "-ms-content-zoom-chaining": {
         /** The nearest zoomable parent element begins zooming when the user hits a zoom limit during a manipulation. No bounce effect is shown. */
-        "chained": StyleObject;
+        chained: StyleObject;
         /** A bounce effect is shown when the user hits a zoom limit during a manipulation. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5539,9 +5541,9 @@ export interface CSSDecls {
      */
     "-ms-content-zooming": {
         /** The element is not zoomable. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The element is zoomable. */
-        "zoom": StyleObject;
+        zoom: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5584,11 +5586,11 @@ export interface CSSDecls {
      */
     "-ms-content-zoom-snap": {
         /** Indicates that the motion of the content after the contact is picked up is always adjusted so that it lands on a snap-point. */
-        "mandatory": StyleObject;
+        mandatory: StyleObject;
         /** Indicates that zooming is unaffected by any defined snap-points. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Indicates that the motion of the content after the contact is picked up may be adjusted if the content would normally stop "close enough" to a snap-point. */
-        "proximity": StyleObject;
+        proximity: StyleObject;
         /** Specifies where the snap-points will be placed. */
         "snapInterval(100%, 100%)": StyleObject;
         /** Specifies the position of individual snap-points as a comma-separated list of zoom factors. */
@@ -5620,11 +5622,11 @@ export interface CSSDecls {
      */
     "-ms-content-zoom-snap-type": {
         /** Indicates that the motion of the content after the contact is picked up is always adjusted so that it lands on a snap-point. */
-        "mandatory": StyleObject;
+        mandatory: StyleObject;
         /** Indicates that zooming is unaffected by any defined snap-points. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Indicates that the motion of the content after the contact is picked up may be adjusted if the content would normally stop "close enough" to a snap-point. */
-        "proximity": StyleObject;
+        proximity: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5643,9 +5645,9 @@ export interface CSSDecls {
      */
     "-ms-flex": {
         /** Retrieves the value of the main size property as the used 'flex-basis'. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Expands to '0 0 auto'. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -5656,15 +5658,15 @@ export interface CSSDecls {
      */
     "-ms-flex-align": {
         /** If the flex item’s inline axis is the same as the cross axis, this value is identical to 'flex-start'. Otherwise, it participates in baseline alignment. */
-        "baseline": StyleObject;
+        baseline: StyleObject;
         /** The flex item’s margin box is centered in the cross axis within the line. */
-        "center": StyleObject;
+        center: StyleObject;
         /** The cross-end margin edge of the flex item is placed flush with the cross-end edge of the line. */
-        "end": StyleObject;
+        end: StyleObject;
         /** The cross-start margin edge of the flexbox item is placed flush with the cross-start edge of the line. */
-        "start": StyleObject;
+        start: StyleObject;
         /** If the cross size property of the flexbox item is anything other than 'auto', this value is identical to 'start'. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * Specifies how flex items are placed in the flex container, by setting the direction of the flex container’s main axis.
@@ -5673,11 +5675,11 @@ export interface CSSDecls {
      */
     "-ms-flex-direction": {
         /** The flex container’s main axis has the same orientation as the block axis of the current writing mode. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Same as 'column', except the main-start and main-end directions are swapped. */
         "column-reverse": StyleObject;
         /** The flex container’s main axis has the same orientation as the inline axis of the current writing mode. */
-        "row": StyleObject;
+        row: StyleObject;
         /** Same as 'row', except the main-start and main-end directions are swapped. */
         "row-reverse": StyleObject;
     } & WideEntry;
@@ -5688,15 +5690,15 @@ export interface CSSDecls {
      */
     "-ms-flex-flow": {
         /** The flex container’s main axis has the same orientation as the block axis of the current writing mode. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Same as 'column', except the main-start and main-end directions are swapped. */
         "column-reverse": StyleObject;
         /** The flex container is single-line. */
-        "nowrap": StyleObject;
+        nowrap: StyleObject;
         /** The flex container’s main axis has the same orientation as the inline axis of the current writing mode. */
-        "row": StyleObject;
+        row: StyleObject;
         /** The flexbox is multi-line. */
-        "wrap": StyleObject;
+        wrap: StyleObject;
         /** Same as 'wrap', except the cross-start and cross-end directions are swapped. */
         "wrap-reverse": StyleObject;
     } & WideEntry;
@@ -5707,17 +5709,17 @@ export interface CSSDecls {
      */
     "-ms-flex-item-align": {
         /** Computes to the value of 'align-items' on the element’s parent, or 'stretch' if the element has no parent. On absolutely positioned elements, it computes to itself. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** If the flex item’s inline axis is the same as the cross axis, this value is identical to 'flex-start'. Otherwise, it participates in baseline alignment. */
-        "baseline": StyleObject;
+        baseline: StyleObject;
         /** The flex item’s margin box is centered in the cross axis within the line. */
-        "center": StyleObject;
+        center: StyleObject;
         /** The cross-end margin edge of the flex item is placed flush with the cross-end edge of the line. */
-        "end": StyleObject;
+        end: StyleObject;
         /** The cross-start margin edge of the flex item is placed flush with the cross-start edge of the line. */
-        "start": StyleObject;
+        start: StyleObject;
         /** If the cross size property of the flex item computes to auto, and neither of the cross-axis margins are auto, the flex item is stretched. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * Aligns a flex container’s lines within the flex container when there is extra space in the cross-axis, similar to how 'justify-content' aligns individual items within the main-axis.
@@ -5726,17 +5728,17 @@ export interface CSSDecls {
      */
     "-ms-flex-line-pack": {
         /** Lines are packed toward the center of the flex container. */
-        "center": StyleObject;
+        center: StyleObject;
         /** Lines are evenly distributed in the flex container, with half-size spaces on either end. */
-        "distribute": StyleObject;
+        distribute: StyleObject;
         /** Lines are packed toward the end of the flex container. */
-        "end": StyleObject;
+        end: StyleObject;
         /** Lines are evenly distributed in the flex container. */
-        "justify": StyleObject;
+        justify: StyleObject;
         /** Lines are packed toward the start of the flex container. */
-        "start": StyleObject;
+        start: StyleObject;
         /** Lines stretch to take up the remaining space. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * Controls the order in which children of a flex container appear within the flex container, by assigning them to ordinal groups.
@@ -5751,15 +5753,15 @@ export interface CSSDecls {
      */
     "-ms-flex-pack": {
         /** Flex items are packed toward the center of the line. */
-        "center": StyleObject;
+        center: StyleObject;
         /** Flex items are evenly distributed in the line, with half-size spaces on either end. */
-        "distribute": StyleObject;
+        distribute: StyleObject;
         /** Flex items are packed toward the end of the line. */
-        "end": StyleObject;
+        end: StyleObject;
         /** Flex items are evenly distributed in the line. */
-        "justify": StyleObject;
+        justify: StyleObject;
         /** Flex items are packed toward the start of the line. */
-        "start": StyleObject;
+        start: StyleObject;
     } & WideEntry;
     /**
      * Controls whether the flex container is single-line or multi-line, and the direction of the cross-axis, which determines the direction new lines are stacked in.
@@ -5768,9 +5770,9 @@ export interface CSSDecls {
      */
     "-ms-flex-wrap": {
         /** The flex container is single-line. */
-        "nowrap": StyleObject;
+        nowrap: StyleObject;
         /** The flexbox is multi-line. */
-        "wrap": StyleObject;
+        wrap: StyleObject;
         /** Same as 'wrap', except the cross-start and cross-end directions are swapped. */
         "wrap-reverse": StyleObject;
     } & WideEntry;
@@ -5785,7 +5787,7 @@ export interface CSSDecls {
      */
     "-ms-flow-from": {
         /** The block container is not a CSS Region. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5798,7 +5800,7 @@ export interface CSSDecls {
      */
     "-ms-flow-into": {
         /** The element is not moved to a named flow and normal CSS processing takes place. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Used to place grid items and explicitly defined grid cells in the Grid.
@@ -5806,9 +5808,9 @@ export interface CSSDecls {
      * (Edge 12, IE 10)
      */
     "-ms-grid-column": {
-        "auto": StyleObject;
-        "end": StyleObject;
-        "start": StyleObject;
+        auto: StyleObject;
+        end: StyleObject;
+        start: StyleObject;
     } & StringEntry & IntegerEntry & WideEntry;
     /**
      * Aligns the columns in a grid.
@@ -5817,13 +5819,13 @@ export interface CSSDecls {
      */
     "-ms-grid-column-align": {
         /** Places the center of the Grid Item's margin box at the center of the Grid Item's column. */
-        "center": StyleObject;
+        center: StyleObject;
         /** Aligns the end edge of the Grid Item's margin box to the end edge of the Grid Item's column. */
-        "end": StyleObject;
+        end: StyleObject;
         /** Aligns the starting edge of the Grid Item's margin box to the starting edge of the Grid Item's column. */
-        "start": StyleObject;
+        start: StyleObject;
         /** Ensures that the Grid Item's margin box is equal to the size of the Grid Item's column. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5853,9 +5855,9 @@ export interface CSSDecls {
      * (Edge 12, IE 10)
      */
     "-ms-grid-row": {
-        "auto": StyleObject;
-        "end": StyleObject;
-        "start": StyleObject;
+        auto: StyleObject;
+        end: StyleObject;
+        start: StyleObject;
     } & StringEntry & IntegerEntry & WideEntry;
     /**
      * Aligns the rows in a grid.
@@ -5864,13 +5866,13 @@ export interface CSSDecls {
      */
     "-ms-grid-row-align": {
         /** Places the center of the Grid Item's margin box at the center of the Grid Item's row. */
-        "center": StyleObject;
+        center: StyleObject;
         /** Aligns the end edge of the Grid Item's margin box to the end edge of the Grid Item's row. */
-        "end": StyleObject;
+        end: StyleObject;
         /** Aligns the starting edge of the Grid Item's margin box to the starting edge of the Grid Item's row. */
-        "start": StyleObject;
+        start: StyleObject;
         /** Ensures that the Grid Item's margin box is equal to the size of the Grid Item's row. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5899,9 +5901,9 @@ export interface CSSDecls {
      */
     "-ms-high-contrast-adjust": {
         /** Properties will be adjusted as applicable. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** No adjustments will be applied. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5914,7 +5916,7 @@ export interface CSSDecls {
      */
     "-ms-hyphenate-limit-chars": {
         /** The user agent chooses a value that adapts to the current layout. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -5946,11 +5948,11 @@ export interface CSSDecls {
      */
     "-ms-hyphens": {
         /** Conditional hyphenation characters inside a word, if present, take priority over automatic resources when determining hyphenation points within the word. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Words are only broken at line breaks where there are characters inside the word that suggest line break opportunities */
-        "manual": StyleObject;
+        manual: StyleObject;
         /** Words are not broken at line breaks, even if characters inside the word suggest line break points. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Controls the state of the input method editor for text fields.
@@ -5959,15 +5961,15 @@ export interface CSSDecls {
      */
     "-ms-ime-mode": {
         /** The input method editor is initially active; text entry is performed using it unless the user specifically dismisses it. */
-        "active": StyleObject;
+        active: StyleObject;
         /** No change is made to the current input method editor state. This is the default. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The input method editor is disabled and may not be activated by the user. */
-        "disabled": StyleObject;
+        disabled: StyleObject;
         /** The input method editor is initially inactive, but the user may activate it if they wish. */
-        "inactive": StyleObject;
+        inactive: StyleObject;
         /** The IME state should be normal; this value can be used in a user style sheet to override the page setting. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * Gets or sets the interpolation (resampling) method used to stretch images.
@@ -5975,7 +5977,7 @@ export interface CSSDecls {
      * (IE 7)
      */
     "-ms-interpolation-mode": {
-        "bicubic": StyleObject;
+        bicubic: StyleObject;
         "nearest-neighbor": StyleObject;
     } & WideEntry;
     /**
@@ -5985,13 +5987,13 @@ export interface CSSDecls {
      */
     "-ms-layout-grid": {
         /** Any of the range of character values available to the -ms-layout-grid-char property. */
-        "char": StyleObject;
+        char: StyleObject;
         /** Any of the range of line values available to the -ms-layout-grid-line property. */
-        "line": StyleObject;
+        line: StyleObject;
         /** Any of the range of mode values available to the -ms-layout-grid-mode property. */
-        "mode": StyleObject;
+        mode: StyleObject;
         /** Any of the range of type values available to the -ms-layout-grid-type property. */
-        "type": StyleObject;
+        type: StyleObject;
     } & WideEntry;
     /**
      * Sets or retrieves the size of the character grid used for rendering the text content of an element.
@@ -6000,9 +6002,9 @@ export interface CSSDecls {
      */
     "-ms-layout-grid-char": {
         /** Largest character in the font of the element is used to set the character grid. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Default. No character grid is set. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Sets or retrieves the gridline value used for rendering the text content of an element.
@@ -6011,9 +6013,9 @@ export interface CSSDecls {
      */
     "-ms-layout-grid-line": {
         /** Largest character in the font of the element is used to set the character grid. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Default. No grid line is set. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Gets or sets whether the text layout grid uses two dimensions.
@@ -6022,13 +6024,13 @@ export interface CSSDecls {
      */
     "-ms-layout-grid-mode": {
         /** Default. Both the char and line grid modes are enabled. This setting is necessary to fully enable the layout grid on an element. */
-        "both": StyleObject;
+        both: StyleObject;
         /** Only a character grid is used. This is recommended for use with block-level elements, such as a blockquote, where the line grid is intended to be disabled. */
-        "char": StyleObject;
+        char: StyleObject;
         /** Only a line grid is used. This is recommended for use with inline elements, such as a span, to disable the horizontal grid on runs of text that act as a single entity in the grid layout. */
-        "line": StyleObject;
+        line: StyleObject;
         /** No grid is used. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Sets or retrieves the type of grid used for rendering the text content of an element.
@@ -6037,11 +6039,11 @@ export interface CSSDecls {
      */
     "-ms-layout-grid-type": {
         /** Grid used for monospaced layout. All noncursive characters are treated as equal; every character is centered within a single grid space by default. */
-        "fixed": StyleObject;
+        fixed: StyleObject;
         /** Default. Grid used for Japanese and Korean characters. */
-        "loose": StyleObject;
+        loose: StyleObject;
         /** Grid used for Chinese, as well as Japanese (Genko) and Korean characters. Only the ideographs, kanas, and wide characters are snapped to the grid. */
-        "strict": StyleObject;
+        strict: StyleObject;
     } & WideEntry;
     /**
      * Specifies what set of line breaking restrictions are in effect within the element.
@@ -6050,15 +6052,15 @@ export interface CSSDecls {
      */
     "-ms-line-break": {
         /** The UA determines the set of line-breaking restrictions to use for CJK scripts, and it may vary the restrictions based on the length of the line; e.g., use a less restrictive set of line-break rules for short lines. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Sequences of CJK characters can no longer break on implied break points. This option should only be used where the presence of word separator characters still creates line-breaking opportunities, as in Korean. */
         "keep-all": StyleObject;
         /** Breaks CJK scripts using the least restrictive set of line-breaking rules. Typically used for short lines, such as in newspapers. */
-        "newspaper": StyleObject;
+        newspaper: StyleObject;
         /** Breaks CJK scripts using a normal set of line-breaking rules. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** Breaks CJK scripts using a more restrictive set of line-breaking rules than 'normal'. */
-        "strict": StyleObject;
+        strict: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6071,13 +6073,13 @@ export interface CSSDecls {
      */
     "-ms-overflow-style": {
         /** No preference, UA should use the first scrolling method in the list that it supports. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates the element displays auto-hiding scrollbars during mouse interactions and panning indicators during touch and keyboard interactions. */
         "-ms-autohiding-scrollbar": StyleObject;
         /** Indicates the element does not display scrollbars or panning indicators, even when its content overflows. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Scrollbars are typically narrow strips inserted on one or two edges of an element and which often have arrows to click on and a "thumb" to drag up and down (or left and right) to move the contents of the element. */
-        "scrollbar": StyleObject;
+        scrollbar: StyleObject;
     } & WideEntry;
     /**
      * Applies the same transform as the perspective(\<number>) transform function, except that it applies only to the positioned or transformed children of the element, not to the transform on the element itself.
@@ -6086,7 +6088,7 @@ export interface CSSDecls {
      */
     "-ms-perspective": {
         /** No perspective transform is applied. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Establishes the origin for the perspective property. It effectively sets the X and Y position at which the viewer appears to be looking at the children of the element.
@@ -6112,8 +6114,8 @@ export interface CSSDecls {
      * (IE 10)
      */
     "-ms-progress-appearance": {
-        "bar": StyleObject;
-        "ring": StyleObject;
+        bar: StyleObject;
+        ring: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6207,8 +6209,8 @@ export interface CSSDecls {
      * Syntax: chained | none
      */
     "-ms-scroll-chaining": {
-        "chained": StyleObject;
-        "none": StyleObject;
+        chained: StyleObject;
+        none: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6220,7 +6222,7 @@ export interface CSSDecls {
      * Syntax: \<'-ms-scroll-limit-x-min'> \<'-ms-scroll-limit-y-min'> \<'-ms-scroll-limit-x-max'> \<'-ms-scroll-limit-y-max'>
      */
     "-ms-scroll-limit": {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6232,7 +6234,7 @@ export interface CSSDecls {
      * Syntax: auto | \<length>
      */
     "-ms-scroll-limit-x-max": {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6254,7 +6256,7 @@ export interface CSSDecls {
      * Syntax: auto | \<length>
      */
     "-ms-scroll-limit-y-max": {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6276,8 +6278,8 @@ export interface CSSDecls {
      * Syntax: none | railed
      */
     "-ms-scroll-rails": {
-        "none": StyleObject;
-        "railed": StyleObject;
+        none: StyleObject;
+        railed: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6316,11 +6318,11 @@ export interface CSSDecls {
      */
     "-ms-scroll-snap-type": {
         /** The visual viewport of this scroll container must ignore snap points, if any, when scrolled. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The visual viewport of this scroll container is guaranteed to rest on a snap point when there are no active scrolling operations. */
-        "mandatory": StyleObject;
+        mandatory: StyleObject;
         /** The visual viewport of this scroll container may come to rest on a snap point at the termination of a scroll at the discretion of the UA given the parameters of the scroll. */
-        "proximity": StyleObject;
+        proximity: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6332,9 +6334,9 @@ export interface CSSDecls {
      * Syntax: \<'-ms-scroll-snap-type'> \<'-ms-scroll-snap-points-x'>
      */
     "-ms-scroll-snap-x": {
-        "mandatory": StyleObject;
-        "none": StyleObject;
-        "proximity": StyleObject;
+        mandatory: StyleObject;
+        none: StyleObject;
+        proximity: StyleObject;
         "snapInterval(100%, 100%)": StyleObject;
         "snapList()": StyleObject;
     } & WideEntry;
@@ -6348,9 +6350,9 @@ export interface CSSDecls {
      * Syntax: \<'-ms-scroll-snap-type'> \<'-ms-scroll-snap-points-y'>
      */
     "-ms-scroll-snap-y": {
-        "mandatory": StyleObject;
-        "none": StyleObject;
-        "proximity": StyleObject;
+        mandatory: StyleObject;
+        none: StyleObject;
+        proximity: StyleObject;
         "snapInterval(100%, 100%)": StyleObject;
         "snapList()": StyleObject;
     } & WideEntry;
@@ -6364,7 +6366,7 @@ export interface CSSDecls {
      * Syntax: none | vertical-to-horizontal
      */
     "-ms-scroll-translation": {
-        "none": StyleObject;
+        none: StyleObject;
         "vertical-to-horizontal": StyleObject;
     } & WideEntry;
     /**
@@ -6373,15 +6375,15 @@ export interface CSSDecls {
      * (Edge, IE 8)
      */
     "-ms-text-align-last": {
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The inline contents are centered within the line box. */
-        "center": StyleObject;
+        center: StyleObject;
         /** The text is justified according to the method specified by the 'text-justify' property. */
-        "justify": StyleObject;
+        justify: StyleObject;
         /** The inline contents are aligned to the left edge of the line box. In vertical text, 'left' aligns to the edge of the line box that would be the start edge for left-to-right text. */
-        "left": StyleObject;
+        left: StyleObject;
         /** The inline contents are aligned to the right edge of the line box. In vertical text, 'right' aligns to the edge of the line box that would be the end edge for left-to-right text. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6402,9 +6404,9 @@ export interface CSSDecls {
         /** Extends the width of the space character while surrounded by ideographs. */
         "ideograph-space": StyleObject;
         /** No extra space is created. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Creates extra non-breaking spacing around punctuation as required by language-specific typographic conventions. */
-        "punctuation": StyleObject;
+        punctuation: StyleObject;
     } & WideEntry;
     /**
      * This property specifies the combination of multiple characters into the space of a single character.
@@ -6413,11 +6415,11 @@ export interface CSSDecls {
      */
     "-ms-text-combine-horizontal": {
         /** Attempt to typeset horizontally all consecutive characters within the box such that they take up the space of a single character within the vertical line box. */
-        "all": StyleObject;
+        all: StyleObject;
         /** Attempt to typeset horizontally each maximal sequence of consecutive ASCII digits (U+0030–U+0039) that has as many or fewer characters than the specified integer such that it takes up the space of a single character within the vertical line box. */
-        "digits": StyleObject;
+        digits: StyleObject;
         /** No special processing. */
-        "none": StyleObject;
+        none: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Selects the justification algorithm used when 'text-align' is set to 'justify'. The property applies to block containers, but the UA may (but is not required to) also support it on inline elements.
@@ -6426,9 +6428,9 @@ export interface CSSDecls {
      */
     "-ms-text-justify": {
         /** The UA determines the justification algorithm to follow, based on a balance between performance and adequate presentation quality. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Justification primarily changes spacing both at word separators and at grapheme cluster boundaries in all scripts except those in the connected and cursive groups. This value is sometimes used in e.g. Japanese, often with the 'text-align-last' property. */
-        "distribute": StyleObject;
+        distribute: StyleObject;
         /** Justification primarily changes spacing at word separators and at grapheme cluster boundaries in clustered scripts. This value is typically used for Southeast Asian scripts such as Thai. */
         "inter-cluster": StyleObject;
         /** Justification primarily changes spacing at word separators and at inter-graphemic boundaries in scripts that use no word spaces. This value is typically used for CJK languages. */
@@ -6436,7 +6438,7 @@ export interface CSSDecls {
         /** Justification primarily changes spacing at word separators. This value is typically used for languages that separate words using spaces, like English or (sometimes) Korean. */
         "inter-word": StyleObject;
         /** Justification primarily stretches Arabic and related scripts through the use of kashida or other calligraphic elongation. */
-        "kashida": StyleObject;
+        kashida: StyleObject;
     } & WideEntry;
     /**
      * Sets or retrieves the ratio of kashida expansion to white space expansion when justifying lines of text in the object.
@@ -6451,9 +6453,9 @@ export interface CSSDecls {
      */
     "-ms-text-overflow": {
         /** Clip inline content that overflows. Characters may be only partially rendered. */
-        "clip": StyleObject;
+        clip: StyleObject;
         /** Render an ellipsis character (U+2026) to represent clipped inline content. */
-        "ellipsis": StyleObject;
+        ellipsis: StyleObject;
     } & WideEntry;
     /**
      * Specifies a size adjustment for displaying text content in mobile browsers.
@@ -6462,9 +6464,9 @@ export interface CSSDecls {
      */
     "-ms-text-size-adjust": {
         /** Renderers must use the default size adjustment when displaying on a small device. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Renderers must not do size adjustment when displaying on a small device. */
-        "none": StyleObject;
+        none: StyleObject;
     } & PercentEntry & WideEntry;
     /**
      * Sets the position of an underline specified on the same element: it does not affect underlines specified by ancestor elements.This property is typically used in vertical writing contexts such as in Japanese documents where it often desired to have the underline appear 'over' (to the right of) the affected run of text
@@ -6473,13 +6475,13 @@ export interface CSSDecls {
      */
     "-ms-text-underline-position": {
         /** The underline is aligned with the alphabetic baseline. In this case the underline is likely to cross some descenders. */
-        "alphabetic": StyleObject;
+        alphabetic: StyleObject;
         /** The user agent may use any algorithm to determine the underline's position. In horizontal line layout, the underline should be aligned as for alphabetic. In vertical line layout, if the language is set to Japanese or Korean, the underline should be aligned as for over. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The underline is aligned with the 'top' (right in vertical writing) edge of the element's em-box. In this mode, an overline also switches sides. */
-        "over": StyleObject;
+        over: StyleObject;
         /** The underline is aligned with the 'bottom' (left in vertical writing) edge of the element's em-box. In this case the underline usually does not cross the descenders. This is sometimes called 'accounting' underline. */
-        "under": StyleObject;
+        under: StyleObject;
     } & WideEntry;
     /**
      * Gets or sets a value that indicates whether and how a given region can be manipulated by the user.
@@ -6488,13 +6490,13 @@ export interface CSSDecls {
      */
     "-ms-touch-action": {
         /** The element is a passive element, with several exceptions. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The element will zoom on double-tap. */
         "double-tap-zoom": StyleObject;
         /** The element is a manipulation-causing element. */
-        "manipulation": StyleObject;
+        manipulation: StyleObject;
         /** The element is a manipulation-blocking element. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The element permits touch-driven panning on the horizontal axis. The touch pan is performed on the nearest ancestor with horizontally scrollable content. */
         "pan-x": StyleObject;
         /** The element permits touch-driven panning on the vertical axis. The touch pan is performed on the nearest ancestor with vertically scrollable content. */
@@ -6513,9 +6515,9 @@ export interface CSSDecls {
      */
     "-ms-touch-select": {
         /** Grippers are always on. */
-        "grippers": StyleObject;
+        grippers: StyleObject;
         /** Grippers are always off. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * A two-dimensional transformation is applied to an element through the 'transform' property. This property contains a list of transform functions similar to those allowed by SVG.
@@ -6527,7 +6529,7 @@ export interface CSSDecls {
         matrix: (...params: Parameters<typeof matrix>) => StyleObject;
         /** Specifies a 3D transformation as a 4x4 homogeneous matrix of 16 values in column-major order. */
         matrix3d: (...params: Parameters<typeof matrix3d>) => StyleObject;
-        "none": StyleObject;
+        none: StyleObject;
         /** Specifies a 2D rotation by the angle specified in the parameter about the origin of the element, as defined by the transform-origin property. */
         rotate: (...params: Parameters<typeof rotate>) => StyleObject;
         /** Specifies a clockwise 3D rotation by the angle specified in last parameter about the [x,y,z] direction vector described by the first 3 parameters. */
@@ -6599,9 +6601,9 @@ export interface CSSDecls {
      * Syntax: none | element | text
      */
     "-ms-user-select": {
-        "element": StyleObject;
-        "none": StyleObject;
-        "text": StyleObject;
+        element: StyleObject;
+        none: StyleObject;
+        text: StyleObject;
     } & WideEntry;
     /**
      * Specifies line break opportunities for non-CJK scripts.
@@ -6614,7 +6616,7 @@ export interface CSSDecls {
         /** Block characters can no longer create implied break points. */
         "keep-all": StyleObject;
         /** Breaks non-CJK scripts according to their own rules. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * Specifies whether the UA may break within a word to prevent overflow when an otherwise-unbreakable string is too long to fit.
@@ -6625,7 +6627,7 @@ export interface CSSDecls {
         /** An unbreakable 'word' may be broken at an arbitrary point if there are no otherwise-acceptable break points in the line. */
         "break-word": StyleObject;
         /** Lines may break only at allowed break points. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6638,19 +6640,19 @@ export interface CSSDecls {
      */
     "-ms-wrap-flow": {
         /** For floats an exclusion is created, for all other elements an exclusion is not created. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Inline flow content can flow on all sides of the exclusion. */
-        "both": StyleObject;
+        both: StyleObject;
         /** Inline flow content can only wrap on top and bottom of the exclusion and must leave the areas to the start and end edges of the exclusion box empty. */
-        "clear": StyleObject;
+        clear: StyleObject;
         /** Inline flow content can wrap on the end side of the exclusion area but must leave the area to the start edge of the exclusion area empty. */
-        "end": StyleObject;
+        end: StyleObject;
         /** Inline flow content can wrap on the side of the exclusion with the largest available space for the given line, and must leave the other side of the exclusion empty. */
-        "maximum": StyleObject;
+        maximum: StyleObject;
         /** Inline flow content can flow around the edge of the exclusion with the smallest available space within the flow content’s containing block, and must leave the other edge of the exclusion empty. */
-        "minimum": StyleObject;
+        minimum: StyleObject;
         /** Inline flow content can wrap on the start edge of the exclusion area but must leave the area to end edge of the exclusion area empty. */
-        "start": StyleObject;
+        start: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -6673,9 +6675,9 @@ export interface CSSDecls {
      */
     "-ms-wrap-through": {
         /** The exclusion element does not inherit its parent node's wrapping context. Its descendants are only subject to exclusion shapes defined inside the element. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The exclusion element inherits its parent node's wrapping context. Its descendant inline content wraps around exclusions defined outside the element. */
-        "wrap": StyleObject;
+        wrap: StyleObject;
     } & WideEntry;
     /**
      * Shorthand property for both 'direction' and 'block-progression'.
@@ -6698,7 +6700,7 @@ export interface CSSDecls {
      * (IE 8)
      */
     "-ms-zoom": {
-        "normal": StyleObject;
+        normal: StyleObject;
     } & PercentEntry & {
         [value: number]: StyleObject;
     } & IntegerEntry & WideEntry;
@@ -6708,8 +6710,8 @@ export interface CSSDecls {
      * (IE 10)
      */
     "-ms-zoom-animation": {
-        "default": StyleObject;
-        "none": StyleObject;
+        default: StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Provides an way to control directional focus navigation.
@@ -6718,11 +6720,11 @@ export interface CSSDecls {
      */
     navDown: {
         /** The user agent automatically determines which element to navigate the focus to in response to directional navigational input. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the user agent should target the frame that the element is in. */
-        "current": StyleObject;
+        current: StyleObject;
         /** Indicates that the user agent should target the full window. */
-        "root": StyleObject;
+        root: StyleObject;
     } & StringEntry & WideEntry;
     /**
      * Provides an input-method-neutral way of specifying the sequential navigation order (also known as 'tabbing order').
@@ -6731,7 +6733,7 @@ export interface CSSDecls {
      */
     navIndex: {
         /** The element's sequential navigation order is assigned automatically by the user agent. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -6742,11 +6744,11 @@ export interface CSSDecls {
      */
     navLeft: {
         /** The user agent automatically determines which element to navigate the focus to in response to directional navigational input. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the user agent should target the frame that the element is in. */
-        "current": StyleObject;
+        current: StyleObject;
         /** Indicates that the user agent should target the full window. */
-        "root": StyleObject;
+        root: StyleObject;
     } & StringEntry & WideEntry;
     /**
      * Provides an way to control directional focus navigation.
@@ -6755,11 +6757,11 @@ export interface CSSDecls {
      */
     navRight: {
         /** The user agent automatically determines which element to navigate the focus to in response to directional navigational input. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the user agent should target the frame that the element is in. */
-        "current": StyleObject;
+        current: StyleObject;
         /** Indicates that the user agent should target the full window. */
-        "root": StyleObject;
+        root: StyleObject;
     } & StringEntry & WideEntry;
     /**
      * Provides an way to control directional focus navigation.
@@ -6768,11 +6770,11 @@ export interface CSSDecls {
      */
     navUp: {
         /** The user agent automatically determines which element to navigate the focus to in response to directional navigational input. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the user agent should target the frame that the element is in. */
-        "current": StyleObject;
+        current: StyleObject;
         /** Indicates that the user agent should target the full window. */
-        "root": StyleObject;
+        root: StyleObject;
     } & StringEntry & WideEntry;
     /**
      * \@counter-style descriptor. Defines how to alter the representation when the counter value is negative.
@@ -6789,23 +6791,23 @@ export interface CSSDecls {
      */
     "-o-animation": {
         /** The animation cycle iterations that are odd counts are played in the normal direction, and the animation cycle iterations that are even counts are played in a reverse direction. */
-        "alternate": StyleObject;
+        alternate: StyleObject;
         /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
         "alternate-reverse": StyleObject;
         /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
-        "backwards": StyleObject;
+        backwards: StyleObject;
         /** Both forwards and backwards fill modes are applied. */
-        "both": StyleObject;
+        both: StyleObject;
         /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
-        "forwards": StyleObject;
+        forwards: StyleObject;
         /** Causes the animation to repeat forever. */
-        "infinite": StyleObject;
+        infinite: StyleObject;
         /** No animation is performed */
-        "none": StyleObject;
+        none: StyleObject;
         /** Normal playback. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** All iterations of the animation are played in the reverse direction from the way they were specified. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & TimeEntry & TransitionTimingFunctions & WideEntry;
@@ -6822,13 +6824,13 @@ export interface CSSDecls {
      */
     "-o-animation-direction": {
         /** The animation cycle iterations that are odd counts are played in the normal direction, and the animation cycle iterations that are even counts are played in a reverse direction. */
-        "alternate": StyleObject;
+        alternate: StyleObject;
         /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
         "alternate-reverse": StyleObject;
         /** Normal playback. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** All iterations of the animation are played in the reverse direction from the way they were specified. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & WideEntry;
     /**
      * Defines the length of time that an animation takes to complete one cycle.
@@ -6843,13 +6845,13 @@ export interface CSSDecls {
      */
     "-o-animation-fill-mode": {
         /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
-        "backwards": StyleObject;
+        backwards: StyleObject;
         /** Both forwards and backwards fill modes are applied. */
-        "both": StyleObject;
+        both: StyleObject;
         /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
-        "forwards": StyleObject;
+        forwards: StyleObject;
         /** There is no change to the property value between the time the animation is applied and the time the animation begins playing or after the animation completes. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Defines the number of times an animation cycle is played. The default value is one, meaning the animation will play from beginning to end once.
@@ -6858,7 +6860,7 @@ export interface CSSDecls {
      */
     "-o-animation-iteration-count": {
         /** Causes the animation to repeat forever. */
-        "infinite": StyleObject;
+        infinite: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -6869,7 +6871,7 @@ export interface CSSDecls {
      */
     "-o-animation-name": {
         /** No animation is performed */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Defines whether the animation is running or paused.
@@ -6878,9 +6880,9 @@ export interface CSSDecls {
      */
     "-o-animation-play-state": {
         /** A running animation will be paused. */
-        "paused": StyleObject;
+        paused: StyleObject;
         /** Resume playback of a paused animation. */
-        "running": StyleObject;
+        running: StyleObject;
     } & WideEntry;
     /**
      * Describes how the animation will progress over one cycle of its duration. See the 'transition-timing-function'.
@@ -6899,13 +6901,13 @@ export interface CSSDecls {
      */
     objectFit: {
         /** The replaced content is sized to maintain its aspect ratio while fitting within the element’s content box: its concrete object size is resolved as a contain constraint against the element's used width and height. */
-        "contain": StyleObject;
+        contain: StyleObject;
         /** The replaced content is sized to maintain its aspect ratio while filling the element's entire content box: its concrete object size is resolved as a cover constraint against the element’s used width and height. */
-        "cover": StyleObject;
+        cover: StyleObject;
         /** The replaced content is sized to fill the element’s content box: the object's concrete object size is the element's used width and height. */
-        "fill": StyleObject;
+        fill: StyleObject;
         /** The replaced content is not resized to fit inside the element's content box */
-        "none": StyleObject;
+        none: StyleObject;
         /** Size the content as if ‘none’ or ‘contain’ were specified, whichever would result in a smaller concrete object size. */
         "scale-down": StyleObject;
     } & WideEntry;
@@ -6926,18 +6928,18 @@ export interface CSSDecls {
      */
     "-o-border-image": {
         /** If 'auto' is specified then the border image width is the intrinsic width or height (whichever is applicable) of the corresponding image slice. If the image does not have the required intrinsic dimension then the corresponding border-width is used instead. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Causes the middle part of the border-image to be preserved. */
-        "fill": StyleObject;
-        "none": StyleObject;
+        fill: StyleObject;
+        none: StyleObject;
         /** The image is tiled (repeated) to fill the area. */
-        "repeat": StyleObject;
+        repeat: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the image is rescaled so that it does. */
-        "round": StyleObject;
+        round: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the extra space is distributed around the tiles. */
-        "space": StyleObject;
+        space: StyleObject;
         /** The image is stretched to fill the area. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
     } & ImageFunctions & WideEntry;
@@ -6948,13 +6950,13 @@ export interface CSSDecls {
      */
     "-o-object-fit": {
         /** The replaced content is sized to maintain its aspect ratio while fitting within the element’s content box: its concrete object size is resolved as a contain constraint against the element's used width and height. */
-        "contain": StyleObject;
+        contain: StyleObject;
         /** The replaced content is sized to maintain its aspect ratio while filling the element's entire content box: its concrete object size is resolved as a cover constraint against the element’s used width and height. */
-        "cover": StyleObject;
+        cover: StyleObject;
         /** The replaced content is sized to fill the element’s content box: the object's concrete object size is the element's used width and height. */
-        "fill": StyleObject;
+        fill: StyleObject;
         /** The replaced content is not resized to fit inside the element's content box */
-        "none": StyleObject;
+        none: StyleObject;
         /** Size the content as if ‘none’ or ‘contain’ were specified, whichever would result in a smaller concrete object size. */
         "scale-down": StyleObject;
     } & WideEntry;
@@ -7009,9 +7011,9 @@ export interface CSSDecls {
      */
     "-o-text-overflow": {
         /** Clip inline content that overflows. Characters may be only partially rendered. */
-        "clip": StyleObject;
+        clip: StyleObject;
         /** Render an ellipsis character (U+2026) to represent clipped inline content. */
-        "ellipsis": StyleObject;
+        ellipsis: StyleObject;
     } & WideEntry;
     /**
      * A two-dimensional transformation is applied to an element through the 'transform' property. This property contains a list of transform functions similar to those allowed by SVG.
@@ -7023,7 +7025,7 @@ export interface CSSDecls {
         matrix: (...params: Parameters<typeof matrix>) => StyleObject;
         /** Specifies a 3D transformation as a 4x4 homogeneous matrix of 16 values in column-major order. */
         matrix3d: (...params: Parameters<typeof matrix3d>) => StyleObject;
-        "none": StyleObject;
+        none: StyleObject;
         /** Specifies a 2D rotation by the angle specified in the parameter about the origin of the element, as defined by the transform-origin property. */
         rotate: (...params: Parameters<typeof rotate>) => StyleObject;
         /** Specifies a clockwise 3D rotation by the angle specified in last parameter about the [x,y,z] direction vector described by the first 3 parameters. */
@@ -7074,9 +7076,9 @@ export interface CSSDecls {
      */
     "-o-transition": {
         /** Every property that is able to undergo a transition will do so. */
-        "all": StyleObject;
+        all: StyleObject;
         /** No property will transition. */
-        "none": StyleObject;
+        none: StyleObject;
     } & TimeEntry & TransitionTimingFunctions & WideEntry;
     /**
      * Defines when the transition will start. It allows a transition to begin execution some period of time from when it is applied.
@@ -7097,9 +7099,9 @@ export interface CSSDecls {
      */
     "-o-transition-property": {
         /** Every property that is able to undergo a transition will do so. */
-        "all": StyleObject;
+        all: StyleObject;
         /** No property will transition. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Describes how the intermediate values used during a transition will be calculated.
@@ -7114,7 +7116,7 @@ export interface CSSDecls {
      */
     offsetBlockEnd: {
         /** For non-replaced elements, the effect of this value depends on which of related properties have the value 'auto' as well. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Logical 'top'. Mapping depends on the parent element’s 'writing-mode', 'direction', and 'text-orientation'.
@@ -7123,7 +7125,7 @@ export interface CSSDecls {
      */
     offsetBlockStart: {
         /** For non-replaced elements, the effect of this value depends on which of related properties have the value 'auto' as well. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Logical 'right'. Mapping depends on the parent element’s 'writing-mode', 'direction', and 'text-orientation'.
@@ -7132,7 +7134,7 @@ export interface CSSDecls {
      */
     offsetInlineEnd: {
         /** For non-replaced elements, the effect of this value depends on which of related properties have the value 'auto' as well. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Logical 'left'. Mapping depends on the parent element’s 'writing-mode', 'direction', and 'text-orientation'.
@@ -7141,7 +7143,7 @@ export interface CSSDecls {
      */
     offsetInlineStart: {
         /** For non-replaced elements, the effect of this value depends on which of related properties have the value 'auto' as well. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Shorthand property for 'outline-style', 'outline-width', and 'outline-color'.
@@ -7152,9 +7154,9 @@ export interface CSSDecls {
      */
     outline: {
         /** Permits the user agent to render a custom outline style, typically the default platform style. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Performs a color inversion on the pixels on the screen. */
-        "invert": StyleObject;
+        invert: StyleObject;
     } & ColorEntry & ColorFunctions & LengthEntry & LineWidthEntry & LineStyleEntry & WideEntry;
     /**
      * The color of the outline.
@@ -7165,7 +7167,7 @@ export interface CSSDecls {
      */
     outlineColor: {
         /** Performs a color inversion on the pixels on the screen. */
-        "invert": StyleObject;
+        invert: StyleObject;
     } & ColorEntry & ColorFunctions & WideEntry;
     /**
      * Offset the outline and draw it beyond the border edge.
@@ -7186,7 +7188,7 @@ export interface CSSDecls {
      */
     outlineStyle: {
         /** Permits the user agent to render a custom outline style, typically the default platform style. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LineStyleEntry & WideEntry;
     /**
      * Width of the outline.
@@ -7205,15 +7207,15 @@ export interface CSSDecls {
      */
     overflow: {
         /** The behavior of the 'auto' value is UA-dependent, but should cause a scrolling mechanism to be provided for overflowing boxes. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Content is clipped and no scrolling mechanism should be provided to view the content outside the clipping region. */
-        "hidden": StyleObject;
+        hidden: StyleObject;
         /** Same as the standardized 'clip', except doesn’t establish a block formatting context. */
         "-moz-hidden-unscrollable": StyleObject;
         /** Content is clipped and if the user agent uses a scrolling mechanism that is visible on the screen (such as a scroll bar or a panner), that mechanism should be displayed for a box whether or not any of its content is clipped. */
-        "scroll": StyleObject;
+        scroll: StyleObject;
         /** Content is not clipped, i.e., it may be rendered outside the content box. */
-        "visible": StyleObject;
+        visible: StyleObject;
     } & WideEntry;
     /**
      * Specifies whether the UA may break within a word to prevent overflow when an otherwise-unbreakable string is too long to fit within the line box.
@@ -7226,7 +7228,7 @@ export interface CSSDecls {
         /** An otherwise unbreakable sequence of characters may be broken at an arbitrary point if there are no otherwise-acceptable break points in the line. */
         "break-word": StyleObject;
         /** Lines may break only at allowed break points. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * Specifies the handling of overflow in the horizontal direction.
@@ -7237,13 +7239,13 @@ export interface CSSDecls {
      */
     overflowX: {
         /** The behavior of the 'auto' value is UA-dependent, but should cause a scrolling mechanism to be provided for overflowing boxes. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Content is clipped and no scrolling mechanism should be provided to view the content outside the clipping region. */
-        "hidden": StyleObject;
+        hidden: StyleObject;
         /** Content is clipped and if the user agent uses a scrolling mechanism that is visible on the screen (such as a scroll bar or a panner), that mechanism should be displayed for a box whether or not any of its content is clipped. */
-        "scroll": StyleObject;
+        scroll: StyleObject;
         /** Content is not clipped, i.e., it may be rendered outside the content box. */
-        "visible": StyleObject;
+        visible: StyleObject;
     } & WideEntry;
     /**
      * Specifies the handling of overflow in the vertical direction.
@@ -7254,13 +7256,13 @@ export interface CSSDecls {
      */
     overflowY: {
         /** The behavior of the 'auto' value is UA-dependent, but should cause a scrolling mechanism to be provided for overflowing boxes. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Content is clipped and no scrolling mechanism should be provided to view the content outside the clipping region. */
-        "hidden": StyleObject;
+        hidden: StyleObject;
         /** Content is clipped and if the user agent uses a scrolling mechanism that is visible on the screen (such as a scroll bar or a panner), that mechanism should be displayed for a box whether or not any of its content is clipped. */
-        "scroll": StyleObject;
+        scroll: StyleObject;
         /** Content is not clipped, i.e., it may be rendered outside the content box. */
-        "visible": StyleObject;
+        visible: StyleObject;
     } & WideEntry;
     /**
      * \@counter-style descriptor. Specifies a “fixed-width” counter style, where representations shorter than the pad value are padded with a particular \<symbol>
@@ -7359,15 +7361,15 @@ export interface CSSDecls {
      */
     pageBreakAfter: {
         /** Always force a page break after the generated box. */
-        "always": StyleObject;
+        always: StyleObject;
         /** Neither force nor forbid a page break after generated box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a page break after the generated box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Force one or two page breaks after the generated box so that the next page is formatted as a left page. */
-        "left": StyleObject;
+        left: StyleObject;
         /** Force one or two page breaks after the generated box so that the next page is formatted as a right page. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Defines rules for page breaks before an element.
@@ -7378,15 +7380,15 @@ export interface CSSDecls {
      */
     pageBreakBefore: {
         /** Always force a page break before the generated box. */
-        "always": StyleObject;
+        always: StyleObject;
         /** Neither force nor forbid a page break before the generated box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a page break before the generated box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Force one or two page breaks before the generated box so that the next page is formatted as a left page. */
-        "left": StyleObject;
+        left: StyleObject;
         /** Force one or two page breaks before the generated box so that the next page is formatted as a right page. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Defines rules for page breaks inside an element.
@@ -7397,9 +7399,9 @@ export interface CSSDecls {
      */
     pageBreakInside: {
         /** Neither force nor forbid a page break inside the generated box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a page break inside the generated box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
     } & WideEntry;
     /**
      * Controls the order that the three paint operations that shapes and text are rendered with: their fill, their stroke and any markers they might have.
@@ -7411,11 +7413,11 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/paint-order)
      */
     paintOrder: {
-        "fill": StyleObject;
-        "markers": StyleObject;
+        fill: StyleObject;
+        markers: StyleObject;
         /** The element is painted with the standard order of painting operations: the 'fill' is painted first, then its 'stroke' and finally its markers. */
-        "normal": StyleObject;
-        "stroke": StyleObject;
+        normal: StyleObject;
+        stroke: StyleObject;
     } & WideEntry;
     /**
      * Applies the same transform as the perspective(\<number>) transform function, except that it applies only to the positioned or transformed children of the element, not to the transform on the element itself.
@@ -7426,7 +7428,7 @@ export interface CSSDecls {
      */
     perspective: {
         /** No perspective transform is applied. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Establishes the origin for the perspective property. It effectively sets the X and Y position at which the viewer appears to be looking at the children of the element.
@@ -7445,25 +7447,25 @@ export interface CSSDecls {
      */
     pointerEvents: {
         /** The given element behaves as it would if the pointer-events property were not specified. In SVG content, this value and the value visiblePainted have the same effect. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The given element can be the target element for pointer events whenever the pointer is over either the interior or the perimeter of the element. */
-        "all": StyleObject;
+        all: StyleObject;
         /** The given element can be the target element for pointer events whenever the pointer is over the interior of the element. */
-        "fill": StyleObject;
+        fill: StyleObject;
         /** The given element does not receive pointer events. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The given element can be the target element for pointer events when the pointer is over a "painted" area.  */
-        "painted": StyleObject;
+        painted: StyleObject;
         /** The given element can be the target element for pointer events whenever the pointer is over the perimeter of the element. */
-        "stroke": StyleObject;
+        stroke: StyleObject;
         /** The given element can be the target element for pointer events when the ‘visibility’ property is set to visible and the pointer is over either the interior or the perimeter of the element. */
-        "visible": StyleObject;
+        visible: StyleObject;
         /** The given element can be the target element for pointer events when the ‘visibility’ property is set to visible and when the pointer is over the interior of the element. */
-        "visibleFill": StyleObject;
+        visibleFill: StyleObject;
         /** The given element can be the target element for pointer events when the ‘visibility’ property is set to visible and when the pointer is over a ‘painted’ area. */
-        "visiblePainted": StyleObject;
+        visiblePainted: StyleObject;
         /** The given element can be the target element for pointer events when the ‘visibility’ property is set to visible and when the pointer is over the perimeter of the element. */
-        "visibleStroke": StyleObject;
+        visibleStroke: StyleObject;
     } & WideEntry;
     /**
      * The position CSS property sets how an element is positioned in a document. The top, right, bottom, and left properties determine the final location of positioned elements.
@@ -7474,17 +7476,17 @@ export interface CSSDecls {
      */
     position: {
         /** The box's position (and possibly size) is specified with the 'top', 'right', 'bottom', and 'left' properties. These properties specify offsets with respect to the box's 'containing block'. */
-        "absolute": StyleObject;
+        absolute: StyleObject;
         /** The box's position is calculated according to the 'absolute' model, but in addition, the box is fixed with respect to some reference. As with the 'absolute' model, the box's margins do not collapse with any other margins. */
-        "fixed": StyleObject;
+        fixed: StyleObject;
         /** The box's position is calculated according to the 'absolute' model. */
         "-ms-page": StyleObject;
         /** The box's position is calculated according to the normal flow (this is called the position in normal flow). Then the box is offset relative to its normal position. */
-        "relative": StyleObject;
+        relative: StyleObject;
         /** The box is a normal box, laid out according to the normal flow. The 'top', 'right', 'bottom', and 'left' properties do not apply. */
-        "static": StyleObject;
+        static: StyleObject;
         /** The box's position is calculated according to the normal flow. Then the box is offset relative to its flow root and containing block and in all cases, including table elements, does not affect the position of any following boxes. */
-        "sticky": StyleObject;
+        sticky: StyleObject;
         /** The box's position is calculated according to the normal flow. Then the box is offset relative to its flow root and containing block and in all cases, including table elements, does not affect the position of any following boxes. */
         "-webkit-sticky": StyleObject;
     } & WideEntry;
@@ -7505,7 +7507,7 @@ export interface CSSDecls {
      */
     quotes: {
         /** The 'open-quote' and 'close-quote' values of the 'content' property produce no quotations marks, as if they were 'no-open-quote' and 'no-close-quote' respectively. */
-        "none": StyleObject;
+        none: StyleObject;
     } & StringEntry & WideEntry;
     /**
      * \@counter-style descriptor. Defines the ranges over which the counter style is defined.
@@ -7516,9 +7518,9 @@ export interface CSSDecls {
      */
     range: {
         /** The range depends on the counter system. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** If used as the first value in a range, it represents negative infinity; if used as the second value, it represents positive infinity. */
-        "infinite": StyleObject;
+        infinite: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Specifies whether or not an element is resizable by the user, and if so, along which axis/axes.
@@ -7531,13 +7533,13 @@ export interface CSSDecls {
      */
     resize: {
         /** The UA presents a bidirectional resizing mechanism to allow the user to adjust both the height and the width of the element. */
-        "both": StyleObject;
+        both: StyleObject;
         /** The UA presents a unidirectional horizontal resizing mechanism to allow the user to adjust only the width of the element. */
-        "horizontal": StyleObject;
+        horizontal: StyleObject;
         /** The UA does not present a resizing mechanism on the element, and the user is given no direct manipulation mechanism to resize the element. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The UA presents a unidirectional vertical resizing mechanism to allow the user to adjust only the height of the element. */
-        "vertical": StyleObject;
+        vertical: StyleObject;
     } & WideEntry;
     /**
      * Specifies how far an absolutely positioned box's right margin edge is offset to the left of the right edge of the box's 'containing block'.
@@ -7548,7 +7550,7 @@ export interface CSSDecls {
      */
     right: {
         /** For non-replaced elements, the effect of this value depends on which of related properties have the value 'auto' as well */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * ⚠️ Property is experimental. Be cautious when using it.️
@@ -7567,9 +7569,9 @@ export interface CSSDecls {
          *
          * (Firefox 38)
          */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The ruby content is centered within its box. */
-        "center": StyleObject;
+        center: StyleObject;
         /**
          * If the width of the ruby text is smaller than that of the base, then the ruby text contents are evenly distributed across the width of the base, with the first and last ruby text glyphs lining up with the corresponding first and last base glyphs. If the width of the ruby text is at least the width of the base, then the letters of the base are evenly distributed across the width of the ruby text.
          *
@@ -7583,7 +7585,7 @@ export interface CSSDecls {
          */
         "distribute-space": StyleObject;
         /** The ruby text content is aligned with the start edge of the base. */
-        "left": StyleObject;
+        left: StyleObject;
         /**
          * If the ruby text is not adjacent to a line edge, it is aligned as in 'auto'. If it is adjacent to a line edge, then it is still aligned as in auto, but the side of the ruby text that touches the end of the line is lined up with the corresponding edge of the base.
          *
@@ -7595,13 +7597,13 @@ export interface CSSDecls {
          *
          * (Firefox 38)
          */
-        "right": StyleObject;
+        right: StyleObject;
         /**
          * The ruby text content is aligned with the start edge of the base.
          *
          * (Firefox 38)
          */
-        "start": StyleObject;
+        start: StyleObject;
         /**
          * The ruby content expands as defined for normal text justification (as defined by 'text-justify'),
          *
@@ -7622,13 +7624,13 @@ export interface CSSDecls {
      */
     rubyOverhang: {
         /** The ruby text can overhang text adjacent to the base on either side. This is the initial value. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The ruby text can overhang the text that follows it. */
-        "end": StyleObject;
+        end: StyleObject;
         /** The ruby text cannot overhang any text adjacent to its base, only its own base. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The ruby text can overhang the text that precedes it. */
-        "start": StyleObject;
+        start: StyleObject;
     } & WideEntry;
     /**
      * ⚠️ Property is experimental. Be cautious when using it.️
@@ -7643,12 +7645,12 @@ export interface CSSDecls {
      */
     rubyPosition: {
         /** The ruby text appears after the base. This is a relatively rare setting used in ideographic East Asian writing systems, most easily found in educational text. */
-        "after": StyleObject;
+        after: StyleObject;
         /** The ruby text appears before the base. This is the most common setting used in ideographic East Asian writing systems. */
-        "before": StyleObject;
-        "inline": StyleObject;
+        before: StyleObject;
+        inline: StyleObject;
         /** The ruby text appears on the right of the base. Unlike 'before' and 'after', this value is not relative to the text flow direction. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Determines whether, and on which side, ruby text is allowed to partially overhang any adjacent text in addition to its own base, when the ruby text is wider than the ruby base.
@@ -7659,7 +7661,7 @@ export interface CSSDecls {
         /** The value of attribute 'x' is a string value. The string value is evaluated as a \<number> to determine the number of ruby base elements to be spanned by the annotation element. */
         attr: (...params: Parameters<typeof attr>) => StyleObject;
         /** No spanning. The computed value is '1'. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Determines the color of the top and left edges of the scroll box and scroll arrows of a scroll bar.
@@ -7734,9 +7736,9 @@ export interface CSSDecls {
      */
     scrollBehavior: {
         /** Scrolls in an instant fashion. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Scrolls in a smooth fashion using a user-agent-defined timing function and time period. */
-        "smooth": StyleObject;
+        smooth: StyleObject;
     } & WideEntry;
     /**
      * 🚨️️️ Property is obsolete. Avoid using it.
@@ -7751,7 +7753,7 @@ export interface CSSDecls {
      */
     scrollSnapCoordinate: {
         /** Specifies that this element does not contribute a snap point. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & PercentEntry & PositionEntry & WideEntry;
     /**
      * 🚨️️️ Property is obsolete. Avoid using it.
@@ -7778,7 +7780,7 @@ export interface CSSDecls {
      */
     scrollSnapPointsX: {
         /** No snap points are defined by this scroll container. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Defines an interval at which snap points are defined, starting from the container’s relevant start edge. */
         repeat: (...params: Parameters<typeof repeat>) => StyleObject;
     } & WideEntry;
@@ -7795,7 +7797,7 @@ export interface CSSDecls {
      */
     scrollSnapPointsY: {
         /** No snap points are defined by this scroll container. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Defines an interval at which snap points are defined, starting from the container’s relevant start edge. */
         repeat: (...params: Parameters<typeof repeat>) => StyleObject;
     } & WideEntry;
@@ -7808,11 +7810,11 @@ export interface CSSDecls {
      */
     scrollSnapType: {
         /** The visual viewport of this scroll container must ignore snap points, if any, when scrolled. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The visual viewport of this scroll container is guaranteed to rest on a snap point when there are no active scrolling operations. */
-        "mandatory": StyleObject;
+        mandatory: StyleObject;
         /** The visual viewport of this scroll container may come to rest on a snap point at the termination of a scroll at the discretion of the UA given the parameters of the scroll. */
-        "proximity": StyleObject;
+        proximity: StyleObject;
     } & WideEntry;
     /**
      * Defines the alpha channel threshold used to extract the shape using an image. A value of 0.5 means that the shape will enclose all the pixels that are more than 50% opaque.
@@ -7849,18 +7851,18 @@ export interface CSSDecls {
         /** The background is painted within (clipped to) the margin box. */
         "margin-box": StyleObject;
         /** The float area is unaffected. */
-        "none": StyleObject;
+        none: StyleObject;
     } & ImageFunctions & BasicShapeFunctions & BoxEntry & WideEntry;
     /** Provides hints about what tradeoffs to make as it renders vector graphics elements such as \<path> elements and basic shapes such as circles and rectangles. */
     shapeRendering: {
         /** Suppresses aural rendering. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Emphasize the contrast between clean edges of artwork over rendering speed and geometric precision. */
-        "crispEdges": StyleObject;
+        crispEdges: StyleObject;
         /** Emphasize geometric precision over speed and crisp edges. */
-        "geometricPrecision": StyleObject;
+        geometricPrecision: StyleObject;
         /** Emphasize rendering speed over geometric precision and crisp edges. */
-        "optimizeSpeed": StyleObject;
+        optimizeSpeed: StyleObject;
     } & WideEntry;
     /**
      * The size CSS at-rule descriptor, used with the \@page at-rule, defines the size and orientation of the box which is used to represent a page. Most of the time, this size corresponds to the target size of the printed page if applicable.
@@ -7892,12 +7894,12 @@ export interface CSSDecls {
         /** A URL reference to a paint server element, which is an element that defines a paint server: ‘hatch’, ‘linearGradient’, ‘mesh’, ‘pattern’, ‘radialGradient’ and ‘solidcolor’. */
         url: (...params: Parameters<typeof url>) => StyleObject;
         /** No paint is applied in this layer. */
-        "none": StyleObject;
+        none: StyleObject;
     } & ColorEntry & ColorFunctions & URLEntry & WideEntry;
     /** Controls the pattern of dashes and gaps used to stroke paths. */
     strokeDasharray: {
         /** Indicates that no dashing is used. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -7906,20 +7908,20 @@ export interface CSSDecls {
     /** Specifies the shape to be used at the end of open subpaths when they are stroked. */
     strokeLinecap: {
         /** Indicates that the stroke for each subpath does not extend beyond its two endpoints. */
-        "butt": StyleObject;
+        butt: StyleObject;
         /** Indicates that at each end of each subpath, the shape representing the stroke will be extended by a half circle with a radius equal to the stroke width. */
-        "round": StyleObject;
+        round: StyleObject;
         /** Indicates that at the end of each subpath, the shape representing the stroke will be extended by a rectangle with the same width as the stroke width and whose length is half of the stroke width. */
-        "square": StyleObject;
+        square: StyleObject;
     } & WideEntry;
     /** Specifies the shape to be used at the corners of paths or basic shapes when they are stroked. */
     strokeLinejoin: {
         /** Indicates that a bevelled corner is to be used to join path segments. */
-        "bevel": StyleObject;
+        bevel: StyleObject;
         /** Indicates that a sharp corner is to be used to join path segments. */
-        "miter": StyleObject;
+        miter: StyleObject;
         /** Indicates that a round corner is to be used to join path segments. */
-        "round": StyleObject;
+        round: StyleObject;
     } & WideEntry;
     /** When two line segments meet at a sharp angle and miter joins have been specified for 'stroke-linejoin', it is possible for the miter to extend far beyond the thickness of the line stroking the path. */
     strokeMiterlimit: {
@@ -7946,19 +7948,19 @@ export interface CSSDecls {
      */
     system: {
         /** Represents “sign-value” numbering systems, which, rather than using reusing digits in different positions to change their value, define additional digits with much larger values, so that the value of the number can be obtained by adding all the digits together. */
-        "additive": StyleObject;
+        additive: StyleObject;
         /** Interprets the list of counter symbols as digits to an alphabetic numbering system, similar to the default lower-alpha counter style, which wraps from "a", "b", "c", to "aa", "ab", "ac". */
-        "alphabetic": StyleObject;
+        alphabetic: StyleObject;
         /** Cycles repeatedly through its provided symbols, looping back to the beginning when it reaches the end of the list. */
-        "cyclic": StyleObject;
+        cyclic: StyleObject;
         /** Use the algorithm of another counter style, but alter other aspects. */
-        "extends": StyleObject;
+        extends: StyleObject;
         /** Runs through its list of counter symbols once, then falls back. */
-        "fixed": StyleObject;
+        fixed: StyleObject;
         /** interprets the list of counter symbols as digits to a "place-value" numbering system, similar to the default 'decimal' counter style. */
-        "numeric": StyleObject;
+        numeric: StyleObject;
         /** Cycles repeatedly through its provided symbols, doubling, tripling, etc. the symbols on each successive pass through the list. */
-        "symbolic": StyleObject;
+        symbolic: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * \@counter-style descriptor. Specifies the symbols used by the marker-construction algorithm specified by the system descriptor.
@@ -7977,9 +7979,9 @@ export interface CSSDecls {
      */
     tableLayout: {
         /** Use any automatic table layout algorithm. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Use the fixed table layout algorithm. */
-        "fixed": StyleObject;
+        fixed: StyleObject;
     } & WideEntry;
     /**
      * Determines the width of the tab character (U+0009), in space characters (U+0020), when rendered.
@@ -8000,17 +8002,17 @@ export interface CSSDecls {
      */
     textAlign: {
         /** The inline contents are centered within the line box. */
-        "center": StyleObject;
+        center: StyleObject;
         /** The inline contents are aligned to the end edge of the line box. */
-        "end": StyleObject;
+        end: StyleObject;
         /** The text is justified according to the method specified by the 'text-justify' property. */
-        "justify": StyleObject;
+        justify: StyleObject;
         /** The inline contents are aligned to the left edge of the line box. In vertical text, 'left' aligns to the edge of the line box that would be the start edge for left-to-right text. */
-        "left": StyleObject;
+        left: StyleObject;
         /** The inline contents are aligned to the right edge of the line box. In vertical text, 'right' aligns to the edge of the line box that would be the end edge for left-to-right text. */
-        "right": StyleObject;
+        right: StyleObject;
         /** The inline contents are aligned to the start edge of the line box. */
-        "start": StyleObject;
+        start: StyleObject;
     } & StringEntry & WideEntry;
     /**
      * Describes how the last line of a block or a line right before a forced line break is aligned when 'text-align' is set to 'justify'.
@@ -8023,24 +8025,24 @@ export interface CSSDecls {
      */
     textAlignLast: {
         /** Content on the affected line is aligned per 'text-align' unless 'text-align' is set to 'justify', in which case it is 'start-aligned'. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The inline contents are centered within the line box. */
-        "center": StyleObject;
+        center: StyleObject;
         /** The text is justified according to the method specified by the 'text-justify' property. */
-        "justify": StyleObject;
+        justify: StyleObject;
         /** The inline contents are aligned to the left edge of the line box. In vertical text, 'left' aligns to the edge of the line box that would be the start edge for left-to-right text. */
-        "left": StyleObject;
+        left: StyleObject;
         /** The inline contents are aligned to the right edge of the line box. In vertical text, 'right' aligns to the edge of the line box that would be the end edge for left-to-right text. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /** Used to align (start-, middle- or end-alignment) a string of text relative to a given point. */
     textAnchor: {
         /** The rendered characters are aligned such that the end of the resulting rendered text is at the initial current text position. */
-        "end": StyleObject;
+        end: StyleObject;
         /** The rendered characters are aligned such that the geometric middle of the resulting rendered text is at the initial current text position. */
-        "middle": StyleObject;
+        middle: StyleObject;
         /** The rendered characters are aligned such that the start of the resulting rendered text is at the initial current text position. */
-        "start": StyleObject;
+        start: StyleObject;
     } & WideEntry;
     /**
      * Decorations applied to font used for an element's text.
@@ -8051,23 +8053,23 @@ export interface CSSDecls {
      */
     textDecoration: {
         /** Produces a dashed line style. */
-        "dashed": StyleObject;
+        dashed: StyleObject;
         /** Produces a dotted line. */
-        "dotted": StyleObject;
+        dotted: StyleObject;
         /** Produces a double line. */
-        "double": StyleObject;
+        double: StyleObject;
         /** Each line of text has a line through the middle. */
         "line-through": StyleObject;
         /** Produces no line. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Each line of text has a line above it. */
-        "overline": StyleObject;
+        overline: StyleObject;
         /** Produces a solid line. */
-        "solid": StyleObject;
+        solid: StyleObject;
         /** Each line of text is underlined. */
-        "underline": StyleObject;
+        underline: StyleObject;
         /** Produces a wavy line. */
-        "wavy": StyleObject;
+        wavy: StyleObject;
     } & ColorEntry & ColorFunctions & WideEntry;
     /**
      * Specifies the color of text decoration (underlines overlines, and line-throughs) set on the element with text-decoration-line.
@@ -8092,11 +8094,11 @@ export interface CSSDecls {
         /** Each line of text has a line through the middle. */
         "line-through": StyleObject;
         /** Neither produces nor inhibits text decoration. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Each line of text has a line above it. */
-        "overline": StyleObject;
+        overline: StyleObject;
         /** Each line of text is underlined. */
-        "underline": StyleObject;
+        underline: StyleObject;
     } & WideEntry;
     /**
      * Specifies the line style for underline, line-through and overline text decoration.
@@ -8109,17 +8111,17 @@ export interface CSSDecls {
      */
     textDecorationStyle: {
         /** Produces a dashed line style. */
-        "dashed": StyleObject;
+        dashed: StyleObject;
         /** Produces a dotted line. */
-        "dotted": StyleObject;
+        dotted: StyleObject;
         /** Produces a double line. */
-        "double": StyleObject;
+        double: StyleObject;
         /** Produces no line. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Produces a solid line. */
-        "solid": StyleObject;
+        solid: StyleObject;
         /** Produces a wavy line. */
-        "wavy": StyleObject;
+        wavy: StyleObject;
     } & WideEntry;
     /**
      * Specifies the indentation applied to lines of inline content in a block. The indentation only affects the first line of inline content in the block unless the 'hanging' keyword is specified, in which case it affects all lines except the first.
@@ -8140,9 +8142,9 @@ export interface CSSDecls {
      */
     textJustify: {
         /** The UA determines the justification algorithm to follow, based on a balance between performance and adequate presentation quality. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Justification primarily changes spacing both at word separators and at grapheme cluster boundaries in all scripts except those in the connected and cursive groups. This value is sometimes used in e.g. Japanese, often with the 'text-align-last' property. */
-        "distribute": StyleObject;
+        distribute: StyleObject;
         "distribute-all-lines": StyleObject;
         /** Justification primarily changes spacing at word separators and at grapheme cluster boundaries in clustered scripts. This value is typically used for Southeast Asian scripts such as Thai. */
         "inter-cluster": StyleObject;
@@ -8151,8 +8153,8 @@ export interface CSSDecls {
         /** Justification primarily changes spacing at word separators. This value is typically used for languages that separate words using spaces, like English or (sometimes) Korean. */
         "inter-word": StyleObject;
         /** Justification primarily stretches Arabic and related scripts through the use of kashida or other calligraphic elongation. */
-        "kashida": StyleObject;
-        "newspaper": StyleObject;
+        kashida: StyleObject;
+        newspaper: StyleObject;
     } & WideEntry;
     /**
      * Specifies the orientation of text within a line.
@@ -8169,7 +8171,7 @@ export interface CSSDecls {
          *
          * (Edge 79, Firefox 41, Safari 14, Chrome 48, Opera 35)
          */
-        "sideways": StyleObject;
+        sideways: StyleObject;
         /**
          * In vertical writing modes, this causes text to be set as if in a horizontal layout, but rotated 90° clockwise.
          *
@@ -8177,7 +8179,7 @@ export interface CSSDecls {
          */
         "sideways-right": StyleObject;
         /** In vertical writing modes, characters from horizontal-only scripts are rendered upright, i.e. in their standard horizontal orientation. */
-        "upright": StyleObject;
+        upright: StyleObject;
     } & WideEntry;
     /**
      * Text can overflow for example when it is prevented from wrapping.
@@ -8188,9 +8190,9 @@ export interface CSSDecls {
      */
     textOverflow: {
         /** Clip inline content that overflows. Characters may be only partially rendered. */
-        "clip": StyleObject;
+        clip: StyleObject;
         /** Render an ellipsis character (U+2026) to represent clipped inline content. */
-        "ellipsis": StyleObject;
+        ellipsis: StyleObject;
     } & StringEntry & WideEntry;
     /**
      * The creator of SVG content might want to provide a hint to the implementation about what tradeoffs to make as it renders text. The ‘text-rendering’ property provides these hints.
@@ -8202,13 +8204,13 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-rendering)
      */
     textRendering: {
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the user agent shall emphasize geometric precision over legibility and rendering speed. */
-        "geometricPrecision": StyleObject;
+        geometricPrecision: StyleObject;
         /** Indicates that the user agent shall emphasize legibility over rendering speed and geometric precision. */
-        "optimizeLegibility": StyleObject;
+        optimizeLegibility: StyleObject;
         /** Indicates that the user agent shall emphasize rendering speed over legibility and geometric precision. */
-        "optimizeSpeed": StyleObject;
+        optimizeSpeed: StyleObject;
     } & WideEntry;
     /**
      * Enables shadow effects to be applied to the text of the element.
@@ -8219,7 +8221,7 @@ export interface CSSDecls {
      */
     textShadow: {
         /** No shadow. */
-        "none": StyleObject;
+        none: StyleObject;
     } & ColorEntry & ColorFunctions & LengthEntry & WideEntry;
     /**
      * Controls capitalization effects of an element’s text.
@@ -8230,13 +8232,13 @@ export interface CSSDecls {
      */
     textTransform: {
         /** Puts the first typographic letter unit of each word in titlecase. */
-        "capitalize": StyleObject;
+        capitalize: StyleObject;
         /** Puts all letters in lowercase. */
-        "lowercase": StyleObject;
+        lowercase: StyleObject;
         /** No effects. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Puts all letters in uppercase. */
-        "uppercase": StyleObject;
+        uppercase: StyleObject;
     } & WideEntry;
     /**
      * Sets the position of an underline specified on the same element: it does not affect underlines specified by ancestor elements. This property is typically used in vertical writing contexts such as in Japanese documents where it often desired to have the underline appear 'over' (to the right of) the affected run of text
@@ -8246,11 +8248,11 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-underline-position)
      */
     textUnderlinePosition: {
-        "above": StyleObject;
+        above: StyleObject;
         /** The user agent may use any algorithm to determine the underline’s position. In horizontal line layout, the underline should be aligned as for alphabetic. In vertical line layout, if the language is set to Japanese or Korean, the underline should be aligned as for over. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** The underline is aligned with the under edge of the element’s content box. */
-        "below": StyleObject;
+        below: StyleObject;
     } & WideEntry;
     /**
      * Specifies how far an absolutely positioned box's top margin edge is offset below the top edge of the box's 'containing block'.
@@ -8261,7 +8263,7 @@ export interface CSSDecls {
      */
     top: {
         /** For non-replaced elements, the effect of this value depends on which of related properties have the value 'auto' as well */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Determines whether touch input may trigger default behavior supplied by user agent.
@@ -8272,14 +8274,14 @@ export interface CSSDecls {
      */
     touchAction: {
         /** The user agent may determine any permitted touch behaviors for touches that begin on the element. */
-        "auto": StyleObject;
+        auto: StyleObject;
         "cross-slide-x": StyleObject;
         "cross-slide-y": StyleObject;
         "double-tap-zoom": StyleObject;
         /** The user agent may consider touches that begin on the element only for the purposes of scrolling and continuous zooming. */
-        "manipulation": StyleObject;
+        manipulation: StyleObject;
         /** Touches that begin on the element must not trigger default touch behaviors. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The user agent may consider touches that begin on the element only for the purposes of horizontally scrolling the element’s nearest ancestor with horizontally scrollable content. */
         "pan-x": StyleObject;
         /** The user agent may consider touches that begin on the element only for the purposes of vertically scrolling the element’s nearest ancestor with vertically scrollable content. */
@@ -8298,7 +8300,7 @@ export interface CSSDecls {
         matrix: (...params: Parameters<typeof matrix>) => StyleObject;
         /** Specifies a 3D transformation as a 4x4 homogeneous matrix of 16 values in column-major order. */
         matrix3d: (...params: Parameters<typeof matrix3d>) => StyleObject;
-        "none": StyleObject;
+        none: StyleObject;
         /** Specifies a perspective projection matrix. */
         perspective: (...params: Parameters<typeof perspective>) => StyleObject;
         /** Specifies a 2D rotation by the angle specified in the parameter about the origin of the element, as defined by the transform-origin property. */
@@ -8357,7 +8359,7 @@ export interface CSSDecls {
      */
     transformStyle: {
         /** All children of this element are rendered flattened into the 2D plane of the element. */
-        "flat": StyleObject;
+        flat: StyleObject;
         /**
          * Flattening is not performed, so children maintain their position in 3D space.
          *
@@ -8374,9 +8376,9 @@ export interface CSSDecls {
      */
     transition: {
         /** Every property that is able to undergo a transition will do so. */
-        "all": StyleObject;
+        all: StyleObject;
         /** No property will transition. */
-        "none": StyleObject;
+        none: StyleObject;
     } & TimeEntry & TransitionTimingFunctions & WideEntry;
     /**
      * Defines when the transition will start. It allows a transition to begin execution some period of time from when it is applied.
@@ -8403,9 +8405,9 @@ export interface CSSDecls {
      */
     transitionProperty: {
         /** Every property that is able to undergo a transition will do so. */
-        "all": StyleObject;
+        all: StyleObject;
         /** No property will transition. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Describes how the intermediate values used during a transition will be calculated.
@@ -8426,15 +8428,15 @@ export interface CSSDecls {
         /** Inside the element, reordering is strictly in sequence according to the 'direction' property; the implicit part of the bidirectional algorithm is ignored. */
         "bidi-override": StyleObject;
         /** If the element is inline-level, this value opens an additional level of embedding with respect to the bidirectional algorithm. The direction of this embedding level is given by the 'direction' property. */
-        "embed": StyleObject;
+        embed: StyleObject;
         /** The contents of the element are considered to be inside a separate, independent paragraph. */
-        "isolate": StyleObject;
+        isolate: StyleObject;
         /** This combines the isolation behavior of 'isolate' with the directional override behavior of 'bidi-override' */
         "isolate-override": StyleObject;
         /** The element does not open an additional level of embedding with respect to the bidirectional algorithm. For inline-level elements, implicit reordering works across element boundaries. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** For the purposes of the Unicode bidirectional algorithm, the base directionality of each bidi paragraph for which the element forms the containing block is determined not by the element's computed 'direction'. */
-        "plaintext": StyleObject;
+        plaintext: StyleObject;
     } & WideEntry;
     /**
      * \@font-face descriptor. Defines the set of Unicode codepoints that may be supported by the font face for which it is declared.
@@ -8606,14 +8608,14 @@ export interface CSSDecls {
      */
     userSelect: {
         /** The content of the element must be selected atomically */
-        "all": StyleObject;
-        "auto": StyleObject;
+        all: StyleObject;
+        auto: StyleObject;
         /** UAs must not allow a selection which is started in this element to be extended outside of this element. */
-        "contain": StyleObject;
+        contain: StyleObject;
         /** The UA must not allow selections to be started in this element. */
-        "none": StyleObject;
+        none: StyleObject;
         /** The element imposes no constraint on the selection. */
-        "text": StyleObject;
+        text: StyleObject;
     } & WideEntry;
     /**
      * Affects the vertical positioning of the inline boxes generated by an inline-level element inside a line box.
@@ -8624,23 +8626,23 @@ export interface CSSDecls {
      */
     verticalAlign: {
         /** Align the dominant baseline of the parent box with the equivalent, or heuristically reconstructed, baseline of the element inline box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Align the 'alphabetic' baseline of the element with the 'alphabetic' baseline of the parent element. */
-        "baseline": StyleObject;
+        baseline: StyleObject;
         /** Align the after edge of the extended inline box with the after-edge of the line box. */
-        "bottom": StyleObject;
+        bottom: StyleObject;
         /** Align the 'middle' baseline of the inline element with the middle baseline of the parent. */
-        "middle": StyleObject;
+        middle: StyleObject;
         /** Lower the baseline of the box to the proper position for subscripts of the parent's box. (This value has no effect on the font size of the element's text.) */
-        "sub": StyleObject;
+        sub: StyleObject;
         /** Raise the baseline of the box to the proper position for superscripts of the parent's box. (This value has no effect on the font size of the element's text.) */
-        "super": StyleObject;
+        super: StyleObject;
         /** Align the bottom of the box with the after-edge of the parent element's font. */
         "text-bottom": StyleObject;
         /** Align the top of the box with the before-edge of the parent element's font. */
         "text-top": StyleObject;
         /** Align the before edge of the extended inline box with the before-edge of the line box. */
-        "top": StyleObject;
+        top: StyleObject;
         "-webkit-baseline-middle": StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
@@ -8652,11 +8654,11 @@ export interface CSSDecls {
      */
     visibility: {
         /** Table-specific. If used on elements other than rows, row groups, columns, or column groups, 'collapse' has the same meaning as 'hidden'. */
-        "collapse": StyleObject;
+        collapse: StyleObject;
         /** The generated box is invisible (fully transparent, nothing is drawn), but still affects layout. */
-        "hidden": StyleObject;
+        hidden: StyleObject;
         /** The generated box is visible. */
-        "visible": StyleObject;
+        visible: StyleObject;
     } & WideEntry;
     /**
      * Shorthand property combines six of the animation properties into a single property.
@@ -8665,23 +8667,23 @@ export interface CSSDecls {
      */
     "-webkit-animation": {
         /** The animation cycle iterations that are odd counts are played in the normal direction, and the animation cycle iterations that are even counts are played in a reverse direction. */
-        "alternate": StyleObject;
+        alternate: StyleObject;
         /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
         "alternate-reverse": StyleObject;
         /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
-        "backwards": StyleObject;
+        backwards: StyleObject;
         /** Both forwards and backwards fill modes are applied. */
-        "both": StyleObject;
+        both: StyleObject;
         /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
-        "forwards": StyleObject;
+        forwards: StyleObject;
         /** Causes the animation to repeat forever. */
-        "infinite": StyleObject;
+        infinite: StyleObject;
         /** No animation is performed */
-        "none": StyleObject;
+        none: StyleObject;
         /** Normal playback. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** All iterations of the animation are played in the reverse direction from the way they were specified. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & TimeEntry & TransitionTimingFunctions & WideEntry;
@@ -8698,13 +8700,13 @@ export interface CSSDecls {
      */
     "-webkit-animation-direction": {
         /** The animation cycle iterations that are odd counts are played in the normal direction, and the animation cycle iterations that are even counts are played in a reverse direction. */
-        "alternate": StyleObject;
+        alternate: StyleObject;
         /** The animation cycle iterations that are odd counts are played in the reverse direction, and the animation cycle iterations that are even counts are played in a normal direction. */
         "alternate-reverse": StyleObject;
         /** Normal playback. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** All iterations of the animation are played in the reverse direction from the way they were specified. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & WideEntry;
     /**
      * Defines the length of time that an animation takes to complete one cycle.
@@ -8719,13 +8721,13 @@ export interface CSSDecls {
      */
     "-webkit-animation-fill-mode": {
         /** The beginning property value (as defined in the first \@keyframes at-rule) is applied before the animation is displayed, during the period defined by 'animation-delay'. */
-        "backwards": StyleObject;
+        backwards: StyleObject;
         /** Both forwards and backwards fill modes are applied. */
-        "both": StyleObject;
+        both: StyleObject;
         /** The final property value (as defined in the last \@keyframes at-rule) is maintained after the animation completes. */
-        "forwards": StyleObject;
+        forwards: StyleObject;
         /** There is no change to the property value between the time the animation is applied and the time the animation begins playing or after the animation completes. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Defines the number of times an animation cycle is played. The default value is one, meaning the animation will play from beginning to end once.
@@ -8734,7 +8736,7 @@ export interface CSSDecls {
      */
     "-webkit-animation-iteration-count": {
         /** Causes the animation to repeat forever. */
-        "infinite": StyleObject;
+        infinite: StyleObject;
     } & {
         [value: number]: StyleObject;
     } & WideEntry;
@@ -8745,7 +8747,7 @@ export interface CSSDecls {
      */
     "-webkit-animation-name": {
         /** No animation is performed */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Defines whether the animation is running or paused.
@@ -8754,9 +8756,9 @@ export interface CSSDecls {
      */
     "-webkit-animation-play-state": {
         /** A running animation will be paused. */
-        "paused": StyleObject;
+        paused: StyleObject;
         /** Resume playback of a paused animation. */
-        "running": StyleObject;
+        running: StyleObject;
     } & WideEntry;
     /**
      * Describes how the animation will progress over one cycle of its duration. See the 'transition-timing-function'.
@@ -8774,14 +8776,14 @@ export interface CSSDecls {
      * Syntax: none | button | button-bevel | caret | checkbox | default-button | inner-spin-button | listbox | listitem | media-controls-background | media-controls-fullscreen-background | media-current-time-display | media-enter-fullscreen-button | media-exit-fullscreen-button | media-fullscreen-button | media-mute-button | media-overlay-play-button | media-play-button | media-seek-back-button | media-seek-forward-button | media-slider | media-sliderthumb | media-time-remaining-display | media-toggle-closed-captions-button | media-volume-slider | media-volume-slider-container | media-volume-sliderthumb | menulist | menulist-button | menulist-text | menulist-textfield | meter | progress-bar | progress-bar-value | push-button | radio | searchfield | searchfield-cancel-button | searchfield-decoration | searchfield-results-button | searchfield-results-decoration | slider-horizontal | slider-vertical | sliderthumb-horizontal | sliderthumb-vertical | square-button | textarea | textfield | -apple-pay-button
      */
     "-webkit-appearance": {
-        "button": StyleObject;
+        button: StyleObject;
         "button-bevel": StyleObject;
         "caps-lock-indicator": StyleObject;
-        "caret": StyleObject;
-        "checkbox": StyleObject;
+        caret: StyleObject;
+        checkbox: StyleObject;
         "default-button": StyleObject;
-        "listbox": StyleObject;
-        "listitem": StyleObject;
+        listbox: StyleObject;
+        listitem: StyleObject;
         "media-fullscreen-button": StyleObject;
         "media-mute-button": StyleObject;
         "media-play-button": StyleObject;
@@ -8789,13 +8791,13 @@ export interface CSSDecls {
         "media-seek-forward-button": StyleObject;
         "media-slider": StyleObject;
         "media-sliderthumb": StyleObject;
-        "menulist": StyleObject;
+        menulist: StyleObject;
         "menulist-button": StyleObject;
         "menulist-text": StyleObject;
         "menulist-textfield": StyleObject;
-        "none": StyleObject;
+        none: StyleObject;
         "push-button": StyleObject;
-        "radio": StyleObject;
+        radio: StyleObject;
         "scrollbarbutton-down": StyleObject;
         "scrollbarbutton-left": StyleObject;
         "scrollbarbutton-right": StyleObject;
@@ -8806,7 +8808,7 @@ export interface CSSDecls {
         "scrollbarthumb-vertical": StyleObject;
         "scrollbartrack-horizontal": StyleObject;
         "scrollbartrack-vertical": StyleObject;
-        "searchfield": StyleObject;
+        searchfield: StyleObject;
         "searchfield-cancel-button": StyleObject;
         "searchfield-decoration": StyleObject;
         "searchfield-results-button": StyleObject;
@@ -8816,8 +8818,8 @@ export interface CSSDecls {
         "sliderthumb-vertical": StyleObject;
         "slider-vertical": StyleObject;
         "square-button": StyleObject;
-        "textarea": StyleObject;
-        "textfield": StyleObject;
+        textarea: StyleObject;
+        textfield: StyleObject;
     } & WideEntry;
     /**
      * Applies a filter effect where the first filter in the list takes the element's background image as the input image.
@@ -8826,7 +8828,7 @@ export interface CSSDecls {
      */
     "-webkit-backdrop-filter": {
         /** No filter effects are applied. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Applies a Gaussian blur to the input image. */
         blur: (...params: Parameters<typeof blur>) => StyleObject;
         /** Applies a linear multiplier to input image, making it appear more or less bright. */
@@ -8856,8 +8858,8 @@ export interface CSSDecls {
      * (Chrome, Safari 5)
      */
     "-webkit-backface-visibility": {
-        "hidden": StyleObject;
-        "visible": StyleObject;
+        hidden: StyleObject;
+        visible: StyleObject;
     } & WideEntry;
     /**
      * Determines the background painting area.
@@ -8867,8 +8869,8 @@ export interface CSSDecls {
     "-webkit-background-clip": BoxEntry & WideEntry;
     /** (Chrome, Safari 3) */
     "-webkit-background-composite": {
-        "border": StyleObject;
-        "padding": StyleObject;
+        border: StyleObject;
+        padding: StyleObject;
     } & WideEntry;
     /**
      * For elements rendered as a single box, specifies the background positioning area. For elements rendered as multiple boxes (e.g., inline boxes on several lines, boxes on several pages) specifies which boxes 'box-decoration-break' operates on to determine the background positioning area(s).
@@ -8883,18 +8885,18 @@ export interface CSSDecls {
      */
     "-webkit-border-image": {
         /** If 'auto' is specified then the border image width is the intrinsic width or height (whichever is applicable) of the corresponding image slice. If the image does not have the required intrinsic dimension then the corresponding border-width is used instead. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Causes the middle part of the border-image to be preserved. */
-        "fill": StyleObject;
-        "none": StyleObject;
+        fill: StyleObject;
+        none: StyleObject;
         /** The image is tiled (repeated) to fill the area. */
-        "repeat": StyleObject;
+        repeat: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the image is rescaled so that it does. */
-        "round": StyleObject;
+        round: StyleObject;
         /** The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the extra space is distributed around the tiles. */
-        "space": StyleObject;
+        space: StyleObject;
         /** The image is stretched to fill the area. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & LengthEntry & PercentEntry & {
         [value: number]: StyleObject;
@@ -8906,15 +8908,15 @@ export interface CSSDecls {
      */
     "-webkit-box-align": {
         /** If this box orientation is inline-axis or horizontal, all children are placed with their baselines aligned, and extra space placed before or after as necessary. For block flows, the baseline of the first non-empty line box located within the element is used. For tables, the baseline of the first cell is used. */
-        "baseline": StyleObject;
+        baseline: StyleObject;
         /** Any extra space is divided evenly, with half placed above the child and the other half placed after the child. */
-        "center": StyleObject;
+        center: StyleObject;
         /** For normal direction boxes, the bottom edge of each child is placed along the bottom of the box. Extra space is placed above the element. For reverse direction boxes, the top edge of each child is placed along the top of the box. Extra space is placed below the element. */
-        "end": StyleObject;
+        end: StyleObject;
         /** For normal direction boxes, the top edge of each child is placed along the top of the box. Extra space is placed below the element. For reverse direction boxes, the bottom edge of each child is placed along the bottom of the box. Extra space is placed above the element. */
-        "start": StyleObject;
+        start: StyleObject;
         /** The height of each child is adjusted to that of the containing block. */
-        "stretch": StyleObject;
+        stretch: StyleObject;
     } & WideEntry;
     /**
      * In webkit applications, -webkit-box-direction specifies whether a box lays out its contents normally (from the top or left edge), or in reverse (from the bottom or right edge).
@@ -8923,9 +8925,9 @@ export interface CSSDecls {
      */
     "-webkit-box-direction": {
         /** A box with a computed value of horizontal for box-orient displays its children from left to right. A box with a computed value of vertical displays its children from top to bottom. */
-        "normal": StyleObject;
+        normal: StyleObject;
         /** A box with a computed value of horizontal for box-orient displays its children from right to left. A box with a computed value of vertical displays its children from bottom to top. */
-        "reverse": StyleObject;
+        reverse: StyleObject;
     } & WideEntry;
     /**
      * Specifies an element's flexibility.
@@ -8956,11 +8958,11 @@ export interface CSSDecls {
         /** Elements are oriented along the box's axis. */
         "block-axis": StyleObject;
         /** The box displays its children from left to right in a horizontal line. */
-        "horizontal": StyleObject;
+        horizontal: StyleObject;
         /** Elements are oriented vertically. */
         "inline-axis": StyleObject;
         /** The box displays its children from stacked from top to bottom vertically. */
-        "vertical": StyleObject;
+        vertical: StyleObject;
     } & WideEntry;
     /**
      * Specifies alignment of child elements within the current element in the direction of orientation.
@@ -8969,13 +8971,13 @@ export interface CSSDecls {
      */
     "-webkit-box-pack": {
         /** The extra space is divided evenly, with half placed before the first child and the other half placed after the last child. */
-        "center": StyleObject;
+        center: StyleObject;
         /** For normal direction boxes, the right edge of the last child is placed at the right side, with all extra space placed before the first child. For reverse direction boxes, the left edge of the first child is placed at the left side, with all extra space placed after the last child. */
-        "end": StyleObject;
+        end: StyleObject;
         /** The space is divided evenly in-between each child, with none of the extra space placed before the first child or after the last child. If there is only one child, treat the pack value as if it were start. */
-        "justify": StyleObject;
+        justify: StyleObject;
         /** For normal direction boxes, the left edge of the first child is placed at the left side, with all extra space placed after the last child. For reverse direction boxes, the right edge of the last child is placed at the right side, with all extra space placed before the first child. */
-        "start": StyleObject;
+        start: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -8990,13 +8992,13 @@ export interface CSSDecls {
      */
     "-webkit-box-reflect": {
         /** The reflection appears above the border box. */
-        "above": StyleObject;
+        above: StyleObject;
         /** The reflection appears below the border box. */
-        "below": StyleObject;
+        below: StyleObject;
         /** The reflection appears to the left of the border box. */
-        "left": StyleObject;
+        left: StyleObject;
         /** The reflection appears to the right of the border box. */
-        "right": StyleObject;
+        right: StyleObject;
     } & LengthEntry & ImageFunctions & WideEntry;
     /**
      * Box Model addition in CSS3.
@@ -9016,25 +9018,25 @@ export interface CSSDecls {
      */
     "-webkit-break-after": {
         /** Always force a page break before/after the generated box. */
-        "always": StyleObject;
+        always: StyleObject;
         /** Neither force nor forbid a page/column break before/after the generated box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a page/column break before/after the generated box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Avoid a column break before/after the generated box. */
         "avoid-column": StyleObject;
         /** Avoid a page break before/after the generated box. */
         "avoid-page": StyleObject;
         "avoid-region": StyleObject;
         /** Always force a column break before/after the generated box. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a left page. */
-        "left": StyleObject;
+        left: StyleObject;
         /** Always force a page break before/after the generated box. */
-        "page": StyleObject;
-        "region": StyleObject;
+        page: StyleObject;
+        region: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a right page. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Describes the page/column break behavior before the generated box.
@@ -9043,25 +9045,25 @@ export interface CSSDecls {
      */
     "-webkit-break-before": {
         /** Always force a page break before/after the generated box. */
-        "always": StyleObject;
+        always: StyleObject;
         /** Neither force nor forbid a page/column break before/after the generated box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a page/column break before/after the generated box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Avoid a column break before/after the generated box. */
         "avoid-column": StyleObject;
         /** Avoid a page break before/after the generated box. */
         "avoid-page": StyleObject;
         "avoid-region": StyleObject;
         /** Always force a column break before/after the generated box. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a left page. */
-        "left": StyleObject;
+        left: StyleObject;
         /** Always force a page break before/after the generated box. */
-        "page": StyleObject;
-        "region": StyleObject;
+        page: StyleObject;
+        region: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a right page. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Describes the page/column break behavior inside the generated box.
@@ -9070,9 +9072,9 @@ export interface CSSDecls {
      */
     "-webkit-break-inside": {
         /** Neither force nor forbid a page/column break inside the generated box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a page/column break inside the generated box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Avoid a column break inside the generated box. */
         "avoid-column": StyleObject;
         /** Avoid a page break inside the generated box. */
@@ -9086,25 +9088,25 @@ export interface CSSDecls {
      */
     "-webkit-column-break-after": {
         /** Always force a page break before/after the generated box. */
-        "always": StyleObject;
+        always: StyleObject;
         /** Neither force nor forbid a page/column break before/after the generated box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a page/column break before/after the generated box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Avoid a column break before/after the generated box. */
         "avoid-column": StyleObject;
         /** Avoid a page break before/after the generated box. */
         "avoid-page": StyleObject;
         "avoid-region": StyleObject;
         /** Always force a column break before/after the generated box. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a left page. */
-        "left": StyleObject;
+        left: StyleObject;
         /** Always force a page break before/after the generated box. */
-        "page": StyleObject;
-        "region": StyleObject;
+        page: StyleObject;
+        region: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a right page. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Describes the page/column break behavior before the generated box.
@@ -9113,25 +9115,25 @@ export interface CSSDecls {
      */
     "-webkit-column-break-before": {
         /** Always force a page break before/after the generated box. */
-        "always": StyleObject;
+        always: StyleObject;
         /** Neither force nor forbid a page/column break before/after the generated box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a page/column break before/after the generated box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Avoid a column break before/after the generated box. */
         "avoid-column": StyleObject;
         /** Avoid a page break before/after the generated box. */
         "avoid-page": StyleObject;
         "avoid-region": StyleObject;
         /** Always force a column break before/after the generated box. */
-        "column": StyleObject;
+        column: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a left page. */
-        "left": StyleObject;
+        left: StyleObject;
         /** Always force a page break before/after the generated box. */
-        "page": StyleObject;
-        "region": StyleObject;
+        page: StyleObject;
+        region: StyleObject;
         /** Force one or two page breaks before/after the generated box so that the next page is formatted as a right page. */
-        "right": StyleObject;
+        right: StyleObject;
     } & WideEntry;
     /**
      * Describes the page/column break behavior inside the generated box.
@@ -9140,9 +9142,9 @@ export interface CSSDecls {
      */
     "-webkit-column-break-inside": {
         /** Neither force nor forbid a page/column break inside the generated box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Avoid a page/column break inside the generated box. */
-        "avoid": StyleObject;
+        avoid: StyleObject;
         /** Avoid a column break inside the generated box. */
         "avoid-column": StyleObject;
         /** Avoid a page break inside the generated box. */
@@ -9156,7 +9158,7 @@ export interface CSSDecls {
      */
     "-webkit-column-count": {
         /** Determines the number of columns by the 'column-width' property and the element width. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Sets the gap between columns. If there is a column rule between columns, it will appear in the middle of the gap.
@@ -9165,7 +9167,7 @@ export interface CSSDecls {
      */
     "-webkit-column-gap": {
         /** User agent specific and typically equivalent to 1em. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * This property is a shorthand for setting 'column-rule-width', 'column-rule-style', and 'column-rule-color' at the same place in the style sheet. Omitted values are set to their initial values.
@@ -9198,7 +9200,7 @@ export interface CSSDecls {
      */
     "-webkit-columns": {
         /** The width depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & IntegerEntry & WideEntry;
     /**
      * Describes the page/column break behavior after the generated box.
@@ -9207,9 +9209,9 @@ export interface CSSDecls {
      */
     "-webkit-column-span": {
         /** The element spans across all columns. Content in the normal flow that appears before the element is automatically balanced across all columns before the element appear. */
-        "all": StyleObject;
+        all: StyleObject;
         /** The element does not span multiple columns. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * This property describes the width of columns in multicol elements.
@@ -9218,7 +9220,7 @@ export interface CSSDecls {
      */
     "-webkit-column-width": {
         /** The width depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Processes an element’s rendering before it is displayed in the document, by applying one or more filter effects.
@@ -9227,7 +9229,7 @@ export interface CSSDecls {
      */
     "-webkit-filter": {
         /** No filter effects are applied. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Applies a Gaussian blur to the input image. */
         blur: (...params: Parameters<typeof blur>) => StyleObject;
         /** Applies a linear multiplier to input image, making it appear more or less bright. */
@@ -9258,7 +9260,7 @@ export interface CSSDecls {
      */
     "-webkit-flow-from": {
         /** The block container is not a CSS Region. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Places an element or its contents into a named flow.
@@ -9267,7 +9269,7 @@ export interface CSSDecls {
      */
     "-webkit-flow-into": {
         /** The element is not moved to a named flow and normal CSS processing takes place. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * This property provides low-level control over OpenType font features. It is intended as a way of providing access to font features that are not widely used but are needed for a particular use case.
@@ -9275,19 +9277,19 @@ export interface CSSDecls {
      * (Chrome 16)
      */
     "-webkit-font-feature-settings": {
-        "\"c2cs\"": StyleObject;
-        "\"dlig\"": StyleObject;
-        "\"kern\"": StyleObject;
-        "\"liga\"": StyleObject;
-        "\"lnum\"": StyleObject;
-        "\"onum\"": StyleObject;
-        "\"smcp\"": StyleObject;
-        "\"swsh\"": StyleObject;
-        "\"tnum\"": StyleObject;
+        '"c2cs"': StyleObject;
+        '"dlig"': StyleObject;
+        '"kern"': StyleObject;
+        '"liga"': StyleObject;
+        '"lnum"': StyleObject;
+        '"onum"': StyleObject;
+        '"smcp"': StyleObject;
+        '"swsh"': StyleObject;
+        '"tnum"': StyleObject;
         /** No change in glyph substitution or positioning occurs. */
-        "normal": StyleObject;
-        "off": StyleObject;
-        "on": StyleObject;
+        normal: StyleObject;
+        off: StyleObject;
+        on: StyleObject;
     } & StringEntry & IntegerEntry & WideEntry;
     /**
      * Controls whether hyphenation is allowed to create more break opportunities within a line of text.
@@ -9296,11 +9298,11 @@ export interface CSSDecls {
      */
     "-webkit-hyphens": {
         /** Conditional hyphenation characters inside a word, if present, take priority over automatic resources when determining hyphenation points within the word. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Words are only broken at line breaks where there are characters inside the word that suggest line break opportunities */
-        "manual": StyleObject;
+        manual: StyleObject;
         /** Words are not broken at line breaks, even if characters inside the word suggest line break points. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Specifies line-breaking rules for CJK (Chinese, Japanese, and Korean) text.
@@ -9309,29 +9311,29 @@ export interface CSSDecls {
      */
     "-webkit-line-break": {
         "after-white-space": StyleObject;
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /** (Chrome, Safari 3) */
     "-webkit-margin-bottom-collapse": {
-        "collapse": StyleObject;
-        "discard": StyleObject;
-        "separate": StyleObject;
+        collapse: StyleObject;
+        discard: StyleObject;
+        separate: StyleObject;
     } & WideEntry;
     /** (Chrome, Safari 3) */
     "-webkit-margin-collapse": {
-        "collapse": StyleObject;
-        "discard": StyleObject;
-        "separate": StyleObject;
+        collapse: StyleObject;
+        discard: StyleObject;
+        separate: StyleObject;
     } & WideEntry;
     /** (Chrome, Safari 3) */
     "-webkit-margin-start": {
-        "auto": StyleObject;
+        auto: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /** (Chrome, Safari 3) */
     "-webkit-margin-top-collapse": {
-        "collapse": StyleObject;
-        "discard": StyleObject;
-        "separate": StyleObject;
+        collapse: StyleObject;
+        discard: StyleObject;
+        separate: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -9354,7 +9356,7 @@ export interface CSSDecls {
      */
     "-webkit-mask-image": {
         /** Counts as a transparent black image layer. */
-        "none": StyleObject;
+        none: StyleObject;
         /** Reference to a \<mask element or to a CSS image. */
         url: (...params: Parameters<typeof url>) => StyleObject;
     } & URLEntry & ImageFunctions & WideEntry;
@@ -9389,11 +9391,11 @@ export interface CSSDecls {
      */
     "-webkit-mask-size": {
         /** Resolved by using the image’s intrinsic ratio and the size of the other dimension, or failing that, using the image’s intrinsic size, or failing that, treating it as 100%. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Scale the image, while preserving its intrinsic aspect ratio (if any), to the largest size such that both its width and its height can fit inside the background positioning area. */
-        "contain": StyleObject;
+        contain: StyleObject;
         /** Scale the image, while preserving its intrinsic aspect ratio (if any), to the smallest size such that both its width and its height can completely cover the background positioning area. */
-        "cover": StyleObject;
+        cover: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Defines the behavior of nonbreaking spaces within text.
@@ -9401,8 +9403,8 @@ export interface CSSDecls {
      * (Chrome, Safari 3)
      */
     "-webkit-nbsp-mode": {
-        "normal": StyleObject;
-        "space": StyleObject;
+        normal: StyleObject;
+        space: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -9416,8 +9418,8 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-webkit-overflow-scrolling)
      */
     "-webkit-overflow-scrolling": {
-        "auto": StyleObject;
-        "touch": StyleObject;
+        auto: StyleObject;
+        touch: StyleObject;
     } & WideEntry;
     /** (Chrome, Safari 3) */
     "-webkit-padding-start": LengthEntry & PercentEntry & WideEntry;
@@ -9428,7 +9430,7 @@ export interface CSSDecls {
      */
     "-webkit-perspective": {
         /** No perspective transform is applied. */
-        "none": StyleObject;
+        none: StyleObject;
     } & LengthEntry & WideEntry;
     /**
      * Establishes the origin for the perspective property. It effectively sets the X and Y position at which the viewer appears to be looking at the children of the element.
@@ -9443,9 +9445,9 @@ export interface CSSDecls {
      */
     "-webkit-region-fragment": {
         /** Content flows as it would in a regular content box. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** If the content fits within the CSS Region, then this property has no effect. */
-        "break": StyleObject;
+        break: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -9474,9 +9476,9 @@ export interface CSSDecls {
      */
     "-webkit-text-size-adjust": {
         /** Renderers must use the default size adjustment when displaying on a small device. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Renderers must not do size adjustment when displaying on a small device. */
-        "none": StyleObject;
+        none: StyleObject;
     } & PercentEntry & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -9518,7 +9520,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-webkit-touch-callout)
      */
     "-webkit-touch-callout": {
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * A two-dimensional transformation is applied to an element through the 'transform' property. This property contains a list of transform functions similar to those allowed by SVG.
@@ -9530,7 +9532,7 @@ export interface CSSDecls {
         matrix: (...params: Parameters<typeof matrix>) => StyleObject;
         /** Specifies a 3D transformation as a 4x4 homogeneous matrix of 16 values in column-major order. */
         matrix3d: (...params: Parameters<typeof matrix3d>) => StyleObject;
-        "none": StyleObject;
+        none: StyleObject;
         /** Specifies a perspective projection matrix. */
         perspective: (...params: Parameters<typeof perspective>) => StyleObject;
         /** Specifies a 2D rotation by the angle specified in the parameter about the origin of the element, as defined by the transform-origin property. */
@@ -9601,7 +9603,7 @@ export interface CSSDecls {
      */
     "-webkit-transform-style": {
         /** All children of this element are rendered flattened into the 2D plane of the element. */
-        "flat": StyleObject;
+        flat: StyleObject;
     } & WideEntry;
     /**
      * Shorthand property combines four of the transition properties into a single property.
@@ -9610,9 +9612,9 @@ export interface CSSDecls {
      */
     "-webkit-transition": {
         /** Every property that is able to undergo a transition will do so. */
-        "all": StyleObject;
+        all: StyleObject;
         /** No property will transition. */
-        "none": StyleObject;
+        none: StyleObject;
     } & TimeEntry & TransitionTimingFunctions & WideEntry;
     /**
      * Defines when the transition will start. It allows a transition to begin execution some period of time from when it is applied.
@@ -9633,9 +9635,9 @@ export interface CSSDecls {
      */
     "-webkit-transition-property": {
         /** Every property that is able to undergo a transition will do so. */
-        "all": StyleObject;
+        all: StyleObject;
         /** No property will transition. */
-        "none": StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * Describes how the intermediate values used during a transition will be calculated.
@@ -9645,9 +9647,9 @@ export interface CSSDecls {
     "-webkit-transition-timing-function": TransitionTimingFunctions & WideEntry;
     /** (Safari 3) */
     "-webkit-user-drag": {
-        "auto": StyleObject;
-        "element": StyleObject;
-        "none": StyleObject;
+        auto: StyleObject;
+        element: StyleObject;
+        none: StyleObject;
     } & WideEntry;
     /**
      * 🚨️ Property is nonstandard. Avoid using it.
@@ -9669,9 +9671,9 @@ export interface CSSDecls {
      * (Chrome, Safari 3)
      */
     "-webkit-user-select": {
-        "auto": StyleObject;
-        "none": StyleObject;
-        "text": StyleObject;
+        auto: StyleObject;
+        none: StyleObject;
+        text: StyleObject;
     } & WideEntry;
     /**
      * Specifies the minimum number of line boxes of a block container that must be left in a fragment after a break.
@@ -9692,7 +9694,7 @@ export interface CSSDecls {
      */
     width: {
         /** The width depends on the values of other properties. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Use the fit-content inline size or fit-content block size, as appropriate to the writing mode. */
         "fit-content": StyleObject;
         /** Use the max-content inline size or max-content block size, as appropriate to the writing mode. */
@@ -9711,9 +9713,9 @@ export interface CSSDecls {
      */
     willChange: {
         /** Expresses no particular intent. */
-        "auto": StyleObject;
+        auto: StyleObject;
         /** Indicates that the author expects to animate or change something about the element’s contents in the near future. */
-        "contents": StyleObject;
+        contents: StyleObject;
         /** Indicates that the author expects to animate or change the scroll position of the element in the near future. */
         "scroll-position": StyleObject;
     } & WideEntry;
@@ -9730,7 +9732,7 @@ export interface CSSDecls {
         /** Block characters can no longer create implied break points. */
         "keep-all": StyleObject;
         /** Breaks non-CJK scripts according to their own rules. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * Specifies additional spacing between “words”.
@@ -9741,7 +9743,7 @@ export interface CSSDecls {
      */
     wordSpacing: {
         /** No additional spacing is applied. Computes to zero. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & LengthEntry & PercentEntry & WideEntry;
     /**
      * Specifies whether the UA may break within a word to prevent overflow when an otherwise-unbreakable string is too long to fit.
@@ -9752,7 +9754,7 @@ export interface CSSDecls {
         /** An otherwise unbreakable sequence of characters may be broken at an arbitrary point if there are no otherwise-acceptable break points in the line. */
         "break-word": StyleObject;
         /** Lines may break only at allowed break points. */
-        "normal": StyleObject;
+        normal: StyleObject;
     } & WideEntry;
     /**
      * This is a shorthand property for both 'direction' and 'block-progression'.
@@ -9782,7 +9784,7 @@ export interface CSSDecls {
      */
     zIndex: {
         /** The stack level of the generated box in the current stacking context is 0. The box does not establish a new stacking context unless it is the root element. */
-        "auto": StyleObject;
+        auto: StyleObject;
     } & IntegerEntry & WideEntry;
     /**
      * Non-standard. Specifies the magnification scale of the object. See 'transform: scale()' for a standards-based alternative.
@@ -9794,7 +9796,7 @@ export interface CSSDecls {
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/zoom)
      */
     zoom: {
-        "normal": StyleObject;
+        normal: StyleObject;
     } & PercentEntry & {
         [value: number]: StyleObject;
     } & IntegerEntry & WideEntry;
@@ -15680,7 +15682,12 @@ export interface HTMLAttrs<T> {
     /** Indicates keyboard shortcuts that an author has implemented to activate or give focus to an element. */
     "[aria-keyshortcuts]": T;
 }
-declare type DollarFunc = (...utilities: (StyleObject | StyleObject[])[]) => string;
+declare type DollarFunc = (...utilities: Utilities[]) => StyleObject;
+declare type StyleExport = {
+    selector: string;
+    children: StyleObject[];
+    style: StyleObject;
+};
 declare type DollarAttr = ((attribute: string) => DollarCall) & GeneralHTMLAttrs<DollarCall & {
     /** CSS [attribute="value"] Selector */
     match: ((value: string) => DollarCall) & {
@@ -15720,13 +15727,15 @@ declare type DollarCall = DollarFunc & {
     _$_: DollarType;
     /** CSS attribute Selector, select `element[attribute]` */
     ATTR: DollarAttr;
+    /** CSS styles */
+    styles: StyleObject[];
 } & {
     /** CSS sub class Selector, select `element.class` */
     [key: string]: DollarCall;
 } & {
     [key in keyof ElementSelectors<unknown>]: DollarCall;
 };
-declare type DollarType = typeof unify & ElementSelectors<DollarCall> & {
+declare type DollarType = typeof apply & ElementSelectors<DollarCall> & {
     /** CSS class Selector */
     [key: string]: DollarCall;
 } & {
@@ -15742,7 +15751,16 @@ declare type DollarType = typeof unify & ElementSelectors<DollarCall> & {
     };
     /** CSS attribute Selector, select `[attribute]` */
     ATTR: DollarAttr;
+    /** CSS styles */
+    styles: StyleObject[] & {
+        [key: string]: StyleObject[] | undefined;
+    };
+    /** CSS exports */
+    exports: StyleExport[];
+    /** Initial $ func, clear all styles */
+    init: () => void;
 };
+export declare function queryStyles(selector: string): StyleObject[] | undefined;
 export declare const $: DollarType;
 export declare function escapeCSS(str: string): string;
 export declare function quote(str: string): string;
@@ -15771,14 +15789,14 @@ export declare function inset(lengthOrPercent: CSSLengthPercentage): Inset;
 export declare function inset(lengthOrPercent: CSSLengthPercentage, lengthOrPercent2: CSSLengthPercentage): Inset;
 export declare function inset(lengthOrPercent: CSSLengthPercentage, lengthOrPercent2: CSSLengthPercentage, lengthOrPercent3: CSSLengthPercentage): Inset;
 export declare function inset(lengthOrPercent: CSSLengthPercentage, lengthOrPercent2: CSSLengthPercentage, lengthOrPercent3: CSSLengthPercentage, lengthOrPercent4: CSSLengthPercentage): Inset;
-export declare function polygon(...lengthOrPercent: ([
+export declare function polygon(...lengthOrPercent: [
     CSSLengthPercentage,
     CSSLengthPercentage
-])[]): string;
-export declare function polygon(fillRule: "nonzero" | "evenodd", ...lengthOrPercent: ([
+][]): string;
+export declare function polygon(fillRule: "nonzero" | "evenodd", ...lengthOrPercent: [
     CSSLengthPercentage,
     CSSLengthPercentage
-])[]): string;
+][]): string;
 export declare const matrix: (a: number, b: number, c: number, d: number, tx: number, ty: number) => string, matrix3d: (a1: number, b1: number, c1: number, d1: number, a2: number, b2: number, c2: number, d2: number, a3: number, b3: number, c3: number, d3: number, a4: number, b4: number, c4: number, d4: number) => string, perspective: (d: CSSLength | number | string) => string, rotate: (a: CSSAngle | number) => string, rotate3d: {
     (a: CSSAngle | number): string;
     (x: number, y: number, z: number, a: CSSAngle): string;
@@ -15818,7 +15836,7 @@ export declare function add(left: string | number | CSSDimension | CSSFlex | CSS
 export declare function mul(left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage): string;
 export declare function div(left: string | number | CSSDimension | CSSFlex | CSSPercentage, right: string | number | CSSDimension | CSSFlex | CSSPercentage): string;
 export declare function prec(n: number): number;
-export declare function resetMeta(uid?: string, type?: MetaType): void;
+export declare function resetMeta(uid?: string, type?: MetaType, props?: string[], variants?: string[]): void;
 export declare function getMeta(): UtilityMeta;
 export declare function getUid(): string;
 export declare function pushMetaProp(prop: string): number;
@@ -15830,7 +15848,6 @@ export declare function atomicNamer(style: StyleObject): string;
 export declare function hashNamer(style: StyleObject): string;
 export declare function useNamer(f: StyleNamer): void;
 export declare function nameStyle(style: StyleObject): string;
-export declare function isProxy<T extends object | Function>(i: T): boolean;
 declare type ColorFunc = {
     var(name: string, defaultValue?: string): string;
     calc(expr: string): string;
