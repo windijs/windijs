@@ -1,11 +1,11 @@
 import { parenWrap } from "@windijs/shared";
 
 import { buildStyle } from "./build";
-import { SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "./common";
+import { bundle, SymbolCSS, SymbolData, SymbolMeta, SymbolProxy } from "./common";
 import { getMeta, pushMetaProp } from "./meta";
 import { nameStyle } from "./namer";
 
-import type { CSSMap, CSSObject, StyleLoader, StyleObject, TargetCreator, UtilityMeta } from "./types";
+import type { CSSMap, CSSObject, StyleLoader, StyleObject, TargetCreator, Utilities, UtilityMeta } from "./types";
 
 export const baseStyleTarget: TargetCreator = (css, meta, data) => {
   if (data != null)
@@ -111,4 +111,14 @@ export const ssrLoader = createStyleLoader((className, style) => {
 /** Mount server side generated css */
 export function mountCSS() {
   return SSR_CSS_LIST.join("\n");
+}
+
+export function apply(selector: string, ...utilities: Utilities[]): StyleObject {
+  return css(bundle(utilities), undefined, {
+    uid: "apply",
+    type: "css",
+    props: [selector],
+    variants: [],
+    selector,
+  });
 }
