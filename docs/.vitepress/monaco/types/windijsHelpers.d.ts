@@ -11,7 +11,7 @@ export declare type GeneralCSSData = CSSDecls & {
 export declare type CSSProps = {
     [prop in keyof CSSDecls]?: {
         [value in keyof CSSDecls[prop]]?: CSSDecls[prop][value] extends Function ? value extends string ? `${value}()` : value : value extends CSSLengthType | CSSAngleType | CSSTimeType | CSSResolutionType | CSSFrequencyType ? `0${value}` : value extends "percent" ? "0%" : value extends "fr" ? "0fr" : value;
-    }[keyof CSSDecls[prop]] | string | String[];
+    }[keyof CSSDecls[prop]] | String | string[];
 };
 declare type ExtractAttrName<S extends string> = S extends `${string}[${infer A}]` ? A : S;
 export declare type GeneralHTMLAttrs<T> = {
@@ -39,11 +39,11 @@ export declare type CSSRules = (CSSRule | CSSAtRule)[];
 export declare type CSSStyleSheet = {
     rules: CSSRules;
 };
-export declare type CSSSelector = string | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
+export declare type CSSSelector = String | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
 export declare type CSSObject = CSSProps & Partial<CSSAtRules<CSSObject>> & Partial<CSSClasses<CSSObject>> & Partial<CSSElements<CSSObject>> & Partial<HTMLTags<CSSObject>> & Partial<HTMLAttrs<CSSObject>> & {
-    [key: string]: CSSObject | CSSMap | string | string[] | number;
+    [key: string]: CSSObject | CSSMap | String | string[] | number;
 };
-export declare type CSSMap = Map<keyof CSSProps, string> & Map<keyof CSSAtRules<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSClasses<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSElements<CSSObject>, CSSObject | CSSMap> & Map<keyof HTMLTags<CSSObject>, CSSObject | CSSMap> & Map<string, CSSObject | CSSMap | string | string[] | number>;
+export declare type CSSMap = Map<keyof CSSProps, string> & Map<keyof CSSAtRules<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSClasses<CSSObject>, CSSObject | CSSMap> & Map<keyof CSSElements<CSSObject>, CSSObject | CSSMap> & Map<keyof HTMLTags<CSSObject>, CSSObject | CSSMap> & Map<string, CSSObject | CSSMap | String | string[] | number>;
 export declare type CSSPrefixer = (css: CSSObject) => CSSObject;
 export declare type NumberDict = {
     [key: number]: string;

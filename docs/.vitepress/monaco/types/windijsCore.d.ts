@@ -187,15 +187,7 @@ export declare function buildTransition(property: string, ...styles: StyleObject
 export declare function buildKeyframes(name: string, keyframes: Record<string, CSSObject>): CSSObject;
 export declare function buildGradientDirection(v: unknown, colorStops?: CSSLinearColorStopOrHint[]): StyleObject<Record<string, unknown>>;
 export declare function buildLinearGradient(direction: CSSSideOrCorner | CSSAngle | string, ...colorStops: CSSLinearColorStopOrHint[]): StyleObject<{}>;
-export declare function buildGradientFrom(v: unknown): import("@windijs/helpers").StyleObjectBase & {
-    readonly css: CSSObject | CSSMap;
-    readonly meta: UtilityMeta;
-} & {
-    opacity: (op: number) => StyleObject<{
-        readonly gradient: StyleObject<{}>;
-    }>;
-    readonly gradient: StyleObject<{}>;
-};
+export declare function buildGradientFrom(v: unknown): ColorStyleObject;
 export declare function buildGradientVia(v: unknown): ColorStyleObject;
 export declare function buildGradientTo(v: unknown): ColorStyleObject;
 export declare function buildDivideColor(v: unknown): ColorStyleObject;
@@ -203,15 +195,7 @@ export declare function buildDivideOpacity(v: unknown): StyleObject<Record<strin
 export declare function buildDivideStyle(v: unknown): StyleObject<Record<string, unknown>>;
 export declare function buildRingWidth(v: unknown): StyleObject<Record<string, unknown>>;
 export declare function buildBoxShadowSize(v: unknown): StyleObject<Record<string, unknown>>;
-export declare function buildBoxShadowColor(v: unknown): import("@windijs/helpers").StyleObjectBase & {
-    readonly css: CSSObject | CSSMap;
-    readonly meta: UtilityMeta;
-} & {
-    opacity: (op: number) => StyleObject<{
-        readonly gradient: StyleObject<{}>;
-    }>;
-    readonly gradient: StyleObject<{}>;
-};
+export declare function buildBoxShadowColor(v: unknown): ColorStyleObject;
 export declare function buildImageRendering(v: unknown): StyleObject<Record<string, unknown>>;
 export declare function buildPlaceholder(v: unknown): ColorStyleObject;
 export declare function buildWritingMode(v: unknown): StyleObject<Record<string, unknown>>;

@@ -103,8 +103,8 @@ export declare const animate: Inject<{
 }, "$windi.config.animationConfig.proxy">;
 export declare const aspect: {
     none: StyleObject<{}>;
-    w: Record<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 16 | 20 | 24 | 28 | 36 | 0.5 | 44 | 48 | 60 | 96 | 1.5 | 2.5 | 3.5 | 32 | 40 | 52 | 56 | 64 | 72 | 80, StyleObject<{}>> & Record<number, StyleObject<{}>>;
-    h: Record<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 16 | 20 | 24 | 28 | 36 | 0.5 | 44 | 48 | 60 | 96 | 1.5 | 2.5 | 3.5 | 32 | 40 | 52 | 56 | 64 | 72 | 80, StyleObject<{}>> & Record<number, StyleObject<{}>>;
+    w: Record<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 16 | 20 | 24 | 28 | 36 | 0.5 | 44 | 48 | 64 | 60 | 96 | 1.5 | 2.5 | 3.5 | 32 | 40 | 52 | 56 | 72 | 80, StyleObject<{}>> & Record<number, StyleObject<{}>>;
+    h: Record<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 16 | 20 | 24 | 28 | 36 | 0.5 | 44 | 48 | 64 | 60 | 96 | 1.5 | 2.5 | 3.5 | 32 | 40 | 52 | 56 | 72 | 80, StyleObject<{}>> & Record<number, StyleObject<{}>>;
 } & Inject<{
     auto: StyleObject<{}>;
     square: StyleObject<{}>;
