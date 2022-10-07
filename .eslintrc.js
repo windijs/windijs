@@ -37,6 +37,7 @@ module.exports = {
       2,
       {
         types: {
+          String: false,
           Function: false,
           "{}": false,
         },
