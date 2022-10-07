@@ -207,7 +207,7 @@ export function stylePropertyHandler<T extends Partial<Record<keyof CSSDecls, un
   const build = (prop: string, value: string) => {
     const meta = getMeta();
     if (meta.props.length === 1) meta.props.push(value);
-    return css({ [prop]: value }, undefined, meta);
+    return css(value === "null" || value === "undefined" ? {} : { [prop]: value }, undefined, meta);
   };
 
   return {

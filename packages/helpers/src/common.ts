@@ -1,6 +1,6 @@
 import { entries } from "@windijs/shared";
 
-import type { CSSMap, CSSObject, StyleObject, StyleProperties } from "./types";
+import type { CSSMap, CSSObject, StyleObject, StyleProperties, Utilities } from "./types";
 
 export const SymbolCSS = Symbol.for("css");
 export const SymbolMeta = Symbol.for("meta");
@@ -66,10 +66,10 @@ export function useArrayHelper() {
  * @param utilities - Utilities and Variants
  * @returns CSSObject
  */
-export function bundle(utilities: (StyleObject | StyleObject[])[]): CSSMap {
+export function bundle(utilities: Utilities[]): CSSMap {
   let vcss: CSSMap | CSSObject;
   const css: CSSMap = new Map();
-  for (const utility of utilities.flat()) {
+  for (const utility of utilities.flat().filter(i => i != null) as StyleObject[]) {
     vcss = applyVariant(utility);
     for (const [k, v] of entries(vcss)) if (v != null) css.set(k, css.has(k) && typeof v === "object" ? Object.assign(css.get(k) as object, v) : v);
   }

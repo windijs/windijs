@@ -25,6 +25,7 @@ import {
   resetStyleMeta,
   updateMetaType,
   SymbolData,
+  Utilities,
 } from "@windijs/helpers";
 import { fracToPercent, isFraction, isNumber, parenWrap } from "@windijs/shared";
 
@@ -229,15 +230,13 @@ export function use<U>(uid: string, plugin: Handler<U>): U {
   ) as unknown as U;
 }
 
-export function useVariant(rule: string, utilities: (StyleObject | StyleObject[])[]): StyleObject[] {
-  return utilities
-    .flat()
-    .map(u =>
-      SymbolProxy in u ? css(u.css, undefined, { ...u.meta, variants: [...u.meta.variants, rule] }) : (u[SymbolMeta].variants.push(rule), u)
-    );
+export function useVariant(rule: string, utilities: Utilities[]): StyleObject[] {
+  return (utilities.flat().filter(u => u != null) as StyleObject[]).map(u =>
+    SymbolProxy in u ? css(u.css, undefined, { ...u.meta, variants: [...u.meta.variants, rule] }) : (u[SymbolMeta].variants.push(rule), u)
+  );
 }
 
-export const useMedia = (rule: string, utilities: (StyleObject | StyleObject[])[]) => useVariant("@media " + rule, utilities);
+export const useMedia = (rule: string, utilities: Utilities[]) => useVariant("@media " + rule, utilities);
 
 export const createVariant =
   (rule: string): VariantBuilder =>
@@ -274,9 +273,9 @@ export function createMotionVariants<T extends object>(motions: T) {
   >;
 }
 
-export const variant = (rule: string, ...utilities: (StyleObject | StyleObject[])[]) => useVariant(rule, utilities);
+export const variant = (rule: string, ...utilities: Utilities[]) => useVariant(rule, utilities);
 
-export const media = (rule: string, ...utilities: (StyleObject | StyleObject[])[]) => useMedia(rule, utilities);
+export const media = (rule: string, ...utilities: Utilities[]) => useMedia(rule, utilities);
 
 export function bind<T extends Record<string, string>>(cfg: T, f: (v: string) => StyleObject | undefined) {
   return ((v: string) => f(v in cfg ? cfg[v as keyof typeof cfg] : v)) as unknown as T;
