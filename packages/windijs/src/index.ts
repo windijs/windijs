@@ -11,9 +11,14 @@ export {
   fractions,
   fracToPercent,
   hash,
+  hasKey,
+  isColor,
   isFraction,
+  isGradient,
   isNumber,
+  isPosition,
   isSize,
+  isUrl,
   isVarName,
   negative,
   omit,
@@ -22,6 +27,7 @@ export {
   roundUp,
   scales,
   spacings,
+  uniqueId,
 } from "@windijs/shared";
 export {
   AlphaEntry,
