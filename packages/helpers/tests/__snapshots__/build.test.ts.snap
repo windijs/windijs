@@ -155,6 +155,19 @@ exports[`atomic with nested variant and atomicNamer 1`] = `
 }"
 `;
 
+exports[`bundle with nested media 1`] = `
+Map {
+  "&:hover" => Object {
+    "@media (hover: hover)": Object {
+      "@media (color)": Object {
+        "borderColor": "#036",
+      },
+      "border": "2px solid black",
+    },
+  },
+}
+`;
+
 exports[`unify with utilities 1`] = `
 ".test {
   background-color: rgba(59, 130, 246, var(--w-bg-opacity));

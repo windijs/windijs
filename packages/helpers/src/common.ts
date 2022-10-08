@@ -1,4 +1,5 @@
 import { entries } from "@windijs/shared";
+import { mergeObject } from "./merge";
 
 import type { CSSMap, CSSObject, StyleObject, StyleProperties, Utilities } from "./types";
 
@@ -71,7 +72,7 @@ export function bundle(utilities: Utilities[]): CSSMap {
   const css: CSSMap = new Map();
   for (const utility of utilities.flat().filter(i => i != null) as StyleObject[]) {
     vcss = applyVariant(utility);
-    for (const [k, v] of entries(vcss)) if (v != null) css.set(k, css.has(k) && typeof v === "object" ? Object.assign(css.get(k) as object, v) : v);
+    for (const [k, v] of entries(vcss)) if (v != null) css.set(k, css.has(k) && typeof v === "object" ? mergeObject(css.get(k) as object, v) : v);
   }
   return css;
 }

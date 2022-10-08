@@ -1,4 +1,6 @@
-import { atomic, atomicNamer, hashNamer, unify, useNamer } from "@windijs/helpers";
+import { variant } from "@windijs/core";
+import { atomic, atomicNamer, bundle, hashNamer, unify, useNamer } from "@windijs/helpers";
+import { style } from "@windijs/style";
 import { bg, border, rounded, text } from "@windijs/utilities";
 import { dark, hover, sm } from "@windijs/variants";
 
@@ -74,4 +76,11 @@ test("atomic with hashNamer", () => {
 test("atomic with empty variant", () => {
   expect(atomic(sm())).toEqual("");
   expect(atomic()).toEqual("");
+});
+
+test("bundle with nested media", () => {
+  const bundled = bundle(
+    hover(variant("@media (hover: hover)", style.border["2px solid black"], variant("@media (color)", style.borderColor["#036"])))
+  );
+  expect(bundled).toMatchSnapshot();
 });
