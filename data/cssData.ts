@@ -7666,6 +7666,57 @@ export const cssData: CSSDataV1 = {
     {
       name: "-ms-filter",
       browsers: ["IE8-9"],
+      values: [
+        {
+          name: "none",
+          description: "No filter effects are applied.",
+        },
+        {
+          name: "blur()",
+          description: "Applies a Gaussian blur to the input image.",
+        },
+        {
+          name: "brightness()",
+          description: "Applies a linear multiplier to input image, making it appear more or less bright.",
+        },
+        {
+          name: "contrast()",
+          description: "Adjusts the contrast of the input.",
+        },
+        {
+          name: "drop-shadow()",
+          description: "Applies a drop shadow effect to the input image.",
+        },
+        {
+          name: "grayscale()",
+          description: "Converts the input image to grayscale.",
+        },
+        {
+          name: "hue-rotate()",
+          description: "Applies a hue rotation on the input image. ",
+        },
+        {
+          name: "invert()",
+          description: "Inverts the samples in the input image.",
+        },
+        {
+          name: "opacity()",
+          description: "Applies transparency to the samples in the input image.",
+        },
+        {
+          name: "saturate()",
+          description: "Saturates the input image.",
+        },
+        {
+          name: "sepia()",
+          description: "Converts the input image to sepia.",
+        },
+        {
+          name: "url()",
+          browsers: ["E12", "FF35", "S9.1", "C53", "O40"],
+          description: "A filter reference to a <filter> element.",
+        },
+      ],
       status: "nonstandard",
       syntax: "<string>",
       relevance: 0,
@@ -15066,6 +15117,57 @@ export const cssData: CSSDataV1 = {
     {
       name: "backdrop-filter",
       syntax: "none | <filter-function-list>",
+      values: [
+        {
+          name: "none",
+          description: "No filter effects are applied.",
+        },
+        {
+          name: "blur()",
+          description: "Applies a Gaussian blur to the input image.",
+        },
+        {
+          name: "brightness()",
+          description: "Applies a linear multiplier to input image, making it appear more or less bright.",
+        },
+        {
+          name: "contrast()",
+          description: "Adjusts the contrast of the input.",
+        },
+        {
+          name: "drop-shadow()",
+          description: "Applies a drop shadow effect to the input image.",
+        },
+        {
+          name: "grayscale()",
+          description: "Converts the input image to grayscale.",
+        },
+        {
+          name: "hue-rotate()",
+          description: "Applies a hue rotation on the input image. ",
+        },
+        {
+          name: "invert()",
+          description: "Inverts the samples in the input image.",
+        },
+        {
+          name: "opacity()",
+          description: "Applies transparency to the samples in the input image.",
+        },
+        {
+          name: "saturate()",
+          description: "Saturates the input image.",
+        },
+        {
+          name: "sepia()",
+          description: "Converts the input image to sepia.",
+        },
+        {
+          name: "url()",
+          browsers: ["E12", "FF35", "S9.1", "C53", "O40"],
+          description: "A filter reference to a <filter> element.",
+        },
+      ],
       relevance: 53,
       browsers: ["E17", "FF70", "S9", "C76", "O63"],
       references: [
