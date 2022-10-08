@@ -12,6 +12,8 @@ import windicssConfig from "./windicss/config.ts?raw";
 import windicssMain from "./windicss/main.md?raw";
 import preprocessorConfig from "./preprocessor/config.ts?raw";
 import preprocessorMain from "./preprocessor/main.md?raw";
+import apisConfig from "./apis/config.ts?raw";
+import apisMain from "./apis/main.md?raw";
 
 export type ReplExample = { id: string; label: string; main: string; config: string; cssOnly?: boolean };
 
@@ -57,6 +59,13 @@ export const examples: Examples = {
     label: "Preprocessor",
     main: load(preprocessorMain),
     config: preprocessorConfig,
+    cssOnly: true,
+  },
+  apis: {
+    id: "apis",
+    label: "Built-in APIs",
+    main: load(apisMain),
+    config: apisConfig,
     cssOnly: true,
   },
   windicss: {
