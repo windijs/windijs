@@ -1,5 +1,17 @@
 # windijs
 
+## 1.1.11
+
+### Patch Changes
+
+- [`4e659371a`](https://github.com/windijs/windijs/commit/4e659371a68a22a3ed263fb44eed177364d743c1) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new exported apis
+
+- Updated dependencies [[`6cbffdda1`](https://github.com/windijs/windijs/commit/6cbffdda1f1ce3c48e0e058b9f69dc8c686ddc97), [`3352aedee`](https://github.com/windijs/windijs/commit/3352aedee810c5bfd8145c710d8fd8c727400664), [`48cf4c5b4`](https://github.com/windijs/windijs/commit/48cf4c5b4f3368113947c991dca00054749e9b71), [`c1d6cf51b`](https://github.com/windijs/windijs/commit/c1d6cf51bd9672b987d62024ad880ad7023b168b), [`fce6b9d22`](https://github.com/windijs/windijs/commit/fce6b9d2208795f37dd51ddbd52c48cc0f89ee12), [`ecf9748d5`](https://github.com/windijs/windijs/commit/ecf9748d5dae7062f51eb619ce9cb47efa93920b)]:
+  - @windijs/helpers@1.1.9
+  - @windijs/core@1.1.11
+  - @windijs/shared@1.0.8
+  - @windijs/style@1.1.11
+
 ## 1.1.10
 
 ### Patch Changes

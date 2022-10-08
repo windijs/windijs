@@ -1,5 +1,20 @@
 # @windijs/helpers
 
+## 1.1.9
+
+### Patch Changes
+
+- [`6cbffdda1`](https://github.com/windijs/windijs/commit/6cbffdda1f1ce3c48e0e058b9f69dc8c686ddc97) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: bundle nested media lost styles
+
+* [`48cf4c5b4`](https://github.com/windijs/windijs/commit/48cf4c5b4f3368113947c991dca00054749e9b71) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: quote with escaped chars
+
+- [`c1d6cf51b`](https://github.com/windijs/windijs/commit/c1d6cf51bd9672b987d62024ad880ad7023b168b) Thanks [@voorjaar](https://github.com/voorjaar)! - fix: backdrop-filter functions completion
+
+* [`fce6b9d22`](https://github.com/windijs/windijs/commit/fce6b9d2208795f37dd51ddbd52c48cc0f89ee12) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new color css strings getter api
+
+* Updated dependencies [[`ecf9748d5`](https://github.com/windijs/windijs/commit/ecf9748d5dae7062f51eb619ce9cb47efa93920b)]:
+  - @windijs/shared@1.0.8
+
 ## 1.1.8
 
 ### Patch Changes

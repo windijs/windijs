@@ -1,5 +1,11 @@
 # @windijs/shared
 
+## 1.0.8
+
+### Patch Changes
+
+- [`ecf9748d5`](https://github.com/windijs/windijs/commit/ecf9748d5dae7062f51eb619ce9cb47efa93920b) Thanks [@voorjaar](https://github.com/voorjaar)! - feat: new uniqueId helper function
+
 ## 1.0.7
 
 ### Patch Changes

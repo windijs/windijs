@@ -420,8 +420,8 @@ importers:
 
   packages/core:
     specifiers:
-      '@windijs/helpers': 1.1.8
-      '@windijs/shared': 1.0.7
+      '@windijs/helpers': 1.1.9
+      '@windijs/shared': 1.0.8
     dependencies:
       '@windijs/helpers': link:../helpers
       '@windijs/shared': link:../shared
@@ -429,7 +429,7 @@ importers:
   packages/helpers:
     specifiers:
       '@windijs/config': 1.0.10
-      '@windijs/shared': 1.0.7
+      '@windijs/shared': 1.0.8
     dependencies:
       '@windijs/config': link:../config
       '@windijs/shared': link:../shared
@@ -437,7 +437,7 @@ importers:
   packages/plugin-utils:
     specifiers:
       '@types/picomatch': ^2.3.0
-      '@windijs/helpers': 1.1.8
+      '@windijs/helpers': 1.1.9
       picomatch: ^2.3.1
     dependencies:
       '@windijs/helpers': link:../helpers
@@ -453,9 +453,9 @@ importers:
 
   packages/style:
     specifiers:
-      '@windijs/core': 1.1.10
-      '@windijs/helpers': 1.1.8
-      '@windijs/shared': 1.0.7
+      '@windijs/core': 1.1.11
+      '@windijs/helpers': 1.1.9
+      '@windijs/shared': 1.0.8
     dependencies:
       '@windijs/core': link:../core
       '@windijs/helpers': link:../helpers
@@ -473,8 +473,8 @@ importers:
     specifiers:
       '@windijs/colors': 1.0.4
       '@windijs/config': 1.0.10
-      '@windijs/core': 1.1.10
-      '@windijs/helpers': 1.1.8
+      '@windijs/core': 1.1.11
+      '@windijs/helpers': 1.1.9
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config
@@ -483,9 +483,9 @@ importers:
 
   packages/variants:
     specifiers:
-      '@windijs/core': 1.1.10
-      '@windijs/helpers': 1.1.8
-      '@windijs/shared': 1.0.7
+      '@windijs/core': 1.1.11
+      '@windijs/helpers': 1.1.9
+      '@windijs/shared': 1.0.8
     dependencies:
       '@windijs/core': link:../core
       '@windijs/helpers': link:../helpers
@@ -515,10 +515,10 @@ importers:
     specifiers:
       '@windijs/colors': 1.0.4
       '@windijs/config': 1.0.10
-      '@windijs/core': 1.1.10
-      '@windijs/helpers': 1.1.8
-      '@windijs/shared': 1.0.7
-      '@windijs/style': 1.1.10
+      '@windijs/core': 1.1.11
+      '@windijs/helpers': 1.1.9
+      '@windijs/shared': 1.0.8
+      '@windijs/style': 1.1.11
     dependencies:
       '@windijs/colors': link:../colors
       '@windijs/config': link:../config
