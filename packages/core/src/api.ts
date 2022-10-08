@@ -321,17 +321,17 @@ export function setup<T extends object & { DEFAULT?: unknown }>(t: T, root = tru
   return new Proxy(t, {
     get(target, p) {
       let v: unknown;
+      if (p === SymbolProxy) return true;
       if (root) resetMeta(getUid());
-      if (typeof p === "symbol") return p === SymbolProxy ? true : undefined;
       if (p in target) {
         v = Reflect.get(target, p);
         if (v == null) return;
-        pushMetaProp(p);
+        pushMetaProp(p as string);
         if (isHandler(v)) return Reflect.set(v, SymbolProxy, true) && new Proxy(v, { get: (_, p) => (v as Handler<unknown>).get(p as string) });
         return isStyleObject(v) ? css(v[SymbolCSS]) : typeof v === "object" ? setup(v, false) : v;
       }
       v = target.DEFAULT;
-      return isHandler(v) ? v.get(p) : v;
+      return isHandler(v) ? v.get(p as string) : isStyleObject(v) ? (p === "meta" || p === SymbolMeta ? getMeta() : Reflect.get(v, p)) : v;
     },
   }) as SetUp<T>;
 }

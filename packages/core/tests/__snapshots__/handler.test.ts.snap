@@ -202,23 +202,29 @@ Object {
 
 exports[`setupUtility with config 7`] = `
 Object {
-  "backgroundColor": "blue",
+  "backgroundColor": "yellow",
 }
 `;
 
 exports[`setupUtility with config 8`] = `
 Object {
-  "backgroundColor": "aqua",
+  "backgroundColor": "blue",
 }
 `;
 
 exports[`setupUtility with config 9`] = `
 Object {
-  "backgroundSize": "contain",
+  "backgroundColor": "aqua",
 }
 `;
 
 exports[`setupUtility with config 10`] = `
+Object {
+  "backgroundSize": "contain",
+}
+`;
+
+exports[`setupUtility with config 11`] = `
 Object {
   "props": Array [
     "border",
@@ -229,7 +235,7 @@ Object {
 }
 `;
 
-exports[`setupUtility with config 11`] = `
+exports[`setupUtility with config 12`] = `
 Object {
   "props": Array [
     "clip",
@@ -240,7 +246,7 @@ Object {
 }
 `;
 
-exports[`setupUtility with config 12`] = `
+exports[`setupUtility with config 13`] = `
 Object {
   "props": Array [
     "ellpsis",
@@ -251,7 +257,7 @@ Object {
 }
 `;
 
-exports[`setupUtility with config 13`] = `
+exports[`setupUtility with config 14`] = `
 Object {
   "props": Array [
     "x",
@@ -263,7 +269,7 @@ Object {
 }
 `;
 
-exports[`setupUtility with config 14`] = `
+exports[`setupUtility with config 15`] = `
 Object {
   "props": Array [
     "multi",
@@ -275,7 +281,7 @@ Object {
 }
 `;
 
-exports[`setupUtility with config 15`] = `
+exports[`setupUtility with config 16`] = `
 Object {
   "props": Array [
     "multi",
@@ -287,7 +293,18 @@ Object {
 }
 `;
 
-exports[`setupUtility with config 16`] = `
+exports[`setupUtility with config 17`] = `
+Object {
+  "props": Array [
+    "nested",
+  ],
+  "type": "css",
+  "uid": "overflow",
+  "variants": Array [],
+}
+`;
+
+exports[`setupUtility with config 18`] = `
 Object {
   "props": Array [
     "nested",
@@ -299,7 +316,7 @@ Object {
 }
 `;
 
-exports[`setupUtility with config 17`] = `
+exports[`setupUtility with config 19`] = `
 Object {
   "props": Array [
     "nested",
@@ -312,7 +329,7 @@ Object {
 }
 `;
 
-exports[`setupUtility with config 18`] = `
+exports[`setupUtility with config 20`] = `
 Object {
   "props": Array [
     "nested",

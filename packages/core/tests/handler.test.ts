@@ -179,6 +179,7 @@ test("setupUtility with config", () => {
     x: configHandler(overflowConfig, "overflowX"),
     multi: meld(configHandler(justifyItemsConfig, "justifyItems"), configHandler(fontStyleConfig, "fontStyle")),
     nested: {
+      DEFAULT: css({ backgroundColor: "yellow" }),
       blue: css({ backgroundColor: "blue" }),
       opacity: {
         10: css({ backgroundColor: "aqua" }),
@@ -193,6 +194,7 @@ test("setupUtility with config", () => {
   expect(overflow.x.clip.css).toMatchSnapshot();
   expect(overflow.multi.center.css).toMatchSnapshot();
   expect(overflow.multi.italic.css).toMatchSnapshot();
+  expect(overflow.nested.css).toMatchSnapshot();
   expect(overflow.nested.blue.css).toMatchSnapshot();
   expect(overflow.nested.opacity[10].css).toMatchSnapshot();
   expect(overflow.nested.size.contain.css).toMatchSnapshot();
@@ -203,6 +205,7 @@ test("setupUtility with config", () => {
   expect(overflow.x.clip.meta).toMatchSnapshot();
   expect(overflow.multi.center.meta).toMatchSnapshot();
   expect(overflow.multi.italic.meta).toMatchSnapshot();
+  expect(overflow.nested.meta).toMatchSnapshot();
   expect(overflow.nested.blue.meta).toMatchSnapshot();
   expect(overflow.nested.opacity[10].meta).toMatchSnapshot();
   expect(overflow.nested.size.contain.meta).toMatchSnapshot();
