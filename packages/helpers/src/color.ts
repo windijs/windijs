@@ -313,6 +313,32 @@ export class Color {
     return "#" + (digitToHEX(this.alpha * 255) + this.hexval.slice(1)).toUpperCase();
   }
 
+  get rgbStr(): string {
+    return `rgb(${this.rgb.join(", ")})`;
+  }
+
+  get rgbaStr(): string {
+    return `rgba(${this.rgba.join(", ")})`;
+  }
+
+  get hslStr(): string {
+    const [h, s, l] = this.hsl;
+    return `hsl(${h}, ${s}%, ${l}%)`;
+  }
+
+  get hslaStr(): string {
+    const [h, s, l, a] = this.hsla;
+
+    return `hsla(${h}, ${s}%, ${l}%, ${a})`;
+  }
+
+  get hwbStr(): string {
+    const [h, w, b] = this.hwb;
+    const a = this.opacity;
+
+    return a < 1 ? `hwb(${h} ${w}% ${b}% / ${a})` : `hwb(${h} ${w}% ${b}%)`;
+  }
+
   invert(weight = 100): Color {
     const inverted = this.rgba.map((c, i) => (i === 3 ? c : Math.round(255 - c))) as RGBA;
 

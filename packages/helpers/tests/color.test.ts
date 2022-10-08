@@ -37,6 +37,25 @@ test("Color", () => {
   expect(Color.hwb(210, 0, 60, 0.5).rgba).toEqual([0, 51, 102, 0.5]);
 });
 
+test("Color to css string", () => {
+  const color = Color.hex("#036");
+
+  expect(color.hex).toEqual("#036");
+  expect(color.hslStr).toEqual("hsl(210, 100%, 20%)");
+  expect(color.hslaStr).toEqual("hsla(210, 100%, 20%, 1)");
+  expect(color.rgbStr).toEqual("rgb(0, 51, 102)");
+  expect(color.rgbaStr).toEqual("rgba(0, 51, 102, 1)");
+  expect(color.hwbStr).toEqual("hwb(210 0% 60%)");
+
+  const color2 = Color.rgba(0, 51, 102, 0.75);
+  expect(color2.hex).toEqual("#036");
+  expect(color2.hslStr).toEqual("hsl(210, 100%, 20%)");
+  expect(color2.hslaStr).toEqual("hsla(210, 100%, 20%, 0.75)");
+  expect(color2.rgbStr).toEqual("rgb(0, 51, 102)");
+  expect(color2.rgbaStr).toEqual("rgba(0, 51, 102, 0.75)");
+  expect(color2.hwbStr).toEqual("hwb(210 0% 60% / 0.75)");
+});
+
 test("Color adjust", () => {
   expect(Color.hex("#6b717f").adjust({ red: 15 }).hex).toEqual("#7a717f");
   expect(Color.hex("#d2e1dd").adjust({ red: -10, blue: 10 }).hex).toEqual("#c8e1e7");
