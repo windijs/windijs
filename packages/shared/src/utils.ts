@@ -78,6 +78,10 @@ export function hash(str: string): string {
   return (hash >>> 0).toString(36);
 }
 
+export function uniqueId(): string {
+  return "w" + hash(Math.random().toString());
+}
+
 export function indent(value: string, count = 2) {
   return " ".repeat(count) + value;
 }
