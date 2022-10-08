@@ -101,6 +101,8 @@ test("div", () => {
 
 test("quote", () => {
   expect(quote("Hello World")).toEqual('"Hello World"');
+  expect(quote("\\1F44D")).toEqual('"\\1F44D"');
+  expect(quote("\t")).toEqual('"\\t"');
 });
 
 test("attr", () => {

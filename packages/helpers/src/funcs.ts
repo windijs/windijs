@@ -14,7 +14,7 @@ import type {
 } from "./types";
 
 export function quote(str: string) {
-  return `${JSON.stringify(str)}`;
+  return `${JSON.stringify(str).replace(/\\\\/g, "\\")}`;
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Functions
