@@ -20,6 +20,7 @@ export declare function parenWrap(key: string, value: string): string;
 export declare function camelToDash(str: string): string;
 export declare function dashToCamel(str: string): string;
 export declare function hash(str: string): string;
+export declare function uniqueId(): string;
 export declare function indent(value: string, count?: number): string;
 export declare const entries: <T extends object | Map<string, unknown>>(t: T) => [string, any][] | IterableIterator<[string, unknown]>;
 export declare function negative<T extends Record<string | number, string>>(t: T): Negative<T>;

@@ -1257,6 +1257,11 @@ export declare class Color {
     get whiteness(): number;
     get blackness(): number;
     get ieHexStr(): string;
+    get rgbStr(): string;
+    get rgbaStr(): string;
+    get hslStr(): string;
+    get hslaStr(): string;
+    get hwbStr(): string;
     invert(weight?: number): Color;
     adjustRed(deg?: number, scale?: number): Color;
     adjustGreen(deg?: number, scale?: number): Color;
@@ -5637,7 +5642,36 @@ export interface CSSDecls {
      *
      * Syntax: \<string>
      */
-    "-ms-filter": StringEntry & WideEntry;
+    "-ms-filter": {
+        /** No filter effects are applied. */
+        none: StyleObject;
+        /** Applies a Gaussian blur to the input image. */
+        blur: (...params: Parameters<typeof blur>) => StyleObject;
+        /** Applies a linear multiplier to input image, making it appear more or less bright. */
+        brightness: (...params: Parameters<typeof brightness>) => StyleObject;
+        /** Adjusts the contrast of the input. */
+        contrast: (...params: Parameters<typeof contrast>) => StyleObject;
+        /** Applies a drop shadow effect to the input image. */
+        dropShadow: (...params: Parameters<typeof dropShadow>) => StyleObject;
+        /** Converts the input image to grayscale. */
+        grayscale: (...params: Parameters<typeof grayscale>) => StyleObject;
+        /** Applies a hue rotation on the input image.  */
+        hueRotate: (...params: Parameters<typeof hueRotate>) => StyleObject;
+        /** Inverts the samples in the input image. */
+        invert: (...params: Parameters<typeof invert>) => StyleObject;
+        /** Applies transparency to the samples in the input image. */
+        opacity: (...params: Parameters<typeof opacity>) => StyleObject;
+        /** Saturates the input image. */
+        saturate: (...params: Parameters<typeof saturate>) => StyleObject;
+        /** Converts the input image to sepia. */
+        sepia: (...params: Parameters<typeof sepia>) => StyleObject;
+        /**
+         * A filter reference to a \<filter> element.
+         *
+         * (Edge 12, Firefox 35, Safari 9.1, Chrome 53, Opera 40)
+         */
+        url: (...params: Parameters<typeof url>) => StyleObject;
+    } & StringEntry & WideEntry;
     /**
      * specifies the parameters of a flexible length: the positive and negative flexibility, and the preferred size.
      *
@@ -10197,7 +10231,36 @@ export interface CSSDecls {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/backdrop-filter)
      */
-    backdropFilter: WideEntry;
+    backdropFilter: {
+        /** No filter effects are applied. */
+        none: StyleObject;
+        /** Applies a Gaussian blur to the input image. */
+        blur: (...params: Parameters<typeof blur>) => StyleObject;
+        /** Applies a linear multiplier to input image, making it appear more or less bright. */
+        brightness: (...params: Parameters<typeof brightness>) => StyleObject;
+        /** Adjusts the contrast of the input. */
+        contrast: (...params: Parameters<typeof contrast>) => StyleObject;
+        /** Applies a drop shadow effect to the input image. */
+        dropShadow: (...params: Parameters<typeof dropShadow>) => StyleObject;
+        /** Converts the input image to grayscale. */
+        grayscale: (...params: Parameters<typeof grayscale>) => StyleObject;
+        /** Applies a hue rotation on the input image.  */
+        hueRotate: (...params: Parameters<typeof hueRotate>) => StyleObject;
+        /** Inverts the samples in the input image. */
+        invert: (...params: Parameters<typeof invert>) => StyleObject;
+        /** Applies transparency to the samples in the input image. */
+        opacity: (...params: Parameters<typeof opacity>) => StyleObject;
+        /** Saturates the input image. */
+        saturate: (...params: Parameters<typeof saturate>) => StyleObject;
+        /** Converts the input image to sepia. */
+        sepia: (...params: Parameters<typeof sepia>) => StyleObject;
+        /**
+         * A filter reference to a \<filter> element.
+         *
+         * (Edge 12, Firefox 35, Safari 9.1, Chrome 53, Opera 40)
+         */
+        url: (...params: Parameters<typeof url>) => StyleObject;
+    } & WideEntry;
     /**
      * The border-block CSS property is a shorthand property for setting the individual logical block border property values in a single place in the style sheet.
      *
