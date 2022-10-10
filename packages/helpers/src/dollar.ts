@@ -89,16 +89,33 @@ export function queryStyles(selector: string): StyleObject[] | undefined {
   for (let i = GLOBAL_STYLES.length - 1; i >= 0; i--) if (GLOBAL_STYLES[i].selector === selector) return GLOBAL_STYLES[i].children;
 }
 
-function globalApply(selector: string, ...utilities: Utilities[]): StyleObject {
-  const style = apply(selector, ...utilities);
+function globalApply(strings: TemplateStringsArray, ...values: unknown[]): (...utilities: Utilities[]) => StyleObject;
+function globalApply(selector: string, ...utilities: Utilities[]): StyleObject;
+function globalApply(selector: string | TemplateStringsArray, ...values: unknown[]): StyleObject | ((...utilities: Utilities[]) => StyleObject) {
+  if (typeof selector === "string") {
+    const children = values.flat().filter(i => i != null) as StyleObject[];
+    const style = apply(selector, ...children);
 
-  GLOBAL_STYLES.push({
-    selector,
-    children: utilities.flat().filter(i => i != null) as StyleObject[],
-    style,
-  });
+    // remove nested dollar styles
+    const count = children.filter(i => i[SymbolMeta].selector != null).length;
+    count > 0 && GLOBAL_STYLES.splice(-count);
 
-  return style;
+    GLOBAL_STYLES.push({
+      selector,
+      children,
+      style,
+    });
+
+    return style;
+  }
+  const tmpl = selector.reduce((query, queryPart, i) => {
+    const valueExists = i < values.length;
+    const text = query + queryPart;
+
+    return valueExists ? text + values[i] : text;
+  }, "");
+
+  return (...utilities) => globalApply(tmpl, ...utilities);
 }
 
 function createDollarFunc(selector: string) {

@@ -82,9 +82,10 @@ test("dollar nested selectors", () => {
   expect(build($.A.ATTR.href.endsWith(".org")(utilities))).toMatchSnapshot();
 });
 
-test("dollar call", () => {
+test("dollar with any selectors", () => {
   expect(build($(".test > a", utilities))).toMatchSnapshot();
   expect(build(Reflect.apply($, undefined, [".test > a", utilities]))).toMatchSnapshot();
+  expect(build($`:where(ol, ul) :where(ol, ul) ol`(style.listStyle["lower-greek"], style.color.chocolate))).toMatchSnapshot();
 });
 
 test("dollar styles and exports", () => {
