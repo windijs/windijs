@@ -69,9 +69,15 @@ export function useArrayHelper() {
  */
 export function bundle(utilities: Utilities[]): CSSMap {
   let vcss: CSSMap | CSSObject;
+  let selector: string | undefined;
   const css: CSSMap = new Map();
   for (const utility of utilities.flat().filter(i => i != null) as StyleObject[]) {
     vcss = applyVariant(utility);
+    selector = utility[SymbolMeta].selector;
+    if (selector)
+      vcss = {
+        [selector.charCodeAt(0) === 64 /* @ */ || selector.includes("&") ? selector : "& " + selector]: vcss,
+      };
     for (const [k, v] of entries(vcss)) if (v != null) css.set(k, css.has(k) && typeof v === "object" ? mergeObject(css.get(k) as object, v) : v);
   }
   return css;

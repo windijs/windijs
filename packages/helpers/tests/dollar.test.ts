@@ -113,3 +113,15 @@ test("extend last style", () => {
 
   expect(build($.exports.map(i => i.style))).toMatchSnapshot();
 });
+
+test("nested styles", () => {
+  $.init();
+
+  $.abc(
+    $.def(hover(style.fontWeight[200], style.padding.rem[1])),
+    $`&:focus`(style.background.red),
+    $["@media print"]($.mn(style.borderRadius.px[4]))
+  );
+
+  expect(build($.exports.map(i => i.style))).toMatchSnapshot();
+});
