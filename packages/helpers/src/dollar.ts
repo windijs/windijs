@@ -1,10 +1,11 @@
-import { apply } from "./css";
+import { isStyleArray, isStyleObject } from "./common";
+import { apply, css } from "./css";
 
-import type { ElementSelectors, GeneralHTMLAttrs, StyleObject, Utilities } from "./types";
+import type { CSSMap, CSSObject, ElementSelectors, GeneralHTMLAttrs, StyleObject, Utilities } from "./types";
 
 // TODO: support variant group
 
-type DollarFunc = (...utilities: Utilities[]) => StyleObject;
+type DollarFunc = ((...utilities: Utilities[]) => StyleObject) & ((css: CSSObject | CSSMap) => StyleObject);
 
 type StyleExport = { selector: string; children: StyleObject[]; style: StyleObject };
 
@@ -100,6 +101,15 @@ function globalApply(selector: string, ...utilities: Utilities[]): StyleObject {
   return style;
 }
 
+function createDollarFunc(selector: string) {
+  return (target: typeof apply, thisArg: unknown, argArray: unknown[]) =>
+    Reflect.apply(
+      target,
+      thisArg,
+      isStyleObject(argArray[0]) || isStyleArray(argArray[0]) ? [selector, ...argArray] : [selector, css(argArray[0] as CSSObject)]
+    );
+}
+
 function createDollarCall(selector: string): DollarCall {
   return new Proxy(globalApply, {
     get(target, p: string) {
@@ -118,9 +128,7 @@ function createDollarCall(selector: string): DollarCall {
 
       return createDollarCall(selector);
     },
-    apply(target, thisArg, argArray) {
-      return Reflect.apply(target, thisArg, [selector, ...argArray]);
-    },
+    apply: createDollarFunc(selector),
   }) as unknown as DollarCall;
 }
 
@@ -145,10 +153,7 @@ const createAttrProxy = (selector: string) =>
 
         return Reflect.get(createDollarCall(selector), p);
       },
-      apply(target, thisArg, argArray) {
-        selector += `[${attribute}]`;
-        return Reflect.apply(target, thisArg, [selector, ...argArray]);
-      },
+      apply: createDollarFunc(selector + `[${attribute}]`),
     });
   });
 
