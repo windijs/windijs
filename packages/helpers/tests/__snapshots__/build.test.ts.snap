@@ -155,6 +155,75 @@ exports[`atomic with nested variant and atomicNamer 1`] = `
 }"
 `;
 
+exports[`build font-face 1`] = `
+"@font-face {
+  font-family: monospace;
+  src: url(webfont.eot);
+}"
+`;
+
+exports[`build font-face 2`] = `
+"@font-face {
+  font-family: MyWebFont;
+  src: url(webfont.eot);
+}
+
+@font-face {
+  font-family: MySecondFont;
+  src: url(webfont2.eot);
+}"
+`;
+
+exports[`build global media rules 1`] = `
+"@namespace url(XML-namespace-URL);
+
+@charset \\"utf-8\\";
+
+@import url(http://mysite.com/custom.css);
+
+@layer utilities;
+
+@layer utilities {
+  .padding-sm {
+    padding: 0.5rem;
+  }
+  .padding-lg {
+    padding: 0.8rem;
+  }
+}"
+`;
+
+exports[`build keyframes 1`] = `
+"@-webkit-keyframes {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.container {
+  animation-name: slideRight;
+}"
+`;
+
+exports[`build same css property 1`] = `
+".flex {
+  display: flex;
+  display: -ms-flex;
+}"
+`;
+
 exports[`bundle with nested media 1`] = `
 Map {
   "&:hover" => Object {

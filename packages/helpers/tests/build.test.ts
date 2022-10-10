@@ -1,5 +1,5 @@
 import { variant } from "@windijs/core";
-import { atomic, atomicNamer, bundle, hashNamer, unify, useNamer } from "@windijs/helpers";
+import { atomic, atomicNamer, buildCSS, bundle, hashNamer, unify, useNamer } from "@windijs/helpers";
 import { style } from "@windijs/style";
 import { bg, border, rounded, text } from "@windijs/utilities";
 import { dark, hover, sm } from "@windijs/variants";
@@ -83,4 +83,77 @@ test("bundle with nested media", () => {
     hover(variant("@media (hover: hover)", style.border["2px solid black"], variant("@media (color)", style.borderColor["#036"])))
   );
   expect(bundled).toMatchSnapshot();
+});
+
+test("build keyframes", () => {
+  expect(
+    buildCSS({
+      "@-webkit-keyframes": {
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+      },
+      "@keyframes slideRight": {
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+      },
+      ".container": {
+        animationName: "slideRight",
+      },
+    })
+  ).toMatchSnapshot();
+});
+
+test("build same css property", () => {
+  expect(
+    buildCSS({
+      ".flex": {
+        display: ["flex", "-ms-flex"],
+      },
+    })
+  ).toMatchSnapshot();
+});
+
+test("build font-face", () => {
+  expect(
+    buildCSS({
+      "@font-face": {
+        fontFamily: "monospace",
+        src: "url(webfont.eot)",
+      },
+    })
+  ).toMatchSnapshot();
+
+  expect(
+    buildCSS({
+      "@font-face": [
+        {
+          fontFamily: "MyWebFont",
+          src: "url(webfont.eot)",
+        },
+        {
+          fontFamily: "MySecondFont",
+          src: "url(webfont2.eot)",
+        },
+      ],
+    })
+  ).toMatchSnapshot();
+});
+
+test("build global media rules", () => {
+  expect(
+    buildCSS({
+      "@namespace": "url(XML-namespace-URL)",
+      "@charset": '"utf-8"',
+      "@import": "url(http://mysite.com/custom.css)",
+      "@layer": "utilities",
+      "@layer utilities": {
+        ".padding-sm": {
+          padding: "0.5rem",
+        },
+        ".padding-lg": {
+          padding: "0.8rem",
+        },
+      },
+    })
+  ).toMatchSnapshot();
 });

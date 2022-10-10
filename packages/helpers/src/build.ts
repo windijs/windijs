@@ -3,7 +3,7 @@ import { camelToDash, entries, indent } from "@windijs/shared";
 import { applyVariant, bundle, isStyleObject, SymbolMeta } from "./common";
 import { nameStyle } from "./namer";
 
-import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSMap, CSSObject, CSSRule, CSSRules, StyleObject, Utilities } from "./types";
+import type { CSSAtRule, CSSBlockBody, CSSDecl, CSSInlineAtRule, CSSMap, CSSObject, CSSRule, CSSRules, StyleObject, Utilities } from "./types";
 
 /**
  * Build style value string or style target `HTMLElement`.
@@ -37,23 +37,33 @@ function cssBlock(selector: string, body: CSSBlockBody = [], rootIndent = 0, chi
   return [indent(selector, rootIndent) + " {", ...statements, indent("}", rootIndent)].join("\n");
 }
 
-export function createRules(css: CSSObject | CSSMap, selector: string) {
+export function createRules(css: CSSObject | CSSMap, selector?: string) {
   const rules: CSSRules = [];
-  const rootRule: CSSRule = { selector, children: [] };
+  let decls: CSSDecl[] = [];
+  const isAtRule = selector?.charCodeAt(0) === 64; /* @ */
+
+  const pushBaseStyle = () => {
+    if (decls[0])
+      if (selector) rules.push({ selector, children: decls });
+      else throw new Error("Expect root selector");
+    decls = [];
+  };
 
   for (const [key, value] of entries(css))
-    if (typeof value === "string" || value instanceof String) rootRule.children.push({ property: key, value: value as string });
-    else if (typeof value === "number") rootRule.children.push({ property: key, value: value.toString() });
-    else if (Array.isArray(value)) value.map(i => rootRule.children.push({ property: key, value: i }));
+    if (typeof value === "string" || value instanceof String)
+      key.charCodeAt(0) === 64 /* @ */ ? rules.push({ rule: key, value: value as string }) : decls.push({ property: key, value: value as string });
+    else if (typeof value === "number") decls.push({ property: key, value: value.toString() });
+    else if (Array.isArray(value))
+      if (typeof value[0] === "string") value.map(i => decls.push({ property: key, value: i }));
+      else value.map(i => rules.push(...createRules(i, key)));
     else if (typeof value === "object" && value != null) {
-      if (rootRule.children[0]) rules.push({ ...rootRule });
-      rootRule.children = [];
-      const children = selector.charCodeAt(0) === 64 /* @ */ ? { [selector]: value } : value;
-      if (key.charCodeAt(0) === 64 /* @ */) rules.push({ rule: key, children: createRules(children, selector) });
-      else rules.push(...createRules(children, key.replace(/&/g, selector)));
+      pushBaseStyle();
+      const children = (isAtRule ? { [selector]: value } : value) as CSSObject;
+      if (/^@(media|layer|.*keyframes)/.test(key)) rules.push({ rule: key, children: createRules(children, selector) });
+      else rules.push(...createRules(children, selector ? key.replace(/&/g, selector) : key));
     }
 
-  rootRule.children[0] && rules.push(rootRule);
+  pushBaseStyle();
 
   return rules;
 }
@@ -67,6 +77,10 @@ export function buildRule({ selector, children }: CSSRule, indent = 0) {
   return cssBlock(selector, children.map(i => buildDecl(i)).flat(), indent);
 }
 
+export function buildInlineAtRule({ rule, value }: CSSInlineAtRule, indentCount = 0): string {
+  return indent(rule + " " + value + ";", indentCount);
+}
+
 export function buildAtRule({ rule, children }: CSSAtRule, indent = 0) {
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   return cssBlock(rule, createBlockBody(children, indent + 2), indent, 0);
@@ -77,7 +91,7 @@ function createBlockBody(rules: CSSRules, indent = 0) {
 
   for (const rule of rules)
     if ("selector" in rule) blocks.push(buildRule(rule, indent));
-    else blocks.push(buildAtRule(rule, indent));
+    else blocks.push("value" in rule ? buildInlineAtRule(rule, indent) : buildAtRule(rule, indent));
 
   return blocks;
 }
@@ -86,12 +100,16 @@ export function buildRules(rules: CSSRules) {
   return createBlockBody(rules).join("\n\n");
 }
 
+export function buildCSS(css: CSSObject | CSSMap, selector?: string) {
+  return buildRules(createRules(css, selector));
+}
+
 export function dedupRules(rules: CSSRules): CSSRules {
   const styles: CSSRules = [];
   const atRules: { [key: string]: CSSAtRule } = {};
 
   for (const r of rules)
-    if ("selector" in r) styles.push(r);
+    if ("selector" in r || "value" in r) styles.push(r);
     else if (r.rule in atRules) atRules[r.rule].children.push(...r.children);
     else atRules[r.rule] = r;
 
@@ -100,7 +118,7 @@ export function dedupRules(rules: CSSRules): CSSRules {
 
 /** build a single StyleObject to css */
 export function buildStyle(className: string, style: StyleObject): string {
-  return buildRules(createRules(applyVariant(style), "." + className));
+  return buildCSS(applyVariant(style), "." + className);
 }
 
 export function atomic(...utilities: Utilities[]): string {
@@ -112,7 +130,7 @@ export function atomic(...utilities: Utilities[]): string {
   return buildRules(dedupRules(rules));
 }
 
-const _unify = (selector: string, utilities: Utilities[]) => buildRules(createRules(bundle(utilities), selector));
+const _unify = (selector: string, utilities: Utilities[]) => buildCSS(bundle(utilities), selector);
 
 export function unify(selector: string, ...utilities: Utilities[]): string;
 export function unify(...utilities: { [key: string]: StyleObject | Utilities[] }[]): string;
