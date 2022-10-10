@@ -231,6 +231,28 @@ exports[`dollar with classes 2`] = `
 }"
 `;
 
+exports[`dollar with css object 1`] = `
+".button {
+  font-size: large;
+  padding: 1rem;
+}
+
+.button:hover {
+  background: gray;
+}"
+`;
+
+exports[`dollar with css object 2`] = `
+"[href*=\\"example\\"] {
+  font-size: large;
+  padding: 1rem;
+}
+
+[href*=\\"example\\"]:hover {
+  background: gray;
+}"
+`;
+
 exports[`dollar with id 1`] = `
 "#btn {
   background: blue;

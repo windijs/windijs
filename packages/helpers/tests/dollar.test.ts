@@ -42,6 +42,32 @@ test("dollar with classes", () => {
   expect(build($["bg-red-500"](utilities))).toMatchSnapshot();
 });
 
+test("dollar with css object", () => {
+  expect(
+    build(
+      $.button({
+        fontSize: "large",
+        padding: "1rem",
+        "&:hover": {
+          background: "gray",
+        },
+      })
+    )
+  ).toMatchSnapshot();
+
+  expect(
+    build(
+      $.ATTR.href.includes("example")({
+        fontSize: "large",
+        padding: "1rem",
+        "&:hover": {
+          background: "gray",
+        },
+      })
+    )
+  ).toMatchSnapshot();
+});
+
 test("dollar multi selectors", () => {
   expect(build($.button.$.A.$.Button(utilities))).toMatchSnapshot();
 });
