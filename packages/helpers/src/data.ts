@@ -10662,6 +10662,12 @@ export interface CSSAtRules<T> {
    */
   "@keyframes": T;
   /**
+   * Declare a cascade layer and can also be used to define the order of precedence in case of multiple cascade layers.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@layer)
+   */
+  "@layer": T,
+  /**
    * Defines a stylesheet for a particular media type.
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/\@media)
