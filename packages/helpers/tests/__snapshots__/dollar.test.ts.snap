@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dollar call 1`] = `
-".test > a {
-  background: blue;
-  padding: 4rem;
-  border-radius: 4px;
-}"
-`;
-
-exports[`dollar call 2`] = `
-".test > a {
-  background: blue;
-  padding: 4rem;
-  border-radius: 4px;
-}"
-`;
-
 exports[`dollar multi selectors 1`] = `
 ".button, a, button {
   background: blue;
@@ -143,6 +127,29 @@ exports[`dollar wiith all/root/host 3`] = `
 }"
 `;
 
+exports[`dollar with any selectors 1`] = `
+".test > a {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with any selectors 2`] = `
+".test > a {
+  background: blue;
+  padding: 4rem;
+  border-radius: 4px;
+}"
+`;
+
+exports[`dollar with any selectors 3`] = `
+":where(ol, ul) :where(ol, ul) ol {
+  list-style: lower-greek;
+  color: chocolate;
+}"
+`;
+
 exports[`dollar with attribute 1`] = `
 "[title] {
   background: blue;
@@ -253,6 +260,42 @@ exports[`dollar with css object 2`] = `
 }"
 `;
 
+exports[`dollar with css object 3`] = `
+"@import test.css;
+
+.btn {
+  font-size: large;
+}
+
+.btn:hover {
+  background: gray;
+}"
+`;
+
+exports[`dollar with css object 4`] = `
+".btn {
+  font-size: large;
+}
+
+.btn:hover {
+  background: gray;
+}"
+`;
+
+exports[`dollar with css object 5`] = `
+".btn {
+  font-size: large;
+}
+
+.btn:hover {
+  background: gray;
+}
+
+.second {
+  font-size: large;
+}"
+`;
+
 exports[`dollar with id 1`] = `
 "#btn {
   background: blue;
@@ -291,5 +334,22 @@ exports[`extend last style 1`] = `
 .rounded {
   background-color: red;
   font-size: large;
+}"
+`;
+
+exports[`nested styles 1`] = `
+".abc .def:hover {
+  font-weight: 200;
+  padding: 1rem;
+}
+
+.abc:focus {
+  background: red;
+}
+
+@media print {
+  .abc .mn {
+    border-radius: 4px;
+  }
 }"
 `;

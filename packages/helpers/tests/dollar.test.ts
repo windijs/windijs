@@ -1,5 +1,6 @@
-import { $, build } from "@windijs/helpers";
+import { $, build, css } from "@windijs/helpers";
 import { style } from "@windijs/style";
+import { hover } from "@windijs/variants";
 
 // TODO: fix type bundler error
 
@@ -64,6 +65,55 @@ test("dollar with css object", () => {
           background: "gray",
         },
       })
+    )
+  ).toMatchSnapshot();
+
+  expect(
+    build(
+      $({
+        "@import": "test.css",
+        ".btn": {
+          fontSize: "large",
+          "&:hover": {
+            background: "gray",
+          },
+        },
+      })
+    )
+  ).toMatchSnapshot();
+
+  expect(
+    build(
+      $(
+        css({
+          ".btn": {
+            fontSize: "large",
+            "&:hover": {
+              background: "gray",
+            },
+          },
+        })
+      )
+    )
+  ).toMatchSnapshot();
+
+  expect(
+    build(
+      $(
+        css({
+          ".btn": {
+            fontSize: "large",
+            "&:hover": {
+              background: "gray",
+            },
+          },
+        }),
+        css({
+          ".second": {
+            fontSize: "large",
+          },
+        })
+      )
     )
   ).toMatchSnapshot();
 });

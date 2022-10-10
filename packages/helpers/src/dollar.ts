@@ -1,4 +1,4 @@
-import { isStyleArray, isStyleObject } from "./common";
+import { isStyleArray, isStyleObject, SymbolMeta } from "./common";
 import { apply, css } from "./css";
 
 import type { CSSMap, CSSObject, ElementSelectors, GeneralHTMLAttrs, StyleObject, Utilities } from "./types";
@@ -91,9 +91,19 @@ export function queryStyles(selector: string): StyleObject[] | undefined {
 
 function globalApply(strings: TemplateStringsArray, ...values: unknown[]): (...utilities: Utilities[]) => StyleObject;
 function globalApply(selector: string, ...utilities: Utilities[]): StyleObject;
-function globalApply(selector: string | TemplateStringsArray, ...values: unknown[]): StyleObject | ((...utilities: Utilities[]) => StyleObject) {
-  if (typeof selector === "string") {
+function globalApply(...utilities: Utilities[]): StyleObject;
+function globalApply(css: CSSObject | CSSMap): StyleObject;
+function globalApply(
+  first: string | TemplateStringsArray | CSSObject | CSSMap | Utilities,
+  ...values: unknown[]
+): StyleObject | ((...utilities: Utilities[]) => StyleObject) {
+  const isSelector = typeof first === "string";
+  const isStyles = isStyleArray(first);
+
+  if (isSelector || !Array.isArray(first) || isStyles) {
+    const selector = isSelector ? first : ":root";
     const children = values.flat().filter(i => i != null) as StyleObject[];
+    if (!isSelector) children.unshift(...(isStyles ? (first as StyleObject[]) : isStyleObject(first) ? [first] : [css(first as CSSObject)]));
     const style = apply(selector, ...children);
 
     // remove nested dollar styles
@@ -108,14 +118,15 @@ function globalApply(selector: string | TemplateStringsArray, ...values: unknown
 
     return style;
   }
-  const tmpl = selector.reduce((query, queryPart, i) => {
+
+  const tmpl = first.reduce((query, queryPart, i) => {
     const valueExists = i < values.length;
     const text = query + queryPart;
 
     return valueExists ? text + values[i] : text;
   }, "");
 
-  return (...utilities) => globalApply(tmpl, ...utilities);
+  return (...utilities) => globalApply(tmpl, ...utilities) as unknown as StyleObject;
 }
 
 function createDollarFunc(selector: string) {
