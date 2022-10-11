@@ -217,6 +217,81 @@ exports[`build keyframes 1`] = `
 }"
 `;
 
+exports[`build media queries 1`] = `
+"@media screen and (min-width: 900px) {
+  article {
+    padding: 1rem 3rem;
+  }
+}
+
+@supports (display: flex) {
+  @media screen and (min-width: 900px) {
+    article {
+      display: flex;
+    }
+  }
+}
+
+@media print {
+  @font-face {
+    font-family: MySecondFont;
+    src: url(webfont2.eot);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  @media (min-width: 900px) {
+    article {
+      display: block;
+    }
+  }
+}"
+`;
+
+exports[`build nested css 1`] = `
+".flex .b {
+  font-size: large;
+}
+
+.flex {
+  display: flex;
+  display: -ms-flex;
+}
+
+.flex .c {
+  font-size: 1rem;
+}
+
+@media print {
+  @font-face {
+    font-family: monospace;
+  }
+}
+
+@media (min-width: 900px) {
+  .flex .abc {
+    font-size: 2rem;
+  }
+  .flex.def {
+    font-size: 3rem;
+  }
+}
+
+@supports (display: flex) {
+  .flex {
+    font-size: 4rem;
+  }
+  @media (min-width: 800px) {
+    .flex body {
+      background: red;
+    }
+    .flex > p {
+      padding: 1rem;
+    }
+  }
+}"
+`;
+
 exports[`build same css property 1`] = `
 ".flex {
   display: flex;

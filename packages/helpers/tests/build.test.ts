@@ -113,6 +113,50 @@ test("build same css property", () => {
   ).toMatchSnapshot();
 });
 
+test("build nested css", () => {
+  expect(
+    buildCSS({
+      ".flex": {
+        ".b": {
+          fontSize: "large",
+        },
+        "&": {
+          display: ["flex", "-ms-flex"],
+        },
+        "& .c": {
+          fontSize: "1rem",
+        },
+        "@media print": {
+          "@font-face": {
+            fontFamily: "monospace",
+          },
+        },
+        "@media (min-width: 900px)": {
+          ".abc": {
+            fontSize: "2rem",
+          },
+          "&.def": {
+            fontSize: "3rem",
+          },
+        },
+        "@supports (display: flex)": {
+          "&": {
+            fontSize: "4rem",
+          },
+          "@media (min-width: 800px)": {
+            body: {
+              background: "red",
+            },
+            "& > p": {
+              padding: "1rem",
+            },
+          },
+        },
+      },
+    })
+  ).toMatchSnapshot();
+});
+
 test("build font-face", () => {
   expect(
     buildCSS({
@@ -137,6 +181,64 @@ test("build font-face", () => {
       ],
     })
   ).toMatchSnapshot();
+});
+
+test("build media queries", () => {
+  expect(
+    buildCSS({
+      "@media screen and (min-width: 900px)": {
+        article: {
+          padding: "1rem 3rem",
+        },
+      },
+      "@supports (display: flex)": {
+        "@media screen and (min-width: 900px)": {
+          article: {
+            display: "flex",
+          },
+        },
+      },
+      "@media print": {
+        "@font-face": {
+          fontFamily: "MySecondFont",
+          src: "url(webfont2.eot)",
+        },
+      },
+      "@media (prefers-color-scheme: dark)": {
+        "@media (min-width: 900px)": {
+          article: {
+            display: "block",
+          },
+        },
+      },
+    })
+  ).toMatchSnapshot();
+});
+
+test("should throw errors", () => {
+  expect(() =>
+    buildCSS({
+      padding: "1rem",
+    })
+  ).toThrowError();
+
+  expect(() =>
+    buildCSS({
+      "@media print": {
+        padding: "1rem",
+      },
+    })
+  ).toThrowError();
+
+  expect(() =>
+    buildCSS({
+      "@font-face": {
+        ".nested": {
+          fontSize: "large",
+        },
+      },
+    })
+  ).toThrowError();
 });
 
 test("build global media rules", () => {
