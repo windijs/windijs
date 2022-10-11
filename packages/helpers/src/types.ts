@@ -58,25 +58,32 @@ export type GeneralHTMLAttrs<T> = {
 export type CSSBlockBody = (string | { selector: string; body: CSSBlockBody })[];
 export type CSSDecl = { property: string; value: string | string[] };
 export type CSSRule = { selector: string; children: CSSDecl[] };
+export type CSSInlineAtRule = { rule: string; value: string };
 export type CSSAtRule = { rule: string; children: CSSRules };
-export type CSSRules = (CSSRule | CSSAtRule)[];
+export type CSSRules = (CSSDecl | CSSRule | CSSInlineAtRule | CSSAtRule)[];
 export type CSSStyleSheet = { rules: CSSRules };
 
 export type CSSSelector = String | keyof CSSClasses<unknown> | keyof CSSElements<unknown> | keyof HTMLTags<unknown> | keyof HTMLAttrs<unknown>;
 
-export type CSSObject = CSSProps &
-  Partial<CSSAtRules<CSSObject>> &
-  Partial<CSSClasses<CSSObject>> &
-  Partial<CSSElements<CSSObject>> &
-  Partial<HTMLTags<CSSObject>> &
-  Partial<HTMLAttrs<CSSObject>> & { [key: string]: CSSObject | CSSMap | String | string[] | number };
+type InlineAtRules = "@charset" | "@namespace" | "@import" | "@layer";
+
+export type CSSUnit = CSSObject | CSSMap | (CSSObject | CSSMap)[];
+
+export type CSSObject = CSSProps & { "@layer"?: string | CSSUnit } & Partial<Record<InlineAtRules, string>> &
+  Omit<{ [k in keyof CSSAtRules<unknown>]?: CSSUnit }, InlineAtRules> &
+  Partial<CSSClasses<CSSUnit>> &
+  Partial<CSSElements<CSSUnit>> &
+  Partial<HTMLTags<CSSUnit>> &
+  Partial<HTMLAttrs<CSSUnit>> & { [key: string]: CSSUnit | String | string[] | number };
 
 export type CSSMap = Map<keyof CSSProps, string> &
-  Map<keyof CSSAtRules<CSSObject>, CSSObject | CSSMap> &
-  Map<keyof CSSClasses<CSSObject>, CSSObject | CSSMap> &
-  Map<keyof CSSElements<CSSObject>, CSSObject | CSSMap> &
-  Map<keyof HTMLTags<CSSObject>, CSSObject | CSSMap> &
-  Map<string, CSSObject | CSSMap | String | string[] | number>;
+  Map<"@layer", string | CSSUnit> &
+  Map<InlineAtRules, string> &
+  Map<keyof Omit<CSSAtRules<CSSUnit>, InlineAtRules>, CSSUnit> &
+  Map<keyof CSSClasses<CSSUnit>, CSSUnit> &
+  Map<keyof CSSElements<CSSUnit>, CSSUnit> &
+  Map<keyof HTMLTags<CSSUnit>, CSSUnit> &
+  Map<string, CSSUnit | String | string[] | number>;
 
 export type CSSPrefixer = (css: CSSObject) => CSSObject;
 
@@ -88,6 +95,7 @@ export type UtilityMeta = {
   uid: string;
   type: MetaType;
   props: string[];
+  selector?: string;
   variants: string[];
 } & {
   [key: string]: unknown;
@@ -316,6 +324,109 @@ export type CSSBorderRadiusItem =
 export type CSSBorderRadius = CSSBorderRadiusItem | [CSSBorderRadiusItem, CSSBorderRadiusItem];
 
 // <color>
+
+export type CSSPercentageValue =
+  | "0%"
+  | "1%"
+  | "2%"
+  | "3%"
+  | "4%"
+  | "5%"
+  | "6%"
+  | "7%"
+  | "8%"
+  | "9%"
+  | "10%"
+  | "11%"
+  | "12%"
+  | "13%"
+  | "14%"
+  | "15%"
+  | "16%"
+  | "17%"
+  | "18%"
+  | "19%"
+  | "20%"
+  | "21%"
+  | "22%"
+  | "23%"
+  | "24%"
+  | "25%"
+  | "26%"
+  | "27%"
+  | "28%"
+  | "29%"
+  | "30%"
+  | "31%"
+  | "32%"
+  | "33%"
+  | "34%"
+  | "35%"
+  | "36%"
+  | "37%"
+  | "38%"
+  | "39%"
+  | "40%"
+  | "41%"
+  | "42%"
+  | "43%"
+  | "44%"
+  | "45%"
+  | "46%"
+  | "47%"
+  | "48%"
+  | "49%"
+  | "50%"
+  | "51%"
+  | "52%"
+  | "53%"
+  | "54%"
+  | "55%"
+  | "56%"
+  | "57%"
+  | "58%"
+  | "59%"
+  | "60%"
+  | "61%"
+  | "62%"
+  | "63%"
+  | "64%"
+  | "65%"
+  | "66%"
+  | "67%"
+  | "68%"
+  | "69%"
+  | "70%"
+  | "71%"
+  | "72%"
+  | "73%"
+  | "74%"
+  | "75%"
+  | "76%"
+  | "77%"
+  | "78%"
+  | "79%"
+  | "80%"
+  | "81%"
+  | "82%"
+  | "83%"
+  | "84%"
+  | "85%"
+  | "86%"
+  | "87%"
+  | "88%"
+  | "89%"
+  | "90%"
+  | "91%"
+  | "92%"
+  | "93%"
+  | "94%"
+  | "95%"
+  | "96%"
+  | "97%"
+  | "98%"
+  | "99%"
+  | "100%";
 
 export type CSSAlphaValue =
   | CSSPercentage
@@ -1408,7 +1519,7 @@ export interface LineStyleEntry {
 }
 
 export type LineWidthEntry = { [key in "medium" | "thick" | "thin"]: StyleObject };
-export type AlphaEntry = { [key in Exclude<CSSAlphaValue, CSSPercentage>]: StyleObject };
+export type AlphaEntry = { [key in 0 | Exclude<CSSAlphaValue, CSSPercentage>]: StyleObject };
 export type IntegerEntry = { [key in CSSInteger]: StyleObject };
 export interface URLEntry {
   /** Reference a file by URL */

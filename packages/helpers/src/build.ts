@@ -37,6 +37,15 @@ function cssBlock(selector: string, body: CSSBlockBody = [], rootIndent = 0, chi
   return [indent(selector, rootIndent) + " {", ...statements, indent("}", rootIndent)].join("\n");
 }
 
+function createDecls(css: CSSObject | CSSMap): CSSDecl[] {
+  const decls: CSSDecl[] = [];
+  for (const [k, v] of entries(css)) {
+    if (typeof v !== "string") throw new Error(`Invalid value type in "${k}: ${v}"`);
+    decls.push({ property: k, value: v });
+  }
+  return decls;
+}
+
 export function createRules(css: CSSObject | CSSMap, selector?: string) {
   const rules: CSSRules = [];
   let decls: CSSDecl[] = [];
@@ -45,7 +54,7 @@ export function createRules(css: CSSObject | CSSMap, selector?: string) {
   const pushBaseStyle = () => {
     if (decls[0])
       if (selector) rules.push({ selector, children: decls });
-      else throw new Error("Expect root selector");
+      else throw new Error(`Expect a selector or at-rule for "${decls[0].property}: ${decls[0].value}"`);
     decls = [];
   };
 
@@ -58,9 +67,17 @@ export function createRules(css: CSSObject | CSSMap, selector?: string) {
       else value.map(i => rules.push(...createRules(i, key)));
     else if (typeof value === "object" && value != null) {
       pushBaseStyle();
-      const children = (isAtRule ? { [selector]: value } : value) as CSSObject;
-      if (/^@(media|layer|.*keyframes)/.test(key)) rules.push({ rule: key, children: createRules(children, selector) });
-      else rules.push(...createRules(children, selector ? key.replace(/&/g, selector) : key));
+      if (key.charCodeAt(0) === 64) {
+        const r = {
+          rule: key,
+          children: /^@(media|supports|layer|font-feature-values|.*keyframes)/.test(key) ? createRules(value, selector) : createDecls(value),
+        };
+        if (isAtRule) rules.push({ rule: selector, children: [r] });
+        else rules.push(r);
+      } else {
+        const r = createRules(value, selector && !isAtRule ? (key.includes("&") ? key.replace(/&/g, selector) : selector + " " + key) : key);
+        isAtRule ? rules.push({ rule: selector, children: r }) : rules.push(...r);
+      }
     }
 
   pushBaseStyle();
@@ -73,25 +90,28 @@ export function buildDecl({ value, property }: CSSDecl): string | string[] {
   return property.startsWith("webkit") ? "-" : "" + camelToDash(property) + ": " + value + ";";
 }
 
-export function buildRule({ selector, children }: CSSRule, indent = 0) {
-  return cssBlock(selector, children.map(i => buildDecl(i)).flat(), indent);
+export function buildRule({ selector, children }: CSSRule, indentCount = 0) {
+  return cssBlock(selector, children.map(i => buildDecl(i)).flat(), indentCount);
 }
 
 export function buildInlineAtRule({ rule, value }: CSSInlineAtRule, indentCount = 0): string {
   return indent(rule + " " + value + ";", indentCount);
 }
 
-export function buildAtRule({ rule, children }: CSSAtRule, indent = 0) {
+export function buildAtRule({ rule, children }: CSSAtRule, indentCount = 0) {
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  return cssBlock(rule, createBlockBody(children, indent + 2), indent, 0);
+  return cssBlock(rule, createBlockBody(children, indentCount + 2), indentCount, 0);
 }
 
-function createBlockBody(rules: CSSRules, indent = 0) {
+function createBlockBody(rules: CSSRules, indentCount = 0) {
   const blocks: CSSBlockBody = [];
 
   for (const rule of rules)
-    if ("selector" in rule) blocks.push(buildRule(rule, indent));
-    else blocks.push("value" in rule ? buildInlineAtRule(rule, indent) : buildAtRule(rule, indent));
+    if ("selector" in rule) blocks.push(buildRule(rule, indentCount));
+    else if ("property" in rule) {
+      const decl = buildDecl(rule);
+      blocks.push(...(Array.isArray(decl) ? decl : [decl]).map(i => indent(i, indentCount)));
+    } else blocks.push("value" in rule ? buildInlineAtRule(rule, indentCount) : buildAtRule(rule, indentCount));
 
   return blocks;
 }

@@ -78,13 +78,18 @@ test("apply with atrules", () => {
   ).toMatchSnapshot();
 
   expect(
-    build(apply("@keyframes inline", css({
-      from: {
-        backgroundColor: "yellow"
-      },
-      to: {
-        backgroundColor: "red"
-      }
-    })))
+    build(
+      apply(
+        "@keyframes inline",
+        css({
+          from: {
+            backgroundColor: "yellow",
+          },
+          to: {
+            backgroundColor: "red",
+          },
+        })
+      )
+    )
   ).toMatchSnapshot();
 });

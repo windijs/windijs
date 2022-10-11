@@ -76,7 +76,7 @@ export function bundle(utilities: Utilities[]): CSSMap {
     selector = utility[SymbolMeta].selector;
     if (selector)
       vcss = {
-        [selector.charCodeAt(0) === 64 /* @ */ || selector.includes("&") ? selector : "& " + selector]: vcss,
+        [selector]: vcss,
       };
     for (const [k, v] of entries(vcss)) if (v != null) css.set(k, css.has(k) && typeof v === "object" ? mergeObject(css.get(k) as object, v) : v);
   }
