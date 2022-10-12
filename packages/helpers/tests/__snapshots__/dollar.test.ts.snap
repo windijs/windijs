@@ -1,5 +1,336 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`build charset atrules 1`] = `
+"@charset \\"UTF-8\\";
+
+@charset \\"iso-8859-15\\";"
+`;
+
+exports[`build counter-style atrules 1`] = `
+"@counter-style mycounter {
+  system: cyclic;
+}
+
+@counter-style thumbs {
+  system: cyclic;
+}"
+`;
+
+exports[`build font-face atrules 1`] = `
+"@font-face {
+  font-family: monospace;
+  src: url(webfont.eot);
+}
+
+@font-face {
+  font-family: MyWebFont;
+  src: url(webfont.eot);
+}"
+`;
+
+exports[`build import atrules 1`] = `
+"@import \\"custom.css\\";
+
+@import \\"fineprint.css\\" print;
+
+@import \\"narrow.css\\" supports(display: flex) screen and (max-width: 400px);
+
+@import \\"narrow.css\\" supports(display: flex) screen and (max-width: 400px);
+
+@import \\"theme.css\\" layer(utilities);
+
+@import \\"common.css\\" screen;
+
+@import url(\\"fineprint.css\\") print;
+
+@import url(\\"theme.css\\") layer(utilities);
+
+@import url(\\"theme.css\\") layer(utilities);
+
+@import url(\\"theme.css\\") layer(utilities) print, screen;
+
+@import url(\\"narrow.css\\") supports(display: flex);
+
+@import url(\\"narrow.css\\") supports(display: flex) screen and (max-width: 400px);
+
+@import url(\\"theme.css\\") supports(display: flex) screen;
+
+@import url(\\"narrow.css\\") layer(utilities) supports(display: flex) print;"
+`;
+
+exports[`build keyframes atrules 1`] = `
+"@keyframes abc {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes identifier {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  30% {
+    top: 50px;
+  }
+  68% {
+    left: 50px;
+  }
+  72% {
+    left: 50px;
+  }
+  100% {
+    top: 100px;
+    left: 100%;
+  }
+}
+
+@keyframes some-name {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  50% {
+    top: 50px;
+    left: 50px;
+  }
+}
+
+@keyframes translate {
+  from {
+    transfrom: translateX(0%);
+  }
+}
+
+@keyframes translateStyle {
+  from {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes translateX {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes translateZ {
+  from {
+    transform: translateX(0%);
+  }
+  15% {
+    transform: translateX(15%);
+  }
+  30% {
+    transform: translateX(30%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}"
+`;
+
+exports[`build layer atrules 1`] = `
+"@layer utilities {
+  font-size: large;
+}
+
+@layer theme, layout {
+  font-size: large;
+}"
+`;
+
+exports[`build media atrules 1`] = `
+"@media screen and (min-width: 900px) {
+  .abc {
+    padding: 1rem;
+  }
+}
+
+@supports (display: flex) {
+  @media screen and (min-width: 1200px) {
+    .article {
+      display: flex;
+    }
+    .footer {
+      font-size: small;
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  @media (prefers-color-scheme: dark) {
+    @supports (fontSize: large) {
+      @font-face {
+        font-size: large;
+      }
+    }
+    .abc {
+      padding: 1rem;
+    }
+  }
+}"
+`;
+
+exports[`build namespace atrules 1`] = `
+"@namespace \\"XML-namespace-URL\\";
+
+@namespace svg \\"XML-namespace-URL\\";
+
+@namespace url(XML-namespace-URL);
+
+@namespace svg url(XML-namespace-URL);
+
+@namespace prefix url(XML-namespace-URL);
+
+@namespace prefix \\"XML-namespace-URL\\";"
+`;
+
+exports[`build page atrules 1`] = `
+"@page {
+  margin: 1cm;
+}
+
+@page :first {
+  margin: 2cm;
+}
+
+@page {
+  padding: 1rem;
+}
+
+@page :blank {
+  padding: 2rem;
+}"
+`;
+
+exports[`build property atrules 1`] = `
+"@property --property-name {
+  syntax: \\"<color>\\";
+  inherits: false;
+  initial-value: #c0ffee;
+}
+
+@property --my-color {
+  syntax: \\"<color>\\";
+  inherits: false;
+  initial-value: #c0ffee;
+}
+
+@property --camelCasedColor {
+  syntax: \\"<color>\\";
+  inherits: false;
+}"
+`;
+
+exports[`build supports atrules 1`] = `
+"@supports (display: flex) {
+  .flex {
+    display: flex;
+  }
+}
+
+@supports (transformOrigin: 5% 5%) {
+  .transform {
+    transform-origin: bottom;
+  }
+}
+
+@supports (display: -ms-flexbox) {
+  .flex {
+    display: -ms-flexbox;
+  }
+}
+
+@supports selector(A > B) {
+  .flex {
+    display: flex;
+  }
+}
+
+@supports not (transformOrigin: 10em 10em 10em) {
+  .flex {
+    display: flex;
+  }
+}
+
+@supports not (not (transformOrigin: 2px)) {
+  .grid {
+    transform-origin: 4px;
+  }
+}
+
+@supports (display: grid) or not (display: inline-grid) {
+  .grid {
+    display: inline-grid;
+  }
+}
+
+@supports (display: grid) and not (display: inline-grid) {
+  .grid {
+    display: grid;
+  }
+}
+
+@supports (display: grid) and not (display: inline-grid) and (display: flex) {
+  .grid {
+    display: flex;
+  }
+}
+
+@supports (display: table-cell) and (display: grid) {
+  .grid {
+    display: grid;
+  }
+}
+
+@supports (display: table-cell) and (display: list-item) and (display: grid) {
+  .flex {
+    display: flex;
+  }
+}
+
+@supports (transformStyle: preserve) or (-moz-transform-style: preserve) or (-webkit-transform-style: preserve) {
+  .preserve {
+    transform-style: preserve;
+    -webkit-transform-style: preserve;
+  }
+}
+
+@supports not (textAlignLast: justify) or (-moz-text-align-last: justify) {
+  .alignLast {
+    text-align-last: justify;
+  }
+}
+
+@supports (--foo: green) {
+  body {
+    color: var(--varName);
+  }
+}
+
+@supports not selector(A > B) {
+  .flex {
+    display: flex;
+  }
+}"
+`;
+
 exports[`dollar multi selectors 1`] = `
 ".button, a, button {
   background: blue;
