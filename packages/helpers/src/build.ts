@@ -70,7 +70,9 @@ export function createRules(css: CSSObject | CSSMap, selector?: string) {
       if (key.charCodeAt(0) === 64) {
         const r = {
           rule: key,
-          children: /^@(media|supports|layer|font-feature-values|.*keyframes)/.test(key) ? createRules(value, selector) : createDecls(value),
+          children: /^@(media|supports|layer|font-feature-values|.*keyframes)/.test(key)
+            ? createRules(value, isAtRule ? undefined : selector)
+            : createDecls(value),
         };
         if (isAtRule) rules.push({ rule: selector, children: [r] });
         else rules.push(r);

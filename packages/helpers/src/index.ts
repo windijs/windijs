@@ -2,6 +2,9 @@
 // https://sass-lang.com/documentation/modules
 
 export * from "./types";
+export * from "./dollarTypes";
+export * from "./dollarApply";
+export * from "./dollar";
 export * from "./merge";
 export * from "./build";
 export * from "./config";
@@ -9,7 +12,6 @@ export * from "./color";
 export * from "./common";
 export * from "./css";
 export * from "./data";
-export * from "./dollar";
 export * from "./escape";
 export * from "./funcs";
 export * from "./math";

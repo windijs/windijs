@@ -1,133 +1,11 @@
-import { isStyleArray, isStyleObject, SymbolMeta } from "./common";
+import { globalApply, queryStyles, funcProxy, exportStyles, dollarKeywords } from "./dollarApply";
+import { isStyleArray, isStyleObject } from "./common";
 import { apply, css } from "./css";
 
-import type { CSSMap, CSSObject, ElementSelectors, GeneralHTMLAttrs, StyleObject, Utilities } from "./types";
+import type { CSSObject } from "./types";
+import type { DollarCall, DollarType } from "./dollarTypes";
 
 // TODO: support variant group
-
-type DollarFunc = ((...utilities: Utilities[]) => StyleObject) & ((css: CSSObject | CSSMap) => StyleObject);
-
-type StyleExport = { selector: string; children: StyleObject[]; style: StyleObject };
-
-type DollarAttr = ((attribute: string) => DollarCall) &
-  GeneralHTMLAttrs<
-    DollarCall & {
-      /** CSS [attribute="value"] Selector */
-      match: ((value: string) => DollarCall) & { [key: string]: DollarCall };
-      /** CSS [attribute|="value"] Selector */
-      hyphenMatch: ((value: string) => DollarCall) & { [key: string]: DollarCall };
-      /** CSS [attribute~="value"] Selector */
-      contains: ((value: string) => DollarCall) & { [key: string]: DollarCall };
-      /** CSS [attribute*="value"] Selector */
-      includes: ((value: string) => DollarCall) & { [key: string]: DollarCall };
-      /** CSS [attribute^="value"] Selector */
-      startsWith: ((value: string) => DollarCall) & { [key: string]: DollarCall };
-      /** CSS [attribute$="value"] Selector */
-      endsWith: ((value: string) => DollarCall) & { [key: string]: DollarCall };
-    }
-  >;
-
-type DollarCall = DollarFunc & {
-  /** CSS group Selector, select `element, element, ..` */
-  $: DollarType;
-  /** CSS child Selector, select `element > element` */
-  $$: DollarType;
-  /** CSS descendant Selector, select `element element ..` */
-  _: DollarType;
-  /** CSS adjacent sibling Selector, select `element + element` */
-  __: DollarType;
-  /** CSS general sibling Selector, select `element ~ element` */
-  _$_: DollarType;
-  /** CSS attribute Selector, select `element[attribute]` */
-  ATTR: DollarAttr;
-  /** CSS styles */
-  styles: StyleObject[];
-} & {
-  /** CSS sub class Selector, select `element.class` */
-  [key: string]: DollarCall;
-} & {
-  [key in keyof ElementSelectors<unknown>]: DollarCall;
-};
-
-type DollarType = typeof apply &
-  ElementSelectors<DollarCall> & {
-    /** CSS class Selector */
-    [key: string]: DollarCall;
-  } & {
-    /** CSS universal Selector, select `*` */
-    All: DollarCall;
-    /** CSS root element Selector, select `:root`  */
-    Root: DollarCall;
-    /** CSS shadow host Selector, select `:host` or `:host(...)` */
-    Host: DollarCall & DollarType;
-    /** CSS id Selector, select `#id` */
-    ID: ((id: string) => DollarCall) & { [key: string]: DollarCall };
-    /** CSS attribute Selector, select `[attribute]` */
-    ATTR: DollarAttr;
-    /** CSS styles */
-    styles: StyleObject[] & { [key: string]: StyleObject[] | undefined };
-    /** CSS exports */
-    exports: StyleExport[];
-    /** Initial $ func, clear all styles */
-    init: () => void;
-  };
-
-function funcProxy<T>(f: (prop: string) => T) {
-  return new Proxy(f, {
-    get(target, p: string) {
-      return Reflect.apply(target, undefined, [p]);
-    },
-    apply(target, thisArg, argArray) {
-      return Reflect.apply(target, thisArg, argArray);
-    },
-  });
-}
-
-let GLOBAL_STYLES: StyleExport[] = [];
-
-export function queryStyles(selector: string): StyleObject[] | undefined {
-  for (let i = GLOBAL_STYLES.length - 1; i >= 0; i--) if (GLOBAL_STYLES[i].selector === selector) return GLOBAL_STYLES[i].children;
-}
-
-function globalApply(strings: TemplateStringsArray, ...values: unknown[]): (...utilities: Utilities[]) => StyleObject;
-function globalApply(selector: string, ...utilities: Utilities[]): StyleObject;
-function globalApply(...utilities: Utilities[]): StyleObject;
-function globalApply(css: CSSObject | CSSMap): StyleObject;
-function globalApply(
-  first: string | TemplateStringsArray | CSSObject | CSSMap | Utilities,
-  ...values: unknown[]
-): StyleObject | ((...utilities: Utilities[]) => StyleObject) {
-  const isSelector = typeof first === "string";
-  const isStyles = isStyleArray(first);
-
-  if (isSelector || !Array.isArray(first) || isStyles) {
-    const selector = isSelector ? first : ":root";
-    const children = values.flat().filter(i => i != null) as StyleObject[];
-    if (!isSelector) children.unshift(...(isStyles ? (first as StyleObject[]) : isStyleObject(first) ? [first] : [css(first as CSSObject)]));
-    const style = apply(selector, ...children);
-
-    // remove nested dollar styles
-    const count = children.filter(i => i[SymbolMeta].selector != null).length;
-    count > 0 && GLOBAL_STYLES.splice(-count);
-
-    GLOBAL_STYLES.push({
-      selector,
-      children,
-      style,
-    });
-
-    return style;
-  }
-
-  const tmpl = first.reduce((query, queryPart, i) => {
-    const valueExists = i < values.length;
-    const text = query + queryPart;
-
-    return valueExists ? text + values[i] : text;
-  }, "");
-
-  return (...utilities) => globalApply(tmpl, ...utilities) as unknown as StyleObject;
-}
 
 function createDollarFunc(selector: string) {
   return (target: typeof apply, thisArg: unknown, argArray: unknown[]) =>
@@ -143,7 +21,7 @@ function createDollarCall(selector: string): DollarCall {
     get(target, p: string) {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       if (p === "ATTR") return createAttrProxy(selector);
-      if (p === "styles") return queryStyles(selector) ?? [];
+      if (p === "Styles") return queryStyles(selector) ?? [];
 
       if (p === "$") selector += ", ";
       else if (p === "$$") selector += " > ";
@@ -187,17 +65,22 @@ const createAttrProxy = (selector: string) =>
 
 export const $ = new Proxy(globalApply, {
   get(target, p: string) {
+    if (p === "Exports") return exportStyles();
+    if (p === "Styles")
+      return new Proxy(
+        exportStyles()
+          .map(i => i.children)
+          .flat(),
+        {
+          get(target, p: string) {
+            if (Reflect.has(target, p)) return Reflect.get(target, p);
+            return queryStyles(p);
+          },
+        }
+      );
     if (p === "call") return (thisArg: unknown, ...args: unknown[]) => Reflect.apply(target, thisArg, args);
 
-    if (p === "init") return () => (GLOBAL_STYLES = []);
-    if (p === "exports") return GLOBAL_STYLES;
-    if (p === "styles")
-      return new Proxy(GLOBAL_STYLES.map(i => i.children).flat(), {
-        get(target, p: string) {
-          if (Reflect.has(target, p)) return Reflect.get(target, p);
-          return queryStyles(p);
-        },
-      });
+    if (p in dollarKeywords) return dollarKeywords[p];
 
     let selector = "";
 
@@ -211,7 +94,7 @@ export const $ = new Proxy(globalApply, {
 
     if (p === "All") selector += "*";
     else if (p === "Root") selector += ":root";
-    // TODO: support :host(.selector)
+    // TODO: support :host(.selector) and other variants like :is(), :not(), :where()
     else if (p === "Host") selector += ":host";
     else if (p.charCodeAt(0) < 91) selector += p.toLowerCase(); // HTML Elements
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

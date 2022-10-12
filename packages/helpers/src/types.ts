@@ -1400,7 +1400,7 @@ export interface ColorFunctions {
 export type LengthEntry = {
   [k in "in" | "px" | "pc" | "pt" | "cm" | "mm" | "Q" | "ch" | "ex" | "em" | "rem" | "vw" | "vh" | "vmax" | "vmin"]: { [value: number]: StyleObject };
 };
-export type PercentEntry = { [k in "percent" | "fr"]: { [value: number]: StyleObject } };
+export type PercentEntry = { [k in "percent" | "fr"]: { [value: number]: StyleObject } } & { [0]: Utilities };
 export type AngleEntry = {
   [k in "deg" | "grad" | "rad" | "turn"]: { [value: number]: StyleObject };
 };
