@@ -68,11 +68,13 @@ export function createRules(css: CSSObject | CSSMap, selector?: string) {
     else if (typeof value === "object" && value != null) {
       pushBaseStyle();
       if (key.charCodeAt(0) === 64) {
+        const isKeyframes = /^@.*keyframes/.test(key);
         const r = {
           rule: key,
-          children: /^@(media|supports|layer|font-feature-values|.*keyframes)/.test(key)
-            ? createRules(value, isAtRule ? undefined : selector)
-            : createDecls(value),
+          children:
+            isKeyframes || /^@(media|supports|layer|font-feature-values)/.test(key)
+              ? createRules(value, isAtRule || isKeyframes ? undefined : selector)
+              : createDecls(value),
         };
         if (isAtRule) rules.push({ rule: selector, children: [r] });
         else rules.push(r);
